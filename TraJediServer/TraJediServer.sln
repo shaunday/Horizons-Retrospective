@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraJedi", "TraJediServer\TraJedi.csproj", "{BFD76645-DDC9-495D-8575-4236508BBA0A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CD1B5A27-BCF1-4C55-A756-45290FFDFBC4} = {CD1B5A27-BCF1-4C55-A756-45290FFDFBC4}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraJedi.Journal.Data", "TraJedi.Journal.Data\TraJedi.Journal.Data.csproj", "{CD1B5A27-BCF1-4C55-A756-45290FFDFBC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFD76645-DDC9-495D-8575-4236508BBA0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFD76645-DDC9-495D-8575-4236508BBA0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFD76645-DDC9-495D-8575-4236508BBA0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFD76645-DDC9-495D-8575-4236508BBA0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD1B5A27-BCF1-4C55-A756-45290FFDFBC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD1B5A27-BCF1-4C55-A756-45290FFDFBC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD1B5A27-BCF1-4C55-A756-45290FFDFBC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD1B5A27-BCF1-4C55-A756-45290FFDFBC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6CD0AE80-6A63-459E-884D-64F6D12582F5}
+	EndGlobalSection
+EndGlobal
