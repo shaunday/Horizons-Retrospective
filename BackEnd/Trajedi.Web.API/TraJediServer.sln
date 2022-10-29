@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraJedi", "TraJediServer\TraJedi.csproj", "{BFD76645-DDC9-495D-8575-4236508BBA0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraJedi", "TraJedi.Web.API\TraJedi.Web.API.csproj", "{BFD76645-DDC9-495D-8575-4236508BBA0A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CD1B5A27-BCF1-4C55-A756-45290FFDFBC4} = {CD1B5A27-BCF1-4C55-A756-45290FFDFBC4}
 	EndProjectSection
