@@ -1,21 +1,25 @@
-using Microsoft.EntityFrameworkCore;
-using TraJedi.Journal.Data;
-
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<TraJediDataContext>(
-    o=> o.UseNpgsql(builder.Configuration.GetConnectionString("traJediDatabase"))
-    );
-
 // Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 
-//todo setup rest here
+app.UseAuthorization();
+
+app.MapControllers();
 
 app.Run();
-
