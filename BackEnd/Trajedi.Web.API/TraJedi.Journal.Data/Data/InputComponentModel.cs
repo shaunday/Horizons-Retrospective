@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-
-namespace TraJedi.Journal.Data
+﻿namespace TraJedi.Journal.Data
 {
     public class InputComponentModel
     {

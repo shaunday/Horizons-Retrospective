@@ -14,5 +14,5 @@
     {
         None, Add, Substract
     }
-    
+
 }

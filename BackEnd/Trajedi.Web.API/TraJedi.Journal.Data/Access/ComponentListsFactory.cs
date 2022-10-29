@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TraJedi.Journal.Data;
+﻿using TraJedi.Journal.Data;
 
 namespace TraJediServer.Journal
 {

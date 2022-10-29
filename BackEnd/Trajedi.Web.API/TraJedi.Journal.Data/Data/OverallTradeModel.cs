@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TraJedi.Journal.Data
+﻿namespace TraJedi.Journal.Data
 {
     public class OverallTradeModel
     {
