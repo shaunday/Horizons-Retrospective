@@ -32,6 +32,7 @@
 
         public List<ContentModel> History { get; set; } = new List<ContentModel>();
 
+        public TradeInputModel TradeInput { get; set; }
     }
 
 }

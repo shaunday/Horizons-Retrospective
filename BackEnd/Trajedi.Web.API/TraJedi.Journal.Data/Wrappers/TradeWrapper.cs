@@ -1,45 +1,52 @@
-﻿using TraJedi.Journal.Data;
+﻿using TraJediServer.Journal;
 
-namespace TraJediServer.Journal
+namespace TraJedi.Journal.Data.Wrappers
 {
-    public class JournalTradeWrapper 
+    public class TradeWrapper
     {
-        #region Accessors
+        #region Members
 
-        public OverallTradeModel BackendTradeModel { get; private set; }
+        private TradeModel _backendTradeModel;
 
-        public List<TradeInputModel> TradeInputs
+        private List<TradeInputModel> TradeInputs
         {
-            get => BackendTradeModel.TradeInputs;
-            set => BackendTradeModel.TradeInputs = value;
+            get => _backendTradeModel.TradeInputs;
+            set => _backendTradeModel.TradeInputs = value;
         }
 
         #endregion
 
-        #region Properties
-
-        public TradeInputModel? TradeOrigin
+        public void Init(TradingJournalDataContext dataContext, Guid? id = null)
         {
-            get
+            if (id == null)
             {
-                if (TradeInputs.Where(t => t.TradeInputType == TradeInputType.Origin) is TradeInputModel tradeInput)
-                    return tradeInput;
-                else
-                    return null;
-
+                _backendTradeModel = new TradeModel();
+                _backendTradeModel.TradeInputs.Add(new TradeInputModel()
+                {
+                    TradeInputType = TradeInputType.Origin,
+                    TradeComponents = ComponentListsFactory.GetTradeOriginComponents()
+                });
+                dataContext.OverallTrades.Add(_backendTradeModel);
             }
+            else
+            {
+                _backendTradeModel = dataContext.OverallTrades.Where(t => t.Id == id).FirstOrDefault();
+                if (_backendTradeModel == null)
+                {
+                    //todo handle
+                }
+            } 
         }
 
-        public TradeInputModel? TradeClosure
-        {
-            get
-            {
-                if (TradeInputs.Where(t => t.TradeInputType == TradeInputType.Closure) is TradeInputModel tradeInput)
-                    return tradeInput;
-                else
-                    return null;
-            }
-        }
+        #region Getters
+
+        public string IdString => _backendTradeModel.Id.ToString();
+
+        public TradeInputModel? TradeOrigin => TradeInputs.Where(t => t.TradeInputType == TradeInputType.Origin).FirstOrDefault();
+
+        public TradeInputModel? TradeClosure => TradeInputs.Where(t => t.TradeInputType == TradeInputType.Closure).FirstOrDefault();
+
+        public IEnumerable<TradeInputModel> TradeInterims => TradeInputs.Where(ti => ti.TradeInputType == TradeInputType.Interim);
 
         public TradeInputModel? TradeSummary
         {
@@ -60,56 +67,55 @@ namespace TraJediServer.Journal
 
         #endregion
 
-        public void Init(TraJediDataContext dataContext, Guid? id = null)
+        public InputComponentModel? UpdateTradeInputComponent(string tradeInputId, string componentId, string newContent)
         {
-            if (id == null)
+            var trade = TradeInputs.Where(t => t.Id.ToString() == tradeInputId).FirstOrDefault();
+            if (trade != null)
             {
-                BackendTradeModel = new OverallTradeModel();
-                BackendTradeModel.TradeInputs.Add(new TradeInputModel()
+                var component = trade.TradeComponents?.Where(c => c.Id.ToString() == componentId).FirstOrDefault();
+                if (component != null)
                 {
-                    TradeInputType = TradeInputType.Origin,
-                    TradeComponents = ComponentListsFactory.GetTradeOriginComponents()
-                });
-                dataContext.OverallTrades.Add(BackendTradeModel);
-            }
-            else
-            {
-                BackendTradeModel = dataContext.OverallTrades.Where(t => t.OverallTradeId == id).FirstOrDefault();
-                if (BackendTradeModel == null)
-                {
-                    //todo handle
+                    component.History.Add(component.ContentWrapper);
+                    component.ContentWrapper = new ContentModel() { Content = newContent };
+
+                    return component;
                 }
             }
+
+            return null;
         }
 
-        #region Adding Interim
+        #region Interim
 
-        public void AddTradeEntry()
+        public TradeInputModel AddTradeEntry()
         {
-            TradeInputs.Add(new TradeInputModel()
+            TradeInputModel tradeInput = new TradeInputModel()
             {
                 TradeInputType = TradeInputType.Interim,
                 TradeComponents = ComponentListsFactory.GetTradeEntryComponents(isActual: true)
-            });
+            };
 
+            TradeInputs.Add(tradeInput);
             UpdateInterimSummary();
+
+            return tradeInput;
         }
 
-        public void AddTradeExit()
+        public TradeInputModel AddTradeExit()
         {
-            TradeInputs.Add(new TradeInputModel()
+            TradeInputModel tradeInput = new TradeInputModel()
             {
                 TradeInputType = TradeInputType.Interim,
                 TradeComponents = ComponentListsFactory.GetTradeExitComponents()
-            });
+            };
+
+            TradeInputs.Add(tradeInput);
             UpdateInterimSummary();
+
+            return tradeInput;
         }
 
-        #endregion
-
-        #region Removing
-
-        public void RemoveTradeInput(Guid tradeInputId)
+        public void RemoveInterimInput(Guid tradeInputId)
         {
             var tradeInput = TradeInputs.Where(t => t.Id == tradeInputId && t.TradeInputType == TradeInputType.Interim).FirstOrDefault();
 
@@ -120,45 +126,6 @@ namespace TraJediServer.Journal
 
             UpdateInterimSummary();
         }
-
-        #endregion
-
-        #region Updating Components
-
-        public void UpdateTradeInputComponent(Guid tradeInputId, Guid componentId, string newContent)
-        {
-            var trade = TradeInputs.Where(t => t.Id == tradeInputId).FirstOrDefault();
-            if (trade != null)
-            {
-                var component = trade.TradeComponents?.Where(c => c.Id == componentId).FirstOrDefault();
-                if (component != null)
-                {
-                    component.History.Add(component.ContentWrapper);
-                    component.ContentWrapper = new ContentModel() { Content = newContent };
-                }
-            }
-        }
-
-        #endregion
-
-        #region Closure
-
-        public void CloseMe()
-        {
-            RemoveInterimSummary();
-
-            var analytics = GetAvgEntryAndProfit();
-
-            TradeInputs.Add(new TradeInputModel()
-            {
-                TradeInputType = TradeInputType.Closure,
-                TradeComponents = ComponentListsFactory.GetTradeClosureComponents(profitValue: analytics.profit.ToString())
-            });
-        }
-
-        #endregion
-
-        #region Summary
 
         public void AddInterimSummary()
         {
@@ -184,7 +151,7 @@ namespace TraJediServer.Journal
 
         }
 
-        public void RemoveInterimSummary()
+        private void RemoveInterimSummary()
         {
             var activeSummary = TradeInputs.Where(t => t.TradeInputType == TradeInputType.InterimSummary).FirstOrDefault();
             if (activeSummary != null)
@@ -197,6 +164,23 @@ namespace TraJediServer.Journal
         {
             RemoveInterimSummary();
             AddInterimSummary();
+        }
+
+        #endregion
+
+        #region Closure
+
+        public void CloseMe()
+        {
+            RemoveInterimSummary();
+
+            var analytics = GetAvgEntryAndProfit();
+
+            TradeInputs.Add(new TradeInputModel()
+            {
+                TradeInputType = TradeInputType.Closure,
+                TradeComponents = ComponentListsFactory.GetTradeClosureComponents(profitValue: analytics.profit.ToString())
+            });
         }
 
         #endregion
@@ -258,7 +242,7 @@ namespace TraJediServer.Journal
             {
                 //will substract if exit trade
                 totalCost += item.cost * item.priceValue;
-                totalAmount += (item.cost / item.priceValue);
+                totalAmount += item.cost / item.priceValue;
             }
 
             return (totalCost, totalAmount, profit);
