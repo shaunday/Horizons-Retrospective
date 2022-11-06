@@ -4,6 +4,8 @@
     {
         public Guid Id { get; set; }
 
+        public TradeModel ParentTrade { get; set; }
+
         public DateTime AddedAt { get; set; } 
 
         public TradeInputType TradeInputType { get; set; }

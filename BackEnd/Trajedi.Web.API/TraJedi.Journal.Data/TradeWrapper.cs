@@ -1,6 +1,6 @@
 ﻿using TraJediServer.Journal;
 
-namespace TraJedi.Journal.Data.Wrappers
+namespace TraJedi.Journal.Data
 {
     public class TradeWrapper
     {
@@ -67,7 +67,7 @@ namespace TraJedi.Journal.Data.Wrappers
 
             //todo expand
 
-            return tradeSummary.TradeComponents.Count >0 ? tradeSummary : null;
+            return tradeSummary.TradeComponents.Count > 0 ? tradeSummary : null;
         }
 
         #endregion

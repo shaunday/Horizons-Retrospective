@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TraJedi.Journal.Data.Wrappers;
 using TraJedi.Journal.Data;
 using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.AspNetCore.StaticFiles;
 
-namespace TraJedi.Web.API.Controllers
+namespace TraJedi.Web.API.Controllers.Journal
 {
     [ApiController]
     [Route("api/journal/trades/{tradeId}")]
-    public class TradeInputsController : Controller
+    public class TradeInputsController : JournalControllerBase
     {
+        public TradeInputsController(TradingJournalAccess journalAccess) : base(journalAccess) { }
+
         //#region Get
 
         //[HttpGet("origin")]
@@ -54,7 +56,7 @@ namespace TraJedi.Web.API.Controllers
         {
             TradeInputModel newTradeInput = null;
 
-            TradeWrapper? tradeWrapper = JournalWrapper.Current.GetTrade(tradeId);
+            TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
             if (tradeWrapper != null)
             {
                 newTradeInput = tradeWrapper.AddTradeEntry();
@@ -72,7 +74,7 @@ namespace TraJedi.Web.API.Controllers
         {
             TradeInputModel newTradeInput = null;
 
-            TradeWrapper? tradeWrapper = JournalWrapper.Current.GetTrade(tradeId);
+            TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
             if (tradeWrapper != null)
             {
                 newTradeInput = tradeWrapper.AddTradeExit();
@@ -91,7 +93,7 @@ namespace TraJedi.Web.API.Controllers
         [HttpPut("inputs/{tradeInputId}/components/{componentId}")]
         public ActionResult<InputComponentModel> UpdateComponent(string tradeId, string tradeInputId, string componentId, string newContent)
         {
-            TradeWrapper? tradeWrapper = JournalWrapper.Current.GetTrade(tradeId);
+            TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
             InputComponentModel? updatedComponent = null;
 
             if (tradeWrapper != null)

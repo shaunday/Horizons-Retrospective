@@ -25,7 +25,7 @@ namespace TraJedi.Journal.Data
 
             modelBuilder.Entity<TradeModel>(entity =>
             {
-                entity.HasMany(t => t.TradeInputs).WithOne(t => t.Trade);
+                entity.HasMany(t => t.TradeInputs).WithOne(t => t.ParentTrade);
             });
         }
 

@@ -4,18 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TraJedi.Journal.Data.Wrappers
+namespace TraJedi.Journal.Data
 {
-    public class JournalWrapper
+    public class TradingJournalAccess
     {
+        private readonly TradingJournalDataContext _journalDbContext;
+
         public List<TradeWrapper> Trades { get; }
 
-        public static JournalWrapper Current { get; } = new JournalWrapper();
+        #region Ctor
 
-        public JournalWrapper()
+        public TradingJournalAccess(TradingJournalDataContext journalDbContext)
         {
+            journalDbContext = _journalDbContext;
             Trades = new List<TradeWrapper>();
         }
+        #endregion
 
         public TradeWrapper AddTrade()
         {
