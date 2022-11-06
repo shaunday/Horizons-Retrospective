@@ -26,12 +26,12 @@ namespace TraJedi.Journal.Data.Wrappers
 
         public IEnumerable<string> GetTradeIds()
         {
-            return Trades.Select(t => t.IdString);
+            return Trades.Select(t => t.GetIdString());
         }
 
-        public TradeWrapper GetTrade(string tradeId)
+        public TradeWrapper? GetTrade(string tradeId)
         {
-            return Trades.FirstOrDefault(t => t.IdString == tradeId);
+            return Trades.FirstOrDefault(t => t.GetIdString() == tradeId);
         }
     }
 }

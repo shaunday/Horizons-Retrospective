@@ -14,7 +14,7 @@ namespace TraJedi.Web.API.Controllers
         [HttpGet("origin")]
         public ActionResult<TradeInputModel> GetTradeOrigin(string tradeId)
         {
-            TradeInputModel tradeInputToReturn = JournalWrapper.Current.GetTrade(tradeId).TradeOrigin;
+            TradeInputModel? tradeInputToReturn = JournalWrapper.Current.GetTrade(tradeId)?.GetTradeOrigin();
             if (tradeInputToReturn == null)
             {
                 return NotFound();
@@ -23,11 +23,11 @@ namespace TraJedi.Web.API.Controllers
         }
 
         [HttpGet("interims")]
-        public ActionResult<IEnumerable<TradeInputModel>> GetTradeInterims(string tradeId)
+        public ActionResult<IEnumerable<TradeInputModel>>? GetTradeInterims(string tradeId)
         {
-            IEnumerable<TradeInputModel> tradeInputsToReturn = JournalWrapper.Current.GetTrade(tradeId).TradeInterims;
+            IEnumerable<TradeInputModel>? tradeInputsToReturn = JournalWrapper.Current.GetTrade(tradeId)?.GetTradeInterims();
 
-            if (!tradeInputsToReturn.Any())
+            if (tradeInputsToReturn != null && !tradeInputsToReturn.Any())
             {
                 return NotFound();
             }
@@ -37,7 +37,7 @@ namespace TraJedi.Web.API.Controllers
         [HttpGet("closure")]
         public ActionResult<TradeInputModel> GetTradeClosure(string tradeId)
         {
-            TradeInputModel tradeInputToReturn = JournalWrapper.Current.GetTrade(tradeId).TradeClosure;
+            TradeInputModel? tradeInputToReturn = JournalWrapper.Current.GetTrade(tradeId)?.GetTradeClosure();
             if (tradeInputToReturn == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace TraJedi.Web.API.Controllers
         {
             TradeInputModel newTradeInput = null;
 
-            TradeWrapper tradeWrapper = JournalWrapper.Current.GetTrade(tradeId);
+            TradeWrapper? tradeWrapper = JournalWrapper.Current.GetTrade(tradeId);
             if (tradeWrapper != null)
             {
                 newTradeInput = tradeWrapper.AddTradeEntry();
@@ -72,7 +72,7 @@ namespace TraJedi.Web.API.Controllers
         {
             TradeInputModel newTradeInput = null;
 
-            TradeWrapper tradeWrapper = JournalWrapper.Current.GetTrade(tradeId);
+            TradeWrapper? tradeWrapper = JournalWrapper.Current.GetTrade(tradeId);
             if (tradeWrapper != null)
             {
                 newTradeInput = tradeWrapper.AddTradeExit();
@@ -91,8 +91,8 @@ namespace TraJedi.Web.API.Controllers
         [HttpPut("inputs/{tradeInputId}/components/{componentId}")]
         public ActionResult<InputComponentModel> UpdateComponent(string tradeId, string tradeInputId, string componentId, string newContent)
         {
-            TradeWrapper tradeWrapper = JournalWrapper.Current.GetTrade(tradeId);
-            InputComponentModel updatedComponent = null;
+            TradeWrapper? tradeWrapper = JournalWrapper.Current.GetTrade(tradeId);
+            InputComponentModel? updatedComponent = null;
 
             if (tradeWrapper != null)
             {

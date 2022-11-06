@@ -33,36 +33,41 @@ namespace TraJedi.Journal.Data.Wrappers
                 _backendTradeModel = dataContext.OverallTrades.Where(t => t.Id == id).FirstOrDefault();
                 if (_backendTradeModel == null)
                 {
+                    //shouldnt happen
                     //todo handle
                 }
-            } 
+            }
         }
 
         #region Getters
 
-        public string IdString => _backendTradeModel.Id.ToString();
+        public string GetIdString() => _backendTradeModel.Id.ToString();
 
-        public TradeInputModel? TradeOrigin => TradeInputs.Where(t => t.TradeInputType == TradeInputType.Origin).FirstOrDefault();
+        public TradeInputModel? GetTradeOrigin() => TradeInputs.Where(t => t.TradeInputType == TradeInputType.Origin).FirstOrDefault();
 
-        public TradeInputModel? TradeClosure => TradeInputs.Where(t => t.TradeInputType == TradeInputType.Closure).FirstOrDefault();
+        public TradeInputModel? GetTradeClosure() => TradeInputs.Where(t => t.TradeInputType == TradeInputType.Closure).FirstOrDefault();
 
-        public IEnumerable<TradeInputModel> TradeInterims => TradeInputs.Where(ti => ti.TradeInputType == TradeInputType.Interim);
+        public IEnumerable<TradeInputModel> GetTradeInterims() => TradeInputs.Where(ti => ti.TradeInputType == TradeInputType.Interim);
 
-        public TradeInputModel? TradeSummary
+        public TradeInputModel? GetTradeSummary()
         {
-            get
+            TradeInputModel tradeSummary = new TradeInputModel() { TradeInputType = TradeInputType.TradeSummary, TradeComponents = new() };
+
+            TradeInputModel? tradeOrigin = GetTradeOrigin();
+            if (tradeOrigin != null)
             {
-                TradeInputModel tradeSummary = new TradeInputModel() { TradeInputType = TradeInputType.TradeSummary, TradeComponents = new() };
-                foreach (var component in TradeOrigin.TradeComponents)
+                foreach (var component in tradeOrigin.TradeComponents)
                 {
                     if (component.RelevantForTradeSummary)
                     {
                         tradeSummary.TradeComponents.Add(component);
                     }
                 }
-
-                return tradeSummary;
             }
+
+            //todo expand
+
+            return tradeSummary.TradeComponents.Count >0 ? tradeSummary : null;
         }
 
         #endregion
