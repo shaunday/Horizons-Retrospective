@@ -8,7 +8,7 @@ namespace TraJedi.Journal.Data.Wrappers
 {
     public class JournalWrapper
     {
-        private List<TradeWrapper> Trades { get; }
+        public List<TradeWrapper> Trades { get; }
 
         public static JournalWrapper Current { get; } = new JournalWrapper();
 

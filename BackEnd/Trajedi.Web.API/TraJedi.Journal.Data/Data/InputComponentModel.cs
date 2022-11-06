@@ -20,19 +20,17 @@
 
         #region flags
 
-        public ValueRelevance CostRelevant { get; set; } = ValueRelevance.None;
+        public ValueRelevance CostRelevance { get; set; } = ValueRelevance.None;
 
-        public ValueRelevance PriceValueRelevant { get; set; } = ValueRelevance.None;
+        public ValueRelevance PriceValueRelevance { get; set; } = ValueRelevance.None;
 
         public bool AttachedToggle { get; set; } = false;
 
-        public bool RelevantForTradeSummary { get; set; } = false;
+        public bool IsRelevantForOneLineSummation { get; set; } = false;
 
         #endregion
 
         public List<ContentModel> History { get; set; } = new List<ContentModel>();
-
-        public TradeInputModel TradeInput { get; set; }
     }
 
 }

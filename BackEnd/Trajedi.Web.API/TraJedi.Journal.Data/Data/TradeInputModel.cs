@@ -10,7 +10,5 @@
 
         public List<InputComponentModel> TradeComponents { get; set; } = new List<InputComponentModel>();
 
-        public TradeModel Trade { get; set; }
-
     }
 }

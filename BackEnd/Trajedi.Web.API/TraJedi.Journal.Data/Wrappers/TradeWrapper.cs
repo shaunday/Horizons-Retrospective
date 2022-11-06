@@ -51,14 +51,14 @@ namespace TraJedi.Journal.Data.Wrappers
 
         public TradeInputModel? GetTradeSummary()
         {
-            TradeInputModel tradeSummary = new TradeInputModel() { TradeInputType = TradeInputType.TradeSummary, TradeComponents = new() };
+            TradeInputModel tradeSummary = new TradeInputModel() { TradeInputType = TradeInputType.OneLineSummation, TradeComponents = new() };
 
             TradeInputModel? tradeOrigin = GetTradeOrigin();
             if (tradeOrigin != null)
             {
                 foreach (var component in tradeOrigin.TradeComponents)
                 {
-                    if (component.RelevantForTradeSummary)
+                    if (component.IsRelevantForOneLineSummation)
                     {
                         tradeSummary.TradeComponents.Add(component);
                     }
@@ -82,6 +82,8 @@ namespace TraJedi.Journal.Data.Wrappers
                 {
                     component.History.Add(component.ContentWrapper);
                     component.ContentWrapper = new ContentModel() { Content = newContent };
+
+                    UpdateInterimSummary();
 
                     return component;
                 }
@@ -132,7 +134,7 @@ namespace TraJedi.Journal.Data.Wrappers
             UpdateInterimSummary();
         }
 
-        public void AddInterimSummary()
+        private void AddInterimSummary()
         {
             var analytics = GetAvgEntryAndProfit();
 
@@ -207,25 +209,25 @@ namespace TraJedi.Journal.Data.Wrappers
                 double priceValue = 0.0;
                 foreach (var component in tradeInput.TradeComponents)
                 {
-                    if (component.CostRelevant == ValueRelevance.Add || component.CostRelevant == ValueRelevance.Substract)
+                    if (component.CostRelevance == ValueRelevance.Add || component.CostRelevance == ValueRelevance.Substract)
                     {
                         double.TryParse(component.ContentWrapper.Content, out cost);
 
-                        if (component.CostRelevant == ValueRelevance.Add)
+                        if (component.CostRelevance == ValueRelevance.Add)
                         {
                             profit += cost;
                         }
 
-                        else if (component.CostRelevant == ValueRelevance.Substract)
+                        else if (component.CostRelevance == ValueRelevance.Substract)
                         {
                             profit -= cost;
                         }
                     }
 
-                    if (component.PriceValueRelevant == ValueRelevance.Add || component.PriceValueRelevant == ValueRelevance.Substract)
+                    if (component.PriceValueRelevance == ValueRelevance.Add || component.PriceValueRelevance == ValueRelevance.Substract)
                     {
                         double.TryParse(component.ContentWrapper.Content, out priceValue);
-                        if (component.PriceValueRelevant == ValueRelevance.Substract)
+                        if (component.PriceValueRelevance == ValueRelevance.Substract)
                         {
                             priceValue *= -1;
                         }

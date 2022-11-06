@@ -9,9 +9,9 @@ namespace TraJedi.Web.API.Controllers
     public class JournalController : ControllerBase
     {
         [HttpGet]
-        public ActionResult<IEnumerable<string>> GetTradesIds()
+        public ActionResult<IEnumerable<string>> GetAllTrades()
         {
-            return Ok(JournalWrapper.Current.GetTradeIds());
+            return Ok(JournalWrapper.Current.Trades);
         }
 
         [HttpPost]

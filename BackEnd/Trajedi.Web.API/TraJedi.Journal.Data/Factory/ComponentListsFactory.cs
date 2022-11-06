@@ -8,9 +8,9 @@ namespace TraJediServer.Journal
         {
             return new List<InputComponentModel>
             {
-                new InputComponentModel() { Title = "Ticker", ComponentType = ComponentType.Header, RelevantForTradeSummary =true }, //AttachedToggle for long/short
+                new InputComponentModel() { Title = "Ticker", ComponentType = ComponentType.Header, IsRelevantForOneLineSummation =true }, //AttachedToggle for long/short
                                        
-                new InputComponentModel() { Title = "Thesis", ComponentType = ComponentType.Thesis, RelevantForTradeSummary =true },
+                new InputComponentModel() { Title = "Thesis", ComponentType = ComponentType.Thesis, IsRelevantForOneLineSummation =true },
                 new InputComponentModel() { Title = "Expanded", ComponentType = ComponentType.Thesis },
                 new InputComponentModel() { Title = "Confluences", ComponentType = ComponentType.Thesis },
                 new InputComponentModel() { Title = "Triggers", ComponentType = ComponentType.Thesis },
@@ -25,10 +25,10 @@ namespace TraJediServer.Journal
             {
                 new InputComponentModel() { Title = "Emotions", ComponentType = ComponentType.Entry },
                 new InputComponentModel() { Title = "Entry Price", ComponentType = ComponentType.Entry,
-                                                                                PriceValueRelevant = isActual? ValueRelevance.Add : ValueRelevance.None },
+                                                                                PriceValueRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
                 new InputComponentModel() { Title = "Amount", ComponentType = ComponentType.Entry },
                 new InputComponentModel() { Title = "Cost", ComponentType = ComponentType.Entry,
-                                                                                    CostRelevant = isActual? ValueRelevance.Add : ValueRelevance.None },
+                                                                                    CostRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
 
                 new InputComponentModel() { Title = "SL", ComponentType = ComponentType.SLandTarget },
                 new InputComponentModel() { Title = "SL Thoughts", ComponentType = ComponentType.SLandTarget },
@@ -44,9 +44,9 @@ namespace TraJediServer.Journal
             return new List<InputComponentModel>
             {
                 new InputComponentModel() { Title = "Emotions", ComponentType = ComponentType.Exit },
-                new InputComponentModel() { Title = "Exit Price", ComponentType = ComponentType.Exit, PriceValueRelevant = ValueRelevance.Substract },
+                new InputComponentModel() { Title = "Exit Price", ComponentType = ComponentType.Exit, PriceValueRelevance = ValueRelevance.Substract },
                 new InputComponentModel() { Title = "Amount", ComponentType = ComponentType.Exit },
-                new InputComponentModel() { Title = "Cost", ComponentType = ComponentType.Exit, CostRelevant = ValueRelevance.Substract },
+                new InputComponentModel() { Title = "Cost", ComponentType = ComponentType.Exit, CostRelevance = ValueRelevance.Substract },
 
                 new InputComponentModel() { Title = "Exit Reason", ComponentType = ComponentType.Exit },
             };
@@ -69,9 +69,9 @@ namespace TraJediServer.Journal
         {
             return new List<InputComponentModel>
             {
-                new InputComponentModel() { Title = "Result",  ComponentType = ComponentType.Closure, Content =profitValue, RelevantForTradeSummary =true },
-                new InputComponentModel() { Title = "Actual R:R",  ComponentType = ComponentType.Closure, RelevantForTradeSummary =true },
-                new InputComponentModel() { Title = "W/L", ComponentType = ComponentType.Closure, RelevantForTradeSummary = true },
+                new InputComponentModel() { Title = "Result",  ComponentType = ComponentType.Closure, Content =profitValue, IsRelevantForOneLineSummation =true },
+                new InputComponentModel() { Title = "Actual R:R",  ComponentType = ComponentType.Closure, IsRelevantForOneLineSummation =true },
+                new InputComponentModel() { Title = "W/L", ComponentType = ComponentType.Closure, IsRelevantForOneLineSummation = true },
                 new InputComponentModel() { Title = "Lessons", ComponentType = ComponentType.Closure },
             };
         }

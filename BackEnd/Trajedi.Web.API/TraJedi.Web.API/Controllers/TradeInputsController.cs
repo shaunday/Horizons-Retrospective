@@ -9,43 +9,43 @@ namespace TraJedi.Web.API.Controllers
     [Route("api/journal/trades/{tradeId}")]
     public class TradeInputsController : Controller
     {
-        #region Get
+        //#region Get
 
-        [HttpGet("origin")]
-        public ActionResult<TradeInputModel> GetTradeOrigin(string tradeId)
-        {
-            TradeInputModel? tradeInputToReturn = JournalWrapper.Current.GetTrade(tradeId)?.GetTradeOrigin();
-            if (tradeInputToReturn == null)
-            {
-                return NotFound();
-            }
-            return Ok(tradeInputToReturn);
-        }
+        //[HttpGet("origin")]
+        //public ActionResult<TradeInputModel> GetTradeOrigin(string tradeId)
+        //{
+        //    TradeInputModel? tradeInputToReturn = JournalWrapper.Current.GetTrade(tradeId)?.GetTradeOrigin();
+        //    if (tradeInputToReturn == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(tradeInputToReturn);
+        //}
 
-        [HttpGet("interims")]
-        public ActionResult<IEnumerable<TradeInputModel>>? GetTradeInterims(string tradeId)
-        {
-            IEnumerable<TradeInputModel>? tradeInputsToReturn = JournalWrapper.Current.GetTrade(tradeId)?.GetTradeInterims();
+        //[HttpGet("interims")]
+        //public ActionResult<IEnumerable<TradeInputModel>>? GetTradeInterims(string tradeId)
+        //{
+        //    IEnumerable<TradeInputModel>? tradeInputsToReturn = JournalWrapper.Current.GetTrade(tradeId)?.GetTradeInterims();
 
-            if (tradeInputsToReturn != null && !tradeInputsToReturn.Any())
-            {
-                return NotFound();
-            }
-            return Ok(tradeInputsToReturn);
-        }
+        //    if (tradeInputsToReturn != null && !tradeInputsToReturn.Any())
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(tradeInputsToReturn);
+        //}
 
-        [HttpGet("closure")]
-        public ActionResult<TradeInputModel> GetTradeClosure(string tradeId)
-        {
-            TradeInputModel? tradeInputToReturn = JournalWrapper.Current.GetTrade(tradeId)?.GetTradeClosure();
-            if (tradeInputToReturn == null)
-            {
-                return NotFound();
-            }
-            return Ok(tradeInputToReturn);
-        }
+        //[HttpGet("closure")]
+        //public ActionResult<TradeInputModel> GetTradeClosure(string tradeId)
+        //{
+        //    TradeInputModel? tradeInputToReturn = JournalWrapper.Current.GetTrade(tradeId)?.GetTradeClosure();
+        //    if (tradeInputToReturn == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(tradeInputToReturn);
+        //}
 
-        #endregion
+        //#endregion
 
         #region Add
 
