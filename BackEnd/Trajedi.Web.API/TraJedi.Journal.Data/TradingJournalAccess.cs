@@ -9,7 +9,7 @@ namespace TraJedi.Journal.Data
 {
     public class TradingJournalAccess : ITradingJournalAccess
     {
-        private readonly TradingJournalDataContext _journalDbContext;
+        private readonly TradingJournalDataContext dataContext;
 
         public List<TradeWrapper> Trades { get; }
 
@@ -17,15 +17,16 @@ namespace TraJedi.Journal.Data
 
         public TradingJournalAccess(TradingJournalDataContext journalDbContext)
         {
-            journalDbContext = _journalDbContext;
+            journalDbContext = journalDbContext ?? throw new ArgumentNullException(nameof(journalDbContext));
             Trades = new List<TradeWrapper>();
+
+            //todo parse trades from the db
         }
         #endregion
 
         public TradeWrapper AddTrade()
         {
-            TradeWrapper newTrade = new TradeWrapper();
-            //trade.Init();
+            TradeWrapper newTrade = new TradeWrapper(dataContext);
             return newTrade;
         }
 

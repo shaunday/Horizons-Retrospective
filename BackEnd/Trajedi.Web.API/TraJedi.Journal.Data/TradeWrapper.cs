@@ -14,10 +14,16 @@ namespace TraJedi.Journal.Data
             set => _backendTradeModel.TradeInputs = value;
         }
 
+        private readonly TradingJournalDataContext dataContext;
+
         #endregion
 
-        public void Init(TradingJournalDataContext dataContext, Guid? id = null)
+        #region ctor
+
+        public TradeWrapper(TradingJournalDataContext journalDbContext, Guid? id = null)
         {
+            dataContext = journalDbContext ?? throw new ArgumentNullException(nameof(journalDbContext));
+
             if (id == null)
             {
                 _backendTradeModel = new TradeModel();
@@ -37,7 +43,8 @@ namespace TraJedi.Journal.Data
                     //todo handle
                 }
             }
-        }
+        } 
+        #endregion
 
         #region Getters
 
