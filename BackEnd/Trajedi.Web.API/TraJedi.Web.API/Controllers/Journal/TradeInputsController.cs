@@ -2,6 +2,7 @@
 using TraJedi.Journal.Data;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.AspNetCore.StaticFiles;
+using System.ComponentModel;
 
 namespace TraJedi.Web.API.Controllers.Journal
 {
@@ -9,7 +10,7 @@ namespace TraJedi.Web.API.Controllers.Journal
     [Route("api/journal/trades/{tradeId}")]
     public class TradeInputsController : JournalControllerBase
     {
-        public TradeInputsController(TradingJournalAccess journalAccess) : base(journalAccess) { }
+        public TradeInputsController(TradingJournalAccess journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
 
         //#region Get
 
@@ -54,37 +55,53 @@ namespace TraJedi.Web.API.Controllers.Journal
         [HttpGet("newEntry")]
         public ActionResult<TradeInputModel> NewTradeEntry(string tradeId)
         {
-            TradeInputModel newTradeInput = null;
-
-            TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
-            if (tradeWrapper != null)
+            try
             {
-                newTradeInput = tradeWrapper.AddTradeEntry();
-            }
+                TradeInputModel newTradeInput = null;
 
-            if (newTradeInput == null)
-            {
-                return NotFound();
+                TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
+                if (tradeWrapper != null)
+                {
+                    newTradeInput = tradeWrapper.AddTradeEntry();
+                }
+
+                if (newTradeInput == null)
+                {
+                    _logger.LogWarning($"Could not add entry with tradeId: {tradeId}");
+                    return NotFound();
+                }
+                return Ok(newTradeInput);
             }
-            return Ok(newTradeInput);
+            catch (Exception ex)
+            {
+                return ExceptionHandling(ex, $"adding an entry with tradeId: {tradeId}");
+            }
         }
 
         [HttpGet("newExit")]
         public ActionResult<TradeInputModel> NewTradeExit(string tradeId)
         {
-            TradeInputModel newTradeInput = null;
-
-            TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
-            if (tradeWrapper != null)
+            try
             {
-                newTradeInput = tradeWrapper.AddTradeExit();
-            }
+                TradeInputModel newTradeInput = null;
 
-            if (newTradeInput == null)
-            {
-                return NotFound();
+                TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
+                if (tradeWrapper != null)
+                {
+                    newTradeInput = tradeWrapper.AddTradeExit();
+                }
+
+                if (newTradeInput == null)
+                {
+                    _logger.LogWarning($"Could not add exit with tradeId: {tradeId}");
+                    return NotFound();
+                }
+                return Ok(newTradeInput);
             }
-            return Ok(newTradeInput);
+            catch (Exception ex)
+            {
+                return ExceptionHandling(ex, $"adding an exit with tradeId: {tradeId}");
+            }
         }
         #endregion
 
@@ -93,20 +110,28 @@ namespace TraJedi.Web.API.Controllers.Journal
         [HttpPut("inputs/{tradeInputId}/components/{componentId}")]
         public ActionResult<InputComponentModel> UpdateComponent(string tradeId, string tradeInputId, string componentId, string newContent)
         {
-            TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
-            InputComponentModel? updatedComponent = null;
-
-            if (tradeWrapper != null)
+            try
             {
-                updatedComponent = tradeWrapper.UpdateTradeInputComponent(tradeInputId, componentId, newContent);
-            }
+                TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
+                InputComponentModel? updatedComponent = null;
 
-            if (updatedComponent != null)
-            {
+                if (tradeWrapper != null)
+                {
+                    updatedComponent = tradeWrapper.UpdateTradeInputComponent(tradeInputId, componentId, newContent);
+                }
+
+                if (updatedComponent != null)
+                {
+                    return NotFound();
+                }
+
+                _logger.LogWarning($"Could not update component with tradeId: {tradeId}, componentId: {componentId}");
                 return Ok(updatedComponent);
             }
-
-            return NotFound();
+            catch (Exception ex)
+            {
+                return ExceptionHandling(ex, $"updating component with tradeId: {tradeId}, componentId: {componentId}");
+            }
         }
 
         #endregion

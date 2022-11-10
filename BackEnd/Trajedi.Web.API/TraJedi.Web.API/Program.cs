@@ -1,8 +1,20 @@
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using TraJedi.Journal.Data;
+using TraJedi.Journal.Data.Interfaces;
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .WriteTo.File("/logs/traJedi.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+//builder.Logging.ClearProviders();
+//builder.Logging.AddConsole();
+
+builder.Host.UseSerilog();
 
 // Add services to the container.
 
@@ -13,13 +25,13 @@ builder.Services.AddControllers(options =>
 });
 
 builder.Services.AddEntityFrameworkNpgsql().AddDbContext<TradingJournalDataContext>
-                (options => options.UseNpgsql(builder.Configuration.GetConnectionString("traJediDatabase")));
+                (options => options.UseNpgsql(builder.Configuration.GetConnectionString("traJediDatabase")), ServiceLifetime.Singleton);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
-builder.Services.AddSingleton<TradingJournalAccess>();
+builder.Services.AddSingleton<ITradingJournalAccess, TradingJournalAccess>();
 
 var app = builder.Build();
 

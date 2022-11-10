@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraJedi.Journal.Data.Interfaces;
 
 namespace TraJedi.Journal.Data
 {
-    public class TradingJournalAccess
+    public class TradingJournalAccess : ITradingJournalAccess
     {
         private readonly TradingJournalDataContext _journalDbContext;
 

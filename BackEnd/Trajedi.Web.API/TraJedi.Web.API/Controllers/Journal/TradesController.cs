@@ -7,7 +7,7 @@ namespace TraJedi.Web.API.Controllers.Journal
     [Route("api/journal/trades")]
     public class TradesController : JournalControllerBase
     {
-        public TradesController(TradingJournalAccess journalAccess) : base(journalAccess) { }
+        public TradesController(TradingJournalAccess journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
 
         [HttpGet]
         public ActionResult<IEnumerable<string>> GetAllTrades()
