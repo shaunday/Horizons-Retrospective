@@ -11,7 +11,7 @@ namespace TraJedi.Journal.Data
 
         public string Content { get; set; } = string.Empty;
 
-        public DateTime AddedAt { get; } = DateTime.Now;
+        public DateTime CreatedAt { get; } = DateTime.Now;
 
         //parent
         [ForeignKey("InputComponentModelId")]

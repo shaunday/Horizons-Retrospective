@@ -93,7 +93,7 @@ namespace TraJedi.Journal.Data.Services
                 {
                     component.History.Add(component.ContentWrapper);
                     component.ContentWrapper = new ContentModel() { Content = newContent };
-
+                    trade.LastUpdatedAt = DateTime.Now;
                     UpdateInterimSummary();
 
                     return component;

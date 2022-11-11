@@ -13,7 +13,7 @@ namespace TraJedi.Journal.Data
         [MaxLength(50)]
         public TradeInputType TradeInputType { get; set; }
 
-        public DateTime AddedAt { get; set; } 
+        public DateTime LastUpdatedAt { get; set; } 
 
         public ICollection<InputComponentModel> TradeComponents { get; set; } = new List<InputComponentModel>();
 
