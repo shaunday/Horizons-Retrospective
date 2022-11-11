@@ -4,7 +4,7 @@
     {
         private readonly TradingJournalDataContext dataContext;
 
-        public List<TradeWrapper> Trades { get; }
+        public ICollection<TradeWrapper> Trades { get; }
 
         #region Ctor
 

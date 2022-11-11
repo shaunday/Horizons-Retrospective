@@ -1,7 +1,12 @@
-﻿namespace TraJedi.Journal.Data
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TraJedi.Journal.Data
 {
     public class InputComponentModel
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         public string Title { get; set; } = string.Empty;
@@ -30,7 +35,7 @@
 
         #endregion
 
-        public List<ContentModel> History { get; set; } = new List<ContentModel>();
+        public ICollection<ContentModel> History { get; set; } = new List<ContentModel>();
     }
 
 }

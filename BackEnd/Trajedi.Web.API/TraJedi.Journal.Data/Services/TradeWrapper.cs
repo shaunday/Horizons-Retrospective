@@ -8,7 +8,7 @@ namespace TraJedi.Journal.Data.Services
 
         private TradeModel? _backendTradeModel;
 
-        private List<TradeInputModel> TradeInputs
+        private ICollection<TradeInputModel> TradeInputs
         {
             get => _backendTradeModel.TradeInputs;
             set => _backendTradeModel.TradeInputs = value ;
