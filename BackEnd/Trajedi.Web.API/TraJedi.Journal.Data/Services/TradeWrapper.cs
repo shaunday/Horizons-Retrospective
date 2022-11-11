@@ -11,7 +11,7 @@ namespace TraJedi.Journal.Data.Services
         private ICollection<TradeInputModel> TradeInputs
         {
             get => _backendTradeModel.TradeInputs;
-            set => _backendTradeModel.TradeInputs = value ;
+            set => _backendTradeModel.TradeInputs = value;
         }
 
         private readonly TradingJournalDataContext dataContext;
@@ -58,7 +58,11 @@ namespace TraJedi.Journal.Data.Services
 
         public TradeInputModel? GetTradeSummary()
         {
-            TradeInputModel tradeSummary = new TradeInputModel() { TradeInputType = TradeInputType.OneLineSummation, TradeComponents = new() };
+            TradeInputModel tradeSummary = new TradeInputModel() 
+            {
+                TradeInputType = TradeInputType.OneLineSummation,
+                TradeComponents = new List<InputComponentModel>() 
+            };
 
             TradeInputModel? tradeOrigin = GetTradeOrigin();
             if (tradeOrigin != null)

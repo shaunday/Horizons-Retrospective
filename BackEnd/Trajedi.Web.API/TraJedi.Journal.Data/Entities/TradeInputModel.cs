@@ -9,13 +9,20 @@ namespace TraJedi.Journal.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        public TradeModel ParentTrade { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public TradeInputType TradeInputType { get; set; }
 
         public DateTime AddedAt { get; set; } 
 
-        public TradeInputType TradeInputType { get; set; }
-
         public ICollection<InputComponentModel> TradeComponents { get; set; } = new List<InputComponentModel>();
+
+
+        //parent
+        [ForeignKey("TradeModelId")]
+        public TradeModel? TradeModel { get; set; }
+
+        public Guid TradeModelId { get; set; }
 
     }
 }

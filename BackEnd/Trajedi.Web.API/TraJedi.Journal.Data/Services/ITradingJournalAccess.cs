@@ -2,7 +2,7 @@
 {
     public interface ITradingJournalAccess
     {
-        List<TradeWrapper> Trades { get; }
+        ICollection<TradeWrapper> Trades { get; }
 
         TradeWrapper AddTrade();
 

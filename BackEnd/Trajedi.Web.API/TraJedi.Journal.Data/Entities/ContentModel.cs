@@ -12,5 +12,11 @@ namespace TraJedi.Journal.Data
         public string Content { get; set; } = string.Empty;
 
         public DateTime AddedAt { get; } = DateTime.Now;
+
+        //parent
+        [ForeignKey("InputComponentModelId")]
+        public InputComponentModel? InputComponentModel { get; set; }
+
+        public Guid InputComponentModelId { get; set; }
     }
 }

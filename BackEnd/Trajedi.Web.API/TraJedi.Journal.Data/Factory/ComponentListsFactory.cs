@@ -8,13 +8,13 @@ namespace TraJediServer.Journal
         {
             return new List<InputComponentModel>
             {
-                new InputComponentModel() { Title = "Ticker", ComponentType = ComponentType.Header, IsRelevantForOneLineSummation =true }, //AttachedToggle for long/short
+                new InputComponentModel("Ticker") { ComponentType = ComponentType.Header, IsRelevantForOneLineSummation =true }, //AttachedToggle for long/short
                                        
-                new InputComponentModel() { Title = "Thesis", ComponentType = ComponentType.Thesis, IsRelevantForOneLineSummation =true },
-                new InputComponentModel() { Title = "Expanded", ComponentType = ComponentType.Thesis },
-                new InputComponentModel() { Title = "Confluences", ComponentType = ComponentType.Thesis },
-                new InputComponentModel() { Title = "Triggers", ComponentType = ComponentType.Thesis },
-                new InputComponentModel() { Title = "Position Plans", ComponentType = ComponentType.Thesis }, //todo
+                new InputComponentModel("Thesis") { ComponentType = ComponentType.Thesis, IsRelevantForOneLineSummation =true },
+                new InputComponentModel("Expanded") { ComponentType = ComponentType.Thesis },
+                new InputComponentModel("Confluences") { ComponentType = ComponentType.Thesis },
+                new InputComponentModel("Triggers") { ComponentType = ComponentType.Thesis },
+                new InputComponentModel("Position Plans") { ComponentType = ComponentType.Thesis }, //todo
             }
             .Concat(GetTradeEntryComponents(isActual: false)).ToList();
         }
@@ -23,19 +23,17 @@ namespace TraJediServer.Journal
         {
             return new List<InputComponentModel>
             {
-                new InputComponentModel() { Title = "Emotions", ComponentType = ComponentType.Entry },
-                new InputComponentModel() { Title = "Entry Price", ComponentType = ComponentType.Entry,
-                                                                                PriceValueRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
-                new InputComponentModel() { Title = "Amount", ComponentType = ComponentType.Entry },
-                new InputComponentModel() { Title = "Cost", ComponentType = ComponentType.Entry,
-                                                                                    CostRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
+                new InputComponentModel("Emotions") { ComponentType = ComponentType.Entry },
+                new InputComponentModel("Entry Price") { ComponentType = ComponentType.Entry, PriceValueRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
+                new InputComponentModel("Amount") { ComponentType = ComponentType.Entry },
+                new InputComponentModel("Cost") { ComponentType = ComponentType.Entry, CostRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
 
-                new InputComponentModel() { Title = "SL", ComponentType = ComponentType.SLandTarget },
-                new InputComponentModel() { Title = "SL Thoughts", ComponentType = ComponentType.SLandTarget },
-                new InputComponentModel() { Title = "Target", ComponentType = ComponentType.SLandTarget },
+                new InputComponentModel("SL") { ComponentType = ComponentType.SLandTarget },
+                new InputComponentModel("SL Thoughts") { ComponentType = ComponentType.SLandTarget },
+                new InputComponentModel("Target") { ComponentType = ComponentType.SLandTarget },
 
-                new InputComponentModel() { Title = "Risk", ComponentType = ComponentType.RiskandReward },
-                new InputComponentModel() { Title = "R:R",  ComponentType = ComponentType.RiskandReward },
+                new InputComponentModel("Risk") { ComponentType = ComponentType.RiskandReward },
+                new InputComponentModel("R:R") { ComponentType = ComponentType.RiskandReward },
             };
         }
 
@@ -43,12 +41,12 @@ namespace TraJediServer.Journal
         {
             return new List<InputComponentModel>
             {
-                new InputComponentModel() { Title = "Emotions", ComponentType = ComponentType.Exit },
-                new InputComponentModel() { Title = "Exit Price", ComponentType = ComponentType.Exit, PriceValueRelevance = ValueRelevance.Substract },
-                new InputComponentModel() { Title = "Amount", ComponentType = ComponentType.Exit },
-                new InputComponentModel() { Title = "Cost", ComponentType = ComponentType.Exit, CostRelevance = ValueRelevance.Substract },
+                new InputComponentModel("Emotions") { ComponentType = ComponentType.Exit },
+                new InputComponentModel("Exit Price") { ComponentType = ComponentType.Exit, PriceValueRelevance = ValueRelevance.Substract },
+                new InputComponentModel("Amount") { ComponentType = ComponentType.Exit },
+                new InputComponentModel("Cost") { ComponentType = ComponentType.Exit, CostRelevance = ValueRelevance.Substract },
 
-                new InputComponentModel() { Title = "Exit Reason", ComponentType = ComponentType.Exit },
+                new InputComponentModel("Exit Reason") { ComponentType = ComponentType.Exit },
             };
         }
 
@@ -57,9 +55,9 @@ namespace TraJediServer.Journal
 
             return new List<InputComponentModel>
             {
-                new InputComponentModel() { Title = "Average Entry Price", ComponentType = ComponentType.InterimSummary, Content =averageEntry },
-                new InputComponentModel() { Title = "Total Amount", ComponentType = ComponentType.InterimSummary , Content =totalAmount },
-                new InputComponentModel() { Title = "Total Cost", ComponentType = ComponentType.InterimSummary, Content =totalCost },
+                new InputComponentModel("Average Entry Price") { ComponentType = ComponentType.InterimSummary, Content =averageEntry },
+                new InputComponentModel("Total Amount") { ComponentType = ComponentType.InterimSummary, Content =totalAmount },
+                new InputComponentModel("Total Cost") { ComponentType = ComponentType.InterimSummary, Content =totalCost },
             };
 
             //todo indicators - distance from wmas,dmas, bb, kk
@@ -69,10 +67,10 @@ namespace TraJediServer.Journal
         {
             return new List<InputComponentModel>
             {
-                new InputComponentModel() { Title = "Result",  ComponentType = ComponentType.Closure, Content =profitValue, IsRelevantForOneLineSummation =true },
-                new InputComponentModel() { Title = "Actual R:R",  ComponentType = ComponentType.Closure, IsRelevantForOneLineSummation =true },
-                new InputComponentModel() { Title = "W/L", ComponentType = ComponentType.Closure, IsRelevantForOneLineSummation = true },
-                new InputComponentModel() { Title = "Lessons", ComponentType = ComponentType.Closure },
+                new InputComponentModel("Result") { ComponentType = ComponentType.Closure, Content =profitValue, IsRelevantForOneLineSummation =true },
+                new InputComponentModel("Actual R:R") { ComponentType = ComponentType.Closure, IsRelevantForOneLineSummation =true },
+                new InputComponentModel("W/L") { ComponentType = ComponentType.Closure, IsRelevantForOneLineSummation = true },
+                new InputComponentModel("Lessons") { ComponentType = ComponentType.Closure },
             };
         }
     }

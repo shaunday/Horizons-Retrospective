@@ -9,8 +9,12 @@ namespace TraJedi.Journal.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        public string Title { get; set; } = string.Empty;
+        [Required]
+        [MaxLength(100)]
+        public string Title { get; set; }
 
+        [Required]
+        [MaxLength(50)]
         public ComponentType ComponentType { get; set; }
 
         #region Content
@@ -20,7 +24,7 @@ namespace TraJedi.Journal.Data
         {
             get { return ContentWrapper.Content; }
             set { ContentWrapper.Content = value; }
-        } 
+        }
         #endregion
 
         #region flags
@@ -36,6 +40,18 @@ namespace TraJedi.Journal.Data
         #endregion
 
         public ICollection<ContentModel> History { get; set; } = new List<ContentModel>();
+
+
+        public InputComponentModel(string title)
+        {
+            Title = title;
+        }
+
+        //parent
+        [ForeignKey("TradeInputModelId")]
+        public TradeInputModel? TradeInputModel { get; set; }
+
+        public Guid TradeInputModelId { get; set; }
     }
 
 }

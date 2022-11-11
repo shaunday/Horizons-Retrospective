@@ -22,4 +22,9 @@
     <PackageReference Include="serilog.sinks.file" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\Converters\" />
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
