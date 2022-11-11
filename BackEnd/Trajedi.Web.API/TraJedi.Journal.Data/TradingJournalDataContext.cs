@@ -7,11 +7,11 @@ namespace TraJedi.Journal.Data
         #region Data
         public DbSet<TradeConstruct> OverallTrades { get; set; } = null!;
 
-        public DbSet<TradeInputModel>? TradeInputs { get; set; } = null!;
+        public DbSet<TradeInputModel> TradeInputs { get; set; } = null!;
 
-        public DbSet<InputComponentModel>? TradeInputComponents { get; set; } = null!;
+        public DbSet<InputComponentModel> TradeInputComponents { get; set; } = null!;
 
-        public DbSet<ContentModel>? ContentModels { get; set; } = null!;
+        public DbSet<ContentModel> ContentModels { get; set; } = null!;
         #endregion
 
         public TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : base(options) { } //allow service configuration 

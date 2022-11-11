@@ -31,7 +31,7 @@ builder.Services.AddEntityFrameworkNpgsql().AddDbContext<TradingJournalDataConte
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
-builder.Services.AddSingleton<ITradingJournalAccess, TradingJournalAccess>();
+builder.Services.AddSingleton<ITradesRepository, TradesRepository>();
 
 var app = builder.Build();
 

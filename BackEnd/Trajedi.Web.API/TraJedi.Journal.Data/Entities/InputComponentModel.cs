@@ -49,7 +49,7 @@ namespace TraJedi.Journal.Data
 
         //parent
         [ForeignKey("TradeInputModelId")]
-        public TradeInputModel? TradeInputModel { get; set; }
+        public TradeInputModel TradeInputModel { get; set; } = null!;
 
         public Guid TradeInputModelId { get; set; }
     }

@@ -8,18 +8,18 @@ namespace TraJedi.Web.API.Controllers.Journal
     [Route("api/journal/trades")]
     public class TradesController : JournalControllerBase
     {
-        public TradesController(TradingJournalAccess journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
+        public TradesController(ITradesRepository journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> GetAllTrades()
+        public ActionResult<IEnumerable<TradeConstruct>> GetAllTrades()
         {
-            return Ok(_journalAccess.Trades);
+            return Ok(_journalAccess.GetAllTradesAsync());
         }
 
         [HttpPost]
         public ActionResult<TradeInputModel> AddTrade()
         {
-            return Ok(_journalAccess.AddTrade());
+            return Ok(_journalAccess.AddTradeAsync());
         }
 
     }

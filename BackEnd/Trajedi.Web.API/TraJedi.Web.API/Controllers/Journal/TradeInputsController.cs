@@ -8,7 +8,7 @@ namespace TraJedi.Web.API.Controllers.Journal
     [Route("api/journal/trades/{tradeId}")]
     public class TradeInputsController : JournalControllerBase
     {
-        public TradeInputsController(TradingJournalAccess journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
+        public TradeInputsController(TradesRepository journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
 
         //#region Get
 
@@ -51,17 +51,11 @@ namespace TraJedi.Web.API.Controllers.Journal
         #region Add
 
         [HttpGet("newEntry")]
-        public ActionResult<TradeInputModel> NewTradeEntry(string tradeId)
+        public async Task<ActionResult<TradeInputModel>> NewTradeEntry(string tradeId)
         {
             try
             {
-                TradeInputModel? newTradeInput = null;
-
-                TradeConstructAccess? tradeWrapper = _journalAccess.GetTrade(tradeId);
-                if (tradeWrapper != null)
-                {
-                    newTradeInput = tradeWrapper.AddTradeEntry();
-                }
+                TradeInputModel? newTradeInput = await _journalAccess.AddTradeEntryAsync(tradeId);
 
                 if (newTradeInput == null)
                 {
@@ -77,17 +71,11 @@ namespace TraJedi.Web.API.Controllers.Journal
         }
 
         [HttpGet("newExit")]
-        public ActionResult<TradeInputModel> NewTradeExit(string tradeId)
+        public async Task<ActionResult<TradeInputModel>> NewTradeExit(string tradeId)
         {
             try
             {
-                TradeInputModel? newTradeInput = null;
-
-                TradeConstructAccess? tradeWrapper = _journalAccess.GetTrade(tradeId);
-                if (tradeWrapper != null)
-                {
-                    newTradeInput = tradeWrapper.AddTradeExit();
-                }
+                TradeInputModel? newTradeInput = await _journalAccess.AddTradeEntryAsync(tradeId);
 
                 if (newTradeInput == null)
                 {
@@ -106,29 +94,23 @@ namespace TraJedi.Web.API.Controllers.Journal
         #region Change
 
         [HttpPut("inputs/{tradeInputId}/components/{componentId}")]
-        public ActionResult<InputComponentModel> UpdateComponent(string tradeId, string tradeInputId, string componentId, string newContent)
+        public async Task<ActionResult<InputComponentModel?>> UpdateComponent(string componentId, string newContent)
         {
             try
             {
-                TradeConstructAccess? tradeWrapper = _journalAccess.GetTrade(tradeId);
-                InputComponentModel? updatedComponent = null;
+                InputComponentModel? updatedComponent = await _journalAccess.UpdateTradeInputComponent(componentId, newContent);
 
-                if (tradeWrapper != null)
+                if (updatedComponent == null)
                 {
-                    updatedComponent = tradeWrapper.UpdateTradeInputComponent(tradeInputId, componentId, newContent);
-                }
-
-                if (updatedComponent != null)
-                {
+                    _logger.LogWarning($"Could not update component: {componentId}");
                     return NotFound();
                 }
 
-                _logger.LogWarning($"Could not update component with tradeId: {tradeId}, componentId: {componentId}");
                 return Ok(updatedComponent);
             }
             catch (Exception ex)
             {
-                return ExceptionHandling(ex, $"updating component with tradeId: {tradeId}, componentId: {componentId}");
+                return ExceptionHandling(ex, $"updating componentId: {componentId}");
             }
         }
 

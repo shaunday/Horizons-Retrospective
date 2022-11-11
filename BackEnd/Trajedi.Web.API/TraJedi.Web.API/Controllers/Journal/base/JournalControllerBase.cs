@@ -5,10 +5,10 @@ namespace TraJedi.Web.API.Controllers.Journal
 {
     public class JournalControllerBase : ControllerBase
     {
-        protected readonly TradingJournalAccess _journalAccess;
+        protected readonly ITradesRepository _journalAccess;
         protected readonly ILogger<JournalControllerBase> _logger;
 
-        public JournalControllerBase(TradingJournalAccess journalAccess, ILogger<JournalControllerBase> logger)
+        public JournalControllerBase(ITradesRepository journalAccess, ILogger<JournalControllerBase> logger)
         {
             _journalAccess = journalAccess ?? throw new ArgumentNullException(nameof(journalAccess));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
