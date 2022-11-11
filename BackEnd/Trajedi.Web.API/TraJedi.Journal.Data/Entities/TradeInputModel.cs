@@ -19,10 +19,10 @@ namespace TraJedi.Journal.Data
 
 
         //parent
-        [ForeignKey("TradeModelId")]
-        public TradeModel? TradeModel { get; set; }
+        [ForeignKey("TradeConstructId")]
+        public TradeConstruct? TradeConstruct { get; set; }
 
-        public Guid TradeModelId { get; set; }
+        public Guid TradeConstructId { get; set; }
 
     }
 }

@@ -2,12 +2,12 @@
 {
     public interface ITradingJournalAccess
     {
-        ICollection<TradeWrapper> Trades { get; }
+        ICollection<TradeConstructAccess> Trades { get; }
 
-        TradeWrapper AddTrade();
+        TradeConstructAccess AddTrade();
 
         IEnumerable<string> GetTradeIds();
 
-        TradeWrapper? GetTrade(string tradeId);
+        TradeConstructAccess? GetTrade(string tradeId);
     }
 }

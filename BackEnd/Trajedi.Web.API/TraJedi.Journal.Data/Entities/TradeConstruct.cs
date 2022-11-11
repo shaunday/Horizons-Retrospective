@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TraJedi.Journal.Data
 {
-    public class TradeModel
+    public class TradeConstruct
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

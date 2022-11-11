@@ -4,22 +4,22 @@
     {
         private readonly TradingJournalDataContext dataContext;
 
-        public ICollection<TradeWrapper> Trades { get; }
+        public ICollection<TradeConstructAccess> Trades { get; }
 
         #region Ctor
 
         public TradingJournalAccess(TradingJournalDataContext journalDbContext)
         {
             dataContext = journalDbContext ?? throw new ArgumentNullException(nameof(journalDbContext));
-            Trades = new List<TradeWrapper>();
+            Trades = new List<TradeConstructAccess>();
 
             //todo parse trades from the db
         }
         #endregion
 
-        public TradeWrapper AddTrade()
+        public TradeConstructAccess AddTrade()
         {
-            TradeWrapper newTrade = new TradeWrapper(dataContext);
+            TradeConstructAccess newTrade = new TradeConstructAccess(dataContext);
             return newTrade;
         }
 
@@ -28,7 +28,7 @@
             return Trades.Select(t => t.GetIdString());
         }
 
-        public TradeWrapper? GetTrade(string tradeId)
+        public TradeConstructAccess? GetTrade(string tradeId)
         {
             return Trades.FirstOrDefault(t => t.GetIdString() == tradeId);
         }

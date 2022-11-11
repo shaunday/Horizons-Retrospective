@@ -57,7 +57,7 @@ namespace TraJedi.Web.API.Controllers.Journal
             {
                 TradeInputModel? newTradeInput = null;
 
-                TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
+                TradeConstructAccess? tradeWrapper = _journalAccess.GetTrade(tradeId);
                 if (tradeWrapper != null)
                 {
                     newTradeInput = tradeWrapper.AddTradeEntry();
@@ -83,7 +83,7 @@ namespace TraJedi.Web.API.Controllers.Journal
             {
                 TradeInputModel? newTradeInput = null;
 
-                TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
+                TradeConstructAccess? tradeWrapper = _journalAccess.GetTrade(tradeId);
                 if (tradeWrapper != null)
                 {
                     newTradeInput = tradeWrapper.AddTradeExit();
@@ -110,7 +110,7 @@ namespace TraJedi.Web.API.Controllers.Journal
         {
             try
             {
-                TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
+                TradeConstructAccess? tradeWrapper = _journalAccess.GetTrade(tradeId);
                 InputComponentModel? updatedComponent = null;
 
                 if (tradeWrapper != null)

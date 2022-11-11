@@ -2,11 +2,11 @@
 
 namespace TraJedi.Journal.Data.Services
 {
-    public class TradeWrapper
+    public class TradeConstructAccess
     {
         #region Members
 
-        private TradeModel? _backendTradeModel;
+        private TradeConstruct _backendTradeModel = null!;
 
         private ICollection<TradeInputModel> TradeInputs
         {
@@ -20,28 +20,26 @@ namespace TraJedi.Journal.Data.Services
 
         #region ctor
 
-        public TradeWrapper(TradingJournalDataContext journalDbContext, Guid? id = null)
+        public TradeConstructAccess(TradingJournalDataContext journalDbContext, Guid? id = null)
         {
             dataContext = journalDbContext ?? throw new ArgumentNullException(nameof(journalDbContext));
 
             if (id == null)
             {
-                _backendTradeModel = new TradeModel();
+                _backendTradeModel = new TradeConstruct();
                 _backendTradeModel.TradeInputs.Add(new TradeInputModel()
                 {
                     TradeInputType = TradeInputType.Origin,
                     TradeComponents = ComponentListsFactory.GetTradeOriginComponents()
                 });
+
                 dataContext.OverallTrades.Add(_backendTradeModel);
             }
             else
             {
-                _backendTradeModel = dataContext.OverallTrades.Where(t => t.Id == id).FirstOrDefault();
-                if (_backendTradeModel == null)
-                {
-                    //shouldnt happen
-                    //todo handle
-                }
+                _backendTradeModel = dataContext.OverallTrades?.Where(t => t.Id == id).FirstOrDefault() ??
+                                                            throw new ArgumentNullException(nameof(dataContext.OverallTrades));
+
             }
         }
         #endregion
@@ -94,7 +92,10 @@ namespace TraJedi.Journal.Data.Services
                     component.History.Add(component.ContentWrapper);
                     component.ContentWrapper = new ContentModel() { Content = newContent };
                     trade.LastUpdatedAt = DateTime.Now;
+
                     UpdateInterimSummary();
+
+                    dataContext.SaveChanges();
 
                     return component;
                 }
@@ -116,6 +117,8 @@ namespace TraJedi.Journal.Data.Services
             TradeInputs.Add(tradeInput);
             UpdateInterimSummary();
 
+            dataContext.SaveChanges();
+
             return tradeInput;
         }
 
@@ -130,6 +133,8 @@ namespace TraJedi.Journal.Data.Services
             TradeInputs.Add(tradeInput);
             UpdateInterimSummary();
 
+            dataContext.SaveChanges();
+
             return tradeInput;
         }
 
@@ -143,6 +148,8 @@ namespace TraJedi.Journal.Data.Services
             }
 
             UpdateInterimSummary();
+
+            dataContext.SaveChanges();
         }
 
         private void AddInterimSummary()
@@ -199,6 +206,8 @@ namespace TraJedi.Journal.Data.Services
                 TradeInputType = TradeInputType.Closure,
                 TradeComponents = ComponentListsFactory.GetTradeClosureComponents(profitValue: analytics.profit.ToString())
             });
+
+            dataContext.SaveChanges();
         }
 
         #endregion

@@ -5,13 +5,13 @@ namespace TraJedi.Journal.Data
     public class TradingJournalDataContext : DbContext
     {
         #region Data
-        public DbSet<TradeModel>? OverallTrades { get; set; }
+        public DbSet<TradeConstruct> OverallTrades { get; set; } = null!;
 
-        public DbSet<TradeInputModel>? TradeInputs { get; set; }
+        public DbSet<TradeInputModel>? TradeInputs { get; set; } = null!;
 
-        public DbSet<InputComponentModel>? TradeInputComponents { get; set; }
+        public DbSet<InputComponentModel>? TradeInputComponents { get; set; } = null!;
 
-        public DbSet<ContentModel>? ContentModels { get; set; } 
+        public DbSet<ContentModel>? ContentModels { get; set; } = null!;
         #endregion
 
         public TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : base(options) { } //allow service configuration 
@@ -20,9 +20,9 @@ namespace TraJedi.Journal.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<TradeModel>(entity =>
+            modelBuilder.Entity<TradeConstruct>(entity =>
             {
-                entity.HasMany(t => t.TradeInputs).WithOne(t => t.TradeModel);
+                entity.HasMany(t => t.TradeInputs).WithOne(t => t.TradeConstruct);
             });
 
             modelBuilder.Entity<InputComponentModel>(entity =>
