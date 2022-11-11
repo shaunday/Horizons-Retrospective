@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TraJedi.Journal.Data;
-using Microsoft.Extensions.Logging.Abstractions;
-using Microsoft.AspNetCore.StaticFiles;
-using System.ComponentModel;
+using TraJedi.Journal.Data.Services;
 
 namespace TraJedi.Web.API.Controllers.Journal
 {
@@ -57,7 +55,7 @@ namespace TraJedi.Web.API.Controllers.Journal
         {
             try
             {
-                TradeInputModel newTradeInput = null;
+                TradeInputModel? newTradeInput = null;
 
                 TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
                 if (tradeWrapper != null)
@@ -83,7 +81,7 @@ namespace TraJedi.Web.API.Controllers.Journal
         {
             try
             {
-                TradeInputModel newTradeInput = null;
+                TradeInputModel? newTradeInput = null;
 
                 TradeWrapper? tradeWrapper = _journalAccess.GetTrade(tradeId);
                 if (tradeWrapper != null)

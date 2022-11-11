@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TraJedi.Journal.Data.Interfaces;
-
-namespace TraJedi.Journal.Data
+﻿namespace TraJedi.Journal.Data.Services
 {
     public class TradingJournalAccess : ITradingJournalAccess
     {
@@ -17,7 +10,7 @@ namespace TraJedi.Journal.Data
 
         public TradingJournalAccess(TradingJournalDataContext journalDbContext)
         {
-            journalDbContext = journalDbContext ?? throw new ArgumentNullException(nameof(journalDbContext));
+            dataContext = journalDbContext ?? throw new ArgumentNullException(nameof(journalDbContext));
             Trades = new List<TradeWrapper>();
 
             //todo parse trades from the db

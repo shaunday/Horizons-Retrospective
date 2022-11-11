@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using TraJedi.Journal.Data;
-using TraJedi.Journal.Data.Interfaces;
+using TraJedi.Journal.Data.Services;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TraJedi.Journal.Data;
+using TraJedi.Journal.Data.Services;
 
 namespace TraJedi.Web.API.Controllers.Journal
 {

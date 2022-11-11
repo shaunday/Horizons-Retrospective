@@ -1,17 +1,17 @@
 ﻿using TraJediServer.Journal;
 
-namespace TraJedi.Journal.Data
+namespace TraJedi.Journal.Data.Services
 {
     public class TradeWrapper
     {
         #region Members
 
-        private TradeModel _backendTradeModel;
+        private TradeModel? _backendTradeModel;
 
         private List<TradeInputModel> TradeInputs
         {
             get => _backendTradeModel.TradeInputs;
-            set => _backendTradeModel.TradeInputs = value;
+            set => _backendTradeModel.TradeInputs = value ;
         }
 
         private readonly TradingJournalDataContext dataContext;
@@ -43,7 +43,7 @@ namespace TraJedi.Journal.Data
                     //todo handle
                 }
             }
-        } 
+        }
         #endregion
 
         #region Getters
