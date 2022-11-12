@@ -51,6 +51,7 @@ namespace TraJedi.Journal.Data.Services
                 TradeComponents = ComponentListsFactory.GetTradeOriginComponents()
             });
             await dataContext.OverallTrades.AddAsync(trade);
+            await dataContext.SaveChangesAsync();
 
             return trade;
         }

@@ -13,5 +13,6 @@
         Task<TradeInputModel> AddTradeExitAsync(string tradeId);
 
         Task<InputComponentModel?> UpdateTradeInputComponent(string componentId, string newContent);
+
     }
 }
