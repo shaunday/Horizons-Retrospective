@@ -56,9 +56,21 @@ namespace TraJedi.Journal.Data.Services
             return trade;
         }
 
-        public async Task<IEnumerable<TradeConstruct>> GetAllTradesAsync()
+        public async Task<(IEnumerable<TradeConstruct>, PaginationMetadata)> GetAllTradesAsync(int pageNumber = 1, int pageSize = 10)
         {
-            return await dataContext.OverallTrades.ToListAsync();
+            //collection to start from
+            var collection = dataContext.OverallTrades as IQueryable<TradeConstruct>;
+
+            var totalItemCount = await collection.CountAsync();
+
+            var paginationMetadata = new PaginationMetadata(totalItemCount, pageSize, pageNumber);
+
+            var collectionToReturn = await collection.OrderBy(t => t.CreatedAt)
+                .Skip(pageSize * (pageNumber -1))
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (collectionToReturn, paginationMetadata);
         }
         #endregion
 

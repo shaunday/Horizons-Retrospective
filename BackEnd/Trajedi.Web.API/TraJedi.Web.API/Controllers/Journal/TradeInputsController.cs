@@ -53,41 +53,17 @@ namespace TraJedi.Web.API.Controllers.Journal
         [HttpGet("newEntry")]
         public async Task<ActionResult<TradeInputModel>> NewTradeEntry(string tradeId)
         {
-            try
-            {
-                TradeInputModel? newTradeInput = await _journalAccess.AddTradeEntryAsync(tradeId);
+            TradeInputModel? newTradeInput = await _journalAccess.AddTradeEntryAsync(tradeId);
 
-                if (newTradeInput == null)
-                {
-                    _logger.LogWarning($"Could not add entry with tradeId: {tradeId}");
-                    return NotFound();
-                }
-                return Ok(newTradeInput);
-            }
-            catch (Exception ex)
-            {
-                return ExceptionHandling(ex, $"adding an entry with tradeId: {tradeId}");
-            }
+            return ResultHandling(newTradeInput, $"Could not add entry with tradeId: {tradeId}");
         }
 
         [HttpGet("newExit")]
         public async Task<ActionResult<TradeInputModel>> NewTradeExit(string tradeId)
         {
-            try
-            {
-                TradeInputModel? newTradeInput = await _journalAccess.AddTradeEntryAsync(tradeId);
+            TradeInputModel? newTradeInput = await _journalAccess.AddTradeEntryAsync(tradeId);
 
-                if (newTradeInput == null)
-                {
-                    _logger.LogWarning($"Could not add exit with tradeId: {tradeId}");
-                    return NotFound();
-                }
-                return Ok(newTradeInput);
-            }
-            catch (Exception ex)
-            {
-                return ExceptionHandling(ex, $"adding an exit with tradeId: {tradeId}");
-            }
+            return ResultHandling(newTradeInput, $"Could not add exit with tradeId: {tradeId}");
         }
         #endregion
 
@@ -96,22 +72,9 @@ namespace TraJedi.Web.API.Controllers.Journal
         [HttpPut("inputs/{tradeInputId}/components/{componentId}")]
         public async Task<ActionResult<InputComponentModel?>> UpdateComponent(string componentId, string newContent)
         {
-            try
-            {
-                InputComponentModel? updatedComponent = await _journalAccess.UpdateTradeInputComponent(componentId, newContent);
+            InputComponentModel? updatedComponent = await _journalAccess.UpdateTradeInputComponent(componentId, newContent);
 
-                if (updatedComponent == null)
-                {
-                    _logger.LogWarning($"Could not update component: {componentId}");
-                    return NotFound();
-                }
-
-                return Ok(updatedComponent);
-            }
-            catch (Exception ex)
-            {
-                return ExceptionHandling(ex, $"updating componentId: {componentId}");
-            }
+            return ResultHandling(updatedComponent, $"Could not update component: {componentId}");
         }
 
         #endregion

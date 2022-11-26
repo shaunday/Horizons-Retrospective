@@ -9,7 +9,9 @@ namespace TraJedi.Journal.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        public ICollection<TradeInputModel> TradeInputs { get; set; } = new List<TradeInputModel>();   
+        public ICollection<TradeInputModel> TradeInputs { get; set; } = new List<TradeInputModel>();
+
+        public DateTime CreatedAt { get; } = DateTime.Now;
 
     }
 }

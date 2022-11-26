@@ -4,7 +4,7 @@
     {
         Task<IEnumerable<TradeInputModel>> GetAllTradesOneLinerSummariesAsync();
 
-        Task<IEnumerable<TradeConstruct>> GetAllTradesAsync();
+        Task<(IEnumerable<TradeConstruct>, PaginationMetadata)> GetAllTradesAsync(int pageNumber = 1, int pageSize = 10);
 
         Task<TradeConstruct> AddTradeAsync();
 
