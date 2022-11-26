@@ -2,7 +2,7 @@
 {
     public enum ComponentType
     {
-        Header, Thesis, Entry, SLandTarget, RiskandReward, Exit, InterimSummary, Closure, Indicators
+        Header, Thesis, Addition, SLandTarget, RiskandReward, Reduction, InterimSummary, Closure, Indicators
     }
 
     public enum TradeInputType

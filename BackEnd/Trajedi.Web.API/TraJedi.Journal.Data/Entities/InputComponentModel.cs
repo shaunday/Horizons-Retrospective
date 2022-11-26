@@ -35,7 +35,7 @@ namespace TraJedi.Journal.Data
 
         public bool AttachedToggle { get; set; } = false;
 
-        public bool IsRelevantForOneLineSummation { get; set; } = false;
+        public bool IsRelevantForOverview { get; set; } = false;
 
         #endregion
 

@@ -8,25 +8,25 @@ namespace TraJediServer.Journal
         {
             return new List<InputComponentModel>
             {
-                new InputComponentModel("Ticker") { ComponentType = ComponentType.Header, IsRelevantForOneLineSummation =true }, //AttachedToggle for long/short
+                new InputComponentModel("Ticker") { ComponentType = ComponentType.Header, IsRelevantForOverview =true }, //AttachedToggle for long/short
                                        
-                new InputComponentModel("Thesis") { ComponentType = ComponentType.Thesis, IsRelevantForOneLineSummation =true },
+                new InputComponentModel("Thesis") { ComponentType = ComponentType.Thesis, IsRelevantForOverview =true },
                 new InputComponentModel("Expanded") { ComponentType = ComponentType.Thesis },
                 new InputComponentModel("Confluences") { ComponentType = ComponentType.Thesis },
                 new InputComponentModel("Triggers") { ComponentType = ComponentType.Thesis },
                 new InputComponentModel("Position Plans") { ComponentType = ComponentType.Thesis }, //todo
             }
-            .Concat(GetTradeEntryComponents(isActual: false)).ToList();
+            .Concat(GetAddToPositionComponents(isActual: false)).ToList();
         }
 
-        public static List<InputComponentModel> GetTradeEntryComponents(bool isActual)
+        public static List<InputComponentModel> GetAddToPositionComponents(bool isActual)
         {
             return new List<InputComponentModel>
             {
-                new InputComponentModel("Emotions") { ComponentType = ComponentType.Entry },
-                new InputComponentModel("Entry Price") { ComponentType = ComponentType.Entry, PriceValueRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
-                new InputComponentModel("Amount") { ComponentType = ComponentType.Entry },
-                new InputComponentModel("Cost") { ComponentType = ComponentType.Entry, CostRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
+                new InputComponentModel("Emotions") { ComponentType = ComponentType.Addition },
+                new InputComponentModel("Entry Price") { ComponentType = ComponentType.Addition, PriceValueRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
+                new InputComponentModel("Amount") { ComponentType = ComponentType.Addition },
+                new InputComponentModel("Cost") { ComponentType = ComponentType.Addition, CostRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
 
                 new InputComponentModel("SL") { ComponentType = ComponentType.SLandTarget },
                 new InputComponentModel("SL Thoughts") { ComponentType = ComponentType.SLandTarget },
@@ -37,16 +37,16 @@ namespace TraJediServer.Journal
             };
         }
 
-        public static List<InputComponentModel> GetTradeExitComponents()
+        public static List<InputComponentModel> GetReducePositionComponents()
         {
             return new List<InputComponentModel>
             {
-                new InputComponentModel("Emotions") { ComponentType = ComponentType.Exit },
-                new InputComponentModel("Exit Price") { ComponentType = ComponentType.Exit, PriceValueRelevance = ValueRelevance.Substract },
-                new InputComponentModel("Amount") { ComponentType = ComponentType.Exit },
-                new InputComponentModel("Cost") { ComponentType = ComponentType.Exit, CostRelevance = ValueRelevance.Substract },
+                new InputComponentModel("Emotions") { ComponentType = ComponentType.Reduction },
+                new InputComponentModel("Exit Price") { ComponentType = ComponentType.Reduction, PriceValueRelevance = ValueRelevance.Substract },
+                new InputComponentModel("Amount") { ComponentType = ComponentType.Reduction },
+                new InputComponentModel("Cost") { ComponentType = ComponentType.Reduction, CostRelevance = ValueRelevance.Substract },
 
-                new InputComponentModel("Exit Reason") { ComponentType = ComponentType.Exit },
+                new InputComponentModel("Exit Reason") { ComponentType = ComponentType.Reduction },
             };
         }
 
@@ -55,9 +55,12 @@ namespace TraJediServer.Journal
 
             return new List<InputComponentModel>
             {
-                new InputComponentModel("Average Entry Price") { ComponentType = ComponentType.InterimSummary, Content =averageEntry },
-                new InputComponentModel("Total Amount") { ComponentType = ComponentType.InterimSummary, Content =totalAmount },
-                new InputComponentModel("Total Cost") { ComponentType = ComponentType.InterimSummary, Content =totalCost },
+                new InputComponentModel("Average Entry Price") { ComponentType = ComponentType.InterimSummary, 
+                                                                    Content =averageEntry, IsRelevantForOverview =true  },
+                new InputComponentModel("Total Amount") { ComponentType = ComponentType.InterimSummary, 
+                                                                    Content =totalAmount , IsRelevantForOverview =true },
+                new InputComponentModel("Total Cost") { ComponentType = ComponentType.InterimSummary, 
+                                                                    Content =totalCost , IsRelevantForOverview =true },
             };
 
             //todo indicators - distance from wmas,dmas, bb, kk
@@ -67,9 +70,9 @@ namespace TraJediServer.Journal
         {
             return new List<InputComponentModel>
             {
-                new InputComponentModel("Result") { ComponentType = ComponentType.Closure, Content =profitValue, IsRelevantForOneLineSummation =true },
-                new InputComponentModel("Actual R:R") { ComponentType = ComponentType.Closure, IsRelevantForOneLineSummation =true },
-                new InputComponentModel("W/L") { ComponentType = ComponentType.Closure, IsRelevantForOneLineSummation = true },
+                new InputComponentModel("Result") { ComponentType = ComponentType.Closure, Content =profitValue, IsRelevantForOverview =true },
+                new InputComponentModel("Actual R:R") { ComponentType = ComponentType.Closure, IsRelevantForOverview =true },
+                new InputComponentModel("W/L") { ComponentType = ComponentType.Closure, IsRelevantForOverview = true },
                 new InputComponentModel("Lessons") { ComponentType = ComponentType.Closure },
             };
         }
