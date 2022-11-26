@@ -14,13 +14,7 @@ namespace TraJedi.Web.API.Controllers.Journal
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        //protected virtual ActionResult ExceptionHandling(Exception ex, string cause)
-        //{
-        //    _logger.LogCritical($"Exception while {cause}. {ex}");
-        //    return StatusCode(500, "A problem happened while handling your request");
-        //}
-
-        public virtual ActionResult ResultHandling(object? result, string logEntry)
+        protected ActionResult ResultHandling(object? result, string logEntry)
         {
             if (result == null)
             {

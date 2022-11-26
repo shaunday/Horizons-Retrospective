@@ -6,8 +6,9 @@ using TraJedi.Journal.Data.Services;
 
 namespace TraJedi.Web.API.Controllers.Journal
 {
+    [Route("api/v{version:apiVersion}/journal/trades")]
+    [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/journal/trades")]
     public class TradesController : JournalControllerBase
     {
         const int maxTradesPageSize = 20;
@@ -29,7 +30,7 @@ namespace TraJedi.Web.API.Controllers.Journal
             return Ok(tradesEntities);
         }
 
-        [HttpGet]
+        [HttpGet("trade1Liners")]
         public async Task<ActionResult<IEnumerable<TradeConstruct>>> GetAllTradesAs1Liner()
         {
             return Ok(await _journalAccess.GetAllTradesOneLinerSummariesAsync());

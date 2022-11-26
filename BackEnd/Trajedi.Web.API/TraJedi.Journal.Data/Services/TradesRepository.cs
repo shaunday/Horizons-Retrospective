@@ -165,13 +165,9 @@ namespace TraJedi.Journal.Data.Services
             return await AddTradeInputAsync(tradeId, tradeInput);
         }
 
-        public async Task RemoveInterimInputByTypeAsync(string tradeInputId, TradeInputType tradeInputType)
+        public async Task<bool> RemoveTradeInterim(string tradeInputId)
         {
-            TradeInputModel? tradeInput =
-                 await dataContext.TradeInputs.Where(t => t.Id.ToString() == tradeInputId && t.TradeInputType == tradeInputType).FirstOrDefaultAsync();
-
-            if (tradeInput != null)
-                dataContext.TradeInputs.Remove(tradeInput);
+           return await RemoveInterimInputByTypeAsync(tradeInputId, TradeInputType.InterimSummary);
         }
 
         public async Task UpdateInterimSummaryAsync(string tradeInputId)
@@ -201,6 +197,20 @@ namespace TraJedi.Journal.Data.Services
         #endregion
 
         #region Helpers
+
+        public async Task<bool> RemoveInterimInputByTypeAsync(string tradeInputId, TradeInputType tradeInputType)
+        {
+            TradeInputModel? tradeInput =
+                 await dataContext.TradeInputs.Where(t => t.Id.ToString() == tradeInputId && t.TradeInputType == tradeInputType).FirstOrDefaultAsync();
+
+            if (tradeInput != null)
+            {
+                dataContext.TradeInputs.Remove(tradeInput);
+                return true;
+            }
+
+            return false;
+        }
 
         private async Task<TradeInputModel> AddTradeInputAsync(string tradeInputId, TradeInputModel tradeInput)
         {

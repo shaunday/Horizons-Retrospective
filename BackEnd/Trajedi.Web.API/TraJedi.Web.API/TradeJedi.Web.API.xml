@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TraJedi.Web.API</name>
+    </assembly>
+    <members>
+        <member name="M:TraJedi.Web.API.Controllers.Journal.TradesController.GetAllTrades(System.Int32,System.Int32)">
+            <summary>
+            Get All Journal Trades
+            </summary>
+            <param name="pageNumber">optional pagination variable</param>
+            <param name="pageSize">optional pagination variable</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

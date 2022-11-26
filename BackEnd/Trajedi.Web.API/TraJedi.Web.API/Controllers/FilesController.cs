@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.StaticFiles;
 
 namespace TraJedi.Web.API.Controllers
 {
-    [ApiController]
-    [Route("api/files")]
+    [Route("api/v{version:apiVersion}/files")]
+    //[ApiController]
+    //[ApiVersion("1.0")]
     public class FilesController : ControllerBase
     {
         private readonly FileExtensionContentTypeProvider _fileExtensionContentTypeProvider;

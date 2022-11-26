@@ -14,5 +14,7 @@
 
         Task<InputComponentModel?> UpdateTradeInputComponent(string componentId, string newContent);
 
+        Task<bool> RemoveTradeInterim(string tradeInputId);
+
     }
 }

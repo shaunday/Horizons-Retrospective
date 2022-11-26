@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Reflection;
 using TraJedi.Journal.Data;
 using TraJedi.Journal.Data.Services;
 
@@ -30,8 +31,24 @@ builder.Services.AddEntityFrameworkNpgsql().AddDbContext<TradingJournalDataConte
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen(setupAction =>
+//{
+//    var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+//    var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+
+//    setupAction.IncludeXmlComments(xmlCommentsFullPath);
+//});
+
+
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 builder.Services.AddScoped<ITradesRepository, TradesRepository>();
+
+builder.Services.AddApiVersioning(setupAction =>
+{
+    setupAction.AssumeDefaultVersionWhenUnspecified = true;
+    setupAction.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+    setupAction.ReportApiVersions = true;
+});
 
 var app = builder.Build();
 

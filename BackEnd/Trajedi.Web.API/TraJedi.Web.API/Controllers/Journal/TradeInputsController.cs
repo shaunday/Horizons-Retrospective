@@ -4,8 +4,9 @@ using TraJedi.Journal.Data.Services;
 
 namespace TraJedi.Web.API.Controllers.Journal
 {
+    [Route("api/v{version:apiVersion}/journal/trades/{tradeId}")]
+    [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/journal/trades/{tradeId}")]
     public class TradeInputsController : JournalControllerBase
     {
         public TradeInputsController(TradesRepository journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
@@ -50,7 +51,7 @@ namespace TraJedi.Web.API.Controllers.Journal
 
         #region Add
 
-        [HttpGet("newEntry")]
+        [HttpPost("newEntry")]
         public async Task<ActionResult<TradeInputModel>> NewTradeEntry(string tradeId)
         {
             TradeInputModel? newTradeInput = await _journalAccess.AddTradeEntryAsync(tradeId);
@@ -58,13 +59,30 @@ namespace TraJedi.Web.API.Controllers.Journal
             return ResultHandling(newTradeInput, $"Could not add entry with tradeId: {tradeId}");
         }
 
-        [HttpGet("newExit")]
+        [HttpPost("newExit")]
         public async Task<ActionResult<TradeInputModel>> NewTradeExit(string tradeId)
         {
             TradeInputModel? newTradeInput = await _journalAccess.AddTradeEntryAsync(tradeId);
 
             return ResultHandling(newTradeInput, $"Could not add exit with tradeId: {tradeId}");
         }
+        #endregion
+
+        #region Remove
+
+        [HttpDelete("{tradeInputId}")]
+        public async Task<ActionResult> DeleteInterimTradeInput(string tradeInputId)
+        {
+            bool res = await _journalAccess.RemoveTradeInterim(tradeInputId);
+
+            if (!res)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
         #endregion
 
         #region Change
