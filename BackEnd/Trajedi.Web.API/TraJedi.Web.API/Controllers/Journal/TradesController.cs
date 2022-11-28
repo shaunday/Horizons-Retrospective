@@ -31,7 +31,7 @@ namespace TraJedi.Web.API.Controllers.Journal
         }
 
         [HttpGet("tradeOverviews")]
-        public async Task<ActionResult<IEnumerable<TradeConstruct>>> GetAllTradesAs1Liner()
+        public async Task<ActionResult<IEnumerable<TradeConstruct>>> GetAllTradeOverviews()
         {
             return Ok(await _journalAccess.GetAllTradeOverviewsAsync());
         }

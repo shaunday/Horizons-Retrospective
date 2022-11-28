@@ -18,7 +18,8 @@ namespace TraJedi.Journal.Data.Services
         }
         #endregion
 
-        #region Trades Access
+        #region Trades 
+
         public async Task<IEnumerable<TradeInputModel>> GetAllTradeOverviewsAsync()
         {
             var _oneLiners = new List<TradeInputModel>();
@@ -72,51 +73,30 @@ namespace TraJedi.Journal.Data.Services
 
             return (collectionToReturn, paginationMetadata);
         }
+
         #endregion
 
-        #region Trade Inputs Access
+        #region Trade Inputs 
+
+        #region Getters
 
         public async Task<TradeInputModel?> GetTradeOriginAsync(string tradeId)
         {
-            return await dataContext.TradeInputs
-                 .Where(t => t.TradeConstructId.ToString() == tradeId && t.TradeInputType == TradeInputType.Origin)
-                 .FirstOrDefaultAsync();
+            return await GetTradeInputByTypeAsync(tradeId, TradeInputType.Origin);
         }
 
         public async Task<TradeInputModel?> GetTradeClosureAsync(string tradeId)
         {
-            return await dataContext.TradeInputs
-               .Where(t => t.TradeConstructId.ToString() == tradeId && t.TradeInputType == TradeInputType.Closure)
-               .FirstOrDefaultAsync();
+            return await GetTradeInputByTypeAsync(tradeId, TradeInputType.Closure);
         }
 
-        public async Task<IEnumerable<TradeInputModel>> GetTradeInterimsAsync(string tradeId)
+        public async Task<TradeInputModel?> GetTradeSummaryAsync(string tradeId)
         {
-            return await dataContext.TradeInputs
-               .Where(t => t.TradeConstructId.ToString() == tradeId && t.TradeInputType == TradeInputType.Interim)
-               .ToListAsync();
+            return await GetTradeInputByTypeAsync(tradeId, TradeInputType.Summary);
         }
+        #endregion
 
-        public async Task<TradeInputModel?> CreateTradeClosureAsync(string tradeId)
-        {
-            await RemoveInterimInputByTypeAsync(tradeId, TradeInputType.InterimSummary);
-
-            var analytics = await GetAvgEntryAndProfitAsync(tradeId);
-
-            TradeInputModel tradeClosure = new TradeInputModel()
-            {
-                TradeInputType = TradeInputType.Closure,
-                TradeComponents = ComponentListsFactory.GetTradeClosureComponents(profitValue: analytics.profit.ToString())
-            };
-
-            await dataContext.TradeInputs.AddAsync(tradeClosure);
-
-            await dataContext.SaveChangesAsync();
-
-            return tradeClosure;
-        }
-
-        #region Interims add/remove
+        #region add/remove
 
         public async Task<TradeInputModel> NewEntryAddPositionAsync(string tradeId)
         {
@@ -140,40 +120,29 @@ namespace TraJedi.Journal.Data.Services
             return await AddTradeInputAsync(tradeId, tradeInput);
         }
 
-        private async Task<TradeInputModel> AddInterimSummaryAsync(string tradeId)
+        public async Task<TradeInputModel?> CreateTradeClosureAsync(string tradeId)
         {
+            await RemoveInterimInputByTypeAsync(tradeId, TradeInputType.Summary);
+
             var analytics = await GetAvgEntryAndProfitAsync(tradeId);
 
-            string averageEntry = string.Empty, totalAmount = string.Empty, totalCost = string.Empty;
-            if (analytics.totalCost > 0)
+            TradeInputModel tradeClosure = new TradeInputModel()
             {
-                totalCost = analytics.totalCost.ToString();
-
-                if (analytics.totalAmount > 0)
-                {
-                    totalAmount = analytics.totalAmount.ToString();
-                    averageEntry = (analytics.totalCost / analytics.totalAmount).ToString();
-                }
-            }
-
-            TradeInputModel tradeInput = new TradeInputModel()
-            {
-                TradeInputType = TradeInputType.Interim,
-                TradeComponents = ComponentListsFactory.GetInterimSummaryComponents(averageEntry, totalAmount, totalCost)
+                TradeInputType = TradeInputType.Closure,
+                TradeComponents = ComponentListsFactory.GetTradeClosureComponents(profitValue: analytics.profit.ToString())
             };
 
-            return await AddTradeInputAsync(tradeId, tradeInput);
+            await dataContext.TradeInputs.AddAsync(tradeClosure);
+
+            await dataContext.SaveChangesAsync();
+
+            return tradeClosure;
         }
+
 
         public async Task<bool> RemoveEntry(string tradeInputId)
         {
-           return await RemoveInterimInputByTypeAsync(tradeInputId, TradeInputType.InterimSummary);
-        }
-
-        public async Task UpdateInterimSummaryAsync(string tradeInputId)
-        {
-            await RemoveInterimInputByTypeAsync(tradeInputId, TradeInputType.InterimSummary);
-            await AddInterimSummaryAsync(tradeInputId);
+           return await RemoveInterimInputByTypeAsync(tradeInputId, TradeInputType.Interim);
         }
 
         #endregion
@@ -198,7 +167,14 @@ namespace TraJedi.Journal.Data.Services
 
         #region Helpers
 
-        public async Task<bool> RemoveInterimInputByTypeAsync(string tradeInputId, TradeInputType tradeInputType)
+        public async Task<TradeInputModel?> GetTradeInputByTypeAsync(string tradeId, TradeInputType tradeInputType)
+        {
+            return await dataContext.TradeInputs
+               .Where(t => t.TradeConstructId.ToString() == tradeId && t.TradeInputType == tradeInputType)
+               .FirstOrDefaultAsync();
+        }
+
+        private async Task<bool> RemoveInterimInputByTypeAsync(string tradeInputId, TradeInputType tradeInputType)
         {
             TradeInputModel? tradeInput =
                  await dataContext.TradeInputs.Where(t => t.Id.ToString() == tradeInputId && t.TradeInputType == tradeInputType).FirstOrDefaultAsync();
@@ -281,6 +257,40 @@ namespace TraJedi.Journal.Data.Services
             }
 
             return (totalCost, totalAmount, profit);
+        }
+
+
+        //summary
+
+        private async Task<TradeInputModel> AddInterimSummaryAsync(string tradeId)
+        {
+            var analytics = await GetAvgEntryAndProfitAsync(tradeId);
+
+            string averageEntry = string.Empty, totalAmount = string.Empty, totalCost = string.Empty;
+            if (analytics.totalCost > 0)
+            {
+                totalCost = analytics.totalCost.ToString();
+
+                if (analytics.totalAmount > 0)
+                {
+                    totalAmount = analytics.totalAmount.ToString();
+                    averageEntry = (analytics.totalCost / analytics.totalAmount).ToString();
+                }
+            }
+
+            TradeInputModel tradeInput = new TradeInputModel()
+            {
+                TradeInputType = TradeInputType.Interim,
+                TradeComponents = ComponentListsFactory.GetSummaryComponents(averageEntry, totalAmount, totalCost)
+            };
+
+            return await AddTradeInputAsync(tradeId, tradeInput);
+        }
+
+        private async Task UpdateInterimSummaryAsync(string tradeInputId)
+        {
+            await RemoveInterimInputByTypeAsync(tradeInputId, TradeInputType.Summary);
+            await AddInterimSummaryAsync(tradeInputId);
         }
 
         #endregion

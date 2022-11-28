@@ -50,7 +50,7 @@ namespace TraJediServer.Journal
             };
         }
 
-        public static List<InputComponentModel> GetInterimSummaryComponents(string averageEntry, string totalAmount, string totalCost)
+        public static List<InputComponentModel> GetSummaryComponents(string averageEntry, string totalAmount, string totalCost)
         {
 
             return new List<InputComponentModel>
