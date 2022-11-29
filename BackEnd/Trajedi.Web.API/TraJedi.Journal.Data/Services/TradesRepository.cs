@@ -98,7 +98,7 @@ namespace TraJedi.Journal.Data.Services
 
         #region add/remove
 
-        public async Task<TradeInputModel> NewEntryAddPositionAsync(string tradeId)
+        public async Task<(TradeInputModel newEntry, TradeInputModel summary)> NewEntryAddPositionAsync(string tradeId)
         {
             TradeInputModel tradeInput = new TradeInputModel()
             {
@@ -106,10 +106,10 @@ namespace TraJedi.Journal.Data.Services
                 TradeComponents = ComponentListsFactory.GetAddToPositionComponents(isActual: true)
             };
 
-            return await AddTradeInputAsync(tradeId, tradeInput);
+            return await AddInterimTradeInputAsync(tradeId, tradeInput);
         }
 
-        public async Task<TradeInputModel> NewEntryReducePositionAsync(string tradeId)
+        public async Task<(TradeInputModel newEntry, TradeInputModel summary)> NewEntryReducePositionAsync(string tradeId)
         {
             TradeInputModel tradeInput = new TradeInputModel()
             {
@@ -117,7 +117,7 @@ namespace TraJedi.Journal.Data.Services
                 TradeComponents = ComponentListsFactory.GetReducePositionComponents()
             };
 
-            return await AddTradeInputAsync(tradeId, tradeInput);
+            return await AddInterimTradeInputAsync(tradeId, tradeInput);
         }
 
         public async Task<TradeInputModel?> CreateTradeClosureAsync(string tradeId)
@@ -138,7 +138,6 @@ namespace TraJedi.Journal.Data.Services
 
             return tradeClosure;
         }
-
 
         public async Task<bool> RemoveEntry(string tradeInputId)
         {
@@ -188,14 +187,14 @@ namespace TraJedi.Journal.Data.Services
             return false;
         }
 
-        private async Task<TradeInputModel> AddTradeInputAsync(string tradeInputId, TradeInputModel tradeInput)
+        private async Task<(TradeInputModel newEntry, TradeInputModel summary)> AddInterimTradeInputAsync(string tradeInputId, TradeInputModel tradeInput)
         {
             await dataContext.TradeInputs.AddAsync(tradeInput);
-            await UpdateInterimSummaryAsync(tradeInputId);
+            TradeInputModel summary = await UpdateInterimSummaryAsync(tradeInputId);
 
             await dataContext.SaveChangesAsync();
 
-            return tradeInput;
+            return (tradeInput, summary);
         }
 
         private async Task<(double totalCost, double totalAmount, double profit)> GetAvgEntryAndProfitAsync(string tradeId)
@@ -284,13 +283,14 @@ namespace TraJedi.Journal.Data.Services
                 TradeComponents = ComponentListsFactory.GetSummaryComponents(averageEntry, totalAmount, totalCost)
             };
 
-            return await AddTradeInputAsync(tradeId, tradeInput);
+            await dataContext.TradeInputs.AddAsync(tradeInput);
+            return tradeInput;
         }
 
-        private async Task UpdateInterimSummaryAsync(string tradeInputId)
+        private async Task<TradeInputModel> UpdateInterimSummaryAsync(string tradeInputId)
         {
             await RemoveInterimInputByTypeAsync(tradeInputId, TradeInputType.Summary);
-            await AddInterimSummaryAsync(tradeInputId);
+            return await AddInterimSummaryAsync(tradeInputId);
         }
 
         #endregion

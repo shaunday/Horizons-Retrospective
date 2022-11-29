@@ -9,7 +9,11 @@ namespace TraJedi.Web.API.Controllers.Journal
     [ApiController]
     public class TradeInputsController : JournalControllerBase
     {
+        #region const
+
         public TradeInputsController(TradesRepository journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
+
+        #endregion
 
         #region Get
 
@@ -26,21 +30,19 @@ namespace TraJedi.Web.API.Controllers.Journal
         #region Add
 
         [HttpPost]
-        public async Task<ActionResult<TradeInputModel>> NewEntry(string tradeId, bool isAdd) 
+        public async Task<ActionResult<(TradeInputModel newEntry, TradeInputModel summary)>> AddInterimEntry(string tradeId, bool isAdd) 
         {
-            TradeInputModel? newTradeInput;
+            (TradeInputModel newEntry, TradeInputModel summary) entryAndSummary;
             if (isAdd)
             {
-                newTradeInput = await _journalAccess.NewEntryAddPositionAsync(tradeId);
+                entryAndSummary = await _journalAccess.NewEntryAddPositionAsync(tradeId);
             }
             else
             {
-                newTradeInput = await _journalAccess.NewEntryReducePositionAsync(tradeId);
+                entryAndSummary = await _journalAccess.NewEntryReducePositionAsync(tradeId);
             }
 
-            string addOrReduce = isAdd ? "add" : "reduce";
-
-            return ResultHandling(newTradeInput, $"Could not {addOrReduce} position to tradeId: {tradeId}");
+            return Ok(entryAndSummary);
         }
 
         #endregion

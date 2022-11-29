@@ -12,9 +12,9 @@
 
         //inputs
 
-        Task<TradeInputModel> NewEntryAddPositionAsync(string tradeId);
+        Task<(TradeInputModel newEntry, TradeInputModel summary)> NewEntryAddPositionAsync(string tradeId);
 
-        Task<TradeInputModel> NewEntryReducePositionAsync(string tradeId);
+        Task<(TradeInputModel newEntry, TradeInputModel summary)> NewEntryReducePositionAsync(string tradeId);
 
         Task<TradeInputModel?> GetTradeSummaryAsync(string tradeId);
 
