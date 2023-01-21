@@ -24,9 +24,11 @@ namespace TraJediServer.Journal
             return new List<InputComponentModel>
             {
                 new InputComponentModel("Emotions") { ComponentType = ComponentType.Addition },
-                new InputComponentModel("Entry Price") { ComponentType = ComponentType.Addition, PriceValueRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
+                new InputComponentModel("Entry Price") { ComponentType = ComponentType.Addition, 
+                                                                PriceRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
                 new InputComponentModel("Amount") { ComponentType = ComponentType.Addition },
-                new InputComponentModel("Cost") { ComponentType = ComponentType.Addition, CostRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
+                new InputComponentModel("Cost") { ComponentType = ComponentType.Addition, 
+                                                                CostRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
 
                 new InputComponentModel("SL") { ComponentType = ComponentType.SLandTarget },
                 new InputComponentModel("SL Thoughts") { ComponentType = ComponentType.SLandTarget },
@@ -42,7 +44,7 @@ namespace TraJediServer.Journal
             return new List<InputComponentModel>
             {
                 new InputComponentModel("Emotions") { ComponentType = ComponentType.Reduction },
-                new InputComponentModel("Exit Price") { ComponentType = ComponentType.Reduction, PriceValueRelevance = ValueRelevance.Substract },
+                new InputComponentModel("Exit Price") { ComponentType = ComponentType.Reduction, PriceRelevance = ValueRelevance.Substract },
                 new InputComponentModel("Amount") { ComponentType = ComponentType.Reduction },
                 new InputComponentModel("Cost") { ComponentType = ComponentType.Reduction, CostRelevance = ValueRelevance.Substract },
 
@@ -55,11 +57,11 @@ namespace TraJediServer.Journal
 
             return new List<InputComponentModel>
             {
-                new InputComponentModel("Average Entry Price") { ComponentType = ComponentType.InterimSummary, 
-                                                                    Content =averageEntry, IsRelevantForOverview =true  },
-                new InputComponentModel("Total Amount") { ComponentType = ComponentType.InterimSummary, 
-                                                                    Content =totalAmount , IsRelevantForOverview =true },
-                new InputComponentModel("Total Cost") { ComponentType = ComponentType.InterimSummary, 
+                new InputComponentModel("Average Entry Price") { ComponentType = ComponentType.InterimSummary,
+                                                                    Content = averageEntry, IsRelevantForOverview =true  },
+                new InputComponentModel("Total Amount") { ComponentType = ComponentType.InterimSummary,
+                                                                    Content = totalAmount , IsRelevantForOverview =true },
+                new InputComponentModel("Total Cost") { ComponentType = ComponentType.InterimSummary,
                                                                     Content =totalCost , IsRelevantForOverview =true },
             };
 

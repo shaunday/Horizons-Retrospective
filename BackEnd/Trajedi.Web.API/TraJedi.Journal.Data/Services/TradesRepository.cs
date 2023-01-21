@@ -29,10 +29,10 @@ namespace TraJedi.Journal.Data.Services
                 TradeInputModel tradeSummary = new TradeInputModel()
                 {
                     TradeInputType = TradeInputType.Overview1Liner,
-                    TradeComponents = new List<InputComponentModel>()
+                    TradeInputComponents = new List<InputComponentModel>()
                 };
 
-                tradeSummary.TradeComponents = await dataContext.TradeInputComponents
+                tradeSummary.TradeInputComponents = await dataContext.TradeInputComponents
                   .Where(tc => tc.TradeInputModel.TradeConstructId == trade.Id && tc.IsRelevantForOverview)
                   .OrderBy(tc => tc.Id)
                   .ToListAsync();
@@ -49,7 +49,7 @@ namespace TraJedi.Journal.Data.Services
             trade.TradeInputs.Add(new TradeInputModel()
             {
                 TradeInputType = TradeInputType.Origin,
-                TradeComponents = ComponentListsFactory.GetTradeOriginComponents()
+                TradeInputComponents = ComponentListsFactory.GetTradeOriginComponents()
             });
             await dataContext.OverallTrades.AddAsync(trade);
             await dataContext.SaveChangesAsync();
@@ -67,7 +67,7 @@ namespace TraJedi.Journal.Data.Services
             var paginationMetadata = new PaginationMetadata(totalItemCount, pageSize, pageNumber);
 
             var collectionToReturn = await collection.OrderBy(t => t.CreatedAt)
-                .Skip(pageSize * (pageNumber -1))
+                .Skip(pageSize * (pageNumber - 1))
                 .Take(pageSize)
                 .ToListAsync();
 
@@ -99,7 +99,7 @@ namespace TraJedi.Journal.Data.Services
             TradeInputModel tradeInput = new TradeInputModel()
             {
                 TradeInputType = TradeInputType.Interim,
-                TradeComponents = ComponentListsFactory.GetAddToPositionComponents(isActual: true)
+                TradeInputComponents = ComponentListsFactory.GetAddToPositionComponents(isActual: true)
             };
 
             return await AddInterimTradeInputAsync(tradeId, tradeInput);
@@ -110,34 +110,15 @@ namespace TraJedi.Journal.Data.Services
             TradeInputModel tradeInput = new TradeInputModel()
             {
                 TradeInputType = TradeInputType.Interim,
-                TradeComponents = ComponentListsFactory.GetReducePositionComponents()
+                TradeInputComponents = ComponentListsFactory.GetReducePositionComponents()
             };
 
             return await AddInterimTradeInputAsync(tradeId, tradeInput);
         }
 
-        public async Task<TradeInputModel?> CreateTradeClosureAsync(string tradeId)
-        {
-            await RemoveInterimInputAsync(TradeInputType.InterimSummary);
-
-            var analytics = await GetAvgEntryAndProfitAsync(tradeId);
-
-            TradeInputModel tradeClosure = new TradeInputModel()
-            {
-                TradeInputType = TradeInputType.Closure,
-                TradeComponents = ComponentListsFactory.GetTradeClosureComponents(profitValue: analytics.profit.ToString())
-            };
-
-            await dataContext.TradeInputs.AddAsync(tradeClosure);
-
-            await dataContext.SaveChangesAsync();
-
-            return tradeClosure;
-        }
-
         public async Task<(bool result, TradeInputModel? summary)> RemoveInterimEntry(string tradeInputId)
         {
-           bool res = await RemoveInterimInputAsync(tradeInputId);
+            bool res = await RemoveInterimInputAsync(tradeInputId);
             TradeInputModel? summary = null;
 
             if (res)
@@ -165,6 +146,61 @@ namespace TraJedi.Journal.Data.Services
             }
 
             return inputComponent;
+        }
+
+        #endregion
+
+        #region Closure
+
+        public async Task Close(string tradeId, string closingPrice)
+        {
+            var analytics = await GetAvgEntryAndProfitAsync(tradeId);
+
+            #region add reduction for current amount at specified price
+            TradeInputModel tradeInput = new TradeInputModel()
+            {
+                TradeInputType = TradeInputType.Interim,
+                TradeInputComponents = ComponentListsFactory.GetReducePositionComponents()
+            };
+
+            InputComponentModel? price = tradeInput.TradeInputComponents.Where(ti => ti.PriceRelevance == ValueRelevance.Substract).FirstOrDefault();
+            if (price == null)
+                throw new Exception("could not find price entry to reduce / close position");
+            else
+            {
+                price.Content = closingPrice;
+            }
+
+            InputComponentModel? cost = tradeInput.TradeInputComponents.Where(ti => ti.CostRelevance == ValueRelevance.Substract).FirstOrDefault();
+            if (cost == null)
+                throw new Exception("could not find cost entry to reduce / close position");
+            else if (double.TryParse(closingPrice, out double amountValue))
+            {
+                cost.Content = (amountValue * analytics.totalAmount).ToString();
+            }
+            else
+                throw new Exception("could not parse closing price to close position");
+
+
+            await dataContext.TradeInputs.AddAsync(tradeInput);
+            #endregion
+
+            // remove interim summary
+
+            await RemoveInterimInputAsync(TradeInputType.InterimSummary);
+
+            // create actual closure
+
+            analytics = await GetAvgEntryAndProfitAsync(tradeId);
+            TradeInputModel tradeClosure = new TradeInputModel()
+            {
+                TradeInputType = TradeInputType.Closure,
+                TradeInputComponents = ComponentListsFactory.GetTradeClosureComponents(profitValue: analytics.profit.ToString())
+            };
+
+            await dataContext.TradeInputs.AddAsync(tradeClosure);
+
+            await dataContext.SaveChangesAsync();
         }
 
         #endregion
@@ -229,7 +265,7 @@ namespace TraJedi.Journal.Data.Services
             {
                 double cost = 0.0;
                 double priceValue = 0.0;
-                foreach (var component in tradeInput.TradeComponents)
+                foreach (var component in tradeInput.TradeInputComponents)
                 {
                     if (component.CostRelevance == ValueRelevance.Add || component.CostRelevance == ValueRelevance.Substract)
                     {
@@ -246,10 +282,10 @@ namespace TraJedi.Journal.Data.Services
                         }
                     }
 
-                    if (component.PriceValueRelevance == ValueRelevance.Add || component.PriceValueRelevance == ValueRelevance.Substract)
+                    if (component.PriceRelevance == ValueRelevance.Add || component.PriceRelevance == ValueRelevance.Substract)
                     {
                         double.TryParse(component.ContentWrapper.Content, out priceValue);
-                        if (component.PriceValueRelevance == ValueRelevance.Substract)
+                        if (component.PriceRelevance == ValueRelevance.Substract)
                         {
                             priceValue *= -1;
                         }
@@ -299,7 +335,7 @@ namespace TraJedi.Journal.Data.Services
             TradeInputModel tradeInput = new TradeInputModel()
             {
                 TradeInputType = TradeInputType.Interim,
-                TradeComponents = ComponentListsFactory.GetSummaryComponents(averageEntry, totalAmount, totalCost)
+                TradeInputComponents = ComponentListsFactory.GetSummaryComponents(averageEntry, totalAmount, totalCost)
             };
 
             await dataContext.TradeInputs.AddAsync(tradeInput);

@@ -22,5 +22,9 @@
 
         Task<InputComponentModel?> UpdateTradeInputComponent(string componentId, string newContent);
 
+        //closure
+
+        Task<TradeInputModel> Close(string tradeId, string closingPrice);
+
     }
 }

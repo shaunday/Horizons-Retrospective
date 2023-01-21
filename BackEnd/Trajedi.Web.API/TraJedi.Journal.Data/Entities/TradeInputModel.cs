@@ -13,7 +13,7 @@ namespace TraJedi.Journal.Data
         [MaxLength(50)]
         public TradeInputType TradeInputType { get; set; }
 
-        public List<InputComponentModel> TradeComponents { get; set; } = new List<InputComponentModel>();
+        public List<InputComponentModel> TradeInputComponents { get; set; } = new List<InputComponentModel>();
 
 
         //parent

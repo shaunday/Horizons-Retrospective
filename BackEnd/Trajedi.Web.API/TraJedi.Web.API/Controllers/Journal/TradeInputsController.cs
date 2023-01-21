@@ -59,5 +59,18 @@ namespace TraJedi.Web.API.Controllers.Journal
         }
 
         #endregion
+
+        #region Closure
+
+        [HttpPost("close/{closingPrice}")]
+        public async Task<ActionResult<bool>> CloseTrade(string tradeId, string closingPrice)
+        {
+            await _journalAccess.Close(tradeId, closingPrice);
+
+            return NoContent();
+        }
+
+        #endregion
+
     }
 }

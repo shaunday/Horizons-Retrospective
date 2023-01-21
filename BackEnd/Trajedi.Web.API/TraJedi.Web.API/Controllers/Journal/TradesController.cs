@@ -42,7 +42,7 @@ namespace TraJedi.Web.API.Controllers.Journal
         #endregion
 
         [HttpPost]
-        public async Task<ActionResult<TradeInputModel>> AddTrade()
+        public async Task<ActionResult<TradeConstruct>> AddTrade()
         {
             return Ok(await _journalAccess.AddTradeAsync());
         }

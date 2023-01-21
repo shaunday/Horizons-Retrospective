@@ -29,9 +29,11 @@ namespace TraJedi.Journal.Data
 
         #region flags
 
+        [MaxLength(50)]
         public ValueRelevance CostRelevance { get; set; } = ValueRelevance.None;
 
-        public ValueRelevance PriceValueRelevance { get; set; } = ValueRelevance.None;
+        [MaxLength(50)]
+        public ValueRelevance PriceRelevance { get; set; } = ValueRelevance.None;
 
         public bool AttachedToggle { get; set; } = false;
 
