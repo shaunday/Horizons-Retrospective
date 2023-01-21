@@ -1,1 +1,6 @@
-﻿
+﻿implement closure
+dto instead of the models?
+security best practices
+testing
+
+new InputComponentModel("Position Plans") { ComponentType = ComponentType.Overview }, //todo

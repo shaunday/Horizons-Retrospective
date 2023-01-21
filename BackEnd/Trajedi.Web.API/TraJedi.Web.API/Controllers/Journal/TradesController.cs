@@ -11,10 +11,14 @@ namespace TraJedi.Web.API.Controllers.Journal
     [ApiController]
     public class TradesController : JournalControllerBase
     {
+        #region Const
         const int maxTradesPageSize = 20;
 
         public TradesController(ITradesRepository journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
 
+        #endregion
+
+        #region Getters
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TradeConstruct>>> GetAllTrades(int pageNumber = 1, int pageSize = 10)
         {
@@ -34,7 +38,8 @@ namespace TraJedi.Web.API.Controllers.Journal
         public async Task<ActionResult<IEnumerable<TradeConstruct>>> GetAllTradeOverviews()
         {
             return Ok(await _journalAccess.GetAllTradeOverviewsAsync());
-        }
+        } 
+        #endregion
 
         [HttpPost]
         public async Task<ActionResult<TradeInputModel>> AddTrade()

@@ -9,7 +9,7 @@ namespace TraJedi.Web.API.Controllers.Journal
     [ApiController]
     public class TradeInputsController : JournalControllerBase
     {
-        #region const
+        #region Const
 
         public TradeInputsController(TradesRepository journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
 
@@ -27,10 +27,10 @@ namespace TraJedi.Web.API.Controllers.Journal
 
         #endregion
 
-        #region Add
+        #region Add / Remove
 
         [HttpPost]
-        public async Task<ActionResult<(TradeInputModel newEntry, TradeInputModel summary)>> AddInterimEntry(string tradeId, bool isAdd) 
+        public async Task<ActionResult<(TradeInputModel newEntry, TradeInputModel summary)>> AddInterimEntry(string tradeId, bool isAdd)
         {
             (TradeInputModel newEntry, TradeInputModel summary) entryAndSummary;
             if (isAdd)
@@ -44,10 +44,6 @@ namespace TraJedi.Web.API.Controllers.Journal
 
             return Ok(entryAndSummary);
         }
-
-        #endregion
-
-        #region Remove
 
         [HttpDelete("inputs/{tradeInputId}")]
         public async Task<ActionResult> DeleteInterimTradeInput(string tradeInputId)
@@ -64,7 +60,7 @@ namespace TraJedi.Web.API.Controllers.Journal
 
         #endregion
 
-        #region Change component
+        #region Update component
 
         [HttpPut("inputs/{tradeInputId}/components/{componentId}")]
         public async Task<ActionResult<InputComponentModel?>> UpdateComponent(string componentId, string newContent)
