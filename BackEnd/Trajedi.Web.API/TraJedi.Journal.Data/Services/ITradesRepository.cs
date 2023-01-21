@@ -16,8 +16,6 @@
 
         Task<(TradeInputModel newEntry, TradeInputModel summary)> NewEntryReducePositionAsync(string tradeId);
 
-        Task<TradeInputModel?> GetTradeSummaryAsync(string tradeId);
-
         Task<(bool result, TradeInputModel? summary)> RemoveInterimEntry(string tradeInputId);
 
         //components

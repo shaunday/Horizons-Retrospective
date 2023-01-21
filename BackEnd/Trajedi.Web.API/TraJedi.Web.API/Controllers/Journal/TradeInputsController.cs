@@ -15,18 +15,6 @@ namespace TraJedi.Web.API.Controllers.Journal
 
         #endregion
 
-        #region Get
-
-        [HttpGet("inputs/summary")]
-        public async Task<ActionResult<TradeInputModel>> GetTradeSummary(string tradeId)
-        {
-            TradeInputModel? tradeInput = await _journalAccess.GetTradeSummaryAsync(tradeId);
-
-            return ResultHandling(tradeInput, $"Could not get trade summary for tradeId: {tradeId}");
-        }
-
-        #endregion
-
         #region Add / Remove
 
         [HttpPost]

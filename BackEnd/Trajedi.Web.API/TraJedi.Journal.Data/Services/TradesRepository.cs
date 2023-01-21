@@ -90,10 +90,6 @@ namespace TraJedi.Journal.Data.Services
             return await GetTradeInputByTypeAsync(tradeId, TradeInputType.Closure);
         }
 
-        public async Task<TradeInputModel?> GetTradeSummaryAsync(string tradeId)
-        {
-            return await GetTradeInputByTypeAsync(tradeId, TradeInputType.InterimSummary);
-        }
         #endregion
 
         #region add/remove
