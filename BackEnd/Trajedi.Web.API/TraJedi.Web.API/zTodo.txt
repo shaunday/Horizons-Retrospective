@@ -4,3 +4,7 @@ security best practices
 testing
 
 new InputComponentModel("Position Plans") { ComponentType = ComponentType.Overview }, //todo
+
+how to update trade's SL ? just update origin? at least add a change - note
+
+

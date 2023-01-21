@@ -7,7 +7,7 @@
 
     public enum TradeInputType
     {
-        Origin, Interim, Summary, Closure, OneLineSummation
+        Origin, Interim, InterimSummary, Closure, Overview1Liner
     }
 
     public enum ValueRelevance

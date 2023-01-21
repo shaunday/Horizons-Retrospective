@@ -48,14 +48,14 @@ namespace TraJedi.Web.API.Controllers.Journal
         [HttpDelete("inputs/{tradeInputId}")]
         public async Task<ActionResult> DeleteInterimTradeInput(string tradeInputId)
         {
-            bool res = await _journalAccess.RemoveEntry(tradeInputId);
+            (bool result, TradeInputModel? summary) = await _journalAccess.RemoveInterimEntry(tradeInputId);
 
-            if (!res)
+            if (!result)
             {
                 return NotFound();
             }
 
-            return NoContent();
+            return Ok(summary);
         }
 
         #endregion
