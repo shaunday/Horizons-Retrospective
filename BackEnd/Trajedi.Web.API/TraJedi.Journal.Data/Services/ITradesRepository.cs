@@ -20,11 +20,11 @@
 
         //components
 
-        Task<InputComponentModel?> UpdateTradeInputComponent(string componentId, string newContent);
+        Task<InputComponentModel?> UpdateTradeInputComponent(string componentId, string newContent, string changeNote);
 
         //closure
 
-        Task<TradeInputModel> Close(string tradeId, string closingPrice);
+        Task Close(string tradeId, string closingPrice);
 
     }
 }

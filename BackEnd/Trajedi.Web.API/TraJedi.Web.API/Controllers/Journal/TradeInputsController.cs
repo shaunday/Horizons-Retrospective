@@ -50,10 +50,10 @@ namespace TraJedi.Web.API.Controllers.Journal
 
         #region Update component
 
-        [HttpPut("inputs/{tradeInputId}/components/{componentId}")]
-        public async Task<ActionResult<InputComponentModel?>> UpdateComponent(string componentId, string newContent)
+        [HttpPut("components/{componentId}")]
+        public async Task<ActionResult<InputComponentModel?>> UpdateComponent(string componentId, string newContent, string changeNote)
         {
-            InputComponentModel? updatedComponent = await _journalAccess.UpdateTradeInputComponent(componentId, newContent);
+            InputComponentModel? updatedComponent = await _journalAccess.UpdateTradeInputComponent(componentId, newContent, changeNote);
 
             return ResultHandling(updatedComponent, $"Could not update component: {componentId}");
         }

@@ -132,13 +132,13 @@ namespace TraJedi.Journal.Data.Services
 
         #endregion
 
-        public async Task<InputComponentModel?> UpdateTradeInputComponent(string componentId, string newContent)
+        public async Task<InputComponentModel?> UpdateTradeInputComponent(string componentId, string newContent, string changeNote)
         {
             InputComponentModel? inputComponent = await dataContext.TradeInputComponents.Where(t => t.Id.ToString() == componentId).FirstOrDefaultAsync();
             if (inputComponent != null)
             {
                 inputComponent.History.Add(inputComponent.ContentWrapper);
-                inputComponent.ContentWrapper = new ContentModel() { Content = newContent };
+                inputComponent.ContentWrapper = new ContentModel() { Content = newContent, ChangeNote = changeNote };
 
                 await UpdateInterimSummaryAsync(inputComponent.TradeInputModel.TradeConstructId.ToString());
 
