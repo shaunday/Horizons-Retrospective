@@ -41,7 +41,7 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
-builder.Services.AddScoped<ITradesRepository, TradesRepository>();
+builder.Services.AddScoped<IJournalRepository, JournalRepository>();
 
 builder.Services.AddApiVersioning(setupAction =>
 {

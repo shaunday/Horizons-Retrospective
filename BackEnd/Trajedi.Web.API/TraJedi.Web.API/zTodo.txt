@@ -1,7 +1,7 @@
 ﻿dto instead of the models?
 security best practices
 testing
-
+Indicators
 
 
  

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TraJedi.Journal.Data
 {
-    public class InputComponentModel
+    public class Cell
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,7 +18,7 @@ namespace TraJedi.Journal.Data
         public ComponentType ComponentType { get; set; }
 
         #region Content
-        public ContentModel ContentWrapper { get; set; } = new ContentModel();
+        public CellContent ContentWrapper { get; set; } = new CellContent();
 
         public string Content
         {
@@ -41,19 +41,19 @@ namespace TraJedi.Journal.Data
 
         #endregion
 
-        public ICollection<ContentModel> History { get; set; } = new List<ContentModel>();
+        public ICollection<CellContent> History { get; set; } = new List<CellContent>();
 
 
-        public InputComponentModel(string title)
+        public Cell(string title)
         {
             Title = title;
         }
 
         //parent
-        [ForeignKey("TradeInputModelId")]
-        public TradeInputModel TradeInputModel { get; set; } = null!;
+        [ForeignKey("TradeInfoSingleLineId")]
+        public TradeInfoSingleLine TradeInfoSingleLine { get; set; } = null!;
 
-        public Guid TradeInputModelId { get; set; }
+        public Guid TradeInfoSingleLineId { get; set; }
     }
 
 }

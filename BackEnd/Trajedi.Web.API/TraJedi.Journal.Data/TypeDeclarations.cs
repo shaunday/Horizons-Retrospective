@@ -5,7 +5,7 @@
         Header, Thesis, Addition, SLandTarget, RiskandReward, Reduction, InterimSummary, Closure, Indicators
     }
 
-    public enum TradeInputType
+    public enum TradeActionType
     {
         Origin, Interim, InterimSummary, Overview1Liner, Closure, 
     }

@@ -5,13 +5,13 @@ namespace TraJedi.Journal.Data
     public class TradingJournalDataContext : DbContext
     {
         #region Data
-        public DbSet<TradeConstruct> OverallTrades { get; set; } = null!;
+        public DbSet<TradePositionComposite> OverallTrades { get; set; } = null!;
 
-        public DbSet<TradeInputModel> TradeInputs { get; set; } = null!;
+        public DbSet<TradeInfoSingleLine> TradeInputs { get; set; } = null!;
 
-        public DbSet<InputComponentModel> TradeInputComponents { get; set; } = null!;
+        public DbSet<Cell> TradeInputComponents { get; set; } = null!;
 
-        public DbSet<ContentModel> ContentModels { get; set; } = null!;
+        public DbSet<CellContent> ContentModels { get; set; } = null!;
         #endregion
 
         public TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : base(options) { } //allow service configuration 
@@ -20,14 +20,14 @@ namespace TraJedi.Journal.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<TradeConstruct>(entity =>
+            modelBuilder.Entity<TradePositionComposite>(entity =>
             {
-                entity.HasMany(t => t.TradeInputs).WithOne(t => t.TradeConstruct);
+                entity.HasMany(t => t.TradeActions).WithOne(t => t.TradePositionComposite);
             });
 
-            modelBuilder.Entity<InputComponentModel>(entity =>
+            modelBuilder.Entity<Cell>(entity =>
             {
-                entity.HasMany(t => t.History).WithOne(t => t.InputComponentModel);
+                entity.HasMany(t => t.History).WithOne(t => t.Cell);
             });
         }
 

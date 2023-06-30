@@ -1,0 +1,2 @@
+﻿Trade Position composed of actions (origin,entry,exit,etc)
+Each line composed of cells

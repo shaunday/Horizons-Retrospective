@@ -14,20 +14,20 @@ namespace TraJedi.Web.API.Controllers.Journal
         #region Const
         const int maxTradesPageSize = 20;
 
-        public TradesController(ITradesRepository journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
+        public TradesController(IJournalRepository journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
 
         #endregion
 
         #region Getters
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TradeConstruct>>> GetAllTrades(int pageNumber = 1, int pageSize = 10)
+        public async Task<ActionResult<IEnumerable<TradePositionComposite>>> GetAllTrades(int pageNumber = 1, int pageSize = 10)
         {
             if (pageSize > maxTradesPageSize)
             {
                 pageSize = maxTradesPageSize;
             }
 
-            var (tradesEntities, paginationMetadata) = await _journalAccess.GetAllTradesAsync(pageNumber, pageSize);
+            var (tradesEntities, paginationMetadata) = await _journalAccess.GetAllTradeCompositesAsync(pageNumber, pageSize);
 
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
 
@@ -35,16 +35,16 @@ namespace TraJedi.Web.API.Controllers.Journal
         }
 
         [HttpGet("tradeOverviews")]
-        public async Task<ActionResult<IEnumerable<TradeConstruct>>> GetAllTradeOverviews()
+        public async Task<ActionResult<IEnumerable<TradePositionComposite>>> GetAllTradeOverviews()
         {
-            return Ok(await _journalAccess.GetAllTradeOverviewsAsync());
+            return Ok(await _journalAccess.GetAllTradeInfoLinesAsync());
         } 
         #endregion
 
         [HttpPost]
-        public async Task<ActionResult<TradeConstruct>> AddTrade()
+        public async Task<ActionResult<TradePositionComposite>> AddTrade()
         {
-            return Ok(await _journalAccess.AddTradeAsync());
+            return Ok(await _journalAccess.AddTradeCompositeAsync());
         }
 
     }

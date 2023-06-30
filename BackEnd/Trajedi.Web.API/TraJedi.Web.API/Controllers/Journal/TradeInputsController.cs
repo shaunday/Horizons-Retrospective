@@ -11,16 +11,16 @@ namespace TraJedi.Web.API.Controllers.Journal
     {
         #region Const
 
-        public TradeInputsController(TradesRepository journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
+        public TradeInputsController(JournalRepository journalAccess, ILogger<JournalControllerBase> logger) : base(journalAccess, logger) { }
 
         #endregion
 
         #region Add / Remove
 
         [HttpPost]
-        public async Task<ActionResult<(TradeInputModel newEntry, TradeInputModel summary)>> AddInterimEntry(string tradeId, bool isAdd)
+        public async Task<ActionResult<(TradeInfoSingleLine newEntry, TradeInfoSingleLine summary)>> AddInterimEntry(string tradeId, bool isAdd)
         {
-            (TradeInputModel newEntry, TradeInputModel summary) entryAndSummary;
+            (TradeInfoSingleLine newEntry, TradeInfoSingleLine summary) entryAndSummary;
             if (isAdd)
             {
                 entryAndSummary = await _journalAccess.NewEntryAddPositionAsync(tradeId);
@@ -36,7 +36,7 @@ namespace TraJedi.Web.API.Controllers.Journal
         [HttpDelete("inputs/{tradeInputId}")]
         public async Task<ActionResult> DeleteInterimTradeInput(string tradeInputId)
         {
-            (bool result, TradeInputModel? summary) = await _journalAccess.RemoveInterimEntry(tradeInputId);
+            (bool result, TradeInfoSingleLine? summary) = await _journalAccess.RemoveInterimEntry(tradeInputId);
 
             if (!result)
             {
@@ -51,9 +51,9 @@ namespace TraJedi.Web.API.Controllers.Journal
         #region Update component
 
         [HttpPut("components/{componentId}")]
-        public async Task<ActionResult<InputComponentModel?>> UpdateComponent(string componentId, string newContent, string changeNote)
+        public async Task<ActionResult<Cell?>> UpdateComponent(string componentId, string newContent, string changeNote)
         {
-            InputComponentModel? updatedComponent = await _journalAccess.UpdateTradeInputComponent(componentId, newContent, changeNote);
+            Cell? updatedComponent = await _journalAccess.UpdateCellContent(componentId, newContent, changeNote);
 
             return ResultHandling(updatedComponent, $"Could not update component: {componentId}");
         }
