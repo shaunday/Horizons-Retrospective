@@ -46,7 +46,7 @@ namespace TraJedi.Journal.Data.Services
         public async Task<TradePositionComposite> AddTradeCompositeAsync()
         {
             TradePositionComposite trade = new TradePositionComposite();
-            trade.TradeActions.Add(new TradeInfoSingleLine()
+            trade.TradeComponents.Add(new TradeInfoSingleLine()
             {
                 TradeActionType = TradeActionType.Origin,
                 TradeActionInfoCells = TradeInfoFactory.GetTradeOriginComponents()

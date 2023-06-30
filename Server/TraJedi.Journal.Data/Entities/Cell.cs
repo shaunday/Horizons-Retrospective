@@ -35,8 +35,6 @@ namespace TraJedi.Journal.Data
         [MaxLength(50)]
         public ValueRelevance PriceRelevance { get; set; } = ValueRelevance.None;
 
-        public bool AttachedToggle { get; set; } = false;
-
         public bool IsRelevantForOverview { get; set; } = false;
 
         #endregion

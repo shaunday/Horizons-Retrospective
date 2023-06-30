@@ -1,4 +1,6 @@
-﻿dto instead of the models?
+﻿Map dto and models
+
+
 security best practices
 testing
 Indicators

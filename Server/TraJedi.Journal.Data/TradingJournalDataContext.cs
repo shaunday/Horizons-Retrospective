@@ -22,7 +22,7 @@ namespace TraJedi.Journal.Data
 
             modelBuilder.Entity<TradePositionComposite>(entity =>
             {
-                entity.HasMany(t => t.TradeActions).WithOne(t => t.TradePositionComposite);
+                entity.HasMany(t => t.TradeComponents).WithOne(t => t.TradePositionComposite);
             });
 
             modelBuilder.Entity<Cell>(entity =>
