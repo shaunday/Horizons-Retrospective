@@ -32,4 +32,8 @@
     <ProjectReference Include="..\TraJedi.Journal.Data\TraJedi.Journal.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>
