@@ -7,7 +7,7 @@ namespace TraJedi.Journal.Data
         #region Data
         public DbSet<TradePositionComposite> OverallTrades { get; set; } = null!;
 
-        public DbSet<TradeInfoSingleLine> TradeInputs { get; set; } = null!;
+        public DbSet<TradeComponent> TradeInputs { get; set; } = null!;
 
         public DbSet<Cell> TradeInputComponents { get; set; } = null!;
 

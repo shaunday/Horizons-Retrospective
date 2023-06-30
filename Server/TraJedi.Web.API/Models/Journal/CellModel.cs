@@ -22,9 +22,9 @@ namespace TraJedi.Web.API.Models
 
         #region flags
 
-        public ValueRelevance CostRelevance { get; set; } 
+        public ValueRelevance CostRelevance { get; set; }
 
-        public ValueRelevance PriceRelevance { get; set; } 
+        public ValueRelevance PriceRelevance { get; set; }
 
         public bool IsRelevantForOverview { get; set; } = false;
 

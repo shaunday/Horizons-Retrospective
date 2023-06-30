@@ -6,6 +6,6 @@ namespace TraJedi.Web.API.Models
     {
         public Guid Id { get; set; }
         public TradeActionType TradeActionType { get; set; }
-        public List<CellModel> TradeActionInfoCells { get; set; } 
+        public List<CellModel> TradeActionInfoCells { get; set; }
     }
 }

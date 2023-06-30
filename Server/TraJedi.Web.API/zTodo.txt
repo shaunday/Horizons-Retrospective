@@ -1,5 +1,5 @@
 ﻿Map dto and models
-
+AutoMapper.Collection
 
 security best practices
 testing

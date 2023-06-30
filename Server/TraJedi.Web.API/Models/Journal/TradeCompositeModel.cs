@@ -2,10 +2,10 @@
 
 namespace TraJedi.Web.API.Models
 {
-    public class TradeCompositeModel
+    public class TradePositionCompositeModel
     {
         public Guid Id { get; set; }
         public ICollection<TradeComponentModel> TradeComponents { get; set; }
-        public DateTime CreatedAt { get; set;  }
+        public DateTime CreatedAt { get; set; }
     }
 }

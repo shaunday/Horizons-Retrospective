@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using TraJedi.Journal.Data.Services;
 
 namespace TraJedi.Web.API.Controllers.Journal
@@ -7,11 +8,13 @@ namespace TraJedi.Web.API.Controllers.Journal
     {
         protected readonly IJournalRepository _journalAccess;
         protected readonly ILogger<JournalControllerBase> _logger;
+        protected readonly IMapper _mapper;
 
-        public JournalControllerBase(IJournalRepository journalAccess, ILogger<JournalControllerBase> logger)
+        public JournalControllerBase(IJournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper)
         {
             _journalAccess = journalAccess ?? throw new ArgumentNullException(nameof(journalAccess));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         protected ActionResult ResultHandling(object? result, string logEntry)

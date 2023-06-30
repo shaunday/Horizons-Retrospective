@@ -4,7 +4,7 @@
     {
         //trades
 
-        Task<IEnumerable<TradeInfoSingleLine>> GetAllTradeInfoLinesAsync();
+        Task<IEnumerable<TradeComponent>> GetAllTradeComponentsAsync();
 
         Task<(IEnumerable<TradePositionComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10);
 
@@ -12,11 +12,11 @@
 
         //inputs
 
-        Task<(TradeInfoSingleLine newEntry, TradeInfoSingleLine summary)> NewEntryAddPositionAsync(string tradeId);
+        Task<(TradeComponent newEntry, TradeComponent summary)> NewEntryAddPositionAsync(string tradeId);
 
-        Task<(TradeInfoSingleLine newEntry, TradeInfoSingleLine summary)> NewEntryReducePositionAsync(string tradeId);
+        Task<(TradeComponent newEntry, TradeComponent summary)> NewEntryReducePositionAsync(string tradeId);
 
-        Task<(bool result, TradeInfoSingleLine? summary)> RemoveInterimEntry(string tradeInputId);
+        Task<(bool result, TradeComponent? summary)> RemoveInterimEntry(string tradeInputId);
 
         //components
 

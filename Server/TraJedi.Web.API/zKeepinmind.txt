@@ -1,0 +1,3 @@
+﻿https://docs.automapper.org/en/stable/Configuration.html
+https://github.com/AutoMapper/AutoMapper.EF6 - auto compute - like first + last name into a full name
+

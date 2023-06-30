@@ -48,10 +48,10 @@ namespace TraJedi.Journal.Data
         }
 
         //parent
-        [ForeignKey("TradeInfoSingleLineId")]
-        public TradeInfoSingleLine TradeInfoSingleLine { get; set; } = null!;
+        [ForeignKey("TradeComponentId")]
+        public TradeComponent TradeComponent { get; set; } = null!;
 
-        public Guid TradeInfoSingleLineId { get; set; }
+        public Guid TradeComponentId { get; set; }
     }
 
 }
