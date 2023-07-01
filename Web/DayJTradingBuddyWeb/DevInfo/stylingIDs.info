@@ -1,0 +1,44 @@
+<style>
+/* Style the element with the id "myHeader" */
+#myHeader {
+  background-color: lightblue;
+  color: black;
+  padding: 30px;
+  text-align: center;
+}
+
+/* Style all elements with the class name "GreekCity" */
+.GreekCity {
+  background-color: #9815B0;
+  color: white;
+  padding: 10px;
+}
+</style>
+
+
+<!-- An element with a unique id -->
+<h1 id="myHeader">Greek Cities</h1>
+
+<!-- Multiple elements with same class -->
+<h2 class="GreekCity">Athens</h2>
+
+-------------
+
+#idName for unique elements on the page. Good examples are #header and #footer
+TAGNAME for general purpose page styling.
+TAG.classname and .classname for exceptions/overrides to the above rules. (?? what is what again??)
+
+-------------
+
+You preference should be, in order from highest to lowest:
+id
+tag
+tag.className
+.className
+
+ID selectors are fast. Tag selectors are reasonably fast. 
+Pure class selectors are slow because the browser essentially has to interrogate every element and see if each has that class. 
+Getting elements by ID or tag name are "native" operations from a browser's context.
+
+
+https://stackoverflow.com/questions/1426499/use-html-tag-names-classes-or-ids-in-css

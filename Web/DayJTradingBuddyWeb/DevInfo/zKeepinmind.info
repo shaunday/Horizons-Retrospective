@@ -1,0 +1,7 @@
+npm run dev
+auto arrange = Shift + Alt + F.
+
+
+
+
+index.html - everything always starts here. vite adds main, which goes to app.jsx ? why all the layers?
