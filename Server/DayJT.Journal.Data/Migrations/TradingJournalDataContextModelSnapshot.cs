@@ -36,6 +36,9 @@ namespace DayJTrading.Journal.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("ContentWrapperId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("CostRelevance")
                         .HasMaxLength(50)
                         .HasColumnType("integer");
@@ -52,12 +55,14 @@ namespace DayJTrading.Journal.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<Guid>("TradeComponentId")
+                    b.Property<Guid>("TradeComponentRefId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TradeComponentId");
+                    b.HasIndex("ContentWrapperId");
+
+                    b.HasIndex("TradeComponentRefId");
 
                     b.ToTable("TradeInputComponents");
                 });
@@ -68,10 +73,7 @@ namespace DayJTrading.Journal.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("CellId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("CellId1")
+                    b.Property<Guid>("CellRefId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("ChangeNote")
@@ -84,10 +86,7 @@ namespace DayJTrading.Journal.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CellId");
-
-                    b.HasIndex("CellId1")
-                        .IsUnique();
+                    b.HasIndex("CellRefId");
 
                     b.ToTable("ContentModels");
                 });
@@ -102,12 +101,12 @@ namespace DayJTrading.Journal.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("TradePositionCompositeId")
+                    b.Property<Guid>("TradePositionCompositeRefId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TradePositionCompositeId");
+                    b.HasIndex("TradePositionCompositeRefId");
 
                     b.ToTable("TradeInputs");
                 });
@@ -125,46 +124,47 @@ namespace DayJTrading.Journal.Data.Migrations
 
             modelBuilder.Entity("DayJT.Journal.Data.Cell", b =>
                 {
-                    b.HasOne("DayJT.Journal.Data.TradeComponent", "TradeComponent")
-                        .WithMany("TradeActionInfoCells")
-                        .HasForeignKey("TradeComponentId")
+                    b.HasOne("DayJT.Journal.Data.CellContent", "ContentWrapper")
+                        .WithMany()
+                        .HasForeignKey("ContentWrapperId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TradeComponent");
+                    b.HasOne("DayJT.Journal.Data.TradeComponent", "TradeComponentRef")
+                        .WithMany("TradeActionInfoCells")
+                        .HasForeignKey("TradeComponentRefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ContentWrapper");
+
+                    b.Navigation("TradeComponentRef");
                 });
 
             modelBuilder.Entity("DayJT.Journal.Data.CellContent", b =>
                 {
-                    b.HasOne("DayJT.Journal.Data.Cell", "Cell")
+                    b.HasOne("DayJT.Journal.Data.Cell", "CellRef")
                         .WithMany("History")
-                        .HasForeignKey("CellId")
+                        .HasForeignKey("CellRefId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DayJT.Journal.Data.Cell", null)
-                        .WithOne("ContentWrapper")
-                        .HasForeignKey("DayJT.Journal.Data.CellContent", "CellId1");
-
-                    b.Navigation("Cell");
+                    b.Navigation("CellRef");
                 });
 
             modelBuilder.Entity("DayJT.Journal.Data.TradeComponent", b =>
                 {
-                    b.HasOne("DayJT.Journal.Data.TradePositionComposite", "TradePositionComposite")
+                    b.HasOne("DayJT.Journal.Data.TradePositionComposite", "TradePositionCompositeRef")
                         .WithMany("TradeComponents")
-                        .HasForeignKey("TradePositionCompositeId")
+                        .HasForeignKey("TradePositionCompositeRefId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TradePositionComposite");
+                    b.Navigation("TradePositionCompositeRef");
                 });
 
             modelBuilder.Entity("DayJT.Journal.Data.Cell", b =>
                 {
-                    b.Navigation("ContentWrapper")
-                        .IsRequired();
-
                     b.Navigation("History");
                 });
 

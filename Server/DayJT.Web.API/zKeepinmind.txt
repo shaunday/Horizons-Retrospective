@@ -1,3 +1,14 @@
-﻿https://docs.automapper.org/en/stable/Configuration.html
+﻿_Create Migration class - has all the info about how to create the DB based on the model
+Package Manager Console: EntityFrameworkCore\Add-Migration <name>
+*without "EntityFrameworkCore\" you'll get errors
+
+_Apply Migration
+EntityFrameworkCore\Update-Database
+
+
+_go to pgadmin
+
+
+https://docs.automapper.org/en/stable/Configuration.html
 https://github.com/AutoMapper/AutoMapper.EF6 - auto compute - like first + last name into a full name
 

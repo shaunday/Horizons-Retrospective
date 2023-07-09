@@ -16,9 +16,9 @@ namespace DayJT.Journal.Data
         public DateTime CreatedAt { get; } = DateTime.Now;
 
         //parent
-        [ForeignKey("CellId")]
-        public Cell? Cell { get; set; }
+        [ForeignKey(nameof(CellRef))]
+        public Guid CellRefId { get; set; }
 
-        public Guid CellId { get; set; }
+        public Cell CellRef { get; set; }
     }
 }

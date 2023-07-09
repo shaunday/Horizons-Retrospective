@@ -48,10 +48,11 @@ namespace DayJT.Journal.Data
         }
 
         //parent
-        [ForeignKey("TradeComponentId")]
-        public TradeComponent TradeComponent { get; set; } = null!;
+        [ForeignKey(nameof(TradeComponentRef))]
+        public Guid TradeComponentRefId { get; set; }
 
-        public Guid TradeComponentId { get; set; }
+        public TradeComponent TradeComponentRef { get; set; }
+
     }
 
 }

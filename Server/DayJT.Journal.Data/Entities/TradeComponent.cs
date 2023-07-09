@@ -17,10 +17,10 @@ namespace DayJT.Journal.Data
 
 
         //parent
-        [ForeignKey("TradePositionCompositeId")]
-        public TradePositionComposite TradePositionComposite { get; set; } = null!;
+        [ForeignKey(nameof(TradePositionCompositeRef))]
+        public Guid TradePositionCompositeRefId { get; set; }
 
-        public Guid TradePositionCompositeId { get; set; }
+        public TradePositionComposite TradePositionCompositeRef { get; set; }
 
     }
 }
