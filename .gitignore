@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+Server/DayJT.Journal.Data/Migrations/TradingJournalDataContextModelSnapshot.cs
+Server/DayJT.Journal.Data/Migrations/20230708173302_InitialDatabase.cs
+Server/DayJT.Journal.Data/Migrations/20230708173302_InitialDatabase.Designer.cs
+Server/DayJT.Journal.Data/Migrations/20230715092958_InitialDatabase.cs
+Server/DayJT.Journal.Data/Migrations/20230715092958_InitialDatabase.Designer.cs
+Server/DayJT.Journal.Data/Migrations/TradingJournalDataContextModelSnapshot.cs

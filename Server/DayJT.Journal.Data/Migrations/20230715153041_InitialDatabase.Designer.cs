@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DayJTrading.Journal.Data.Migrations
 {
     [DbContext(typeof(TradingJournalDataContext))]
-    [Migration("20230708173302_InitialDatabase")]
+    [Migration("20230715153041_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -67,7 +67,7 @@ namespace DayJTrading.Journal.Data.Migrations
 
                     b.HasIndex("TradeComponentRefId");
 
-                    b.ToTable("TradeInputComponents");
+                    b.ToTable("AllTradeInfoCells");
                 });
 
             modelBuilder.Entity("DayJT.Journal.Data.CellContent", b =>
@@ -91,7 +91,7 @@ namespace DayJTrading.Journal.Data.Migrations
 
                     b.HasIndex("CellRefId");
 
-                    b.ToTable("ContentModels");
+                    b.ToTable("AllCellContents");
                 });
 
             modelBuilder.Entity("DayJT.Journal.Data.TradeComponent", b =>
@@ -111,7 +111,7 @@ namespace DayJTrading.Journal.Data.Migrations
 
                     b.HasIndex("TradePositionCompositeRefId");
 
-                    b.ToTable("TradeInputs");
+                    b.ToTable("AllTradeComponents");
                 });
 
             modelBuilder.Entity("DayJT.Journal.Data.TradePositionComposite", b =>
@@ -122,7 +122,7 @@ namespace DayJTrading.Journal.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OverallTrades");
+                    b.ToTable("AllTradeComposites");
                 });
 
             modelBuilder.Entity("DayJT.Journal.Data.Cell", b =>

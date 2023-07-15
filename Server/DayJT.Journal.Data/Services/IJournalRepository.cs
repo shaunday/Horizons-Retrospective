@@ -4,7 +4,7 @@
     {
         //trades
 
-        Task<IEnumerable<TradeComponent>> GetAllTradeComponentsAsync();
+        Task<IEnumerable<TradeComponent>> GetAllTradeCompositesAs1LinerOverviewAsync();
 
         Task<(IEnumerable<TradePositionComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10);
 
@@ -16,7 +16,7 @@
 
         Task<(TradeComponent newEntry, TradeComponent summary)> NewEntryReducePositionAsync(string tradeId);
 
-        Task<(bool result, TradeComponent? summary)> RemoveInterimEntry(string tradeInputId);
+        Task<(bool result, TradeComponent? summary)> RemoveInterimEntry(string tradeId, string tradeInputId);
 
         //components
 
@@ -24,7 +24,7 @@
 
         //closure
 
-        Task Close(string tradeId, string closingPrice);
+        Task CloseAsync(string tradeId, string closingPrice);
 
     }
 }

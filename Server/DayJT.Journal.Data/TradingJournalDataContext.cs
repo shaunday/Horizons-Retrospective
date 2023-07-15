@@ -11,7 +11,7 @@ namespace DayJT.Journal.Data
 
         public DbSet<Cell> AllTradeInfoCells { get; set; } 
 
-        public DbSet<CellContent> AllContentModels { get; set; } 
+        public DbSet<CellContent> AllCellContents { get; set; } 
         #endregion
 
         public TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : base(options) { } //allow service configuration 
@@ -20,18 +20,25 @@ namespace DayJT.Journal.Data
         {
             base.OnModelCreating(modelBuilder);
 
+
             modelBuilder.Entity<TradePositionComposite>()
                 .HasMany(t => t.TradeComponents)
-                .WithOne(t => t.TradePositionCompositeRef);
+                .WithOne(t => t.TradePositionCompositeRef)
+                .HasForeignKey(t => t.TradePositionCompositeRefId)
+                .IsRequired(); //force FK
 
             modelBuilder.Entity<TradeComponent>()
                .HasMany(t => t.TradeActionInfoCells)
-               .WithOne(t => t.TradeComponentRef);
+               .WithOne(t => t.TradeComponentRef)
+               .HasForeignKey(t => t.TradeComponentRefId)
+               .IsRequired(); //force FK
 
             modelBuilder.Entity<Cell>()
                 .HasMany(t => t.History)
                 .WithOne(t => t.CellRef)
-                .IsRequired();
+                .HasForeignKey(t => t.CellRefId)
+                .IsRequired(); //force FK
+
         }
 
     }

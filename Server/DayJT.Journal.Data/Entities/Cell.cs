@@ -7,7 +7,7 @@ namespace DayJT.Journal.Data
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } 
 
         [Required]
         [MaxLength(100)]
@@ -42,13 +42,14 @@ namespace DayJT.Journal.Data
         public ICollection<CellContent> History { get; set; } = new List<CellContent>();
 
 
+        public Cell() { }
+
         public Cell(string title)
         {
             Title = title;
         }
 
         //parent
-        [ForeignKey(nameof(TradeComponentRef))]
         public Guid TradeComponentRefId { get; set; }
 
         public TradeComponent TradeComponentRef { get; set; }

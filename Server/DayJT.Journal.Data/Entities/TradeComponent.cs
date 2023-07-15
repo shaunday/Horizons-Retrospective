@@ -7,7 +7,7 @@ namespace DayJT.Journal.Data
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = new Guid();
 
         [Required]
         [MaxLength(50)]
@@ -15,9 +15,9 @@ namespace DayJT.Journal.Data
 
         public List<Cell> TradeActionInfoCells { get; set; } = new List<Cell>();
 
+        public DateTime CreatedAt { get; } = DateTime.Now;
 
         //parent
-        [ForeignKey(nameof(TradePositionCompositeRef))]
         public Guid TradePositionCompositeRefId { get; set; }
 
         public TradePositionComposite TradePositionCompositeRef { get; set; }

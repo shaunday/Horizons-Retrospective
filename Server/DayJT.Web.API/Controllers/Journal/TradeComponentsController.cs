@@ -40,9 +40,9 @@ namespace DayJT.Web.API.Controllers.Journal
         }
 
         [HttpDelete("inputs/{tradeInputId}")]
-        public async Task<ActionResult> DeleteInterimTradeInput(string tradeInputId)
+        public async Task<ActionResult> DeleteInterimTradeInput(string tradeId, string tradeInputId)
         {
-            (bool result, TradeComponent? summary) = await _journalAccess.RemoveInterimEntry(tradeInputId);
+            (bool result, TradeComponent? summary) = await _journalAccess.RemoveInterimEntry(tradeId, tradeInputId);
 
             if (!result)
             {
@@ -58,8 +58,8 @@ namespace DayJT.Web.API.Controllers.Journal
 
         #region Update component
 
-        [HttpPut("components/{componentId}")]
-        public async Task<ActionResult> UpdateComponent(string componentId, string newContent, string changeNote)
+        [HttpPut("inputs/{tradeInputId}/components/{componentId}")]
+        public async Task<ActionResult> UpdateComponent(string tradeId, string tradeInputId, string componentId, string newContent, string changeNote)
         {
             Cell? updatedComponent = await _journalAccess.UpdateCellContent(componentId, newContent, changeNote);
 
@@ -80,7 +80,7 @@ namespace DayJT.Web.API.Controllers.Journal
         [HttpPost("close/{closingPrice}")]
         public async Task<ActionResult<bool>> CloseTrade(string tradeId, string closingPrice)
         {
-            await _journalAccess.Close(tradeId, closingPrice);
+            await _journalAccess.CloseAsync(tradeId, closingPrice);
 
             return NoContent();
         }
