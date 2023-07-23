@@ -34,8 +34,8 @@ namespace TraJediServer.Journal
                 new Cell("SL Thoughts") { ComponentType = ComponentType.SLandTarget },
                 new Cell("Target") { ComponentType = ComponentType.SLandTarget },
 
-                new Cell("Risk") { ComponentType = ComponentType.RiskandReward },
-                new Cell("R:R") { ComponentType = ComponentType.RiskandReward },
+                new Cell("Risk") { ComponentType = ComponentType.RiskReward },
+                new Cell("R:R") { ComponentType = ComponentType.RiskReward },
             };
         }
 
