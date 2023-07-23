@@ -1,5 +1,6 @@
-﻿Map dto and models
-AutoMapper.Collection
+﻿UpdateCellContent() - fix
+GetAllTradeCompositesAs1LinerOverviewAsync() should be 1 query
+clear details from connection string
 
 security best practices
 testing

@@ -6,8 +6,7 @@ namespace DayJT.Journal.Data
     public class TradePositionComposite
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; } = Guid.NewGuid();
 
         public ICollection<TradeComponent> TradeComponents { get; set; } = new List<TradeComponent>();
 

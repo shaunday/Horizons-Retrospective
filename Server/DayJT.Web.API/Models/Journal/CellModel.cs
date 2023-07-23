@@ -7,18 +7,12 @@ namespace DayJT.Web.API.Models
     {
         public Guid Id { get; set; }
 
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
         public ComponentType ComponentType { get; set; }
 
-        #region Content
-        public CellContentModel ContentWrapper { get; set; }
+        public CellContentModel? ContentWrapper { get; set; }
 
-        public string Content
-        {
-            get { return ContentWrapper.Content; }
-            set { ContentWrapper.Content = value; }
-        }
-        #endregion
+        public ICollection<CellContent> History { get; set; } = new List<CellContent>();
 
         #region flags
 

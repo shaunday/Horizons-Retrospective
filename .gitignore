@@ -402,3 +402,8 @@ Server/DayJT.Journal.Data/Migrations/20230708173302_InitialDatabase.Designer.cs
 Server/DayJT.Journal.Data/Migrations/20230715092958_InitialDatabase.cs
 Server/DayJT.Journal.Data/Migrations/20230715092958_InitialDatabase.Designer.cs
 Server/DayJT.Journal.Data/Migrations/TradingJournalDataContextModelSnapshot.cs
+Server/DayJT.Journal.Data/Migrations/20230715153041_InitialDatabase.cs
+Server/DayJT.Journal.Data/Migrations/20230715153041_InitialDatabase.cs
+Server/DayJT.Journal.Data/Migrations/20230715153041_InitialDatabase.Designer.cs
+Server/DayJT.Journal.Data/Migrations/20230723155932_Initial-Database.cs
+Server/DayJT.Journal.Data/Migrations/20230723155932_Initial-Database.Designer.cs

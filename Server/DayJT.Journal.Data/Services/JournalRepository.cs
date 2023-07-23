@@ -46,14 +46,21 @@ namespace DayJT.Journal.Data.Services
         public async Task<TradePositionComposite> AddTradeCompositeAsync()
         {
             TradePositionComposite trade = new TradePositionComposite();
-            trade.TradeComponents.Add(new TradeComponent()
+            try
             {
-                TradeActionType = TradeActionType.Origin,
-                TradeActionInfoCells = TradeInfoFactory.GetTradeOriginComponents()
-            });
-            await dataContext.AllTradeComposites.AddAsync(trade);
-            await dataContext.SaveChangesAsync();
-
+               
+                trade.TradeComponents.Add(new TradeComponent()
+                {
+                    TradeActionType = TradeActionType.Origin,
+                    TradeActionInfoCells = TradeInfoFactory.GetTradeOriginComponents()
+                });
+                dataContext.AllTradeComposites.Add(trade);
+                await dataContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                string t = ex.ToString();
+            }
             return trade;
         }
 
@@ -94,7 +101,7 @@ namespace DayJT.Journal.Data.Services
 
         #region add/remove
 
-        public async Task<(TradeComponent newEntry, TradeComponent summary)> NewEntryAddPositionAsync(string tradeId)
+        public async Task<(TradeComponent? newEntry, TradeComponent? summary)> NewEntryAddPositionAsync(string tradeId)
         {
             TradeComponent tradeInput = new TradeComponent()
             {
@@ -105,7 +112,7 @@ namespace DayJT.Journal.Data.Services
             return await AddInterimTradeInputAsync(tradeId, tradeInput);
         }
 
-        public async Task<(TradeComponent newEntry, TradeComponent summary)> NewEntryReducePositionAsync(string tradeId)
+        public async Task<(TradeComponent? newEntry, TradeComponent? summary)> NewEntryReducePositionAsync(string tradeId)
         {
             TradeComponent tradeInput = new TradeComponent()
             {
@@ -135,15 +142,15 @@ namespace DayJT.Journal.Data.Services
         public async Task<Cell?> UpdateCellContent(string componentId, string newContent, string changeNote)
         {
             Cell? inputComponent = await dataContext.AllTradeInfoCells.Where(t => t.Id.ToString() == componentId).FirstOrDefaultAsync();
-            if (inputComponent != null)
-            {
-                inputComponent.History.Add(inputComponent.ContentWrapper);
-                inputComponent.ContentWrapper = new CellContent() { Content = newContent, ChangeNote = changeNote };
+            //if (inputComponent != null)
+            //{
+            //    //inputComponent.History.Add(inputComponent.ContentWrapper);
+            //    inputComponent.ContentWrapper = new CellContent() { Content = newContent, ChangeNote = changeNote };
 
-                await UpdateInterimSummaryAsync(inputComponent.TradeComponentRef.TradePositionCompositeRefId.ToString());
+            //    await UpdateInterimSummaryAsync(inputComponent.TradeComponentRef.TradePositionCompositeRefId.ToString());
 
-                await dataContext.SaveChangesAsync();
-            }
+            //    await dataContext.SaveChangesAsync();
+            //}
 
             return inputComponent;
         }
@@ -250,7 +257,7 @@ namespace DayJT.Journal.Data.Services
             return false;
         }
 
-        private async Task<(TradeComponent newEntry, TradeComponent summary)> AddInterimTradeInputAsync(string tradeId, TradeComponent tradeInput)
+        private async Task<(TradeComponent? newEntry, TradeComponent? summary)> AddInterimTradeInputAsync(string tradeId, TradeComponent tradeInput)
         {
             TradeComponent? summary = null;
             var trade = await dataContext.AllTradeComposites.Where(tc => tc.Id.ToString() == tradeId).SingleOrDefaultAsync();
@@ -283,7 +290,7 @@ namespace DayJT.Journal.Data.Services
                 {
                     if (component.CostRelevance == ValueRelevance.Add || component.CostRelevance == ValueRelevance.Substract)
                     {
-                        double.TryParse(component.ContentWrapper.Content, out cost);
+                        double.TryParse(component.Content, out cost);
 
                         if (component.CostRelevance == ValueRelevance.Add)
                         {
@@ -298,7 +305,7 @@ namespace DayJT.Journal.Data.Services
 
                     if (component.PriceRelevance == ValueRelevance.Add || component.PriceRelevance == ValueRelevance.Substract)
                     {
-                        double.TryParse(component.ContentWrapper.Content, out priceValue);
+                        double.TryParse(component.Content, out priceValue);
                         if (component.PriceRelevance == ValueRelevance.Substract)
                         {
                             priceValue *= -1;

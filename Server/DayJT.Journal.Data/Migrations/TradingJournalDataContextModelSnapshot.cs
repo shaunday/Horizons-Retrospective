@@ -73,7 +73,7 @@ namespace DayJTrading.Journal.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("CellRefId")
+                    b.Property<Guid?>("CellRefId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("ChangeNote")
@@ -145,9 +145,7 @@ namespace DayJTrading.Journal.Data.Migrations
                 {
                     b.HasOne("DayJT.Journal.Data.Cell", "CellRef")
                         .WithMany("History")
-                        .HasForeignKey("CellRefId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CellRefId");
 
                     b.Navigation("CellRef");
                 });

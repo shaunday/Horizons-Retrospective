@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DayJT.Journal.Data;
 
 namespace DayJT.Journal.Data
 {
     public class CellContent
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; } = Guid.NewGuid();
 
         public string Content { get; set; } = string.Empty;
 
@@ -16,8 +16,8 @@ namespace DayJT.Journal.Data
         public DateTime CreatedAt { get; } = DateTime.Now;
 
         //parent
-        public Guid CellRefId { get; set; }
+        public Guid? CellRefId { get; set; } //reference is optional (for main content)
 
-        public Cell CellRef { get; set; }
+        public Cell? CellRef { get; set; }
     }
 }

@@ -21,9 +21,9 @@ namespace DayJT.Web.API.Controllers.Journal
         #region Add / Remove
 
         [HttpPost]
-        public async Task<ActionResult<(TradeComponentModel newEntry, TradeComponentModel summary)>> AddInterimEntry(string tradeId, bool isAdd)
+        public async Task<ActionResult<(TradeComponentModel? newEntry, TradeComponentModel? summary)>> AddInterimEntry(string tradeId, bool isAdd)
         {
-            (TradeComponent newEntry, TradeComponent summary) entryAndSummary;
+            (TradeComponent? newEntry, TradeComponent? summary) entryAndSummary;
             if (isAdd)
             {
                 entryAndSummary = await _journalAccess.NewEntryAddPositionAsync(tradeId);
@@ -33,7 +33,7 @@ namespace DayJT.Web.API.Controllers.Journal
                 entryAndSummary = await _journalAccess.NewEntryReducePositionAsync(tradeId);
             }
 
-            (TradeComponentModel newEntry, TradeComponentModel TradeComponentModel) resAsModel =
+            (TradeComponentModel? newEntry, TradeComponentModel? TradeComponentModel) resAsModel =
                             (_mapper.Map<TradeComponentModel>(entryAndSummary.newEntry), _mapper.Map<TradeComponentModel>(entryAndSummary.summary));
 
             return Ok(resAsModel);

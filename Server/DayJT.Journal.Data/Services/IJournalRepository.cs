@@ -12,9 +12,9 @@
 
         //inputs
 
-        Task<(TradeComponent newEntry, TradeComponent summary)> NewEntryAddPositionAsync(string tradeId);
+        Task<(TradeComponent? newEntry, TradeComponent? summary)> NewEntryAddPositionAsync(string tradeId);
 
-        Task<(TradeComponent newEntry, TradeComponent summary)> NewEntryReducePositionAsync(string tradeId);
+        Task<(TradeComponent? newEntry, TradeComponent? summary)> NewEntryReducePositionAsync(string tradeId);
 
         Task<(bool result, TradeComponent? summary)> RemoveInterimEntry(string tradeId, string tradeInputId);
 

@@ -6,25 +6,29 @@ namespace DayJT.Journal.Data
     public class Cell
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; } 
+        public Guid Id { get; private set; } = Guid.NewGuid();
 
         [Required]
         [MaxLength(100)]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(50)]
         public ComponentType ComponentType { get; set; }
 
         #region Content
-        public CellContent ContentWrapper { get; set; } = new CellContent();
+
+        public CellContent ContentWrapper { get; private set; }
 
         public string Content
         {
             get { return ContentWrapper.Content; }
-            set { ContentWrapper.Content = value; }
+            set
+            {
+                ContentWrapper.Content = value;
+            }
         }
+
         #endregion
 
         #region flags
@@ -41,18 +45,16 @@ namespace DayJT.Journal.Data
 
         public ICollection<CellContent> History { get; set; } = new List<CellContent>();
 
-
-        public Cell() { }
-
         public Cell(string title)
         {
             Title = title;
+            ContentWrapper = new CellContent();
         }
 
         //parent
         public Guid TradeComponentRefId { get; set; }
 
-        public TradeComponent TradeComponentRef { get; set; }
+        public TradeComponent TradeComponentRef { get; set; } = null!; // Required reference navigation to principal
 
     }
 

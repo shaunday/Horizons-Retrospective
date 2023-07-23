@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DayJT.Journal.Data
@@ -6,8 +7,7 @@ namespace DayJT.Journal.Data
     public class TradeComponent
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; } = new Guid();
+        public Guid Id { get; private set; } = Guid.NewGuid();
 
         [Required]
         [MaxLength(50)]
@@ -20,7 +20,7 @@ namespace DayJT.Journal.Data
         //parent
         public Guid TradePositionCompositeRefId { get; set; }
 
-        public TradePositionComposite TradePositionCompositeRef { get; set; }
+        public TradePositionComposite TradePositionCompositeRef { get; set; } = null!; // Required reference navigation to principal
 
     }
 }
