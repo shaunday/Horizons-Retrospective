@@ -1,5 +1,6 @@
 ﻿UpdateCellContent() - gotta mark father for update
-unify names
+how to version dbs
+add reopen function (delete closure add position)
 
 GetAllTradeCompositesAs1LinerOverviewAsync() try with a proper query instead of get all
 clear details from connection string
