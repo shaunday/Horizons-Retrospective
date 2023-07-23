@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Diagnostics;
 using TraJediServer.Journal;
@@ -24,7 +25,13 @@ namespace DayJT.Journal.Data.Services
         {
             var _oneLiners = new List<TradeComponent>();
 
-            foreach (var trade in dataContext.AllTradeComposites)
+            //var allTrades = dataContext.AllTradeComposites.SelectMany(t => t.TradeComponents)
+            //                                              .SelectMany(tc => tc.TradeActionInfoCells)
+            //                                              .Where(aic => aic.IsRelevantForOverview);
+                
+
+            var allTrades = dataContext.AllTradeComposites;
+            foreach (var trade in allTrades)
             {
                 TradeComponent tradeSummary = new TradeComponent()
                 {
@@ -32,14 +39,22 @@ namespace DayJT.Journal.Data.Services
                     TradeActionInfoCells = new List<Cell>()
                 };
 
-                tradeSummary.TradeActionInfoCells = await dataContext.AllTradeInfoCells
-                  .Where(tc => tc.TradeComponentRef.TradePositionCompositeRefId == trade.Id && tc.IsRelevantForOverview)
-                  .OrderBy(tc => tc.Id)
-                  .ToListAsync();
+                foreach (var tc in trade.TradeComponents)
+                {
+                    foreach (var actionInfo in tc.TradeActionInfoCells)
+                    {
+                        if (actionInfo.IsRelevantForOverview)
+                        {
+                            tradeSummary.TradeActionInfoCells.Add(actionInfo);
+                        }
+                    }
+                }
 
+                tradeSummary.TradeActionInfoCells = tradeSummary.TradeActionInfoCells.OrderBy(aic => aic.ContentWrapper.CreatedAt).ToList();
                 _oneLiners.Add(tradeSummary);
             }
 
+            _oneLiners = _oneLiners.OrderBy(t => t.CreatedAt).ToList();
             return _oneLiners;
         }
 
@@ -101,6 +116,11 @@ namespace DayJT.Journal.Data.Services
 
         #region add/remove
 
+        private TradePositionComposite? GetTradeComposite(string tradeId)
+        {
+            return dataContext.AllTradeComposites.Where(t => t.Id.ToString() == tradeId).SingleOrDefault();
+        }
+
         public async Task<(TradeComponent? newEntry, TradeComponent? summary)> NewEntryAddPositionAsync(string tradeId)
         {
             TradeComponent tradeInput = new TradeComponent()
@@ -109,7 +129,8 @@ namespace DayJT.Journal.Data.Services
                 TradeActionInfoCells = TradeInfoFactory.GetAddToPositionComponents(isActual: true)
             };
 
-            return await AddInterimTradeInputAsync(tradeId, tradeInput);
+            var trade = GetTradeComposite(tradeId);
+            return await AddInterimTradeInputAsync(trade, tradeInput);
         }
 
         public async Task<(TradeComponent? newEntry, TradeComponent? summary)> NewEntryReducePositionAsync(string tradeId)
@@ -120,17 +141,19 @@ namespace DayJT.Journal.Data.Services
                 TradeActionInfoCells = TradeInfoFactory.GetReducePositionComponents()
             };
 
-            return await AddInterimTradeInputAsync(tradeId, tradeInput);
+            var trade = GetTradeComposite(tradeId);
+            return await AddInterimTradeInputAsync(trade, tradeInput);
         }
 
         public async Task<(bool result, TradeComponent? summary)> RemoveInterimEntry(string tradeId, string tradeInputId)
         {
-            bool res = await RemoveInterimInputAsync(tradeId, tradeInputId);
+            var trade = GetTradeComposite(tradeId);
+            bool res = RemoveInterimInput(trade, tradeInputId);
             TradeComponent? summary = null;
 
             if (res)
             {
-                summary = await UpdateInterimSummaryAsync(tradeId);
+                summary = UpdateInterimSummary(trade);
                 await dataContext.SaveChangesAsync();
             }
 
@@ -142,15 +165,15 @@ namespace DayJT.Journal.Data.Services
         public async Task<Cell?> UpdateCellContent(string componentId, string newContent, string changeNote)
         {
             Cell? inputComponent = await dataContext.AllTradeInfoCells.Where(t => t.Id.ToString() == componentId).FirstOrDefaultAsync();
-            //if (inputComponent != null)
-            //{
-            //    //inputComponent.History.Add(inputComponent.ContentWrapper);
-            //    inputComponent.ContentWrapper = new CellContent() { Content = newContent, ChangeNote = changeNote };
+            if (inputComponent != null)
+            {
+                inputComponent.History.Add(inputComponent.ContentWrapper);
+                inputComponent.ContentWrapper = new CellContent() { Content = newContent, ChangeNote = changeNote };
 
-            //    await UpdateInterimSummaryAsync(inputComponent.TradeComponentRef.TradePositionCompositeRefId.ToString());
+                UpdateInterimSummary(inputComponent.TradeComponentRef.TradePositionCompositeRef);
 
-            //    await dataContext.SaveChangesAsync();
-            //}
+                await dataContext.SaveChangesAsync();
+            }
 
             return inputComponent;
         }
@@ -161,7 +184,8 @@ namespace DayJT.Journal.Data.Services
 
         public async Task CloseAsync(string tradeId, string closingPrice)
         {
-            var analytics = await GetAvgEntryAndProfitAsync(tradeId);
+            var trade = GetTradeComposite(tradeId);
+            var analytics = GetAvgEntryAndProfit(trade);
 
             #region add reduction for current amount at specified price
             TradeComponent tradeInput = new TradeComponent()
@@ -194,11 +218,11 @@ namespace DayJT.Journal.Data.Services
 
             // remove interim summary
 
-            await RemoveInterimInputAsync(tradeId, TradeActionType.InterimSummary);
+            RemoveInterimInput(trade, TradeActionType.InterimSummary);
 
             // create actual closure
 
-            analytics = await GetAvgEntryAndProfitAsync(tradeId);
+            analytics = GetAvgEntryAndProfit(trade);
             TradeComponent tradeClosure = new TradeComponent()
             {
                 TradeActionType = TradeActionType.Closure,
@@ -221,10 +245,8 @@ namespace DayJT.Journal.Data.Services
                .FirstOrDefaultAsync();
         }
 
-        private async Task<bool> RemoveInterimInputAsync(string tradeId, string tradeInputId)
+        private bool RemoveInterimInput(TradePositionComposite trade, string tradeInputId)
         {
-            var trade = await dataContext.AllTradeComposites.Where(t => t.Id.ToString() == tradeId).SingleOrDefaultAsync();
-
             if (trade != null)
             {
                 var tradeInputToRemove = trade.TradeComponents.Where(t => t.Id.ToString() == tradeInputId).SingleOrDefault();
@@ -239,10 +261,8 @@ namespace DayJT.Journal.Data.Services
             return false;
         }
 
-        private async Task<bool> RemoveInterimInputAsync(string tradeId, TradeActionType tradeInputType)
+        private bool RemoveInterimInput(TradePositionComposite trade, TradeActionType tradeInputType)
         {
-            var trade = await dataContext.AllTradeComposites.Where(t => t.Id.ToString() == tradeId).SingleOrDefaultAsync();
-
             if (trade != null)
             {
                 var tradeInputToRemove = trade.TradeComponents.Where(t => t.TradeActionType == tradeInputType).SingleOrDefault();
@@ -257,15 +277,15 @@ namespace DayJT.Journal.Data.Services
             return false;
         }
 
-        private async Task<(TradeComponent? newEntry, TradeComponent? summary)> AddInterimTradeInputAsync(string tradeId, TradeComponent tradeInput)
+        private async Task<(TradeComponent? newEntry, TradeComponent? summary)>  
+                                                        AddInterimTradeInputAsync(TradePositionComposite trade, TradeComponent tradeInput)
         {
             TradeComponent? summary = null;
-            var trade = await dataContext.AllTradeComposites.Where(tc => tc.Id.ToString() == tradeId).SingleOrDefaultAsync();
 
             if (trade != null)
             {
                 trade.TradeComponents.Add(tradeInput);
-                summary = await UpdateInterimSummaryAsync(tradeId);
+                summary = UpdateInterimSummary(trade);
 
                 await dataContext.SaveChangesAsync();
             }
@@ -273,14 +293,14 @@ namespace DayJT.Journal.Data.Services
             return (tradeInput, summary);
         }
 
-        private async Task<(double totalCost, double totalAmount, double profit)> GetAvgEntryAndProfitAsync(string tradeId)
+        private (double totalCost, double totalAmount, double profit) GetAvgEntryAndProfit(TradePositionComposite trade)
         {
             List<(double priceValue, double cost)> entriesWithAmount = new();
             double profit = 0.0;
 
-            var interims = await dataContext.AllTradeComponents
-                .Where(t => t.TradePositionCompositeRefId.ToString() == tradeId && t.TradeActionType == TradeActionType.Interim)
-                .ToListAsync();
+            var interims = trade.TradeComponents
+                .Where(t => t.TradeActionType == TradeActionType.Interim)
+                .ToList();
 
             foreach (var tradeInput in interims)
             {
@@ -337,14 +357,12 @@ namespace DayJT.Journal.Data.Services
 
         //summary
 
-        private async Task<TradeComponent?> AddInterimSummaryAsync(string tradeId)
+        private TradeComponent? AddInterimSummary(TradePositionComposite trade)
         {
-            var trade = await dataContext.AllTradeComposites.Where(tc => tc.Id.ToString() == tradeId).SingleOrDefaultAsync();
             TradeComponent? tradeInput = null;
-
             if (trade != null) 
             {
-                var analytics = await GetAvgEntryAndProfitAsync(tradeId);
+                var analytics = GetAvgEntryAndProfit(trade);
 
                 string averageEntry = string.Empty, totalAmount = string.Empty, totalCost = string.Empty;
                 if (analytics.totalCost > 0)
@@ -371,10 +389,10 @@ namespace DayJT.Journal.Data.Services
             return tradeInput;
         }
 
-        private async Task<TradeComponent?> UpdateInterimSummaryAsync(string tradeId)
+        private TradeComponent? UpdateInterimSummary(TradePositionComposite trade)
         {
-            await RemoveInterimInputAsync(tradeId, TradeActionType.InterimSummary);
-            return await AddInterimSummaryAsync(tradeId);
+            RemoveInterimInput(trade, TradeActionType.InterimSummary);
+            return AddInterimSummary(trade);
         }
 
         #endregion

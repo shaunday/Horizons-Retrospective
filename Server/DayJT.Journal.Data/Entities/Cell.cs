@@ -18,7 +18,7 @@ namespace DayJT.Journal.Data
 
         #region Content
 
-        public CellContent ContentWrapper { get; private set; }
+        public CellContent ContentWrapper { get; set; }
 
         public string Content
         {
@@ -48,7 +48,6 @@ namespace DayJT.Journal.Data
         public Cell(string title)
         {
             Title = title;
-            ContentWrapper = new CellContent();
         }
 
         //parent
