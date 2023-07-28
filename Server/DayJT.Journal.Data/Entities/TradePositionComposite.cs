@@ -8,7 +8,7 @@ namespace DayJT.Journal.Data
         [Key]
         public Guid Id { get; private set; } = Guid.NewGuid();
 
-        public ICollection<TradeComponent> TradeComponents { get; set; } = new List<TradeComponent>();
+        public List<TradeComponent> TradeComponents { get; set; } = new List<TradeComponent>();
 
         public DateTime CreatedAt { get; } = DateTime.Now;
 

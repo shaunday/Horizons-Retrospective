@@ -20,7 +20,7 @@
 
         //components
 
-        Task<Cell?> UpdateCellContent(string componentId, string newContent, string changeNote);
+        Task<(Cell? updatedCell, TradeComponent? summary)> UpdateCellContent(string componentId, string newContent, string changeNote);
 
         //closure
 

@@ -1,4 +1,5 @@
-﻿UpdateCellContent() - gotta mark father for update
+﻿if (false) //check if cell is cost or price relevant
+
 how to version dbs
 add reopen function (delete closure add position)
 

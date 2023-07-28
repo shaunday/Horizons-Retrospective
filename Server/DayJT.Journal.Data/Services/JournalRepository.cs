@@ -162,20 +162,24 @@ namespace DayJT.Journal.Data.Services
 
         #endregion
 
-        public async Task<Cell?> UpdateCellContent(string componentId, string newContent, string changeNote)
+        public async Task<(Cell? updatedCell, TradeComponent? summary)> UpdateCellContent(string componentId, string newContent, string changeNote)
         {
-            Cell? inputComponent = await dataContext.AllTradeInfoCells.Where(t => t.Id.ToString() == componentId).FirstOrDefaultAsync();
-            if (inputComponent != null)
+            TradeComponent? summary = null;
+            Cell? cell = await dataContext.AllTradeInfoCells.Where(t => t.Id.ToString() == componentId).FirstOrDefaultAsync();
+            if (cell != null)
             {
-                inputComponent.History.Add(inputComponent.ContentWrapper);
-                inputComponent.ContentWrapper = new CellContent() { Content = newContent, ChangeNote = changeNote };
+                cell.History.Add(cell.ContentWrapper);
+                cell.ContentWrapper = new CellContent() { Content = newContent, ChangeNote = changeNote };
 
-                UpdateInterimSummary(inputComponent.TradeComponentRef.TradePositionCompositeRef);
+                if (false) //check if cell is cost or price relevant
+                {
+                    summary = UpdateInterimSummary(cell.TradeComponentRef.TradePositionCompositeRef);
+                }
 
                 await dataContext.SaveChangesAsync();
             }
 
-            return inputComponent;
+            return (cell, summary);
         }
 
         #endregion
