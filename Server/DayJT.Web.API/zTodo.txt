@@ -1,6 +1,4 @@
-﻿if (false) //check if cell is cost or price relevant
-
-how to version dbs
+﻿how to version dbs
 add reopen function (delete closure add position)
 
 GetAllTradeCompositesAs1LinerOverviewAsync() try with a proper query instead of get all

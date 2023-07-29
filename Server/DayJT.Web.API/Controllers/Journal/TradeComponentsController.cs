@@ -33,7 +33,7 @@ namespace DayJT.Web.API.Controllers.Journal
                 entryAndSummary = await _journalAccess.NewEntryReducePositionAsync(tradeId);
             }
 
-            (TradeComponentModel? newEntry, TradeComponentModel? TradeComponentModel) resAsModel =
+            (TradeComponentModel?, TradeComponentModel?) resAsModel =
                             (_mapper.Map<TradeComponentModel>(entryAndSummary.newEntry), _mapper.Map<TradeComponentModel>(entryAndSummary.summary));
 
             return Ok(resAsModel);
@@ -59,16 +59,11 @@ namespace DayJT.Web.API.Controllers.Journal
         #region Update component
 
         [HttpPut("inputs/{tradeInputId}/components/{componentId}")]
-        public async Task<ActionResult> UpdateComponent(string tradeId, string tradeInputId, string componentId, string newContent, string changeNote)
+        public async Task<ActionResult> UpdateComponent(string tradeInputId, string componentId, string newContent, string changeNote)
         {
-            Cell? updatedComponent = await _journalAccess.UpdateCellContent(componentId, newContent, changeNote);
+            (Cell? updatedComponent, TradeComponent? summary) = await _journalAccess.UpdateCellContent(componentId, newContent, changeNote);
 
-            CellModel? resAsModel = null;
-
-            if (updatedComponent != null)
-            {
-                resAsModel = _mapper.Map<CellModel>(updatedComponent);
-            }
+            (CellModel?, TradeComponentModel?) resAsModel = (_mapper.Map<CellModel>(updatedComponent), _mapper.Map<TradeComponentModel>(summary));
 
             return ResultHandling(resAsModel, $"Could not update component: {componentId}");
         }
