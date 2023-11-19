@@ -139,6 +139,9 @@ namespace DayJT.Journal.Data.Services
             return (res, summary);
         }
 
+        #endregion
+
+        #region Cell Content
         public async Task<(Cell? updatedCell, TradeComponent? summary)> UpdateCellContent(string componentId, string newContent, string changeNote)
         {
             TradeComponent? summary = null;
@@ -148,7 +151,7 @@ namespace DayJT.Journal.Data.Services
                 cell.History.Add(cell.ContentWrapper);
                 cell.ContentWrapper = new CellContent() { Content = newContent, ChangeNote = changeNote };
 
-                if (cell.IsRelevantForOverview) 
+                if (cell.IsRelevantForOverview)
                 {
                     summary = JournalRepoHelpers.UpdateInterimSummary(cell.TradeComponentRef.TradePositionCompositeRef);
                 }
@@ -157,9 +160,9 @@ namespace DayJT.Journal.Data.Services
             }
 
             return (cell, summary);
-        }
-
+        } 
         #endregion
+
 
         #region Closure
 
