@@ -1,9 +1,5 @@
-body,html {
-  margin: 0;
-  padding: 0;
-}
-* {
-  box-sizing: border-box;
+html, body, #root {
+  background-color: rgb(139, 154, 168);
 }
 
 #vwrapper {
@@ -11,14 +7,14 @@ body,html {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  height: calc(100vh - 3px);
+  background-color: lightslategray;
 }
 
 #mainBody {
   display: flex;
   flex-direction: row;
   background-color: lightpink;
-  height: calc(100vh - 3px);
+  height: calc(100vh - 80px)
 }
 
 #journalMainBody {
@@ -35,7 +31,6 @@ body,html {
   background-color: lightskyblue;
   margin: 0.5rem;
   flex: 1 1 auto;
-  height: calc(100vh - 3px);
 }
 
 

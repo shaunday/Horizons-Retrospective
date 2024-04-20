@@ -1,5 +1,5 @@
 import './App.css'
-import JournalContainer from './Components/Journal/JournalContainer'
+import JournalContainer from './Journal/Trades/Components/JournalContainer'
 
 function App() {
 

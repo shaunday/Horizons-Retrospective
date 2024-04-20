@@ -1,3 +1,5 @@
 whats the best/right way to define url/addy + with/without actual data in the put/post 
 parse variables from the url or from data?
 
+Later on:
+"The main component i.e., UI should get stored in the /pages or /views directory. "

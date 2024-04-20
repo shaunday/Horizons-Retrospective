@@ -1,5 +1,5 @@
 import React from 'react';
-import TradesApiAccess from './../Services/TradesApiAccess'
+import * as TradesApiAccess from './../Services/TradesApiAccess'
 
 function Cell({cell}) {
     var content = cell.ContentWrapper.Content;
@@ -11,7 +11,7 @@ function Cell({cell}) {
   };
 
   const updateCellContent = e => {
-    TradesApiAccess.UpdateComponent(cell.Id, content, "no comment.")
+    TradesApiAccess.UpdateComponent(cell.Id, content, "no comment. ")
   };
 
     return (
