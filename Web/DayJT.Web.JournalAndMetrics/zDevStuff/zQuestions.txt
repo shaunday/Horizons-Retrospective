@@ -3,3 +3,10 @@ parse variables from the url or from data?
 
 Later on:
 "The main component i.e., UI should get stored in the /pages or /views directory. "
+
+
+cell update -> await response -> if success we update the value... will it propogate up?
+alternatively - hit the static method, await response, response will update context which will propogate down
+
+
+RTK Query VS React Query

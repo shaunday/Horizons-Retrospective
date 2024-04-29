@@ -1,0 +1,34 @@
+https://www.reddit.com/r/reactjs/comments/z4y7sj/redux_vs_context_what_exactly_does_redux/
+
+
+
+* When you have multiple variables context object and one of your components doesn't subscribe to the entire object (only some variables of the context), 
+it will still re-render when the context updates
+
+*Here's a fantastic example (and pattern) of this in action, using refs to store state within a context, 
+and useSyncExternalStore to handle subscriptions and isolate rendering to only components subscribing to that state:
+
+Making React Context FAST! by Jack Herrington
+https://www.youtube.com/watch?v=ZKlXqrcBx88
+
+This is especially handy for rapid changes to state to avoid wasted re-renders, and is fully type-safe if you're using TypeScript.
+
+
+*Fair point, I use context for 2 things. An authenticated fetch wrapper that I can access anywhere and app theme settings. 
+Everything else is either local native react state or redux global state.
+
+
+If you use Context = https://www.npmjs.com/package/react-provider-factory
+
+
+
+https://blog.isquaredsoftware.com/2021/01/context-redux-differences/
+
+Is Context a "state management" tool?
+No. Context is a form of Dependency Injection. 
+It is a transport mechanism - it doesn't "manage" anything. Any "state management" is done by you and your own code, typically via useState/useReducer.
+
+Based on that, we can see that Context doesn't actually "manage" anything at all. Instead, it's like a pipe or a wormhole. 
+You put something in the top end of the pipe using the <MyContext.Provider>, and that one thing (whatever it is) goes down through the pipe
+ until it pops out the other end where another component asks for it with useContext(MyProvider).
+

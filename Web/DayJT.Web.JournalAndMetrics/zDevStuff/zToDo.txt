@@ -1,13 +1,13 @@
 error catching in axios ? how to return
 
-trades:  
-
-get trade overviews on load, get all trades on load, save
+get all trades on load
 
 onadd trade - await object and pass it into trades if they exist or await finish
 
-finish structure - trades have trades that build a lines structure
 cell update 
 
+selected cell update
 
-trade origin? how to set date? add date filter in the hook and connect hook to trades and to filters
+error boundaries?
+
+build a useReducer for filtered states that are actually displayed
