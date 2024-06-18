@@ -9,5 +9,3 @@ cell update
 selected cell update
 
 error boundaries?
-
-build a useReducer for filtered states that are actually displayed

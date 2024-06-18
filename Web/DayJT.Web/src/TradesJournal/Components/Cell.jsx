@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as TradesApiAccess from './../Services/TradesApiAccess'
 
-function Cell({cellInfo}) {
-    
+function Cell({cellInfo, onCellUpdateConfirmation}) {
+
+  //1st/initial values
+  let approvedValue = cellInfo.ContentWrapper.Content  
+  let displayValue = cellInfo.ContentWrapper.Content  
+
+
   const handleKeyPress = e => {
     if (e.key === "Enter") {
       updateCellContent();
@@ -10,13 +15,13 @@ function Cell({cellInfo}) {
   };
 
   const updateCellContent = e => {
-    //todo update via store
+    
   };
 
     return (
         <div id="cell">
             <div id="cellTitle">{cellInfo.ContentWrapper.Title}</div>
-            <input id="cellInput" type="text" value={cellInfo.ContentWrapper.Content} onKeyDown={handleKeyPress}/>
+            <input id="cellInput" type="text" value={displayValue} onKeyDown={handleKeyPress}/>
         </div> )};
 
 export default Cell;

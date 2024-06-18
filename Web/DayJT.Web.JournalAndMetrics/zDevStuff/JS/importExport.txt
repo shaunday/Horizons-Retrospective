@@ -1,2 +1,0 @@
-import * for a class that holds a bunch of methods
-import by name for react components
