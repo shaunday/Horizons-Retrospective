@@ -8,9 +8,6 @@ const componentsUrl = import.meta.env.VITE_API_URL + import.meta.env.VITE_JOURNA
 const componentsClient = axios.create(baseURL + componentsUrl);
 const tradesClient = axios.create(baseURL + tradesUrl);
 
-// export function getAllTrades() {
-//     return tradesClient.get()
-// };
 
  export function getAllTrades() {
      return tradesClient.post()

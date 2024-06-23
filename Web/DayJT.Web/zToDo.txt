@@ -9,3 +9,8 @@ cell update
 selected cell update
 
 error boundaries?
+
+
+## TODO
+
+ -[] error management - sentry?

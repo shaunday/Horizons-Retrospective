@@ -1,2 +1,23 @@
 ﻿Trade Position composed of actions (origin,entry,exit,etc)
 Each line composed of cells
+
+
+TradeComposite: List<TradeComponent>
+TradeComponent: List<InfoCell>
+
+TradeComposite:  (Origin)    [ ] [ ] [ ] [ ]
+                 (Entry)     [ ] [ ] [ ] [ ]
+                 (Reduction) [ ] [ ] [ ] [ ]
+                 (Summary)   [ ] [ ] [ ] [ ]
+
+How to get summary on server?
+Search for a line with summary
+Alternatively - save a summary line...
+
+On Info cell update: 
+update the cell, update the summary... callback function 2(?) lvels up
+
+
+Scenario: 
+Server: 2 TradeComposites
+Working on 1,
