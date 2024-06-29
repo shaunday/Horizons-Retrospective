@@ -9,11 +9,11 @@ const componentsClient = axios.create(baseURL + componentsUrl);
 const tradesClient = axios.create(baseURL + tradesUrl);
 
 
- export function getAllTrades() {
-     return tradesClient.post()
+ export async function getAllTrades() {
+     return await tradesClient.post()
  }
 
-export function UpdateComponent(componentId, newContent, changeNote) {
+export async function UpdateComponent(componentId, newContent, changeNote) {
     const newContentAndInfo = {
         content: newContent,
         info: changeNote

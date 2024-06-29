@@ -3,12 +3,14 @@ import Cell from './Cell';
 
 function TradeComponent({tradeComponent}) {
 
+    const CellMemo = memo(Cell)
+
     return (
         <div id="tradeComponent">
             {/* todo add check vs expanded tradeid once i get store going */}
             {tradeComponent.TradeActionInfoCells.filter(actionInfo => actionInfo.IsRelevantForOverview || true).map(filteredActionInfo=> (
                 <li>
-                    <Cell cellInfo={filteredActionInfo}/>
+                    <CellMemo cellInfo={filteredActionInfo}/>
                  </li>
                  ))}
         </div>)};

@@ -4,8 +4,10 @@ import * as TradesApiAccess from './../Services/TradesApiAccess'
 import useAllTrades from './../useAllTrades'
 import TradeComposite from './TradeComposite';
 
-function JournalContainer() {
+function JournalContainer({trades}) {
     
+    const TradeCompositeMemo = memo(TradeComposite)
+
     return (
         <div id="journalMainBody">
         <FilterControl/>
@@ -13,7 +15,7 @@ function JournalContainer() {
         const trades ="hi";
         {trades.map(composite=> (
                 <li>
-                    <TradeComposite tradeComposite={composite}/>
+                    <TradeCompositeMemo tradeComposite={composite} key={composite.id}/>
                  </li>
                  ))}
         <button className="button-38" type="button" 
