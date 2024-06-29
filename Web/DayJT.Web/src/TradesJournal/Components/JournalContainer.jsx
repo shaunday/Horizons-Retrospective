@@ -1,7 +1,5 @@
 import React from 'react'
 import FilterControl from './FilterControl'
-import * as TradesApiAccess from './../Services/TradesApiAccess'
-import useAllTrades from './../useAllTrades'
 import TradeComposite from './TradeComposite';
 
 function JournalContainer({trades}) {
