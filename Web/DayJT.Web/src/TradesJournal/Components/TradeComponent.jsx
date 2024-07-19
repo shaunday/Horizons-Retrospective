@@ -1,7 +1,7 @@
 import React from 'react';
 import Cell from './Cell';
 
-function TradeComponent({tradeComponent}) {
+export default function TradeComponent({tradeComponent}) {
 
     const CellMemo = memo(Cell)
 
@@ -14,5 +14,3 @@ function TradeComponent({tradeComponent}) {
                  </li>
                  ))}
         </div>)};
-
-export default TradeComponent;

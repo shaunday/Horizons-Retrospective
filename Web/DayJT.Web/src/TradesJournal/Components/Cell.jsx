@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query'
 import * as tradesApiAccess from '../..//tradesApiAccess'
 
-function Cell({cellInfo, onCellUpdate}) {
+export default function Cell({cellInfo, onCellUpdate}) {
 
   const [displayValue, setDisplayValue] = useState(cellInfo.ContentWrapper.Content );
   
@@ -38,5 +38,3 @@ function Cell({cellInfo, onCellUpdate}) {
               onChange={(e) => setDisplayValue(e.target.value)}
               onKeyDown={handleKeyPress}/>
         </div> )};
-
-export default Cell;

@@ -2,7 +2,7 @@ import React from 'react'
 import FilterControl from './FilterControl'
 import TradeComposite from './TradeComposite';
 
-function JournalContainer({trades}) {
+export default function JournalContainer({trades}) {
     
     const TradeCompositeMemo = memo(TradeComposite)
 
@@ -20,5 +20,3 @@ function JournalContainer({trades}) {
                     style={{ justifyContent: 'center'}}>Add a Trade</button>
         </div> )};
 
-
-export default JournalContainer;

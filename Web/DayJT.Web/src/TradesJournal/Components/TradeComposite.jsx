@@ -1,7 +1,7 @@
 import {React, memo} from 'react';
 import TradeComponent from './TradeComponent';
 
-function TradeComposite({tradeComposite}) {
+export default function TradeComposite({tradeComposite}) {
     
    const TradeCompositeMemo = memo(TradeComponent)
 
@@ -13,5 +13,3 @@ function TradeComposite({tradeComposite}) {
                  </li>
                  ))}
         </div> )};
-
-export default TradeComposite;

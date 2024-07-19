@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FilterControl() {
+export default function FilterControl() {
     return (
         <div className="">
             <div className='flexChildCenter' 
@@ -8,5 +8,3 @@ function FilterControl() {
                  >
                     Trade Filters placeholder</div>
         </div> );};
-
-export default FilterControl;
