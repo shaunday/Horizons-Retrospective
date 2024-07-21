@@ -8,7 +8,8 @@ TradeComponent: List<InfoCell>
 TradeComposite:  (Origin)    [ ] [ ] [ ] [ ]
                  (Entry)     [ ] [ ] [ ] [ ]
                  (Reduction) [ ] [ ] [ ] [ ]
-                 (Summary)   [ ] [ ] [ ] [ ]
+
+                 (Closure)   [ ] [ ] [ ] [ ] ?
 
 How to get summary on server?
 Search for a line with summary

@@ -25,7 +25,10 @@ namespace DayJT.Journal.Data
             get { return ContentWrapper.Content; }
             set
             {
-                ContentWrapper.Content = value;
+                ContentWrapper = new CellContent
+                {
+                    Content = value
+                };
             }
         }
 
@@ -43,11 +46,14 @@ namespace DayJT.Journal.Data
 
         #endregion
 
+        public CellType CellType { get; private set; }
+
         public ICollection<CellContent> History { get; set; } = new List<CellContent>();
 
-        public Cell(string title)
+        public Cell(CellType cellType, string title)
         {
             Title = title;
+            CellType = cellType;
         }
 
         //parent

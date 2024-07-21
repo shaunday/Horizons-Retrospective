@@ -105,7 +105,7 @@ namespace DayJT.Journal.DataContext.Services
             TradeComponent tradeInput = new TradeComponent()
             {
                 TradeActionType = TradeActionType.Interim,
-                TradeActionInfoCells = TradeInfoFactory.GetAddToPositionComponents(isActual: true)
+                TradeActionInfoCells = TradeInfoFactory.GetAddToPositionComponents()
             };
 
             var trade = GetTradeComposite(tradeId);

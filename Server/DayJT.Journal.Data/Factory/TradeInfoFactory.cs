@@ -1,67 +1,59 @@
 ﻿
+using DayJTrading.Journal.Data;
+using System.Linq;
+using System.Threading.Channels;
+
 namespace DayJT.Journal.Data
 {
     public static class TradeInfoFactory
     {
-        public static List<Cell> GetTradeOriginComponents()
+        public static List<CellType> GetTradeOriginCellTypes()
         {
-            return new List<Cell>
-            {
-                new Cell("Ticker") { ComponentType = ComponentType.Header, IsRelevantForOverview =true }, //AttachedToggle for long/short
-                                       
-                new Cell("Thesis") { ComponentType = ComponentType.Thesis, IsRelevantForOverview =true },
-                new Cell("Expanded") { ComponentType = ComponentType.Thesis },
-                new Cell("Confluences") { ComponentType = ComponentType.Thesis },
-                new Cell("Triggers") { ComponentType = ComponentType.Thesis },
-                new Cell("Position Plans") { ComponentType = ComponentType.Thesis }, 
-            }
-            .Concat(GetAddToPositionComponents(isActual: false)).ToList();
+            return new List<CellType>() { CellType.Ticker, CellType.LongOrShort,
+                                          CellType.Thesis, CellType.ThesisExpanded, CellType.Confluences, CellType.Triggers, CellType.PositionPlans };
         }
 
-        public static List<Cell> GetAddToPositionComponents(bool isActual)
+        public static List<CellType> GetAddToPositionCellTypes()
         {
-            return new List<Cell>
-            {
-                new Cell("Emotions") { ComponentType = ComponentType.Addition },
-                new Cell("Entry Price") { ComponentType = ComponentType.Addition, 
-                                                                PriceRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
-                new Cell("Amount") { ComponentType = ComponentType.Addition },
-                new Cell("Cost") { ComponentType = ComponentType.Addition, 
-                                                                CostRelevance = isActual? ValueRelevance.Add : ValueRelevance.None },
+            return new List<CellType>() { CellType.AddEmotions, CellType.AddPrice, CellType.AddAmount, CellType.AddCost, CellType.SL, CellType.SL_Thoughts, CellType.Target, CellType.Risk, CellType.RR };
+        }
 
-                new Cell("SL") { ComponentType = ComponentType.SLandTarget },
-                new Cell("SL Thoughts") { ComponentType = ComponentType.SLandTarget },
-                new Cell("Target") { ComponentType = ComponentType.SLandTarget },
+        public static List<CellType> GetReducePositionCellTypes()
+        {
+            return new List<CellType>() { CellType.ReduceEmotions, CellType.ReducePrice, CellType.ReduceAmount, CellType.ReduceCost, CellType.ReduceReason };
+        }
 
-                new Cell("Risk") { ComponentType = ComponentType.RiskReward },
-                new Cell("R:R") { ComponentType = ComponentType.RiskReward },
-            };
+        public static List<CellType> GetSummaryCellTypes()
+        {
+            return new List<CellType>() { CellType.AverageEntryPrice, CellType.TotalAmount, CellType.TotalCost };
+        }
+
+
+        private static Func<List<CellType>, List<Cell>> GetCellsListFromCellsTypeList = new(cellTypes => cellTypes.Select(cellType => CellsFactory.GetCellByType(cellType)).ToList());
+
+        public static List<Cell> GetTradeOriginComponents()
+        {
+            return GetCellsListFromCellsTypeList(GetTradeOriginCellTypes());
+        }
+
+        public static List<Cell> GetAddToPositionComponents()
+        {
+            return GetCellsListFromCellsTypeList(GetAddToPositionCellTypes());
         }
 
         public static List<Cell> GetReducePositionComponents()
         {
-            return new List<Cell>
-            {
-                new Cell("Emotions") { ComponentType = ComponentType.Reduction },
-                new Cell("Exit Price") { ComponentType = ComponentType.Reduction, PriceRelevance = ValueRelevance.Substract },
-                new Cell("Amount") { ComponentType = ComponentType.Reduction },
-                new Cell("Cost") { ComponentType = ComponentType.Reduction, CostRelevance = ValueRelevance.Substract },
-
-                new Cell("Exit Reason") { ComponentType = ComponentType.Reduction },
-            };
+            return GetCellsListFromCellsTypeList(GetReducePositionCellTypes());
         }
+
 
         public static List<Cell> GetSummaryComponents(string averageEntry, string totalAmount, string totalCost)
         {
-
             return new List<Cell>
             {
-                new Cell("Average Entry Price") { ComponentType = ComponentType.InterimSummary,
-                                                                    Content = averageEntry, IsRelevantForOverview =true  },
-                new Cell("Total Amount") { ComponentType = ComponentType.InterimSummary,
-                                                                    Content = totalAmount , IsRelevantForOverview =true },
-                new Cell("Total Cost") { ComponentType = ComponentType.InterimSummary,
-                                                                    Content =totalCost , IsRelevantForOverview =true },
+                CellsFactory.GetCellByType(CellType.AverageEntryPrice, averageEntry),
+                CellsFactory.GetCellByType(CellType.TotalAmount, totalAmount),
+                CellsFactory.GetCellByType(CellType.TotalCost, totalCost),
             };
 
             //todo indicators - distance from wmas,dmas, bb, kk
@@ -69,13 +61,15 @@ namespace DayJT.Journal.Data
 
         public static List<Cell> GetTradeClosureComponents(string profitValue = "")
         {
-            return new List<Cell>
+            List<Cell> closureCells = new List<Cell>
             {
-                new Cell("Result") { ComponentType = ComponentType.Closure, Content =profitValue, IsRelevantForOverview =true },
-                new Cell("Actual R:R") { ComponentType = ComponentType.Closure, IsRelevantForOverview =true },
-                new Cell("W/L") { ComponentType = ComponentType.Closure, IsRelevantForOverview = true },
-                new Cell("Lessons") { ComponentType = ComponentType.Closure },
+                CellsFactory.GetCellByType(CellType.Result, profitValue),
+                CellsFactory.GetCellByType(CellType.ActualRR),
+                CellsFactory.GetCellByType(CellType.WinOrLoss),
+                CellsFactory.GetCellByType(CellType.Lessons),
             };
+
+            return closureCells;
         }
     }
 }

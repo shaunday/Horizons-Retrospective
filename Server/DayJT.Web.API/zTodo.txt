@@ -10,3 +10,5 @@ clear details from connection string
 
  i might wanna split the list of trade components
  bring the summary / closing first, and then the others
+
+ add shot/long indicator
