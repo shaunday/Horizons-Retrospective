@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TraJediServer.Journal;
 
-namespace DayJT.Journal.Data.Services
+namespace DayJT.Journal.DataContext.Services
 {
     internal static class JournalRepoHelpers
     {

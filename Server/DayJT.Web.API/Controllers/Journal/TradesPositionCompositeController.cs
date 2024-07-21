@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Xml.Linq;
 using DayJT.Journal.Data;
-using DayJT.Journal.Data.Services;
 using DayJT.Web.API.Models;
+using DayJT.Journal.DataContext.Services;
 
 namespace DayJT.Web.API.Controllers.Journal
 {

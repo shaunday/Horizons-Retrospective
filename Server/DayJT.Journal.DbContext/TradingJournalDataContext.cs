@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DayJT.Journal.Data;
+using Microsoft.EntityFrameworkCore;
 
-namespace DayJT.Journal.Data
+namespace DayJT.Journal.DataContext.Services
 {
     public class TradingJournalDataContext : DbContext
     {

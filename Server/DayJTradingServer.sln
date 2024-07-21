@@ -4,11 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJTrading.Web.API", "DayJT.Web.API\DayJTrading.Web.API.csproj", "{BFD76645-DDC9-495D-8575-4236508BBA0A}"
-	ProjectSection(ProjectDependencies) = postProject
-		{CD1B5A27-BCF1-4C55-A756-45290FFDFBC4} = {CD1B5A27-BCF1-4C55-A756-45290FFDFBC4}
-	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJTrading.Journal.Data", "DayJT.Journal.Data\DayJTrading.Journal.Data.csproj", "{CD1B5A27-BCF1-4C55-A756-45290FFDFBC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJTrading.Journal.Data", "DayJT.Journal.Data\DayJTrading.Journal.Data.csproj", "{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJTrading.Journal.DbContext", "DayJT.Journal.DbContext\DayJTrading.Journal.DbContext.csproj", "{71B5E78E-B056-4414-B253-42E41650DC5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +19,14 @@ Global
 		{BFD76645-DDC9-495D-8575-4236508BBA0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFD76645-DDC9-495D-8575-4236508BBA0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFD76645-DDC9-495D-8575-4236508BBA0A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD1B5A27-BCF1-4C55-A756-45290FFDFBC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD1B5A27-BCF1-4C55-A756-45290FFDFBC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD1B5A27-BCF1-4C55-A756-45290FFDFBC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD1B5A27-BCF1-4C55-A756-45290FFDFBC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71B5E78E-B056-4414-B253-42E41650DC5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71B5E78E-B056-4414-B253-42E41650DC5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71B5E78E-B056-4414-B253-42E41650DC5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71B5E78E-B056-4414-B253-42E41650DC5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

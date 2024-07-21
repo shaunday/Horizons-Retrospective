@@ -1,6 +1,5 @@
-﻿using DayJT.Journal.Data;
-
-namespace TraJediServer.Journal
+﻿
+namespace DayJT.Journal.Data
 {
     public static class TradeInfoFactory
     {

@@ -1,4 +1,6 @@
-﻿namespace DayJT.Journal.Data.Services
+﻿using DayJT.Journal.Data;
+
+namespace DayJT.Journal.DataContext.Services
 {
     public interface IJournalRepository
     {

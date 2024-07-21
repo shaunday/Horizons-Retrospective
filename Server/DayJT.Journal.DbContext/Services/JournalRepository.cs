@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.Abstractions;
+﻿using DayJT.Journal.Data;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Diagnostics;
-using TraJediServer.Journal;
 
-namespace DayJT.Journal.Data.Services
+namespace DayJT.Journal.DataContext.Services
 {
     public class JournalRepository : IJournalRepository
     {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using DayJT.Journal.DataContext.Services;
 using Microsoft.AspNetCore.Mvc;
-using DayJT.Journal.Data.Services;
 
 namespace DayJT.Web.API.Controllers.Journal
 {

@@ -6,9 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System.Reflection;
-using DayJT.Journal.Data;
-using DayJT.Journal.Data.Services;
-using DayJT.Web.API.Mapping;
+using DayJT.Journal.DataContext.Services;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
