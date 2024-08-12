@@ -7,9 +7,11 @@ export default function TradeComposite({tradeComposite}) {
 
     return (
         <div id="tradeComposite">
-            {tradeComposite.TradeComponents.map(component=> (
-                <li>
-                    <TradeCompositeMemo tradeComponent={component} key={component.id}/>
-                 </li>
-                 ))}
+            <ul>
+                {tradeComposite.TradeComponents.map(component=> (
+                    <li key={component.id}>
+                        <TradeCompositeMemo tradeComponent={component}/>
+                    </li>
+                    ))}
+            </ul>
         </div> )};

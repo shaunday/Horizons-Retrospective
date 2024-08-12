@@ -8,9 +8,11 @@ export default function TradeComponent({tradeComponent}) {
     return (
         <div id="tradeComponent">
             {/* todo add check vs expanded tradeid once i get store going */}
-            {tradeComponent.TradeActionInfoCells.filter(actionInfo => actionInfo.IsRelevantForOverview || true).map(filteredActionInfo=> (
-                <li>
-                    <CellMemo cellInfo={filteredActionInfo}/>
-                 </li>
-                 ))}
+            <ul>
+                {tradeComponent.TradeActionInfoCells.filter(actionInfo => actionInfo.IsRelevantForOverview || true).map(filteredActionInfo=> (
+                    <li key={filteredActionInfo.id}>
+                        <CellMemo cellInfo={filteredActionInfo}/>
+                    </li>
+                    ))}
+             </ul>
         </div>)};

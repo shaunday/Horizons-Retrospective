@@ -10,7 +10,7 @@ const tradesClient = axios.create(baseURL + tradesUrl);
 
 
  export async function getAllTrades() {
-     return await tradesClient.post()
+     return await tradesClient.get()
  }
 
 export async function UpdateComponent(componentId, newContent, changeNote) {

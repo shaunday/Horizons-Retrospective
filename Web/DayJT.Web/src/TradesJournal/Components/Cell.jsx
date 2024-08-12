@@ -38,3 +38,7 @@ export default function Cell({cellInfo, onCellUpdate}) {
               onChange={(e) => setDisplayValue(e.target.value)}
               onKeyDown={handleKeyPress}/>
         </div> )};
+
+
+
+

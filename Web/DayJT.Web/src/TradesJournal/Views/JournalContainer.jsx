@@ -1,6 +1,6 @@
 import React from 'react'
-import FilterControl from './FilterControl'
-import TradeComposite from './TradeComposite';
+import FilterControl from '../Components/FilterControl'
+import TradeComposite from '../Components/TradeComposite';
 
 export default function JournalContainer({trades}) {
     
@@ -11,11 +11,13 @@ export default function JournalContainer({trades}) {
         <FilterControl/>
         
         const trades ="hi";
-        {trades.map(composite=> (
-                <li>
-                    <TradeCompositeMemo tradeComposite={composite} key={composite.id}/>
-                 </li>
-                 ))}
+        <ul>
+            {trades.map(composite=> (
+                    <li key={composite.id}>
+                        <TradeCompositeMemo tradeComposite={composite}/>
+                    </li>
+                    ))}
+        </ul>
         <button className="button-38" type="button" 
                     style={{ justifyContent: 'center'}}>Add a Trade</button>
         </div> )};
