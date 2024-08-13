@@ -9,11 +9,11 @@ namespace DayJT.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/trades/{tradeId}")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class TradeInputsController : JournalControllerBase
+    public class TradeElementController : JournalControllerBase
     {
         #region Ctor
 
-        public TradeInputsController(JournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
+        public TradeElementController(JournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
                                                                                                         base(journalAccess, logger, mapper)
         { }
         #endregion
@@ -21,20 +21,20 @@ namespace DayJT.Web.API.Controllers.Journal
         #region Add / Remove
 
         [HttpPost]
-        public async Task<ActionResult<(TradeComponentModel? newEntry, TradeComponentModel? summary)>> AddInterimEntry(string tradeId, bool isAdd)
+        public async Task<ActionResult<(TradeElementModel? newEntry, TradeElementModel? summary)>> AddInterimEntry(string tradeId, bool isAdd)
         {
-            (TradeComponent? newEntry, TradeComponent? summary) entryAndSummary;
+            (TradeElement? newEntry, TradeElement? summary) entryAndSummary;
             if (isAdd)
             {
-                entryAndSummary = await _journalAccess.NewEntryAddPositionAsync(tradeId);
+                entryAndSummary = await _journalAccess.AddPositionAsync(tradeId);
             }
             else
             {
-                entryAndSummary = await _journalAccess.NewEntryReducePositionAsync(tradeId);
+                entryAndSummary = await _journalAccess.ReducePositionAsync(tradeId);
             }
 
-            (TradeComponentModel?, TradeComponentModel?) resAsModel =
-                            (_mapper.Map<TradeComponentModel>(entryAndSummary.newEntry), _mapper.Map<TradeComponentModel>(entryAndSummary.summary));
+            (TradeElementModel?, TradeElementModel?) resAsModel =
+                            (_mapper.Map<TradeElementModel>(entryAndSummary.newEntry), _mapper.Map<TradeElementModel>(entryAndSummary.summary));
 
             return Ok(resAsModel);
         }
@@ -42,14 +42,14 @@ namespace DayJT.Web.API.Controllers.Journal
         [HttpDelete("{tradeInputId}")]
         public async Task<ActionResult> DeleteInterimTradeInput(string tradeId, string tradeInputId)
         {
-            (bool result, TradeComponent? summary) = await _journalAccess.RemoveInterimEntry(tradeId, tradeInputId);
+            (bool result, TradeElement? summary) = await _journalAccess.RemoveInterimEntry(tradeId, tradeInputId);
 
             if (!result)
             {
                 return NotFound();
             }
 
-            TradeComponentModel resAsModel = _mapper.Map<TradeComponentModel>(summary);
+            TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
 
             return Ok(resAsModel);
         }

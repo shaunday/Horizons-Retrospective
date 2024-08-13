@@ -1,0 +1,81 @@
+import { useMutation, useQueryClient } from 'react-query';
+import produce from 'immer';
+
+// API call function
+const updateTrade = async (updatedTrade) => {
+  const response = await fetch(`/api/trades/${updatedTrade.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedTrade),
+  });
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+};
+
+// Component for updating trade
+const UpdateTradeComponent = ({ trade }) => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(updateTrade, {
+    onMutate: async (updatedTrade) => {
+      // Snapshot the previous state
+      const previousTrade = queryClient.getQueryData(['trades', trade.id]);
+
+      // Optimistically update the cache using Immer
+      queryClient.setQueryData(['trades', trade.id], (old) =>
+        produce(old, (draft) => {
+          if (draft) {
+            // Apply updates to the draft state
+            Object.assign(draft, updatedTrade);
+
+            draft.tradeComposite.forEach((tc, index) => {
+              const updatedTc = updatedTrade.tradeComposite.find(t => t.id === tc.id);
+              if (updatedTc) {
+                draft.tradeComposite[index] = {
+                  ...tc,
+                  cells: tc.cells.map(cell => {
+                    const updatedCell = updatedTc.cells.find(c => c.id === cell.id);
+                    return updatedCell ? { ...cell, ...updatedCell } : cell;
+                  }),
+                };
+              }
+            });
+          }
+        })
+      );
+
+      return { previousTrade };
+    },
+    onError: (error, updatedTrade, context) => {
+      queryClient.setQueryData(['trades', trade.id], context.previousTrade);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries('trades');
+    },
+  });
+
+  const handleUpdate = () => {
+    const updatedTrade = {
+      ...trade,
+      tradeComposite: trade.tradeComposite.map(tc => ({
+        ...tc,
+        cells: tc.cells.map(cell => ({
+          ...cell,
+          // Example update
+          value: cell.value === 'oldValue' ? 'newValue' : cell.value,
+        })),
+      })),
+    };
+    mutation.mutate(updatedTrade);
+  };
+
+  if (mutation.isLoading) return <div>Updating...</div>;
+  if (mutation.isError) return <div>Error: {mutation.error.message}</div>;
+  if (mutation.isSuccess) return <div>Trade updated!</div>;
+
+  return <button onClick={handleUpdate}>Update Trade</button>;
+};

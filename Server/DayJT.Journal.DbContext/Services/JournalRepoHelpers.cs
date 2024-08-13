@@ -9,12 +9,12 @@ namespace DayJT.Journal.DataContext.Services
 {
     internal static class JournalRepoHelpers
     {
-        internal static (double totalCost, double totalAmount, double profit) GetAvgEntryAndProfit(TradePositionComposite trade)
+        internal static (double totalCost, double totalAmount, double profit) GetAvgEntryAndProfit(TradeComposite trade)
         {
             List<(double priceValue, double cost)> entriesWithAmount = new();
             double profit = 0.0;
 
-            var interims = trade.TradeComponents
+            var interims = trade.TradeElements
                 .Where(t => t.TradeActionType == TradeActionType.Interim)
                 .ToList();
 
@@ -22,7 +22,7 @@ namespace DayJT.Journal.DataContext.Services
             {
                 double cost = 0.0;
                 double priceValue = 0.0;
-                foreach (var component in tradeInput.TradeActionInfoCells)
+                foreach (var component in tradeInput.Entries)
                 {
                     if (component.CostRelevance == ValueRelevance.Add || component.CostRelevance == ValueRelevance.Substract)
                     {
@@ -70,9 +70,9 @@ namespace DayJT.Journal.DataContext.Services
             return (totalCost, totalAmount, profit);
         }
 
-        internal static TradeComponent? AddInterimSummary(TradePositionComposite trade)
+        internal static TradeElement? AddInterimSummary(TradeComposite trade)
         {
-            TradeComponent? tradeInput = null;
+            TradeElement? tradeInput = null;
             if (trade != null)
             {
                 var analytics = GetAvgEntryAndProfit(trade);
@@ -90,27 +90,27 @@ namespace DayJT.Journal.DataContext.Services
                 }
 
 
-                tradeInput = new TradeComponent()
+                tradeInput = new TradeElement()
                 {
                     TradeActionType = TradeActionType.Interim,
-                    TradeActionInfoCells = TradeInfoFactory.GetSummaryComponents(averageEntry, totalAmount, totalCost)
+                    Entries = TradeElementFactory.GetSummaryComponents(averageEntry, totalAmount, totalCost)
                 };
 
-                trade.TradeComponents.Add(tradeInput);
+                trade.TradeElements.Add(tradeInput);
             }
 
             return tradeInput;
         }
 
-        internal static bool RemoveInterimInput(TradePositionComposite trade, string tradeInputId)
+        internal static bool RemoveInterimInput(TradeComposite trade, string tradeInputId)
         {
             if (trade != null)
             {
-                var tradeInputToRemove = trade.TradeComponents.Where(t => t.Id.ToString() == tradeInputId).SingleOrDefault();
+                var tradeInputToRemove = trade.TradeElements.Where(t => t.Id.ToString() == tradeInputId).SingleOrDefault();
 
                 if (tradeInputToRemove != null && tradeInputToRemove.TradeActionType == TradeActionType.Interim)
                 {
-                    trade.TradeComponents.Remove(tradeInputToRemove);
+                    trade.TradeElements.Remove(tradeInputToRemove);
                     return true;
                 }
             }
@@ -118,15 +118,15 @@ namespace DayJT.Journal.DataContext.Services
             return false;
         }
 
-        internal static bool RemoveInterimInput(TradePositionComposite trade, TradeActionType tradeInputType)
+        internal static bool RemoveInterimInput(TradeComposite trade, TradeActionType tradeInputType)
         {
             if (trade != null)
             {
-                var tradeInputToRemove = trade.TradeComponents.Where(t => t.TradeActionType == tradeInputType).SingleOrDefault();
+                var tradeInputToRemove = trade.TradeElements.Where(t => t.TradeActionType == tradeInputType).SingleOrDefault();
 
                 if (tradeInputToRemove != null)
                 {
-                    trade.TradeComponents.Remove(tradeInputToRemove);
+                    trade.TradeElements.Remove(tradeInputToRemove);
                     return true;
                 }
             }
@@ -134,7 +134,7 @@ namespace DayJT.Journal.DataContext.Services
             return false;
         }
 
-        internal static TradeComponent? UpdateInterimSummary(TradePositionComposite trade)
+        internal static TradeElement? UpdateInterimSummary(TradeComposite trade)
         {
             RemoveInterimInput(trade, TradeActionType.InterimSummary);
             return AddInterimSummary(trade);

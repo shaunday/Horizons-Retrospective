@@ -6,9 +6,9 @@ namespace DayJT.Journal.DataContext.Services
     public class TradingJournalDataContext : DbContext
     {
         #region Data
-        public DbSet<TradePositionComposite> AllTradeComposites { get; set; } 
+        public DbSet<TradeComposite> AllTradeComposites { get; set; } 
 
-        public DbSet<TradeComponent> AllTradeComponents { get; set; }
+        public DbSet<TradeElement> AllTradeElements { get; set; }
 
         public DbSet<Cell> AllTradeInfoCells { get; set; } 
 
@@ -22,16 +22,16 @@ namespace DayJT.Journal.DataContext.Services
             base.OnModelCreating(modelBuilder);
 
 
-            modelBuilder.Entity<TradePositionComposite>()
-                .HasMany(t => t.TradeComponents)
-                .WithOne(t => t.TradePositionCompositeRef)
-                .HasForeignKey(t => t.TradePositionCompositeRefId)
+            modelBuilder.Entity<TradeComposite>()
+                .HasMany(t => t.TradeElements)
+                .WithOne(t => t.TradeCompositeRef)
+                .HasForeignKey(t => t.TradeCompositeRefId)
                 .IsRequired(); //force FK
 
-            modelBuilder.Entity<TradeComponent>()
-               .HasMany(t => t.TradeActionInfoCells)
-               .WithOne(t => t.TradeComponentRef)
-               .HasForeignKey(t => t.TradeComponentRefId)
+            modelBuilder.Entity<TradeElement>()
+               .HasMany(t => t.Entries)
+               .WithOne(t => t.TradeElementRef)
+               .HasForeignKey(t => t.TradeElementRefId)
                .IsRequired(); //force FK
 
             modelBuilder.Entity<Cell>()

@@ -57,9 +57,9 @@ namespace DayJT.Journal.Data
         }
 
         //parent
-        public Guid TradeComponentRefId { get; set; }
+        public Guid TradeElementRefId { get; set; }
 
-        public TradeComponent TradeComponentRef { get; set; } = null!; // Required reference navigation to principal
+        public TradeElement TradeElementRef { get; set; } = null!; // Required reference navigation to principal
 
     }
 

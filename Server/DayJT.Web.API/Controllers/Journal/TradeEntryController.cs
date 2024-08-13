@@ -9,11 +9,11 @@ namespace DayJT.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/trades/components")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class TradeComponentsController : JournalControllerBase
+    public class ContentUpdateController : JournalControllerBase
     {
         #region Ctor
 
-        public TradeComponentsController(JournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
+        public ContentUpdateController(JournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
                                                                                                         base(journalAccess, logger, mapper)
         { }
 
@@ -22,9 +22,9 @@ namespace DayJT.Web.API.Controllers.Journal
         [HttpPut("{componentId}")]
         public async Task<ActionResult> UpdateComponent(string componentId, string newContent, string changeNote)
         {
-            (Cell? updatedComponent, TradeComponent? summary) = await _journalAccess.UpdateCellContent(componentId, newContent, changeNote);
+            (Cell? updatedComponent, TradeElement? summary) = await _journalAccess.UpdateCellContent(componentId, newContent, changeNote);
 
-            (CellModel?, TradeComponentModel?) resAsModel = (_mapper.Map<CellModel>(updatedComponent), _mapper.Map<TradeComponentModel>(summary));
+            (CellModel?, TradeElementModel?) resAsModel = (_mapper.Map<CellModel>(updatedComponent), _mapper.Map<TradeElementModel>(summary));
 
             return ResultHandling(resAsModel, $"Could not update component: {componentId}");
         }

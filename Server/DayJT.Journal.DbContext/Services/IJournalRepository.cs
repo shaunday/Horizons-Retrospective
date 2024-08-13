@@ -6,23 +6,23 @@ namespace DayJT.Journal.DataContext.Services
     {
         //trades
 
-        Task<IEnumerable<TradeComponent>> GetAllTradeCompositesAs1LinerOverviewAsync();
+        Task<IEnumerable<TradeElement>> GetAllTradeCompositesAs1LinerOverviewAsync();
 
-        Task<(IEnumerable<TradePositionComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10);
+        Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10);
 
-        Task<TradePositionComposite> AddTradeCompositeAsync();
+        Task<TradeComposite> AddTradeCompositeAsync();
 
         //inputs
 
-        Task<(TradeComponent? newEntry, TradeComponent? summary)> NewEntryAddPositionAsync(string tradeId);
+        Task<(TradeElement? newEntry, TradeElement? summary)> AddPositionAsync(string tradeId);
 
-        Task<(TradeComponent? newEntry, TradeComponent? summary)> NewEntryReducePositionAsync(string tradeId);
+        Task<(TradeElement? newEntry, TradeElement? summary)> ReducePositionAsync(string tradeId);
 
-        Task<(bool result, TradeComponent? summary)> RemoveInterimEntry(string tradeId, string tradeInputId);
+        Task<(bool result, TradeElement? summary)> RemoveInterimEntry(string tradeId, string tradeInputId);
 
         //components
 
-        Task<(Cell? updatedCell, TradeComponent? summary)> UpdateCellContent(string componentId, string newContent, string changeNote);
+        Task<(Cell? updatedCell, TradeElement? summary)> UpdateCellContent(string componentId, string newContent, string changeNote);
 
         //closure
 

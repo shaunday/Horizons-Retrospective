@@ -11,8 +11,8 @@ namespace DayJT.Web.API.Mapping
         {
             CreateMap<CellContent, CellContentModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
             CreateMap<Cell, CellModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
-            CreateMap<TradeComponent, TradeComponentModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
-            CreateMap<TradePositionComposite, TradePositionCompositeModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
+            CreateMap<TradeElement, TradeElementModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
+            CreateMap<TradeComposite, TradeCompositeModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
         }
     }
 }

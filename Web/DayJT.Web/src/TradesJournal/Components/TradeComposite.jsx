@@ -1,16 +1,14 @@
 import {React, memo} from 'react';
-import TradeComponent from './TradeComponent';
+import TradeElement from './TradeElement';
 
 export default function TradeComposite({tradeComposite}) {
     
-   const TradeCompositeMemo = memo(TradeComponent)
-
     return (
         <div id="tradeComposite">
             <ul>
-                {tradeComposite.TradeComponents.map(component=> (
-                    <li key={component.id}>
-                        <TradeCompositeMemo tradeComponent={component}/>
+                {tradeComposite.TradeElements.map(step=> (
+                    <li key={step.id}>
+                        <TradeElement tradeStep={step}/>
                     </li>
                     ))}
             </ul>

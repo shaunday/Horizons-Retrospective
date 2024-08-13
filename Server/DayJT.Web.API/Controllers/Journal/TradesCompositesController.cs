@@ -12,19 +12,19 @@ namespace DayJT.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/trades")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class TradesPositionCompositeController : JournalControllerBase
+    public class TradesCompositesController : JournalControllerBase
     {
         const int maxTradesPageSize = 20;
 
         #region Ctor
 
-        public TradesPositionCompositeController(IJournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :  
+        public TradesCompositesController(IJournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :  
                                                                                                     base(journalAccess, logger, mapper) { }
         #endregion
 
         #region Getters
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TradePositionCompositeModel>>> GetAllTrades(int pageNumber = 1, int pageSize = 10)
+        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(int pageNumber = 1, int pageSize = 10)
         {
             if (pageSize > maxTradesPageSize)
             {
@@ -35,28 +35,28 @@ namespace DayJT.Web.API.Controllers.Journal
 
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
 
-            IEnumerable<TradePositionCompositeModel> resAsModels = _mapper.Map<IEnumerable<TradePositionCompositeModel>>(tradesEntities);
+            IEnumerable<TradeCompositeModel> resAsModels = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradesEntities);
 
             return Ok(resAsModels);
         }
 
-        [HttpGet("tradeComponents")]
-        public async Task<ActionResult<IEnumerable<TradeComponentModel>>> GetAllPositionComponents()
+        [HttpGet("TradeElements")]
+        public async Task<ActionResult<IEnumerable<TradeElementModel>>> GetAllPositionComponents()
         {
-            var tradeComponents = await _journalAccess.GetAllTradeCompositesAs1LinerOverviewAsync();
+            var TradeElements = await _journalAccess.GetAllTradeCompositesAs1LinerOverviewAsync();
 
-            IEnumerable<TradeComponentModel> resAsModels = _mapper.Map<IEnumerable<TradeComponentModel>>(tradeComponents);
+            IEnumerable<TradeElementModel> resAsModels = _mapper.Map<IEnumerable<TradeElementModel>>(TradeElements);
 
             return Ok(resAsModels);
         } 
         #endregion
 
         [HttpPost]
-        public async Task<ActionResult<TradePositionCompositeModel>> AddTrade()
+        public async Task<ActionResult<TradeCompositeModel>> AddTrade()
         {
             var positionComposite = await _journalAccess.AddTradeCompositeAsync();
 
-            TradePositionCompositeModel resAsModel = _mapper.Map<TradePositionCompositeModel>(positionComposite);
+            TradeCompositeModel resAsModel = _mapper.Map<TradeCompositeModel>(positionComposite);
 
             return Ok(resAsModel);
         }

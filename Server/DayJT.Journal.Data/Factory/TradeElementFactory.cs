@@ -1,11 +1,12 @@
 ﻿
 using DayJTrading.Journal.Data;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Channels;
 
 namespace DayJT.Journal.Data
 {
-    public static class TradeInfoFactory
+    public static class TradeElementFactory
     {
         public static List<CellType> GetTradeOriginCellTypes()
         {
