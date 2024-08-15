@@ -6,6 +6,7 @@ namespace DayJT.Web.API.Models
     {
         public Guid Id { get; set; }
         public ICollection<TradeElementModel>? TradeElements { get; set; }
+        public TradeElement Summary { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }

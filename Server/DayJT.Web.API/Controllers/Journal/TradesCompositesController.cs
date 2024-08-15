@@ -40,15 +40,6 @@ namespace DayJT.Web.API.Controllers.Journal
             return Ok(resAsModels);
         }
 
-        [HttpGet("TradeElements")]
-        public async Task<ActionResult<IEnumerable<TradeElementModel>>> GetAllPositionComponents()
-        {
-            var TradeElements = await _journalAccess.GetAllTradeCompositesAs1LinerOverviewAsync();
-
-            IEnumerable<TradeElementModel> resAsModels = _mapper.Map<IEnumerable<TradeElementModel>>(TradeElements);
-
-            return Ok(resAsModels);
-        } 
         #endregion
 
         [HttpPost]

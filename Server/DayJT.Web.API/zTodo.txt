@@ -2,13 +2,13 @@
 security best practices
 testing
 
-GetAllTradeCompositesAs1LinerOverviewAsync() try with a proper query instead of get all
+GetAllTradeCompositesAs1LinerOverviewAsync()?
 add reopen function (delete closure add position)
 Indicators
 
 clear details from connection string
 
- i might wanna split the list of trade components
- bring the summary / closing first, and then the others
 
  add shot/long indicator
+
+ add/reduce position same ?? reduce enums

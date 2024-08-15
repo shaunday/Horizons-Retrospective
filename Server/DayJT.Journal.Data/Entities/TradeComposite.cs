@@ -10,6 +10,8 @@ namespace DayJT.Journal.Data
 
         public List<TradeElement> TradeElements { get; set; } = new List<TradeElement>();
 
+        public TradeElement Summary { get; set; } 
+
         public DateTime CreatedAt { get; } = DateTime.Now;
 
     }

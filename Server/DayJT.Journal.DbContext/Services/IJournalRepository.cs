@@ -6,7 +6,7 @@ namespace DayJT.Journal.DataContext.Services
     {
         //trades
 
-        Task<IEnumerable<TradeElement>> GetAllTradeCompositesAs1LinerOverviewAsync();
+        //Task<IEnumerable<TradeElement>> GetAllTradeCompositesAs1LinerOverviewAsync();
 
         Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10);
 
@@ -26,7 +26,7 @@ namespace DayJT.Journal.DataContext.Services
 
         //closure
 
-        Task CloseAsync(string tradeId, string closingPrice);
+        Task<TradeElement> CloseAsync(string tradeId, string closingPrice);
 
     }
 }

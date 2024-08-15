@@ -70,9 +70,9 @@ namespace DayJT.Journal.DataContext.Services
             return (totalCost, totalAmount, profit);
         }
 
-        internal static TradeElement? AddInterimSummary(TradeComposite trade)
+        internal static TradeElement? GetInterimSummary(TradeComposite trade)
         {
-            TradeElement? tradeInput = null;
+            TradeElement? summary = null;
             if (trade != null)
             {
                 var analytics = GetAvgEntryAndProfit(trade);
@@ -90,16 +90,14 @@ namespace DayJT.Journal.DataContext.Services
                 }
 
 
-                tradeInput = new TradeElement()
+                summary = new TradeElement()
                 {
-                    TradeActionType = TradeActionType.Interim,
+                    TradeActionType = TradeActionType.InterimSummary,
                     Entries = TradeElementFactory.GetSummaryComponents(averageEntry, totalAmount, totalCost)
                 };
-
-                trade.TradeElements.Add(tradeInput);
             }
 
-            return tradeInput;
+            return summary;
         }
 
         internal static bool RemoveInterimInput(TradeComposite trade, string tradeInputId)
@@ -132,12 +130,6 @@ namespace DayJT.Journal.DataContext.Services
             }
 
             return false;
-        }
-
-        internal static TradeElement? UpdateInterimSummary(TradeComposite trade)
-        {
-            RemoveInterimInput(trade, TradeActionType.InterimSummary);
-            return AddInterimSummary(trade);
         }
     }
 }

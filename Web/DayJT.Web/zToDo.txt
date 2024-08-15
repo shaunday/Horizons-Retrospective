@@ -1,16 +1,12 @@
 error catching in axios ? how to return
 
-get all trades on load
-
-onadd trade - await object and pass it into trades if they exist or await finish
+grab all journal stuff on mount, but then set by tc_te - more granular <RQ
 
 cell update 
 
-selected cell update
-
-error boundaries?
+Summary on client??
 
 
 ## TODO
 
- -[] error management - sentry?
+ -[] error management - sentry? error boundaries?

@@ -2,16 +2,11 @@ import './App.css'
 import * as TradesApiAccess from './../Services/TradesApiAccess'
 import * as Constants from './constants/constants'
 import { useAllTrades } from './Hooks/useAllTrades'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-
 import JournalContainer from './Journal/Trades/Components/JournalContainer'
 
 function App() {
 
- const queryClient = new QueryClient()
  const allTradesQuery = useAllTrades()
-
 
 if (allTradesQuery.status === 'pending') {
   return <span>Loading...</span>
@@ -22,8 +17,6 @@ if (allTradesQuery.status === 'error') {
 }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
       <div id="vwrapper">
         <div id="header">Header placeholder</div>
         <div id="mainBody">
@@ -32,7 +25,6 @@ if (allTradesQuery.status === 'error') {
         </div>
         <div id="footer">Footer placeholder</div>
       </div>
-    </QueryClientProvider>
   )
 }
 

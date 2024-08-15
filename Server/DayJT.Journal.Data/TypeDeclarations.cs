@@ -7,7 +7,7 @@
 
     public enum TradeActionType
     {
-        Origin, Interim, InterimSummary, Overview1Liner, Closure, 
+        Origin, Interim, Overview1Liner, InterimSummary, Closure, 
     }
 
     public enum ValueRelevance
