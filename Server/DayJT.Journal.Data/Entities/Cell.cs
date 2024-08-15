@@ -50,6 +50,8 @@ namespace DayJT.Journal.Data
 
         public ICollection<CellContent> History { get; set; } = new List<CellContent>();
 
+        public Cell() { }
+
         public Cell(CellType cellType, string title)
         {
             Title = title;

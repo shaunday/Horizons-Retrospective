@@ -2,13 +2,12 @@
 security best practices
 testing
 
-GetAllTradeCompositesAs1LinerOverviewAsync()?
-add reopen function (delete closure add position)
+
+add reopen function (delete closure add position)?
 Indicators
 
 clear details from connection string
 
-
- add shot/long indicator
-
  add/reduce position same ?? reduce enums
+
+ const of cell must get a ref

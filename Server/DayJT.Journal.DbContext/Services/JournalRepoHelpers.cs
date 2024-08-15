@@ -90,7 +90,7 @@ namespace DayJT.Journal.DataContext.Services
                 }
 
 
-                summary = new TradeElement()
+                summary = new TradeElement(trade)
                 {
                     TradeActionType = TradeActionType.InterimSummary,
                     Entries = TradeElementFactory.GetSummaryComponents(averageEntry, totalAmount, totalCost)
