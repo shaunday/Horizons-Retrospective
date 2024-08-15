@@ -1,0 +1,7 @@
+All Trades will be fetched on app init (eventually to be paginated)- never stale, invalidate when????
+
+Once data starts flowing in- 
+start creating components
+
+TradeComposite(tc): RQ for Summary (set initial with first data, only manual invalidate) keyd with tc id, map list of elements
+TradeElement(te): RQ for self (initial with first data, only manual invalidate), map lists of cells

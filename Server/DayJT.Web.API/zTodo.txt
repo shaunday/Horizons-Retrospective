@@ -10,4 +10,8 @@ clear details from connection string
 
  add/reduce position same ?? reduce enums
 
+
+
+
  const of cell must get a ref
+ add a get element method

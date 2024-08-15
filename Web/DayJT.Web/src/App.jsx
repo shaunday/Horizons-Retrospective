@@ -1,6 +1,5 @@
 import './App.css'
 import * as TradesApiAccess from './../Services/TradesApiAccess'
-import * as Constants from './constants/constants'
 import { useAllTrades } from './Hooks/useAllTrades'
 import JournalContainer from './Journal/Trades/Components/JournalContainer'
 

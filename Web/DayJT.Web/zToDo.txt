@@ -1,10 +1,12 @@
 error catching in axios ? how to return
 
-grab all journal stuff on mount, but then set by tc_te - more granular <RQ
+grab all journal stuff on mount, but then set as initialData by tc_te - more granular <RQ
 
 cell update 
 
-Summary on client??
+rq: refetch inverval , enabled
+
+callback functions, memo
 
 
 ## TODO
