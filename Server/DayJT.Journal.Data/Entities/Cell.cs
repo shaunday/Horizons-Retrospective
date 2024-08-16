@@ -27,7 +27,9 @@ namespace DayJT.Journal.Data
             {
                 ContentWrapper = new CellContent
                 {
-                    Content = value
+                    Content = value,
+                    CellRef = this,
+                    CellRefId = Id
                 };
             }
         }
@@ -56,6 +58,12 @@ namespace DayJT.Journal.Data
         {
             Title = title;
             CellType = cellType;
+        }
+
+        public void UpdateParentReference(TradeElement refObj)
+        {
+            TradeElementRef = refObj;
+            TradeElementRefId = refObj.Id;
         }
 
         //parent
