@@ -2,13 +2,15 @@ import {React, memo} from 'react';
 import TradeElement from './TradeElement';
 import { useQuery  } from '@tanstack/react-query'
 import * as Constants from '../../Constants/constants'
+import * as TradesApiAccess from './../Services/TradesApiAccess'
 
 export default function TradeComposite({tradeComposite}) {
     
     const { data: tradeSummary } = useQuery({
         queryKey: [Constants.TRADECOMPOSITE_SUMMARY_KEY, tradeComposite.Id],
         initialData: tradeComposite.Summary,
-        queryFn: async () => await TradesApiAccess.getAllTrades().data //todo
+        refetchOnWindowFocus: false,
+        queryFn: TradesApiAccess.getSummaryElement
       })
 
       const onElementUpdate = (data) => {

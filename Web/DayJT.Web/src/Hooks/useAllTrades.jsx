@@ -1,5 +1,5 @@
 import { useQuery  } from '@tanstack/react-query'
-import * as Constants from '../Constants/constantss
+import * as Constants from '../Constants/constants
 
 function useAllTrades() {
     const { data: query } = useQuery({

@@ -1,10 +1,8 @@
-error catching in axios ? how to return
-
-grab all journal stuff on mount, but then set as initialData by tc_te - more granular <RQ
-
 cell update 
 
-rq: refetch inverval , enabled
+rq: refetch inverval , background fetching notificaion ?
+
+log/console writes ups?
 
 callback functions, memo
 
