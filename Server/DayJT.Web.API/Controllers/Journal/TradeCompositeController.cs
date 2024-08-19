@@ -9,7 +9,7 @@ namespace DayJT.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/trades/{tradeId}")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class TradeElementController : JournalControllerBase
+    public class TradeCompositeController : JournalControllerBase
     {
         #region Ctor
 
@@ -50,21 +50,6 @@ namespace DayJT.Web.API.Controllers.Journal
             }
 
             TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
-
-            return Ok(resAsModel);
-        }
-
-        #endregion
-
-        #region get
-
-        [HttpGet]
-        public async Task<ActionResult<(TradeElementModel? element, TradeElementModel? summary)>> GetTradeElement(string tradeId, string tradeElementId)
-        {
-            (TradeElement? newEntry, TradeElement? summary) entryAndSummary = await _journalAccess.GetTradeElement(tradeId, tradeElementId);
-
-            (TradeElementModel?, TradeElementModel?) resAsModel =
-                            (_mapper.Map<TradeElementModel>(entryAndSummary.newEntry), _mapper.Map<TradeElementModel>(entryAndSummary.summary));
 
             return Ok(resAsModel);
         }

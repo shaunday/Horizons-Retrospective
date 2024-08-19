@@ -12,13 +12,13 @@ namespace DayJT.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/trades")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class TradesCompositesController : JournalControllerBase
+    public class TradesJournalController : JournalControllerBase
     {
         const int maxTradesPageSize = 20;
 
         #region Ctor
 
-        public TradesCompositesController(IJournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :  
+        public TradesJournalController(IJournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :  
                                                                                                     base(journalAccess, logger, mapper) { }
         #endregion
 

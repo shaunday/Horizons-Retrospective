@@ -1,6 +1,6 @@
 cell update 
 
-rq: refetch inverval , background fetching notificaion ?
+rq: refetch inverval , background fetching notificaion, pagination ?
 
 log/console writes ups?
 
