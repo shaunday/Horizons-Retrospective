@@ -10,8 +10,17 @@ export default function Cell({cellInfo, onCellUpdate}) {
   const [localCellInfo, setLocalCellInfo] = useState(cellInfo);
 
   const contentUpdateMutation = useMutation({
-    mutationFn: (newContent) =>
-      tradesApiAccess.UpdateComponent(cellInfo.Id, newContent, ""),
+    scope: {
+      id: 'entry' + cellInfo.Id,
+    },
+    mutationFn: (newContent) => {
+      tradesApiAccess.UpdateComponent(cellInfo.Id, newContent, "")
+      //mark process. somehow
+    },
+    onError: (error, variables, context) => {
+      // An error happened!
+      //log, revert
+    },
     onSuccess: (updatedCellInfo, newSummary) => {
       setLocalCellInfo(updatedCellInfo);
       onCellUpdate(newSummary);

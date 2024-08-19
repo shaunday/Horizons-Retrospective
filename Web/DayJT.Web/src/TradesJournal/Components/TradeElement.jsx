@@ -1,19 +1,23 @@
 import React from 'react';
 import Cell from './Cell';
-import { useQuery  } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import * as Constants from '../../Constants/constants'
 import * as TradesApiAccess from './../Services/TradesApiAccess'
 
 export default function TradeElement({tradeElement, onElementUpdate}) {
 
+    const elementQueryKey = [Constants.TRADE_ELEMENT_KEY, tradeElement.TradeCompositeRefId, tradeElement.Id]
+    const queryClient = useQueryClient()
+
     const { data: tradeEle } = useQuery({
-        queryKey: [Constants.TRADE_ELEMENT_KEY, tradeElement.TradeCompositeRefId, tradeElement.Id],
+        queryKey: elementQueryKey,
         initialData: tradeElement,
         refetchOnWindowFocus: false,
-        queryFn: TradesApiAccess.getElement //todo
+        queryFn: TradesApiAccess.getElement 
       })
 
       const onCellUpdate = (data) => {
+        queryClient.invalidateQueries({ queryKey: elementQueryKey }) //cells within an element might have inter-relations
         onElementUpdate(data);
       }
 
