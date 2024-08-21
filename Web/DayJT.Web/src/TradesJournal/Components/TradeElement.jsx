@@ -17,15 +17,29 @@ export default function TradeElement({tradeElement, onElementUpdate}) {
       })
 
       const onCellUpdate = (data) => {
-        queryClient.invalidateQueries({ queryKey: elementQueryKey }) //cells within an element might have inter-relations
+        //handle inter-connectdness
         onElementUpdate(data);
       }
 
+      const listStyle = {
+        display: 'flex',
+        listStyleType: 'none',  // Removes default list bullets
+        padding: 0,             // Removes default padding
+        margin: 0               // Removes default margin
+      };
+    
+      const listItemStyle = {
+        marginRight: '10px',    // Adds spacing between items
+        border: '1px solid lightblue', // Adds a solid black border
+        padding: '5px',        // Adds some padding inside the border
+        borderRadius: '4px'    // Optional: Adds rounded corners
+      };
+
     return (
         <div id="tradeElement">
-            <ul>
+            <ul style={listStyle}>
                 {tradeEle.Entries.map(entry=> (
-                    <li key={entry.id}>
+                    <li key={entry.id} style={listItemStyle}>
                         <Cell cellInfo={entry} onCellUpdate={onCellUpdate}/>
                     </li>
                     ))}
