@@ -3,6 +3,8 @@ security best practices
 testing
 
 add reopen function (delete closure add position)?
-Indicators
+
+// dashboard
+Indicator alerts, upcoming reports 
 
 clear details from connection string

@@ -171,7 +171,7 @@ namespace DayJT.Journal.DataContext.Services
         public async Task<(Cell? updatedCell, TradeElement? summary)> UpdateCellContent(string componentId, string newContent, string changeNote)
         {
             TradeElement? summary = null;
-            Cell? cell = await dataContext.AllTradeInfoCells.Where(t => t.Id.ToString() == componentId).SingleOrDefaultAsync();
+            Cell? cell = await dataContext.AllEntries.Where(t => t.Id.ToString() == componentId).SingleOrDefaultAsync();
             if (cell != null)
             {
                 cell.SetFollowupContent(newContent, changeNote);

@@ -7,10 +7,9 @@ namespace DayJT.Journal.Data
     public class TradeElement
     {
         [Key]
-        public Guid Id { get; private set; } = Guid.NewGuid();
+        public int Id { get; private set; } 
 
         [Required]
-        [MaxLength(50)]
         public TradeActionType TradeActionType { get; set; }
 
         public List<Cell> Entries { get; set; } = new List<Cell>();
@@ -26,8 +25,10 @@ namespace DayJT.Journal.Data
         }
 
         //parent
-        public Guid TradeCompositeRefId { get; set; }
+        [Required]
+        public int TradeCompositeRefId { get; set; }
 
+        [Required]
         public TradeComposite TradeCompositeRef { get; set; } = null!; // Required reference navigation to principal
 
     }

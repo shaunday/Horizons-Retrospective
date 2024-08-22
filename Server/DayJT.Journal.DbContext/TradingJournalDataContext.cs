@@ -10,9 +10,9 @@ namespace DayJT.Journal.DataContext.Services
 
         public DbSet<TradeElement> AllTradeElements { get; set; }
 
-        public DbSet<Cell> AllTradeInfoCells { get; set; } 
+        public DbSet<Cell> AllEntries { get; set; } 
 
-        public DbSet<CellContent> AllCellContents { get; set; } 
+        public DbSet<ContentRecord> AllContentRecords { get; set; } 
         #endregion
 
         public TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : base(options) { } //allow service configuration 

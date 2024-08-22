@@ -4,9 +4,9 @@ namespace DayJT.Web.API.Models
 {
     public class TradeCompositeModel
     {
-        public Guid Id { get; set; }
-        public ICollection<TradeElementModel>? TradeElements { get; set; }
-        public TradeElement Summary { get; set; }
+        public int Id { get; set; }
+        public ICollection<TradeElementModel> TradeElements { get; set; } = null!;
+        public TradeElement Summary { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
     }
 }

@@ -4,11 +4,12 @@ using DayJT.Journal.Data;
 
 namespace DayJT.Journal.Data
 {
-    public class CellContent
+    public class ContentRecord
     {
         [Key]
-        public Guid Id { get; private set; } = Guid.NewGuid();
+        public int Id { get; private set; } 
 
+        [Required]
         public string Content { get; set; } = string.Empty;
 
         public string ChangeNote { get; set; } = string.Empty;
@@ -16,8 +17,10 @@ namespace DayJT.Journal.Data
         public DateTime CreatedAt { get; } = DateTime.Now;
 
         //parent
-        public Guid? CellRefId { get; set; } //reference is optional (for main content)
+        [Required]
+        public int CellRefId { get; set; } //reference is optional (for main content)
 
-        public Cell? CellRef { get; set; }
+        [Required]
+        public Cell CellRef { get; set; } = null!;
     }
 }

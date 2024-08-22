@@ -4,8 +4,11 @@ namespace DayJT.Web.API.Models
 {
     public class TradeElementModel
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public TradeActionType TradeActionType { get; set; }
-        public List<CellModel>? Entries { get; set; }
+        public List<CellModel> Entries { get; set; } = null!;
+
+        public int TradeCompositeRefId { get; set; }
+        public TradeComposite TradeCompositeRef { get; set; } = null!;
     }
 }

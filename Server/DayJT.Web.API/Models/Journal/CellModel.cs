@@ -5,24 +5,22 @@ namespace DayJT.Web.API.Models
 {
     public class CellModel
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string Title { get; set; } = string.Empty;
+
         public ComponentType ComponentType { get; set; }
+        public BasicCellType CellType { get; set; }
 
-        public CellContentModel? ContentWrapper { get; set; }
+        public ContentRecordModel ContentWrapper { get; set; } = null!;
+        public ICollection<ContentRecord> History { get; set; } = null!;
 
-        public ICollection<CellContent> History { get; set; } = new List<CellContent>();
-
-        #region flags
 
         public ValueRelevance CostRelevance { get; set; }
-
         public ValueRelevance PriceRelevance { get; set; }
-
         public bool IsRelevantForOverview { get; set; } = false;
 
-        #endregion
+        public int TradeElementRefId { get; set; }
 
     }
 }

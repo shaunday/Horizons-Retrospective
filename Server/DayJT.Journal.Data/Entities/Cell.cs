@@ -8,23 +8,19 @@ namespace DayJT.Journal.Data
         #region Props part a
 
         [Key]
-        public Guid Id { get; private set; } = Guid.NewGuid();
+        public int Id { get; private set; } 
 
         [Required]
-        [MaxLength(100)]
         public string Title { get; set; } = string.Empty;
 
         [Required]
-        [MaxLength(50)]
         public ComponentType ComponentType { get; set; }
 
-        public BasicCellType CellType { get; private set; }
+        [Required]
+        public BasicCellType CellType { get; set; }
 
-
-        [MaxLength(50)]
         public ValueRelevance CostRelevance { get; set; } = ValueRelevance.None;
 
-        [MaxLength(50)]
         public ValueRelevance PriceRelevance { get; set; } = ValueRelevance.None;
 
         public bool IsRelevantForOverview { get; set; } = false;
@@ -41,14 +37,15 @@ namespace DayJT.Journal.Data
         }
         #endregion
 
-        public CellContent ContentWrapper { get; set; }
+        [Required]
+        public ContentRecord ContentWrapper { get; set; } = null!;
 
         public string Content
         {
             get { return ContentWrapper.Content; }
             set
             {
-                ContentWrapper = new CellContent
+                ContentWrapper = new ContentRecord
                 {
                     Content = value,
                     CellRef = this,
@@ -57,17 +54,20 @@ namespace DayJT.Journal.Data
             }
         }
 
-        public ICollection<CellContent> History { get; set; } = new List<CellContent>();
+        [Required]
+        public ICollection<ContentRecord> History { get; set; } = new List<ContentRecord>();
 
         public void SetFollowupContent(string newContent, string changeNote)
         {
             History.Add(ContentWrapper);
-            ContentWrapper = new CellContent() { Content = newContent, ChangeNote = changeNote, CellRef = this, CellRefId = this.Id };
+            ContentWrapper = new ContentRecord() { Content = newContent, ChangeNote = changeNote, CellRef = this, CellRefId = this.Id };
         }
 
         //parent
-        public Guid TradeElementRefId { get; set; }
+        [Required]
+        public int TradeElementRefId { get; set; }
 
+        [Required]
         public TradeElement TradeElementRef { get; set; } = null!; // Required reference navigation to principal
 
         public void UpdateParentReference(TradeElement refObj)
