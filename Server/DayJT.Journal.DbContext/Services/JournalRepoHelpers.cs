@@ -15,7 +15,7 @@ namespace DayJT.Journal.DataContext.Services
             double profit = 0.0;
 
             var interims = trade.TradeElements
-                .Where(t => t.TradeActionType == TradeActionType.Interim)
+                .Where(t => t.TradeActionType == TradeActionType.AddPosition || t.TradeActionType == TradeActionType.ReducePosition)
                 .ToList();
 
             foreach (var tradeInput in interims)
@@ -106,10 +106,14 @@ namespace DayJT.Journal.DataContext.Services
             {
                 var tradeInputToRemove = trade.TradeElements.Where(t => t.Id.ToString() == tradeInputId).SingleOrDefault();
 
-                if (tradeInputToRemove != null && tradeInputToRemove.TradeActionType == TradeActionType.Interim)
+                if (tradeInputToRemove != null && (tradeInputToRemove.TradeActionType == TradeActionType.ReducePosition || tradeInputToRemove.TradeActionType == TradeActionType.ReducePosition))
                 {
                     trade.TradeElements.Remove(tradeInputToRemove);
                     return true;
+                }
+                else
+                {
+                    throw new Exception("weird");
                 }
             }
 

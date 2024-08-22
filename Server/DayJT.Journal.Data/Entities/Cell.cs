@@ -5,6 +5,8 @@ namespace DayJT.Journal.Data
 {
     public class Cell
     {
+        #region Props part a
+
         [Key]
         public Guid Id { get; private set; } = Guid.NewGuid();
 
@@ -16,7 +18,28 @@ namespace DayJT.Journal.Data
         [MaxLength(50)]
         public ComponentType ComponentType { get; set; }
 
-        #region Content
+        public BasicCellType CellType { get; private set; }
+
+
+        [MaxLength(50)]
+        public ValueRelevance CostRelevance { get; set; } = ValueRelevance.None;
+
+        [MaxLength(50)]
+        public ValueRelevance PriceRelevance { get; set; } = ValueRelevance.None;
+
+        public bool IsRelevantForOverview { get; set; } = false;
+
+        #endregion
+
+        #region Ctors
+        public Cell() { }
+
+        public Cell(BasicCellType cellType, string title)
+        {
+            Title = title;
+            CellType = cellType;
+        }
+        #endregion
 
         public CellContent ContentWrapper { get; set; }
 
@@ -34,36 +57,12 @@ namespace DayJT.Journal.Data
             }
         }
 
-        #endregion
-
-        #region flags
-
-        [MaxLength(50)]
-        public ValueRelevance CostRelevance { get; set; } = ValueRelevance.None;
-
-        [MaxLength(50)]
-        public ValueRelevance PriceRelevance { get; set; } = ValueRelevance.None;
-
-        public bool IsRelevantForOverview { get; set; } = false;
-
-        #endregion
-
-        public CellType CellType { get; private set; }
-
         public ICollection<CellContent> History { get; set; } = new List<CellContent>();
 
-        public Cell() { }
-
-        public Cell(CellType cellType, string title)
+        public void SetFollowupContent(string newContent, string changeNote)
         {
-            Title = title;
-            CellType = cellType;
-        }
-
-        public void UpdateParentReference(TradeElement refObj)
-        {
-            TradeElementRef = refObj;
-            TradeElementRefId = refObj.Id;
+            History.Add(ContentWrapper);
+            ContentWrapper = new CellContent() { Content = newContent, ChangeNote = changeNote, CellRef = this, CellRefId = this.Id };
         }
 
         //parent
@@ -71,6 +70,11 @@ namespace DayJT.Journal.Data
 
         public TradeElement TradeElementRef { get; set; } = null!; // Required reference navigation to principal
 
+        public void UpdateParentReference(TradeElement refObj)
+        {
+            TradeElementRef = refObj;
+            TradeElementRefId = refObj.Id;
+        }
     }
 
 }

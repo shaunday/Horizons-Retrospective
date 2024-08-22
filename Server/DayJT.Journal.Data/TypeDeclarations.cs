@@ -2,12 +2,12 @@
 {
     public enum ComponentType
     {
-        Header, Thesis, Addition, SLandTarget, RiskReward, Reduction, InterimSummary, Closure
+        Header, Thesis, SLandTarget, RiskReward, Addition, Reduction, InterimSummary, Closure
     }
 
     public enum TradeActionType
     {
-        Origin, Interim, Overview1Liner, InterimSummary, Closure, 
+        Origin, AddPosition, ReducePosition, InterimSummary, Closure, 
     }
 
     public enum ValueRelevance
@@ -15,7 +15,7 @@
         None, Add, Substract
     }
 
-    public enum CellType
+    public enum BasicCellType
     {
         Ticker, LongOrShort,
         Thesis, ThesisExpanded, Confluences, Triggers, PositionPlans,

@@ -13,7 +13,7 @@ namespace DayJT.Web.API.Controllers.Journal
     {
         #region Ctor
 
-        public TradeElementController(JournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
+        public TradeCompositeController(JournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
                                                                                                         base(journalAccess, logger, mapper)
         { }
         #endregion

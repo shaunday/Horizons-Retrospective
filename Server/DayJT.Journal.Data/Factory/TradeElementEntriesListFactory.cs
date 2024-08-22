@@ -8,24 +8,24 @@ namespace DayJT.Journal.Data
 {
     public static class TradeElementEntriesListFactory
     {
-        public static IEnumerable<CellType> GetTradeOriginCellTypes()
+        public static IEnumerable<BasicCellType> GetTradeOriginCellTypes()
         {
-            return new List<CellType>() { CellType.Ticker, CellType.LongOrShort,
-                                          CellType.Thesis, CellType.ThesisExpanded, CellType.Confluences, CellType.Triggers, CellType.PositionPlans };
+            return new List<BasicCellType>() { BasicCellType.Ticker, BasicCellType.LongOrShort,
+                                          BasicCellType.Thesis, BasicCellType.ThesisExpanded, BasicCellType.Confluences, BasicCellType.Triggers, BasicCellType.PositionPlans };
         }
 
-        public static IEnumerable<CellType> GetAddToPositionCellTypes()
+        public static IEnumerable<BasicCellType> GetAddToPositionCellTypes()
         {
-            return new List<CellType>() { CellType.AddEmotions, CellType.AddPrice, CellType.AddAmount, CellType.AddCost, CellType.SL, CellType.SL_Thoughts, CellType.Target, CellType.Risk, CellType.RR };
+            return new List<BasicCellType>() { BasicCellType.AddEmotions, BasicCellType.AddPrice, BasicCellType.AddAmount, BasicCellType.AddCost, BasicCellType.SL, BasicCellType.SL_Thoughts, BasicCellType.Target, BasicCellType.Risk, BasicCellType.RR };
         }
 
-        public static IEnumerable<CellType> GetReducePositionCellTypes()
+        public static IEnumerable<BasicCellType> GetReducePositionCellTypes()
         {
-            return new List<CellType>() { CellType.ReduceEmotions, CellType.ReducePrice, CellType.ReduceAmount, CellType.ReduceCost, CellType.ReduceReason };
+            return new List<BasicCellType>() { BasicCellType.ReduceEmotions, BasicCellType.ReducePrice, BasicCellType.ReduceAmount, BasicCellType.ReduceCost, BasicCellType.ReduceReason };
         }
 
 
-        private static Func<IEnumerable<CellType>, TradeElement, List<Cell>> GetActualCellsFromCellsTypeList = (cellTypes, elementRef) => cellTypes.Select(cellType => CellsFactory.GetCellByType(elementRef, cellType)).ToList();
+        private static Func<IEnumerable<BasicCellType>, TradeElement, List<Cell>> GetActualCellsFromCellsTypeList = (cellTypes, elementRef) => cellTypes.Select(cellType => CellsFactory.GetCellByType(elementRef, cellType)).ToList();
 
         public static List<Cell> GetTradeOriginComponents(TradeElement elementRef)
         {
@@ -46,9 +46,9 @@ namespace DayJT.Journal.Data
         {
             return new List<Cell>
             {
-                CellsFactory.GetCellByType(elementRef, CellType.AverageEntryPrice, averageEntry),
-                CellsFactory.GetCellByType(elementRef, CellType.TotalAmount, totalAmount),
-                CellsFactory.GetCellByType(elementRef, CellType.TotalCost, totalCost),
+                CellsFactory.GetCellByType(elementRef, BasicCellType.AverageEntryPrice, averageEntry),
+                CellsFactory.GetCellByType(elementRef, BasicCellType.TotalAmount, totalAmount),
+                CellsFactory.GetCellByType(elementRef, BasicCellType.TotalCost, totalCost),
             };
 
             //todo indicators - distance from wmas,dmas, bb, kk
@@ -58,10 +58,10 @@ namespace DayJT.Journal.Data
         {
             List<Cell> closureCells = new List<Cell>
             {
-                CellsFactory.GetCellByType(elementRef, CellType.Result, profitValue),
-                CellsFactory.GetCellByType(elementRef, CellType.ActualRR),
-                CellsFactory.GetCellByType(elementRef, CellType.WinOrLoss),
-                CellsFactory.GetCellByType(elementRef, CellType.Lessons),
+                CellsFactory.GetCellByType(elementRef, BasicCellType.Result, profitValue),
+                CellsFactory.GetCellByType(elementRef, BasicCellType.ActualRR),
+                CellsFactory.GetCellByType(elementRef, BasicCellType.WinOrLoss),
+                CellsFactory.GetCellByType(elementRef, BasicCellType.Lessons),
             };
 
             return closureCells;

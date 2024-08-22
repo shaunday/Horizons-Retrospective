@@ -2,10 +2,7 @@
 security best practices
 testing
 
-
 add reopen function (delete closure add position)?
 Indicators
 
 clear details from connection string
-
- add/reduce position same ?? reduce enums

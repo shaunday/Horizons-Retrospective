@@ -74,7 +74,6 @@ namespace DayJT.Journal.DataContext.Services
                 originElement.Entries = TradeElementEntriesListFactory.GetTradeOriginComponents(originElement);
                 trade.TradeElements.Add(originElement);
 
-
                 dataContext.AllTradeComposites.Add(trade);
                 await dataContext.SaveChangesAsync();
             }
@@ -127,7 +126,7 @@ namespace DayJT.Journal.DataContext.Services
             var trade = await GetTradeCompositeAsync(tradeId);
             TradeElement tradeInput = new TradeElement(trade)
             {
-                TradeActionType = TradeActionType.Interim,
+                TradeActionType = TradeActionType.AddPosition,
             };
             tradeInput.Entries = TradeElementEntriesListFactory.GetAddToPositionComponents(tradeInput);
 
@@ -139,7 +138,7 @@ namespace DayJT.Journal.DataContext.Services
             var trade = await GetTradeCompositeAsync(tradeId);
             TradeElement tradeInput = new TradeElement(trade)
             {
-                TradeActionType = TradeActionType.Interim,
+                TradeActionType = TradeActionType.ReducePosition,
             };
             tradeInput.Entries = TradeElementEntriesListFactory.GetReducePositionComponents(tradeInput);
 
@@ -175,8 +174,7 @@ namespace DayJT.Journal.DataContext.Services
             Cell? cell = await dataContext.AllTradeInfoCells.Where(t => t.Id.ToString() == componentId).SingleOrDefaultAsync();
             if (cell != null)
             {
-                cell.History.Add(cell.ContentWrapper);
-                cell.ContentWrapper = new CellContent() { Content = newContent, ChangeNote = changeNote, CellRef = cell, CellRefId = cell.Id };
+                cell.SetFollowupContent(newContent, changeNote);
 
                 if (cell.IsRelevantForOverview)
                 {
@@ -189,7 +187,8 @@ namespace DayJT.Journal.DataContext.Services
             }
 
             return (cell, summary);
-        } 
+        }
+
         #endregion
 
         #region Closure
@@ -202,7 +201,7 @@ namespace DayJT.Journal.DataContext.Services
             #region add reduction for current amount at specified price
             TradeElement tradeInput = new TradeElement(trade)
             {
-                TradeActionType = TradeActionType.Interim,
+                TradeActionType = TradeActionType.ReducePosition,
             };
             tradeInput.Entries = TradeElementEntriesListFactory.GetReducePositionComponents(tradeInput);
 
