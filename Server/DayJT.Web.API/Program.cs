@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System.Reflection;
 using DayJT.Journal.DataContext.Services;
+using DayJTrading.Journal.Seeder;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -62,7 +63,20 @@ builder.Services.AddApiVersioning(setupAction =>
     setupAction.ReportApiVersions = true;
 });
 
+builder.Services.AddScoped<DatabaseSeeder>();  // Register the seeder
+
 var app = builder.Build();
+
+// Apply migrations and seed the database
+using (var scope = app.Services.CreateScope())
+{
+    //is this stuff relevant or useful?? //todo
+    //var dbContext = scope.ServiceProvider.GetRequiredService<YourDbContext>();
+    //await dbContext.Database.MigrateAsync();  // Ensure database is created/up-to-date
+
+    var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+    await seeder.SeedAsync();  // Seed data
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
