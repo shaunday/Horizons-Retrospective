@@ -38,6 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DayJT.Journal.DbContext\DayJTrading.Journal.DbContext.csproj" />
+    <ProjectReference Include="..\DayJTrading.Journal.Seeder\DayJTrading.Journal.Seeder.csproj" />
   </ItemGroup>
 
 </Project>
