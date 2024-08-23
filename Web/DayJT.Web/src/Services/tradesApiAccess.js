@@ -8,16 +8,15 @@ const componentsClient = axios.create(baseURL + componentsUrl);
 const tradesClient = axios.create(baseURL + tradesUrl);
 
 
- export async function getAllTrades() {
+ export async function getTradeById() {
      return await tradesClient.get()
  }
 
- export function getElement({ queryKey }) {
-    const [_key, RefId, EleId] = queryKey
-    return new Promise() //todo
-  }
+ export async function addTradeComposite() {
+    return await tradesClient.get()
+}
 
-  export function getSummaryElement({ queryKey }) {
+export function getSummaryElement({ queryKey }) {
     const [_key, RefId] = queryKey
     return new Promise() //todo
   }

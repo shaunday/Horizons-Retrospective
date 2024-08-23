@@ -6,6 +6,8 @@ import * as TradesApiAccess from './../Services/TradesApiAccess'
 
 export default function TradeComposite({tradeComposite}) {
     
+   const tradeElementsValue = tradeComposite[Constants.TRADE_ELEMENTS_KEY]
+
     const summaryQueryKey = [Constants.TRADECOMPOSITE_SUMMARY_KEY, tradeComposite.Id]
     const queryClient = useQueryClient()
 
@@ -16,14 +18,32 @@ export default function TradeComposite({tradeComposite}) {
         queryFn: TradesApiAccess.getSummaryElement
       })
 
-      const onElementUpdate = (data) => {
-        queryClient.setQueryData(summaryQueryKey, data)
-      }
+    const onElementUpdate = (data) => {
+        const { updatedEntry, newSummary } = data;
+
+        const clientIdValue = tradeComposite[Constants.TRADE_CLIENTID_KEY]
+        queryClient.setQueryData([Constants.TRADES_KEY, clientIdValue], (oldTradeComposite) => 
+        produce(oldTradeComposite, draft => {
+            const tradeElementsValue = draft[Constants.TRADE_ELEMENTS_KEY]
+            for (const tradeElement of tradeElementsValue) {
+                const entryIndex = tradeElement.entries.findIndex(entry => entry.id === updatedEntry.id);
+                if (entryIndex !== -1) {
+                    // Update the specific Entry
+                    draft.tradeElements[tradeElement.id].Entries[entryIndex] = updatedEntry;
+                    break;
+                }
+            }
+        })
+      );
+      
+      //update summary, internal so we can update just here
+      queryClient.setQueryData(summaryQueryKey, data)
+    }
 
     return (
         <div id="tradeComposite">
             <ul>
-                {tradeComposite.TradeElements.map(ele=> (
+                {tradeElementsValue.map(ele=> (
                     <li key={ele.id}>
                         <TradeElement tradeElement={ele} onElementUpdate={onElementUpdate}/>
                     </li>

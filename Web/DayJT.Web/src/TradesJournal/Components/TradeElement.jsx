@@ -1,20 +1,10 @@
 import React from 'react';
 import Cell from './Cell';
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import * as Constants from '../../Constants/constants'
 import * as TradesApiAccess from './../Services/TradesApiAccess'
 
 export default function TradeElement({tradeElement, onElementUpdate}) {
-
-    const elementQueryKey = [Constants.TRADE_ELEMENT_KEY, tradeElement.TradeCompositeRefId, tradeElement.Id]
-    const queryClient = useQueryClient()
-
-    const { data: tradeEle } = useQuery({
-        queryKey: elementQueryKey,
-        initialData: tradeElement,
-        refetchOnWindowFocus: false,
-        queryFn: TradesApiAccess.getElement 
-      })
 
       const onCellUpdate = (data) => {
         //handle inter-connectdness
@@ -38,7 +28,7 @@ export default function TradeElement({tradeElement, onElementUpdate}) {
     return (
         <div id="tradeElement">
             <ul style={listStyle}>
-                {tradeEle.Entries.map(entry=> (
+                {tradeElement.Entries.map(entry=> (
                     <li key={entry.id} style={listItemStyle}>
                         <Cell cellInfo={entry} onCellUpdate={onCellUpdate}/>
                     </li>

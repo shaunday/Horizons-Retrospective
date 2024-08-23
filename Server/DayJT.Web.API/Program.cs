@@ -8,6 +8,7 @@ using Serilog;
 using System.Reflection;
 using DayJT.Journal.DataContext.Services;
 using DayJTrading.Journal.Seeder;
+using System.Data.SqlClient;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -95,5 +96,23 @@ app.UseEndpoints(endpoints =>
 {
     app.MapControllers();
 });
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage(); // General developer exception page
+
+    // Use a custom middleware to handle database exceptions
+    app.Use(async (context, next) =>
+    {
+        try
+        {
+            await next.Invoke();
+        }
+        catch (Exception ex) when (ex is DbUpdateException || ex is SqlException)
+        {
+            Log.Logger.Error("Db exception - " + ex);
+        }
+    });
+}
 
 app.Run();

@@ -21,20 +21,16 @@ export default function Cell({cellInfo, onCellUpdate}) {
       // An error happened!
       //log, revert
     },
-    onSuccess: (updatedCellInfo, newSummary) => {
-      setLocalCellInfo(updatedCellInfo);
-      onCellUpdate(newSummary);
+    onSuccess: (updatedEntry, newSummary) => {
+      setLocalCellInfo(updatedEntry);
+      onCellUpdate(updatedEntry, newSummary);
     },
   })
 
   const handleKeyPress = e => {
     if (e.key === "Enter") {
-      initiateContentUpdate(e.target.value);
+      contentUpdateMutation.mutate(value)
     }
-  };
-
-  const initiateContentUpdate = value => {
-    contentUpdateMutation.mutate(value)
   };
 
     return (

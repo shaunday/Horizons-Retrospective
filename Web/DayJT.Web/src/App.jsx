@@ -1,17 +1,17 @@
 import './App.css'
-import * as TradesApiAccess from './../Services/TradesApiAccess'
-import { useAllTrades } from './Hooks/useAllTrades'
+import { useTrades } from './Hooks/useTrades'
 import JournalContainer from './Journal/Trades/Components/JournalContainer'
 
 function App() {
 
- const allTradesQuery = useAllTrades()
+  const { trades } = useTrades(); 
 
-if (allTradesQuery.status === 'pending') {
+  //todo how to monitor status for multiple?
+if (trades.status === 'pending') {
   return <span>Loading...</span>
 }
 
-if (allTradesQuery.status === 'error') {
+if (trades.status === 'error') {
   return <span>Error: {allTradesQuery.error.message}</span>
 }
 

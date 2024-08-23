@@ -1,14 +1,15 @@
 import React from 'react'
 import FilterControl from '../Components/FilterControl'
-import TradeComponents from '../Components/TradeComposite';
+import TradeComposite from '../Components/TradeComposite';
+import { useTrades } from './Hooks/useTrades'
 
-export default function JournalContainer({trades}) {
-    
+export default function JournalContainer() {
+
+    const { addTrade } = useTrades(); 
+
     return (
         <div id="journalMainBody">
         <FilterControl/>
-        
-        const trades ="hi";
         <ul>
             {trades.map(composite=> (
                     <li key={composite.id}>
@@ -17,6 +18,7 @@ export default function JournalContainer({trades}) {
                     ))}
         </ul>
         <button className="button-38" type="button" 
-                    style={{ justifyContent: 'center'}}>Add a Trade</button>
+                    style={{ justifyContent: 'center'}}
+                    onClick={addTrade}>Add a Trade</button>
         </div> )};
 

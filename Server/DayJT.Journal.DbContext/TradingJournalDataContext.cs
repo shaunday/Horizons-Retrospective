@@ -5,7 +5,6 @@ namespace DayJT.Journal.DataContext.Services
 {
     public class TradingJournalDataContext : DbContext
     {
-        #region Data
         public DbSet<TradeComposite> AllTradeComposites { get; set; } 
 
         public DbSet<TradeElement> AllTradeElements { get; set; }
@@ -13,7 +12,8 @@ namespace DayJT.Journal.DataContext.Services
         public DbSet<Cell> AllEntries { get; set; } 
 
         public DbSet<ContentRecord> AllContentRecords { get; set; } 
-        #endregion
+
+
 
         public TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : base(options) { } //allow service configuration 
 
