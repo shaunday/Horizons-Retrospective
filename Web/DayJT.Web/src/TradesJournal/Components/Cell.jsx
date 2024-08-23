@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query'
-import * as tradesApiAccess from '../..//tradesApiAccess'
 
 export default function Cell({cellInfo, onCellUpdate}) {
 

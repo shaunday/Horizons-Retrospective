@@ -1,6 +1,6 @@
 import './App.css'
-import { useTrades } from './Hooks/useTrades'
-import JournalContainer from './Journal/Trades/Components/JournalContainer'
+import { useTrades } from '@hooks/useTrades'
+import JournalContainer from '@components/JournalContainer'
 
 function App() {
 

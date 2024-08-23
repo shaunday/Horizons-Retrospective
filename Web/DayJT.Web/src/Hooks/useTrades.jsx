@@ -1,6 +1,6 @@
-import * as Constants from '../Constants/constants
 import { useState } from 'react';
-import TradesApiAccess from './TradesApiAccess'; 
+import * as Constants from '@constants/Constants';
+import TradesApiAccess from '@services/TradesApiAccess';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 function useTrades() {

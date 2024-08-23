@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 import TradeElement from './TradeElement';
-import { useTradeUpdate } from './hooks/useTradeUpdate';
-import { useTradeSummary } from './hooks/useTradeSummary';
-import * as Constants from '../../Constants/constants';
+import { useTradeUpdate } from '@hooks/useTradeUpdate';
+import { useTradeSummary } from '@hooks/useTradeSummary';
+import * as Constants from '@constants/Constants';
 
 const TradeComposite = memo(({ tradeComposite }) => {
     const tradeElementsValue = tradeComposite[Constants.TRADE_ELEMENTS_KEY];
