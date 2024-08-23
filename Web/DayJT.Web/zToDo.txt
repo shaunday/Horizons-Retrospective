@@ -1,10 +1,11 @@
-cell update 
+api access
+
+callback functions, memo
 
 rq: refetch inverval , background fetching notificaion, pagination ?
 
 log/console writes ups?
 
-callback functions, memo
 
 
 ## TODO

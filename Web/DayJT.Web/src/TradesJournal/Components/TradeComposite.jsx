@@ -6,6 +6,7 @@ import * as Constants from '@constants/constants';
 
 const TradeComposite = memo(({ tradeComposite }) => {
     const tradeElementsValue = tradeComposite[Constants.TRADE_ELEMENTS_KEY];
+    
     const tradeSummary = useTradeSummary(tradeComposite);
     const { onElementUpdate } = useTradeUpdate(tradeComposite);
 

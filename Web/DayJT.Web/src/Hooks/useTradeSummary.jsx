@@ -7,9 +7,9 @@ export function useTradeSummary(tradeComposite) {
 
     const { data: tradeSummary } = useQuery({
         queryKey: summaryQueryKey,
+        queryFn: async () => await getSummaryElement(tradeComposite.Id),
         initialData: tradeComposite.Summary,
         refetchOnWindowFocus: false,
-        queryFn: getSummaryElement,
     });
 
     return tradeSummary;

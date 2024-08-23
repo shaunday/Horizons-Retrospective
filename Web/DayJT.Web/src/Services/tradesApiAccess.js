@@ -8,20 +8,19 @@ const componentsClient = axios.create(baseURL + componentsUrl);
 const tradesClient = axios.create(baseURL + tradesUrl);
 
 
- export async function getTradeById() {
-     return await tradesClient.get()
+ export async function getTradeById(clientId) {
+     return await tradesClient.get(clientId)
  }
 
  export async function addTradeComposite() {
     return await tradesClient.get()
 }
 
-export function getSummaryElement({ queryKey }) {
-    const [_key, RefId] = queryKey
-    return new Promise() //todo
+export function getSummaryElement(tradeId) {
+
   }
 
-export async function UpdateComponent(componentId, newContent, changeNote) {
+export async function updateEntry(componentId, newContent, changeNote) {
     const newContentAndInfo = {
         content: newContent,
         info: changeNote

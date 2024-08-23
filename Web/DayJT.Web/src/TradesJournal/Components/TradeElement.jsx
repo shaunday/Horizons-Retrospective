@@ -7,7 +7,7 @@ export default function TradeElement({tradeElement, onElementUpdate}) {
     const entriesValue = tradeElement[Constants.Entries];
 
     const onCellUpdate = (data) => {
-        //handle inter-connectdness
+        //todo handle inter-connectdness
         onElementUpdate(data);
     }
 
