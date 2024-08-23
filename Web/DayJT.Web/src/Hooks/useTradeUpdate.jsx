@@ -1,7 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { produce } from 'immer';
-import * as Constants from '@constants/Constants';
-import TradesApiAccess from '@services/TradesApiAccess';
+import * as Constants from '@constants/constants';
 
 export function useTradeUpdate(tradeComposite) {
     const queryClient = useQueryClient();

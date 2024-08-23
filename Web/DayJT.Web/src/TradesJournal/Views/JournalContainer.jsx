@@ -1,7 +1,7 @@
 import React from 'react'
-import FilterControl from '../Components/FilterControl'
-import TradeComposite from '../Components/TradeComposite';
-import { useTrades } from './Hooks/useTrades'
+import FilterControl from '@components/FilterControl'
+import TradeComposite from '@components/TradeComposite';
+import { useTrades } from '@hooks/useTrades'
 
 export default function JournalContainer() {
 

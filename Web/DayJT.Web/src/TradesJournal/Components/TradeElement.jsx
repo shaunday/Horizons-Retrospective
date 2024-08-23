@@ -1,6 +1,6 @@
 import React from 'react';
 import Cell from './Cell';
-import * as Constants from '@constants/Constants';
+import * as Constants from '@constants/constants';
 
 export default function TradeElement({tradeElement, onElementUpdate}) {
 

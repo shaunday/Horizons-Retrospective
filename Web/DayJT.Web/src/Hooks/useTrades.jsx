@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import * as Constants from '@constants/Constants';
-import TradesApiAccess from '@services/TradesApiAccess';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import * as Constants from '@constants/constants';
+import { getTradeById, addTradeComposite} from '@services/tradesApiAccess';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 function useTrades() {
     const queryClient = useQueryClient();
@@ -9,7 +9,7 @@ function useTrades() {
 
     // Fetch trade by ID
     const fetchTradeById = async (id) => {
-        const response = await TradesApiAccess.getTradeById(id);
+        const response = await getTradeById(id);
         return response.data;
     };
     
@@ -34,7 +34,7 @@ function useTrades() {
 
     // Mutation to add a new trade
     const addTradeMutation = useMutation(
-        async () => await TradesApiAccess.addTradeComposite(), 
+        async () => await addTradeComposite(), 
         {
             onSuccess: (data) => {
                 // Update the cache with the new trade

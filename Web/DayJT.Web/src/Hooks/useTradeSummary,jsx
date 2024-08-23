@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import * as Constants from '@constants/Constants';
-import TradesApiAccess from '@services/TradesApiAccess';
+import * as Constants from '@constants/constants';
+import { getSummaryElement } from '@services/TradesApiAccess';
 
 export function useTradeSummary(tradeComposite) {
     const summaryQueryKey = [Constants.TRADECOMPOSITE_SUMMARY_KEY, tradeComposite.Id];
@@ -9,7 +9,7 @@ export function useTradeSummary(tradeComposite) {
         queryKey: summaryQueryKey,
         initialData: tradeComposite.Summary,
         refetchOnWindowFocus: false,
-        queryFn: TradesApiAccess.getSummaryElement,
+        queryFn: getSummaryElement,
     });
 
     return tradeSummary;
