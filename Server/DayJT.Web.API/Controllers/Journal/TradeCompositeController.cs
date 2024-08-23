@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using DayJT.Journal.Data;
 using DayJT.Web.API.Models;
 using DayJT.Journal.DataContext.Services;
+using System.ComponentModel;
 
 namespace DayJT.Web.API.Controllers.Journal
 {
@@ -36,7 +37,7 @@ namespace DayJT.Web.API.Controllers.Journal
             (TradeElementModel?, TradeElementModel?) resAsModel =
                             (_mapper.Map<TradeElementModel>(entryAndSummary.newEntry), _mapper.Map<TradeElementModel>(entryAndSummary.summary));
 
-            return Ok(resAsModel);
+            return ResultHandling(resAsModel, $"Could not add interim element on : {tradeId}");
         }
 
         [HttpDelete("{tradeInputId}")]
@@ -51,7 +52,7 @@ namespace DayJT.Web.API.Controllers.Journal
 
             TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
 
-            return Ok(resAsModel);
+            return ResultHandling(resAsModel, $"Could not delete interim element on : {tradeId}");
         }
 
         #endregion

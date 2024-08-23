@@ -19,7 +19,7 @@ namespace DayJT.Web.API.Controllers.Journal
 
         protected ActionResult ResultHandling(object? result, string logEntry)
         {
-            if (result == null)
+            if (result == null || (result is Tuple<object, object> tuple && (tuple.Item1 == null || tuple.Item2 == null)))
             {
                 _logger.LogWarning(logEntry);
                 return NotFound();
