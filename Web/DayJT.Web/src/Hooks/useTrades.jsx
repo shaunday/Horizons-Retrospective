@@ -24,7 +24,7 @@ function useTrades() {
             };
             
             // Update the cache with the new data
-            queryClient.setQueryData([Constants.TRADES_KEY, tradeIdCounter], updatedData);
+            queryClient.setQueryData([Constants.TRADES_KEY_SUFFIX, tradeIdCounter], updatedData);
     
             // Increment the ID for the next fetch
             setTradeIdCounter((prevId) => prevId + 1);
@@ -38,7 +38,7 @@ function useTrades() {
         {
             onSuccess: (data) => {
                 // Update the cache with the new trade
-                queryClient.setQueryData([Constants.TRADES_KEY, tradeIdCounter], (oldTrades = []) => {
+                queryClient.setQueryData([Constants.TRADES_KEY_SUFFIX, tradeIdCounter], (oldTrades = []) => {
                     return [...oldTrades, data]; // Append the new trade to the existing trades
                 });
                 setTradeIdCounter((prevId) => prevId + 1);

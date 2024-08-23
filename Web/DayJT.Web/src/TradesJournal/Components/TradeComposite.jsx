@@ -1,12 +1,16 @@
-import React, { memo } from 'react';
+import React, { useState } from 'react';
 import TradeElement from './TradeElement';
 import { useTradeUpdate } from '@hooks/useTradeUpdate';
 import { useTradeSummary } from '@hooks/useTradeSummary';
 import * as Constants from '@constants/constants';
 
-const TradeComposite = memo(({ tradeComposite }) => {
+const TradeComposite = (({ tradeComposite }) => {
+
+    const summaryQueryKey = [Constants.TRADECOMPOSITE_SUMMARY_KEY, tradeComposite.Id];
+    const [summary, setSummary] = useState(tradeComposite.Summary);
+
     const tradeElementsValue = tradeComposite[Constants.TRADE_ELEMENTS_KEY];
-    
+
     const tradeSummary = useTradeSummary(tradeComposite);
     const { onElementUpdate } = useTradeUpdate(tradeComposite);
 
@@ -15,7 +19,7 @@ const TradeComposite = memo(({ tradeComposite }) => {
             <ul>
                 {tradeElementsValue.map(ele => (
                     <li key={ele.id}>
-                        <TradeElement tradeElement={ele} onElementUpdate={onElementUpdate} />
+                        <TradeElement tradeElement={ele} onElementUpdate={setSummary} />
                     </li>
                 ))}
             </ul>
