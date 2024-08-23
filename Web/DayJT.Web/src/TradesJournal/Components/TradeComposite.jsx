@@ -1,13 +1,13 @@
 import {React, memo} from 'react';
 import TradeElement from './TradeElement';
 import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import * as Constants from '../../Constants/constants'
 import * as TradesApiAccess from './../Services/TradesApiAccess'
 
 export default function TradeComposite({tradeComposite}) {
     
    const tradeElementsValue = tradeComposite[Constants.TRADE_ELEMENTS_KEY]
-
     const summaryQueryKey = [Constants.TRADECOMPOSITE_SUMMARY_KEY, tradeComposite.Id]
     const queryClient = useQueryClient()
 
