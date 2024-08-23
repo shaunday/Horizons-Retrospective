@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
 import TradeElement from './TradeElement';
 import { useTradeUpdate } from '@hooks/useTradeUpdate';
-import { useTradeSummary } from '@hooks/useTradeSummary';
 import * as Constants from '@constants/constants';
 
 const TradeComposite = (({ tradeComposite }) => {
+    const initialTradeSummaryValue = tradeComposite[Constants.TRADE_SUMMARY_STRING];
+    const initialElementsValue = tradeComposite[Constants.TRADE_ELEMENTS_STRING];
 
-    const summaryQueryKey = [Constants.TRADECOMPOSITE_SUMMARY_KEY, tradeComposite.Id];
-    const [summary, setSummary] = useState(tradeComposite.Summary);
+    const [tradeSummary, setTradeSummary] = useState(initialTradeSummaryValue);
 
-    const tradeElementsValue = tradeComposite[Constants.TRADE_ELEMENTS_KEY];
-
-    const tradeSummary = useTradeSummary(tradeComposite);
-    const { onElementUpdate } = useTradeUpdate(tradeComposite);
+    const entryUpdate = useTradeUpdate(tradeComposite);
+    const onEntryUpdate = ({updatedEntry, newSummary }) => {
+        entryUpdate(updatedEntry);
+        setTradeSummary(newSummary);
+    }
 
     return (
         <div id="tradeComposite">
             <ul>
-                {tradeElementsValue.map(ele => (
+                {initialElementsValue.map(ele => (
                     <li key={ele.id}>
-                        <TradeElement tradeElement={ele} onElementUpdate={setSummary} />
+                        <TradeElement tradeElement={ele} onElementUpdate={onEntryUpdate} />
                     </li>
                 ))}
             </ul>

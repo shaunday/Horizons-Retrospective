@@ -16,10 +16,6 @@ const tradesClient = axios.create(baseURL + tradesUrl);
     return await tradesClient.get()
 }
 
-export function getSummaryElement(tradeId) {
-
-  }
-
 export async function updateEntry(componentId, newContent, changeNote) {
     const newContentAndInfo = {
         content: newContent,

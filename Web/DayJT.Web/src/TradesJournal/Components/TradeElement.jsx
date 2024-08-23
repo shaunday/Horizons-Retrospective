@@ -3,8 +3,7 @@ import Cell from './Cell';
 import * as Constants from '@constants/constants';
 
 export default function TradeElement({tradeElement, onElementUpdate}) {
-
-    const entriesValue = tradeElement[Constants.Entries];
+    const initialEntriesValue = tradeElement[Constants.TRADE_ENTRIES_STRING];
 
     const onCellUpdate = (data) => {
         //todo handle inter-connectdness
@@ -28,7 +27,7 @@ export default function TradeElement({tradeElement, onElementUpdate}) {
     return (
         <div id="tradeElement">
             <ul style={listStyle}>
-                {entriesValue.map(entry=> (
+                {initialEntriesValue.map(entry=> (
                     <li key={entry.id} style={listItemStyle}>
                         <Cell cellInfo={entry} onCellUpdate={onCellUpdate}/>
                     </li>

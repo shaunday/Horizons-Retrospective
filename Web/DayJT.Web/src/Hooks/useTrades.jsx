@@ -15,16 +15,16 @@ function useTrades() {
     
     // Fetch the trade corresponding to the current incremental ID
     const { data: trades } = useQuery({
-        queryKey: [Constants.TRADES_KEY, tradeIdCounter],
+        queryKey: [Constants.TRADE_KEY, tradeIdCounter],
         queryFn: async () => await fetchTradeById(tradeIdCounter),
         onSuccess: (data) => {
             const updatedData = {
                 ...data,
-                clientId: tradeIdCounter,
+                [Constants.TRADE_CLIENTID_PROP_STRING]: tradeIdCounter,
             };
             
             // Update the cache with the new data
-            queryClient.setQueryData([Constants.TRADES_KEY_SUFFIX, tradeIdCounter], updatedData);
+            queryClient.setQueryData([Constants.TRADE_KEY, tradeIdCounter], updatedData);
     
             // Increment the ID for the next fetch
             setTradeIdCounter((prevId) => prevId + 1);
@@ -38,7 +38,7 @@ function useTrades() {
         {
             onSuccess: (data) => {
                 // Update the cache with the new trade
-                queryClient.setQueryData([Constants.TRADES_KEY_SUFFIX, tradeIdCounter], (oldTrades = []) => {
+                queryClient.setQueryData([Constants.TRADE_KEY, tradeIdCounter], (oldTrades = []) => {
                     return [...oldTrades, data]; // Append the new trade to the existing trades
                 });
                 setTradeIdCounter((prevId) => prevId + 1);

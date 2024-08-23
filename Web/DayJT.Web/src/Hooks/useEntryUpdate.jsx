@@ -2,16 +2,16 @@ import { useQueryClient } from '@tanstack/react-query';
 import { produce } from 'immer';
 import * as Constants from '@constants/constants';
 
-export function useTradeUpdate(tradeComposite) {
+export function useEntryUpdate(tradeComposite) {
     const queryClient = useQueryClient();
 
     const onElementUpdate = (data) => {
-        const { updatedEntry, newSummary } = data;
-        const clientIdValue = tradeComposite[Constants.TRADE_CLIENTID_KEY];
+        const { updatedEntry } = data;
+        const clientIdValue = tradeComposite[Constants.TRADE_CLIENT_ID_PROPERTY];
 
-        queryClient.setQueryData([Constants.TRADES_KEY, clientIdValue], (oldTradeComposite) =>
+        queryClient.setQueryData([Constants.TRADE_KEY, clientIdValue], (oldTradeComposite) =>
             produce(oldTradeComposite, draft => {
-                const tradeElements = draft[Constants.TRADE_ELEMENTS_KEY];
+                const tradeElements = draft[Constants.TRADE_ELEMENTS_STRING];
                 for (const tradeElement of tradeElements) {
                     const entryIndex = tradeElement.entries.findIndex(entry => entry.id === updatedEntry.id);
                     if (entryIndex !== -1) {
@@ -22,9 +22,6 @@ export function useTradeUpdate(tradeComposite) {
                 }
             })
         );
-
-        // Update summary
-        queryClient.setQueryData([Constants.TRADECOMPOSITE_SUMMARY_KEY, tradeComposite.Id], newSummary);
     };
 
     return { onElementUpdate };

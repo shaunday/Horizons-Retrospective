@@ -5,7 +5,7 @@ import { useTrades } from '@hooks/useTrades'
 
 export default function JournalContainer() {
 
-    const { addTrade } = useTrades(); 
+    const { trades } = useTrades(); 
 
     return (
         <div id="journalMainBody">
