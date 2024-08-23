@@ -1,53 +1,26 @@
-import {React, memo} from 'react';
+import React, { memo } from 'react';
 import TradeElement from './TradeElement';
-import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { produce } from 'immer'
-import * as Constants from '../../Constants/constants'
-import * as TradesApiAccess from './../Services/TradesApiAccess'
+import { useTradeUpdate } from './hooks/useTradeUpdate';
+import { useTradeSummary } from './hooks/useTradeSummary';
+import * as Constants from '../../Constants/constants';
 
-export default function TradeComposite({tradeComposite}) {
-    
-   const tradeElementsValue = tradeComposite[Constants.TRADE_ELEMENTS_KEY]
-    const summaryQueryKey = [Constants.TRADECOMPOSITE_SUMMARY_KEY, tradeComposite.Id]
-    const queryClient = useQueryClient()
-
-    const { data: tradeSummary } = useQuery({
-        queryKey: summaryQueryKey,
-        initialData: tradeComposite.Summary,
-        refetchOnWindowFocus: false,
-        queryFn: TradesApiAccess.getSummaryElement
-      })
-
-    const onElementUpdate = (data) => {
-        const { updatedEntry, newSummary } = data;
-
-        const clientIdValue = tradeComposite[Constants.TRADE_CLIENTID_KEY]
-        queryClient.setQueryData([Constants.TRADES_KEY, clientIdValue], (oldTradeComposite) => 
-        produce(oldTradeComposite, draft => {
-            const tradeElementsValue = draft[Constants.TRADE_ELEMENTS_KEY]
-            for (const tradeElement of tradeElementsValue) {
-                const entryIndex = tradeElement.entries.findIndex(entry => entry.id === updatedEntry.id);
-                if (entryIndex !== -1) {
-                    // Update the specific Entry
-                    draft.tradeElements[tradeElement.id].Entries[entryIndex] = updatedEntry;
-                    break;
-                }
-            }
-        })
-      );
-      
-      //update summary, internal so we can update just here
-      queryClient.setQueryData(summaryQueryKey, data)
-    }
+const TradeComposite = memo(({ tradeComposite }) => {
+    const tradeElementsValue = tradeComposite[Constants.TRADE_ELEMENTS_KEY];
+    const tradeSummary = useTradeSummary(tradeComposite);
+    const { onElementUpdate } = useTradeUpdate(tradeComposite);
 
     return (
         <div id="tradeComposite">
             <ul>
-                {tradeElementsValue.map(ele=> (
+                {tradeElementsValue.map(ele => (
                     <li key={ele.id}>
-                        <TradeElement tradeElement={ele} onElementUpdate={onElementUpdate}/>
+                        <TradeElement tradeElement={ele} onElementUpdate={onElementUpdate} />
                     </li>
-                    ))}
+                ))}
             </ul>
-            {data ?  <TradeElement tradeStep={ tradeSummary }/> : ''}  
-        </div> )};
+            {tradeSummary ? <TradeElement tradeStep={tradeSummary} /> : ''}
+        </div>
+    );
+});
+
+export default TradeComposite;
