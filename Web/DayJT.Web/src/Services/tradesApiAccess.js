@@ -16,6 +16,18 @@ const tradesClient = axios.create(baseURL + tradesUrl);
     return await tradesClient.get()
 }
 
+export async function addPosition(tradeId) {
+    
+}
+
+export async function closeTrade(tradeId) {
+    
+}
+
+export async function reducePosition(tradeId) {
+    
+}
+
 export async function updateEntry(componentId, newContent, changeNote) {
     const newContentAndInfo = {
         content: newContent,

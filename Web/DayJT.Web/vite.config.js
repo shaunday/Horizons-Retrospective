@@ -7,8 +7,10 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
   alias: {
-        '@components': path.resolve(__dirname, 'src/TradesJournal/Components'),
-        '@hooks': path.resolve(__dirname, 'src/Hooks'),
+        '@components': path.resolve(__dirname, 'src/Components'),
+        '@journalComponents': path.resolve(__dirname, 'src/Components/Journal'),
+        '@views': path.resolve(__dirname, 'src/Views'),
+        '@hooks': path.resolve(__dirname, 'src/Hooks/Journal'),
         '@services': path.resolve(__dirname, 'src/Services'),
         '@constants': path.resolve(__dirname, 'src/Constants'),
     },
