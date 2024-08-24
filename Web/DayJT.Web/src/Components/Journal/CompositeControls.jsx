@@ -3,17 +3,16 @@ import SuccessMessage from "@components/SuccessMessage";
 import { useTradeAction } from "@hooks/useTradeAction"; // Import custom hook
 import * as Constants from "@constants/journalConstants";
 
-export default function CompositeControls({
-  tradeComposite,
-  onElementAddition,
-}) {
+const MemoizedSuccessMessage = React.memo(SuccessMessage);
+
+function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const tradeActionMutation = useTradeAction(
     tradeComposite,
     (newElement, newSummary) => {
-      onElementAddition(newElement, newSummary);
+      onTradeActionExecuted(newElement, newSummary);
       setProcessing(false);
       setSuccess(true);
       setTimeout(() => setSuccess(false), 2000);
@@ -57,7 +56,9 @@ export default function CompositeControls({
         </button>
       </div>
       {processing && <div className="spinner">Processing...</div>}
-      {success && <SuccessMessage />}
+      {success && <MemoizedSuccessMessage />}
     </div>
   );
 }
+
+export default React.memo(CompositeControls);

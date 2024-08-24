@@ -4,7 +4,7 @@ import CompositeControls from "./CompositeControls";
 import { useEntryUpdate } from "@hooks/useTradeUpdate";
 import * as Constants from "@constants/journalConstants";
 
-export default function TradeComposite({ tradeComposite }) {
+function TradeComposite({ tradeComposite }) {
   const initialTradeSummaryValue =
     tradeComposite[Constants.TRADE_SUMMARY_STRING];
   const initialElementsValue = tradeComposite[Constants.TRADE_ELEMENTS_STRING];
@@ -13,15 +13,15 @@ export default function TradeComposite({ tradeComposite }) {
 
   const entryUpdate = useEntryUpdate(tradeComposite);
 
-  const processEntryUpdate = ({ updatedEntry, newSummary }) => {
+  const processEntryUpdate = useCallback(({ updatedEntry, newSummary }) => {
     entryUpdate(updatedEntry);
     setTradeSummary(newSummary);
-  };
+  }, []);
 
-  const processElementAdded = ({ newElement, newSummary }) => {
-    //todo add to composite
+  const processTradeAction = useCallback(({ newElement, newSummary }) => {
+    // todo add to composite
     setTradeSummary(newSummary);
-  };
+  }, []);
 
   return (
     <div id="tradeComposite">
@@ -35,11 +35,13 @@ export default function TradeComposite({ tradeComposite }) {
           </li>
         ))}
       </ul>
-      {tradeSummary ? <TradeElement tradeStep={tradeSummary} /> : ""}
+      {tradeSummary && <TradeElement tradeElement={tradeSummary} />}
       <CompositeControls
         tradeComposite={tradeComposite}
-        onElementAddition={processElementAdded}
+        onTradeActionExecuted={processTradeAction}
       />
     </div>
   );
 }
+
+export default React.memo(TradeComposite);
