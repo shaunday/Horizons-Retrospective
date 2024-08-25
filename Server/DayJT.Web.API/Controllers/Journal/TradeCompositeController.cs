@@ -55,9 +55,16 @@ namespace DayJT.Web.API.Controllers.Journal
         [HttpPost("close/{closingPrice}")]
         public async Task<ActionResult<bool>> CloseTrade(string tradeId, string closingPrice)
         {
-            await _journalAccess.CloseAsync(tradeId, closingPrice);
+            TradeElement summary = await _journalAccess.CloseAsync(tradeId, closingPrice);
 
-            return NoContent();
+            if (summary == null)
+            {
+                return NotFound();
+            }
+
+            TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
+
+            return ResultHandling(resAsModel, $"Could not delete interim element on : {tradeId}");
         }
 
         #endregion
