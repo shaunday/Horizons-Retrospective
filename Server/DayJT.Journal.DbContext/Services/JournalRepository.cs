@@ -62,18 +62,13 @@ namespace DayJT.Journal.DataContext.Services
 
         #region Trade Elements 
 
-        public async Task<(TradeElement? newEntry, TradeElement? summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
+        public async Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
             TradeElement tradeInput = new TradeElement(trade, isAdd? TradeActionType.AddPosition : TradeActionType.ReducePosition);
 
             trade.TradeElements.Add(tradeInput);
             TradeElement newSummary = JournalRepoHelpers.GetInterimSummary(trade);
-
-            if (newSummary == null)
-            {
-                throw new Exception("todo");
-            }
 
             trade.Summary = newSummary;
             await dataContext.SaveChangesAsync();
@@ -84,12 +79,13 @@ namespace DayJT.Journal.DataContext.Services
         public async Task<TradeElement?> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
-            JournalRepoHelpers.RemoveInterimInput(ref trade, tradeInputId);
-            TradeElement? summary = JournalRepoHelpers.GetInterimSummary(trade);
-            if (summary != null)
+            if (trade.TradeElements.Count <= 1)
             {
-                trade.Summary = summary;
+                throw new InvalidOperationException($"No entries to remove on trade ID {tradeId} .");
             }
+            JournalRepoHelpers.RemoveInterimInput(ref trade, tradeInputId);
+            TradeElement summary = JournalRepoHelpers.GetInterimSummary(trade);
+            trade.Summary = summary;
 
             await dataContext.SaveChangesAsync();
 
@@ -100,23 +96,25 @@ namespace DayJT.Journal.DataContext.Services
 
         #region Entries Update
 
-        public async Task<(Cell? updatedCell, TradeElement? summary)> UpdateCellContent(string componentId, string newContent, string changeNote)
+        public async Task<(Cell updatedCell, TradeElement? summary)> UpdateCellContent(string componentId, string newContent, string changeNote)
         {
-            TradeElement? summary = null;
-            Cell? cell = await dataContext.AllEntries.Where(t => t.Id.ToString() == componentId).SingleOrDefaultAsync();
-            if (cell != null)
+            var cell = await dataContext.AllEntries.Where(t => t.Id.ToString() == componentId).SingleOrDefaultAsync();
+            if (cell == null)
             {
-                cell.SetFollowupContent(newContent, changeNote);
-
-                if (cell.IsRelevantForOverview)
-                {
-                    var trade = cell.TradeElementRef.TradeCompositeRef;
-                    summary = JournalRepoHelpers.GetInterimSummary(trade);
-                    trade.Summary = summary;
-                }
-
-                await dataContext.SaveChangesAsync();
+                throw new InvalidOperationException($"Entry with ID {componentId} not found.");
             }
+
+            cell.SetFollowupContent(newContent, changeNote);
+
+            TradeElement? summary = null;
+            if (cell.IsRelevantForOverview)
+            {
+                var trade = cell.TradeElementRef.TradeCompositeRef;
+                summary = JournalRepoHelpers.GetInterimSummary(trade);
+                trade.Summary = summary;
+            }
+
+            await dataContext.SaveChangesAsync();
 
             return (cell, summary);
         }

@@ -22,13 +22,12 @@ namespace DayJT.Web.API.Controllers.Journal
         #region Add / Delete
 
         [HttpPost]
-        public async Task<ActionResult<(TradeElementModel? newEntry, TradeElementModel? summary)>> AddInterimEntry(string tradeId, bool isAdd)
+        public async Task<ActionResult<(TradeElementModel newEntry, TradeElementModel summary)>> AddInterimEntry(string tradeId, bool isAdd)
         {
-            (TradeElement? newEntry, TradeElement? summary) entryAndSummary;
+            (TradeElement newEntry, TradeElement summary) entryAndSummary;
             entryAndSummary = await _journalAccess.AddInterimPositionAsync(tradeId, isAdd);
 
-
-            (TradeElementModel?, TradeElementModel?) resAsModel =
+            (TradeElementModel, TradeElementModel) resAsModel =
                             (_mapper.Map<TradeElementModel>(entryAndSummary.newEntry), _mapper.Map<TradeElementModel>(entryAndSummary.summary));
 
             return ResultHandling(resAsModel, $"Could not add interim element on : {tradeId}");
@@ -37,7 +36,7 @@ namespace DayJT.Web.API.Controllers.Journal
         [HttpDelete("{tradeInputId}")]
         public async Task<ActionResult> DeleteInterimTradeInput(string tradeId, string tradeInputId)
         {
-            TradeElement? summary = await _journalAccess.RemoveInterimPositionAsync(tradeId, tradeInputId);
+            TradeElement summary = await _journalAccess.RemoveInterimPositionAsync(tradeId, tradeInputId);
 
             if (summary ==null)
             {

@@ -20,11 +20,11 @@ namespace DayJT.Web.API.Controllers.Journal
         #endregion
 
         [HttpPut("{componentId}")]
-        public async Task<ActionResult<(CellModel? newEntry, TradeElementModel? summary)>> UpdateComponent(string componentId, string newContent, string changeNote)
+        public async Task<ActionResult<(CellModel newEntry, TradeElementModel? summary)>> UpdateComponent(string componentId, string newContent, string changeNote)
         {
-            (Cell? updatedComponent, TradeElement? summary) = await _journalAccess.UpdateCellContent(componentId, newContent, changeNote);
+            (Cell updatedComponent, TradeElement? summary) = await _journalAccess.UpdateCellContent(componentId, newContent, changeNote);
 
-            (CellModel?, TradeElementModel?) resAsModel = (_mapper.Map<CellModel>(updatedComponent), _mapper.Map<TradeElementModel>(summary));
+            (CellModel, TradeElementModel?) resAsModel = (_mapper.Map<CellModel>(updatedComponent), _mapper.Map<TradeElementModel>(summary));
 
             return ResultHandling(resAsModel, $"Could not update component: {componentId}");
         }

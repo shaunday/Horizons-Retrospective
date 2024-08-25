@@ -12,13 +12,13 @@ namespace DayJT.Journal.DataContext.Services
 
         //interim elements
 
-        Task<(TradeElement? newEntry, TradeElement? summary)> AddInterimPositionAsync(string tradeId, bool isAdd);
+        Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd);
 
-        Task<TradeElement?> RemoveInterimPositionAsync(string tradeId, string tradeInputId);
+        Task<TradeElement> RemoveInterimPositionAsync(string tradeId, string tradeInputId);
 
         //components
 
-        Task<(Cell? updatedCell, TradeElement? summary)> UpdateCellContent(string componentId, string newContent, string changeNote);
+        Task<(Cell updatedCell, TradeElement? summary)> UpdateCellContent(string componentId, string newContent, string changeNote);
 
         //closure
 
