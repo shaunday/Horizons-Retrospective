@@ -1,4 +1,5 @@
 ﻿using DayJT.Journal.Data;
+using DayJTrading.Journal.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,12 +90,8 @@ namespace DayJT.Journal.DataContext.Services
                     }
                 }
 
-
-                summary = new TradeElement(trade)
-                {
-                    TradeActionType = TradeActionType.InterimSummary,
-                };
-                summary.Entries = TradeElementEntriesListFactory.GetSummaryComponents(summary, averageEntry, totalAmount, totalCost);
+                summary = new TradeElement(trade, TradeActionType.InterimSummary);
+                summary.Entries = SummaryPositionsFactory.GetSummaryComponents(summary, averageEntry, totalAmount, totalCost);
             }
 
             return summary;

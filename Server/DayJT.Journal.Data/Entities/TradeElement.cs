@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DayJTrading.Journal.Data.Factory;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 
@@ -18,10 +19,16 @@ namespace DayJT.Journal.Data
 
         public TradeElement() { }
 
-        public TradeElement(TradeComposite trade)
+        public TradeElement(TradeComposite trade, TradeActionType actionType)
         {
             TradeCompositeRef = trade;
             TradeCompositeRefId = trade.Id;
+
+            if (actionType == TradeActionType.Origin || actionType == TradeActionType.AddPosition || actionType == TradeActionType.ReducePosition)
+            {
+                TradeActionType = actionType;
+                Entries = InterimPositionFactory.GetPositionEntries(actionType, this);
+            }
         }
 
         //parent

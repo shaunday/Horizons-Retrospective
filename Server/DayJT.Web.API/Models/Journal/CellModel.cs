@@ -10,11 +10,9 @@ namespace DayJT.Web.API.Models
         public string Title { get; set; } = string.Empty;
 
         public ComponentType ComponentType { get; set; }
-        public BasicCellType CellType { get; set; }
 
         public ContentRecordModel ContentWrapper { get; set; } = null!;
         public ICollection<ContentRecord> History { get; set; } = null!;
-
 
         public ValueRelevance CostRelevance { get; set; }
         public ValueRelevance PriceRelevance { get; set; }

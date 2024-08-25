@@ -1,5 +1,6 @@
 ﻿using DayJT.Journal.Data;
 using DayJT.Journal.DataContext.Services;
+using DayJTrading.Journal.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics;
@@ -32,19 +33,11 @@ namespace DayJTrading.Journal.Seeder
         private void AddTradeCompositeToDbContext()
         {
             TradeComposite trade = new TradeComposite();
-            TradeElement originElement = new TradeElement(trade)
-            {
-                TradeActionType = TradeActionType.Origin,
-            };
-            originElement.Entries = TradeElementEntriesListFactory.GetTradeOriginComponents(originElement);
+            TradeElement originElement = new TradeElement(trade, TradeActionType.Origin);
             PopulateElementWithData(ref originElement);
             trade.TradeElements.Add(originElement);
 
-            TradeElement addElement = new TradeElement(trade)
-            {
-                TradeActionType = TradeActionType.AddPosition,
-            };
-            originElement.Entries = TradeElementEntriesListFactory.GetAddToPositionComponents(addElement);
+            TradeElement addElement = new TradeElement(trade, TradeActionType.AddPosition);
             PopulateElementWithData(ref addElement);
             trade.TradeElements.Add(addElement);
 

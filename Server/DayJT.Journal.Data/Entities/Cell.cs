@@ -16,9 +16,6 @@ namespace DayJT.Journal.Data
         [Required]
         public ComponentType ComponentType { get; set; }
 
-        [Required]
-        public BasicCellType CellType { get; set; }
-
         public ValueRelevance CostRelevance { get; set; } = ValueRelevance.None;
 
         public ValueRelevance PriceRelevance { get; set; } = ValueRelevance.None;
@@ -30,10 +27,10 @@ namespace DayJT.Journal.Data
         #region Ctors
         public Cell() { }
 
-        public Cell(BasicCellType cellType, string title)
+        public Cell(string title, ComponentType componentType)
         {
             Title = title;
-            CellType = cellType;
+            ComponentType = componentType;
         }
         #endregion
 
