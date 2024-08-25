@@ -71,6 +71,42 @@ namespace DayJT.Journal.DataContext.Services
             return (totalCost, totalAmount, profit);
         }
 
+        internal static TradeElement CreateTradeElementForClosure(TradeComposite trade, string closingPrice, (double totalCost, double totalAmount, double profit) analytics)
+        {
+            // Create a TradeElement for ReducePosition
+            var tradeInput = new TradeElement(trade, TradeActionType.ReducePosition);
+
+            // Find price entry
+            var priceEntry = tradeInput.Entries.SingleOrDefault(ti => ti.PriceRelevance == ValueRelevance.Substract);
+            if (priceEntry == null)
+            {
+                throw new InvalidOperationException("Could not find price entry to reduce / close position");
+            }
+            priceEntry.Content = closingPrice;
+
+            // Find cost entry
+            var costEntry = tradeInput.Entries.SingleOrDefault(ti => ti.CostRelevance == ValueRelevance.Substract);
+            if (costEntry == null)
+            {
+                throw new InvalidOperationException("Could not find cost entry to reduce / close position");
+            }
+
+            if (double.TryParse(closingPrice, out double closingPriceValue))
+            {
+                costEntry.Content = (closingPriceValue * analytics.totalAmount).ToString();
+            }
+            else
+            {
+                throw new FormatException("Could not parse closing price");
+            }
+
+            // Create TradeElement for Closure
+            var tradeClosure = new TradeElement(trade, TradeActionType.Closure);
+            tradeClosure.Entries = SummaryPositionsFactory.GetTradeClosureComponents(tradeClosure, profitValue: analytics.profit.ToString());
+
+            return tradeInput; // Return tradeInput, as this is the entry we are adding
+        }
+
         internal static TradeElement GetInterimSummary(TradeComposite trade)
         {
             var analytics = GetAvgEntryAndProfit(trade);

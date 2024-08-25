@@ -4,21 +4,17 @@ namespace DayJT.Journal.DataContext.Services
 {
     public interface IJournalRepository
     {
-        //trades
-
-        //Task<IEnumerable<TradeElement>> GetAllTradeCompositesAs1LinerOverviewAsync();
+        //composites
 
         Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10);
 
         Task<TradeComposite> AddTradeCompositeAsync();
 
-        //inputs
+        //interim elements
 
-        Task<(TradeElement? newEntry, TradeElement? summary)> AddPositionAsync(string tradeId);
+        Task<(TradeElement? newEntry, TradeElement? summary)> AddInterimPositionAsync(string tradeId, bool isAdd);
 
-        Task<(TradeElement? newEntry, TradeElement? summary)> ReducePositionAsync(string tradeId);
-
-        Task<TradeElement?> RemoveInterimEntry(string tradeId, string tradeInputId);
+        Task<TradeElement?> RemoveInterimPositionAsync(string tradeId, string tradeInputId);
 
         //components
 

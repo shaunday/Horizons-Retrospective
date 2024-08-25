@@ -25,14 +25,8 @@ namespace DayJT.Web.API.Controllers.Journal
         public async Task<ActionResult<(TradeElementModel? newEntry, TradeElementModel? summary)>> AddInterimEntry(string tradeId, bool isAdd)
         {
             (TradeElement? newEntry, TradeElement? summary) entryAndSummary;
-            if (isAdd)
-            {
-                entryAndSummary = await _journalAccess.AddPositionAsync(tradeId);
-            }
-            else
-            {
-                entryAndSummary = await _journalAccess.ReducePositionAsync(tradeId);
-            }
+            entryAndSummary = await _journalAccess.AddInterimPositionAsync(tradeId, isAdd);
+
 
             (TradeElementModel?, TradeElementModel?) resAsModel =
                             (_mapper.Map<TradeElementModel>(entryAndSummary.newEntry), _mapper.Map<TradeElementModel>(entryAndSummary.summary));
@@ -43,7 +37,7 @@ namespace DayJT.Web.API.Controllers.Journal
         [HttpDelete("{tradeInputId}")]
         public async Task<ActionResult> DeleteInterimTradeInput(string tradeId, string tradeInputId)
         {
-            TradeElement? summary = await _journalAccess.RemoveInterimEntry(tradeId, tradeInputId);
+            TradeElement? summary = await _journalAccess.RemoveInterimPositionAsync(tradeId, tradeInputId);
 
             if (summary ==null)
             {
