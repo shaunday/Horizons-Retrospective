@@ -43,9 +43,9 @@ namespace DayJT.Web.API.Controllers.Journal
         [HttpDelete("{tradeInputId}")]
         public async Task<ActionResult> DeleteInterimTradeInput(string tradeId, string tradeInputId)
         {
-            (bool result, TradeElement? summary) = await _journalAccess.RemoveInterimEntry(tradeId, tradeInputId);
+            TradeElement? summary = await _journalAccess.RemoveInterimEntry(tradeId, tradeInputId);
 
-            if (!result)
+            if (summary ==null)
             {
                 return NotFound();
             }

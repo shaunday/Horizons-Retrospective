@@ -71,66 +71,40 @@ namespace DayJT.Journal.DataContext.Services
             return (totalCost, totalAmount, profit);
         }
 
-        internal static TradeElement? GetInterimSummary(TradeComposite trade)
+        internal static TradeElement GetInterimSummary(TradeComposite trade)
         {
-            TradeElement? summary = null;
-            if (trade != null)
+            var analytics = GetAvgEntryAndProfit(trade);
+
+            string averageEntry = string.Empty, totalAmount = string.Empty, totalCost = string.Empty;
+            if (analytics.totalCost > 0)
             {
-                var analytics = GetAvgEntryAndProfit(trade);
+                totalCost = analytics.totalCost.ToString();
 
-                string averageEntry = string.Empty, totalAmount = string.Empty, totalCost = string.Empty;
-                if (analytics.totalCost > 0)
+                if (analytics.totalAmount > 0)
                 {
-                    totalCost = analytics.totalCost.ToString();
-
-                    if (analytics.totalAmount > 0)
-                    {
-                        totalAmount = analytics.totalAmount.ToString();
-                        averageEntry = (analytics.totalCost / analytics.totalAmount).ToString();
-                    }
+                    totalAmount = analytics.totalAmount.ToString();
+                    averageEntry = (analytics.totalCost / analytics.totalAmount).ToString();
                 }
-
-                summary = new TradeElement(trade, TradeActionType.InterimSummary);
-                summary.Entries = SummaryPositionsFactory.GetSummaryComponents(summary, averageEntry, totalAmount, totalCost);
             }
+
+            TradeElement summary = new TradeElement(trade, TradeActionType.InterimSummary);
+            summary.Entries = SummaryPositionsFactory.GetSummaryComponents(summary, averageEntry, totalAmount, totalCost);
 
             return summary;
         }
 
-        internal static bool RemoveInterimInput(TradeComposite trade, string tradeInputId)
+        internal static void RemoveInterimInput(ref TradeComposite trade, string tradeInputId)
         {
-            if (trade != null)
+            var tradeInputToRemove = trade.TradeElements.Where(t => t.Id.ToString() == tradeInputId).SingleOrDefault();
+
+            if (tradeInputToRemove != null && (tradeInputToRemove.TradeActionType == TradeActionType.ReducePosition || tradeInputToRemove.TradeActionType == TradeActionType.ReducePosition))
             {
-                var tradeInputToRemove = trade.TradeElements.Where(t => t.Id.ToString() == tradeInputId).SingleOrDefault();
-
-                if (tradeInputToRemove != null && (tradeInputToRemove.TradeActionType == TradeActionType.ReducePosition || tradeInputToRemove.TradeActionType == TradeActionType.ReducePosition))
-                {
-                    trade.TradeElements.Remove(tradeInputToRemove);
-                    return true;
-                }
-                else
-                {
-                    throw new Exception("weird");
-                }
+                trade.TradeElements.Remove(tradeInputToRemove);
             }
-
-            return false;
-        }
-
-        internal static bool RemoveInterimInput(TradeComposite trade, TradeActionType tradeInputType)
-        {
-            if (trade != null)
+            else
             {
-                var tradeInputToRemove = trade.TradeElements.Where(t => t.TradeActionType == tradeInputType).SingleOrDefault();
-
-                if (tradeInputToRemove != null)
-                {
-                    trade.TradeElements.Remove(tradeInputToRemove);
-                    return true;
-                }
+                throw new Exception("weird");
             }
-
-            return false;
         }
     }
 }

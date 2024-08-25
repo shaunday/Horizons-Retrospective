@@ -14,13 +14,11 @@ namespace DayJT.Journal.DataContext.Services
 
         //inputs
 
-        Task<(TradeElement? element, TradeElement? summary)> GetTradeElement(string tradeId, string tradeElementId);
-
         Task<(TradeElement? newEntry, TradeElement? summary)> AddPositionAsync(string tradeId);
 
         Task<(TradeElement? newEntry, TradeElement? summary)> ReducePositionAsync(string tradeId);
 
-        Task<(bool result, TradeElement? summary)> RemoveInterimEntry(string tradeId, string tradeInputId);
+        Task<TradeElement?> RemoveInterimEntry(string tradeId, string tradeInputId);
 
         //components
 
