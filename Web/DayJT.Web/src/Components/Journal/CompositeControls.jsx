@@ -28,7 +28,7 @@ function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
   const handleActionClick = (action) => () => handleAction(action);
 
   return (
-    <div>
+    <>
       <div style={{ textAlign: "right", marginRight: "10px" }}>
         <button
           className="button-38"
@@ -57,7 +57,7 @@ function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
       </div>
       {processing && <div className="spinner">Processing...</div>}
       {success && <MemoizedSuccessMessage />}
-    </div>
+    </>
   );
 }
 

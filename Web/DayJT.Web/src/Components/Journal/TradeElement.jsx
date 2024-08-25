@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import Cell from "./Cell";
 import * as Constants from "@constants/journalConstants";
 
@@ -16,27 +16,38 @@ const listItemStyle = {
   borderRadius: "4px", // Optional: Adds rounded corners
 };
 
-function TradeElement({ tradeElement, onElementContentUpdate }) {
+function TradeElement({ tradeElement, onElementContentUpdate, collapsible }) {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   const initialEntriesValue = tradeElement[Constants.TRADE_ENTRIES_STRING];
 
   const processCellUpdate = useCallback(
     (data) => {
-      //todo handle inter-connectdness
+      //todo handle inter-connectedness
       onElementContentUpdate(data);
     },
     [onElementContentUpdate]
   );
 
+  const toggleCollapse = useCallback(() => {
+    setIsCollapsed((prev) => !prev);
+  }, []);
+
   return (
-    <div id="tradeElement">
+    <>
+      <div onClick={toggleCollapse} style={{ cursor: "pointer" }}>
+        {isCollapsed ? "▼" : "▲"}
+      </div>
       <ul style={listStyle}>
-        {initialEntriesValue.map((entry) => (
-          <li key={entry.id} style={listItemStyle}>
-            <Cell cellInfo={entry} onCellUpdate={processCellUpdate} />
-          </li>
-        ))}
+        {initialEntriesValue
+          .filter((entry) => !collapsible || entry.prop1) // Filter if collapsible is true, otherwise show all
+          .map((entry) => (
+            <li key={entry.id} style={listItemStyle}>
+              <Cell cellInfo={entry} onCellUpdate={processCellUpdate} />
+            </li>
+          ))}
       </ul>
-    </div>
+    </>
   );
 }
 

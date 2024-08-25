@@ -24,7 +24,7 @@ function TradeComposite({ tradeComposite }) {
   }, []);
 
   return (
-    <div id="tradeComposite">
+    <>
       <ul>
         {initialElementsValue.map((ele) => (
           <li key={ele.id}>
@@ -40,7 +40,7 @@ function TradeComposite({ tradeComposite }) {
         tradeComposite={tradeComposite}
         onTradeActionExecuted={processTradeAction}
       />
-    </div>
+    </>
   );
 }
 

@@ -1,11 +1,5 @@
 api access
 
-collapsability
-
-add interim (element)
-
-callback functions, memo
-
 rq: refetch inverval , background fetching notificaion, pagination ?
 
 log/console writes ups?

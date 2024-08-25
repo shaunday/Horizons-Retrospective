@@ -19,7 +19,7 @@ function Cell({ cellInfo, onCellUpdate }) {
   };
 
   return (
-    <div id="cell">
+    <>
       <div id="cellTitle">{cellInfo.ContentWrapper.Title}</div>
       <input
         id="cellInput"
@@ -32,7 +32,7 @@ function Cell({ cellInfo, onCellUpdate }) {
       />
       {processing && <div className="spinner">Processing...</div>}
       {success && <MemoizedSuccessMessage />}
-    </div>
+    </>
   );
 }
 
