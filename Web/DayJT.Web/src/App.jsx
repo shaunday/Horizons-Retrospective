@@ -1,9 +1,9 @@
 import "./App.css";
-import { useTrades } from "@hooks/useTrades";
+import { useAllTrades } from "@hooks/useAllTrades";
 import JournalContainer from "@views/JournalContainer";
 
 function App() {
-  const { trades } = useTrades();
+  const { allTradesQuery } = useAllTrades();
 
   //todo how to monitor status for multiple?
   if (trades.status === "pending") {

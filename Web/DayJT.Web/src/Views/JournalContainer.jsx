@@ -1,10 +1,7 @@
 import FilterControl from "@journalComponents/FilterControl";
 import TradeComposite from "@journalComponents/TradeComposite";
-import { useTrades } from "@hooks/useTrades";
 
-export default function JournalContainer() {
-  const { trades } = useTrades();
-
+export default function JournalContainer(trades) {
   return (
     <div id="journalMainBody">
       <FilterControl />
@@ -19,7 +16,7 @@ export default function JournalContainer() {
         className="button-38"
         type="button"
         style={{ justifyContent: "center" }}
-        onClick={addTrade}
+        onClick={addTradeInitiaded} //todo
       >
         Add a Trade
       </button>

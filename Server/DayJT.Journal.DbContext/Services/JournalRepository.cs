@@ -20,25 +20,21 @@ namespace DayJT.Journal.DataContext.Services
 
         //Trade Composite 
 
-        public async Task<TradeComposite> GetTradeCompositeByCounterAsync(string counter)
+        public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
         {
-            if (!int.TryParse(counter, out int parsedCounter))
-            {
-                throw new ArgumentException($"The TradeCounter '{counter}' is not a valid integer.", nameof(counter));
-            }
+            //collection to start from
+            var collection = dataContext.AllTradeComposites as IQueryable<TradeComposite>;
 
-            var trade = await dataContext.AllTradeComposites
-                                         .OrderBy(t => t.Id)  // Order by the actual ID to ensure correct sequential order
-                                         .Skip(parsedCounter - 1)    // Skip to the correct position (counter is 1-based)
-                                         .Take(1)              // Take one element from the sequence
-                                         .SingleOrDefaultAsync();
+            var totalItemCount = await collection.CountAsync();
 
-            if (trade == null)
-            {
-                throw new InvalidOperationException($"Trade with counter {counter} not found.");
-            }
+            var paginationMetadata = new PaginationMetadata(totalItemCount, pageSize, pageNumber);
 
-            return trade!;
+            var collectionToReturn = await collection.OrderBy(t => t.CreatedAt)
+                .Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (collectionToReturn, paginationMetadata);
         }
 
 
