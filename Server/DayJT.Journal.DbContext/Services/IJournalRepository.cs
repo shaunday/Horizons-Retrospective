@@ -6,7 +6,7 @@ namespace DayJT.Journal.DataContext.Services
     {
         //composites
 
-        Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10);
+        Task<TradeComposite> GetTradeCompositeByCounterAsync(string counter);
 
         Task<TradeComposite> AddTradeCompositeAsync();
 

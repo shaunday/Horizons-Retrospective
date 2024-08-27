@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using DayJT.Journal.DataContext.Services;
+using DayJTrading.Web.API.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DayJT.Web.API.Controllers.Journal
 {
-    public class JournalControllerBase : ControllerBase
+    public class JournalControllerBase : DayJControllerBase
     {
         protected readonly IJournalRepository _journalAccess;
         protected readonly ILogger<JournalControllerBase> _logger;

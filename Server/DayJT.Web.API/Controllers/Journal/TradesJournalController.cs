@@ -22,26 +22,6 @@ namespace DayJT.Web.API.Controllers.Journal
                                                                                                     base(journalAccess, logger, mapper) { }
         #endregion
 
-        #region Getters
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(int pageNumber = 1, int pageSize = 10)
-        {
-            if (pageSize > maxTradesPageSize)
-            {
-                pageSize = maxTradesPageSize;
-            }
-
-            var (tradesEntities, paginationMetadata) = await _journalAccess.GetAllTradeCompositesAsync(pageNumber, pageSize);
-
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
-
-            IEnumerable<TradeCompositeModel> resAsModels = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradesEntities);
-
-            return Ok(resAsModels);
-        }
-
-        #endregion
-
         [HttpPost]
         public async Task<ActionResult<TradeCompositeModel>> AddTrade()
         {

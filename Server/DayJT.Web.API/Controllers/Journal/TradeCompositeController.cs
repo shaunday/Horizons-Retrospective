@@ -19,6 +19,16 @@ namespace DayJT.Web.API.Controllers.Journal
         { }
         #endregion
 
+        [HttpGet]
+        public async Task<ActionResult<TradeComposite>> GetTradeByCounter(string tradeId)
+        {
+            TradeComposite trade = await _journalAccess.GetTradeCompositeByCounterAsync(tradeId);
+
+            TradeCompositeModel resAsModel =  _mapper.Map<TradeCompositeModel>(trade);
+
+            return ResultHandling(resAsModel, $"Could get trade by counter : {tradeId}");
+        }
+
         #region Add / Delete
 
         [HttpPost]

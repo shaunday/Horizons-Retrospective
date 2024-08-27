@@ -1,4 +1,5 @@
 ﻿using DayJT.Journal.Data;
+using DayJTrading.Common.Extenders;
 using DayJTrading.Journal.Data;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.EntityFrameworkCore;
@@ -12,55 +13,48 @@ namespace DayJT.Journal.DataContext.Services
     {
         private readonly TradingJournalDataContext dataContext;
 
-        #region Ctor
-
         public JournalRepository(TradingJournalDataContext journalDbContext)
         {
             dataContext = journalDbContext ?? throw new ArgumentNullException(nameof(journalDbContext));
-
         }
-        #endregion
 
-        #region Trade Composite 
+        //Trade Composite 
+
+        public async Task<TradeComposite> GetTradeCompositeByCounterAsync(string counter)
+        {
+            if (!int.TryParse(counter, out int parsedCounter))
+            {
+                throw new ArgumentException($"The TradeCounter '{counter}' is not a valid integer.", nameof(counter));
+            }
+
+            var trade = await dataContext.AllTradeComposites
+                                         .OrderBy(t => t.Id)  // Order by the actual ID to ensure correct sequential order
+                                         .Skip(parsedCounter - 1)    // Skip to the correct position (counter is 1-based)
+                                         .Take(1)              // Take one element from the sequence
+                                         .SingleOrDefaultAsync();
+
+            if (trade == null)
+            {
+                throw new InvalidOperationException($"Trade with counter {counter} not found.");
+            }
+
+            return trade!;
+        }
+
 
         public async Task<TradeComposite> AddTradeCompositeAsync()
         {
             TradeComposite trade = new TradeComposite();
-            try
-            {
-                TradeElement originElement = new TradeElement(trade, TradeActionType.Origin);
-                trade.TradeElements.Add(originElement);
 
-                dataContext.AllTradeComposites.Add(trade);
-                await dataContext.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                string t = ex.ToString();
-            }
+            TradeElement originElement = new TradeElement(trade, TradeActionType.Origin);
+            trade.TradeElements.Add(originElement);
+
+            dataContext.AllTradeComposites.Add(trade);
+            await dataContext.SaveChangesAsync();
             return trade;
         }
 
-        public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
-        {
-            //collection to start from
-            var collection = dataContext.AllTradeComposites as IQueryable<TradeComposite>;
-
-            var totalItemCount = await collection.CountAsync();
-
-            var paginationMetadata = new PaginationMetadata(totalItemCount, pageSize, pageNumber);
-
-            var collectionToReturn = await collection.OrderBy(t => t.CreatedAt)
-                .Skip(pageSize * (pageNumber - 1))
-                .Take(pageSize)
-                .ToListAsync();
-
-            return (collectionToReturn, paginationMetadata);
-        }
-
-        #endregion
-
-        #region Trade Elements 
+        //Trade Elements 
 
         public async Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
@@ -68,15 +62,12 @@ namespace DayJT.Journal.DataContext.Services
             TradeElement tradeInput = new TradeElement(trade, isAdd? TradeActionType.AddPosition : TradeActionType.ReducePosition);
 
             trade.TradeElements.Add(tradeInput);
-            TradeElement newSummary = JournalRepoHelpers.GetInterimSummary(trade);
+            UpdateSummary(ref trade);
 
-            trade.Summary = newSummary;
-            await dataContext.SaveChangesAsync();
-
-            return (tradeInput, newSummary);
+            return (tradeInput, trade.Summary);
         }
 
-        public async Task<TradeElement?> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
+        public async Task<TradeElement> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
             if (trade.TradeElements.Count <= 1)
@@ -84,20 +75,20 @@ namespace DayJT.Journal.DataContext.Services
                 throw new InvalidOperationException($"No entries to remove on trade ID {tradeId} .");
             }
             JournalRepoHelpers.RemoveInterimInput(ref trade, tradeInputId);
-            TradeElement summary = JournalRepoHelpers.GetInterimSummary(trade);
-            trade.Summary = summary;
+            UpdateSummary(ref trade);
 
-            await dataContext.SaveChangesAsync();
-
-            return summary;
+            return trade.Summary;
         }
 
-        #endregion
-
-        #region Entries Update
+        //Entries Update
 
         public async Task<(Cell updatedCell, TradeElement? summary)> UpdateCellContent(string componentId, string newContent, string changeNote)
         {
+            if (!componentId.IsValidInteger())
+            {
+                throw new ArgumentException($"The EntryId '{componentId}' is not a valid integer.", nameof(componentId));
+            }
+
             var cell = await dataContext.AllEntries.Where(t => t.Id.ToString() == componentId).SingleOrDefaultAsync();
             if (cell == null)
             {
@@ -110,8 +101,7 @@ namespace DayJT.Journal.DataContext.Services
             if (cell.IsRelevantForOverview)
             {
                 var trade = cell.TradeElementRef.TradeCompositeRef;
-                summary = JournalRepoHelpers.GetInterimSummary(trade);
-                trade.Summary = summary;
+                summary = UpdateSummary(ref trade);
             }
 
             await dataContext.SaveChangesAsync();
@@ -119,9 +109,7 @@ namespace DayJT.Journal.DataContext.Services
             return (cell, summary);
         }
 
-        #endregion
-
-        #region Closure
+        //Closure
 
         public async Task<TradeElement> CloseAsync(string tradeId, string closingPrice)
         {
@@ -132,18 +120,26 @@ namespace DayJT.Journal.DataContext.Services
             var tradeInput = JournalRepoHelpers.CreateTradeElementForClosure(trade, closingPrice, analytics);
             trade.TradeElements.Add(tradeInput);
 
-            // Generate summary based on updated trade
-            trade.Summary = JournalRepoHelpers.GetInterimSummary(trade);
-
-            await dataContext.SaveChangesAsync();
+            UpdateSummary(ref trade);
 
             return trade.Summary!;
         }
 
-        #endregion
+        private TradeElement UpdateSummary(ref TradeComposite trade)
+        {
+            TradeElement summary = JournalRepoHelpers.GetInterimSummary(trade);
+            trade.Summary = summary;
+
+            return summary;
+        }
 
         private async Task<TradeComposite> GetTradeCompositeAsync(string tradeId)
         {
+            if (!tradeId.IsValidInteger())
+            {
+                throw new ArgumentException($"The tradeId '{tradeId}' is not a valid integer.", nameof(tradeId));
+            }
+
             var trade = await dataContext.AllTradeComposites.Where(t => t.Id.ToString() == tradeId).SingleOrDefaultAsync();
 
             if (trade == null)

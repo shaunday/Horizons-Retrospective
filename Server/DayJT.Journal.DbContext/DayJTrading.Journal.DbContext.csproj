@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DayJT.Journal.Data\DayJTrading.Journal.Data.csproj" />
+    <ProjectReference Include="..\DayJTrading.Common\DayJTrading.Common.csproj" />
   </ItemGroup>
 
 </Project>
