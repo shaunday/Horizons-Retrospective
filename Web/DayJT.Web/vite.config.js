@@ -11,7 +11,6 @@ export default defineConfig({
         '@journalComponents': path.resolve(__dirname, 'src/Components/Journal'),
         '@views': path.resolve(__dirname, 'src/Views'),
         '@hooks': path.resolve(__dirname, 'src/Hooks/Journal'),
-        '@journalHooks': path.resolve(__dirname, 'src/Hooks/Journal'),
         '@services': path.resolve(__dirname, 'src/Services'),
         '@constants': path.resolve(__dirname, 'src/Constants'),
     },
