@@ -1,56 +1,68 @@
-import { useState } from 'react';
-import * as Constants from '@constants/constants';
-import { getTradeById, addTradeComposite} from '@services/tradesApiAccess';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from "react";
+import * as Constants from "@constants/constants";
+import { getTradeById, addTradeComposite } from "@services/tradesApiAccess";
+import { useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
 
-function useTrades() {
-    const queryClient = useQueryClient();
-    const [tradeIdCounter, setTradeIdCounter] = useState(1); // Start with ID 1
+function useTrades(tradeClientIds, isAddTrade, onTradeAdded) {
+  const queryClient = useQueryClient();
+  const [tradeIdCounter, setTradeIdCounter] = useState(0);
+  const [isAddingTrade, setIsAddingTrade] = useState(false);
 
-    // Fetch trade by ID
-    const fetchTradeById = async (id) => {
-        const response = await getTradeById(id);
-        return response.data;
+  // Function to update the trade data in the cache
+  function saveTrade(clientId, data) {
+    const updatedData = {
+      ...data,
+      [Constants.TRADE_CLIENTID_PROP_STRING]: clientId,
     };
-    
-    // Fetch the trade corresponding to the current incremental ID
-    const { data: trades } = useQuery({
-        queryKey: [Constants.TRADE_KEY, tradeIdCounter],
-        queryFn: async () => await fetchTradeById(tradeIdCounter),
-        onSuccess: (data) => {
-            const updatedData = {
-                ...data,
-                [Constants.TRADE_CLIENTID_PROP_STRING]: tradeIdCounter,
-            };
-            
-            // Update the cache with the new data
-            queryClient.setQueryData([Constants.TRADE_KEY, tradeIdCounter], updatedData);
-    
-            // Increment the ID for the next fetch
-            setTradeIdCounter((prevId) => prevId + 1);
-        },
-        keepPreviousData: true  
-        });
 
-    // Mutation to add a new trade
-    const addTradeMutation = useMutation(
-        async () => await addTradeComposite(), 
-        {
-            onSuccess: (data) => {
-                // Update the cache with the new trade
-                queryClient.setQueryData([Constants.TRADE_KEY, tradeIdCounter], (oldTrades = []) => {
-                    return [...oldTrades, data]; // Append the new trade to the existing trades
-                });
-                setTradeIdCounter((prevId) => prevId + 1);
-            },
-            onError: (error) => {
-                console.error('Error adding trade:', error);
-            }
-        }
-    );
+    // Update the cache with the new data
+    queryClient.setQueryData([Constants.TRADE_KEY, clientId], updatedData);
+  }
 
-    return {
-        trades,       // List of trades from the cache
-        addTrade: addTradeMutation.mutate, // Function to add a new trade
-    };
+  // Define queries for fetching trades
+  const queries = tradeClientIds.map((clientId) => ({
+    queryKey: [Constants.TRADE_KEY, clientId],
+    queryFn: async () => await getTradeById(clientId),
+    onSuccess: (data) => saveTrade(clientId, data),
+    keepPreviousData: true,
+  }));
+
+  // Execute all queries
+  const results = useQueries(queries);
+
+  // Extract trade data from the results
+  const trades = results
+    .map((result) => result.data)
+    .filter((data) => data !== undefined);
+
+  // useQuery for adding a trade, based on `isAddTrade` flag
+  const { data: addTradeData } = useQuery({
+    queryKey: [Constants.TRADE_KEY, tradeIdCounter],
+    queryFn: async () => {
+      setIsAddingTrade(true); // Start adding trade
+      const trade = await addTradeComposite();
+      setIsAddingTrade(false); // Finish adding trade
+      return trade;
+    },
+    enabled: isAddTrade && !isAddingTrade,
+    onSuccess: (data) => {
+      if (data) {
+        saveTrade(tradeIdCounter, data);
+        // Call onTradeAdded callback
+        onTradeAdded();
+        setTradeIdCounter((prevId) => prevId + 1); // Increment the counter
+      }
+    },
+    onError: () => {
+      setIsAddingTrade(false); // Ensure state is reset on error
+    },
+  });
+
+  return {
+    trades,
+    addTradeData,
+    isAddingTrade,
+  };
 }
+
+export default useTrades;

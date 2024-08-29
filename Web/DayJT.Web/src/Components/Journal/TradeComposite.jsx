@@ -1,25 +1,29 @@
 import { useState } from "react";
 import TradeElement from "./TradeElement";
 import CompositeControls from "./CompositeControls";
-import { useEntryUpdate } from "@hooks/useTradeUpdate";
+import { useCacheUpdatedEntry } from "@hooks/useTradeUpdate";
+import { useCacheNewElement } from "@hooks/useCacheNewElement";
+
 import * as Constants from "@constants/journalConstants";
 
 function TradeComposite({ tradeComposite }) {
-  const initialTradeSummaryValue =
-    tradeComposite[Constants.TRADE_SUMMARY_STRING];
   const initialElementsValue = tradeComposite[Constants.TRADE_ELEMENTS_STRING];
 
-  const [tradeSummary, setTradeSummary] = useState(initialTradeSummaryValue);
+  const [tradeSummary, setTradeSummary] = useState(
+    tradeComposite[Constants.TRADE_SUMMARY_STRING]
+  );
 
-  const entryUpdate = useEntryUpdate(tradeComposite);
-
+  const entryUpdate = useCacheUpdatedEntry(tradeComposite);
   const processEntryUpdate = useCallback(({ updatedEntry, newSummary }) => {
     entryUpdate(updatedEntry);
     setTradeSummary(newSummary);
   }, []);
 
+  const { onElementUpdate } = useCacheNewElement();
   const processTradeAction = useCallback(({ newElement, newSummary }) => {
-    // todo add to composite
+    if (!!newElement) {
+      onElementUpdate(newElement);
+    }
     setTradeSummary(newSummary);
   }, []);
 

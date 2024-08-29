@@ -40,7 +40,10 @@ function TradeElement({ tradeElement, onElementContentUpdate, collapsible }) {
       </div>
       <ul style={listStyle}>
         {initialEntriesValue
-          .filter((entry) => !collapsible || entry.prop1) // Filter if collapsible is true, otherwise show all
+          .filter(
+            (entry) =>
+              !collapsible || entry[Constants.RELEVANT_FOR_ORVERVIEW_STRING]
+          ) // Filter if collapsible is true, otherwise show all
           .map((entry) => (
             <li key={entry.id} style={listItemStyle}>
               <Cell cellInfo={entry} onCellUpdate={processCellUpdate} />

@@ -2,13 +2,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import { produce } from "immer";
 import * as Constants from "@constants/constants";
 
-export function useAddElement(element) {
+export function useCacheUpdatedEntry(tradeComposite) {
   const queryClient = useQueryClient();
+  const clientIdValue = tradeComposite[Constants.TRADE_CLIENT_ID_PROPERTY];
 
-  const onElementUpdate = (data) => {
+  const onEntryUpdate = (data) => {
     const { updatedEntry } = data;
-    const clientIdValue = tradeComposite[Constants.TRADE_CLIENT_ID_PROPERTY];
-
     queryClient.setQueryData(
       [Constants.TRADE_KEY, clientIdValue],
       (oldTradeComposite) =>
@@ -28,5 +27,5 @@ export function useAddElement(element) {
     );
   };
 
-  return { onElementUpdate };
+  return { onEntryUpdate };
 }

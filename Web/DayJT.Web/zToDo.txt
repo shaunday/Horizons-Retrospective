@@ -1,6 +1,6 @@
 api access
 
-rq: refetch inverval , background fetching notificaion, pagination ?
+rq: refetch inverval , cache time, stale time, background fetching notificaion, pagination ?
 
 log/console writes ups?
 

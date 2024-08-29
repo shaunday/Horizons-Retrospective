@@ -63,7 +63,7 @@ namespace DayJT.Web.API.Controllers.Journal
         #region Closure
 
         [HttpPost("close/{closingPrice}")]
-        public async Task<ActionResult<bool>> CloseTrade(string tradeId, string closingPrice)
+        public async Task<ActionResult<(TradeElementModel? filler, TradeElementModel summary)>> CloseTrade(string tradeId, string closingPrice)
         {
             TradeElement summary = await _journalAccess.CloseAsync(tradeId, closingPrice);
 
@@ -73,8 +73,8 @@ namespace DayJT.Web.API.Controllers.Journal
             }
 
             TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
-
-            return ResultHandling(resAsModel, $"Could not delete interim element on : {tradeId}");
+            TradeElement filler = null;
+            return ResultHandling((filler, resAsModel), $"Could not delete interim element on : {tradeId}");
         }
 
         #endregion

@@ -1,25 +1,26 @@
+import { useState } from "react";
 import FilterControl from "@journalComponents/FilterControl";
-import TradeComposite from "@journalComponents/TradeComposite";
+import TradesContainer from "@journalComponents/TradesContainer";
 import { useTrades } from "@hooks/useTrades";
 
 export default function JournalContainer() {
-  const { trades } = useTrades();
+  const [isAddTrade, setIsAddTrade] = useState(false);
+
+  const { trades, addTradeData, isAddingTrade } = useTrades(
+    IDS,
+    isAddTrade,
+    () => setIsAddTrade(false) // onTradeAdded callback
+  );
 
   return (
     <div id="journalMainBody">
       <FilterControl />
-      <ul>
-        {trades.map((composite) => (
-          <li key={composite.id}>
-            <TradeComposite tradeComposite={composite} />
-          </li>
-        ))}
-      </ul>
+      <TradesContainer trades={trades} />
       <button
         className="button-38"
         type="button"
         style={{ justifyContent: "center" }}
-        onClick={addTrade}
+        onClick={() => setIsAddTrade(true)}
       >
         Add a Trade
       </button>
