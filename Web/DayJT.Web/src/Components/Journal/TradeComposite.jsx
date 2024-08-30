@@ -3,23 +3,28 @@ import TradeElement from "./TradeElement";
 import CompositeControls from "./CompositeControls";
 import { useCacheUpdatedEntry } from "@hooks/useTradeUpdate";
 import { useCacheNewElement } from "@hooks/useCacheNewElement";
-
+import { useQuery } from "@tanstack/react-query";
+import { getTradeQueryConfig } from "@servies/tradeQueryHelper"; //
 import * as Constants from "@constants/journalConstants";
 
 function TradeComposite({ tradeComposite }) {
-  const initialElementsValue = tradeComposite[Constants.TRADE_ELEMENTS_STRING];
+  const tradeQueryConfig = getTradeQueryConfig(
+    tradeComposite[Constants.TRADE_CLIENT_ID_PROPERTY],
+    tradeComposite
+  );
+  const { cachedTradeComposite } = useQuery(tradeQueryConfig);
 
   const [tradeSummary, setTradeSummary] = useState(
-    tradeComposite[Constants.TRADE_SUMMARY_STRING]
+    useCacheTradeComposite[Constants.TRADE_SUMMARY_STRING]
   );
 
-  const entryUpdate = useCacheUpdatedEntry(tradeComposite);
+  const entryUpdate = useCacheUpdatedEntry(useCacheTradeComposite);
   const processEntryUpdate = useCallback(({ updatedEntry, newSummary }) => {
     entryUpdate(updatedEntry);
     setTradeSummary(newSummary);
   }, []);
 
-  const { onElementUpdate } = useCacheNewElement();
+  const { onElementUpdate } = useCacheNewElement(cachedTradeComposite);
   const processTradeAction = useCallback(({ newElement, newSummary }) => {
     if (!!newElement) {
       onElementUpdate(newElement);
@@ -30,7 +35,7 @@ function TradeComposite({ tradeComposite }) {
   return (
     <>
       <ul>
-        {initialElementsValue.map((ele) => (
+        {cachedTradeComposite[Constants.TRADE_ELEMENTS_STRING].map((ele) => (
           <li key={ele.id}>
             <TradeElement
               tradeElement={ele}
@@ -41,7 +46,7 @@ function TradeComposite({ tradeComposite }) {
       </ul>
       {tradeSummary && <TradeElement tradeElement={tradeSummary} />}
       <CompositeControls
-        tradeComposite={tradeComposite}
+        tradeComposite={cachedTradeComposite}
         onTradeActionExecuted={processTradeAction}
       />
     </>

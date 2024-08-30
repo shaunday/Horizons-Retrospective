@@ -29,7 +29,7 @@ namespace DayJT.Journal.DataContext.Services
 
             var trade = await dataContext.AllTradeComposites
                                          .OrderBy(t => t.Id)  // Order by the actual ID to ensure correct sequential order
-                                         .Skip(parsedCounter - 1)    // Skip to the correct position (counter is 1-based)
+                                         .Skip(parsedCounter )   
                                          .Take(1)              // Take one element from the sequence
                                          .SingleOrDefaultAsync();
 
