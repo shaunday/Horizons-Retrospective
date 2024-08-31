@@ -1,0 +1,13 @@
+### Fetch Flow and Cache Management
+
+1. **Initial Data Load (`useFetchAndCacheTrades`):**
+   - Fetches all trades on app start or refocus.
+   - Caches trade IDs and individual trades.
+
+2. **Trade Data Fetching (`useTrade`):**
+   - Retrieves trade data from the cache or fetches if missing.
+   - Updates cache with new data if fetched.
+
+3. **Adding Trades (`useAddTrade`):**
+   - Handles new trade submissions.
+   - Updates both the trade IDs list and individual trade caches.

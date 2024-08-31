@@ -1,26 +1,19 @@
-import { useState } from "react";
 import FilterControl from "@journalComponents/FilterControl";
 import TradesContainer from "@journalComponents/TradesContainer";
-import { useTrades } from "@hooks/useTrades";
+import { useAddTrade } from "@hooks/useAddTrade";
 
 export default function JournalContainer() {
-  const [isAddTrade, setIsAddTrade] = useState(false);
-
-  const { trades, addTradeData, isAddingTrade } = useTrades(
-    IDS,
-    isAddTrade,
-    () => setIsAddTrade(false) // onTradeAdded callback
-  );
+  const { addTrade } = useAddTrade();
 
   return (
     <div id="journalMainBody">
       <FilterControl />
-      <TradesContainer trades={trades} />
+      <TradesContainer />
       <button
         className="button-38"
         type="button"
         style={{ justifyContent: "center" }}
-        onClick={() => setIsAddTrade(true)}
+        onClick={addTrade}
       >
         Add a Trade
       </button>

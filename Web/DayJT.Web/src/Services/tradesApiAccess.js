@@ -8,6 +8,10 @@ const componentsClient = axios.create(baseURL + componentsUrl);
 const tradesClient = axios.create(baseURL + tradesUrl);
 
 
+export async function getAllTrades() {
+    return await tradesClient.get();
+}
+
  export async function getTradeById(clientId) {
      return await tradesClient.get(clientId)
  }

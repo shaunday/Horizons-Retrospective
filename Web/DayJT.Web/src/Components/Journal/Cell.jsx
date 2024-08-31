@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useContentUpdateMutation } from "@hooks/useContentUpdateMutation";
+import { useContentUpdateMutation } from "@hooks/Entry/useContentUpdateMutation";
 import SuccessMessage from "@components/SuccessMessage";
 
 const MemoizedSuccessMessage = React.memo(SuccessMessage);

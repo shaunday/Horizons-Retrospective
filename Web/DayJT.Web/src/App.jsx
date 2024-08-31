@@ -1,8 +1,11 @@
 import "./App.css";
-import { useTrades } from "@hooks/useTrades";
+import { useFetchAndCacheTrades } from "@hooks/useFetchAndCacheTrades";
 import JournalContainer from "@views/JournalContainer";
 
 function App() {
+  const { isLoading: isFetchingTrades, isError: errorFetchingTrades } =
+    useFetchAndCacheTrades();
+
   return (
     <div id="vwrapper">
       <div id="header">Header placeholder</div>
