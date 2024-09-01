@@ -1,11 +1,7 @@
-api access
-
 rq: refetch inverval , cache time, stale time, background fetching notificaion, pagination ?
 
 log/console writes ups?
 
 
-
-## TODO
 
  -[] error management - sentry? error boundaries?

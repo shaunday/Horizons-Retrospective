@@ -1,7 +1,4 @@
-﻿closure flow (return new summary)
-
-
-how to version dbs
+﻿how to version dbs
 security best practices
 testing
 

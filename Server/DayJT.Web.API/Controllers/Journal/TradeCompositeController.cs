@@ -19,20 +19,10 @@ namespace DayJT.Web.API.Controllers.Journal
         { }
         #endregion
 
-        [HttpGet]
-        public async Task<ActionResult<TradeComposite>> GetTradeByCounter(string tradeId)
-        {
-            TradeComposite trade = await _journalAccess.GetTradeCompositeByCounterAsync(tradeId);
-
-            TradeCompositeModel resAsModel =  _mapper.Map<TradeCompositeModel>(trade);
-
-            return ResultHandling(resAsModel, $"Could get trade by counter : {tradeId}");
-        }
-
         #region Add / Delete
 
         [HttpPost]
-        public async Task<ActionResult<(TradeElementModel newEntry, TradeElementModel summary)>> AddInterimEntry(string tradeId, bool isAdd)
+        public async Task<ActionResult<(TradeElementModel newEntry, TradeElementModel summary)>> AddReduceInterimPosition(string tradeId, bool isAdd)
         {
             (TradeElement newEntry, TradeElement summary) entryAndSummary;
             entryAndSummary = await _journalAccess.AddInterimPositionAsync(tradeId, isAdd);
@@ -62,7 +52,7 @@ namespace DayJT.Web.API.Controllers.Journal
 
         #region Closure
 
-        [HttpPost("close/{closingPrice}")]
+        [HttpPost("close")]
         public async Task<ActionResult<(TradeElementModel? filler, TradeElementModel summary)>> CloseTrade(string tradeId, string closingPrice)
         {
             TradeElement summary = await _journalAccess.CloseAsync(tradeId, closingPrice);

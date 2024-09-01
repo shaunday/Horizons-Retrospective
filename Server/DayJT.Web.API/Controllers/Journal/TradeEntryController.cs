@@ -6,7 +6,7 @@ using DayJT.Journal.DataContext.Services;
 
 namespace DayJT.Web.API.Controllers.Journal
 {
-    [Route("api/v{version:apiVersion}/journal/trades/components")]
+    [Route("api/v{version:apiVersion}/journal/components")]
     [ApiVersion("1.0")]
     [ApiController]
     public class ContentUpdateController : JournalControllerBase
