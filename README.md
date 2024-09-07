@@ -23,15 +23,16 @@ TBD2: Trade alerts, based on current price action + indicators.
    - Handles new trade submissions.
    - Updates both the trade IDs list and individual trade caches.
 
-## Part2: Server; PostgreSQL DB, EF, ASP.NET Core, REST API
+## Part2: Server; PostgreSQL, EF, ASP.NET Core, REST API
 ### Data Structure:
 
-Each Trade Position composed of elements  (origin,entry,exit,etc)
+Each Trade Position composed of elements  (origin, entry, exit, etc.)
 
-Each element's line composed of cells
+Each element's line is composed of cell objects
 
-TradeComposite: List<TradeElement>
-TradeElement: List<InfoCell>
+TradeComposite: List <TradeElement>
+
+TradeElement: List <InfoCell>
 
 TradeComposite:  
 
