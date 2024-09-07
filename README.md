@@ -4,7 +4,7 @@ TBD1: Filtering of trades, Positions/allocations pie charts
 TBD2: Trade alerts, based on current price action + indicators.
 
 ## Part 1: Client; React 18, SAA
-### Fetch Flow and Cache Management
+### Fetch Flow and Cache Management:
 
 1. **Initial Data Prefetch in App.Js (`useFetchAndCacheTrades`):**
    - Fetches all trades on app start or refocus.
@@ -22,7 +22,7 @@ TBD2: Trade alerts, based on current price action + indicators.
    - Updates both the trade IDs list and individual trade caches.
 
 ## Part2: Server; PostgreSQL DB, EF, ASP.NET Core, REST API
-### Data Structure
+### Data Structure:
 
 Each Trade Position composed of elements  (origin,entry,exit,etc)
 
