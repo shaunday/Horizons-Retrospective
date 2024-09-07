@@ -1,5 +1,6 @@
 ## Overview: 
 A trading Journal, will allow the user to add and manage ongoing trade positions.
+
 TBD1: Filtering of trades, Positions/allocations pie charts
 TBD2: Trade alerts, based on current price action + indicators.
 
