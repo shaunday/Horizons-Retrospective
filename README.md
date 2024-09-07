@@ -30,8 +30,11 @@ Each element's line composed of cells
 TradeComposite: List<TradeElement>
 TradeElement: List<InfoCell>
 
-TradeComposite:  (Origin)    [ ] [ ] [ ] [ ]
+TradeComposite:  
+                  (Origin)    [ ] [ ] [ ] [ ]
+
                  (Entry)     [ ] [ ] [ ] [ ]
+                 
                  (Reduction) [ ] [ ] [ ] [ ]
 
                  (Summary)   [ ] [ ] [ ] [ ] 
