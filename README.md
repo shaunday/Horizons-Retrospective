@@ -1,5 +1,5 @@
 ## Overview: 
-A trading Journal, will allow the user to add and manage ongoing trade positions.
+An online Trading Journal, will allow the user to add and manage ongoing trade positions.
 
 TBD1: Filtering of trades, Positions/allocations pie charts
 
