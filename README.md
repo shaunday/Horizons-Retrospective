@@ -30,9 +30,9 @@ Each Trade Position composed of elements  (origin, entry, exit, etc.)
 
 Each element's line is composed of cell objects
 
-TradeComposite: List <TradeElement>
+TradeComposite: List<TradeElement>
 
-TradeElement: List <InfoCell>
+TradeElement: List<InfoCell>
 
 TradeComposite:  
 
