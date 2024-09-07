@@ -31,7 +31,8 @@ TradeComposite: List<TradeElement>
 TradeElement: List<InfoCell>
 
 TradeComposite:  
-                  (Origin)    [ ] [ ] [ ] [ ]
+
+                (Origin)    [ ] [ ] [ ] [ ]
 
                  (Entry)     [ ] [ ] [ ] [ ]
                  
