@@ -25,6 +25,7 @@ TBD2: Trade alerts, based on current price action + indicators.
 ### Data Structure
 
 Each Trade Position composed of elements  (origin,entry,exit,etc)
+
 Each element's line composed of cells
 
 TradeComposite: List<TradeElement>
