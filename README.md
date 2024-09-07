@@ -33,7 +33,7 @@ TradeElement: List<InfoCell>
 
 TradeComposite:  
 
-                (Origin)    [ ] [ ] [ ] [ ]
+                 (Origin)    [ ] [ ] [ ] [ ]
 
                  (Entry)     [ ] [ ] [ ] [ ]
                  
