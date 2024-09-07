@@ -26,9 +26,9 @@ TBD2: Trade alerts, based on current price action + indicators.
 ## Part2: Server; PostgreSQL, EF, ASP.NET Core, REST API
 ### Data Structure:
 
-Each Trade Position composed of elements  (origin, entry, exit, etc.)
+Each Trade Position composed of Elements  (origin, entry, exit, etc.)
 
-Each element's line is composed of cell objects
+Each Element (line) is composed of Entry (cell) objects
 
 TradeComposite:  
 
