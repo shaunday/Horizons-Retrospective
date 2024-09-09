@@ -3,8 +3,7 @@ import { useFetchAndCacheTrades } from "@hooks/useFetchAndCacheTrades";
 import JournalContainer from "@views/JournalContainer";
 
 function App() {
-  const { isLoading: isFetchingTrades, isError: errorFetchingTrades } =
-    useFetchAndCacheTrades();
+  const tradesQuery = useFetchAndCacheTrades();
 
   return (
     <div id="vwrapper">
@@ -13,7 +12,7 @@ function App() {
         <div className="flexChildCenter gotRightSideNeighbour">
           Metrics placeholder
         </div>
-        <JournalContainer trades={allTradesQuery.data} />
+        <JournalContainer tradesQuery={tradesQuery} />
       </div>
       <div id="footer">Footer placeholder</div>
     </div>

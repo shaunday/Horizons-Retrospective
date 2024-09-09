@@ -2,8 +2,22 @@ import FilterControl from "@journalComponents/FilterControl";
 import TradesContainer from "@journalComponents/TradesContainer";
 import { useAddTrade } from "@hooks/useAddTrade";
 
-export default function JournalContainer() {
+function JournalContainer() {
+  const { tradesQuery } = useFetchAndCacheTrades();
+  const { isLoading, isError, trades } = tradesQuery;
   const { addTrade } = useAddTrade();
+
+  if (isLoading) {
+    return <div>Loading trades...</div>;
+  }
+
+  if (isError) {
+    return <div>Error fetching trades. Please try again later.</div>;
+  }
+
+  if (!trades || trades.length === 0) {
+    return <div>No trades available.</div>;
+  }
 
   return (
     <div id="journalMainBody">
@@ -20,3 +34,5 @@ export default function JournalContainer() {
     </div>
   );
 }
+
+export default JournalContainer;

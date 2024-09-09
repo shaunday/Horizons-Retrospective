@@ -6,11 +6,7 @@ export function useFetchAndCacheTrades() {
   const queryClient = useQueryClient();
 
   // Fetch all trades
-  const {
-    data: trades,
-    isLoading,
-    isError,
-  } = useQuery({
+  const tradesQuery = useQuery({
     queryKey: [Constants.TRADES_ARRAY_KEY],
     queryFn: getAllTrades,
     onSuccess: (fetchedTrades) => {
@@ -28,9 +24,5 @@ export function useFetchAndCacheTrades() {
     },
   });
 
-  return {
-    isLoading,
-    isError,
-    trades, // Optionally return the fetched trades if needed
-  };
+  return tradesQuery;
 }

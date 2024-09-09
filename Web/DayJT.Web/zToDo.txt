@@ -1,7 +1,6 @@
 rq: refetch inverval , cache time, stale time, background fetching notificaion, pagination ?
 
-log/console writes ups?
+log/console writes ups
 
 
-
- -[] error management - sentry? error boundaries?
+ -[] error management - sentry? 
