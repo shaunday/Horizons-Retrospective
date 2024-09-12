@@ -1,6 +1,7 @@
 rq: refetch inverval , cache time, stale time, background fetching notificaion, pagination ?
 
-log/console writes ups
-
-
+Testing:
+ -[] RQ: https://tanstack.com/query/latest/docs/framework/react/guides/testing
+        https://tkdodo.eu/blog/testing-react-query
+ -[] log/console writes ups
  -[] error management - sentry? 

@@ -1,28 +1,33 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getAllTrades } from "@services/tradesApiAccess"; // Function to fetch all trades
-import * as Constants from "@constants/journalConstants";
+import { getAllTrades } from "@services/tradesApiAccess";
+import { tradeKeysFactory } from "@services/query-key-factory";
 
 export function useFetchAndCacheTrades() {
   const queryClient = useQueryClient();
 
-  // Fetch all trades
+  const cacheTrades = (fetchedTrades) => {
+    const tradeIds = fetchedTrades.map((trade) => trade["ID"]);
+    queryClient.setQueryData(tradeKeysFactory.tradeIdsKey, tradeIds);
+
+    fetchedTrades.forEach((trade) => {
+      const tradeId = trade["ID"];
+      queryClient.setQueryData(tradeKeysFactory.tradeByIdKey(tradeId), trade);
+    });
+  };
+
   const tradesQuery = useQuery({
-    queryKey: [Constants.TRADES_ARRAY_KEY],
+    queryKey: tradeKeysFactory.tradesKey,
     queryFn: getAllTrades,
-    onSuccess: (fetchedTrades) => {
-      // Extract trade IDs and cache them
-      const tradeIds = fetchedTrades.map((trade) => trade["ID"]);
-
-      // Cache all trade IDs
-      queryClient.setQueryData([Constants.TRADE_IDS_ARRAY_KEY], tradeIds);
-
-      // Cache each trade individually
-      fetchedTrades.forEach((trade) => {
-        const tradeId = trade["ID"];
-        queryClient.setQueryData([Constants.TRADE_KEY, tradeId], trade);
-      });
-    },
+    onSuccess: cacheTrades,
   });
 
-  return tradesQuery;
+  const prefetchTrades = async () => {
+    await queryClient.prefetchQuery({
+      queryKey: tradeKeysFactory.tradesKey,
+      queryFn: getAllTrades,
+      onSuccess: cacheTrades,
+    });
+  };
+
+  return { tradesQuery, prefetchTrades };
 }

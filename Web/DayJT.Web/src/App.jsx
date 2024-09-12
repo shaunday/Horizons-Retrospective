@@ -3,7 +3,11 @@ import { useFetchAndCacheTrades } from "@hooks/useFetchAndCacheTrades";
 import JournalContainer from "@views/JournalContainer";
 
 function App() {
-  const tradesQuery = useFetchAndCacheTrades();
+  const { prefetchTrades } = useFetchAndCacheTrades();
+
+  useMemo(() => {
+    prefetchTrades();
+  }, []); // Ensures prefetchTrades is only called once
 
   return (
     <div id="vwrapper">
@@ -12,7 +16,7 @@ function App() {
         <div className="flexChildCenter gotRightSideNeighbour">
           Metrics placeholder
         </div>
-        <JournalContainer tradesQuery={tradesQuery} />
+        <JournalContainer />
       </div>
       <div id="footer">Footer placeholder</div>
     </div>

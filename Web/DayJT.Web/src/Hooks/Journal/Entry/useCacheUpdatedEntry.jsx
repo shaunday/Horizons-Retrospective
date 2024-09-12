@@ -1,24 +1,23 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { produce } from "immer";
-import * as Constants from "@constants/constants";
+import { tradeKeysFactory } from "@services/query-key-factory";
 
 export function useCacheUpdatedEntry(tradeComposite) {
   const queryClient = useQueryClient();
-  const clientIdValue = tradeComposite[Constants.TRADE_CLIENT_ID_PROPERTY];
+  const { tradeId } = tradeComposite["ID"];
 
   const onEntryUpdate = (data) => {
     const { updatedEntry } = data;
     queryClient.setQueryData(
-      [Constants.TRADE_KEY, clientIdValue],
+      tradeKeysFactory.tradeByIdKey(tradeId),
       (oldTradeComposite) =>
         produce(oldTradeComposite, (draft) => {
-          const tradeElements = draft[Constants.TRADE_ELEMENTS_STRING];
+          const tradeElements = draft.tradeElements;
           for (const tradeElement of tradeElements) {
             const entryIndex = tradeElement.entries.findIndex(
               (entry) => entry.id === updatedEntry.id
             );
             if (entryIndex !== -1) {
-              // Update the specific Entry
               tradeElement.entries[entryIndex] = updatedEntry;
               break;
             }

@@ -1,8 +1,11 @@
 ### Fetch Flow and Cache Management
 
-1. **Initial Data Load (`useFetchAndCacheTrades`):**
+1. **Initial Data Prefetch in App.Js (`useFetchAndCacheTrades`):**
    - Fetches all trades on app start or refocus.
    - Caches trade IDs and individual trades.
+
+1a. **Actual UseQuery Hook in JournalContainer (1 level below App.Js)
+   - Same fetch function, should be using prefetch's data as it comes up
 
 2. **Trade Data Fetching (`useTrade`):**
    - Retrieves trade data from the cache or fetches if missing.

@@ -1,17 +1,17 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { produce } from "immer";
-import * as Constants from "@constants/constants";
+import { tradeKeysFactory } from "@services/query-key-factory";
 
 export function useCacheNewElement(tradeComposite) {
   const queryClient = useQueryClient();
-  const clientIdValue = tradeComposite[Constants.TRADE_CLIENT_ID_PROPERTY];
+  const tradeId = tradeComposite["ID"];
 
   const onElementUpdate = (newElement) => {
     queryClient.setQueryData(
-      [Constants.TRADE_KEY, clientIdValue],
+      tradeKeysFactory.tradeByIdKey(tradeId),
       (oldTradeComposite) =>
         produce(oldTradeComposite, (draft) => {
-          draft[Constants.TRADE_ELEMENTS_STRING].push(newElement);
+          draft.tradeElements.push(newElement);
         })
     );
   };

@@ -1,11 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addTradeComposite } from "@services/tradesApiAccess"; // Function to add a trade
-import * as Constants from "@constants/journalConstants";
+import { addTradeComposite } from "@services/tradesApiAccess";
+import { tradeKeysFactory } from "@services/query-key-factory";
 
 export function useAddTrade() {
   const queryClient = useQueryClient();
 
-  // Mutation to add a trade
   const {
     mutate: addTrade,
     isLoading: isAddingTrade,
@@ -17,26 +16,19 @@ export function useAddTrade() {
     },
     onSuccess: (newTrade) => {
       const tradeId = newTrade["ID"];
-
-      // Update the trade cache
-      queryClient.setQueryData([Constants.TRADE_KEY, tradeId], newTrade);
-
-      // Update the trade IDs cache
-      const currentTradeIds =
-        queryClient.getQueryData([Constants.TRADE_IDS_ARRAY_KEY]) || [];
       queryClient.setQueryData(
-        [Constants.TRADE_IDS_ARRAY_KEY],
-        [...currentTradeIds, tradeId]
+        tradeKeysFactory.tradeByIdKey(tradeId),
+        newTrade
       );
-    },
-    onError: () => {
-      // Handle error if needed
+
+      const currentTradeIds =
+        queryClient.getQueryData(tradeKeysFactory.tradeIdsKey) || [];
+      queryClient.setQueryData(tradeKeysFactory.tradeIdsKey, [
+        ...currentTradeIds,
+        tradeId,
+      ]);
     },
   });
 
-  return {
-    addTrade,
-    isAddingTrade,
-    isAddTradeError,
-  };
+  return { addTrade, isAddingTrade, isAddTradeError };
 }
