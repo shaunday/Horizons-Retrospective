@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 
 namespace DayJT.Journal.DataContext.Services
 {
@@ -20,27 +21,33 @@ namespace DayJT.Journal.DataContext.Services
 
         //Trade Composite 
 
-        public async Task<TradeComposite> GetTradeCompositeByCounterAsync(string counter)
+        public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
         {
-            if (!int.TryParse(counter, out int parsedCounter))
-            {
-                throw new ArgumentException($"The TradeCounter '{counter}' is not a valid integer.", nameof(counter));
-            }
-
-            var trade = await dataContext.AllTradeComposites
+            var trades = await dataContext.AllTradeComposites
+                                         .AsNoTracking()
                                          .OrderBy(t => t.Id)  // Order by the actual ID to ensure correct sequential order
-                                         .Skip(parsedCounter )   
-                                         .Take(1)              // Take one element from the sequence
-                                         .SingleOrDefaultAsync();
+                                         .Skip((pageNumber - 1) * pageSize)
+                                         .Take(pageSize)
+                                         .ToListAsync();
 
-            if (trade == null)
+            // Ensure there are trades
+            if (trades == null || !trades.Any())
             {
-                throw new InvalidOperationException($"Trade with counter {counter} not found.");
+                throw new InvalidOperationException("Could not get any trades.");
             }
 
-            return trade!;
-        }
+            // Get total count of records
+            var totalCount = await dataContext.AllTradeComposites.CountAsync();
 
+            // Create pagination metadata
+            var paginationMetadata = new PaginationMetadata(totalCount, pageSize, pageNumber)
+            {
+                TotalPageCount = (int)Math.Ceiling(totalCount / (double)pageSize)
+            };
+
+            // Return paginated results with metadata
+            return (trades, paginationMetadata);
+        }
 
         public async Task<TradeComposite> AddTradeCompositeAsync()
         {
@@ -140,7 +147,7 @@ namespace DayJT.Journal.DataContext.Services
                 throw new ArgumentException($"The tradeId '{tradeId}' is not a valid integer.", nameof(tradeId));
             }
 
-            var trade = await dataContext.AllTradeComposites.Where(t => t.Id.ToString() == tradeId).SingleOrDefaultAsync();
+            var trade = await dataContext.AllTradeComposites.AsNoTracking().Where(t => t.Id.ToString() == tradeId).SingleOrDefaultAsync();
 
             if (trade == null)
             {
@@ -149,5 +156,6 @@ namespace DayJT.Journal.DataContext.Services
 
             return trade!;
         }
+
     }
 }

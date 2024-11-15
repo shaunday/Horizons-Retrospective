@@ -1,4 +1,4 @@
-rq: refetch inverval , cache time, stale time, background fetching notificaion, pagination ?
+rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 
 Testing:
  -[] RQ: https://tanstack.com/query/latest/docs/framework/react/guides/testing
