@@ -77,7 +77,8 @@ namespace DayJT.Journal.DataContext.Services
             TradeElement tradeInput = new TradeElement(trade, isAdd? TradeActionType.AddPosition : TradeActionType.ReducePosition);
 
             trade.TradeElements.Add(tradeInput);
-            UpdateSummary(ref trade);
+            RecalculateSummary(ref trade);
+            await dataContext.SaveChangesAsync();
 
             return (tradeInput, trade.Summary);
         }
@@ -90,7 +91,8 @@ namespace DayJT.Journal.DataContext.Services
                 throw new InvalidOperationException($"No entries to remove on trade ID {tradeId} .");
             }
             JournalRepoHelpers.RemoveInterimInput(ref trade, tradeInputId);
-            UpdateSummary(ref trade);
+            RecalculateSummary(ref trade);
+            await dataContext.SaveChangesAsync();
 
             return trade.Summary;
         }
@@ -116,7 +118,8 @@ namespace DayJT.Journal.DataContext.Services
             if (cell.IsRelevantForOverview)
             {
                 var trade = cell.TradeElementRef.TradeCompositeRef;
-                summary = UpdateSummary(ref trade);
+                RecalculateSummary(ref trade);
+                summary = trade.Summary;
             }
 
             await dataContext.SaveChangesAsync();
@@ -135,17 +138,15 @@ namespace DayJT.Journal.DataContext.Services
             var tradeInput = JournalRepoHelpers.CreateTradeElementForClosure(trade, closingPrice, analytics);
             trade.TradeElements.Add(tradeInput);
 
-            UpdateSummary(ref trade);
+            RecalculateSummary(ref trade);
 
             return trade.Summary!;
         }
 
-        private TradeElement UpdateSummary(ref TradeComposite trade)
+        private void RecalculateSummary(ref TradeComposite trade)
         {
             TradeElement summary = JournalRepoHelpers.GetInterimSummary(trade);
             trade.Summary = summary;
-
-            return summary;
         }
 
         private async Task<TradeComposite> GetTradeCompositeAsync(string tradeId)
