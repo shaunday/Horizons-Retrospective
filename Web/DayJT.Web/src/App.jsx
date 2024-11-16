@@ -11,14 +11,14 @@ function App() {
 
   return (
     <div id="vwrapper">
-      <div id="header">Header placeholder</div>
-      <div id="mainBody">
+      <header id="header">Header placeholder</header>
+      <main id="mainBody">
         <div className="flexChildCenter gotRightSideNeighbour">
           Metrics placeholder
         </div>
         <JournalContainer />
-      </div>
-      <div id="footer">Footer placeholder</div>
+      </main>
+      <footer id="footer">Footer placeholder</footer>
     </div>
   );
 }

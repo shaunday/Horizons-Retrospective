@@ -10,7 +10,17 @@ html, body, #root {
   background-color: lightslategray;
 }
 
-#mainBody {
+header {
+  background-color: lightgray;
+  text-align: center;
+}
+
+footer {
+  background-color: lightgray;
+  text-align: center;
+}
+
+main {
   display: flex;
   flex-direction: row;
   background-color: lightpink;
@@ -41,16 +51,6 @@ html, body, #root {
   align-items: center;
   margin: 0.5rem;
   flex: 1 1 auto;
-}
-
-#header {
-  background-color: lightgray;
-  text-align: center;
-}
-
-#footer {
-  background-color: lightgray;
-  text-align: center;
 }
 
 
