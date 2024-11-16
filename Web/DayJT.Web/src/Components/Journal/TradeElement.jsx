@@ -35,10 +35,8 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
   }, []);
 
   return (
-    <>
-      <div onClick={toggleCollapse} style={{ cursor: "pointer" }}>
-        {isCollapsed ? "▼" : "▲"}
-      </div>
+    <div onClick={toggleCollapse}>
+      <div>{isCollapsed ? "▼" : "▲"}</div>
       <ul style={listStyle}>
         {initialEntriesValue
           .filter(
@@ -51,7 +49,7 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
             </li>
           ))}
       </ul>
-    </>
+    </div>
   );
 }
 
