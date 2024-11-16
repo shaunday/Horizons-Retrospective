@@ -24,7 +24,7 @@ namespace DayJT.Journal.DataContext.Services
         public async Task<List<string>?> GetAllSavedSectors()
         {
             var journalData = await dataContext.JournalData.AsNoTracking().SingleOrDefaultAsync();
-            return journalData?.SavedSectors;
+            return journalData?.SavedSectors?.OrderBy(s => s).ToList();
         }
 
         //Trade Composite 
