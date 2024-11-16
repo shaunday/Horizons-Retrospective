@@ -24,5 +24,9 @@ namespace DayJT.Journal.DataContext.Services
 
         Task<TradeElement> CloseAsync(string tradeId, string closingPrice);
 
+        //data
+
+        Task<List<string>?> GetAllSavedSectors();
+
     }
 }

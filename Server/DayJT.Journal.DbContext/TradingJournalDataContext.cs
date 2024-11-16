@@ -1,4 +1,5 @@
 ﻿using DayJT.Journal.Data;
+using DayJTrading.Journal.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace DayJT.Journal.DataContext.Services
@@ -13,7 +14,7 @@ namespace DayJT.Journal.DataContext.Services
 
         public DbSet<ContentRecord> AllContentRecords { get; set; } 
 
-
+        public DbSet<JournalData> JournalData { get; set; }
 
         public TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : base(options) { } //allow service configuration 
 

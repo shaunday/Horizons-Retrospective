@@ -19,6 +19,14 @@ namespace DayJT.Journal.DataContext.Services
             dataContext = journalDbContext ?? throw new ArgumentNullException(nameof(journalDbContext));
         }
 
+        //Gen. Data
+
+        public async Task<List<string>?> GetAllSavedSectors()
+        {
+            var journalData = await dataContext.JournalData.AsNoTracking().SingleOrDefaultAsync();
+            return journalData?.SavedSectors;
+        }
+
         //Trade Composite 
 
         public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
