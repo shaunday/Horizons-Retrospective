@@ -17,7 +17,7 @@ const listItemStyle = {
   borderRadius: "4px", // Optional: Adds rounded corners
 };
 
-function TradeElement({ tradeElement, onElementContentUpdate, collapsible }) {
+function TradeElement({ tradeElement, onElementContentUpdate }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const initialEntriesValue = tradeElement[Constants.TRADE_ENTRIES_STRING];
@@ -43,7 +43,7 @@ function TradeElement({ tradeElement, onElementContentUpdate, collapsible }) {
         {initialEntriesValue
           .filter(
             (entry) =>
-              !collapsible || entry[Constants.RELEVANT_FOR_ORVERVIEW_STRING]
+              !isCollapsed || entry[Constants.RELEVANT_FOR_ORVERVIEW_STRING]
           ) // Filter if collapsible is true, otherwise show all
           .map((entry) => (
             <li key={entry.id} style={listItemStyle}>
