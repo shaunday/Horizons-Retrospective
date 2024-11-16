@@ -4,6 +4,7 @@ using DayJT.Journal.Data;
 using DayJT.Web.API.Models;
 using DayJT.Journal.DataContext.Services;
 using System.ComponentModel;
+using Asp.Versioning;
 
 namespace DayJT.Web.API.Controllers.Journal
 {
@@ -63,7 +64,7 @@ namespace DayJT.Web.API.Controllers.Journal
             }
 
             TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
-            TradeElement filler = null;
+            TradeElement? filler = null;
             return ResultHandling((filler, resAsModel), $"Could not delete interim element on : {tradeId}");
         }
 

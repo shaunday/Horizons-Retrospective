@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using DayJT.Journal.Data;
 using DayJT.Web.API.Models;
 using DayJT.Journal.DataContext.Services;
+using Asp.Versioning;
 
 namespace DayJT.Web.API.Controllers.Journal
 {

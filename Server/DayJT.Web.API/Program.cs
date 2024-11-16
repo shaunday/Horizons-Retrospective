@@ -9,6 +9,7 @@ using System.Reflection;
 using DayJT.Journal.DataContext.Services;
 using DayJTrading.Journal.Seeder;
 using System.Data.SqlClient;
+using Asp.Versioning;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -60,7 +61,7 @@ builder.Services.AddScoped<IJournalRepository, JournalRepository>();
 builder.Services.AddApiVersioning(setupAction =>
 {
     setupAction.AssumeDefaultVersionWhenUnspecified = true;
-    setupAction.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+    setupAction.DefaultApiVersion = new ApiVersion(1, 0);
     setupAction.ReportApiVersions = true;
 });
 
