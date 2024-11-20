@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.10" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.1" />
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
     <PackageReference Include="serilog.sinks.console" Version="6.0.0" />
     <PackageReference Include="serilog.sinks.file" Version="6.0.0" />
