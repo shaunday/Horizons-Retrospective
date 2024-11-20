@@ -22,6 +22,10 @@ namespace DayJT.Journal.DataContext.Services
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<JournalData>(entity =>
+            {
+                entity.HasNoKey(); 
+            });
 
             modelBuilder.Entity<TradeComposite>()
                 .HasMany(t => t.TradeElements)
