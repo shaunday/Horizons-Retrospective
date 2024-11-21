@@ -31,8 +31,15 @@ builder.Services.AddControllers(options =>
     options.ReturnHttpNotAcceptable = true; //default is json - won't accept requests for diff formats
 });
 
-builder.Services.AddEntityFrameworkNpgsql().AddDbContext<TradingJournalDataContext>
-                (options => options.UseNpgsql(builder.Configuration.GetConnectionString("DayJTradingDbKey")), ServiceLifetime.Singleton);
+builder.Services.AddDbContext<TradingJournalDataContext>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DayJTradingDbKey"));
+
+    if (builder.Environment.IsDevelopment())
+    {
+        options.LogTo(Console.WriteLine, LogLevel.Information); // Enable logging in Development
+    }
+}, ServiceLifetime.Singleton);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
