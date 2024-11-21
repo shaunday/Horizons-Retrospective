@@ -10,6 +10,7 @@ using DayJT.Journal.DataContext.Services;
 using DayJTrading.Journal.Seeder;
 using System.Data.SqlClient;
 using Asp.Versioning;
+using DayJT.Web.API.Mapping;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -48,10 +49,9 @@ builder.Services.AddSwaggerGen();
 // Auto Mapper 
 Action<IMapperConfigurationExpression> configAction = (mce) =>
 {
-    mce.AddMaps(Assembly.GetExecutingAssembly()); // all profiles
+    mce.AddMaps(typeof(JournalObjectsMappingProfile).Assembly); // all profiles
     mce.AddCollectionMappers();
 };
-
 builder.Services.AddAutoMapper(configAction); 
 
 
@@ -90,10 +90,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    app.MapControllers();
-});
+app.MapControllers();
 
 if (app.Environment.IsDevelopment())
 {

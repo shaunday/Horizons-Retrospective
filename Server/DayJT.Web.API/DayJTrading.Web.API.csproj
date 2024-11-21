@@ -42,6 +42,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DayJT.Journal.DbContext\DayJTrading.Journal.DbContext.csproj" />
     <ProjectReference Include="..\DayJTrading.Journal.Seeder\DayJTrading.Journal.Seeder.csproj" />
+    <ProjectReference Include="..\DayJTrading.Web.Services\DayJTrading.Web.Services.csproj" />
   </ItemGroup>
 
 </Project>

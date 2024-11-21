@@ -33,7 +33,7 @@ namespace DayJT.Web.API.Controllers.Journal
 
             var (tradesEntities, paginationMetadata) = await _journalAccess.GetAllTradeCompositesAsync(pageNumber, pageSize);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
+            Response.Headers["X-Pagination"] = JsonSerializer.Serialize(paginationMetadata);
 
             IEnumerable<TradeCompositeModel> resAsModels = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradesEntities);
 

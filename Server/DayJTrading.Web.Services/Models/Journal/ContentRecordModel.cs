@@ -1,6 +1,4 @@
-﻿using DayJT.Journal.Data;
-
-namespace DayJT.Web.API.Models
+﻿namespace DayJT.Web.API.Models
 {
     public class ContentRecordModel
     {

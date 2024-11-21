@@ -1,5 +1,4 @@
-﻿how to version dbs
-security best practices
+﻿security best practices
 testing
 
 add reopen function (delete closure add position)?
@@ -8,3 +7,7 @@ add reopen function (delete closure add position)?
 Indicator alerts, upcoming reports 
 
 clear details from connection string
+
+Incdicators: double bottom on rsi/cci, ma, ema, wbb, dividends, report, news
+
+position weight/ sector weight
