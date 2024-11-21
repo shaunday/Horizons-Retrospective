@@ -30,19 +30,19 @@ namespace DayJT.Journal.DataContext.Services
             modelBuilder.Entity<TradeComposite>()
                 .HasMany(t => t.TradeElements)
                 .WithOne(t => t.TradeCompositeRef)
-                .HasForeignKey(t => t.TradeCompositeRefId)
+                .HasForeignKey(t => t.TradeCompositeFK)
                 .IsRequired(); //force FK
 
             modelBuilder.Entity<TradeElement>()
                .HasMany(t => t.Entries)
                .WithOne(t => t.TradeElementRef)
-               .HasForeignKey(t => t.TradeElementRefId)
+               .HasForeignKey(t => t.TradeElementFK)
                .IsRequired(); //force FK
 
             modelBuilder.Entity<Cell>()
                 .HasMany(t => t.History)
                 .WithOne(t => t.CellRef)
-                .HasForeignKey(t => t.CellRefId)
+                .HasForeignKey(t => t.CellFK)
                 .IsRequired(false); //force FK
 
         }

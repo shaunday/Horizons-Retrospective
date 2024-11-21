@@ -22,7 +22,7 @@ namespace DayJT.Journal.Data
         public TradeElement(TradeComposite trade, TradeActionType actionType)
         {
             TradeCompositeRef = trade;
-            TradeCompositeRefId = trade.Id;
+            TradeCompositeFK = trade.Id;
 
             if (actionType == TradeActionType.Origin || actionType == TradeActionType.AddPosition || actionType == TradeActionType.ReducePosition)
             {
@@ -33,7 +33,7 @@ namespace DayJT.Journal.Data
 
         //parent
         [Required]
-        public int TradeCompositeRefId { get; set; }
+        public int TradeCompositeFK { get; set; }
 
         [Required]
         public TradeComposite TradeCompositeRef { get; set; } = null!; // Required reference navigation to principal

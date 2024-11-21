@@ -18,7 +18,7 @@ namespace DayJT.Journal.Data
 
         //parent
         [Required]
-        public int CellRefId { get; set; } //reference is optional (for main content)
+        public int CellFK { get; set; } 
 
         [Required]
         public Cell CellRef { get; set; } = null!;
