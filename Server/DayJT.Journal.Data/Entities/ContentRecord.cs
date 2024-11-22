@@ -7,7 +7,7 @@ namespace DayJT.Journal.Data
     public class ContentRecord
     {
         [Key]
-        public int Id { get; private set; } 
+        public int Id { get; private set; }
 
         [Required]
         public string Content { get; set; } = string.Empty;
@@ -16,9 +16,15 @@ namespace DayJT.Journal.Data
 
         public DateTime CreatedAt { get; } = DateTime.Now;
 
+        public ContentRecord(Cell parentCell, string content)
+        {
+            Content = content;
+            CellRef = parentCell;
+        }
+
         //parent
         [Required]
-        public int CellFK { get; set; } 
+        public int CellFK { get; set; }
 
         [Required]
         public Cell CellRef { get; set; } = null!;

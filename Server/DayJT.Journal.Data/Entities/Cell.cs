@@ -42,12 +42,7 @@ namespace DayJT.Journal.Data
             get { return ContentWrapper.Content; }
             set
             {
-                ContentWrapper = new ContentRecord
-                {
-                    Content = value,
-                    CellRef = this,
-                    CellFK = Id
-                };
+                ContentWrapper = new ContentRecord(this, value);
             }
         }
 
@@ -57,7 +52,7 @@ namespace DayJT.Journal.Data
         public void SetFollowupContent(string newContent, string changeNote)
         {
             History.Add(ContentWrapper);
-            ContentWrapper = new ContentRecord() { Content = newContent, ChangeNote = changeNote, CellRef = this, CellFK = this.Id };
+            ContentWrapper = new ContentRecord(parentCell:this, content: newContent) { ChangeNote = changeNote };
         }
 
         //parent
@@ -65,12 +60,11 @@ namespace DayJT.Journal.Data
         public int TradeElementFK { get; set; }
 
         [Required]
-        public TradeElement TradeElementRef { get; set; } = null!; // Required reference navigation to principal
+        public TradeElement TradeElementRef { get; set; } = null!; 
 
         public void UpdateParentReference(TradeElement refObj)
         {
             TradeElementRef = refObj;
-            TradeElementFK = refObj.Id;
         }
     }
 

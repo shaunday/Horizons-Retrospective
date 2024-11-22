@@ -32,11 +32,14 @@ namespace DayJT.Journal.DataContext.Services
         public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
         {
             var trades = await dataContext.AllTradeComposites
-                                         .AsNoTracking()
-                                         .OrderBy(t => t.Id)  // Order by the actual ID to ensure correct sequential order
-                                         .Skip((pageNumber - 1) * pageSize)
-                                         .Take(pageSize)
-                                         .ToListAsync();
+                                            .AsNoTracking()
+                                            .OrderBy(t => t.Id)  // Order by the actual ID to ensure correct sequential order
+                                            .Skip((pageNumber - 1) * pageSize)
+                                            .Take(pageSize)
+                                            .Include(t => t.TradeElements)
+                                                .ThenInclude(te => te.Entries)
+                                                    .ThenInclude(e => e.History)
+                                            .ToListAsync();
 
             // Ensure there are trades
             if (trades == null || !trades.Any())
@@ -131,7 +134,7 @@ namespace DayJT.Journal.DataContext.Services
 
         public async Task<TradeElement> CloseAsync(string tradeId, string closingPrice)
         {
-            var trade = await GetTradeCompositeAsync(tradeId);
+            var trade = await GetTradeCompositeAsync(tradeId, loadTradeElements: true, useNoTracking: false);
             var analytics = JournalRepoHelpers.GetAvgEntryAndProfit(trade);
 
             // Create and add reduction entry for closing
@@ -149,14 +152,29 @@ namespace DayJT.Journal.DataContext.Services
             trade.Summary = summary;
         }
 
-        private async Task<TradeComposite> GetTradeCompositeAsync(string tradeId)
+        private async Task<TradeComposite> GetTradeCompositeAsync(string tradeId, bool loadTradeElements = false, bool useNoTracking = true)
         {
             if (!tradeId.IsValidInteger())
             {
                 throw new ArgumentException($"The tradeId '{tradeId}' is not a valid integer.", nameof(tradeId));
             }
 
-            var trade = await dataContext.AllTradeComposites.AsNoTracking().Where(t => t.Id.ToString() == tradeId).SingleOrDefaultAsync();
+            var tradeQuery = dataContext.AllTradeComposites.AsQueryable();
+
+            if (useNoTracking)
+            {
+                tradeQuery = tradeQuery.AsNoTracking();
+            }
+
+            if (loadTradeElements)
+            {
+                tradeQuery = tradeQuery.Include(t => t.TradeElements)
+                                       .ThenInclude(te => te.Entries)
+                                       .ThenInclude(e => e.History);
+            }
+
+            // Execute the query
+            var trade = await tradeQuery.SingleOrDefaultAsync();
 
             if (trade == null)
             {

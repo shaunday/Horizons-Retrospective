@@ -37,7 +37,7 @@ builder.Services.AddDbContext<TradingJournalDataContext>(options =>
 
     if (builder.Environment.IsDevelopment())
     {
-        options.LogTo(Console.WriteLine, LogLevel.Information); // Enable logging in Development
+        options.LogTo(Console.WriteLine, LogLevel.Information).EnableSensitiveDataLogging(); // Enable logging in Development
     }
 }, ServiceLifetime.Singleton);
 
