@@ -5,15 +5,15 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJTrading.Web.API", "DayJT.Web.API\DayJTrading.Web.API.csproj", "{BFD76645-DDC9-495D-8575-4236508BBA0A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJTrading.Journal.Data", "DayJT.Journal.Data\DayJTrading.Journal.Data.csproj", "{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJT.Journal.Data", "DayJT.Journal.Data\DayJT.Journal.Data.csproj", "{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJTrading.Journal.DbContext", "DayJT.Journal.DbContext\DayJTrading.Journal.DbContext.csproj", "{71B5E78E-B056-4414-B253-42E41650DC5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJT.Journal.DbContext", "DayJT.Journal.DbContext\DayJT.Journal.DbContext.csproj", "{71B5E78E-B056-4414-B253-42E41650DC5D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJTrading.Journal.Seeder", "DayJTrading.Journal.Seeder\DayJTrading.Journal.Seeder.csproj", "{9E5A0232-2B34-4D69-A714-2C34C38C4BB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJT.Journal.Seeder", "DayJTrading.Journal.Seeder\DayJT.Journal.Seeder.csproj", "{9E5A0232-2B34-4D69-A714-2C34C38C4BB4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJTrading.Common", "DayJTrading.Common\DayJTrading.Common.csproj", "{E61664FD-0D76-4D8C-93F5-9DD4AF2A2F6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJT.Common", "DayJTrading.Common\DayJT.Common.csproj", "{E61664FD-0D76-4D8C-93F5-9DD4AF2A2F6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayJTrading.Web.Services", "DayJTrading.Web.Services\DayJTrading.Web.Services.csproj", "{A1142458-7155-4FC6-BEB2-81DA7FE6A06D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJTrading.Web.Services", "DayJTrading.Web.Services\DayJTrading.Web.Services.csproj", "{A1142458-7155-4FC6-BEB2-81DA7FE6A06D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

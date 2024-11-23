@@ -77,7 +77,7 @@ namespace DayJT.Journal.DataContext.Services
         public async Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
-            TradeElement tradeInput = new TradeElement(trade, isAdd? TradeActionType.AddPosition : TradeActionType.ReducePosition);
+            TradeElement tradeInput = new TradeElement(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);
 
             trade.TradeElements.Add(tradeInput);
             RecalculateSummary(ref trade);
@@ -93,7 +93,7 @@ namespace DayJT.Journal.DataContext.Services
             {
                 throw new InvalidOperationException($"No entries to remove on trade ID {tradeId} .");
             }
-            JournalRepoHelpers.RemoveInterimInput(ref trade, tradeInputId);
+            TradeElementCRUDs.RemoveInterimInput(ref trade, tradeInputId);
             RecalculateSummary(ref trade);
             await dataContext.SaveChangesAsync();
 
@@ -104,12 +104,12 @@ namespace DayJT.Journal.DataContext.Services
 
         public async Task<(Cell updatedCell, TradeElement? summary)> UpdateCellContent(string componentId, string newContent, string changeNote)
         {
-            if (!componentId.IsValidInteger())
+            if (!int.TryParse(componentId, out var parsedId))
             {
                 throw new ArgumentException($"The EntryId '{componentId}' is not a valid integer.", nameof(componentId));
             }
 
-            var cell = await dataContext.AllEntries.Where(t => t.Id.ToString() == componentId).SingleOrDefaultAsync();
+            var cell = await dataContext.AllEntries.SingleOrDefaultAsync(t => t.Id == parsedId);
             if (cell == null)
             {
                 throw new InvalidOperationException($"Entry with ID {componentId} not found.");
@@ -121,7 +121,7 @@ namespace DayJT.Journal.DataContext.Services
             if (cell.IsRelevantForOverview)
             {
                 var trade = cell.TradeElementRef.TradeCompositeRef;
-                RecalculateSummary(ref trade);
+                RecalculateSummary(ref trade);  // Assuming this modifies trade.Summary
                 summary = trade.Summary;
             }
 
@@ -130,15 +130,15 @@ namespace DayJT.Journal.DataContext.Services
             return (cell, summary);
         }
 
+
         //Closure
 
         public async Task<TradeElement> CloseAsync(string tradeId, string closingPrice)
         {
-            var trade = await GetTradeCompositeAsync(tradeId, loadTradeElements: true, useNoTracking: false);
-            var analytics = JournalRepoHelpers.GetAvgEntryAndProfit(trade);
+            var trade = await GetTradeCompositeAsync(tradeId);
 
             // Create and add reduction entry for closing
-            var tradeInput = JournalRepoHelpers.CreateTradeElementForClosure(trade, closingPrice, analytics);
+            var tradeInput = TradeElementCRUDs.CreateTradeElementForClosure(trade, closingPrice);
             trade.TradeElements.Add(tradeInput);
 
             RecalculateSummary(ref trade);
@@ -148,33 +148,22 @@ namespace DayJT.Journal.DataContext.Services
 
         private void RecalculateSummary(ref TradeComposite trade)
         {
-            TradeElement summary = JournalRepoHelpers.GetInterimSummary(trade);
+            TradeElement summary = TradeElementCRUDs.GetInterimSummary(trade);
             trade.Summary = summary;
         }
 
-        private async Task<TradeComposite> GetTradeCompositeAsync(string tradeId, bool loadTradeElements = false, bool useNoTracking = true)
+        private async Task<TradeComposite> GetTradeCompositeAsync(string tradeId, bool loadEntriesHistory = false)
         {
-            if (!tradeId.IsValidInteger())
+            if (!int.TryParse(tradeId, out var parsedId))
             {
                 throw new ArgumentException($"The tradeId '{tradeId}' is not a valid integer.", nameof(tradeId));
             }
 
-            var tradeQuery = dataContext.AllTradeComposites.AsQueryable();
-
-            if (useNoTracking)
-            {
-                tradeQuery = tradeQuery.AsNoTracking();
-            }
-
-            if (loadTradeElements)
-            {
-                tradeQuery = tradeQuery.Include(t => t.TradeElements)
-                                       .ThenInclude(te => te.Entries)
-                                       .ThenInclude(e => e.History);
-            }
-
-            // Execute the query
-            var trade = await tradeQuery.SingleOrDefaultAsync();
+            var trade = await dataContext.AllTradeComposites
+                                            .Where(t => t.Id == parsedId)
+                                            .Include(t => t.TradeElements)
+                                                .ThenInclude(te => te.Entries)
+                                            .SingleOrDefaultAsync();
 
             if (trade == null)
             {

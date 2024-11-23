@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DayJT.Journal.Data\DayJT.Journal.Data.csproj" />
+    <ProjectReference Include="..\DayJT.Journal.DbContext\DayJT.Journal.DbContext.csproj" />
+  </ItemGroup>
+
+</Project>
