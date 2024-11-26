@@ -1,5 +1,4 @@
 ﻿using DayJT.Journal.Data;
-using DayJTrading.Common.Extenders;
 using DayJTrading.Journal.Data;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.EntityFrameworkCore;

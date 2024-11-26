@@ -40,8 +40,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DayJT.Journal.DbContext\DayJT.Journal.Repository.csproj" />
-    <ProjectReference Include="..\DayJTrading.Journal.Seeder\DayJT.Journal.DataSeeder.csproj" />
+    <ProjectReference Include="..\DayJT.Journal.Repository\DayJT.Journal.Repository.csproj" />
+    <ProjectReference Include="..\DayJT.Journal.Seeder\DayJT.Journal.DataSeeder.csproj" />
     <ProjectReference Include="..\DayJTrading.Web.Services\DayJTrading.Web.Services.csproj" />
   </ItemGroup>
 

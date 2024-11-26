@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DayJT.Journal.Data\DayJT.Journal.DataEntities.csproj" />
-    <ProjectReference Include="..\DayJT.Journal.DbContext\DayJT.Journal.Repository.csproj" />
+    <ProjectReference Include="..\DayJT.Journal.Repository\DayJT.Journal.Repository.csproj" />
   </ItemGroup>
 
 </Project>
