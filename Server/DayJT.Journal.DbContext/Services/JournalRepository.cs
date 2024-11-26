@@ -41,6 +41,8 @@ namespace DayJT.Journal.DataContext.Services
                                                     .ThenInclude(e => e.History)
                                             .ToListAsync();
 
+            //todo monitor performance .AsSplitQuery() ? or other solutions
+
             // Ensure there are trades
             if (trades == null || !trades.Any())
             {
@@ -80,7 +82,7 @@ namespace DayJT.Journal.DataContext.Services
             TradeElement tradeInput = new TradeElement(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);
 
             trade.TradeElements.Add(tradeInput);
-            RecalculateSummary(ref trade);
+            RecalculateSummary(trade);
             await dataContext.SaveChangesAsync();
 
             return (tradeInput, trade.Summary);
@@ -93,8 +95,8 @@ namespace DayJT.Journal.DataContext.Services
             {
                 throw new InvalidOperationException($"No entries to remove on trade ID {tradeId} .");
             }
-            TradeElementCRUDs.RemoveInterimInput(ref trade, tradeInputId);
-            RecalculateSummary(ref trade);
+            TradeElementCRUDs.RemoveInterimInput(trade, tradeInputId);
+            RecalculateSummary(trade);
             await dataContext.SaveChangesAsync();
 
             return trade.Summary;
@@ -121,7 +123,7 @@ namespace DayJT.Journal.DataContext.Services
             if (cell.IsRelevantForOverview)
             {
                 var trade = cell.TradeElementRef.TradeCompositeRef;
-                RecalculateSummary(ref trade);  // Assuming this modifies trade.Summary
+                RecalculateSummary(trade);  // Assuming this modifies trade.Summary
                 summary = trade.Summary;
             }
 
@@ -141,12 +143,12 @@ namespace DayJT.Journal.DataContext.Services
             var tradeInput = TradeElementCRUDs.CreateTradeElementForClosure(trade, closingPrice);
             trade.TradeElements.Add(tradeInput);
 
-            RecalculateSummary(ref trade);
+            RecalculateSummary(trade);
 
             return trade.Summary!;
         }
 
-        private void RecalculateSummary(ref TradeComposite trade)
+        private void RecalculateSummary(TradeComposite trade)
         {
             TradeElement summary = TradeElementCRUDs.GetInterimSummary(trade);
             trade.Summary = summary;

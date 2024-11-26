@@ -34,18 +34,18 @@ namespace DayJTrading.Journal.Seeder
         {
             TradeComposite trade = new TradeComposite();
             TradeElement originElement = new TradeElement(trade, TradeActionType.Origin);
-            PopulateElementWithData(ref originElement);
+            PopulateElementWithData(originElement);
             trade.TradeElements.Add(originElement);
 
             TradeElement addElement = new TradeElement(trade, TradeActionType.AddPosition);
-            PopulateElementWithData(ref addElement);
+            PopulateElementWithData(addElement);
             trade.TradeElements.Add(addElement);
 
             _context.AllTradeComposites.Add(trade);
         }
 
         private static readonly Random _lengthRandom = new Random();
-        private TradeElement PopulateElementWithData(ref TradeElement element)
+        private TradeElement PopulateElementWithData(TradeElement element)
         {
             int length;
             for (int i = 0; i < element.Entries.Count; i++)

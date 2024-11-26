@@ -69,7 +69,7 @@ namespace DayJT.Journal.DataContext.Services
             return summary;
         }
 
-        internal static void RemoveInterimInput(ref TradeComposite trade, string tradeInputId)
+        internal static void RemoveInterimInput(TradeComposite trade, string tradeInputId)
         {
             var tradeInputToRemove = trade.TradeElements.Where(t => t.Id.ToString() == tradeInputId).SingleOrDefault();
 

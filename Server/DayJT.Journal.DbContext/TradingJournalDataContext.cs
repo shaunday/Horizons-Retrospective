@@ -43,9 +43,8 @@ namespace DayJT.Journal.DataContext.Services
                 .HasMany(t => t.History)
                 .WithOne(t => t.CellRef)
                 .HasForeignKey(t => t.CellFK)
-                .IsRequired(false); //force FK
+                .IsRequired(); //force FK
 
         }
-
     }
 }
