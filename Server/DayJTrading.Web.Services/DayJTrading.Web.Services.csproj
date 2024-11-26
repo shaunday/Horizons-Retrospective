@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DayJT.Journal.Data\DayJTrading.Journal.Data.csproj" />
+    <ProjectReference Include="..\DayJT.Journal.Data\DayJT.Journal.Data.csproj" />
   </ItemGroup>
 
 </Project>
