@@ -123,7 +123,9 @@ namespace DayJT.Journal.DataContext.Services
                 throw new ArgumentException($"The EntryId '{componentId}' is not a valid integer.", nameof(componentId));
             }
 
-            var cell = await dataContext.AllEntries.SingleOrDefaultAsync(t => t.Id == parsedId);
+            var cell = await dataContext.AllEntries
+                                .Include(t => t.History)
+                                .SingleOrDefaultAsync(t => t.Id == parsedId);
             if (cell == null)
             {
                 throw new InvalidOperationException($"Entry with ID {componentId} not found.");

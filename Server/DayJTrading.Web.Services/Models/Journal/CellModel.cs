@@ -18,7 +18,7 @@ namespace DayJT.Web.API.Models
         public ValueRelevance PriceRelevance { get; set; }
         public bool IsRelevantForOverview { get; set; } = false;
 
-        public int TradeElementRefId { get; set; }
-
+        public int TradeElementFK { get; set; }
+        public int TradeCompositeFK { get; set; }
     }
 }
