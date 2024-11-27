@@ -11,6 +11,6 @@
         public DateTime CreatedAt { get; } = DateTime.Now;
 
 
-        public int CellRefId { get; set; }
+        public int CellFK { get; set; }
     }
 }
