@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DayJT.Journal.DataEntities.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DayJT.Journal.Data
 {
-    public class Cell
+    public class Cell : TradeCompositeNavDataBase
     {
         #region Props part a
 

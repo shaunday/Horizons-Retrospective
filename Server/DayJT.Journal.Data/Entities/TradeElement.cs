@@ -1,11 +1,12 @@
-﻿using DayJTrading.Journal.Data.Factory;
+﻿using DayJT.Journal.DataEntities.Entities;
+using DayJTrading.Journal.Data.Factory;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 
 namespace DayJT.Journal.Data
 {
-    public class TradeElement
+    public class TradeElement : TradeCompositeNavDataBase
     {
         [Key]
         public int Id { get; private set; } 
@@ -29,13 +30,5 @@ namespace DayJT.Journal.Data
                 Entries = InterimPositionFactory.GetPositionEntries(actionType, this);
             }
         }
-
-        //parent
-        [Required]
-        public int TradeCompositeFK { get; set; }
-
-        [Required]
-        public TradeComposite TradeCompositeRef { get; set; } = null!; 
-
     }
 }

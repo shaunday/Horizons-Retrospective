@@ -118,21 +118,23 @@ namespace DayJT.Journal.DataContext.Services
 
             cell.SetFollowupContent(newContent, changeNote);
 
-            TradeElement? summary = null;
+            TradeElement? newSummary = null;
             if (cell.IsRelevantForOverview)
             {
-                var trade = cell.TradeElementRef.TradeCompositeRef;
-                RecalculateSummary(trade);  // Assuming this modifies trade.Summary
-                summary = trade.Summary;
+                await dataContext.Entry(cell)
+                    .Reference(c => c.TradeCompositeRef)
+                    .LoadAsync();
+
+                var trade = cell.TradeCompositeRef;
+
+                newSummary = RecalculateSummary(trade);
             }
 
             await dataContext.SaveChangesAsync();
 
-            return (cell, summary);
+            return (cell, newSummary);
         }
 
-
-        //Closure
 
         public async Task<TradeElement> CloseAsync(string tradeId, string closingPrice)
         {
@@ -147,10 +149,13 @@ namespace DayJT.Journal.DataContext.Services
             return trade.Summary!;
         }
 
-        private void RecalculateSummary(TradeComposite trade)
+
+        #region Helpers
+        private TradeElement RecalculateSummary(TradeComposite trade)
         {
             TradeElement summary = TradeElementCRUDs.GetInterimSummary(trade);
             trade.Summary = summary;
+            return summary;
         }
 
         private async Task<TradeComposite> GetTradeCompositeAsync(string tradeId, bool loadEntriesHistory = false)
@@ -160,8 +165,13 @@ namespace DayJT.Journal.DataContext.Services
                 throw new ArgumentException($"The tradeId '{tradeId}' is not a valid integer.", nameof(tradeId));
             }
 
+            return await GetTradeCompositeAsync(parsedId, loadEntriesHistory);
+        }
+
+        private async Task<TradeComposite> GetTradeCompositeAsync(int tradeId, bool loadEntriesHistory = false)
+        {
             var trade = await dataContext.AllTradeComposites
-                                            .Where(t => t.Id == parsedId)
+                                            .Where(t => t.Id == tradeId)
                                             .Include(t => t.TradeElements)
                                                 .ThenInclude(te => te.Entries)
                                             .SingleOrDefaultAsync();
@@ -172,7 +182,7 @@ namespace DayJT.Journal.DataContext.Services
             }
 
             return trade!;
-        }
-
+        } 
+        #endregion
     }
 }

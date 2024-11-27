@@ -45,6 +45,13 @@ namespace DayJT.Journal.DataContext.Services
                 .HasForeignKey(t => t.CellFK)
                 .IsRequired(); //force FK
 
+            //force Cell to also have trade composite Ref/ FK
+            modelBuilder.Entity<Cell>()
+                .HasOne(c => c.TradeCompositeRef)
+                .WithMany()
+                .HasForeignKey(c => c.TradeCompositeFK)
+                .IsRequired(); //force FK
+
         }
     }
 }
