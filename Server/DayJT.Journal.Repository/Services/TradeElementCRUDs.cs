@@ -80,7 +80,7 @@ namespace DayJT.Journal.DataContext.Services
             else
             {
                 throw new Exception("weird");
-            }
+            } 
         }
     }
 }

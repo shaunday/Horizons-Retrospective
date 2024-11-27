@@ -6,15 +6,15 @@ namespace DayJT.Journal.DataContext.Services
 {
     public class TradingJournalDataContext : DbContext
     {
-        public DbSet<TradeComposite> AllTradeComposites { get; set; } 
+        public DbSet<TradeComposite> AllTradeComposites { get; set; } = null!;
 
-        public DbSet<TradeElement> AllTradeElements { get; set; }
+        public DbSet<TradeElement> AllTradeElements { get; set; } = null!;
 
-        public DbSet<Cell> AllEntries { get; set; } 
+        public DbSet<Cell> AllEntries { get; set; } = null!;
 
-        public DbSet<ContentRecord> AllContentRecords { get; set; } 
+        public DbSet<ContentRecord> AllContentRecords { get; set; } = null!;
 
-        public DbSet<JournalData> JournalData { get; set; }
+        public DbSet<JournalData> JournalData { get; set; } = null!;
 
         public TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : base(options) { } //allow service configuration 
 
@@ -24,7 +24,7 @@ namespace DayJT.Journal.DataContext.Services
 
             modelBuilder.Entity<JournalData>(entity =>
             {
-                entity.HasNoKey(); 
+                entity.HasNoKey();
             });
 
             modelBuilder.Entity<TradeComposite>()
