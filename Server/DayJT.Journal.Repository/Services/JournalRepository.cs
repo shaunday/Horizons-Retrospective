@@ -73,6 +73,19 @@ namespace DayJT.Journal.DataContext.Services
             return trade;
         }
 
+        public async Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice)
+        {
+            var trade = await GetTradeCompositeAsync(tradeId);
+
+            // Create and add reduction entry for closing
+            var tradeInput = TradeElementCRUDs.CreateTradeElementForClosure(trade, closingPrice);
+            trade.TradeElements.Add(tradeInput);
+
+            RecalculateSummary(trade);
+
+            return trade.Summary!;
+        }
+
         //Trade Elements 
 
         public async Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
@@ -133,21 +146,7 @@ namespace DayJT.Journal.DataContext.Services
             await dataContext.SaveChangesAsync();
 
             return (cell, newSummary);
-        }
-
-
-        public async Task<TradeElement> CloseAsync(string tradeId, string closingPrice)
-        {
-            var trade = await GetTradeCompositeAsync(tradeId);
-
-            // Create and add reduction entry for closing
-            var tradeInput = TradeElementCRUDs.CreateTradeElementForClosure(trade, closingPrice);
-            trade.TradeElements.Add(tradeInput);
-
-            RecalculateSummary(trade);
-
-            return trade.Summary!;
-        }
+        }     
 
 
         #region Helpers

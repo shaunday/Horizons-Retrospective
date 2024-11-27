@@ -22,7 +22,7 @@ namespace DayJT.Journal.DataContext.Services
 
         //closure
 
-        Task<TradeElement> CloseAsync(string tradeId, string closingPrice);
+        Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice);
 
         //data
 

@@ -56,7 +56,7 @@ namespace DayJT.Web.API.Controllers.Journal
         [HttpPost("close")]
         public async Task<ActionResult<(TradeElementModel? filler, TradeElementModel summary)>> CloseTrade(string tradeId, string closingPrice)
         {
-            TradeElement summary = await _journalAccess.CloseAsync(tradeId, closingPrice);
+            TradeElement summary = await _journalAccess.CloseTradeAsync(tradeId, closingPrice);
 
             if (summary == null)
             {
