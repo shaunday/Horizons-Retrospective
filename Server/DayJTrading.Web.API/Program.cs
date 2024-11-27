@@ -8,9 +8,9 @@ using Serilog;
 using System.Reflection;
 using DayJT.Journal.DataContext.Services;
 using DayJTrading.Journal.Seeder;
-using System.Data.SqlClient;
 using Asp.Versioning;
 using DayJT.Web.API.Mapping;
+using Microsoft.Data.SqlClient;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
