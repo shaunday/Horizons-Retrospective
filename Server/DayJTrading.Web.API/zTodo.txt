@@ -12,7 +12,7 @@ position weight/ sector weight
 
 
 //pre production
-security best practices + expand testing
+security best practices + expand testing (API tests,)
 
 //production
 clear details from connection string
