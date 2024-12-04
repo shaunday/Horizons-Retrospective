@@ -1,13 +1,23 @@
-﻿security best practices
-testing
-
-add reopen function (delete closure add position)?
+﻿
+// good to have
+add reopen function (delete closure, add position)?
 
 // dashboard
 Indicator alerts, upcoming reports 
+Incdicators: double bottom on rsi/cci, ma, ema, wbb, dividends, report, news
+position weight/ sector weight
 
+
+
+
+
+//pre production
+security best practices + expand testing
+
+//production
 clear details from connection string
 
-Incdicators: double bottom on rsi/cci, ma, ema, wbb, dividends, report, news
-
-position weight/ sector weight
+// later on/ playing around
+Suspence? RQ Suspence
+Get a Node.Js server
+Get an GraphQL instead of REST
