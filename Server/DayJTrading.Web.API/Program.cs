@@ -31,6 +31,9 @@ builder.Services.AddControllers(options =>
     options.ReturnHttpNotAcceptable = true; //default is json - won't accept requests for diff formats
 });
 
+// Add appsettings.json to the configuration
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
 builder.Services.AddDbContext<TradingJournalDataContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DayJTradingDbKey"));

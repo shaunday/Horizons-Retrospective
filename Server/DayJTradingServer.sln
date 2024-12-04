@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJT.Common", "DayJT.Commo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJTrading.Web.Services", "DayJTrading.Web.Services\DayJTrading.Web.Services.csproj", "{A1142458-7155-4FC6-BEB2-81DA7FE6A06D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayJT.Journal.Test", "DayJT.Journal.Test\DayJT.Journal.Test.csproj", "{1070FBF4-644F-4D08-8486-37EB9F8D872E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayJTrading.Configuration", "DayJTrading.Configuration\DayJTrading.Configuration.csproj", "{AE58BB14-4EE6-40CB-B3AF-217DF696E722}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{A1142458-7155-4FC6-BEB2-81DA7FE6A06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1142458-7155-4FC6-BEB2-81DA7FE6A06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1142458-7155-4FC6-BEB2-81DA7FE6A06D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1070FBF4-644F-4D08-8486-37EB9F8D872E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1070FBF4-644F-4D08-8486-37EB9F8D872E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1070FBF4-644F-4D08-8486-37EB9F8D872E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1070FBF4-644F-4D08-8486-37EB9F8D872E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE58BB14-4EE6-40CB-B3AF-217DF696E722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE58BB14-4EE6-40CB-B3AF-217DF696E722}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE58BB14-4EE6-40CB-B3AF-217DF696E722}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE58BB14-4EE6-40CB-B3AF-217DF696E722}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
-	<BaseOutputPath>D:\DayJTradingBuddy\Server\bin</BaseOutputPath>
+	<BaseOutputPath>..\bin</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
