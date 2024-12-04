@@ -11,6 +11,8 @@ using DayJTrading.Journal.Seeder;
 using Asp.Versioning;
 using DayJT.Web.API.Mapping;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using System.Text.Json;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -19,9 +21,6 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
-//builder.Logging.ClearProviders();
-//builder.Logging.AddConsole();
-
 builder.Host.UseSerilog();
 
 // Add services to the container.
@@ -29,6 +28,10 @@ builder.Services.AddControllers(options =>
 {
     //input or output formatters
     options.ReturnHttpNotAcceptable = true; //default is json - won't accept requests for diff formats
+    options.OutputFormatters.Insert(0, new SystemTextJsonOutputFormatter(new JsonSerializerOptions
+    {
+        WriteIndented = true
+    }));
 });
 
 // Add appsettings.json to the configuration
@@ -42,18 +45,18 @@ builder.Services.AddDbContext<TradingJournalDataContext>(options =>
     {
         options.LogTo(Console.WriteLine, LogLevel.Information).EnableSensitiveDataLogging(); // Enable logging in Development
     }
-}, ServiceLifetime.Singleton);
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//builder.Services.AddSwaggerGen(setupAction =>
-//{
-//    var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-//    var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+builder.Services.AddSwaggerGen(setupAction =>
+{
+    var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
 
-//    setupAction.IncludeXmlComments(xmlCommentsFullPath);
-//});
+    setupAction.IncludeXmlComments(xmlCommentsFullPath);
+});
 
 
 // Auto Mapper 
@@ -77,11 +80,10 @@ builder.Services.AddApiVersioning(setupAction =>
 
 var app = builder.Build();
 
-// Apply migrations and seed the database
+// seed the database
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<TradingJournalDataContext>();
-    //await dbContext.Database.MigrateAsync();  // Ensure database is created/up-to-date
 
     var seeder = new DatabaseSeeder(dbContext);
     await seeder.SeedAsync();  // Seed data
