@@ -27,6 +27,14 @@ namespace DayJT.Journal.DataContext.Services
                 entity.HasNoKey();
             });
 
+            modelBuilder.Entity<TradeComposite>() //force eager load of TradeElements
+                .Navigation(tc => tc.TradeElements)  
+                .AutoInclude();  
+
+            modelBuilder.Entity<TradeElement>() //same for entries.. no point in a trade element without entries
+                .Navigation(te => te.Entries)
+                .AutoInclude();  
+
             modelBuilder.Entity<TradeComposite>()
                 .HasMany(t => t.TradeElements)
                 .WithOne(t => t.TradeCompositeRef)

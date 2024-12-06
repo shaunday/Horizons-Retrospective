@@ -168,8 +168,6 @@ namespace DayJT.Journal.DataContext.Services
             
             var trade = await dataContext.AllTradeComposites
                                             .Where(t => t.Id == parsedId)
-                                            .Include(t => t.TradeElements)
-                                                .ThenInclude(te => te.Entries)
                                             .SingleOrDefaultAsync();
 
             if (trade == null)
