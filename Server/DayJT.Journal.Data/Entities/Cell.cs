@@ -43,17 +43,16 @@ namespace DayJT.Journal.Data
             get { return ContentWrapper.Content; }
             set
             {
-                ContentWrapper = new ContentRecord(this, value);
+                ContentWrapper = new ContentRecord(value);
             }
         }
 
-        [Required]
         public ICollection<ContentRecord> History { get; set; } = new List<ContentRecord>();
 
         public void SetFollowupContent(string newContent, string changeNote)
         {
             History.Add(ContentWrapper);
-            ContentWrapper = new ContentRecord(parentCell:this, content: newContent) { ChangeNote = changeNote };
+            ContentWrapper = new ContentRecord(content: newContent) { ChangeNote = changeNote };
         }
 
         //parent

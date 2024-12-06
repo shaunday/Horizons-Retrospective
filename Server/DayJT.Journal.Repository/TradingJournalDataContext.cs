@@ -8,11 +8,7 @@ namespace DayJT.Journal.DataContext.Services
     {
         public DbSet<TradeComposite> AllTradeComposites { get; set; } = null!;
 
-        public DbSet<TradeElement> AllTradeElements { get; set; } = null!;
-
         public DbSet<Cell> AllEntries { get; set; } = null!;
-
-        public DbSet<ContentRecord> AllContentRecords { get; set; } = null!;
 
         public DbSet<JournalData> JournalData { get; set; } = null!;
 
@@ -33,33 +29,34 @@ namespace DayJT.Journal.DataContext.Services
 
             modelBuilder.Entity<TradeElement>() //same for entries.. no point in a trade element without entries
                 .Navigation(te => te.Entries)
-                .AutoInclude();  
+                .AutoInclude();
 
             modelBuilder.Entity<TradeComposite>()
-                .HasMany(t => t.TradeElements)
-                .WithOne(t => t.TradeCompositeRef)
-                .HasForeignKey(t => t.TradeCompositeFK)
-                .IsRequired(); //force FK
+                .OwnsMany(t => t.TradeElements)
+                .WithOwner(t => t.TradeCompositeRef)
+                .HasForeignKey(t => t.TradeCompositeFK);
 
             modelBuilder.Entity<TradeElement>()
                .HasMany(t => t.Entries)
                .WithOne(t => t.TradeElementRef)
                .HasForeignKey(t => t.TradeElementFK)
-               .IsRequired(); //force FK
+               .IsRequired()
+               .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Cell>().OwnsOne(c => c.ContentWrapper);
+            modelBuilder.Entity<Cell>().Navigation(c => c.ContentWrapper).AutoInclude();
 
             modelBuilder.Entity<Cell>()
-                .HasMany(t => t.History)
-                .WithOne(t => t.CellRef)
-                .HasForeignKey(t => t.CellFK)
-                .IsRequired(); //force FK
+                .OwnsMany(t => t.History)
+                .WithOwner(h => h.CellRef);
 
             //force Cell to also have trade composite Ref/ FK
             modelBuilder.Entity<Cell>()
                 .HasOne(c => c.TradeCompositeRef)
                 .WithMany()
                 .HasForeignKey(c => c.TradeCompositeFK)
-                .IsRequired(); //force FK
-
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

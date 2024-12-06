@@ -12,7 +12,7 @@ namespace DayJT.Web.API.Models
         public ComponentType ComponentType { get; set; }
 
         public ContentRecordModel ContentWrapper { get; set; } = null!;
-        public ICollection<ContentRecord> History { get; set; } = null!;
+        //public ICollection<ContentRecord> History { get; set; } = null!;
 
         public ValueRelevance CostRelevance { get; set; }
         public ValueRelevance PriceRelevance { get; set; }
