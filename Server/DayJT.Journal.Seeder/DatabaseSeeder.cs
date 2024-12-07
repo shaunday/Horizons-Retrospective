@@ -23,7 +23,7 @@ namespace DayJTrading.Journal.Seeder
         public async Task SeedAsync()
         {
             // Check if any data exists in a specific table to avoid reseeding
-            if (!await _context.AllTradeComposites.AnyAsync())
+            if (!await _context.TradeComposites.AnyAsync())
             {
                 AddTradeCompositeToDbContext();
                 await _context.SaveChangesAsync();
@@ -41,7 +41,7 @@ namespace DayJTrading.Journal.Seeder
             PopulateElementWithData(addElement);
             trade.TradeElements.Add(addElement);
 
-            _context.AllTradeComposites.Add(trade);
+            _context.TradeComposites.Add(trade);
         }
 
         private static readonly Random _lengthRandom = new Random();

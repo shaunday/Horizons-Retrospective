@@ -30,7 +30,7 @@ namespace DayJT.Journal.DataContext.Services
 
         public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
         {
-            var trades = await dataContext.AllTradeComposites
+            var trades = await dataContext.TradeComposites
                                             .AsNoTracking()
                                             .OrderBy(t => t.Id)  // Order by the actual ID to ensure correct sequential order
                                             .Skip((pageNumber - 1) * pageSize)
@@ -49,7 +49,7 @@ namespace DayJT.Journal.DataContext.Services
             }
 
             // Get total count of records
-            var totalCount = await dataContext.AllTradeComposites.CountAsync();
+            var totalCount = await dataContext.TradeComposites.CountAsync();
 
             // Create pagination metadata
             var paginationMetadata = new PaginationMetadata(totalCount, pageSize, pageNumber)
@@ -68,7 +68,7 @@ namespace DayJT.Journal.DataContext.Services
             TradeElement originElement = new TradeElement(trade, TradeActionType.Origin);
             trade.TradeElements.Add(originElement);
 
-            dataContext.AllTradeComposites.Add(trade);
+            dataContext.TradeComposites.Add(trade);
             await dataContext.SaveChangesAsync();
             return trade;
         }
@@ -123,7 +123,7 @@ namespace DayJT.Journal.DataContext.Services
                 throw new ArgumentException($"The EntryId '{componentId}' is not a valid integer.", nameof(componentId));
             }
 
-            var cell = await dataContext.AllEntries
+            var cell = await dataContext.Entries
                                 .Include(t => t.History)
                                 .SingleOrDefaultAsync(t => t.Id == parsedId);
             if (cell == null)
@@ -166,7 +166,7 @@ namespace DayJT.Journal.DataContext.Services
                 throw new ArgumentException($"The tradeId '{tradeId}' is not a valid integer.", nameof(tradeId));
             }
             
-            var trade = await dataContext.AllTradeComposites
+            var trade = await dataContext.TradeComposites
                                             .Where(t => t.Id == parsedId)
                                             .SingleOrDefaultAsync();
 

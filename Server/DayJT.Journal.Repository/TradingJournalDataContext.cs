@@ -6,15 +6,18 @@ namespace DayJT.Journal.DataContext.Services
 {
     public class TradingJournalDataContext : DbContext
     {
-        public DbSet<TradeComposite> AllTradeComposites { get; set; } = null!;
+        public DbSet<TradeComposite> TradeComposites { get; set; } = null!;
 
-        public DbSet<TradeElement> AllTradeElements { get; set; } = null!; //must have this to allow principality of TradeElement in the r/ship with cell
+        public DbSet<TradeElement> TradeElements { get; set; } = null!; //must have this to allow principality of TradeElement in the r/ship with cell
 
-        public DbSet<Cell> AllEntries { get; set; } = null!;
+        public DbSet<Cell> Entries { get; set; } = null!;
 
         public DbSet<JournalData> JournalData { get; set; } = null!;
 
+
         public TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : base(options) { } //allow service configuration 
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
