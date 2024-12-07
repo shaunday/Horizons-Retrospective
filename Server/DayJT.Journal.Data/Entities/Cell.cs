@@ -1,10 +1,9 @@
-﻿using DayJT.Journal.DataEntities.Entities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DayJT.Journal.Data
 {
-    public class Cell : TradeCompositeNavDataBase
+    public class Cell 
     {
         #region Props part a
 
@@ -55,17 +54,23 @@ namespace DayJT.Journal.Data
             ContentWrapper = new ContentRecord(content: newContent) { ChangeNote = changeNote };
         }
 
-        //parent
         [Required]
         public int TradeElementFK { get; set; }
 
         [Required]
         public TradeElement TradeElementRef { get; set; } = null!; 
 
-        public void UpdateParentReference(TradeElement refObj)
+        public void UpdateParentRefs(TradeElement refObj)
         {
             TradeElementRef = refObj;
+            TradeCompositeRef = refObj.TradeCompositeRef;
         }
+
+        [Required]
+        public int TradeCompositeFK { get; set; }
+
+        [Required]
+        public TradeComposite TradeCompositeRef { get; set; } = null!;
     }
 
 }

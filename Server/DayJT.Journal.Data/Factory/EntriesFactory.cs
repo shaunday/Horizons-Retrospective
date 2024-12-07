@@ -16,7 +16,7 @@ namespace DayJTrading.Journal.Data.Factory
             {
                 cell.Content = content;
             }
-            cell.UpdateParentReference(elementRef);
+            cell.UpdateParentRefs(elementRef);
             return cell;
         }
 
