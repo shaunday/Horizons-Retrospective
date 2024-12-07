@@ -38,13 +38,17 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
 
 builder.Services.AddDbContextPool<TradingJournalDataContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DayJTradingDbKey"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DayJTradingDbKey"), npgsqlOptions =>
+    {
+        npgsqlOptions.EnableRetryOnFailure(); 
+    });
 
     if (builder.Environment.IsDevelopment())
     {
         options.LogTo(Console.WriteLine, LogLevel.Information).EnableSensitiveDataLogging(); // Enable logging in Development
     }
 });
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
