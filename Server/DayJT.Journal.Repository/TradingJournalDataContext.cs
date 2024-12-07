@@ -1,6 +1,8 @@
 ﻿using DayJT.Journal.DataEntities.Entities;
+using DayJT.Journal.Repository.Configurations;
 using DayJTrading.Journal.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace DayJT.Journal.Repository
 {
@@ -18,47 +20,10 @@ namespace DayJT.Journal.Repository
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<JournalData>(entity =>
-            {
-                entity.HasNoKey();
-            });
-
-            modelBuilder.Entity<TradeComposite>() //force eager load of TradeElements
-                .Navigation(tc => tc.TradeElements)
-                .AutoInclude();
-
-            modelBuilder.Entity<TradeElement>() //same for entries.. no point in a trade element without entries
-                .Navigation(te => te.Entries)
-                .AutoInclude();
-
-            modelBuilder.Entity<TradeComposite>()
-                .HasMany(t => t.TradeElements)
-                .WithOne(t => t.TradeCompositeRef)
-                .HasForeignKey(t => t.TradeCompositeFK)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<TradeElement>()
-               .HasMany(t => t.Entries)
-               .WithOne(t => t.TradeElementRef)
-               .HasForeignKey(t => t.TradeElementFK)
-               .IsRequired()
-               .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Cell>().OwnsOne(c => c.ContentWrapper);
-            modelBuilder.Entity<Cell>().Navigation(c => c.ContentWrapper).AutoInclude();
-
-            modelBuilder.Entity<Cell>()
-                .OwnsMany(t => t.History)
-                .WithOwner(h => h.CellRef);
-
-            //force Cell to also have trade composite Ref/ FK
-            modelBuilder.Entity<Cell>()
-                .HasOne(c => c.TradeCompositeRef)
-                .WithMany()
-                .HasForeignKey(c => c.TradeCompositeFK)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.ApplyConfiguration(new JournalDataConfiguration());
+            modelBuilder.ApplyConfiguration(new TradeCompositeConfiguration());
+            modelBuilder.ApplyConfiguration(new TradeElementConfiguration());
+            modelBuilder.ApplyConfiguration(new CellConfiguration());
         }
 
         //override save changes to clear tracker after saving

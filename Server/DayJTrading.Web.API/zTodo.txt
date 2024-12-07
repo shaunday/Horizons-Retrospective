@@ -1,6 +1,7 @@
 ﻿
-// good to have
+// todo
 add reopen function (delete closure, add position)?
+filtering
 
 // dashboard
 Indicator alerts, upcoming reports 
@@ -9,10 +10,9 @@ position weight/ sector weight
 
 
 
-
-
-//pre production
-security best practices + expand testing (API tests,)
+//pre production - 2nd stage
+users + authentication 
+expand testing (API tests, etc)
 
 //production
 clear details from connection string
