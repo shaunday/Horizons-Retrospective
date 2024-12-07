@@ -3,12 +3,16 @@
 Trade Position composed of actions (origin,entry,exit,etc)
 Each line composed of cells
 
-
 TradeComposite: List<TradeElement>
-TradeElement: List<InfoCell>
+TradeElement: List<Cell/Entry>
+optional...Entry: List<ContentRecord> (as History)
 
-TradeComposite:  (Origin)    [ ] [ ] [ ] [ ]
-                 (Entry)     [ ] [ ] [ ] [ ]
-                 (Reduction) [ ] [ ] [ ] [ ]
+TradeComposite:  (Origin)       [  ]  [ ]  [  ]  [  ]
+                 (Increase)     [  ]  [ ]  [  ]  [  ]
+                 (Reduction)    [  ]  [ ]  [  ]  [  ]
+                    ... 
+                    ...
+                    ...
+                 (Summary)      [  ]  [ ]  [  ]  [  ]
 
-                 (Summary)   [ ] [ ] [ ] [ ] 
+
