@@ -14,10 +14,9 @@ namespace DayJT.Journal.DataContext.Services
 
         public DbSet<JournalData> JournalData { get; set; } = null!;
 
-
+        #region Ctor
         public TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : base(options) { } //allow service configuration 
-
-
+        #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
