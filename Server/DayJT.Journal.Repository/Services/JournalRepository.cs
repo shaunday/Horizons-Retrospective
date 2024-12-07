@@ -1,14 +1,7 @@
 ﻿using DayJT.Journal.Data;
 using DayJT.Journal.DataContext.Services;
 using DayJT.Journal.DataEntities.Entities;
-using DayJT.Journal.Repository;
-using DayJTrading.Journal.Data;
-using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Diagnostics.Metrics;
 
 namespace DayJT.Journal.Repository.Services
 {

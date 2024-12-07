@@ -1,20 +1,17 @@
-using AutoMapper;
-using AutoMapper.EntityFramework;
-using AutoMapper.EquivalencyExpression;
-using Microsoft.AspNetCore.StaticFiles;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Serilog;
-using System.Reflection;
-using DayJT.Journal.DataContext.Services;
-using DayJTrading.Journal.Seeder;
 using Asp.Versioning;
-using DayJT.Web.API.Mapping;
-using Microsoft.Data.SqlClient;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using System.Text.Json;
+using AutoMapper;
+using AutoMapper.EquivalencyExpression;
+using DayJT.Journal.DataContext.Services;
 using DayJT.Journal.Repository;
 using DayJT.Journal.Repository.Services;
+using DayJT.Web.API.Mapping;
+using DayJTrading.Journal.Seeder;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Serilog;
+using System.Reflection;
+using System.Text.Json;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()

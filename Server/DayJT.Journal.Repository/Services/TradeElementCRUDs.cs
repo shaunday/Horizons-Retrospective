@@ -1,11 +1,6 @@
 ﻿using DayJT.Journal.Data;
 using DayJT.Journal.DataEntities.Entities;
 using DayJTrading.Journal.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DayJT.Journal.DataContext.Services
 {
@@ -72,7 +67,12 @@ namespace DayJT.Journal.DataContext.Services
 
         internal static void RemoveInterimInput(TradeComposite trade, string tradeInputId)
         {
-            var tradeInputToRemove = trade.TradeElements.Where(t => t.Id.ToString() == tradeInputId).SingleOrDefault();
+            if (!int.TryParse(tradeInputId, out var parsedId))
+            {
+                throw new ArgumentException($"The element Id '{tradeInputId}' is not a valid integer.", nameof(tradeInputId));
+            }
+
+            var tradeInputToRemove = trade.TradeElements.Where(t => t.Id == parsedId).SingleOrDefault();
 
             if (tradeInputToRemove != null && (tradeInputToRemove.TradeActionType == TradeActionType.ReducePosition || tradeInputToRemove.TradeActionType == TradeActionType.ReducePosition))
             {
