@@ -28,7 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DayJT.Journal.Data\DayJT.Journal.DataEntities.csproj" />
     <ProjectReference Include="..\DayJT.Journal.Repository\DayJT.Journal.Repository.csproj" />
-    <ProjectReference Include="..\DayJTrading.Configuration\DayJTrading.Configuration.csproj" />
+    <ProjectReference Include="..\DayJTrading.Configuration\DayJT.Common.Configuration.csproj" />
   </ItemGroup>
 
   <ItemGroup>

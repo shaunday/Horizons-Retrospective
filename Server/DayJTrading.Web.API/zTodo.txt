@@ -4,6 +4,7 @@ add reopen function (delete closure, add position)?
 filtering
 
 // dashboard
+pies
 Indicator alerts, upcoming reports 
 Incdicators: double bottom on rsi/cci, ma, ema, wbb, dividends, report, news
 position weight/ sector weight

@@ -1,4 +1,5 @@
 using DayJT.Journal.DataEntities.Entities;
+using DayJTrading.Journal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
