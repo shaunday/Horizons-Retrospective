@@ -36,7 +36,7 @@ builder.Services.AddControllers(options =>
 // Add appsettings.json to the configuration
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-builder.Services.AddDbContext<TradingJournalDataContext>(options =>
+builder.Services.AddDbContextPool<TradingJournalDataContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DayJTradingDbKey"));
 

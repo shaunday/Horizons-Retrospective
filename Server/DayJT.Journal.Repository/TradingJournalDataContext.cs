@@ -60,5 +60,13 @@ namespace DayJT.Journal.Repository
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
         }
+
+        //override save changes to clear tracker after saving
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            int saveRes = await base.SaveChangesAsync(cancellationToken);
+            ChangeTracker.Clear(); // Clear tracker after saving
+            return saveRes;
+        }
     }
 }
