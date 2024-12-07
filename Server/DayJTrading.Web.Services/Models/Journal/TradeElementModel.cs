@@ -1,6 +1,6 @@
 ﻿using DayJT.Journal.Data;
 
-namespace DayJT.Web.API.Models
+namespace DayJTrading.Web.Services.Models.Journal
 {
     public class TradeElementModel
     {

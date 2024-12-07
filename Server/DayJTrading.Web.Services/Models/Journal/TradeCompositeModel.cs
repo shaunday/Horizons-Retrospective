@@ -1,6 +1,6 @@
-﻿using DayJT.Journal.Data;
+﻿using DayJT.Journal.DataEntities.Entities;
 
-namespace DayJT.Web.API.Models
+namespace DayJTrading.Web.Services.Models.Journal
 {
     public class TradeCompositeModel
     {
@@ -8,6 +8,6 @@ namespace DayJT.Web.API.Models
         public ICollection<TradeElementModel> TradeElements { get; set; } = null!;
         public TradeElement Summary { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
-        public string Sector { get; set;} = "";
+        public string Sector { get; set; } = "";
     }
 }

@@ -1,4 +1,4 @@
-﻿using DayJT.Journal.Data;
+﻿using DayJT.Journal.DataEntities.Entities;
 
 namespace DayJT.Journal.DataContext.Services
 {

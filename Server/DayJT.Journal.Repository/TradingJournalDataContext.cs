@@ -1,10 +1,10 @@
-﻿using DayJT.Journal.Data;
+﻿using DayJT.Journal.DataEntities.Entities;
 using DayJTrading.Journal.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace DayJT.Journal.DataContext.Services
+namespace DayJT.Journal.Repository
 {
-    public class TradingJournalDataContext : DbContext
+    public class TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : DbContext(options)
     {
         public DbSet<TradeComposite> TradeComposites { get; set; } = null!;
 
@@ -13,10 +13,6 @@ namespace DayJT.Journal.DataContext.Services
         public DbSet<Cell> Entries { get; set; } = null!;
 
         public DbSet<JournalData> JournalData { get; set; } = null!;
-
-        #region Ctor
-        public TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : base(options) { } //allow service configuration 
-        #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,8 +24,8 @@ namespace DayJT.Journal.DataContext.Services
             });
 
             modelBuilder.Entity<TradeComposite>() //force eager load of TradeElements
-                .Navigation(tc => tc.TradeElements)  
-                .AutoInclude();  
+                .Navigation(tc => tc.TradeElements)
+                .AutoInclude();
 
             modelBuilder.Entity<TradeElement>() //same for entries.. no point in a trade element without entries
                 .Navigation(te => te.Entries)

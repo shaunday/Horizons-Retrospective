@@ -1,4 +1,5 @@
 ﻿using DayJT.Journal.Data;
+using DayJT.Journal.DataEntities.Entities;
 using DayJTrading.Journal.Data;
 using System;
 using System.Collections.Generic;

@@ -13,6 +13,8 @@ using DayJT.Web.API.Mapping;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using System.Text.Json;
+using DayJT.Journal.Repository;
+using DayJT.Journal.Repository.Services;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()

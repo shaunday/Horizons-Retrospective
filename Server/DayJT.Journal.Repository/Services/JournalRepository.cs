@@ -1,4 +1,7 @@
 ﻿using DayJT.Journal.Data;
+using DayJT.Journal.DataContext.Services;
+using DayJT.Journal.DataEntities.Entities;
+using DayJT.Journal.Repository;
 using DayJTrading.Journal.Data;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.EntityFrameworkCore;
@@ -7,16 +10,11 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
 
-namespace DayJT.Journal.DataContext.Services
+namespace DayJT.Journal.Repository.Services
 {
-    public class JournalRepository : IJournalRepository
+    public class JournalRepository(TradingJournalDataContext journalDbContext) : IJournalRepository
     {
-        private readonly TradingJournalDataContext dataContext;
-
-        public JournalRepository(TradingJournalDataContext journalDbContext)
-        {
-            dataContext = journalDbContext ?? throw new ArgumentNullException(nameof(journalDbContext));
-        }
+        private readonly TradingJournalDataContext dataContext = journalDbContext ?? throw new ArgumentNullException(nameof(journalDbContext));
 
         //Gen. Data
 
@@ -35,15 +33,12 @@ namespace DayJT.Journal.DataContext.Services
                                             .OrderBy(t => t.Id)  // Order by the actual ID to ensure correct sequential order
                                             .Skip((pageNumber - 1) * pageSize)
                                             .Take(pageSize)
-                                            .Include(t => t.TradeElements)
-                                                .ThenInclude(te => te.Entries)
-                                                    .ThenInclude(e => e.History)
                                             .ToListAsync();
 
             //todo monitor performance .AsSplitQuery() ? or other solutions
 
             // Ensure there are trades
-            if (trades == null || !trades.Any())
+            if (trades == null || trades.Count == 0)
             {
                 throw new InvalidOperationException("Could not get any trades.");
             }
@@ -63,9 +58,9 @@ namespace DayJT.Journal.DataContext.Services
 
         public async Task<TradeComposite> AddTradeCompositeAsync()
         {
-            TradeComposite trade = new TradeComposite();
+            TradeComposite trade = new();
 
-            TradeElement originElement = new TradeElement(trade, TradeActionType.Origin);
+            TradeElement originElement = new(trade, TradeActionType.Origin);
             trade.TradeElements.Add(originElement);
 
             dataContext.TradeComposites.Add(trade);
@@ -91,7 +86,7 @@ namespace DayJT.Journal.DataContext.Services
         public async Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
-            TradeElement tradeInput = new TradeElement(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);
+            TradeElement tradeInput = new(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);
 
             trade.TradeElements.Add(tradeInput);
             RecalculateSummary(trade);
@@ -125,11 +120,7 @@ namespace DayJT.Journal.DataContext.Services
 
             var cell = await dataContext.Entries
                                 .Include(t => t.History)
-                                .SingleOrDefaultAsync(t => t.Id == parsedId);
-            if (cell == null)
-            {
-                throw new InvalidOperationException($"Entry with ID {componentId} not found.");
-            }
+                                .SingleOrDefaultAsync(t => t.Id == parsedId) ?? throw new InvalidOperationException($"Entry with ID {componentId} not found.");
 
             cell.SetFollowupContent(newContent, changeNote);
 
@@ -148,35 +139,29 @@ namespace DayJT.Journal.DataContext.Services
             await dataContext.SaveChangesAsync();
 
             return (cell, newSummary);
-        }     
+        }
 
 
         #region Helpers
-        private TradeElement RecalculateSummary(TradeComposite trade)
+        private static TradeElement RecalculateSummary(TradeComposite trade)
         {
             TradeElement summary = TradeElementCRUDs.GetInterimSummary(trade);
             trade.Summary = summary;
             return summary;
         }
 
-        private async Task<TradeComposite> GetTradeCompositeAsync(string tradeId, bool loadEntriesHistory = false)
+        private async Task<TradeComposite> GetTradeCompositeAsync(string tradeId)
         {
             if (!int.TryParse(tradeId, out var parsedId))
             {
                 throw new ArgumentException($"The tradeId '{tradeId}' is not a valid integer.", nameof(tradeId));
             }
-            
+
             var trade = await dataContext.TradeComposites
                                             .Where(t => t.Id == parsedId)
-                                            .SingleOrDefaultAsync();
-
-            if (trade == null)
-            {
-                throw new InvalidOperationException($"Trade with ID {tradeId} not found.");
-            }
-
+                                            .SingleOrDefaultAsync() ?? throw new InvalidOperationException($"Trade with ID {tradeId} not found.");
             return trade!;
-        } 
+        }
         #endregion
     }
 }

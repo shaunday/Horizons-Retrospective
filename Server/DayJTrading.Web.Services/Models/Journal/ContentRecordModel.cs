@@ -1,4 +1,4 @@
-﻿namespace DayJT.Web.API.Models
+﻿namespace DayJTrading.Web.Services.Models.Journal
 {
     public class ContentRecordModel
     {

@@ -1,4 +1,4 @@
-﻿using DayJT.Journal.DataContext.Services;
+﻿using DayJT.Journal.Repository;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;

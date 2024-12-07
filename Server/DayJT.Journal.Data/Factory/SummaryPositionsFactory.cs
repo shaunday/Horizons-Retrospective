@@ -1,6 +1,7 @@
 ﻿using DayJT.Journal.Data;
+using DayJT.Journal.DataEntities.Entities;
+using DayJT.Journal.DataEntities.Factory;
 using DayJTrading.Journal.Data;
-using DayJTrading.Journal.Data.Factory;
 using System.Collections.Generic;
 using System.Linq;
 

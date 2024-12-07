@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using DayJT.Journal.Data;
+using DayJT.Journal.DataEntities.Entities;
 
-namespace DayJT.Web.API.Models
+namespace DayJTrading.Web.Services.Models.Journal
 {
     public class CellModel
     {
@@ -12,7 +13,7 @@ namespace DayJT.Web.API.Models
         public ComponentType ComponentType { get; set; }
 
         public ContentRecordModel ContentWrapper { get; set; } = null!;
-        public ICollection<ContentRecord> History { get; set; } = null!; 
+        public ICollection<ContentRecord>? History { get; set; }
 
         public ValueRelevance CostRelevance { get; set; }
         public ValueRelevance PriceRelevance { get; set; }

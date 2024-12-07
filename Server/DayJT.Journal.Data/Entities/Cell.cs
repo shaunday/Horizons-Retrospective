@@ -1,14 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using DayJT.Journal.Data;
+using System.ComponentModel.DataAnnotations;
 
-namespace DayJT.Journal.Data
+namespace DayJT.Journal.DataEntities.Entities
 {
-    public class Cell 
+    public class Cell
     {
         #region Props part a
 
         [Key]
-        public int Id { get; private set; } 
+        public int Id { get; private set; }
 
         [Required]
         public string Title { get; set; } = string.Empty;
@@ -46,10 +46,11 @@ namespace DayJT.Journal.Data
             }
         }
 
-        public ICollection<ContentRecord> History { get; set; } = new List<ContentRecord>();
+        public ICollection<ContentRecord>? History { get; set; }
 
         public void SetFollowupContent(string newContent, string changeNote)
         {
+            History ??= new List<ContentRecord>();
             History.Add(ContentWrapper);
             ContentWrapper = new ContentRecord(content: newContent) { ChangeNote = changeNote };
         }
@@ -58,7 +59,7 @@ namespace DayJT.Journal.Data
         public int TradeElementFK { get; set; }
 
         [Required]
-        public TradeElement TradeElementRef { get; set; } = null!; 
+        public TradeElement TradeElementRef { get; set; } = null!;
 
         public void UpdateParentRefs(TradeElement refObj)
         {

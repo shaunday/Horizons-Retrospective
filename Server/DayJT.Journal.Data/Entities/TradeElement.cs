@@ -1,14 +1,13 @@
-﻿using DayJTrading.Journal.Data.Factory;
+﻿using DayJT.Journal.Data;
+using DayJTrading.Journal.Data.Factory;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics;
 
-namespace DayJT.Journal.Data
+namespace DayJT.Journal.DataEntities.Entities
 {
-    public class TradeElement 
+    public class TradeElement
     {
         [Key]
-        public int Id { get; private set; } 
+        public int Id { get; private set; }
 
         [Required]
         public TradeActionType TradeActionType { get; set; }

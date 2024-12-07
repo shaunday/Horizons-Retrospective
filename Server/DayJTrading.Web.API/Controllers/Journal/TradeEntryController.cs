@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using DayJT.Journal.Data;
-using DayJT.Web.API.Models;
-using DayJT.Journal.DataContext.Services;
 using Asp.Versioning;
+using DayJT.Journal.DataEntities.Entities;
+using DayJTrading.Web.Services.Models.Journal;
+using DayJT.Journal.Repository.Services;
 
 namespace DayJT.Web.API.Controllers.Journal
 {

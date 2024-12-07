@@ -1,4 +1,4 @@
-﻿using DayJT.Journal.DataContext.Services;
+﻿using DayJT.Journal.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

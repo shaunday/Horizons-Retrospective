@@ -1,11 +1,7 @@
 ﻿using DayJT.Journal.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DayJT.Journal.DataEntities.Entities;
 
-namespace DayJTrading.Journal.Data.Factory
+namespace DayJT.Journal.DataEntities.Factory
 {
     internal static class EntriesFactory
     {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.EquivalencyExpression;
-using DayJT.Journal.Data;
-using DayJT.Web.API.Models;
+using DayJT.Journal.DataEntities.Entities;
+using DayJTrading.Web.Services.Models.Journal;
 
 namespace DayJT.Web.API.Mapping
 {

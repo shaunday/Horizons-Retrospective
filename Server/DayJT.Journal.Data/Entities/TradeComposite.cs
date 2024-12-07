@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DayJT.Journal.Data
+namespace DayJT.Journal.DataEntities.Entities
 {
     public class TradeComposite
     {

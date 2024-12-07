@@ -1,5 +1,6 @@
 ﻿using DayJT.Journal.Data;
-using DayJT.Journal.DataContext.Services;
+using DayJT.Journal.DataEntities.Entities;
+using DayJT.Journal.Repository;
 using DayJTrading.Journal.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
