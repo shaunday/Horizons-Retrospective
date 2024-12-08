@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DayJTrading.Web.API</name>
+    </assembly>
+    <members>
+        <member name="T:DayJTrading.Web.API.Configurations.ControllerExtensions">
+            <summary>
+            Extension methods for configuring controllers.
+            </summary>
+        </member>
+        <member name="M:DayJTrading.Web.API.Configurations.ControllerExtensions.AddConfiguredControllers(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds configured controllers to the service collection.
+            </summary>
+            <param name="services">The service collection.</param>
+            <returns>The updated service collection.</returns>
+        </member>
+    </members>
+</doc>

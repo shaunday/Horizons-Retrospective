@@ -8,30 +8,22 @@ using System.Diagnostics;
 
 namespace DayJTrading.Journal.Seeder
 {
-    public class DatabaseSeeder
+    internal static class DatabaseSeeder
     {
-        private readonly TradingJournalDataContext _context;
+        private static RandomNumberGenerator _randomNumbersMachine = new RandomNumberGenerator();
+        private static RandomWordsGenerator _randomWordsMachine = new RandomWordsGenerator();
 
-        private RandomNumberGenerator _randomNumbersMachine = new RandomNumberGenerator();
-        private RandomWordsGenerator _randomWordsMachine = new RandomWordsGenerator();
-
-
-        public DatabaseSeeder(TradingJournalDataContext context)
-        {
-            _context = context;
-        }
-
-        public async Task SeedAsync()
+        internal static async Task SeedAsync(TradingJournalDataContext context)
         {
             // Check if any data exists in a specific table to avoid reseeding
-            if (!await _context.TradeComposites.AnyAsync())
+            if (!await context.TradeComposites.AnyAsync())
             {
-                AddTradeCompositeToDbContext();
-                await _context.SaveChangesAsync();
+                AddTradeCompositeToDbContext(context);
+                await context.SaveChangesAsync();
             }
         }
 
-        private void AddTradeCompositeToDbContext()
+        private static void AddTradeCompositeToDbContext(TradingJournalDataContext context)
         {
             TradeComposite trade = new TradeComposite();
             TradeElement originElement = new TradeElement(trade, TradeActionType.Origin);
@@ -42,11 +34,11 @@ namespace DayJTrading.Journal.Seeder
             PopulateElementWithData(addElement);
             trade.TradeElements.Add(addElement);
 
-            _context.TradeComposites.Add(trade);
+            context.TradeComposites.Add(trade);
         }
 
         private static readonly Random _lengthRandom = new Random();
-        private TradeElement PopulateElementWithData(TradeElement element)
+        private static TradeElement PopulateElementWithData(TradeElement element)
         {
             int length;
             for (int i = 0; i < element.Entries.Count; i++)
