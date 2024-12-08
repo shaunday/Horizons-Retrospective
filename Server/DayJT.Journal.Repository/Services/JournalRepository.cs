@@ -115,18 +115,6 @@ namespace DayJT.Journal.Repository.Services
             return trade.Summary!;
         }
 
-        public async Task<TradeElement> ReopenTradeAsync(string tradeId)
-        {
-            var trade = await GetTradeCompositeAsync(tradeId);
-            TradeElement originElement = new(trade, TradeActionType.Origin);
-            trade.TradeElements.Add(originElement);
-
-            dataContext.TradeComposites.Add(trade);
-            RecalculateSummary(trade);
-            await dataContext.SaveChangesAsync();
-            return (trade.Summary);
-        }
-
         //Trade Elements 
 
         public async Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd)

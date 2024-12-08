@@ -19,7 +19,6 @@ namespace DayJT.Journal.DataContext.Services
 
         //closure
         Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice);
-        Task<TradeElement> ReopenTradeAsync(string tradeId);
 
         //data
         Task<List<string>?> GetAllSavedSectors();
