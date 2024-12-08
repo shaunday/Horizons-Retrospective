@@ -3,7 +3,7 @@ using DayJTrading.Journal.Data;
 
 namespace DayJT.Journal.DataContext.Services
 {
-    public interface IJournalRepository
+    public interface ITradingJournalRepository
     {
         //composites
         Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10);

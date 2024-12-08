@@ -19,7 +19,7 @@ namespace DayJT.Web.API.Controllers.Journal
 
         #region Ctor
 
-        public TradesJournalController(IJournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :  
+        public TradesJournalController(ITradingJournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :  
                                                                                                     base(journalAccess, logger, mapper) { }
         #endregion
 

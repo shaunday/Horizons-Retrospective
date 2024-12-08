@@ -72,7 +72,7 @@ builder.Services.AddAutoMapper(configAction);
 
 
 //builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
-builder.Services.AddScoped<IJournalRepository, JournalRepository>();
+builder.Services.AddScoped<ITradingJournalRepository, TradingJournalRepository>();
 
 builder.Services.AddApiVersioning(setupAction =>
 {

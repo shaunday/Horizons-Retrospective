@@ -6,17 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DayJT.Journal.Repository.Services
 {
-    public class JournalRepository(TradingJournalDataContext journalDbContext) : IJournalRepository
+    public partial class TradingJournalRepository(TradingJournalDataContext journalDbContext) : ITradingJournalRepository
     {
         private readonly TradingJournalDataContext dataContext = journalDbContext ?? throw new ArgumentNullException(nameof(journalDbContext));
-
-        //Gen. Data
-
-        public async Task<List<string>?> GetAllSavedSectors()
-        {
-            var journalData = await dataContext.JournalData.AsNoTracking().SingleOrDefaultAsync();
-            return journalData?.SavedSectors?.OrderBy(s => s).ToList();
-        }
 
         //Trade Composite 
 
