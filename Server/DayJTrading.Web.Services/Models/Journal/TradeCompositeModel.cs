@@ -8,6 +8,6 @@ namespace DayJTrading.Web.Services.Models.Journal
         public ICollection<TradeElementModel> TradeElements { get; set; } = null!;
         public TradeElement Summary { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
-        public string Sector { get; set; } = "";
+        public List<string> Sectors { get; set; } = null!;
     }
 }

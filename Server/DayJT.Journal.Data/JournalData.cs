@@ -13,6 +13,5 @@ namespace DayJTrading.Journal.Data
 
         public List<string>? SavedBrokers { get; set; }
 
-        //filter stuff ?
     }
 }

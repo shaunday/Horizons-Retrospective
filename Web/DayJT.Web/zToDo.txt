@@ -1,5 +1,7 @@
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 
+filtering
+
 Testing:
  -[] RQ: https://tanstack.com/query/latest/docs/framework/react/guides/testing
         https://tkdodo.eu/blog/testing-react-query

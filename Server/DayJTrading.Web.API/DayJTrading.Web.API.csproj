@@ -38,9 +38,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DayJT.Common.Configuration\DayJT.Common.Configuration.csproj" />
     <ProjectReference Include="..\DayJT.Journal.Repository\DayJT.Journal.Repository.csproj" />
     <ProjectReference Include="..\DayJT.Journal.Seeder\DayJT.Journal.DataSeeder.csproj" />
-    <ProjectReference Include="..\DayJTrading.Configuration\DayJT.Common.Configuration.csproj" />
     <ProjectReference Include="..\DayJTrading.Web.Services\DayJTrading.Web.Services.csproj" />
   </ItemGroup>
 

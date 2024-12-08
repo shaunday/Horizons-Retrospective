@@ -9,7 +9,7 @@ namespace DayJT.Journal.DataEntities.Entities
 
         public ICollection<TradeElement> TradeElements { get; set; } = new List<TradeElement>(); //only called when I new this manually, not called on DB access.
 
-        public string Sector { get; set; } = "";
+        public List<string> Sectors { get; set; } = [];
 
         public TradeElement Summary { get; set; } = null!;
 

@@ -1,6 +1,7 @@
 ﻿using DayJT.Journal.Data;
 using DayJT.Journal.DataContext.Services;
 using DayJT.Journal.DataEntities.Entities;
+using DayJTrading.Journal.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace DayJT.Journal.Repository.Services
@@ -49,6 +50,46 @@ namespace DayJT.Journal.Repository.Services
             return (trades, paginationMetadata);
         }
 
+        public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllFilteredTradeCompositesAsync(
+            DataFilteringInfo filter, int pageNumber = 1, int pageSize = 10)
+        {
+            var query = dataContext.TradeComposites.AsNoTracking().AsQueryable();
+
+            if (filter.StartDate.HasValue)
+            {
+                query = query.Where(t => t.CreatedAt >= filter.StartDate.Value);
+            }
+
+            if (filter.EndDate.HasValue)
+            {
+                query = query.Where(t => t.CreatedAt <= filter.EndDate.Value);
+            }
+
+            if (filter.FilterObjects != null && filter.FilterObjects.Any())
+            {
+                foreach (var filterObject in filter.FilterObjects)
+                {
+                    query = query.Where(t => t.TradeElements.Any(te => te.Entries.Any(e =>
+                                    e.Title == filterObject.Title && e.Content.Contains(filterObject.FilterValue))));
+                }
+            }
+
+            var totalCount = await query.CountAsync();
+
+            var trades = await query
+                                .OrderBy(t => t.Id)
+                                .Skip((pageNumber - 1) * pageSize)
+                                .Take(pageSize)
+                                .ToListAsync();
+
+            var paginationMetadata = new PaginationMetadata(totalCount, pageSize, pageNumber)
+            {
+                TotalPageCount = (int)Math.Ceiling(totalCount / (double)pageSize)
+            };
+
+            return (trades, paginationMetadata);
+        }
+
         public async Task<TradeComposite> AddTradeCompositeAsync()
         {
             TradeComposite trade = new();
@@ -72,6 +113,18 @@ namespace DayJT.Journal.Repository.Services
             RecalculateSummary(trade);
 
             return trade.Summary!;
+        }
+
+        public async Task<TradeElement> ReopenTradeAsync(string tradeId)
+        {
+            var trade = await GetTradeCompositeAsync(tradeId);
+            TradeElement originElement = new(trade, TradeActionType.Origin);
+            trade.TradeElements.Add(originElement);
+
+            dataContext.TradeComposites.Add(trade);
+            RecalculateSummary(trade);
+            await dataContext.SaveChangesAsync();
+            return (trade.Summary);
         }
 
         //Trade Elements 
@@ -104,7 +157,7 @@ namespace DayJT.Journal.Repository.Services
 
         //Entries Update
 
-        public async Task<(Cell updatedCell, TradeElement? summary)> UpdateCellContent(string componentId, string newContent, string changeNote)
+        public async Task<(Cell updatedCell, TradeElement? summary)> UpdateCellContentAsync(string componentId, string newContent, string changeNote)
         {
             if (!int.TryParse(componentId, out var parsedId))
             {

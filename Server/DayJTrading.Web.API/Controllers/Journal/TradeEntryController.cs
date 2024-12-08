@@ -23,7 +23,7 @@ namespace DayJT.Web.API.Controllers.Journal
         [HttpPut("{componentId}")]
         public async Task<ActionResult<(CellModel newEntry, TradeElementModel? summary)>> UpdateComponent(string componentId, string newContent, string changeNote)
         {
-            (Cell updatedComponent, TradeElement? summary) = await _journalAccess.UpdateCellContent(componentId, newContent, changeNote);
+            (Cell updatedComponent, TradeElement? summary) = await _journalAccess.UpdateCellContentAsync(componentId, newContent, changeNote);
 
             (CellModel, TradeElementModel?) resAsModel = (_mapper.Map<CellModel>(updatedComponent), _mapper.Map<TradeElementModel>(summary));
 

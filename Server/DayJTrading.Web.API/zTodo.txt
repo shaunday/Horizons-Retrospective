@@ -1,7 +1,7 @@
 ﻿
 // todo
-add reopen function (delete closure, add position)?
-filtering
+should summary be different when position is closed... how?
+filtering dto?
 
 // dashboard
 pies
