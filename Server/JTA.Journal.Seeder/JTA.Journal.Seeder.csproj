@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DayJT.Journal.Data\DayJT.Journal.DataEntities.csproj" />
-    <ProjectReference Include="..\DayJT.Journal.Repository\DayJT.Journal.Repository.csproj" />
+    <ProjectReference Include="..\JTA.Journal.Entities\JTA.Journal.Entities.csproj" />
+    <ProjectReference Include="..\JTA.Journal.Repository\JTA.Journal.Repository.csproj" />
   </ItemGroup>
 
 </Project>

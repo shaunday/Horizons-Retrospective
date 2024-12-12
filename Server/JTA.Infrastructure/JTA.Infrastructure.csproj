@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DayJT.Journal.Repository\DayJT.Journal.Repository.csproj" />
+    <ProjectReference Include="..\JTA.Journal.Repository\JTA.Journal.Repository.csproj" />
   </ItemGroup>
 
 </Project>

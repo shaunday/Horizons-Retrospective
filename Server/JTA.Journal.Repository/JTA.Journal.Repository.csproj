@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DayJT.Journal.Data\DayJT.Journal.DataEntities.csproj" />
+    <ProjectReference Include="..\JTA.Journal.Entities\JTA.Journal.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

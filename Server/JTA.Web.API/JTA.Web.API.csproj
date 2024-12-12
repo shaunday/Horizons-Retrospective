@@ -26,10 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DayJT.Configurations\DayJT.Configurations.csproj" />
-    <ProjectReference Include="..\DayJT.Journal.Repository\DayJT.Journal.Repository.csproj" />
-    <ProjectReference Include="..\DayJT.Journal.Seeder\DayJT.Journal.DataSeeder.csproj" />
-    <ProjectReference Include="..\DayJTrading.Web.Services\DayJTrading.Web.Services.csproj" />
+    <ProjectReference Include="..\JTA.Infrastructure\JTA.Infrastructure.csproj" />
+    <ProjectReference Include="..\JTA.Journal.Repository\JTA.Journal.Repository.csproj" />
+    <ProjectReference Include="..\JTA.Journal.Seeder\JTA.Journal.Seeder.csproj" />
+    <ProjectReference Include="..\JTA.Web.Services\JTA.Web.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,29 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJTrading.Web.API", "DayJTrading.Web.API\DayJTrading.Web.API.csproj", "{BFD76645-DDC9-495D-8575-4236508BBA0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JTA.Web.API", "JTA.Web.API\JTA.Web.API.csproj", "{BFD76645-DDC9-495D-8575-4236508BBA0A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJT.Journal.DataEntities", "DayJT.Journal.Data\DayJT.Journal.DataEntities.csproj", "{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JTA.Journal.Entities", "JTA.Journal.Entities\JTA.Journal.Entities.csproj", "{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJT.Journal.Repository", "DayJT.Journal.Repository\DayJT.Journal.Repository.csproj", "{71B5E78E-B056-4414-B253-42E41650DC5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JTA.Journal.Repository", "JTA.Journal.Repository\JTA.Journal.Repository.csproj", "{71B5E78E-B056-4414-B253-42E41650DC5D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJT.Journal.DataSeeder", "DayJT.Journal.Seeder\DayJT.Journal.DataSeeder.csproj", "{9E5A0232-2B34-4D69-A714-2C34C38C4BB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JTA.Journal.Seeder", "JTA.Journal.Seeder\JTA.Journal.Seeder.csproj", "{9E5A0232-2B34-4D69-A714-2C34C38C4BB4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJT.Common", "DayJT.Common\DayJT.Common.csproj", "{E61664FD-0D76-4D8C-93F5-9DD4AF2A2F6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JTA.Web.Services", "JTA.Web.Services\JTA.Web.Services.csproj", "{A1142458-7155-4FC6-BEB2-81DA7FE6A06D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayJTrading.Web.Services", "DayJTrading.Web.Services\DayJTrading.Web.Services.csproj", "{A1142458-7155-4FC6-BEB2-81DA7FE6A06D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JTA.UnitTests", "JTA.UnitTests\JTA.UnitTests.csproj", "{1070FBF4-644F-4D08-8486-37EB9F8D872E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayJT.Journal.Test", "DayJT.Journal.Test\DayJT.Journal.Test.csproj", "{1070FBF4-644F-4D08-8486-37EB9F8D872E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Journal", "Journal", "{488C87F6-C664-4DDF-A861-DE990E539B91}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web.API", "Web.API", "{C8840FAB-F75D-4F8F-9D14-CA7BA9A48F2E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{50D4082D-3B73-41CA-8632-FABDA25E4C16}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{28F0B4C3-FB86-4047-BFA4-FB1BE7FAECEC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayJT.Configurations", "DayJT.Configurations\DayJT.Configurations.csproj", "{4C8A4A02-17FD-42BA-85F0-D535616669E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JTA.Infrastructure", "JTA.Infrastructure\JTA.Infrastructure.csproj", "{4C8A4A02-17FD-42BA-85F0-D535616669E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,10 +39,6 @@ Global
 		{9E5A0232-2B34-4D69-A714-2C34C38C4BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E5A0232-2B34-4D69-A714-2C34C38C4BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E5A0232-2B34-4D69-A714-2C34C38C4BB4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E61664FD-0D76-4D8C-93F5-9DD4AF2A2F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E61664FD-0D76-4D8C-93F5-9DD4AF2A2F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E61664FD-0D76-4D8C-93F5-9DD4AF2A2F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E61664FD-0D76-4D8C-93F5-9DD4AF2A2F6D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1142458-7155-4FC6-BEB2-81DA7FE6A06D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1142458-7155-4FC6-BEB2-81DA7FE6A06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1142458-7155-4FC6-BEB2-81DA7FE6A06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -68,16 +54,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{BFD76645-DDC9-495D-8575-4236508BBA0A} = {C8840FAB-F75D-4F8F-9D14-CA7BA9A48F2E}
-		{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406} = {488C87F6-C664-4DDF-A861-DE990E539B91}
-		{71B5E78E-B056-4414-B253-42E41650DC5D} = {488C87F6-C664-4DDF-A861-DE990E539B91}
-		{9E5A0232-2B34-4D69-A714-2C34C38C4BB4} = {488C87F6-C664-4DDF-A861-DE990E539B91}
-		{E61664FD-0D76-4D8C-93F5-9DD4AF2A2F6D} = {50D4082D-3B73-41CA-8632-FABDA25E4C16}
-		{A1142458-7155-4FC6-BEB2-81DA7FE6A06D} = {C8840FAB-F75D-4F8F-9D14-CA7BA9A48F2E}
-		{1070FBF4-644F-4D08-8486-37EB9F8D872E} = {488C87F6-C664-4DDF-A861-DE990E539B91}
-		{4C8A4A02-17FD-42BA-85F0-D535616669E9} = {28F0B4C3-FB86-4047-BFA4-FB1BE7FAECEC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6CD0AE80-6A63-459E-884D-64F6D12582F5}
