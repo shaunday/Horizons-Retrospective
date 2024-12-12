@@ -34,7 +34,7 @@ TradeComposite:
 
                  (Origin)    [ ] [ ] [ ] [ ]
 
-                 (Entry)     [ ] [ ] [ ] [ ]
+                 (Increase)  [ ] [ ] [ ] [ ]
                  
                  (Reduction) [ ] [ ] [ ] [ ]
 
