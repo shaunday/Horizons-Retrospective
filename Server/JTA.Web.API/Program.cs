@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.AddConfiguredControllers();
 builder.Services.AddTradingJournalDbContext(builder.Configuration, builder.Environment);
