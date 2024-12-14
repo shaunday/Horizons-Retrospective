@@ -1,0 +1,34 @@
+﻿If you’ve just installed PostgreSQL and haven't created a database yet, follow these steps to create a database and then execute the commands:
+
+### 1. **Create a Database**:
+   First, you need to create a database to use. Here’s how you can do that:
+   
+   - Open **pgAdmin 4** and connect to your PostgreSQL server.
+   - In the left panel, right-click on the **Databases** node.
+   - Select **Create > Database**.
+   - In the dialog, enter a name for your database (e.g., `DayJournalDatabase`), and click **Save**.
+
+### 2. **Open Query Tool**:
+   Once the database is created, do the following:
+   - In the left panel, expand the **Databases** section.
+   - Right-click on your newly created database (`DayJournalDatabase`).
+   - Select **Query Tool** to open a new SQL editor.
+
+### 3. **Run Your SQL Script**:
+   Now that you have a database, you can execute the SQL commands:
+
+   Copy and paste the following SQL commands into the Query Tool:
+   ```sql
+   CREATE ROLE dayj_user WITH LOGIN PASSWORD 'securepassword';
+   GRANT CONNECT ON DATABASE "DayJournalDatabase" TO dayj_user;
+   GRANT USAGE ON SCHEMA public TO dayj_user;
+   GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO dayj_user;
+   ```
+
+### 4. **Execute the SQL**:
+   Click the **Execute/Refresh** button (or press `F5`) to run the commands.
+
+After doing this, you should have:
+- A `dayj_user` role created with login credentials.
+- Permissions to connect to the `DayJournalDatabase` database.
+- Access to the `public` schema with `SELECT`, `INSERT`, `UPDATE`, and `DELETE` permissions on all tables in that schema.

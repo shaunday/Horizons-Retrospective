@@ -1,0 +1,3 @@
+﻿Edit system variables > Add (jta_user), (jta_admin) with appropriate connection strings:
+
+Host=localhost; Port=5432; Database=JTA_Database; Username=jta_user; Password='securepass'; Include Error Detail=true
