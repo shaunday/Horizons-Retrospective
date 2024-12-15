@@ -1,7 +1,11 @@
-﻿1. 
+﻿0.
+Reference to the db context project, add ef core, ef core tools, ef sql
+
+1. 
 _Create Migration class - has all the info about how to create the DB based on the model
-Package Manager Console: EntityFrameworkCore\Add-Migration InitialCreate  -p JTA.Journal.Repository -s JTA.Web.API
-*without "EntityFrameworkCore\" you'll get errors
+Package Manager Console: EntityFrameworkCore\Add-Migration InitialCreate -p JTA.Infrastructure -s JTA.Infrastructure
+* The -s flag is optional in this case because your design-time factory already handles the configuration.
+**without "EntityFrameworkCore\" you'll get errors
 
 _Apply Migration
 2a. Directly

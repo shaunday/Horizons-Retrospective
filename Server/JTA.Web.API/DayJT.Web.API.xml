@@ -16,18 +16,5 @@
             <param name="services">The service collection.</param>
             <returns>The updated service collection.</returns>
         </member>
-        <member name="T:JTA.Web.API.DesignTime.TradingJournalContextFactory">
-            <summary>
-            Factory for creating instances of <see cref="T:DayJT.Journal.Repository.TradingJournalDataContext"/> at design time.
-            </summary>
-        </member>
-        <member name="M:JTA.Web.API.DesignTime.TradingJournalContextFactory.CreateDbContext(System.String[])">
-            <summary>
-            Creates a new instance of <see cref="T:DayJT.Journal.Repository.TradingJournalDataContext"/> using the provided arguments.
-            </summary>
-            <param name="args">Arguments for creating the context.</param>
-            <returns>A new instance of <see cref="T:DayJT.Journal.Repository.TradingJournalDataContext"/>.</returns>
-            <exception cref="T:System.ApplicationException">Thrown if the connection string is not set.</exception>
-        </member>
     </members>
 </doc>

@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using DayJT.Journal.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace JTA.Journal.Repository.Migrations
+namespace JTA.Infrastructure.Migrations
 {
     [DbContext(typeof(TradingJournalDataContext))]
-    partial class TradingJournalDataContextModelSnapshot : ModelSnapshot
+    [Migration("20241215155350_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

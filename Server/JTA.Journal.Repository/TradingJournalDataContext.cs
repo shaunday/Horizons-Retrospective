@@ -2,19 +2,22 @@
 using DayJT.Journal.Repository.Configurations;
 using DayJTrading.Journal.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
+
+#nullable disable
 
 namespace DayJT.Journal.Repository
 {
-    public class TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : DbContext(options)
+    public class TradingJournalDataContext : DbContext
     {
-        public DbSet<TradeComposite> TradeComposites { get; set; } = null!;
+        public TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : base(options) { }
 
-        public DbSet<TradeElement> TradeElements { get; set; } = null!; //must have this to allow principality of TradeElement in the r/ship with cell
+        public DbSet<TradeComposite> TradeComposites { get; set; }
 
-        public DbSet<Cell> Entries { get; set; } = null!;
+        public DbSet<TradeElement> TradeElements { get; set; }  //must have this to allow principality of TradeElement in the r/ship with cell
 
-        public DbSet<JournalData> JournalData { get; set; } = null!;
+        public DbSet<Cell> Entries { get; set; } 
+
+        public DbSet<JournalData> JournalData { get; set; } 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
