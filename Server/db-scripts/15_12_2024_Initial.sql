@@ -135,7 +135,7 @@ END $EF$;
 DO $EF$
 BEGIN
     IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20241215165315_CreateAppRoles') THEN
-    CREATE ROLE jta_app;
+    CREATE ROLE jta_app WITH LOGIN PASSWORD 'your_secure_password';
     END IF;
 END $EF$;
 

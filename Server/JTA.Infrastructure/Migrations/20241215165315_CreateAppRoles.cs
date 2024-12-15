@@ -9,8 +9,8 @@ namespace JTA.Infrastructure.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            // Create a new role for your app
-            migrationBuilder.Sql("CREATE ROLE jta_app;");
+            // Create a new login role for your app
+            migrationBuilder.Sql("CREATE ROLE jta_app WITH LOGIN PASSWORD 'your_secure_password';");
 
             // Grant permissions to the role (you can adjust permissions as needed)
             migrationBuilder.Sql("GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO jta_app;");
@@ -27,7 +27,7 @@ namespace JTA.Infrastructure.Migrations
             // Optionally, revoke access to sequences if you granted it
             migrationBuilder.Sql("REVOKE USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public FROM jta_app;");
 
-            // Drop the role
+            // Drop the login role
             migrationBuilder.Sql("DROP ROLE IF EXISTS jta_app;");
         }
     }
