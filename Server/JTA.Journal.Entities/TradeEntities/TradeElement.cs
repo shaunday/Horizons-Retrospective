@@ -14,6 +14,7 @@ namespace DayJT.Journal.DataEntities.Entities
 
         public List<Cell> Entries { get; set; } = new List<Cell>();
 
+        [Required]
         public DateTime CreatedAt { get; } = DateTime.Now;
 
         public TradeElement() { }

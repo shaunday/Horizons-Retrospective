@@ -20,6 +20,7 @@ namespace DayJT.Journal.DataEntities.Entities
 
         public ValueRelevance PriceRelevance { get; set; } = ValueRelevance.None;
 
+        [Required]
         public bool IsRelevantForOverview { get; set; } = false;
 
         #endregion

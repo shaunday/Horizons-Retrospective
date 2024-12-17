@@ -9,6 +9,7 @@ namespace DayJT.Journal.DataEntities.Entities
 
         public string ChangeNote { get; set; } = string.Empty;
 
+        [Required]
         public DateTime CreatedAt { get; } = DateTime.Now;
 
         [Required]

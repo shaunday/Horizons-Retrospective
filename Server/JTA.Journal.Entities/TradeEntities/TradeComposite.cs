@@ -13,6 +13,7 @@ namespace DayJT.Journal.DataEntities.Entities
 
         public TradeElement Summary { get; set; } = null!;
 
+        [Required]
         public DateTime CreatedAt { get; } = DateTime.Now;
 
     }
