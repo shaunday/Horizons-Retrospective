@@ -15,7 +15,7 @@ namespace DayJT.Journal.Repository
 
         public DbSet<TradeElement> TradeElements { get; set; }  //must have this to allow principality of TradeElement in the r/ship with cell
 
-        public DbSet<Cell> Entries { get; set; } 
+        public DbSet<DataElement> Entries { get; set; } 
 
         public DbSet<JournalData> JournalData { get; set; } 
 

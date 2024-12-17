@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DayJT.Journal.DataEntities.Entities
 {
-    public class Cell
+    public class DataElement
     {
         #region Props part a
 
@@ -26,9 +26,9 @@ namespace DayJT.Journal.DataEntities.Entities
         #endregion
 
         #region Ctors
-        public Cell() { }
+        public DataElement() { }
 
-        public Cell(string title, ComponentType componentType)
+        public DataElement(string title, ComponentType componentType)
         {
             Title = title;
             ComponentType = componentType;
@@ -40,7 +40,7 @@ namespace DayJT.Journal.DataEntities.Entities
 
         public string Content
         {
-            get { return ContentWrapper.Content; }
+            get { return ContentWrapper.ContentValue; }
             set
             {
                 ContentWrapper = new ContentRecord(value);

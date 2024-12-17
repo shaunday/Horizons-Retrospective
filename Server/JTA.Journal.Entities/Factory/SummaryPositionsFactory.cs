@@ -7,7 +7,7 @@ namespace DayJTrading.Journal.Data
     public static class SummaryPositionsFactory
     {
 
-        public static List<Cell> GetSummaryComponents(TradeElement elementRef, string averageEntry, string totalAmount, string totalCost)
+        public static List<DataElement> GetSummaryComponents(TradeElement elementRef, string averageEntry, string totalAmount, string totalCost)
         {
             var summaryCells = new List<(string Title, ComponentType Type, string Content)>
             {
@@ -18,7 +18,7 @@ namespace DayJTrading.Journal.Data
             return EntriesFactory.CreateCells(summaryCells, elementRef);
         }
 
-        public static List<Cell> GetTradeClosureComponents(TradeElement elementRef, string? profitValue)
+        public static List<DataElement> GetTradeClosureComponents(TradeElement elementRef, string? profitValue)
         {
             var closureCells = new List<(string Title, ComponentType Type, string Content)>
             {

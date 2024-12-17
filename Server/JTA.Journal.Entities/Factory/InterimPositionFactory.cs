@@ -39,7 +39,7 @@ namespace DayJTrading.Journal.Data.Factory
             ("Reduce/Close Reason", ComponentType.Reduction)
         };
 
-        public static List<Cell> GetPositionEntries(TradeActionType actionType, TradeElement elementRef)
+        public static List<DataElement> GetPositionEntries(TradeActionType actionType, TradeElement elementRef)
         {
             switch (actionType)
             {

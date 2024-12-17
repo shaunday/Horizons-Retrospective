@@ -4,7 +4,7 @@ using DayJT.Journal.DataEntities.Entities;
 
 namespace DayJTrading.Web.Services.Models.Journal
 {
-    public class CellModel
+    public class DataElementModel
     {
         public int Id { get; set; }
 

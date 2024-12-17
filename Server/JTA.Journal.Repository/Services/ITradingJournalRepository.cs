@@ -15,7 +15,7 @@ namespace DayJT.Journal.DataContext.Services
         Task<TradeElement> RemoveInterimPositionAsync(string tradeId, string tradeInputId);
 
         //components
-        Task<(Cell updatedCell, TradeElement? summary)> UpdateCellContentAsync(string componentId, string newContent, string changeNote);
+        Task<(DataElement updatedCell, TradeElement? summary)> UpdateCellContentAsync(string componentId, string newContent, string changeNote);
 
         //closure
         Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice);

@@ -12,7 +12,7 @@ namespace DayJT.Journal.DataEntities.Entities
         [Required]
         public TradeActionType TradeActionType { get; set; }
 
-        public List<Cell> Entries { get; set; } = new List<Cell>();
+        public List<DataElement> Entries { get; set; } = new List<DataElement>();
 
         [Required]
         public DateTime CreatedAt { get; } = DateTime.Now;

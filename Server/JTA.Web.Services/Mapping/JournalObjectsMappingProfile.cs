@@ -9,7 +9,7 @@ namespace DayJT.Web.API.Mapping
     {
         public JournalObjectsMappingProfile()
         {
-            CreateMap<Cell, CellModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
+            CreateMap<DataElement, DataElementModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
             CreateMap<TradeElement, TradeElementModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
             CreateMap<TradeComposite, TradeCompositeModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
         }

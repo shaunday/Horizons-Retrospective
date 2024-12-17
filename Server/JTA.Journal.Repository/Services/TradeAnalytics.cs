@@ -43,7 +43,7 @@ namespace DayJT.Journal.DataContext.Services
         }
 
         // Helper method to process the cost and profit
-        private static (double cost, double profit) ProcessCostAndProfit(Cell component, double cost, double profit)
+        private static (double cost, double profit) ProcessCostAndProfit(DataElement component, double cost, double profit)
         {
             if (component.CostRelevance == ValueRelevance.Add || component.CostRelevance == ValueRelevance.Substract)
             {
@@ -63,7 +63,7 @@ namespace DayJT.Journal.DataContext.Services
         }
 
         // Helper method to process the price
-        private static double ProcessPrice(Cell component, double priceValue)
+        private static double ProcessPrice(DataElement component, double priceValue)
         {
             if (component.PriceRelevance == ValueRelevance.Add || component.PriceRelevance == ValueRelevance.Substract)
             {

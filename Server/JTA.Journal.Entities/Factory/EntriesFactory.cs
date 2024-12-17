@@ -5,9 +5,9 @@ namespace DayJT.Journal.DataEntities.Factory
 {
     internal static class EntriesFactory
     {
-        internal static Cell CreateCell(string title, ComponentType type, TradeElement elementRef, string content = "")
+        internal static DataElement CreateCell(string title, ComponentType type, TradeElement elementRef, string content = "")
         {
-            var cell = new Cell(title, type);
+            var cell = new DataElement(title, type);
             if (!string.IsNullOrEmpty(content))
             {
                 cell.Content = content;
@@ -16,7 +16,7 @@ namespace DayJT.Journal.DataEntities.Factory
             return cell;
         }
 
-        internal static List<Cell> CreateCells(IEnumerable<(string Title, ComponentType Type, string Content)> cellConfigs, TradeElement elementRef)
+        internal static List<DataElement> CreateCells(IEnumerable<(string Title, ComponentType Type, string Content)> cellConfigs, TradeElement elementRef)
         {
             return cellConfigs.Select(config => CreateCell(config.Title, config.Type, elementRef, config.Content)).ToList();
         }

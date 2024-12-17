@@ -137,7 +137,7 @@ namespace DayJT.Journal.Repository.Services
 
         //Entries Update
 
-        public async Task<(Cell updatedCell, TradeElement? summary)> UpdateCellContentAsync(string componentId, string newContent, string changeNote)
+        public async Task<(DataElement updatedCell, TradeElement? summary)> UpdateCellContentAsync(string componentId, string newContent, string changeNote)
         {
             if (!int.TryParse(componentId, out var parsedId))
             {

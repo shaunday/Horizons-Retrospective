@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DayJT.Journal.Repository.Configurations
 {
-    public class CellConfiguration : IEntityTypeConfiguration<Cell>
+    public class CellConfiguration : IEntityTypeConfiguration<DataElement>
     {
-        public void Configure(EntityTypeBuilder<Cell> builder)
+        public void Configure(EntityTypeBuilder<DataElement> builder)
         {
             builder.OwnsOne(c => c.ContentWrapper);
             builder.Navigation(c => c.ContentWrapper).AutoInclude();

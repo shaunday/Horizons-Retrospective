@@ -5,7 +5,7 @@ namespace DayJT.Journal.DataEntities.Entities
     public class ContentRecord(string content)
     {
         [Required]
-        public string Content { get; set; } = content;
+        public string ContentValue { get; set; } = content;
 
         public string ChangeNote { get; set; } = string.Empty;
 
@@ -13,6 +13,6 @@ namespace DayJT.Journal.DataEntities.Entities
         public DateTime CreatedAt { get; } = DateTime.Now;
 
         [Required]
-        public Cell CellRef { get; set; } = null!; // Navigation property to the owning Cell
+        public DataElement CellRef { get; set; } = null!; // Navigation property to the owning Cell
     }
 }
