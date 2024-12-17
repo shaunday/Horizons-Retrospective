@@ -19,6 +19,16 @@ namespace DayJT.Journal.Repository.Configurations
                 .HasForeignKey(c => c.TradeCompositeFK)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Enum to string conversions
+            builder.Property(c => c.ComponentType)
+                .HasConversion<string>();
+
+            builder.Property(c => c.CostRelevance)
+                .HasConversion<string>();
+
+            builder.Property(c => c.PriceRelevance)
+                .HasConversion<string>();
         }
     }
 }

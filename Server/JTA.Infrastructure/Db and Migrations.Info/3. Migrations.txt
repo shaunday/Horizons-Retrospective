@@ -1,30 +1,27 @@
-﻿0.
-Reference to the db context project, add ef core, ef core tools, ef sql
+﻿0. _Reference to the db context project, add ef core, ef core tools, ef sql
 
-1. 
-_Create Migration class - has all the info about how to create the DB based on the model
+1. _Create Migration class - has all the info about how to create the DB based on the model
 Package Manager Console: 
 EntityFrameworkCore\Add-Migration InitialCreate -p JTA.Infrastructure -s JTA.Infrastructure
 **without "EntityFrameworkCore\" you'll get errors
 
-2.
+2. _App Roles
 EntityFrameworkCore\Add-Migration CreateAppRoles -p JTA.Infrastructure -s JTA.Infrastructure
 
-_Apply Migration
-3a. Directly
+3. _Apply Migration
+a. Directly
 EntityFrameworkCore\Update-Database -p JTA.Infrastructure -s JTA.Infrastructure
 
-3b. Script
+b. Script
 save the script in /db-scripts : DATE_WHAT_CHANGED
 Document what changed... release notes of sorts = Version
 Then apply the script in the DB/ do 2a.
 
 PM: 
 EntityFrameworkCore\Script-Migration -Idempotent -Output "db-scripts\15_12_2024_Initial.sql" -Project JTA.Infrastructure -StartupProject JTA.Infrastructure
-CLI: 
-dotnet ef migrations script --idempotent -o db-scripts\15_12_2024_Initial.sql -p JTA.Journal.Repository EntityFrameworkCore\Update-Database -p JTA.Infrastructure -s JTA.Infrastructure
-
 
 (Script needs to be applied to the DB))
+
+c. Migration bundles
 
 

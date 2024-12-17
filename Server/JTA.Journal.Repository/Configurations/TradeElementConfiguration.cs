@@ -15,6 +15,10 @@ namespace DayJT.Journal.Repository.Configurations
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Navigation(te => te.Entries).AutoInclude();
+
+            // Enum to string conversion
+            builder.Property(te => te.TradeActionType)
+                .HasConversion<string>();
         }
     }
 }
