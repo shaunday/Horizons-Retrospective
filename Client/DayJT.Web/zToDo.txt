@@ -1,5 +1,6 @@
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 
+how to adjust trade status?
 filtering
 
 Testing:
