@@ -5,7 +5,7 @@ namespace DayJT.Journal.DataEntities.Entities
 {
     public class DataElement
     {
-        #region Props part a
+        #region Props 
 
         [Key]
         public int Id { get; private set; }
@@ -16,9 +16,9 @@ namespace DayJT.Journal.DataEntities.Entities
         [Required]
         public ComponentType ComponentType { get; set; }
 
-        public ValueRelevance CostRelevance { get; set; } = ValueRelevance.None;
+        public ValueRelevance? CostRelevance { get; set; } 
 
-        public ValueRelevance PriceRelevance { get; set; } = ValueRelevance.None;
+        public ValueRelevance? PriceRelevance { get; set; } 
 
         [Required]
         public bool IsRelevantForOverview { get; set; } = false;
@@ -56,11 +56,6 @@ namespace DayJT.Journal.DataEntities.Entities
             ContentWrapper = new ContentRecord(content: newContent) { ChangeNote = changeNote };
         }
 
-        [Required]
-        public int TradeElementFK { get; set; }
-
-        [Required]
-        public TradeElement TradeElementRef { get; set; } = null!;
 
         public void UpdateParentRefs(TradeElement refObj)
         {
@@ -68,11 +63,19 @@ namespace DayJT.Journal.DataEntities.Entities
             CompositeRef = refObj.CompositeRef;
         }
 
+        #region Refs, FKs
+        [Required]
+        public int TradeElementFK { get; set; }
+
+        [Required]
+        public TradeElement TradeElementRef { get; set; } = null!;
+
         [Required]
         public int CompositeFK { get; set; }
 
         [Required]
-        public TradeComposite CompositeRef { get; set; } = null!;
+        public TradeComposite CompositeRef { get; set; } = null!; 
+        #endregion
     }
 
 }

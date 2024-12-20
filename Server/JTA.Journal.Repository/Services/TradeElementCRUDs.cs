@@ -12,7 +12,7 @@ namespace DayJT.Journal.DataContext.Services
             var tradeInput = new TradeElement(trade, TradeActionType.ReducePosition);
 
             // Find price entry
-            var priceEntry = tradeInput.Entries.SingleOrDefault(ti => ti.PriceRelevance == ValueRelevance.Substract);
+            var priceEntry = tradeInput.Entries.SingleOrDefault(ti => ti.PriceRelevance == ValueRelevance.Negative);
             if (priceEntry == null)
             {
                 throw new InvalidOperationException("Could not find price entry to reduce / close position");
@@ -20,7 +20,7 @@ namespace DayJT.Journal.DataContext.Services
             priceEntry.Content = closingPrice;
 
             // Find cost entry
-            var costEntry = tradeInput.Entries.SingleOrDefault(ti => ti.CostRelevance == ValueRelevance.Substract);
+            var costEntry = tradeInput.Entries.SingleOrDefault(ti => ti.CostRelevance == ValueRelevance.Negative);
             if (costEntry == null)
             {
                 throw new InvalidOperationException("Could not find cost entry to reduce / close position");

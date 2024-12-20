@@ -44,7 +44,7 @@ namespace DayJTrading.Journal.Seeder
             for (int i = 0; i < element.Entries.Count; i++)
             {
                 length = _lengthRandom.Next(3, 8);
-                if (element.Entries[i].CostRelevance != ValueRelevance.None || element.Entries[i].PriceRelevance != ValueRelevance.None)
+                if (element.Entries[i].CostRelevance != null || element.Entries[i].PriceRelevance != null)
                 {
                     element.Entries[i].Content = _randomNumbersMachine.GenerateRandomNumber(length);
                 }

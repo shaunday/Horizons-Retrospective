@@ -45,15 +45,15 @@ namespace DayJT.Journal.DataContext.Services
         // Helper method to process the cost and profit
         private static (double cost, double profit) ProcessCostAndProfit(DataElement component, double cost, double profit)
         {
-            if (component.CostRelevance == ValueRelevance.Add || component.CostRelevance == ValueRelevance.Substract)
+            if (component.CostRelevance == ValueRelevance.Positive || component.CostRelevance == ValueRelevance.Negative)
             {
                 double.TryParse(component.Content, out cost);
 
-                if (component.CostRelevance == ValueRelevance.Add)
+                if (component.CostRelevance == ValueRelevance.Positive)
                 {
                     profit += cost;
                 }
-                else if (component.CostRelevance == ValueRelevance.Substract)
+                else if (component.CostRelevance == ValueRelevance.Negative)
                 {
                     profit -= cost;
                 }
@@ -65,11 +65,11 @@ namespace DayJT.Journal.DataContext.Services
         // Helper method to process the price
         private static double ProcessPrice(DataElement component, double priceValue)
         {
-            if (component.PriceRelevance == ValueRelevance.Add || component.PriceRelevance == ValueRelevance.Substract)
+            if (component.PriceRelevance == ValueRelevance.Positive || component.PriceRelevance == ValueRelevance.Negative)
             {
                 double.TryParse(component.Content, out priceValue);
 
-                if (component.PriceRelevance == ValueRelevance.Substract)
+                if (component.PriceRelevance == ValueRelevance.Negative)
                 {
                     priceValue *= -1;
                 }

@@ -12,6 +12,6 @@
 
     public enum ValueRelevance
     {
-        None, Add, Substract
+        Positive, Negative
     }
 }
