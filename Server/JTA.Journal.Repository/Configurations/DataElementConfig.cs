@@ -4,20 +4,22 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DayJT.Journal.Repository.Configurations
 {
-    public class DataElementConfiguration : IEntityTypeConfiguration<DataElement>
+    public class DataElementConfig : IEntityTypeConfiguration<DataElement>
     {
         public void Configure(EntityTypeBuilder<DataElement> builder)
         {
-            builder.OwnsOne(c => c.ContentWrapper);
+            builder.OwnsOne(c => c.ContentWrapper)
+                .WithOwner()
+                .HasForeignKey(h => h.DataElementFK);
             builder.Navigation(c => c.ContentWrapper).AutoInclude();
 
             builder.OwnsMany(t => t.History)
                 .WithOwner()
                 .HasForeignKey(h => h.DataElementFK);
 
-            builder.HasOne(c => c.TradeCompositeRef)
+            builder.HasOne(c => c.CompositeRef)
                 .WithMany()
-                .HasForeignKey(c => c.TradeCompositeFK)
+                .HasForeignKey(c => c.CompositeFK)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 

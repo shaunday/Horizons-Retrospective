@@ -6,7 +6,7 @@ namespace DayJTrading.Journal.Data
         public required string FilterValue { get; set; }
     }
 
-    public class DataFilteringInfo
+    public class TradesFilterModel
     {
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }

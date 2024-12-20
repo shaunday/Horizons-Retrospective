@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using JTA.Journal.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace DayJT.Journal.DataEntities.Entities
 {
@@ -12,6 +13,8 @@ namespace DayJT.Journal.DataEntities.Entities
         public List<string> Sectors { get; set; } = [];
 
         public TradeElement Summary { get; set; } = null!;
+
+        public TradeStatus Status { get; set; } = new TradeStatus();
 
     }
 }

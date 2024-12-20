@@ -23,10 +23,10 @@ namespace DayJT.Journal.Repository
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new JournalDataConfiguration());
-            modelBuilder.ApplyConfiguration(new TradeCompositeConfiguration());
-            modelBuilder.ApplyConfiguration(new TradeElementConfiguration());
-            modelBuilder.ApplyConfiguration(new DataElementConfiguration());
+            modelBuilder.ApplyConfiguration(new JournalDataConfig());
+            modelBuilder.ApplyConfiguration(new TradeCompositeConfig());
+            modelBuilder.ApplyConfiguration(new TradeElementConfig());
+            modelBuilder.ApplyConfiguration(new DataElementConfig());
         }
 
         //override save changes to clear tracker after saving

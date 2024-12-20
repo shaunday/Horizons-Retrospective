@@ -17,7 +17,7 @@ namespace DayJTrading.Web.Services.Models.Journal
 
         [Required]
         public ContentRecordModel ContentWrapper { get; set; } = null!;
-        public ICollection<ContentRecord>? History { get; set; }
+        public ICollection<ContentRecordModel>? History { get; set; }
 
         public ValueRelevance CostRelevance { get; set; }
         public ValueRelevance PriceRelevance { get; set; }

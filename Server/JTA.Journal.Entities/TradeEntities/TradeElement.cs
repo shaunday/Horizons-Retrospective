@@ -21,7 +21,7 @@ namespace DayJT.Journal.DataEntities.Entities
 
         public TradeElement(TradeComposite trade, TradeActionType actionType)
         {
-            TradeCompositeRef = trade;
+            CompositeRef = trade;
 
             if (actionType == TradeActionType.Origin || actionType == TradeActionType.AddPosition || actionType == TradeActionType.ReducePosition)
             {
@@ -31,9 +31,9 @@ namespace DayJT.Journal.DataEntities.Entities
         }
 
         [Required]
-        public int TradeCompositeFK { get; set; }
+        public int CompositeFK { get; set; }
 
         [Required]
-        public TradeComposite TradeCompositeRef { get; set; } = null!;
+        public TradeComposite CompositeRef { get; set; } = null!;
     }
 }

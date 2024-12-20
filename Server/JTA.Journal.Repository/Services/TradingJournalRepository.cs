@@ -2,6 +2,7 @@
 using DayJT.Journal.DataContext.Services;
 using DayJT.Journal.DataEntities.Entities;
 using DayJTrading.Journal.Data;
+using JTA.Journal.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DayJT.Journal.Repository.Services
@@ -43,18 +44,18 @@ namespace DayJT.Journal.Repository.Services
         }
 
         public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllFilteredTradeCompositesAsync(
-            DataFilteringInfo filter, int pageNumber = 1, int pageSize = 10)
+            TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
         {
             var query = dataContext.TradeComposites.AsNoTracking().AsQueryable();
 
             if (filter.StartDate.HasValue)
             {
-                query = query.Where(t => t.CreatedAt >= filter.StartDate.Value);
+                query = query.Where(t => t.Status.OpenedAt >= filter.StartDate.Value);
             }
 
             if (filter.EndDate.HasValue)
             {
-                query = query.Where(t => t.CreatedAt <= filter.EndDate.Value);
+                query = query.Where(t => t.Status.OpenedAt <= filter.EndDate.Value);
             }
 
             if (filter.FilterObjects != null && filter.FilterObjects.Any())
@@ -154,10 +155,10 @@ namespace DayJT.Journal.Repository.Services
             if (cell.IsRelevantForOverview)
             {
                 await dataContext.Entry(cell)
-                    .Reference(c => c.TradeCompositeRef)
+                    .Reference(c => c.CompositeRef)
                     .LoadAsync();
 
-                var trade = cell.TradeCompositeRef;
+                var trade = cell.CompositeRef;
 
                 newSummary = RecalculateSummary(trade);
             }

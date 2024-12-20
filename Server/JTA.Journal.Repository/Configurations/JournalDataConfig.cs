@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DayJT.Journal.Repository.Configurations
 {
-    public class JournalDataConfiguration : IEntityTypeConfiguration<JournalData>
+    public class JournalDataConfig : IEntityTypeConfiguration<JournalData>
     {
         public void Configure(EntityTypeBuilder<JournalData> builder)
         {

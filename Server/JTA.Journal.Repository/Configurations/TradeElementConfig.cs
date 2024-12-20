@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DayJT.Journal.Repository.Configurations
 {
-    public class TradeElementConfiguration : IEntityTypeConfiguration<TradeElement>
+    public class TradeElementConfig : IEntityTypeConfiguration<TradeElement>
     {
         public void Configure(EntityTypeBuilder<TradeElement> builder)
         {

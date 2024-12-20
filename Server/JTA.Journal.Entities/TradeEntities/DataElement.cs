@@ -65,14 +65,14 @@ namespace DayJT.Journal.DataEntities.Entities
         public void UpdateParentRefs(TradeElement refObj)
         {
             TradeElementRef = refObj;
-            TradeCompositeRef = refObj.TradeCompositeRef;
+            CompositeRef = refObj.CompositeRef;
         }
 
         [Required]
-        public int TradeCompositeFK { get; set; }
+        public int CompositeFK { get; set; }
 
         [Required]
-        public TradeComposite TradeCompositeRef { get; set; } = null!;
+        public TradeComposite CompositeRef { get; set; } = null!;
     }
 
 }

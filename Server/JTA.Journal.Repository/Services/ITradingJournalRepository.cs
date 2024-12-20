@@ -8,7 +8,7 @@ namespace DayJT.Journal.DataContext.Services
         //composites
         Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10);
         Task<TradeComposite> AddTradeCompositeAsync();
-        Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllFilteredTradeCompositesAsync(DataFilteringInfo filter, int pageNumber = 1, int pageSize = 10);
+        Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllFilteredTradeCompositesAsync(TradesFilterModel filter, int pageNumber = 1, int pageSize = 10);
 
         //interim elements
         Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd);
