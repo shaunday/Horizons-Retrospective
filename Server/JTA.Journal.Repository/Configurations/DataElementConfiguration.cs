@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DayJT.Journal.Repository.Configurations
 {
-    public class CellConfiguration : IEntityTypeConfiguration<DataElement>
+    public class DataElementConfiguration : IEntityTypeConfiguration<DataElement>
     {
         public void Configure(EntityTypeBuilder<DataElement> builder)
         {
@@ -12,7 +12,8 @@ namespace DayJT.Journal.Repository.Configurations
             builder.Navigation(c => c.ContentWrapper).AutoInclude();
 
             builder.OwnsMany(t => t.History)
-                .WithOwner(h => h.CellRef);
+                .WithOwner()
+                .HasForeignKey(h => h.DataElementFK);
 
             builder.HasOne(c => c.TradeCompositeRef)
                 .WithMany()

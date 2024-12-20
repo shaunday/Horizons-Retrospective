@@ -1,7 +1,6 @@
 ﻿
 // todo
 should summary be different when position is closed... how?
-filtering dto?
 
 // dashboard
 pies
@@ -10,13 +9,10 @@ Incdicators: double bottom on rsi/cci, ma, ema, wbb, dividends, report, news
 position weight/ sector weight
 
 
-
 //pre production - 2nd stage
+filtering history
 users + authentication 
 expand testing (API tests, etc)
-
-//production
-clear details from connection string
 
 // later on/ playing around
 Suspence? RQ Suspence

@@ -13,6 +13,6 @@ namespace DayJT.Journal.DataEntities.Entities
         public DateTime CreatedAt { get; } = DateTime.Now;
 
         [Required]
-        public DataElement CellRef { get; set; } = null!; // Navigation property to the owning Cell
+        public int DataElementFK { get; set; }  // FK property to the owning DataCell
     }
 }

@@ -6,12 +6,16 @@ namespace DayJTrading.Web.Services.Models.Journal
 {
     public class DataElementModel
     {
+        [Required]
         public int Id { get; set; }
 
+        [Required]
         public string Title { get; set; } = string.Empty;
 
+        [Required]
         public ComponentType ComponentType { get; set; }
 
+        [Required]
         public ContentRecordModel ContentWrapper { get; set; } = null!;
         public ICollection<ContentRecord>? History { get; set; }
 
@@ -19,7 +23,9 @@ namespace DayJTrading.Web.Services.Models.Journal
         public ValueRelevance PriceRelevance { get; set; }
         public bool IsRelevantForOverview { get; set; } = false;
 
+        [Required]
         public int TradeElementFK { get; set; }
+        [Required]
         public int TradeCompositeFK { get; set; }
     }
 }
