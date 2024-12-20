@@ -1,24 +1,25 @@
 ﻿using DayJT.Journal.Data;
 using DayJT.Journal.DataEntities.Entities;
+using JTA.Journal.Entities.Factory;
 
 namespace DayJT.Journal.DataEntities.Factory
 {
     internal static class EntriesFactory
     {
-        internal static DataElement CreateCell(string title, ComponentType type, TradeElement elementRef, string content = "")
+        internal static DataElement CreateEntry(EntryOverview overview, TradeElement elementRef)
         {
-            var cell = new DataElement(title, type);
-            if (!string.IsNullOrEmpty(content))
+            var cell = new DataElement(overview.Title, overview.Type);
+            if (!string.IsNullOrEmpty(overview.Content))
             {
-                cell.Content = content;
+                cell.Content = overview.Content;
             }
             cell.UpdateParentRefs(elementRef);
             return cell;
         }
 
-        internal static List<DataElement> CreateCells(IEnumerable<(string Title, ComponentType Type, string Content)> cellConfigs, TradeElement elementRef)
+        internal static List<DataElement> CreateEntries(IEnumerable<EntryOverview> cellConfigs, TradeElement elementRef)
         {
-            return cellConfigs.Select(config => CreateCell(config.Title, config.Type, elementRef, config.Content)).ToList();
+            return cellConfigs.Select(config => CreateEntry(config, elementRef)).ToList();
         }
     }
 }

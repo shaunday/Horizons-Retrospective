@@ -1,56 +1,57 @@
 ﻿using DayJT.Journal.Data;
 using DayJT.Journal.DataEntities.Entities;
 using DayJT.Journal.DataEntities.Factory;
+using JTA.Journal.Entities.Factory;
 
 namespace DayJTrading.Journal.Data.Factory
 {
-    internal static class InterimPositionFactory 
+    internal static class InterimPositionFactory
     {
-        private static readonly List<(string Title, ComponentType Type)> TradeOriginCells = new List<(string, ComponentType)>
-        {
-            ("Ticker", ComponentType.Header),
-            ("LongOrShort", ComponentType.Header),
-            ("Thesis", ComponentType.Thesis),
-            ("Expanded", ComponentType.Thesis),
-            ("Confluences", ComponentType.Thesis),
-            ("Triggers", ComponentType.Thesis),
-            ("Position Plans", ComponentType.Thesis)
-        };
+        private static readonly List<EntryOverview> TradeOriginCells =
+            [
+                new EntryOverview("Ticker", ComponentType.Header),
+                new EntryOverview("LongOrShort", ComponentType.Header),
+                new EntryOverview("Thesis", ComponentType.Thesis),
+                new EntryOverview("Expanded", ComponentType.Thesis),
+                new EntryOverview("Confluences", ComponentType.Thesis),
+                new EntryOverview("Triggers", ComponentType.Thesis),
+                new EntryOverview("Position Plans", ComponentType.Thesis)
+            ];
 
-        private static readonly List<(string Title, ComponentType Type)> AddToPositionCells = new List<(string, ComponentType)>
-        {
-            ("Emotions", ComponentType.Addition),
-            ("Entry Price", ComponentType.Addition),
-            ("Amount", ComponentType.Addition),
-            ("Cost", ComponentType.Addition),
-            ("SL", ComponentType.SLandTarget),
-            ("SL Thoughts", ComponentType.SLandTarget),
-            ("Target", ComponentType.SLandTarget),
-            ("Risk", ComponentType.RiskReward),
-            ("R:R", ComponentType.RiskReward)
-        };
+        private static readonly List<EntryOverview> AddToPositionCells =
+            [
+                new EntryOverview("Emotions", ComponentType.Addition),
+                new EntryOverview("Entry Price", ComponentType.Addition) { ValueRelevance = ValueRelevance.Positive},
+                new EntryOverview("Amount", ComponentType.Addition),
+                new EntryOverview("Cost", ComponentType.Addition) { CostRelevance = ValueRelevance.Positive},
+                new EntryOverview("SL", ComponentType.SLandTarget),
+                new EntryOverview("SL Thoughts", ComponentType.SLandTarget),
+                new EntryOverview("Target", ComponentType.SLandTarget),
+                new EntryOverview("Risk", ComponentType.RiskReward),
+                new EntryOverview("R:R", ComponentType.RiskReward)
+            ];
 
-        private static readonly List<(string Title, ComponentType Type)> ReducePositionCells = new List<(string, ComponentType)>
-        {
-            ("Emotions", ComponentType.Reduction),
-            ("Exit Price", ComponentType.Reduction),
-            ("Amount", ComponentType.Reduction),
-            ("Cost", ComponentType.Reduction),
-            ("Reduce/Close Reason", ComponentType.Reduction)
-        };
+        private static readonly List<EntryOverview> ReducePositionCells =
+            [
+                new EntryOverview("Emotions", ComponentType.Reduction),
+                new EntryOverview("Exit Price", ComponentType.Reduction) { ValueRelevance = ValueRelevance.Negative},
+                new EntryOverview("Amount", ComponentType.Reduction),
+                new EntryOverview("Cost", ComponentType.Reduction) { CostRelevance = ValueRelevance.Negative},
+                new EntryOverview("Reduce/Close Reason", ComponentType.Reduction)
+            ];
 
         public static List<DataElement> GetPositionEntries(TradeActionType actionType, TradeElement elementRef)
         {
             switch (actionType)
             {
                 case TradeActionType.Origin:
-                    return EntriesFactory.CreateCells(TradeOriginCells.Select(c => (c.Title, c.Type, "")), elementRef);
+                    return EntriesFactory.CreateEntries(TradeOriginCells, elementRef);
 
                 case TradeActionType.AddPosition:
-                    return EntriesFactory.CreateCells(AddToPositionCells.Select(c => (c.Title, c.Type, "")), elementRef);
+                    return EntriesFactory.CreateEntries(AddToPositionCells, elementRef);
 
                 case TradeActionType.ReducePosition:
-                    return EntriesFactory.CreateCells(ReducePositionCells.Select(c => (c.Title, c.Type, "")), elementRef);
+                    return EntriesFactory.CreateEntries(ReducePositionCells, elementRef);
 
                 default:
                     throw new ArgumentException($"Unsupported TradeActionType: {actionType}", nameof(actionType));
