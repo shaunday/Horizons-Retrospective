@@ -1,5 +1,5 @@
 ## Overview: 
-An online Trading Journal, will allow the user to add and manage ongoing trade positions.
+An online Trading Journal, will allow the user to add and manage trade ideas and ongoing trade positions.
 
 TBD1: Filtering of trades, Positions/allocations pie charts
 
@@ -23,12 +23,12 @@ TBD2: Trade alerts, based on current price action + indicators.
    - Handles new trade submissions.
    - Updates both the trade IDs list and individual trade caches.
 
-## Part2: Server; PostgreSQL, EF, ASP.NET Core, REST API
+## Part2: Server; PostgreSQL, EF Core, ASP.NET Core, REST API
 ### Data Structure:
 
-Each Trade Position composed of Elements  (origin, entry, exit, etc.)
+Each Trade Position composed of Trade Elements  (origin, entry, exit, alerts, general thoughts)
 
-Each Element (line) is composed of Entry (cell) objects
+Each Element (line) is composed of Data (cell) objects
 
 TradeComposite:  
 
