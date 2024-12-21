@@ -10,8 +10,8 @@ namespace DayJTrading.Journal.Seeder
 {
     internal static class DatabaseSeeder
     {
-        private static RandomNumberGenerator _randomNumbersMachine = new RandomNumberGenerator();
-        private static RandomWordsGenerator _randomWordsMachine = new RandomWordsGenerator();
+        private static RandomNumberGenerator _randomNumbersMachine = new();
+        private static RandomWordsGenerator _randomWordsMachine = new();
 
         internal static async Task SeedAsync(TradingJournalDataContext context)
         {
@@ -25,19 +25,19 @@ namespace DayJTrading.Journal.Seeder
 
         private static void AddTradeCompositeToDbContext(TradingJournalDataContext context)
         {
-            TradeComposite trade = new TradeComposite();
-            TradeElement originElement = new TradeElement(trade, TradeActionType.Origin);
+            TradeComposite trade = new();
+            TradeElement originElement = new(trade, TradeActionType.Origin);
             PopulateElementWithData(originElement);
             trade.TradeElements.Add(originElement);
 
-            TradeElement addElement = new TradeElement(trade, TradeActionType.AddPosition);
+            TradeElement addElement = new(trade, TradeActionType.AddPosition);
             PopulateElementWithData(addElement);
             trade.TradeElements.Add(addElement);
 
             context.TradeComposites.Add(trade);
         }
 
-        private static readonly Random _lengthRandom = new Random();
+        private static readonly Random _lengthRandom = new();
         private static TradeElement PopulateElementWithData(TradeElement element)
         {
             int length;

@@ -12,7 +12,7 @@ namespace DayJT.Journal.DataContext.Services
     {
         internal static (double totalCost, double totalAmount, double profit) GetAvgEntryAndProfit(TradeComposite trade)
         {
-            List<(double priceValue, double cost)> entriesWithAmount = new();
+            List<(double priceValue, double cost)> entriesWithAmount = [];
             double profit = 0.0;
 
             var interims = trade.TradeElements
