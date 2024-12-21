@@ -23,6 +23,8 @@ namespace DayJT.Journal.DataEntities.Entities
         [Required]
         public bool IsRelevantForOverview { get; set; } = false;
 
+        public ICollection<ContentRecord>? History { get; set; }
+
         #endregion
 
         #region Ctors
@@ -47,20 +49,11 @@ namespace DayJT.Journal.DataEntities.Entities
             }
         }
 
-        public ICollection<ContentRecord>? History { get; set; }
-
         public void SetFollowupContent(string newContent, string changeNote)
         {
             History ??= new List<ContentRecord>();
             History.Add(ContentWrapper);
             ContentWrapper = new ContentRecord(content: newContent) { ChangeNote = changeNote };
-        }
-
-
-        public void UpdateParentRefs(TradeElement refObj)
-        {
-            TradeElementRef = refObj;
-            CompositeRef = refObj.CompositeRef;
         }
 
         #region Refs, FKs
@@ -74,7 +67,13 @@ namespace DayJT.Journal.DataEntities.Entities
         public int CompositeFK { get; set; }
 
         [Required]
-        public TradeComposite CompositeRef { get; set; } = null!; 
+        public TradeComposite CompositeRef { get; set; } = null!;
+
+        public void UpdateParentRefs(TradeElement refObj)
+        {
+            TradeElementRef = refObj;
+            CompositeRef = refObj.CompositeRef;
+        }
         #endregion
     }
 

@@ -7,7 +7,7 @@ namespace DayJT.Journal.DataEntities.Entities
         [Required]
         public string ContentValue { get; set; } = content;
 
-        public string ChangeNote { get; set; } = string.Empty;
+        public string? ChangeNote { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; } = DateTime.Now;

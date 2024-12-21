@@ -8,7 +8,7 @@ namespace DayJTrading.Web.Services.Models.Journal
         [Required]
         public string Content { get; set; } = string.Empty;
 
-        public string ChangeNote { get; set; } = string.Empty;
+        public string? ChangeNote { get; set; } 
 
         public DateTime CreatedAt { get; set; }
 

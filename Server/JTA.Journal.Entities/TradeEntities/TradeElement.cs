@@ -17,6 +17,7 @@ namespace DayJT.Journal.DataEntities.Entities
         [Required]
         public DateTime CreatedAt { get; } = DateTime.Now;
 
+        #region Ctors
         public TradeElement() { }
 
         public TradeElement(TradeComposite trade, TradeActionType actionType)
@@ -28,7 +29,8 @@ namespace DayJT.Journal.DataEntities.Entities
                 TradeActionType = actionType;
                 Entries = InterimPositionFactory.GetPositionEntries(actionType, this);
             }
-        }
+        } 
+        #endregion
 
         [Required]
         public int CompositeFK { get; set; }

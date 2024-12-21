@@ -21,7 +21,7 @@ namespace DayJTrading.Web.Services.Models.Journal
 
         public ValueRelevance? CostRelevance { get; set; }
         public ValueRelevance? PriceRelevance { get; set; }
-        public bool IsRelevantForOverview { get; set; } = false;
+        public bool IsRelevantForOverview { get; set; }
 
         [Required]
         public int TradeElementFK { get; set; }
