@@ -1,6 +1,6 @@
-﻿using DayJT.Journal.DataEntities.Entities;
+﻿using DayJT.Journal.Data;
+using DayJT.Journal.DataEntities.Entities;
 using JTA.Journal.Entities;
-using JTA.Web.Services.Models.Journal;
 using System.ComponentModel.DataAnnotations;
 
 namespace DayJTrading.Web.Services.Models.Journal
@@ -14,6 +14,11 @@ namespace DayJTrading.Web.Services.Models.Journal
 
         public List<string> Sectors { get; set; } = null!;
 
-        public TradeStatusModel Status { get; set; } = null!;
+        [Required]
+        public TradeStatus Status { get; set; } 
+
+        public DateTime? OpenedAt { get; set; }
+
+        public DateTime? ClosedAt { get; set; }
     }
 }

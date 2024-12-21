@@ -8,8 +8,11 @@ namespace DayJTrading.Journal.Data
 
     public class TradesFilterModel
     {
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public DateTime? OpenLowerLimit { get; set; }
+        public DateTime? OpenUpperLimit { get; set; }
+
+        public DateTime? CloseLowerLimit { get; set; }
+        public DateTime? CloseUpperLimit { get; set; }
         public List<FilterInfoPair>? FilterObjects { get; set; }
     }
 }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      

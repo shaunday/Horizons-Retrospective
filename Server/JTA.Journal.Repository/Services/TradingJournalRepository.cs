@@ -48,14 +48,24 @@ namespace DayJT.Journal.Repository.Services
         {
             var query = dataContext.TradeComposites.AsNoTracking().AsQueryable();
 
-            if (filter.StartDate.HasValue)
+            if (filter.OpenLowerLimit.HasValue)
             {
-                query = query.Where(t => t.Status.OpenedAt >= filter.StartDate.Value);
+                query = query.Where(t => t.OpenedAt >= filter.OpenLowerLimit.Value);
             }
 
-            if (filter.EndDate.HasValue)
+            if (filter.OpenUpperLimit.HasValue)
             {
-                query = query.Where(t => t.Status.OpenedAt <= filter.EndDate.Value);
+                query = query.Where(t => t.OpenedAt <= filter.OpenUpperLimit.Value);
+            }
+
+            if (filter.CloseLowerLimit.HasValue)
+            {
+                query = query.Where(t => t.OpenedAt >= filter.CloseLowerLimit.Value);
+            }
+
+            if (filter.CloseUpperLimit.HasValue)
+            {
+                query = query.Where(t => t.OpenedAt <= filter.CloseUpperLimit.Value);
             }
 
             if (filter.FilterObjects != null && filter.FilterObjects.Any())

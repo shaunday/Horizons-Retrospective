@@ -7,11 +7,18 @@
 
     public enum TradeActionType
     {
-        Origin, AddPosition, ReducePosition, InterimSummary, Closure, 
+        Origin, AddPosition, ReducePosition, InterimSummary, Closure,
     }
 
     public enum ValueRelevance
     {
         Positive, Negative
+    }
+
+    public enum TradeStatus
+    {
+        AnIdea,
+        Open,
+        Closed
     }
 }

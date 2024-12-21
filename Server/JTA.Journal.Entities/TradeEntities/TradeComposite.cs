@@ -1,4 +1,5 @@
-﻿using JTA.Journal.Entities;
+﻿using DayJT.Journal.Data;
+using JTA.Journal.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace DayJT.Journal.DataEntities.Entities
@@ -14,7 +15,11 @@ namespace DayJT.Journal.DataEntities.Entities
 
         public TradeElement Summary { get; set; } = null!;
 
-        public TradeStatus Status { get; set; } = new TradeStatus();
+        public TradeStatus Status { get; set; } = TradeStatus.AnIdea;
+
+        public DateTime? OpenedAt { get; set; }
+
+        public DateTime? ClosedAt { get; set; }
 
     }
 }

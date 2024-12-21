@@ -8,12 +8,6 @@ namespace DayJT.Journal.Repository.Configurations
     {
         public void Configure(EntityTypeBuilder<TradeComposite> builder)
         {
-            builder.OwnsOne(c => c.Status)
-                .WithOwner()
-                .HasForeignKey(h => h.CompositeFK);
-
-            builder.Navigation(c => c.Status).AutoInclude();
-
             builder.HasMany(t => t.TradeElements)
                 .WithOne(t => t.CompositeRef)
                 .HasForeignKey(t => t.CompositeFK)
@@ -21,6 +15,10 @@ namespace DayJT.Journal.Repository.Configurations
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Navigation(tc => tc.TradeElements).AutoInclude();
+
+            // Enum to string conversion
+            builder.Property(te => te.Status)
+                .HasConversion<string>();
         }
     }
 }
