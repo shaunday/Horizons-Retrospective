@@ -68,7 +68,7 @@ namespace DayJT.Journal.Repository.Services
                 query = query.Where(t => t.OpenedAt <= filter.CloseUpperLimit.Value);
             }
 
-            if (filter.FilterObjects != null && filter.FilterObjects.Any())
+            if (filter.FilterObjects != null && filter.FilterObjects.Count != 0)
             {
                 foreach (var filterObject in filter.FilterObjects)
                 {
