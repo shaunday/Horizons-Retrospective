@@ -4,5 +4,8 @@ rename all atrl + h
 
 
 
-index.html - everything always starts here. vite adds main, which goes to app.jsx ? why all the layers?
-margin is for spacing from outside, padding is for spacing for inside (like min size)
+index.html - everything always starts here. vite adds main, which goes to app.jsx 
+
+index.html handles the basic HTML structure and bootstrapping.
+main.js serves as the glue between your HTML and your application logic.
+App.vue or App.jsx contains your app's core UI and logic.
