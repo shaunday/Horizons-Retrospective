@@ -11,7 +11,7 @@ namespace DayJT.Journal.DataEntities.Factory
             var cell = new DataElement(overview.Title, overview.Type);
             if (!string.IsNullOrEmpty(overview.Content))
             {
-                cell.Content = overview.Content;
+                cell.ContentWrapper = new ContentRecord(overview.Content);
             }
             cell.UpdateParentRefs(elementRef);
             return cell;

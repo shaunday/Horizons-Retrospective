@@ -17,7 +17,7 @@ namespace DayJT.Journal.DataContext.Services
             {
                 throw new InvalidOperationException("Could not find price entry to reduce / close position");
             }
-            priceEntry.Content = closingPrice;
+            priceEntry.ContentWrapper = new ContentRecord(closingPrice);
 
             // Find cost entry
             var costEntry = tradeInput.Entries.SingleOrDefault(ti => ti.CostRelevance == ValueRelevance.Negative);
@@ -29,7 +29,7 @@ namespace DayJT.Journal.DataContext.Services
             var analytics = TradeAnalytics.GetAvgEntryAndProfit(trade);
             if (double.TryParse(closingPrice, out double closingPriceValue))
             {
-                costEntry.Content = (closingPriceValue * analytics.totalAmount).ToString();
+                costEntry.ContentWrapper = new ContentRecord((closingPriceValue * analytics.totalAmount).ToString());
             }
             else
             {

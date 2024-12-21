@@ -28,7 +28,7 @@ namespace DayJT.Journal.DataEntities.Entities
         #endregion
 
         #region Ctors
-        public DataElement() { }
+        private DataElement() { } //for ef
 
         public DataElement(string title, ComponentType componentType)
         {
@@ -38,21 +38,18 @@ namespace DayJT.Journal.DataEntities.Entities
         #endregion
 
         [Required]
-        public ContentRecord ContentWrapper { get; set; } = null!;
+        public ContentRecord? ContentWrapper { get; set; }
 
-        public string Content
-        {
-            get { return ContentWrapper.ContentValue; }
-            set
-            {
-                ContentWrapper = new ContentRecord(value);
-            }
-        }
+        public string? Content => ContentWrapper?.ContentValue ;
 
         public void SetFollowupContent(string newContent, string changeNote)
         {
-            History ??= new List<ContentRecord>();
-            History.Add(ContentWrapper);
+            if (ContentWrapper != null)
+            {
+                History ??= new List<ContentRecord>();
+                History.Add(ContentWrapper);
+            }
+           
             ContentWrapper = new ContentRecord(content: newContent) { ChangeNote = changeNote };
         }
 

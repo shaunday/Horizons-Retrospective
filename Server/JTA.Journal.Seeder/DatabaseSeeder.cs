@@ -46,12 +46,12 @@ namespace DayJTrading.Journal.Seeder
                 length = _lengthRandom.Next(3, 8);
                 if (element.Entries[i].CostRelevance != null || element.Entries[i].PriceRelevance != null)
                 {
-                    element.Entries[i].Content = _randomNumbersMachine.GenerateRandomNumber(length);
+                    element.Entries[i].ContentWrapper = new ContentRecord(_randomNumbersMachine.GenerateRandomNumber(length));
                 }
                 else
                 {
                     {
-                        element.Entries[i].Content = _randomWordsMachine.GenerateRandomWord(length);
+                        element.Entries[i].ContentWrapper = new ContentRecord(_randomWordsMachine.GenerateRandomWord(length));
                     }
                 }
             }

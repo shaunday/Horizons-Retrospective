@@ -73,7 +73,9 @@ namespace DayJT.Journal.Repository.Services
                 foreach (var filterObject in filter.FilterObjects)
                 {
                     query = query.Where(t => t.TradeElements.Any(te => te.Entries.Any(e =>
-                                    e.Title == filterObject.Title && e.Content.Contains(filterObject.FilterValue))));
+                                    e.Title == filterObject.Title &&
+                                     (e.Content == null && string.IsNullOrEmpty(filterObject.FilterValue) ||
+                                      e.Content != null && e.Content.Contains(filterObject.FilterValue)))));
                 }
             }
 
