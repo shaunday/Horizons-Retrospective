@@ -21,9 +21,11 @@ public class TradingJournalContextFactory : IDesignTimeDbContextFactory<TradingJ
         }
 
         var optionsBuilder = new DbContextOptionsBuilder<TradingJournalDataContext>();
+        var migrationsAssembly = typeof(TradingJournalContextFactory).Assembly.GetName().Name;
+
         optionsBuilder.UseNpgsql(connectionString, sqlOptions =>
             {
-                sqlOptions.MigrationsAssembly("JTA.Infrastructure");
+                sqlOptions.MigrationsAssembly(migrationsAssembly);
             });
 
         return new TradingJournalDataContext(optionsBuilder.Options);

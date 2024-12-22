@@ -1,4 +1,5 @@
 ﻿using DayJT.Journal.Repository;
+using JTA.Infrastructure.DayJT.Journal.Repository.CompiledModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,9 +33,16 @@ namespace DayJT.Infrastructure
                     npgsqlOptions.EnableRetryOnFailure();
                 });
 
-                if (environment?.IsDevelopment() == true)
+                if (environment != null)
                 {
-                    options.LogTo(Console.WriteLine, LogLevel.Information).EnableSensitiveDataLogging();
+                    if (environment.IsDevelopment())
+                    {
+                        options.LogTo(Console.WriteLine, LogLevel.Information).EnableSensitiveDataLogging();
+                    }
+                    else
+                    {
+                        options.UseModel(TradingJournalDataContextModel.Instance);   
+                    }
                 }
             });
         }
