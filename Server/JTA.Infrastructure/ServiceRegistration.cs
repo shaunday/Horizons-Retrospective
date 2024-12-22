@@ -1,4 +1,5 @@
-﻿using JTA.Journal.Repository;
+﻿using JTA.Infrastructure.JTA.Journal.Repository.CompiledModels;
+using JTA.Journal.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -40,7 +41,7 @@ namespace JTA.Infrastructure
                     }
                     else
                     {
-                        //options.UseModel(TradingJournalDataContextModel.Instance);   
+                        options.UseModel(TradingJournalDataContextModel.Instance);   
                     }
                 }
             });

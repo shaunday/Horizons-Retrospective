@@ -1,0 +1,3 @@
+dotnet ef dbcontext optimize -p JTA.Infrastructure -s JTA.Infrastructure
+
+^ for production
