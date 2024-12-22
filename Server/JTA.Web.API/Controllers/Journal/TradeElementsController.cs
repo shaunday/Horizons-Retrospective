@@ -10,11 +10,11 @@ namespace JTA.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/trades/{tradeId}")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class TradeCompositeController : JournalControllerBase
+    public class TradeElementsController : JournalControllerBase
     {
         #region Ctor
 
-        public TradeCompositeController(JournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
+        public TradeElementsController(JournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
                                                                                                         base(journalAccess, logger, mapper)
         { }
         #endregion

@@ -26,12 +26,12 @@ namespace JTA.Journal.DataContext
         } 
         #endregion
 
-        public Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
+        public Task<(IAsyncEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
         {
             return _tradeCompositeRepository.GetAllTradeCompositesAsync(pageNumber, pageSize);
         }
 
-        public Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetFilteredTradesAsync(TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
+        public Task<(IAsyncEnumerable<TradeComposite>, PaginationMetadata)> GetFilteredTradesAsync(TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
         {
             return _tradeCompositeRepository.GetFilteredTradesAsync(filter, pageNumber, pageSize);
         }
