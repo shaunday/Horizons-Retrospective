@@ -9,7 +9,7 @@ namespace DayJT.Journal.Repository.Services
 {
     public partial class JournalRepository: IJournalRepository
     {
-        public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetFilteredTradeCompositesAsync(
+        public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetFilteredTradesAsync(
             TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
         {
             var query = dataContext.TradeComposites.AsNoTracking().AsQueryable();

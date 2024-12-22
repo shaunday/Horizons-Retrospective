@@ -26,7 +26,7 @@ builder.ConfigureForEnvironment();
 builder.Services.AddConfiguredControllers();
 builder.Services.AddCustomSwagger();
 builder.Services.AddCustomAutoMapper();
-builder.Services.AddScoped<ITradingJournalRepository, TradingJournalRepository>();
+builder.Services.AddScoped<IJournalRepository, JournalRepository>();
 builder.Services.AddCustomApiVersioning();
 
 var app = builder.Build();

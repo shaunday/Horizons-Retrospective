@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DayJT.Journal.Repository.Services
 {
-    public partial class TradingJournalRepository : ITradingJournalRepository
+    public partial class JournalRepository : IJournalRepository
     {
         //Gen. Data
 
