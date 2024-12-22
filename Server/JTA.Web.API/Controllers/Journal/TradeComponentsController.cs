@@ -37,7 +37,8 @@ namespace JTA.Web.API.Controllers.Journal
         }
 
         [HttpGet("byFilter")]
-        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetFilteredTrades(TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
+        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> 
+                                                    GetFilteredTrades(TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
         {
             pageSize = ValidatePageSize(pageSize);
 

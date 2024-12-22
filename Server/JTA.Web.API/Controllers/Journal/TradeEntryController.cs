@@ -21,7 +21,8 @@ namespace JTA.Web.API.Controllers.Journal
         #endregion
 
         [HttpPut("{componentId}")]
-        public async Task<ActionResult<(DataElementModel newEntry, TradeElementModel? summary)>> UpdateDataComponent(string componentId, string newContent, string changeNote)
+        public async Task<ActionResult<(DataElementModel newEntry, TradeElementModel? summary)>> 
+                                                            UpdateDataComponent(string componentId, string newContent, string changeNote)
         {
             (DataElement updatedComponent, TradeElement? summary) = await _journalAccess.UpdateCellContentAsync(componentId, newContent, changeNote);
 
