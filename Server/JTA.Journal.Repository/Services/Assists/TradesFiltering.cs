@@ -1,16 +1,16 @@
-using JTA.Common;
-using JTA.Journal.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using JTA.Journal.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace JTA.Journal.DataContext
 {
-    public partial class TradeCompositeRepository : JournalRepositoryBase, ITradeCompositeRepository
+    public static class TradesFiltering
     {
-        public async Task<(IEnumerable<TradeComposite>, Pagination)> GetFilteredTradesAsync(
-               TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
+        public static IQueryable<TradeComposite> ApplyFiltering(this IQueryable<TradeComposite> query, TradesFilterModel filter)
         {
-            var query = _dataContext.TradeComposites.AsNoTracking().AsQueryable();
-
             if (filter.OpenLowerLimit.HasValue)
             {
                 query = query.Where(t => t.OpenedAt >= filter.OpenLowerLimit.Value);
@@ -42,16 +42,7 @@ namespace JTA.Journal.DataContext
                 }
             }
 
-            var totalCount = await query.CountAsync();
-
-            var trades = await ApplyPagination(query, pageNumber, pageSize).ToListAsync();
-
-            var paginationMetadata = new Pagination(totalCount, pageSize, pageNumber)
-            {
-                TotalPageCount = (int)Math.Ceiling(totalCount / (double)pageSize)
-            };
-
-            return (trades, paginationMetadata);
+            return query;
         }
-    } 
+    }
 }
