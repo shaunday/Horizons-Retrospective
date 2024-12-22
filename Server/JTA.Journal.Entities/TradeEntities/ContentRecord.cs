@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DayJT.Journal.DataEntities.Entities
+namespace JTA.Journal.Entities
 {
     public class ContentRecord
     {

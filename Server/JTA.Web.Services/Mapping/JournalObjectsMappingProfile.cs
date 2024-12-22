@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using AutoMapper.EquivalencyExpression;
-using DayJT.Journal.DataEntities.Entities;
-using DayJTrading.Web.Services.Models.Journal;
+using JTA.Journal.Entities;
+using JTA.Web.Services.Models.Journal;
 
-namespace DayJT.Web.API.Mapping
+namespace JTA.Web.API.Mapping
 {
     public class JournalObjectsMappingProfile : Profile
     {

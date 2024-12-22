@@ -1,8 +1,7 @@
-﻿using DayJT.Journal.Data;
-using DayJT.Journal.DataEntities.Entities;
-using DayJTrading.Journal.Data;
+﻿using JTA.Journal.Entities;
+using JTA.Journal.Entities.Factory;
 
-namespace DayJT.Journal.DataContext.Services
+namespace JTA.Journal.DataContext.Services
 {
     internal static class TradeElementCRUDs
     {

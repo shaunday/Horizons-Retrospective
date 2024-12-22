@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Xml.Linq;
-using DayJT.Journal.Data;
-using DayJT.Journal.DataContext.Services;
+using JTA.Journal.Entities;
+using JTA.Journal.DataContext.Services;
 using Asp.Versioning;
-using DayJTrading.Web.Services.Models.Journal;
+using JTA.Web.Services.Models.Journal;
 
-namespace DayJT.Web.API.Controllers.Journal
+namespace JTA.Web.API.Controllers.Journal
 {
     [Route("api/v{version:apiVersion}/journal/trades")]
     [ApiVersion("1.0")]

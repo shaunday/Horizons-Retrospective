@@ -1,8 +1,8 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
-using DayJT.Web.API.Mapping;
+using JTA.Web.API.Mapping;
 
-namespace DayJTrading.Web.API.Configurations
+namespace JTA.Web.API.Configurations
 {
     internal static class ApiVersioningExtensions
     {

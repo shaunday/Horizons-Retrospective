@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 
-namespace DayJT.Web.API.Controllers
+namespace JTA.Web.API.Controllers
 {
     [Route("api/v{version:apiVersion}/files")]
     //[ApiController]

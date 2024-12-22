@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using DayJT.Journal.Data;
-using DayJT.Journal.DataEntities.Entities;
+using JTA.Journal.Entities;
 
-namespace DayJTrading.Web.Services.Models.Journal
+namespace JTA.Web.Services.Models.Journal
 {
     public class DataElementModel
     {

@@ -1,9 +1,4 @@
-﻿using DayJT.Journal.Data;
-using DayJT.Journal.DataEntities.Entities;
-using DayJT.Journal.DataEntities.Factory;
-using JTA.Journal.Entities.Factory;
-
-namespace DayJTrading.Journal.Data
+﻿namespace JTA.Journal.Entities.Factory
 {
     public static class SummaryPositionsFactory
     {

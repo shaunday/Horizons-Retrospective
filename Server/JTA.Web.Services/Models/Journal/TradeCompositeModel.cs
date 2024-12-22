@@ -1,9 +1,7 @@
-﻿using DayJT.Journal.Data;
-using DayJT.Journal.DataEntities.Entities;
-using JTA.Journal.Entities;
+﻿using JTA.Journal.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace DayJTrading.Web.Services.Models.Journal
+namespace JTA.Web.Services.Models.Journal
 {
     public class TradeCompositeModel
     {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 
-namespace DayJTrading.Web.API.Controllers
+namespace JTA.Web.API.Controllers
 {
     public class CustomExceptionFilterAttribute : ExceptionFilterAttribute
     {

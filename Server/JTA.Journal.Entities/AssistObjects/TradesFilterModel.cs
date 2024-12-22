@@ -1,4 +1,4 @@
-namespace DayJTrading.Journal.Data
+namespace JTA.Journal.Entities
 {
     public class FilterInfoPair
     {

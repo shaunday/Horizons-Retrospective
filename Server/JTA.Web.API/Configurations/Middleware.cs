@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-namespace DayJTrading.Web.API.Configurations
+namespace JTA.Web.API.Configurations
 {
     internal static class Middleware
     {

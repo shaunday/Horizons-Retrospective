@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DayJTrading.Journal.Data
+namespace JTA.Journal.Entities
 {
     public class JournalData
     {

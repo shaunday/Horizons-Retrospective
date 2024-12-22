@@ -1,11 +1,4 @@
-﻿using DayJT.Journal.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JTA.Journal.Entities.Factory
+﻿namespace JTA.Journal.Entities.Factory
 {
     internal class EntryOverview(string title, ComponentType componentType, string content = "")
     {

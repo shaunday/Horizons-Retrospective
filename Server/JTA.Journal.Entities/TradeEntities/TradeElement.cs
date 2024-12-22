@@ -1,8 +1,7 @@
-﻿using DayJT.Journal.Data;
-using DayJTrading.Journal.Data.Factory;
+﻿using JTA.Journal.Entities.Factory;
 using System.ComponentModel.DataAnnotations;
 
-namespace DayJT.Journal.DataEntities.Entities
+namespace JTA.Journal.Entities
 {
     public class TradeElement
     {

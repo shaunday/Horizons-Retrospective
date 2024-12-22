@@ -1,4 +1,4 @@
-﻿namespace DayJT.Journal.Data
+﻿namespace JTA.Journal.Entities
 {
     public enum ComponentType
     {

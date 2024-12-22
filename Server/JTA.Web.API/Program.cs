@@ -1,13 +1,9 @@
-using DayJT.Infrastructure;
-using DayJT.Journal.DataContext.Services;
-using DayJT.Journal.DataSeeder;
-using DayJT.Journal.Repository.Services;
-using DayJTrading.Web.API.Configurations;
+using JTA.Infrastructure;
+using JTA.Journal.DataContext.Services;
+using JTA.Journal.DataSeeder;
+using JTA.Journal.Repository.Services;
 using JTA.Web.API.Configurations;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Logging;
 using Serilog;
-using System;
 
 LoggingConfiguration.ConfigureLogging();
 

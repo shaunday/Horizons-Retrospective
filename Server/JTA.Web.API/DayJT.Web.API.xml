@@ -4,12 +4,12 @@
         <name>JTA.Web.API</name>
     </assembly>
     <members>
-        <member name="T:DayJTrading.Web.API.Configurations.ControllerExtensions">
+        <member name="T:JTA.Web.API.Configurations.ControllerExtensions">
             <summary>
             Extension methods for configuring controllers.
             </summary>
         </member>
-        <member name="M:DayJTrading.Web.API.Configurations.ControllerExtensions.AddConfiguredControllers(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:JTA.Web.API.Configurations.ControllerExtensions.AddConfiguredControllers(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             Adds configured controllers to the service collection.
             </summary>

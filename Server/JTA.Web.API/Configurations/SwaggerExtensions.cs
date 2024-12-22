@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace DayJTrading.Web.API.Configurations
+namespace JTA.Web.API.Configurations
 {
     internal static class SwaggerExtensions
     {

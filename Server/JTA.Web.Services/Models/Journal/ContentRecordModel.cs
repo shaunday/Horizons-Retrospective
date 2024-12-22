@@ -1,7 +1,6 @@
-﻿using DayJT.Journal.DataEntities.Entities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace DayJTrading.Web.Services.Models.Journal
+namespace JTA.Web.Services.Models.Journal
 {
     public class ContentRecordModel
     {

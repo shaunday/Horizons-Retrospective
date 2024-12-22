@@ -1,12 +1,11 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
+using JTA.Journal.Entities;
+using JTA.Journal.Repository.Services;
+using JTA.Web.Services.Models.Journal;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
-using Asp.Versioning;
-using DayJT.Journal.DataEntities.Entities;
-using DayJTrading.Web.Services.Models.Journal;
-using DayJT.Journal.Repository.Services;
 
-namespace DayJT.Web.API.Controllers.Journal
+namespace JTA.Web.API.Controllers.Journal
 {
     [Route("api/v{version:apiVersion}/journal/trades/{tradeId}")]
     [ApiVersion("1.0")]

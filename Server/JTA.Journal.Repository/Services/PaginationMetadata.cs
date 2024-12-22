@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DayJT.Journal.DataContext.Services
+namespace JTA.Journal.DataContext.Services
 {
     public class PaginationMetadata
     {

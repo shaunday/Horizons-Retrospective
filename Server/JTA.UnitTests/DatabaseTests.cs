@@ -1,9 +1,9 @@
-﻿using DayJT.Journal.Repository;
+﻿using JTA.Journal.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DayJT.Journal.Test
+namespace JTA.Journal.Test
 {
     [TestClass]
     public sealed class DatabaseTests

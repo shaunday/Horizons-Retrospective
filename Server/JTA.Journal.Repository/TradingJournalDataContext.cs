@@ -1,9 +1,8 @@
-﻿using DayJT.Journal.DataEntities.Entities;
-using DayJT.Journal.Repository.Configurations;
-using DayJTrading.Journal.Data;
+﻿using JTA.Journal.Repository.Configurations;
+using JTA.Journal.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace DayJT.Journal.Repository
+namespace JTA.Journal.Repository
 {
     public class TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : DbContext(options)
     {

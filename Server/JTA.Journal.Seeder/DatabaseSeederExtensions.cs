@@ -1,5 +1,5 @@
-﻿using DayJT.Journal.Repository;
-using DayJTrading.Journal.Seeder;
+﻿using JTA.Journal.Repository;
+using JTA.Journal.Seeder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DayJT.Journal.DataSeeder
+namespace JTA.Journal.DataSeeder
 {
     public static class DatabaseSeederExtensions
     {

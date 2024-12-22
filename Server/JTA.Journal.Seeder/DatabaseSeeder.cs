@@ -1,12 +1,8 @@
-﻿using DayJT.Journal.Data;
-using DayJT.Journal.DataEntities.Entities;
-using DayJT.Journal.Repository;
-using DayJTrading.Journal.Data;
+﻿using JTA.Journal.Entities;
+using JTA.Journal.Repository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Diagnostics;
 
-namespace DayJTrading.Journal.Seeder
+namespace JTA.Journal.Seeder
 {
     internal static class DatabaseSeeder
     {

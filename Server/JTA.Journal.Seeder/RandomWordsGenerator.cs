@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DayJTrading.Journal.Seeder
+namespace JTA.Journal.Seeder
 {
     internal class RandomWordsGenerator
     {

@@ -1,11 +1,11 @@
-using DayJT.Journal.Repository;
+using JTA.Journal.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
 
-namespace DayJT.Infrastructure;
+namespace JTA.Infrastructure;
 
 public class TradingJournalContextFactory : IDesignTimeDbContextFactory<TradingJournalDataContext>
 {

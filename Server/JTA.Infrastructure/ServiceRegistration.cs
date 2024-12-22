@@ -1,5 +1,4 @@
-﻿using DayJT.Journal.Repository;
-using JTA.Infrastructure.DayJT.Journal.Repository.CompiledModels;
+﻿using JTA.Journal.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace DayJT.Infrastructure
+namespace JTA.Infrastructure
 {
     public static class ServiceRegistration
     {
@@ -41,7 +40,7 @@ namespace DayJT.Infrastructure
                     }
                     else
                     {
-                        options.UseModel(TradingJournalDataContextModel.Instance);   
+                        //options.UseModel(TradingJournalDataContextModel.Instance);   
                     }
                 }
             });

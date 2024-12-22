@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using AutoMapper.EquivalencyExpression;
-using DayJT.Web.API.Mapping;
+using JTA.Web.API.Mapping;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DayJTrading.Web.API.Configurations
+namespace JTA.Web.API.Configurations
 {
     internal static class AutoMapperExtensions
     {

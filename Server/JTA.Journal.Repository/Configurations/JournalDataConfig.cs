@@ -1,9 +1,8 @@
-using DayJT.Journal.DataEntities.Entities;
-using DayJTrading.Journal.Data;
+using JTA.Journal.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DayJT.Journal.Repository.Configurations
+namespace JTA.Journal.Repository.Configurations
 {
     public class JournalDataConfig : IEntityTypeConfiguration<JournalData>
     {

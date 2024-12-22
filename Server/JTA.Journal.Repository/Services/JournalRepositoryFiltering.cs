@@ -1,11 +1,8 @@
-﻿using DayJT.Journal.Data;
-using DayJT.Journal.DataContext.Services;
-using DayJT.Journal.DataEntities.Entities;
-using DayJTrading.Journal.Data;
-using JTA.Journal.Entities;
+﻿using JTA.Journal.Entities;
+using JTA.Journal.DataContext.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace DayJT.Journal.Repository.Services
+namespace JTA.Journal.Repository.Services
 {
     public partial class JournalRepository: IJournalRepository
     {

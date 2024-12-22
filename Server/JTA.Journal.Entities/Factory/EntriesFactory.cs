@@ -1,8 +1,4 @@
-﻿using DayJT.Journal.Data;
-using DayJT.Journal.DataEntities.Entities;
-using JTA.Journal.Entities.Factory;
-
-namespace DayJT.Journal.DataEntities.Factory
+﻿namespace JTA.Journal.Entities.Factory
 {
     internal static class EntriesFactory
     {

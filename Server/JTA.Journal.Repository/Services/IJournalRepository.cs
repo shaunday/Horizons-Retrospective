@@ -1,7 +1,6 @@
-﻿using DayJT.Journal.DataEntities.Entities;
-using DayJTrading.Journal.Data;
+﻿using JTA.Journal.Entities;
 
-namespace DayJT.Journal.DataContext.Services
+namespace JTA.Journal.DataContext.Services
 {
     public interface IJournalRepository
     {
