@@ -1,5 +1,5 @@
-﻿using JTA.Journal.Entities;
-using JTA.Journal.Repository;
+﻿using JTA.Journal.DataContext;
+using JTA.Journal.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace JTA.Journal.Seeder

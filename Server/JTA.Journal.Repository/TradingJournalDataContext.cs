@@ -2,7 +2,7 @@
 using JTA.Journal.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace JTA.Journal.Repository
+namespace JTA.Journal.DataContext
 {
     public class TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : DbContext(options)
     {

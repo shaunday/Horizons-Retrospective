@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
+using JTA.Journal.DataContext;
 using JTA.Journal.Entities;
-using JTA.Journal.Repository.Services;
 using JTA.Web.Services.Models.Journal;
 using Microsoft.AspNetCore.Mvc;
 

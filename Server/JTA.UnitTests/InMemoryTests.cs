@@ -1,8 +1,6 @@
-﻿using JTA.Journal.Repository;
+﻿using JTA.Journal.DataContext;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using SQLitePCL;
-using System.ComponentModel.DataAnnotations;
 
 
 namespace PubAppTest;

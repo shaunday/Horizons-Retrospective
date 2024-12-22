@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JTA.Journal.DataContext.Services
+﻿
+namespace JTA.Common
 {
-    public class PaginationMetadata
+    public class Pagination
     {
         public int TotalItemCount { get; set; }
         public int TotalPageCount { get; set; }
         public int PageSize { get; set; }
         public int CurrentPage { get; set; }
 
-        public PaginationMetadata(int totalItemCount, int pageSize, int currentPage)
+        public Pagination(int totalItemCount, int pageSize, int currentPage)
         {
             TotalItemCount = totalItemCount;
             PageSize = pageSize;

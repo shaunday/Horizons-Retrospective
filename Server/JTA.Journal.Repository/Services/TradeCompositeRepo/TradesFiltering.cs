@@ -1,15 +1,15 @@
-﻿using JTA.Journal.Entities;
-using JTA.Journal.DataContext.Services;
+using JTA.Common;
+using JTA.Journal.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace JTA.Journal.Repository.Services
+namespace JTA.Journal.DataContext
 {
-    public partial class JournalRepository: IJournalRepository
+    public partial class TradeCompositeRepository : JournalRepositoryBase, ITradeCompositeRepository
     {
-        public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetFilteredTradesAsync(
-            TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
+        public async Task<(IEnumerable<TradeComposite>, Pagination)> GetFilteredTradesAsync(
+               TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
         {
-            var query = dataContext.TradeComposites.AsNoTracking().AsQueryable();
+            var query = _dataContext.TradeComposites.AsNoTracking().AsQueryable();
 
             if (filter.OpenLowerLimit.HasValue)
             {
@@ -44,19 +44,14 @@ namespace JTA.Journal.Repository.Services
 
             var totalCount = await query.CountAsync();
 
-            var trades = await query
-                                .OrderBy(t => t.Id)
-                                .Skip((pageNumber - 1) * pageSize)
-                                .Take(pageSize)
-                                .ToListAsync();
+            var trades = await ApplyPagination(query, pageNumber, pageSize).ToListAsync();
 
-            var paginationMetadata = new PaginationMetadata(totalCount, pageSize, pageNumber)
+            var paginationMetadata = new Pagination(totalCount, pageSize, pageNumber)
             {
                 TotalPageCount = (int)Math.Ceiling(totalCount / (double)pageSize)
             };
 
             return (trades, paginationMetadata);
         }
-        
-    }
+    } 
 }

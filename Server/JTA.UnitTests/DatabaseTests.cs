@@ -1,4 +1,5 @@
-﻿using JTA.Journal.Repository;
+﻿using JTA.Journal.DataContext;
+using JTA.Journal.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

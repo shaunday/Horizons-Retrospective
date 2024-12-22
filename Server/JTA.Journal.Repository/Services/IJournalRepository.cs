@@ -1,13 +1,14 @@
-﻿using JTA.Journal.Entities;
+﻿using JTA.Common;
+using JTA.Journal.Entities;
 
-namespace JTA.Journal.DataContext.Services
+namespace JTA.Journal.DataContext
 {
     public interface IJournalRepository
     {
         //composites
-        Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10);
+        Task<(IEnumerable<TradeComposite>, Pagination)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10);
         Task<TradeComposite> AddTradeCompositeAsync();
-        Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetFilteredTradesAsync(TradesFilterModel filter, int pageNumber = 1, int pageSize = 10);
+        Task<(IEnumerable<TradeComposite>, Pagination)> GetFilteredTradesAsync(TradesFilterModel filter, int pageNumber = 1, int pageSize = 10);
 
         //interim elements
         Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd);

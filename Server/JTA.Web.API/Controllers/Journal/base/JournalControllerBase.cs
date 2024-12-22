@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using JTA.Journal.DataContext.Services;
+using JTA.Journal.DataContext;
 using JTA.Web.API.Controllers;
 using Microsoft.AspNetCore.Mvc;
 

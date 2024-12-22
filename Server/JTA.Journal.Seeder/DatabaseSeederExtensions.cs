@@ -1,11 +1,6 @@
-﻿using JTA.Journal.Repository;
+﻿using JTA.Journal.DataContext;
 using JTA.Journal.Seeder;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JTA.Journal.DataSeeder
 {

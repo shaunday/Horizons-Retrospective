@@ -1,6 +1,6 @@
 ﻿using JTA.Journal.Entities;
 
-namespace JTA.Journal.DataContext.Services
+namespace JTA.Journal.DataContext
 {
     internal static class TradeAnalytics
     {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Asp.Versioning;
 using JTA.Journal.Entities;
 using JTA.Web.Services.Models.Journal;
-using JTA.Journal.Repository.Services;
+using JTA.Journal.DataContext;
 
 namespace JTA.Web.API.Controllers.Journal
 {

@@ -1,8 +1,8 @@
 using JTA.Infrastructure;
-using JTA.Journal.DataContext.Services;
+using JTA.Journal.DataContext;
 using JTA.Journal.DataSeeder;
-using JTA.Journal.Repository.Services;
 using JTA.Web.API.Configurations;
+using JTA.Web.API.Repositories;
 using Serilog;
 
 LoggingConfiguration.ConfigureLogging();
@@ -22,7 +22,7 @@ builder.ConfigureForEnvironment();
 builder.Services.AddConfiguredControllers();
 builder.Services.AddCustomSwagger();
 builder.Services.AddCustomAutoMapper();
-builder.Services.AddScoped<IJournalRepository, JournalRepository>();
+builder.Services.AddRepositories();
 builder.Services.AddCustomApiVersioning();
 
 var app = builder.Build();

@@ -1,7 +1,7 @@
 ﻿using JTA.Journal.Entities;
 using JTA.Journal.Entities.Factory;
 
-namespace JTA.Journal.DataContext.Services
+namespace JTA.Journal.DataContext
 {
     internal static class TradeElementCRUDs
     {

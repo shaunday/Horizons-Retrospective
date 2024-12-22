@@ -1,12 +1,9 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Xml.Linq;
-using JTA.Journal.Entities;
-using JTA.Journal.DataContext.Services;
-using Asp.Versioning;
+﻿using Asp.Versioning;
+using AutoMapper;
+using JTA.Journal.DataContext;
 using JTA.Web.Services.Models.Journal;
+using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace JTA.Web.API.Controllers.Journal
 {
