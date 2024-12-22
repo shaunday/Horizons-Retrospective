@@ -3,12 +3,12 @@ using DayJTrading.Journal.Data;
 
 namespace DayJT.Journal.DataContext.Services
 {
-    public interface ITradingJournalRepository
+    public interface IJournalRepository
     {
         //composites
         Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10);
         Task<TradeComposite> AddTradeCompositeAsync();
-        Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllFilteredTradeCompositesAsync(TradesFilterModel filter, int pageNumber = 1, int pageSize = 10);
+        Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetFilteredTradeCompositesAsync(TradesFilterModel filter, int pageNumber = 1, int pageSize = 10);
 
         //interim elements
         Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd);
