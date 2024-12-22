@@ -31,8 +31,7 @@ namespace JTA.Web.API.Controllers.Journal
 
             SetPaginationHeader(paginationMetadata);
 
-            // Map trade entities to models asynchronously
-            var resAsModels = await MapToModelAsync(tradesEntities);
+            IEnumerable<TradeCompositeModel> resAsModels = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradesEntities);
 
             return Ok(resAsModels);
         }
@@ -46,8 +45,7 @@ namespace JTA.Web.API.Controllers.Journal
 
             SetPaginationHeader(paginationMetadata);
 
-            // Map filtered trade entities to models asynchronously
-            var resAsModels = await MapToModelAsync(filteredTradesEntities);
+            IEnumerable<TradeCompositeModel> resAsModels = _mapper.Map<IEnumerable<TradeCompositeModel>>(filteredTradesEntities);
 
             return Ok(resAsModels);
         }
@@ -73,20 +71,7 @@ namespace JTA.Web.API.Controllers.Journal
         private void SetPaginationHeader(PaginationMetadata paginationMetadata)
         {
             Response.Headers["X-Pagination"] = JsonSerializer.Serialize(paginationMetadata);
-        }
-
-        private async Task<List<TradeCompositeModel>> MapToModelAsync(IAsyncEnumerable<TradeComposite> tradesEntities)
-        {
-            var resAsModels = new List<TradeCompositeModel>();
-
-            await foreach (var tradeEntity in tradesEntities)
-            {
-                resAsModels.Add(_mapper.Map<TradeCompositeModel>(tradeEntity));
-            }
-
-            return resAsModels;
-        }
-        
+        }        
 
         #endregion
 

@@ -6,28 +6,28 @@ namespace JTA.Journal.DataContext
 {
     public partial class TradeCompositeRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), ITradeCompositeRepository
     {
-        public async Task<(IAsyncEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
+        public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
         {
             var query = _dataContext.TradeComposites.AsNoTracking().AsQueryable();
             return await GetPaginatedTradesAsync(query, pageNumber, pageSize);
         }
 
-        public async Task<(IAsyncEnumerable<TradeComposite>, PaginationMetadata)> GetFilteredTradesAsync(
+        public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetFilteredTradesAsync(
             TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
         {
             var query = _dataContext.TradeComposites.AsNoTracking().AsQueryable().ApplyFiltering(filter);
             return await GetPaginatedTradesAsync(query, pageNumber, pageSize);
         }
 
-        private static async Task<(IAsyncEnumerable<TradeComposite>, PaginationMetadata)> 
+        private static async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> 
                                                     GetPaginatedTradesAsync(IQueryable<TradeComposite> query, int pageNumber, int pageSize)
         {
             var totalCount = await query.CountAsync();
 
-            var trades = query.OrderBy(t => t.Id)
+            var trades = await query.OrderBy(t => t.Id)
                         .Skip((pageNumber - 1) * pageSize)
                         .Take(pageSize)
-                        .AsAsyncEnumerable();
+                        .ToListAsync();
 
             var paginationMetadata = new PaginationMetadata(totalCount, pageSize, pageNumber)
             {
