@@ -7,11 +7,11 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - "server/**"  # Only trigger when files in the 'server' folder change
+      - "./Server/**"  # Only trigger when files in the 'server' folder change
   pull_request:
     branches: [ "main" ]
     paths:
-      - "server/**"  # Only trigger for PRs affecting files in the 'server' folder
+      - "./Server/**"  # Only trigger for PRs affecting files in the 'server' folder
   workflow_dispatch:  # Allow manual triggers  
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      SERVER_PATH: ./server  # Define the server path once here
+      SERVER_PATH: ./Server  # Define the server path once here
 
     steps:
     - uses: actions/checkout@v4
