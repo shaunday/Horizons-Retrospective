@@ -12,6 +12,7 @@ on:
     branches: [ "main" ]
     paths:
       - "server/**"  # Only trigger for PRs affecting files in the 'server' folder
+  workflow_dispatch:  # Allow manual triggers  
 
 jobs:
   build:
