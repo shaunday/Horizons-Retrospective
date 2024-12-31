@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JTA.Journal.Entities\JTA.Journal.Entities.csproj" />
+    <ProjectReference Include="..\JTA.Journal.Entities\HsR.Journal.Entities.csproj" />
   </ItemGroup>
 
 </Project>

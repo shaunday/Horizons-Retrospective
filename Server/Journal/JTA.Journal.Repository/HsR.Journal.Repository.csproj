@@ -31,8 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JTA.Common\JTA.Common.csproj" />
-    <ProjectReference Include="..\JTA.Journal.Entities\JTA.Journal.Entities.csproj" />
+    <ProjectReference Include="..\..\JTA.Common\HsR.Common.csproj" />
+    <ProjectReference Include="..\JTA.Journal.Entities\HsR.Journal.Entities.csproj" />
   </ItemGroup>
 
 </Project>

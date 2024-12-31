@@ -1,6 +1,7 @@
 ﻿
 // todo
 should summary be different when position is closed... how?
+add investment timeframe
 
 // dashboard
 pies

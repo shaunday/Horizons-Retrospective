@@ -34,10 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JTA.Infrastructure\JTA.Infrastructure.csproj" />
-    <ProjectReference Include="..\JTA.Journal.Repository\JTA.Journal.Repository.csproj" />
-    <ProjectReference Include="..\JTA.Journal.Seeder\JTA.Journal.Seeder.csproj" />
-    <ProjectReference Include="..\JTA.Web.Services\JTA.Web.Services.csproj" />
+    <ProjectReference Include="..\JTA.Infrastructure\HsR.Journal.Infrastructure.csproj" />
+    <ProjectReference Include="..\JTA.Journal.Repository\HsR.Journal.Repository.csproj" />
+    <ProjectReference Include="..\JTA.Journal.Seeder\HsR.Journal.Seeder.csproj" />
+    <ProjectReference Include="..\JTA.Web.Services\HsR.Journal.Web.Services.csproj" />
   </ItemGroup>
 
 </Project>
