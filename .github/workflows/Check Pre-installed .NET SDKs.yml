@@ -1,0 +1,24 @@
+name: Check Pre-installed .NET SDKs
+
+on:
+  workflow_dispatch:  # Enable manual trigger
+
+jobs:
+  check-dotnet-sdks:
+    runs-on: ${{ matrix.os }}  # Use a matrix to test across multiple runners
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-22.04, windows-latest, macos-latest]  # Add any runners you want to test
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: List Pre-installed .NET SDKs
+      run: dotnet --list-sdks
+
+    - name: Display Runner OS Info
+      run: uname -a  # For Linux/MacOS
+      if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'macos')
+    - run: ver  # For Windows
+      if: startsWith(matrix.os, 'windows')
