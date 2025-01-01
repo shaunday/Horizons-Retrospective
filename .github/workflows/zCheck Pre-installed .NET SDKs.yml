@@ -1,4 +1,4 @@
-name: Check Pre-installed .NET SDKs
+name: zCheck Pre-installed .NET SDKs
 
 on:
   workflow_dispatch:  # Enable manual trigger
