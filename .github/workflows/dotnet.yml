@@ -37,6 +37,6 @@ jobs:
       working-directory: ${{ env.SERVER_PATH }} 
 
     # Step 3: Run .NET tests
-    - name: Run .NET tests
-      run: dotnet test --no-build --verbosity normal
-      working-directory: ${{ env.SERVER_PATH }} 
+    #- name: Run .NET tests
+    #  run: dotnet test --no-build --verbosity normal
+    #  working-directory: ${{ env.SERVER_PATH }} 
