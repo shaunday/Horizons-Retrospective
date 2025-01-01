@@ -1,9 +1,9 @@
 ## Overview: 
-An online Trading Journal, will allow the user to add and manage trade ideas and ongoing trade positions.
+Stage1: An online Trading Journal, will allow the user to add and manage trade ideas and ongoing trade positions.
 
 TBD1: Filtering of trades, Positions/allocations pie charts
 
-TBD2: Trade alerts, based on current price action + indicators.
+TBD Stage2: Trade alerts, based on current price action + indicators.
 
 ## Part 1: Client; React 18, SAA
 ### Fetch Flow and Cache Management:
