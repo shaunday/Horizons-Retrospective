@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest  # The host runner
     container:
-      image: mcr.microsoft.com/dotnet/nightly:9.0-sdk  # Docker container with .NET SDK 9
+      image: mcr.microsoft.com/dotnet/sdk:9.0  # Docker container with .NET SDK 9
 
     env:
       SERVER_PATH: ./Server  # Define the server path once here
