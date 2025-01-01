@@ -18,6 +18,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/nightly:9.0-sdk
     
     env:
       SERVER_PATH: ./Server  # Define the server path once here
