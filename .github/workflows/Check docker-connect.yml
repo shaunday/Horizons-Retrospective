@@ -1,4 +1,4 @@
-name: Docker Login
+name: zDocker Login
 
 on:
   workflow_dispatch:  # Allow manual trigger
