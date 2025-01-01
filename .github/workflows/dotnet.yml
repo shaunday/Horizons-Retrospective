@@ -16,34 +16,33 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # The host runner
     container:
-      image: mcr.microsoft.com/dotnet/nightly:9.0-sdk
-    
+      image: mcr.microsoft.com/dotnet/nightly:9.0-sdk  # Docker container with .NET SDK 9
+
     env:
       SERVER_PATH: ./Server  # Define the server path once here
 
     steps:
+    - name: Log in to Docker Hub (if needed)
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
     - uses: actions/checkout@v4
 
-    # Step 1: Setup .NET
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 9.0.x 
-
-    # Step 2: Restore .NET dependencies
+    # Step 1: Restore .NET dependencies
     - name: Restore .NET dependencies
       run: dotnet restore
-      working-directory: ${{ env.SERVER_PATH }}  # Use the defined variable
+      working-directory: ${{ env.SERVER_PATH }} 
 
-    # Step 3: Build .NET project
+    # Step 2: Build .NET project
     - name: Build .NET project
       run: dotnet build --no-restore
-      working-directory: ${{ env.SERVER_PATH }}  # Use the defined variable
+      working-directory: ${{ env.SERVER_PATH }} 
 
-    # Step 4: Run .NET tests
+    # Step 3: Run .NET tests
     - name: Run .NET tests
       run: dotnet test --no-build --verbosity normal
-      working-directory: ${{ env.SERVER_PATH }}  # Use the defined variable
+      working-directory: ${{ env.SERVER_PATH }} 
