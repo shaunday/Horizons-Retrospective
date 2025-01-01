@@ -24,19 +24,17 @@ jobs:
       SERVER_PATH: ./Server  # Define the server path once here
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-    # Step 1: Restore .NET dependencies
     - name: Restore .NET dependencies
       run: dotnet restore
       working-directory: ${{ env.SERVER_PATH }} 
 
-    # Step 2: Build .NET project
     - name: Build .NET project
       run: dotnet build --no-restore
       working-directory: ${{ env.SERVER_PATH }} 
 
-    # Step 3: Run .NET tests
     #- name: Run .NET tests
     #  run: dotnet test --no-build --verbosity normal
     #  working-directory: ${{ env.SERVER_PATH }} 
