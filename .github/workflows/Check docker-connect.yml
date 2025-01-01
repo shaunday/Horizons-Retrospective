@@ -8,6 +8,15 @@ jobs:
     runs-on: ubuntu-latest  # The host runner
 
     steps:
+    - name: Check if Docker username secret exists
+      run: |
+        if [ -z "${{ secrets.DOCKER_USERNAME }}" ]; then
+          echo "Error: Docker username secret is not set."
+          exit 1
+        else
+          echo "Docker username secret is set."
+        fi
+        
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
       with:
