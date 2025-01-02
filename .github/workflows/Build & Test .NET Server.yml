@@ -1,12 +1,11 @@
 name: Build & Test .NET Server
 
 on:
-  push: &common_filters
+  push:
     branches:
       - main
     paths:
       - "./Server/**"
-  pull_request: *common_filters
   workflow_dispatch:  # Allow manual triggers  
 
 jobs:
