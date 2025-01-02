@@ -1,14 +1,12 @@
 name: Build & Test .NET Server
 
 on:
-  push:
-    branches: [ "main" ]
+  push: &common_filters
+    branches:
+      - main
     paths:
-      - "./Server/**"  # Only trigger when files in the 'server' folder change
-  pull_request:
-    branches: [ "main" ]
-    paths:
-      - "./Server/**"  # Only trigger for PRs affecting files in the 'server' folder
+      - "./Server/**"
+  pull_request: *common_filters
   workflow_dispatch:  # Allow manual triggers  
 
 jobs:
