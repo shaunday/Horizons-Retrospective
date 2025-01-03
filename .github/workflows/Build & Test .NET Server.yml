@@ -8,9 +8,6 @@ on:
       - "./Server/**"
   workflow_dispatch:  # Allow manual triggers
 
-env:
-  SERVER_PATH: ./Server  # Define environment variables globally
-
 jobs:
   pre-build:
     uses: ./.github/workflows/reusable-dotnet-job.yaml
