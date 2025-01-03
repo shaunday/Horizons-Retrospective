@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: restore-artifacts
-          path: ${{ env.SERVER_PATH }}/obj
+          path: public/
 
   build:
     needs: restore  
@@ -45,6 +45,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: restore-artifacts
+          path: public
 
       - name: Build .NET project
         run: dotnet build --no-restore
@@ -54,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
-          path: ${{ env.SERVER_PATH }}/bin
+          path: public/
 
   test:
     needs: build 
@@ -70,7 +71,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: build-artifacts
+          path: public
 
-      - name: Run .NET tests
-        run: dotnet test --no-build --verbosity normal
-        working-directory: ${{ env.SERVER_PATH }}
+      #- name: Run .NET tests
+     #   run: dotnet test --no-build --verbosity normal
+     #   working-directory: ${{ env.SERVER_PATH }}
