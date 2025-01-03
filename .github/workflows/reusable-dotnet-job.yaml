@@ -12,6 +12,9 @@ on:
         required: true
         type: string
 
+env:
+  SERVER_PATH: ./Server  # Define environment variables globally
+
 jobs:
   dotnet-job:
     runs-on: ubuntu-latest
