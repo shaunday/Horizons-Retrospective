@@ -2,15 +2,15 @@
 
 1. _Create Migration class - has all the info about how to create the DB based on the model
 Package Manager Console: 
-EntityFrameworkCore\Add-Migration InitialCreate -p JTA.Infrastructure -s JTA.Infrastructure
+EntityFrameworkCore\Add-Migration InitialCreate -p HsR.Journal.Infrastructure -s HsR.Journal.Infrastructure
 **without "EntityFrameworkCore\" you'll get errors
 
 2. _App Roles
-EntityFrameworkCore\Add-Migration CreateAppRoles -p JTA.Infrastructure -s JTA.Infrastructure
+EntityFrameworkCore\Add-Migration CreateAppRoles -p HsR.Journal.Infrastructure -s HsR.Journal.Infrastructure
 
 3. _Apply Migration
 a. Directly
-EntityFrameworkCore\Update-Database -p JTA.Infrastructure -s JTA.Infrastructure
+EntityFrameworkCore\Update-Database -p HsR.Journal.Infrastructure -s HsR.Journal.Infrastructure
 
 b. Script
 save the script in /db-scripts : DATE_WHAT_CHANGED
@@ -18,7 +18,7 @@ Document what changed... release notes of sorts = Version
 Then apply the script in the DB/ do 2a.
 
 PM: 
-EntityFrameworkCore\Script-Migration -Idempotent -Output "db-scripts\15_12_2024_Initial.sql" -Project JTA.Infrastructure -StartupProject JTA.Infrastructure
+EntityFrameworkCore\Script-Migration -Idempotent -Output "db-scripts\04_01_2025_Initial.sql" -Project HsR.Journal.Infrastructure -StartupProject HsR.Journal.Infrastructure
 
 (Script needs to be applied to the DB))
 

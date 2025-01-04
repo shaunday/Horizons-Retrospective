@@ -6,7 +6,7 @@ namespace JTA.Infrastructure;
 
 public class TradingJournalContextFactory : IDesignTimeDbContextFactory<TradingJournalDataContext>
 {
-    private const string AdminConnectionString = "JTA_ADMIN_CONNECTION_STRING";
+    private const string AdminConnectionString = "HsR_Journal_ADMIN_CONNECTION";
 
     public TradingJournalDataContext CreateDbContext(string[] args)
     {

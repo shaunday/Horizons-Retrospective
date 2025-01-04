@@ -6,12 +6,12 @@
    - Open **pgAdmin 4** and connect to your PostgreSQL server.
    - In the left panel, right-click on the **Databases** node.
    - Select **Create > Database**.
-   - In the dialog, enter a name for your database (e.g., `DayJournalDatabase`), and click **Save**.
+   - In the dialog, enter a name for your database (e.g., `HsR_Journal_Database`), and click **Save**.
 
 ### 2. **Open Query Tool**:
    Once the database is created, do the following:
    - In the left panel, expand the **Databases** section.
-   - Right-click on your newly created database (`DayJournalDatabase`).
+   - Right-click on your newly created database (`HsR_Journal_Database`).
    - Select **Query Tool** to open a new SQL editor.
 
 ### 3. **Run Your SQL Script**:
@@ -19,16 +19,16 @@
 
    Copy and paste the following SQL commands into the Query Tool:
    ```sql
-   CREATE ROLE dayj_user WITH LOGIN PASSWORD 'securepassword';
-   GRANT CONNECT ON DATABASE "DayJournalDatabase" TO dayj_user;
-   GRANT USAGE ON SCHEMA public TO dayj_user;
-   GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO dayj_user;
+   CREATE ROLE hsrj_user WITH LOGIN PASSWORD 'securepassword';
+   GRANT CONNECT ON DATABASE "HsR_Journal_Database" TO hsrj_user;
+   GRANT USAGE ON SCHEMA public TO hsrj_user;
+   GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO hsrj_user;
    ```
 
 ### 4. **Execute the SQL**:
    Click the **Execute/Refresh** button (or press `F5`) to run the commands.
 
 After doing this, you should have:
-- A `dayj_user` role created with login credentials.
-- Permissions to connect to the `DayJournalDatabase` database.
+- A `hsrj_user` role created with login credentials.
+- Permissions to connect to the `HsR_Journal_Database` database.
 - Access to the `public` schema with `SELECT`, `INSERT`, `UPDATE`, and `DELETE` permissions on all tables in that schema.

@@ -14,7 +14,7 @@ builder.Configuration.AddEnvironmentVariables();
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 #pragma warning disable CS8604 // Disable warning for possible null reference argument
-string? connectionString = builder.Configuration.GetConnectionString("JTA_Db_Key");
+string? connectionString = builder.Configuration.GetConnectionString("HsRJ_Db_Key");
 builder.Services.AddInfrastructureWithLogging(connectionString, builder.Environment);
 
 builder.ConfigureForEnvironment();
