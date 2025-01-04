@@ -1,0 +1,34 @@
+name: Build & Test .NET Server
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "./Server/**"
+  workflow_dispatch:  # Allow manual triggers  
+
+jobs:
+  Restore-Build-Test:
+    runs-on: ubuntu-latest  # The host runner
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:9.0  # Docker container with .NET SDK 9
+
+    env:
+      SERVER_PATH: ./Server  # Define the server path once here
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Restore .NET dependencies
+      run: dotnet restore
+      working-directory: ${{ env.SERVER_PATH }} 
+
+    - name: Build .NET project
+      run: dotnet build --no-restore
+      working-directory: ${{ env.SERVER_PATH }} 
+
+    #- name: Run .NET tests
+    #  run: dotnet test --no-build --verbosity normal
+    #  working-directory: ${{ env.SERVER_PATH }} 

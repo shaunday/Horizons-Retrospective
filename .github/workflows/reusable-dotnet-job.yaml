@@ -1,0 +1,30 @@
+name: Reusable .NET Job
+
+on:
+  workflow_call:
+    inputs:
+      job_name:
+        description: The name of the job
+        required: true
+        type: string
+      dotnet_command:
+        description: The .NET command to execute
+        required: true
+        type: string
+
+env:
+  SERVER_PATH: ./Server  # Define environment variables globally
+
+jobs:
+  dotnet-job:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:9.0
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run .NET ${{ inputs.job_name }}
+        run: dotnet ${{ inputs.dotnet_command }}
+        working-directory: ${{ env.SERVER_PATH }}
