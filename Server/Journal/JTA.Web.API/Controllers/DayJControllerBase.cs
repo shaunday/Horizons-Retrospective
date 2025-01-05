@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 
-namespace JTA.Web.API.Controllers
+namespace HsR.Web.API.Controllers
 {
     public class CustomExceptionFilterAttribute : ExceptionFilterAttribute
     {

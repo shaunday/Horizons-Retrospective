@@ -1,4 +1,4 @@
-﻿namespace JTA.Journal.Entities.Factory
+﻿namespace HsR.Journal.Entities.Factory
 {
     internal static class EntriesFactory
     {

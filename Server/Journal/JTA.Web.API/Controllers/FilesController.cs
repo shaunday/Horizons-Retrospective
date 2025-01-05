@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 
-namespace JTA.Web.API.Controllers
+namespace HsR.Web.API.Controllers
 {
     [Route("api/v{version:apiVersion}/files")]
     //[ApiController]

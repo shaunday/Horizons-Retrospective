@@ -1,5 +1,5 @@
 ﻿
-namespace JTA.Common
+namespace HsR.Common
 {
     public class PaginationMetadata
     {

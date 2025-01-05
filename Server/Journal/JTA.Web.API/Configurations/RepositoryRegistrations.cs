@@ -1,6 +1,6 @@
-using JTA.Journal.DataContext;
+using HsR.Journal.DataContext;
 
-namespace JTA.Web.API.Repositories
+namespace HsR.Web.API.Repositories
 {
     public static class RepositoryRegistrations
     {

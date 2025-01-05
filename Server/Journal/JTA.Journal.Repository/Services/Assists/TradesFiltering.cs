@@ -1,11 +1,11 @@
-﻿using JTA.Journal.Entities;
+﻿using HsR.Journal.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JTA.Journal.DataContext
+namespace HsR.Journal.DataContext
 {
     public static class TradesFiltering
     {

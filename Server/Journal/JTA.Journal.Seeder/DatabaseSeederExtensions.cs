@@ -1,8 +1,8 @@
-﻿using JTA.Journal.DataContext;
-using JTA.Journal.Seeder;
+﻿using HsR.Journal.DataContext;
+using HsR.Journal.Seeder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JTA.Journal.DataSeeder
+namespace HsR.Journal.DataSeeder
 {
     public static class DatabaseSeederExtensions
     {

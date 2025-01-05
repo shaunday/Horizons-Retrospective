@@ -1,4 +1,4 @@
-﻿using JTA.Journal.DataContext;
+﻿using HsR.Journal.DataContext;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 

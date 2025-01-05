@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using JTA.Journal.DataContext;
-using JTA.Web.API.Controllers;
+using HsR.Journal.DataContext;
+using HsR.Web.API.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JTA.Web.API.Controllers.Journal
+namespace HsR.Web.API.Controllers.Journal
 {
     public class JournalControllerBase : DayJControllerBase
     {

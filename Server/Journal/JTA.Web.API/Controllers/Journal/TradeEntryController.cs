@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Asp.Versioning;
-using JTA.Journal.Entities;
-using JTA.Web.Services.Models.Journal;
-using JTA.Journal.DataContext;
+using HsR.Journal.Entities;
+using HsR.Web.Services.Models.Journal;
+using HsR.Journal.DataContext;
 
-namespace JTA.Web.API.Controllers.Journal
+namespace HsR.Web.API.Controllers.Journal
 {
     [Route("api/v{version:apiVersion}/journal/components")]
     [ApiVersion("1.0")]

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-namespace JTA.Web.API.Configurations
+namespace HsR.Web.API.Configurations
 {
     internal static class Middleware
     {

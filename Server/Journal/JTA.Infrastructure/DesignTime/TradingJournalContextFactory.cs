@@ -1,8 +1,8 @@
-using JTA.Journal.DataContext;
+using HsR.Journal.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace JTA.Infrastructure;
+namespace HsR.Infrastructure;
 
 public class TradingJournalContextFactory : IDesignTimeDbContextFactory<TradingJournalDataContext>
 {

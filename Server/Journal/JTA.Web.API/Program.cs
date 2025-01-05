@@ -1,8 +1,8 @@
-using JTA.Infrastructure;
-using JTA.Journal.DataContext;
-using JTA.Journal.DataSeeder;
-using JTA.Web.API.Configurations;
-using JTA.Web.API.Repositories;
+using HsR.Infrastructure;
+using HsR.Journal.DataContext;
+using HsR.Journal.DataSeeder;
+using HsR.Web.API.Configurations;
+using HsR.Web.API.Repositories;
 using Serilog;
 
 LoggingConfiguration.ConfigureLogging();

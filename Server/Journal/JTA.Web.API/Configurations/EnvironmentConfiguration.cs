@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Logging;
 
-namespace JTA.Web.API.Configurations
+namespace HsR.Web.API.Configurations
 {
     public static class EnvironmentConfiguration
     {

@@ -1,8 +1,8 @@
-using JTA.Common;
-using JTA.Journal.Entities;
+using HsR.Common;
+using HsR.Journal.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace JTA.Journal.DataContext
+namespace HsR.Journal.DataContext
 {
     public partial class TradeCompositeRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), ITradeCompositeRepository
     {

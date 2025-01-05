@@ -1,4 +1,4 @@
-﻿namespace JTA.Journal.Entities.Factory
+﻿namespace HsR.Journal.Entities.Factory
 {
     internal class EntryOverview(string title, ComponentType componentType, string content = "")
     {

@@ -1,8 +1,8 @@
-using JTA.Common;
-using JTA.Journal.Entities;
-using JTA.Journal.Repository;
+using HsR.Common;
+using HsR.Journal.Entities;
+using HsR.Journal.Repository;
 
-namespace JTA.Journal.DataContext
+namespace HsR.Journal.DataContext
 {
     public interface IGeneralDataRepository
     {

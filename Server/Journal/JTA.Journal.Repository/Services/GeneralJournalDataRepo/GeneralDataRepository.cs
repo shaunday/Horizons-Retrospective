@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace JTA.Journal.DataContext
+namespace HsR.Journal.DataContext
 {
     public partial class GeneralDataRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), IGeneralDataRepository
     {

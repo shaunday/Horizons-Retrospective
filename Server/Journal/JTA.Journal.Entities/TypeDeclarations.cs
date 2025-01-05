@@ -1,4 +1,4 @@
-﻿namespace JTA.Journal.Entities
+﻿namespace HsR.Journal.Entities
 {
     public enum ComponentType
     {

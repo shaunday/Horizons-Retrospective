@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using AutoMapper.EquivalencyExpression;
-using JTA.Journal.Entities;
-using JTA.Web.Services.Models.Journal;
+using HsR.Journal.Entities;
+using HsR.Web.Services.Models.Journal;
 
-namespace JTA.Web.API.Mapping
+namespace HsR.Web.API.Mapping
 {
     public class JournalObjectsMappingProfile : Profile
     {

@@ -1,10 +1,10 @@
-﻿using JTA.Journal.DataContext;
-using JTA.Journal.Repository;
+﻿using HsR.Journal.DataContext;
+using HsR.Journal.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JTA.Journal.Test
+namespace HsR.Journal.Test
 {
     [TestClass]
     public sealed class DatabaseTests

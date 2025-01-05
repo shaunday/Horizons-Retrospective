@@ -1,5 +1,5 @@
-﻿using JTA.Journal.DataContext;
-using JTA.Journal.Repository;
+﻿using HsR.Journal.DataContext;
+using HsR.Journal.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace JTA.Infrastructure
+namespace HsR.Infrastructure
 {
     public static class ServiceRegistration
     {

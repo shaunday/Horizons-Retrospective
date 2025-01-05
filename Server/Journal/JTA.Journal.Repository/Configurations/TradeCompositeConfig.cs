@@ -1,8 +1,8 @@
-using JTA.Journal.Entities;
+using HsR.Journal.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace JTA.Journal.Repository.Configurations
+namespace HsR.Journal.Repository.Configurations
 {
     public class TradeCompositeConfig : IEntityTypeConfiguration<TradeComposite>
     {

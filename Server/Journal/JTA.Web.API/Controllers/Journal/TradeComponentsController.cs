@@ -1,13 +1,13 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
-using JTA.Common;
-using JTA.Journal.DataContext;
-using JTA.Journal.Entities;
-using JTA.Web.Services.Models.Journal;
+using HsR.Common;
+using HsR.Journal.DataContext;
+using HsR.Journal.Entities;
+using HsR.Web.Services.Models.Journal;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
-namespace JTA.Web.API.Controllers.Journal
+namespace HsR.Web.API.Controllers.Journal
 {
     [Route("api/v{version:apiVersion}/journal/trades")]
     [ApiVersion("1.0")]

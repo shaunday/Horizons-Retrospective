@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using AutoMapper.EquivalencyExpression;
-using JTA.Web.API.Mapping;
+using HsR.Web.API.Mapping;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JTA.Web.API.Configurations
+namespace HsR.Web.API.Configurations
 {
     internal static class AutoMapperExtensions
     {

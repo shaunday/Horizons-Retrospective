@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Formatters;
 using System.Text.Json;
 
-namespace JTA.Web.API.Configurations
+namespace HsR.Web.API.Configurations
 {
     /// <summary>
     /// Extension methods for configuring controllers.

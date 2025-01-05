@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using JTA.Journal.Entities;
+using HsR.Journal.Entities;
 
-namespace JTA.Web.Services.Models.Journal
+namespace HsR.Web.Services.Models.Journal
 {
     public class DataElementModel
     {

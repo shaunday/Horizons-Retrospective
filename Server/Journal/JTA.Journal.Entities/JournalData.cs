@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JTA.Journal.Entities
+namespace HsR.Journal.Entities
 {
     public class JournalData
     {

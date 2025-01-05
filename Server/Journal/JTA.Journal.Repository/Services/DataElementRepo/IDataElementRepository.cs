@@ -1,6 +1,6 @@
-using JTA.Journal.Entities;
+using HsR.Journal.Entities;
 
-namespace JTA.Journal.DataContext
+namespace HsR.Journal.DataContext
 {
     public interface IDataElementRepository
     {

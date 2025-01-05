@@ -1,7 +1,7 @@
-﻿using JTA.Common;
-using JTA.Journal.Entities;
+﻿using HsR.Common;
+using HsR.Journal.Entities;
 
-namespace JTA.Journal.DataContext
+namespace HsR.Journal.DataContext
 {
     public interface IJournalRepository
     {

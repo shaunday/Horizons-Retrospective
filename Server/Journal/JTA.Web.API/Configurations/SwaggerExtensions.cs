@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace JTA.Web.API.Configurations
+namespace HsR.Web.API.Configurations
 {
     internal static class SwaggerExtensions
     {

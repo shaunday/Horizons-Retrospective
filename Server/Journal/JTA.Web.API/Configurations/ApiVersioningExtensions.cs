@@ -1,8 +1,8 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
-using JTA.Web.API.Mapping;
+using HsR.Web.API.Mapping;
 
-namespace JTA.Web.API.Configurations
+namespace HsR.Web.API.Configurations
 {
     internal static class ApiVersioningExtensions
     {

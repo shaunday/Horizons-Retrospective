@@ -1,7 +1,7 @@
-using JTA.Journal.Entities;
+using HsR.Journal.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace JTA.Journal.DataContext
+namespace HsR.Journal.DataContext
 {
     public class TradeElementRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), ITradeElementRepository
     {

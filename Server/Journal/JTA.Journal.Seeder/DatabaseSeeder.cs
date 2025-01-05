@@ -1,8 +1,8 @@
-﻿using JTA.Journal.DataContext;
-using JTA.Journal.Entities;
+﻿using HsR.Journal.DataContext;
+using HsR.Journal.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace JTA.Journal.Seeder
+namespace HsR.Journal.Seeder
 {
     internal static class DatabaseSeeder
     {

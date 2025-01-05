@@ -1,8 +1,8 @@
-﻿using JTA.Journal.Repository.Configurations;
-using JTA.Journal.Entities;
+﻿using HsR.Journal.Repository.Configurations;
+using HsR.Journal.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace JTA.Journal.DataContext
+namespace HsR.Journal.DataContext
 {
     public class TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : DbContext(options)
     {

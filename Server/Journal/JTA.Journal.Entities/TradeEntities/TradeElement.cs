@@ -1,7 +1,7 @@
-﻿using JTA.Journal.Entities.Factory;
+﻿using HsR.Journal.Entities.Factory;
 using System.ComponentModel.DataAnnotations;
 
-namespace JTA.Journal.Entities
+namespace HsR.Journal.Entities
 {
     public class TradeElement
     {

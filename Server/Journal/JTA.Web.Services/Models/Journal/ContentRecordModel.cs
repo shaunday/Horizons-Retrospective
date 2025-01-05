@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JTA.Web.Services.Models.Journal
+namespace HsR.Web.Services.Models.Journal
 {
     public class ContentRecordModel
     {
