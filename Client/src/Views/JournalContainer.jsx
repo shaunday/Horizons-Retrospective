@@ -1,4 +1,4 @@
-import FilterControl from "@journalComponents/FilterControl";
+import FilterControl from "@journalComponents/Filtering/FilterControl";
 import TradesContainer from "@journalComponents/TradeComposite/TradesContainer";
 import { useAddTrade } from "@hooks/useAddTrade";
 

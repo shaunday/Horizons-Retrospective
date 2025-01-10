@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from "react";
 import Cell from "./Cell";
-import { useTradeStateAndManagement } from "@hooks/Composite/useTradeStateAndManagement";
 import * as Constants from "@constants/journalConstants";
 
 const listStyle = {
