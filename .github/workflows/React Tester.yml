@@ -27,9 +27,9 @@ jobs:
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        run:  cd ${{ env.CLIENT_PATH }} npm install
+        run:  cd ${{ env.CLIENT_PATH }} && npm install
 
       # Step 4: Run the build script
       - name: Run build
-        run: cd ${{ env.CLIENT_PATH }} npm run build
+        run: cd ${{ env.CLIENT_PATH }} && npm run build
 
