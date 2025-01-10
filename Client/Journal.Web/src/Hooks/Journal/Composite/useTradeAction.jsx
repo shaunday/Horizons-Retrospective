@@ -1,19 +1,19 @@
 import { useMutation } from "@tanstack/react-query";
 import {
-  addPositaddReduceInterimPositionion,
+  addReduceInterimPosition,
   closeTrade,
 } from "@services/tradesApiAccess";
 import * as Constants from "@constants/journalConstants";
 
-const useTradeAction = (tradeComposite, onElementAddition) => {
+export const useTradeAction = (tradeComposite, onElementAddition) => {
   return useMutation({
     mutationFn: async (action) => {
       switch (action) {
         case Constants.TradeActions.ADD:
-          await addPositaddReduceInterimPositionion(tradeComposite.Id, "true");
+          await addReduceInterimPosition(tradeComposite.Id, "true");
           break;
         case Constants.TradeActions.REDUCE:
-          await addPositaddReduceInterimPositionion(tradeComposite.Id, "false");
+          await addReduceInterimPosition(tradeComposite.Id, "false");
           break;
         case Constants.TradeActions.CLOSE:
           await closeTrade(tradeComposite.Id); //todo find closing price

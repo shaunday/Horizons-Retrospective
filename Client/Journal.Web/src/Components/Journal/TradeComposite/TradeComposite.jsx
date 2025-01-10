@@ -1,4 +1,4 @@
-import TradeElement from "./TradeElement";
+import TradeElement from "@journalComponents/TradeElement";
 import CompositeControls from "./CompositeControls";
 import { useTrade } from "@hooks/useTrade";
 import { useTradeStateAndManagement } from "@hooks/Composite/useTradeStateAndManagement";

@@ -2,7 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { tradeKeysFactory } from "@services/query-key-factory";
 import { getTradeById } from "@services/tradesApiAccess";
 
-function useTrade(tradeId) {
+export function useTrade(tradeId) {
   const queryClient = useQueryClient();
 
   const queryKey = tradeKeysFactory.tradeByIdKey(tradeId);

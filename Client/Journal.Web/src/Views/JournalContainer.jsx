@@ -1,5 +1,5 @@
 import FilterControl from "@journalComponents/FilterControl";
-import TradesContainer from "@journalComponents/TradesContainer";
+import TradesContainer from "@journalComponents/TradeComposite/TradesContainer";
 import { useAddTrade } from "@hooks/useAddTrade";
 
 function JournalContainer() {
