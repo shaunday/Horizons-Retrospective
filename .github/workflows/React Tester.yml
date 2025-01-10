@@ -1,0 +1,35 @@
+name: Build React App
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "./Client/**"
+  workflow_dispatch:  # Allow manual triggers  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  
+    env:
+      CLIENT_PATH: ./Client  
+      
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js 23.6
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '23.6'  
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run:  cd ${{ env.CLIENT_PATH }} && npm install
+
+      # Step 4: Run the build script
+      - name: Run build
+        run: cd ${{ env.CLIENT_PATH }} && npm run build
+
