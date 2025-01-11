@@ -1,4 +1,5 @@
 import FilterControl from "@journalComponents/Filtering/FilterControl";
+import PnLLineChart from "@components/PnLLineChart"
 import TradesContainer from "@journalComponents/TradeComposite/TradesContainer";
 import { useAddTrade } from "@hooks/useAddTrade";
 
@@ -22,6 +23,7 @@ function JournalContainer() {
   return (
     <div id="journalMainBody">
       <FilterControl />
+      <PnLLineChart />
       <TradesContainer />
       <button
         className="button-38"
