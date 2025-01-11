@@ -3,7 +3,8 @@
 should summary be different when position is closed... how?
 add investment timeframe
 add devil's advocate thesis
-add overview -- next trouble area
+
+add overview -- next trouble area, d/w/m strength/weakness
 
 // dashboard
 pies

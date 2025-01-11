@@ -6,7 +6,6 @@ export default function FilterControl() {
   // Initialize the filters hashtable
   const filters = createFilterHash();
 
-  // State to store the form values
   const [formValues, setFormValues] = useState(filters);
 
   const handleChange = (e) => {
@@ -26,18 +25,14 @@ export default function FilterControl() {
     <div className="flexChildCenter" style={{ padding: 10 }}>
       <div>
         <form onSubmit={handleSubmit}>
-          <LabeledField
-            info={formValues.ticker}
-            onChange={handleChange}
-          />
-          <LabeledField
-            info={formValues.startDate}
-            onChange={handleChange}
-          />
-          <LabeledField
-            info={formValues.endDate}
-            onChange={handleChange}
-          />
+          {Object.entries(formValues).map(([key, info]) => (
+            <LabeledField
+              key={key}
+              info={info}
+              onChange={handleChange}
+              style={index !== 0 ? { marginLeft: "10px" } : {}}
+            />
+          ))}
           <button type="submit" style={{ marginTop: 10 }}>Submit</button>
         </form>
       </div>

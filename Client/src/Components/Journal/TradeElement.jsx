@@ -10,7 +10,6 @@ const listStyle = {
 };
 
 const listItemStyle = {
-  marginRight: "10px", // Adds spacing between items
   border: "1px solid lightblue", // Adds a solid black border
   padding: "5px", // Adds some padding inside the border
   borderRadius: "4px", // Optional: Adds rounded corners
@@ -44,7 +43,7 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
           ) // Filter if collapsible is true, otherwise show all
           .map((entry) => (
             <li key={entry.id} style={listItemStyle}>
-              <Cell cellInfo={entry} onCellUpdate={processCellUpdate} />
+              <Cell cellInfo={entry} onCellUpdate={processCellUpdate} style={index !== 0 ? { marginLeft: "10px" } : {}}/>
             </li>
           ))}
       </ul>

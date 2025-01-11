@@ -17,6 +17,7 @@ function TradeComposite({ tradeId }) {
             <TradeElement
               tradeElement={ele}
               onElementContentUpdate={processEntryUpdate}
+              style={index !== 0 ? { marginTop: "10px" } : {}}
             />
           </li>
         ))}

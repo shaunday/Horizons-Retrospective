@@ -1,7 +1,8 @@
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 
 how to adjust trade status?
-filtering
+filtering - adjust data call api
+add sectors combobox or whatevs
 
 Testing:
  -[] RQ: https://tanstack.com/query/latest/docs/framework/react/guides/testing
