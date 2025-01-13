@@ -11,7 +11,7 @@ namespace HsR.Journal.Entities
 
         public List<string> Sectors { get; set; } = [];
 
-        public TradeElement Summary { get; set; } = null!;
+        public TradeElement? Summary { get; set; }
 
         public TradeStatus Status { get; set; } = TradeStatus.AnIdea;
 

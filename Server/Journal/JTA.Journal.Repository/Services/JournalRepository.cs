@@ -47,12 +47,12 @@ namespace HsR.Journal.DataContext
         }
 
 
-        public Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
+        public Task<(TradeElement newEntry, TradeElement? summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             return _tradeElementRepository.AddInterimPositionAsync(tradeId, isAdd);
         }
 
-        public Task<TradeElement> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
+        public Task<TradeElement?> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
         {
             return _tradeElementRepository.RemoveInterimPositionAsync(tradeId, tradeInputId);
         }

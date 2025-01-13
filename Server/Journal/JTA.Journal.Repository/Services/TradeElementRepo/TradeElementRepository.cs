@@ -14,7 +14,7 @@ namespace HsR.Journal.DataContext
             return trade.Summary!;
         }
 
-        public async Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
+        public async Task<(TradeElement newEntry, TradeElement? summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
             TradeElement tradeInput = new(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);
@@ -24,7 +24,7 @@ namespace HsR.Journal.DataContext
             return (tradeInput, trade.Summary);
         }
 
-        public async Task<TradeElement> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
+        public async Task<TradeElement?> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
             if (trade.TradeElements.Count <= 1)
