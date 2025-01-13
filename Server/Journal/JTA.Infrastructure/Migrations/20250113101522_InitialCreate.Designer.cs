@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HsR.Journal.Infrastructure.Migrations
 {
     [DbContext(typeof(TradingJournalDataContext))]
-    [Migration("20250105181326_InitialCreate")]
+    [Migration("20250113101522_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -99,7 +99,7 @@ namespace HsR.Journal.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("SummaryId")
+                    b.Property<int?>("SummaryId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -205,9 +205,7 @@ namespace HsR.Journal.Infrastructure.Migrations
                 {
                     b.HasOne("HsR.Journal.Entities.TradeElement", "Summary")
                         .WithMany()
-                        .HasForeignKey("SummaryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SummaryId");
 
                     b.Navigation("Summary");
                 });

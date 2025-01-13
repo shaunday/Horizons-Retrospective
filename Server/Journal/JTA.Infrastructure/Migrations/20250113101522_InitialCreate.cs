@@ -73,7 +73,7 @@ namespace HsR.Journal.Infrastructure.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Sectors = table.Column<List<string>>(type: "text[]", nullable: false),
-                    SummaryId = table.Column<int>(type: "integer", nullable: false),
+                    SummaryId = table.Column<int>(type: "integer", nullable: true),
                     Status = table.Column<string>(type: "text", nullable: false),
                     OpenedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     ClosedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
@@ -144,8 +144,7 @@ namespace HsR.Journal.Infrastructure.Migrations
                 table: "TradeComposites",
                 column: "SummaryId",
                 principalTable: "TradeElements",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />
