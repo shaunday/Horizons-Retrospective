@@ -6,7 +6,7 @@ namespace HsR.Infrastructure;
 
 public class TradingJournalContextFactory : IDesignTimeDbContextFactory<TradingJournalDataContext>
 {
-    private const string AdminConnectionString = "HsR_Journal_ADMIN_CONNECTION";
+    public static string AdminConnectionString = "HsR_Journal_ADMIN_CONNECTION";
 
     public TradingJournalDataContext CreateDbContext(string[] args)
     {

@@ -10,11 +10,12 @@ LoggingConfiguration.ConfigureLogging();
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();
 
-builder.Configuration.AddEnvironmentVariables();
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-#pragma warning disable CS8604 // Disable warning for possible null reference argument
-string? connectionString = builder.Configuration.GetConnectionString("HsRJ_Db_Key");
+string? connectionString = Environment.GetEnvironmentVariable(TradingJournalContextFactory.AdminConnectionString); //todo change to user
+
+Log.Logger.Information($"Connection String: {connectionString}");
+
 builder.Services.AddInfrastructureWithLogging(connectionString, builder.Environment);
 
 builder.ConfigureForEnvironment();
