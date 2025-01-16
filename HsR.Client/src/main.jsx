@@ -9,8 +9,6 @@ import { useFetchAndCacheTrades } from "@hooks/useFetchAndCacheTrades";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 1000 * 20 } },
 });
-const { prefetchTrades } = useFetchAndCacheTrades();
-prefetchTrades();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

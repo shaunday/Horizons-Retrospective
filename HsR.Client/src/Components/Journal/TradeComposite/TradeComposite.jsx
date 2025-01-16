@@ -1,8 +1,9 @@
+import React from "react";
+import * as Constants from "@constants/journalConstants";
 import TradeElement from "@journalComponents/TradeElement";
 import CompositeControls from "./CompositeControls";
 import { useTrade } from "@hooks/useTrade";
 import { useTradeStateAndManagement } from "@hooks/Composite/useTradeStateAndManagement";
-import * as Constants from "@constants/journalConstants";
 
 function TradeComposite({ tradeId }) {
   const { cachedTradeComposite } = useTrade(tradeId);

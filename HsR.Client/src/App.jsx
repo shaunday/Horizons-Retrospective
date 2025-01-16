@@ -1,13 +1,14 @@
 import "./App.css";
+import { useEffect } from "react";
 import { useFetchAndCacheTrades } from "@hooks/useFetchAndCacheTrades";
 import JournalContainer from "@views/JournalContainer";
 
 function App() {
   const { prefetchTrades } = useFetchAndCacheTrades();
 
-  useMemo(() => {
+  useEffect(() => {
     prefetchTrades();
-  }, []); // Ensures prefetchTrades is only called once
+  }, []); 
 
   return (
     <div id="vwrapper">

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
-import Cell from "./Cell";
 import * as Constants from "@constants/journalConstants";
+import Cell from "./Cell";
 
 const listStyle = {
   display: "flex",

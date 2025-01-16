@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <DocumentationFile>$(OutputPath)HsR.Journal.Web.API.xml</DocumentationFile>
+    <DocumentationFile>$(OutputPath)HsR.Web.API.xml</DocumentationFile>
     <BaseOutputPath>..\bin</BaseOutputPath>
   </PropertyGroup>
 

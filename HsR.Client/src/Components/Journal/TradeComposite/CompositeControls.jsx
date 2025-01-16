@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import * as Constants from "@constants/journalConstants";
 import SuccessMessage from "@components/SuccessMessage";
 import { useTradeAction } from "@hooks/Composite/useTradeAction"; // Import custom hook
-import * as Constants from "@constants/journalConstants";
 
 const MemoizedSuccessMessage = React.memo(SuccessMessage);
 

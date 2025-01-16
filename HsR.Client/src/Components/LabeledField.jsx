@@ -1,5 +1,6 @@
 
-// Function to create the structure for the labeled field info
+import React from "react";
+
 export const createLabeledFieldInfoStruct = (id, type, name, value = "") => {
   return { id, type, name, value };
 };

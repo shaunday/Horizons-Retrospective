@@ -1,7 +1,7 @@
 import React from "react";
+import * as Constants from "@constants/journalConstants";
 import TradeComposite from "./TradeComposite";
 import { useQueryClient } from "@tanstack/react-query";
-import * as Constants from "@constants/journalConstants";
 
 function TradesContainer() {
   const queryClient = useQueryClient();
