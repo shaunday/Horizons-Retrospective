@@ -6,6 +6,9 @@
             [
                 new EntryOverview("Ticker", ComponentType.Header),
                 new EntryOverview("LongOrShort", ComponentType.Header),
+                new EntryOverview("Broker", ComponentType.Header),
+                new EntryOverview("Sector", ComponentType.Header),
+
                 new EntryOverview("Thesis", ComponentType.Thesis),
                 new EntryOverview("Expanded", ComponentType.Thesis),
                 new EntryOverview("Confluences", ComponentType.Thesis),
@@ -23,7 +26,7 @@
                 new EntryOverview("SL Thoughts", ComponentType.SLandTarget),
                 new EntryOverview("Target", ComponentType.SLandTarget),
                 new EntryOverview("Risk", ComponentType.RiskReward),
-                new EntryOverview("R:R", ComponentType.RiskReward)
+                new EntryOverview("Projected R:R", ComponentType.RiskReward)
             ];
 
         private static readonly List<EntryOverview> ReducePositionCells =
@@ -32,7 +35,8 @@
                 new EntryOverview("Exit Price", ComponentType.Reduction) { ValueRelevance = ValueRelevance.Negative},
                 new EntryOverview("Amount", ComponentType.Reduction),
                 new EntryOverview("Cost", ComponentType.Reduction) { CostRelevance = ValueRelevance.Negative},
-                new EntryOverview("Reduce/Close Reason", ComponentType.Reduction)
+                new EntryOverview("Reduce/Close Reason", ComponentType.Reduction),
+                new EntryOverview("R:R", ComponentType.RiskReward)
             ];
 
         public static List<DataElement> GetPositionEntries(TradeActionType actionType, TradeElement elementRef)
