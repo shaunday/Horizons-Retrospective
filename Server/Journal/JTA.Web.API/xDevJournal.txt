@@ -1,0 +1,6 @@
+Ledger
+Had a thought of creating Ledger as a micro service - worker + observer
+The issue would've been keeping sync 
+(Which you can do with event driven solution using Rabbit/Kafka or on the Sql level)
+.... thing is Journal and Ledger dont need to scale, and theyre tied 1+1
+decided to stay mono- 1 solution, code separation
