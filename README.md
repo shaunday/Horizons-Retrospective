@@ -1,7 +1,9 @@
 ## Overview: 
-Stage1: An online Trading Journal, will allow the user to add and manage trade ideas and ongoing trade positions.
+Stage1: A Trading Journal, allows the user to add and manage trade ideas and ongoing trade positions.
 
-TBD1: Filtering of trades, Positions/allocations pie charts
+TBD1: Add Ledger: withdraw, deposit, convert (per broker) + time stamps           .....> expand to Asset / Trading Flow
+
+TBD2: Positions/allocations pie charts
 
 TBD Stage2: Trade alerts, based on current price action + indicators.
 
