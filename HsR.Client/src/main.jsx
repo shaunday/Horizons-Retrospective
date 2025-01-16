@@ -4,7 +4,6 @@ import App from "./App.jsx";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { useFetchAndCacheTrades } from "@hooks/useFetchAndCacheTrades";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 1000 * 20 } },
