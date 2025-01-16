@@ -37,7 +37,7 @@
     <ProjectReference Include="..\JTA.Infrastructure\HsR.Journal.Infrastructure.csproj" />
     <ProjectReference Include="..\JTA.Journal.Repository\HsR.Journal.Repository.csproj" />
     <ProjectReference Include="..\JTA.Journal.Seeder\HsR.Journal.Seeder.csproj" />
-    <ProjectReference Include="..\JTA.Web.Services\HsR.Journal.Web.Services.csproj" />
+    <ProjectReference Include="..\JTA.Web.Services\HsR.Web.Services.csproj" />
   </ItemGroup>
 
 </Project>

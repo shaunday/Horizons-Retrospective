@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HsR.Journal.Web.API", "Journal\JTA.Web.API\HsR.Journal.Web.API.csproj", "{BFD76645-DDC9-495D-8575-4236508BBA0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HsR.Web.API", "Journal\JTA.Web.API\HsR.Web.API.csproj", "{BFD76645-DDC9-495D-8575-4236508BBA0A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HsR.Journal.Entities", "Journal\JTA.Journal.Entities\HsR.Journal.Entities.csproj", "{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HsR.Journal.Repository", "J
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HsR.Journal.Seeder", "Journal\JTA.Journal.Seeder\HsR.Journal.Seeder.csproj", "{9E5A0232-2B34-4D69-A714-2C34C38C4BB4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HsR.Journal.Web.Services", "Journal\JTA.Web.Services\HsR.Journal.Web.Services.csproj", "{A1142458-7155-4FC6-BEB2-81DA7FE6A06D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HsR.Web.Services", "Journal\JTA.Web.Services\HsR.Web.Services.csproj", "{A1142458-7155-4FC6-BEB2-81DA7FE6A06D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.UnitTests", "Journal\JTA.UnitTests\HsR.Journal.UnitTests.csproj", "{1070FBF4-644F-4D08-8486-37EB9F8D872E}"
 EndProject
@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common", "JTA.Common\HsR.Common.csproj", "{96F05EF9-E7DF-41A0-9986-DD90AA866D72}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Journal", "Journal", "{E2F11EF4-F624-492C-83BE-36B75D46AA56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ledger", "Ledger", "{5CAFC034-4D7B-4A72-B13C-5FF762C6EEEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +69,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406} = {E2F11EF4-F624-492C-83BE-36B75D46AA56}
+		{71B5E78E-B056-4414-B253-42E41650DC5D} = {E2F11EF4-F624-492C-83BE-36B75D46AA56}
+		{9E5A0232-2B34-4D69-A714-2C34C38C4BB4} = {E2F11EF4-F624-492C-83BE-36B75D46AA56}
+		{1070FBF4-644F-4D08-8486-37EB9F8D872E} = {E2F11EF4-F624-492C-83BE-36B75D46AA56}
+		{4C8A4A02-17FD-42BA-85F0-D535616669E9} = {E2F11EF4-F624-492C-83BE-36B75D46AA56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6CD0AE80-6A63-459E-884D-64F6D12582F5}
