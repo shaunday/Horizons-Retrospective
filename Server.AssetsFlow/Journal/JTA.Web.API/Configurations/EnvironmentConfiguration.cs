@@ -9,6 +9,17 @@ namespace HsR.Web.API.Configurations
             if (builder.Environment.IsDevelopment())
             {
                 IdentityModelEventSource.ShowPII = true;
+
+                // Add CORS services
+                builder.Services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowReactApp", policy =>
+                    {
+                        policy.WithOrigins("http://localhost:5173") // Allow requests from your React app
+                              .AllowAnyMethod()                   // Allow all HTTP methods (GET, POST, etc.)
+                              .AllowAnyHeader();                  // Allow all headers
+                    });
+                });
             }
         }
     }

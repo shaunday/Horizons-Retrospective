@@ -19,7 +19,7 @@ builder.Services.AddInfrastructureWithLogging(connectionString, builder.Environm
 builder.ConfigureForEnvironment();
 
 builder.Services.AddConfiguredControllers();
-builder.Services.AddCustomSwagger();
+//builder.Services.AddCustomSwagger();
 builder.Services.AddCustomAutoMapper();
 builder.Services.AddRepositories();
 builder.Services.AddCustomApiVersioning();

@@ -11,9 +11,10 @@ namespace HsR.Web.API.Configurations
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                // Use Swagger for API documentation in development.
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseCors("AllowReactApp");
+
+                //app.UseSwagger();
+                //app.UseSwaggerUI();
 
                 // Enable the developer exception page for detailed error messages.
                 app.UseDeveloperExceptionPage();

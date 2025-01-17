@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\JTA.Common\HsR.Common.csproj" />
+    <ProjectReference Include="..\..\..\Server.Common\HsR.Common\HsR.Common.csproj" />
     <ProjectReference Include="..\JTA.Journal.Entities\HsR.Journal.Entities.csproj" />
   </ItemGroup>
 
