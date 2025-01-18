@@ -26,19 +26,21 @@ namespace HsR.Journal.DataContext
                 throw new InvalidOperationException("Could not find cost entry to reduce / close position");
             }
 
-            var analytics = TradeAnalytics.GetAvgEntryAndProfit(trade);
             if (double.TryParse(closingPrice, out double closingPriceValue))
             {
-                costEntry.ContentWrapper = new ContentRecord((closingPriceValue * analytics.totalAmount).ToString());
+                var analytics = TradeAnalytics.GetTradeTotals(trade);
+                costEntry.ContentWrapper = new ContentRecord((closingPriceValue * analytics.totalAmount).GetValueAsString());
+
+                // Create TradeElement for Closure
+
+                double profit = analytics.totalCost - (closingPriceValue * analytics.totalAmount);
+                var tradeClosure = new TradeElement(trade, TradeActionType.Closure);
+                tradeClosure.Entries = EntriesFactory.GetTradeClosureComponents(tradeClosure, profit.GetValueAsString());
             }
             else
             {
                 throw new FormatException("Could not parse closing price");
-            }
-
-            // Create TradeElement for Closure
-            var tradeClosure = new TradeElement(trade, TradeActionType.Closure);
-            tradeClosure.Entries = EntriesFactory.GetTradeClosureComponents(tradeClosure, profitValue: analytics.profit.ToString());
+            }            
 
             return tradeInput; // Return tradeInput, as this is the entry we are adding
         }
@@ -60,17 +62,17 @@ namespace HsR.Journal.DataContext
 
         internal static TradeElement GetInterimSummary(TradeComposite trade)
         {
-            var analytics = TradeAnalytics.GetAvgEntryAndProfit(trade);
+            var analytics = TradeAnalytics.GetTradeTotals(trade);
 
             string averageEntry = string.Empty, totalAmount = string.Empty, totalCost = string.Empty;
             if (analytics.totalCost > 0)
             {
-                totalCost = analytics.totalCost.ToString();
+                totalCost = analytics.totalCost.GetValueAsString();
 
                 if (analytics.totalAmount > 0)
                 {
-                    totalAmount = analytics.totalAmount.ToString();
-                    averageEntry = (analytics.totalCost / analytics.totalAmount).ToString();
+                    totalAmount = analytics.totalAmount.GetValueAsString();
+                    averageEntry = (analytics.totalCost / analytics.totalAmount).GetValueAsString();
                 }
             }
 
@@ -97,6 +99,11 @@ namespace HsR.Journal.DataContext
             {
                 throw new Exception("weird");
             } 
+        }
+
+        private static string GetValueAsString(this double value)
+        {
+            return value.ToString("F2");
         }
     }
 }

@@ -1,12 +1,11 @@
 ﻿
 // todo
 
-2. profit method fucked- should take sell price
-3. reduce & close same, remove close
-4. overview relevant  add in factory
-5. must flag.. like broker
+closure should include summary?
+when reduce reduce = interim profit...
+overview relevant  add in factory
+must flag.. like broker?
 
-should summary be different when position is closed... how?
 add investment timeframe
 add devil's advocate thesis
 
