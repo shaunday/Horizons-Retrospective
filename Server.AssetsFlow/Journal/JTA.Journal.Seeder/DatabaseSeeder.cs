@@ -1,5 +1,6 @@
 ﻿using HsR.Journal.DataContext;
 using HsR.Journal.Entities;
+using HsR.Journal.Entities.Factory;
 using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.Seeder
@@ -23,10 +24,14 @@ namespace HsR.Journal.Seeder
         {
             TradeComposite trade = new();
             TradeElement originElement = new(trade, TradeActionType.Origin);
+            originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
+
             PopulateElementWithData(originElement);
             trade.TradeElements.Add(originElement);
 
             TradeElement addElement = new(trade, TradeActionType.AddPosition);
+            addElement.Entries = EntriesFactory.GetAddPositionEntries(addElement);
+
             PopulateElementWithData(addElement);
             trade.TradeElements.Add(addElement);
 
@@ -40,7 +45,7 @@ namespace HsR.Journal.Seeder
             for (int i = 0; i < element.Entries.Count; i++)
             {
                 length = _lengthRandom.Next(3, 8);
-                if (element.Entries[i].CostRelevance != null || element.Entries[i].PriceRelevance != null)
+                if (element.Entries[i].UnitPriceRelevance != null || element.Entries[i].TotalCostRelevance != null)
                 {
                     element.Entries[i].ContentWrapper = new ContentRecord(_randomNumbersMachine.GenerateRandomNumber(length));
                 }

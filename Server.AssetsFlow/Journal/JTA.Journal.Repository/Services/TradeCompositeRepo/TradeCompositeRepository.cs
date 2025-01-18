@@ -1,5 +1,6 @@
 using HsR.Common;
 using HsR.Journal.Entities;
+using HsR.Journal.Entities.Factory;
 using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.DataContext
@@ -42,6 +43,7 @@ namespace HsR.Journal.DataContext
         {
             TradeComposite trade = new();
             TradeElement originElement = new(trade, TradeActionType.Origin);
+            originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
             trade.TradeElements.Add(originElement);
 
             _dataContext.TradeComposites.Add(trade);

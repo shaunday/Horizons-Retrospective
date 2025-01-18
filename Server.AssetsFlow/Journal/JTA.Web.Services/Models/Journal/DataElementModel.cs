@@ -14,12 +14,12 @@ namespace HsR.Web.Services.Models.Journal
         [Required]
         public ComponentType ComponentType { get; set; }
 
-        //[Required]
-        //public ContentRecordModel? ContentWrapper { get; set; } 
-        //public ICollection<ContentRecordModel>? History { get; set; }
+        [Required]
+        public ContentRecord? ContentWrapper { get; set; }
+        public ICollection<ContentRecord>? History { get; set; }
 
-        public ValueRelevance? CostRelevance { get; set; }
-        public ValueRelevance? PriceRelevance { get; set; }
+        public ValueRelevance? TotalCostRelevance { get; set; }
+        public ValueRelevance? UnitPriceRelevance { get; set; }
         public bool IsRelevantForOverview { get; set; }
 
         [Required]

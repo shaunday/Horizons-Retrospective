@@ -17,7 +17,7 @@ namespace HsR.Journal.DataContext
         public async Task<(TradeElement newEntry, TradeElement? summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
-            TradeElement tradeInput = new(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);
+            TradeElement tradeInput = TradeElementCRUDs.CreateInterimTradeElement(trade, isAdd);
             trade.TradeElements.Add(tradeInput);
             RecalculateSummary(trade);
             await _dataContext.SaveChangesAsync();

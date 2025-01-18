@@ -5,10 +5,7 @@ namespace HsR.Journal.Entities
     public class ContentRecord
     {
         // Private parameterless constructor for EF Core
-        private ContentRecord()
-        {
-            ContentValue = string.Empty; // Initialize to avoid CS8618
-        }
+        private ContentRecord() { }
 
         public ContentRecord(string content)
         {
@@ -16,7 +13,7 @@ namespace HsR.Journal.Entities
         }
 
         [Required]
-        public string ContentValue { get; set; }
+        public string ContentValue { get; set; } = string.Empty;
 
         public string? ChangeNote { get; set; }
 

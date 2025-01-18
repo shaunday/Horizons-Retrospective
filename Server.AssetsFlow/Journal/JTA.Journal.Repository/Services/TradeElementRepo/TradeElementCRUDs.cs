@@ -9,9 +9,10 @@ namespace HsR.Journal.DataContext
         {
             // Create a TradeElement for ReducePosition
             var tradeInput = new TradeElement(trade, TradeActionType.ReducePosition);
+            tradeInput.Entries = EntriesFactory.GetReducePositionEntries(tradeInput);
 
             // Find price entry
-            var priceEntry = tradeInput.Entries.SingleOrDefault(ti => ti.PriceRelevance == ValueRelevance.Negative);
+            var priceEntry = tradeInput.Entries.SingleOrDefault(ti => ti.UnitPriceRelevance == ValueRelevance.Negative);
             if (priceEntry == null)
             {
                 throw new InvalidOperationException("Could not find price entry to reduce / close position");
@@ -19,7 +20,7 @@ namespace HsR.Journal.DataContext
             priceEntry.ContentWrapper = new ContentRecord(closingPrice);
 
             // Find cost entry
-            var costEntry = tradeInput.Entries.SingleOrDefault(ti => ti.CostRelevance == ValueRelevance.Negative);
+            var costEntry = tradeInput.Entries.SingleOrDefault(ti => ti.TotalCostRelevance == ValueRelevance.Negative);
             if (costEntry == null)
             {
                 throw new InvalidOperationException("Could not find cost entry to reduce / close position");
@@ -37,10 +38,25 @@ namespace HsR.Journal.DataContext
 
             // Create TradeElement for Closure
             var tradeClosure = new TradeElement(trade, TradeActionType.Closure);
-            tradeClosure.Entries = SummaryPositionsFactory.GetTradeClosureComponents(tradeClosure, profitValue: analytics.profit.ToString());
+            tradeClosure.Entries = EntriesFactory.GetTradeClosureComponents(tradeClosure, profitValue: analytics.profit.ToString());
 
             return tradeInput; // Return tradeInput, as this is the entry we are adding
         }
+
+        internal static TradeElement CreateInterimTradeElement(TradeComposite trade, bool isAdd)
+        {
+            TradeElement tradeInput = new(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);
+            if (isAdd)
+            {
+                tradeInput.Entries = EntriesFactory.GetAddPositionEntries(tradeInput);
+            }
+            else
+            {
+                tradeInput.Entries = EntriesFactory.GetReducePositionEntries(tradeInput);
+            }
+            return tradeInput;
+        }
+
 
         internal static TradeElement GetInterimSummary(TradeComposite trade)
         {
@@ -59,7 +75,7 @@ namespace HsR.Journal.DataContext
             }
 
             TradeElement summary = new(trade, TradeActionType.InterimSummary);
-            summary.Entries = SummaryPositionsFactory.GetSummaryComponents(summary, averageEntry, totalAmount, totalCost);
+            summary.Entries = EntriesFactory.GetSummaryComponents(summary, averageEntry, totalAmount, totalCost);
 
             return summary;
         }

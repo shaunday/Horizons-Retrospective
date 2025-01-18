@@ -15,9 +15,9 @@ namespace HsR.Journal.Entities
         [Required]
         public ComponentType ComponentType { get; set; }
 
-        public ValueRelevance? CostRelevance { get; set; } 
+        public ValueRelevance? UnitPriceRelevance { get; set; } 
 
-        public ValueRelevance? PriceRelevance { get; set; } 
+        public ValueRelevance? TotalCostRelevance { get; set; } 
 
         [Required]
         public bool IsRelevantForOverview { get; set; } = false;
@@ -29,10 +29,15 @@ namespace HsR.Journal.Entities
         #region Ctors
         private DataElement() { } //for ef
 
-        public DataElement(string title, ComponentType componentType)
+        public DataElement(string title, ComponentType componentType, string content = "")
         {
             Title = title;
             ComponentType = componentType;
+
+            if (!string.IsNullOrEmpty(content))
+            {
+                ContentWrapper = new ContentRecord(content);
+            }
         }
         #endregion
 

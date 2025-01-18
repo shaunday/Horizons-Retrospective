@@ -7,9 +7,9 @@ namespace HsR.Journal.Entities
         [Key]
         public int Id { get; private set; }
 
-        public ICollection<TradeElement> TradeElements { get; set; } = new List<TradeElement>(); //only called when I new this manually, not called on DB access.
+        public ICollection<TradeElement> TradeElements { get; set; } = []; //only called when I new this manually, not called on DB access.
 
-        public List<string> Sectors { get; set; } = [];
+        public ICollection<string> Sectors { get; set; } = [];
 
         public TradeElement? Summary { get; set; }
 

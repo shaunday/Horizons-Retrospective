@@ -5,11 +5,11 @@ using HsR.Web.Services.Models.Journal;
 
 namespace HsR.Web.API.Mapping
 {
-    public class JournalObjectsMappingProfile : Profile
+    public class EntitiesToDtosMappingProfile : Profile
     {
-        public JournalObjectsMappingProfile()
+        public EntitiesToDtosMappingProfile()
         {
-            //CreateMap<ContentRecord, ContentRecordModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
+            CreateMap<ContentRecord, ContentRecordModel>();
             CreateMap<DataElement, DataElementModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
             CreateMap<TradeElement, TradeElementModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
             CreateMap<TradeComposite, TradeCompositeModel>().EqualityComparison((dto, m) => dto.Id == m.Id);

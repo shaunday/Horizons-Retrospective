@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ledger", "Ledger", "{5CAFC0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common", "..\Server.Common\HsR.Common\HsR.Common.csproj", "{C7809543-EF79-49D8-820A-ED03C99AE855}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Entities.Factory", "Journal\JTA.Journal.Entities.Factory\HsR.Journal.Entities.Factory\HsR.Journal.Entities.Factory.csproj", "{FE541F0D-5304-41B5-B2F6-BBBBA1A8A850}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{C7809543-EF79-49D8-820A-ED03C99AE855}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7809543-EF79-49D8-820A-ED03C99AE855}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7809543-EF79-49D8-820A-ED03C99AE855}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE541F0D-5304-41B5-B2F6-BBBBA1A8A850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE541F0D-5304-41B5-B2F6-BBBBA1A8A850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE541F0D-5304-41B5-B2F6-BBBBA1A8A850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE541F0D-5304-41B5-B2F6-BBBBA1A8A850}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{9E5A0232-2B34-4D69-A714-2C34C38C4BB4} = {E2F11EF4-F624-492C-83BE-36B75D46AA56}
 		{1070FBF4-644F-4D08-8486-37EB9F8D872E} = {E2F11EF4-F624-492C-83BE-36B75D46AA56}
 		{4C8A4A02-17FD-42BA-85F0-D535616669E9} = {E2F11EF4-F624-492C-83BE-36B75D46AA56}
+		{FE541F0D-5304-41B5-B2F6-BBBBA1A8A850} = {E2F11EF4-F624-492C-83BE-36B75D46AA56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6CD0AE80-6A63-459E-884D-64F6D12582F5}

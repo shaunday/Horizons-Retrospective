@@ -27,10 +27,10 @@ namespace HsR.Journal.Repository.Configurations
             builder.Property(c => c.ComponentType)
                 .HasConversion<string>();
 
-            builder.Property(c => c.CostRelevance)
+            builder.Property(c => c.TotalCostRelevance)
                 .HasConversion<string>();
 
-            builder.Property(c => c.PriceRelevance)
+            builder.Property(c => c.UnitPriceRelevance)
                 .HasConversion<string>();
         }
     }

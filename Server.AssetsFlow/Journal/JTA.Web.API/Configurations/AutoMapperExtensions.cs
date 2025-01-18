@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.EquivalencyExpression;
 using HsR.Web.API.Mapping;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace HsR.Web.API.Configurations
 {
@@ -11,7 +10,7 @@ namespace HsR.Web.API.Configurations
         {
             Action<IMapperConfigurationExpression> configAction = (mce) =>
             {
-                mce.AddMaps(typeof(JournalObjectsMappingProfile));
+                mce.AddMaps(typeof(EntitiesToDtosMappingProfile));
                 mce.AddCollectionMappers();
             };
             return services.AddAutoMapper(configAction);

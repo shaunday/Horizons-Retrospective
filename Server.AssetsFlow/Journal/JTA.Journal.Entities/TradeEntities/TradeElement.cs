@@ -1,5 +1,4 @@
-﻿using HsR.Journal.Entities.Factory;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace HsR.Journal.Entities
 {
@@ -11,7 +10,7 @@ namespace HsR.Journal.Entities
         [Required]
         public TradeActionType TradeActionType { get; set; }
 
-        public List<DataElement> Entries { get; set; } = new List<DataElement>();
+        public List<DataElement> Entries { get; set; } = [];
 
         [Required]
         public DateTime CreatedAt { get; } = DateTime.Now;
@@ -22,12 +21,7 @@ namespace HsR.Journal.Entities
         public TradeElement(TradeComposite trade, TradeActionType actionType)
         {
             CompositeRef = trade;
-
-            if (actionType == TradeActionType.Origin || actionType == TradeActionType.AddPosition || actionType == TradeActionType.ReducePosition)
-            {
-                TradeActionType = actionType;
-                Entries = InterimPositionFactory.GetPositionEntries(actionType, this);
-            }
+            TradeActionType = actionType;
         } 
         #endregion
 

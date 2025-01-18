@@ -39,15 +39,15 @@ namespace HsR.Journal.DataContext
         // Helper method to process the cost and profit
         private static (double cost, double profit) ProcessCostAndProfit(DataElement component, double cost, double profit)
         {
-            if (component.CostRelevance == ValueRelevance.Positive || component.CostRelevance == ValueRelevance.Negative)
+            if (component.TotalCostRelevance == ValueRelevance.Positive || component.TotalCostRelevance == ValueRelevance.Negative)
             {
                 double.TryParse(component.Content, out cost);
 
-                if (component.CostRelevance == ValueRelevance.Positive)
+                if (component.TotalCostRelevance == ValueRelevance.Positive)
                 {
                     profit += cost;
                 }
-                else if (component.CostRelevance == ValueRelevance.Negative)
+                else if (component.TotalCostRelevance == ValueRelevance.Negative)
                 {
                     profit -= cost;
                 }
@@ -59,11 +59,11 @@ namespace HsR.Journal.DataContext
         // Helper method to process the price
         private static double ProcessPrice(DataElement component, double priceValue)
         {
-            if (component.PriceRelevance == ValueRelevance.Positive || component.PriceRelevance == ValueRelevance.Negative)
+            if (component.UnitPriceRelevance == ValueRelevance.Positive || component.UnitPriceRelevance == ValueRelevance.Negative)
             {
                 double.TryParse(component.Content, out priceValue);
 
-                if (component.PriceRelevance == ValueRelevance.Negative)
+                if (component.UnitPriceRelevance == ValueRelevance.Negative)
                 {
                     priceValue *= -1;
                 }

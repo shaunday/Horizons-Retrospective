@@ -1,7 +1,6 @@
 ﻿
 // todo
 
-1. entry simplified?? remove
 2. profit method fucked- should take sell price
 3. reduce & close same, remove close
 4. overview relevant  add in factory
