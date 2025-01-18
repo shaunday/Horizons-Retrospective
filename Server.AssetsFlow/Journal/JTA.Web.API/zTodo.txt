@@ -2,6 +2,7 @@
 // todo
 
 closure should include summary
+first position ?
 must flag on entries.. like broker? ticker.. how? temp ele?
 
 add investment timeframe

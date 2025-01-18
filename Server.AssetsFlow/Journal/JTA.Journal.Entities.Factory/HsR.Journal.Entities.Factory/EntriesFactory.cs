@@ -1,4 +1,6 @@
-﻿namespace HsR.Journal.Entities.Factory
+﻿using HsR.Journal.Entities.Factory.Assists;
+
+namespace HsR.Journal.Entities.Factory
 {
     public static class EntriesFactory
     {
@@ -16,17 +18,17 @@
 
         public static List<DataElement> GetOriginEntries(TradeElement elementRef)
         {
-            return CreateEntries(InterimPositionLists.TradeOriginObjects, elementRef);
+            return CreateEntries(OriginPositionList.GetTradeOriginObjects(), elementRef);
         }
 
         public static List<DataElement> GetAddPositionEntries(TradeElement elementRef)
         {
-            return CreateEntries(InterimPositionLists.AddToPositionObjects, elementRef);
+            return CreateEntries(AddPositionLists.GetAddToPositionObjects(), elementRef);
         }
 
         public static List<DataElement> GetReducePositionEntries(TradeElement elementRef)
         {
-            return CreateEntries(InterimPositionLists.ReducePositionObjects, elementRef);
+            return CreateEntries(ReducePositionList.GetReducePositionObjects(), elementRef);
         }
 
 
