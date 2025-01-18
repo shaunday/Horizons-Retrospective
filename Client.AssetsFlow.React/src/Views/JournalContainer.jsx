@@ -5,8 +5,7 @@ import { useFetchAndCacheTrades } from "@hooks/useFetchAndCacheTrades";
 import { useAddTrade } from "@hooks/useAddTrade";
 
 function JournalContainer() {
-  const { tradesQuery } = useFetchAndCacheTrades();
-  const { isLoading, isError, trades } = tradesQuery;
+  const { isLoading, isError, trades } = useFetchAndCacheTrades();
   const { addTrade } = useAddTrade();
 
   if (isLoading) {
@@ -23,8 +22,8 @@ function JournalContainer() {
 
   return (
     <div id="journalMainBody">
-      <FilterControl />
-      <PnLLineChart />
+      {/* <FilterControl />
+      <PnLLineChart /> */}
       <TradesContainer />
       <button
         className="button-38"

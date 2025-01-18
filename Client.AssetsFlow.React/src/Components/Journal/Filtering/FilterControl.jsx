@@ -25,7 +25,7 @@ export default function FilterControl() {
     <div className="flexChildCenter" style={{ padding: 10 }}>
       <div>
         <form onSubmit={handleSubmit}>
-          {Object.entries(formValues).map(([key, info]) => (
+          {Object.entries(formValues).map(([key, info], index) => (
             <LabeledField
               key={key}
               info={info}

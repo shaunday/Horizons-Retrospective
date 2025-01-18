@@ -1,5 +1,7 @@
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 
+https
+
 how to adjust trade status?
 filtering - adjust data call api
 add sectors combobox or whatevs

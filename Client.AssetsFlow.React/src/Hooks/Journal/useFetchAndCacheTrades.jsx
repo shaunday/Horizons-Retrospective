@@ -29,5 +29,10 @@ export function useFetchAndCacheTrades() {
     });
   };
 
-  return { tradesQuery, prefetchTrades };
+  return { 
+    isLoading: tradesQuery.isLoading, 
+    isError: tradesQuery.isError, 
+    trades: tradesQuery.data, 
+    prefetchTrades 
+  };
 }
