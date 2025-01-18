@@ -6,9 +6,9 @@
         {
             var summaryCells = new List<DataElement>
                 {
-                    new DataElement("Average Entry Price", ComponentType.InterimSummary, averageEntry),
-                    new DataElement("Total Amount", ComponentType.InterimSummary, totalAmount),
-                    new DataElement("Total Cost", ComponentType.InterimSummary, totalCost)
+                    new DataElement("Average Entry Price", ComponentType.InterimSummary, averageEntry) {IsRelevantForOverview = true },
+                    new DataElement("Total Amount", ComponentType.InterimSummary, totalAmount) { IsRelevantForOverview = true },
+                    new DataElement("Total Cost", ComponentType.InterimSummary, totalCost) { IsRelevantForOverview = true }
                 };
             return summaryCells;
         }
@@ -17,9 +17,9 @@
         {
             var closureCells = new List<DataElement>
                 {
-                    new DataElement("Result", ComponentType.Closure, profitValue ?? ""),
-                    new DataElement("Actual R:R", ComponentType.Closure, ""),
-                    new DataElement("W/L", ComponentType.Closure, ""),
+                    new DataElement("Result", ComponentType.Closure, profitValue ?? "") {IsRelevantForOverview = true },
+                    new DataElement("Actual R:R", ComponentType.Closure, "") {IsRelevantForOverview = true },
+                    new DataElement("W/L", ComponentType.Closure, "") { IsRelevantForOverview = true },
                     new DataElement("Lessons", ComponentType.Closure, "")
                 };
 

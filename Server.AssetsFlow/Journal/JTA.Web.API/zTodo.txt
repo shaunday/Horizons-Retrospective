@@ -1,21 +1,21 @@
 ﻿
 // todo
 
-closure should include summary?
-when reduce reduce = interim profit...
-overview relevant  add in factory
-must flag.. like broker?
+closure should include summary
+must flag on entries.. like broker? ticker.. how? temp ele?
 
 add investment timeframe
+when reduce = interim profit/loss... how to save?
 add devil's advocate thesis
 
 add overview -- next trouble area, d/w/m strength/weakness
+position weight/ sector weight
 
-// dashboard
-pies
+//pies
+
+// dashboard + price alerts
 Indicator alerts, upcoming reports 
 Incdicators: double bottom on rsi/cci, ma, ema, wbb, dividends, report, news
-position weight/ sector weight
 
 
 //pre production - 2nd stage
