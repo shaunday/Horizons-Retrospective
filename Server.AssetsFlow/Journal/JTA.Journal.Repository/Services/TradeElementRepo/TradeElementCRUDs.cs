@@ -1,5 +1,7 @@
-﻿using HsR.Journal.Entities;
+﻿using HsR.Common.Extenders;
+using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
+using HsR.Journal.TradeAnalytics;
 
 namespace HsR.Journal.DataContext
 {
@@ -28,14 +30,19 @@ namespace HsR.Journal.DataContext
 
             if (double.TryParse(closingPrice, out double closingPriceValue))
             {
-                var analytics = TradeAnalytics.GetTradeTotals(trade);
-                costEntry.ContentWrapper = new ContentRecord((closingPriceValue * analytics.totalAmount).GetValueAsString());
+                var analytics = Analytics.GetTradingCosts(trade);
+                double netAmountInPosition = analytics.addPositions.TotalAmount - analytics.reducePositions.TotalAmount;
+                double costToClose = closingPriceValue * netAmountInPosition;
+                costEntry.ContentWrapper = new ContentRecord(costToClose.ToF2String());
 
                 // Create TradeElement for Closure
 
-                double profit = analytics.totalCost - (closingPriceValue * analytics.totalAmount);
+                analytics.reducePositions.TotalCost += costToClose;
+                analytics.reducePositions.TotalAmount += netAmountInPosition;
+
                 var tradeClosure = new TradeElement(trade, TradeActionType.Closure);
-                tradeClosure.Entries = EntriesFactory.GetTradeClosureComponents(tradeClosure, profit.GetValueAsString());
+                TradeAnalyticsSummary analyticsSummary = new(analytics);
+                tradeClosure.Entries = EntriesFactory.GetTradeClosureComponents(tradeClosure, analyticsSummary);
             }
             else
             {
@@ -62,22 +69,11 @@ namespace HsR.Journal.DataContext
 
         internal static TradeElement GetInterimSummary(TradeComposite trade)
         {
-            var analytics = TradeAnalytics.GetTradeTotals(trade);
-
-            string averageEntry = string.Empty, totalAmount = string.Empty, totalCost = string.Empty;
-            if (analytics.totalCost > 0)
-            {
-                totalCost = analytics.totalCost.GetValueAsString();
-
-                if (analytics.totalAmount > 0)
-                {
-                    totalAmount = analytics.totalAmount.GetValueAsString();
-                    averageEntry = (analytics.totalCost / analytics.totalAmount).GetValueAsString();
-                }
-            }
+            var analytics = Analytics.GetTradingCosts(trade);
+            TradeAnalyticsSummary analyticsSummary = new(analytics);
 
             TradeElement summary = new(trade, TradeActionType.InterimSummary);
-            summary.Entries = EntriesFactory.GetSummaryComponents(summary, averageEntry, totalAmount, totalCost);
+            summary.Entries = EntriesFactory.GetSummaryComponents(summary, analyticsSummary);
 
             return summary;
         }
@@ -99,11 +95,6 @@ namespace HsR.Journal.DataContext
             {
                 throw new Exception("weird");
             } 
-        }
-
-        private static string GetValueAsString(this double value)
-        {
-            return value.ToString("F2");
         }
     }
 }

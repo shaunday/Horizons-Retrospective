@@ -22,9 +22,9 @@ namespace HsR.Web.API.Controllers.Journal
         #region Add / Delete
 
         [HttpPost]
-        public async Task<ActionResult<(TradeElementModel newEntry, TradeElementModel summary)>> AddReduceInterimPosition(string tradeId, bool isAdd)
+        public async Task<ActionResult<(TradeElementModel newEntry, TradeElementModel? summary)>> AddReduceInterimPosition(string tradeId, bool isAdd)
         {
-            (TradeElement newEntry, TradeElement summary) entryAndSummary;
+            (TradeElement newEntry, TradeElement? summary) entryAndSummary;
             entryAndSummary = await _journalAccess.AddInterimPositionAsync(tradeId, isAdd);
 
             (TradeElementModel, TradeElementModel) resAsModel =
@@ -36,7 +36,7 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpDelete("{tradeInputId}")]
         public async Task<ActionResult> DeleteInterimTradeInput(string tradeId, string tradeInputId)
         {
-            TradeElement summary = await _journalAccess.RemoveInterimPositionAsync(tradeId, tradeInputId);
+            TradeElement? summary = await _journalAccess.RemoveInterimPositionAsync(tradeId, tradeInputId);
 
             if (summary ==null)
             {

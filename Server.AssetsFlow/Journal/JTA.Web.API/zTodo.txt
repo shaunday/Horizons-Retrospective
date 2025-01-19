@@ -1,9 +1,8 @@
 ﻿
 // todo
 
-closure should include summary
-first position ?
 must flag on entries.. like broker? ticker.. how? temp ele?
+add first position
 
 add investment timeframe
 when reduce = interim profit/loss... how to save?

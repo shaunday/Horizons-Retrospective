@@ -1,23 +1,34 @@
-﻿namespace HsR.Journal.Entities.Factory
+﻿using HsR.Common.Extenders;
+using HsR.Journal.TradeAnalytics;
+
+namespace HsR.Journal.Entities.Factory
 {
     internal static class SummaryPositionsLists
     {
-        internal static List<DataElement> GetSummaryComponents(string averageEntry, string totalAmount, string totalCost)
+        internal static List<DataElement> GetSummaryComponents(TradeAnalyticsSummary analytics)
         {
             var summaryCells = new List<DataElement>
                 {
-                    new DataElement("Average Entry Price", ComponentType.InterimSummary, averageEntry) {IsRelevantForOverview = true },
-                    new DataElement("Total Amount", ComponentType.InterimSummary, totalAmount) { IsRelevantForOverview = true },
-                    new DataElement("Total Cost", ComponentType.InterimSummary, totalCost) { IsRelevantForOverview = true }
+                    new DataElement("Average Entry Price", ComponentType.InterimSummary, analytics.AverageEntryPrice.ToF2String()) 
+                                                                                                    {IsRelevantForOverview = true },
+                    new DataElement("Average Close Price", ComponentType.InterimSummary, analytics.AverageExitPrice.ToF2String())
+                                                                                                    {IsRelevantForOverview = true },
+                    new DataElement("Total Amount", ComponentType.InterimSummary, analytics.NetAmount.ToF2String()) 
+                                                                                                    { IsRelevantForOverview = true } ,
+                    new DataElement("Total Cost", ComponentType.InterimSummary, analytics.NetCost.ToF2String()) 
+                                                                                                    { IsRelevantForOverview = true }
                 };
             return summaryCells;
         }
 
-        internal static List<DataElement> GetTradeClosureComponents(string? profitValue)
+        internal static List<DataElement> GetTradeClosureComponents(TradeAnalyticsSummary analytics)
         {
             var closureCells = new List<DataElement>
                 {
-                    new DataElement("Result", ComponentType.Closure, profitValue ?? "") {IsRelevantForOverview = true },
+                    new DataElement("Average Entry Price", ComponentType.InterimSummary, analytics.AverageEntryPrice.ToF2String())
+                                                                                                    {IsRelevantForOverview = true },
+
+                    new DataElement("Result", ComponentType.Closure, analytics.Profit.ToF2String()) {IsRelevantForOverview = true },
                     new DataElement("Actual R:R", ComponentType.Closure, "") {IsRelevantForOverview = true },
                     new DataElement("W/L", ComponentType.Closure, "") { IsRelevantForOverview = true },
                     new DataElement("Lessons", ComponentType.Closure, "")

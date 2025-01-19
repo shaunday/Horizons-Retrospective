@@ -1,21 +1,10 @@
 ﻿using HsR.Journal.Entities.Factory.Assists;
+using HsR.Journal.TradeAnalytics;
 
 namespace HsR.Journal.Entities.Factory
 {
     public static class EntriesFactory
     {
-        public static List<DataElement> GetSummaryComponents(TradeElement elementRef, string averageEntry, string totalAmount, string totalCost)
-        {
-            var summaryCells = SummaryPositionsLists.GetSummaryComponents(averageEntry, totalAmount, totalCost);
-            return CreateEntries(summaryCells, elementRef);
-        }
-
-        public static List<DataElement> GetTradeClosureComponents(TradeElement elementRef, string? profitValue)
-        {
-            var closureCells = SummaryPositionsLists.GetTradeClosureComponents(profitValue);
-            return CreateEntries(closureCells, elementRef);
-        }
-
         public static List<DataElement> GetOriginEntries(TradeElement elementRef)
         {
             return CreateEntries(OriginPositionList.GetTradeOriginObjects(), elementRef);
@@ -29,6 +18,17 @@ namespace HsR.Journal.Entities.Factory
         public static List<DataElement> GetReducePositionEntries(TradeElement elementRef)
         {
             return CreateEntries(ReducePositionList.GetReducePositionObjects(), elementRef);
+        }
+        public static List<DataElement> GetSummaryComponents(TradeElement elementRef, TradeAnalyticsSummary analytics)
+        {
+            var summaryCells = SummaryPositionsLists.GetSummaryComponents(analytics);
+            return CreateEntries(summaryCells, elementRef);
+        }
+
+        public static List<DataElement> GetTradeClosureComponents(TradeElement elementRef, TradeAnalyticsSummary analytics)
+        {
+            var closureCells = SummaryPositionsLists.GetTradeClosureComponents(analytics);
+            return CreateEntries(closureCells, elementRef);
         }
 
 

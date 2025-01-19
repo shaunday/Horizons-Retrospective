@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Server.Common\HsR.Common\HsR.Common.csproj" />
+    <ProjectReference Include="..\HsR.Journal.TradeAnalytics\HsR.Journal.TradeAnalytics\HsR.Journal.TradeAnalytics.csproj" />
     <ProjectReference Include="..\JTA.Journal.Entities.Factory\HsR.Journal.Entities.Factory\HsR.Journal.Entities.Factory.csproj" />
     <ProjectReference Include="..\JTA.Journal.Entities\HsR.Journal.Entities.csproj" />
   </ItemGroup>
