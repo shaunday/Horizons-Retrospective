@@ -23,19 +23,26 @@ namespace HsR.Journal.Seeder
         private static void AddTradeCompositeToDbContext(TradingJournalDataContext context)
         {
             TradeComposite trade = new();
+
             TradeElement originElement = new(trade, TradeActionType.Origin);
             originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
-
             PopulateElementWithData(originElement);
             trade.TradeElements.Add(originElement);
 
+            AddElementToTrade(trade);
+            AddElementToTrade(trade);
+            AddElementToTrade(trade);
+
+            context.TradeComposites.Add(trade);
+        }
+
+        private static void AddElementToTrade(TradeComposite trade)
+        {
             TradeElement addElement = new(trade, TradeActionType.AddPosition);
             addElement.Entries = EntriesFactory.GetAddPositionEntries(addElement);
 
             PopulateElementWithData(addElement);
             trade.TradeElements.Add(addElement);
-
-            context.TradeComposites.Add(trade);
         }
 
         private static readonly Random _lengthRandom = new();
@@ -45,7 +52,7 @@ namespace HsR.Journal.Seeder
             for (int i = 0; i < element.Entries.Count; i++)
             {
                 length = _lengthRandom.Next(3, 8);
-                if (element.Entries[i].UnitPriceRelevance != null || element.Entries[i].TotalCostRelevance != null)
+                if (element.Entries[i].IsCostRelevant)
                 {
                     element.Entries[i].ContentWrapper = new ContentRecord(_randomNumbersMachine.GenerateRandomNumber(length));
                 }

@@ -2,6 +2,7 @@
 // todo
 
 must flag on entries.. like broker? ticker.. how? temp ele?
+add restrictions - selection fileds
 add first position
 add investment timeframe
 add overview -- next trouble area, d/w/m strength/weakness

@@ -5,36 +5,46 @@ namespace HsR.Journal.DataContext
 {
     public class TradeElementRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), ITradeElementRepository
     {
-        public async Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice)
-        {
-            var trade = await GetTradeCompositeAsync(tradeId);
-            var tradeInput = TradeElementCRUDs.CreateTradeElementForClosure(trade, closingPrice);
-            trade.TradeElements.Add(tradeInput);
-            RecalculateSummary(trade);
-            return trade.Summary!;
-        }
-
-        public async Task<(TradeElement newEntry, TradeElement? summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
+        public async Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
             TradeElement tradeInput = TradeElementCRUDs.CreateInterimTradeElement(trade, isAdd);
+
             trade.TradeElements.Add(tradeInput);
-            RecalculateSummary(trade);
+            TradeElement summary = TradeElementCRUDs.GetInterimSummary(trade);
+            trade.Summary = summary;
+
             await _dataContext.SaveChangesAsync();
-            return (tradeInput, trade.Summary);
+            return (tradeInput, summary);
         }
 
-        public async Task<TradeElement?> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
+        public async Task<TradeElement> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
             if (trade.TradeElements.Count <= 1)
             {
                 throw new InvalidOperationException($"No entries to remove on trade ID {tradeId} .");
             }
+
             TradeElementCRUDs.RemoveInterimInput(trade, tradeInputId);
-            RecalculateSummary(trade);
+            TradeElement summary = TradeElementCRUDs.GetInterimSummary(trade);
+            trade.Summary = summary;
+
             await _dataContext.SaveChangesAsync();
-            return trade.Summary;
+            return summary;
+        }
+
+        public async Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice)
+        {
+            var trade = await GetTradeCompositeAsync(tradeId);
+            var tradeInput = TradeElementCRUDs.CreateTradeElementForClosure(trade, closingPrice);
+
+            trade.TradeElements.Add(tradeInput);
+            TradeElement summary = TradeElementCRUDs.GetInterimSummary(trade);
+            trade.Summary = summary;
+
+            await _dataContext.SaveChangesAsync();
+            return trade.Summary!;
         }
 
         private async Task<TradeComposite> GetTradeCompositeAsync(string tradeId)
@@ -48,13 +58,6 @@ namespace HsR.Journal.DataContext
                                             .Where(t => t.Id == parsedId)
                                             .SingleOrDefaultAsync() ?? throw new InvalidOperationException($"Trade with ID {tradeId} not found.");
             return trade!;
-        }
-
-        public static TradeElement RecalculateSummary(TradeComposite trade)
-        {
-            TradeElement summary = TradeElementCRUDs.GetInterimSummary(trade);
-            trade.Summary = summary;
-            return summary;
         }
     }
 

@@ -19,14 +19,15 @@ namespace HsR.Journal.DataContext
             cell.SetFollowupContent(newContent, changeNote);
 
             TradeElement? newSummary = null;
-            if (cell.IsRelevantForOverview)
+            if (cell.IsCostRelevant)
             {
                 await _dataContext.Entry(cell)
                     .Reference(c => c.CompositeRef)
                     .LoadAsync();
 
                 var trade = cell.CompositeRef;
-                newSummary = TradeElementRepository.RecalculateSummary(trade);
+                newSummary = TradeElementCRUDs.GetInterimSummary(trade);
+                trade.Summary = newSummary;
             }
 
             await _dataContext.SaveChangesAsync();
