@@ -3,15 +3,15 @@
 
 must flag on entries.. like broker? ticker.. how? temp ele?
 add first position
-
 add investment timeframe
-when reduce = interim profit/loss... how to save?
-add devil's advocate thesis
-
 add overview -- next trouble area, d/w/m strength/weakness
 position weight/ sector weight
 
 //pies
+
+//add trend watch
+
+//conluences check list = trends per tf, bb/ma distances
 
 // dashboard + price alerts
 Indicator alerts, upcoming reports 

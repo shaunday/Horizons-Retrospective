@@ -2,7 +2,7 @@
 {
     public enum ComponentType
     {
-        Header, Thesis, SLandTarget, RiskReward, Addition, Reduction, InterimSummary, Closure
+        Header, Thesis, DevilsAdvocate, SLandTarget, RiskReward, Addition, Reduction, InterimSummary, Closure
     }
 
     public enum TradeActionType
