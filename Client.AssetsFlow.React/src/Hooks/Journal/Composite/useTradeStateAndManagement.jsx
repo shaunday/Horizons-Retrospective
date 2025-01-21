@@ -5,7 +5,7 @@ import * as Constants from "@constants/journalConstants";
 
 export function useTradeStateAndManagement(cachedTradeComposite) {
   const [tradeSummary, setTradeSummary] = useState(
-    cachedTradeComposite[Constants.TRADE_SUMMARY_STRING]
+    cachedTradeComposite[Constants.TRADE_SUMMARY_STRING] ?? {}
   );
 
   const entryUpdate = useCacheUpdatedEntry(cachedTradeComposite);

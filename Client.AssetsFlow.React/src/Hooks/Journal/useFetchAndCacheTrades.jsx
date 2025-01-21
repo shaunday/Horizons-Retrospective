@@ -5,27 +5,36 @@ import { tradeKeysFactory } from "@services/query-key-factory";
 export function useFetchAndCacheTrades() {
   const queryClient = useQueryClient();
 
-  const cacheTrades = (fetchedTrades) => {
-    const tradeIds = fetchedTrades.map((trade) => trade["ID"]);
-    queryClient.setQueryData(tradeKeysFactory.tradeIdsKey, tradeIds);
+  const getAndCacheTrades = async () => {
+    const fetchedTrades = await getAllTrades();
+    
+    console.log("Fetched data:", fetchedTrades);
 
+    // Cache the trades here
+    const tradeIds = fetchedTrades.map((trade) => trade["id"]);
+    queryClient.setQueryData(tradeKeysFactory.tradeIdsKey, tradeIds);
+  
     fetchedTrades.forEach((trade) => {
-      const tradeId = trade["ID"];
+      const tradeId = trade["id"];
       queryClient.setQueryData(tradeKeysFactory.tradeByIdKey(tradeId), trade);
-    });
+  });
+     
+    return fetchedTrades;
   };
 
   const tradesQuery = useQuery({
     queryKey: tradeKeysFactory.tradesKey,
-    queryFn: getAllTrades,
-    onSuccess: cacheTrades,
+    queryFn: getAndCacheTrades,
+    onError: (error) => console.log("error in tradesQ:", error),
+    onSuccess: (data) => console.log("Success in usequery:", data),
   });
 
   const prefetchTrades = async () => {
-    await queryClient.prefetchQuery({
+    queryClient.prefetchQuery({
       queryKey: tradeKeysFactory.tradesKey,
-      queryFn: getAllTrades,
-      onSuccess: cacheTrades,
+      queryFn: getAndCacheTrades,
+      onError: (error) => console.log("error in tradesQ:", error),
+     onSuccess: (data) => console.log("Success in prefetch:", data),
     });
   };
 

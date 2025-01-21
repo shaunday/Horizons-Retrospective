@@ -4,7 +4,7 @@ import { tradeKeysFactory } from "@services/query-key-factory";
 
 export function useCacheNewElement(tradeComposite) {
   const queryClient = useQueryClient();
-  const tradeId = tradeComposite["ID"];
+  const tradeId = tradeComposite["id"];
 
   const onElementUpdate = (newElement) => {
     queryClient.setQueryData(

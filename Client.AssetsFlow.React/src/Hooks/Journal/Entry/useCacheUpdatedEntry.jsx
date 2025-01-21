@@ -4,7 +4,7 @@ import { tradeKeysFactory } from "@services/query-key-factory";
 
 export function useCacheUpdatedEntry(tradeComposite) {
   const queryClient = useQueryClient();
-  const { tradeId } = tradeComposite["ID"];
+  const { tradeId } = tradeComposite["id"];
 
   const onEntryUpdate = (data) => {
     const { updatedEntry } = data;
