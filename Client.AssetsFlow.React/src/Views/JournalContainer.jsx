@@ -28,7 +28,7 @@ function JournalContainer() {
       <button
         className="button-38"
         type="button"
-        style={{ justifyContent: "center" }}
+        style={{ justifyContent: "center", marginTop: "auto" }}
         onClick={addTrade}
       >
         Add a Trade

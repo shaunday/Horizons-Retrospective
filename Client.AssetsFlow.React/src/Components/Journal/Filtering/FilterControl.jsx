@@ -22,8 +22,7 @@ export default function FilterControl() {
   };
 
   return (
-    <div className="flexChildCenter" style={{ padding: 10 }}>
-      <div>
+    <div>
         <form onSubmit={handleSubmit}>
           {Object.entries(formValues).map(([key, info], index) => (
             <LabeledField
@@ -36,6 +35,5 @@ export default function FilterControl() {
           <button type="submit" style={{ marginTop: 10 }}>Submit</button>
         </form>
       </div>
-    </div>
   );
 }

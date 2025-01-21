@@ -1,5 +1,5 @@
 import React from "react";
-import * as Constants from "@constants/journalConstants";
+import { tradeKeysFactory } from "@services/query-key-factory";
 import TradeComposite from "./TradeComposite";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -8,7 +8,7 @@ function TradesContainer() {
 
   // Get the list of trade IDs from the query cache
   const cachedTradeIds =
-    queryClient.getQueryData([Constants.TRADE_IDS_ARRAY_KEY]) || [];
+    queryClient.getQueryData(tradeKeysFactory.tradeIdsKey) || [];
 
   return (
     <ul>

@@ -17,7 +17,7 @@ function App() {
         <div className="flexChildCenter gotRightSideNeighbour">
           Metrics placeholder
         </div>
-        <JournalContainer />
+        <JournalContainer className="flexChildCenter" />
       </main>
       <footer>Footer placeholder</footer>
     </div>
