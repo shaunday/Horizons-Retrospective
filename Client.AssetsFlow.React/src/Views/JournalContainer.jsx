@@ -1,6 +1,6 @@
 import FilterControl from "@journalComponents/Filtering/FilterControl";
 import PnLLineChart from "@components/PnLLineChart"
-import TradesContainer from "@journalComponents/TradeComposite/TradesContainer";
+import TradesContainer from "@journalComponents/TradesContainer";
 import { useFetchAndCacheTrades } from "@hooks/useFetchAndCacheTrades";
 import { useAddTrade } from "@hooks/useAddTrade";
 
