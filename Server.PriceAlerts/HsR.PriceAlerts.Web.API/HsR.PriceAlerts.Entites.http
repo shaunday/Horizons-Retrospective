@@ -1,0 +1,6 @@
+@HsR.PriceAlerts.Entites_HostAddress = http://localhost:5163
+
+GET {{HsR.PriceAlerts.Entites_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
