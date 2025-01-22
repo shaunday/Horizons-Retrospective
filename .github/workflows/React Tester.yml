@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "./Client/**"
+      - "./Client.AssetsFlow.React/**"
   workflow_dispatch:  # Allow manual triggers  
 
 jobs:
