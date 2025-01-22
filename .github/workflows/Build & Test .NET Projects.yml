@@ -1,12 +1,13 @@
-name: Build & Test .NET Server
+name: Build & Test .NET (Server) Projects
 
 on:
   push:
     branches:
       - main
     paths:
-      - "./Server*/**"
-  workflow_dispatch:  # Allow manual triggers  
+      - "./Server.AssetsFlow/**"
+      - "./Server.PriceAlerts/**"  # Add additional paths as needed
+  workflow_dispatch:  # Allow manual triggers
 
 jobs:
   Restore-Build-Test:
@@ -14,8 +15,11 @@ jobs:
     container:
       image: mcr.microsoft.com/dotnet/sdk:9.0  # Docker container with .NET SDK 9
 
-    env:
-      SERVER_PATH: ./Server*  # Define the server path once here
+    strategy:
+      matrix:
+        server-path:  # Define all paths to test/build
+          - ./Server1
+          - ./Server2
 
     steps:
     - name: Checkout repository
@@ -23,12 +27,12 @@ jobs:
 
     - name: Restore .NET dependencies
       run: dotnet restore
-      working-directory: ${{ env.SERVER_PATH }} 
+      working-directory: ${{ matrix.server-path }}
 
     - name: Build .NET project
       run: dotnet build --no-restore
-      working-directory: ${{ env.SERVER_PATH }} 
+      working-directory: ${{ matrix.server-path }}
 
     #- name: Run .NET tests
     #  run: dotnet test --no-build --verbosity normal
-    #  working-directory: ${{ env.SERVER_PATH }} 
+    #  working-directory: ${{ matrix.server-path }}
