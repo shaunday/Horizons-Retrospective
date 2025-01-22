@@ -5,7 +5,7 @@ import CompositeControls from "./CompositeControls";
 import { useTrade } from "@hooks/useTrade";
 import { useTradeStateAndManagement } from "@hooks/Composite/useTradeStateAndManagement";
 
-function TradeComposite({ tradeId }) {
+function TradeExpanded({ tradeId }) {
   const { trade } = useTrade(tradeId);
   const { tradeSummary, processEntryUpdate, processTradeAction } =
     useTradeStateAndManagement(trade);
@@ -32,4 +32,4 @@ function TradeComposite({ tradeId }) {
   );
 }
 
-export default React.memo(TradeComposite);
+export default React.memo(TradeExpanded);

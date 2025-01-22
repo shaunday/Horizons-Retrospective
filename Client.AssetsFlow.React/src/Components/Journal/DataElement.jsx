@@ -5,9 +5,9 @@ import SuccessMessage from "@components/SuccessMessage";
 
 const MemoizedSuccessMessage = React.memo(SuccessMessage);
 
-function Cell({ cellInfo, onCellUpdate }) {
+function DataElement({ cellInfo, onCellUpdate }) {
   const [displayValue, setDisplayValue] = useState(
-    cellInfo.ContentWrapper?.[Constants.DATAELEMENT_CONTENT_STRING] ?? {}
+    cellInfo.ContentWrapper?.[Constants.DATAELEMENT_CONTENT_STRING] ?? ""
   );
   const [isEditing, setIsEditing] = useState(false);
   const { contentUpdateMutation, processing, success } =
@@ -77,4 +77,4 @@ function Cell({ cellInfo, onCellUpdate }) {
   );
 }
 
-export default React.memo(Cell);
+export default React.memo(DataElement);

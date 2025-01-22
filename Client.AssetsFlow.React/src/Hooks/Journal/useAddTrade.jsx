@@ -15,7 +15,7 @@ export function useAddTrade() {
       return newTrade;
     },
     onSuccess: (newTrade) => {
-      const tradeId = newTrade["id"];
+      const tradeId = newTrade.id;
       queryClient.setQueryData(
         tradeKeysFactory.tradeByIdKey(tradeId),
         newTrade

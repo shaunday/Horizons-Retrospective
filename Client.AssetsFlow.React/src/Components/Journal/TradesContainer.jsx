@@ -1,6 +1,6 @@
 import React from "react";
 import { tradeKeysFactory } from "@services/query-key-factory";
-import TradeComposite from "./TradeComposite";
+import TradeWrapper from "./TradeComposite/TradeWrapper";
 import { useQueryClient } from "@tanstack/react-query";
 
 function TradesContainer() {
@@ -14,7 +14,7 @@ function TradesContainer() {
     <ul>
       {cachedTradeIds.map((tradeId) => (
         <li key={tradeId}>
-          <TradeComposite tradeId={tradeId} />
+          <TradeWrapper tradeId={tradeId} />
         </li>
       ))}
     </ul>

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import * as Constants from "@constants/journalConstants";
-import Cell from "./DataElement";
+import DataElement from "./DataElement";
 
 const listStyle = {
   display: "flex",
@@ -16,10 +16,6 @@ const listItemStyle = {
 };
 
 function TradeElement({ tradeElement, onElementContentUpdate }) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-
-  const initialEntriesValue = tradeElement[Constants.TRADE_ENTRIES_STRING];
-
   const processCellUpdate = useCallback(
     (data) => {
       //todo handle inter-connectedness
@@ -28,29 +24,17 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
     [onElementContentUpdate]
   );
 
-  const toggleCollapse = useCallback(() => {
-    setIsCollapsed((prev) => !prev);
-  }, []);
-
-  if (initialEntriesValue === null || initialEntriesValue === undefined) {
-    console.log("initialEntriesValue is either null or undefined");}
-
   return (
-    <div onClick={toggleCollapse}>
-      <div>{isCollapsed ? "▼" : "▲"}</div>
+    <>
       <ul style={listStyle}>
-        {initialEntriesValue
-          .filter(
-            (entry) =>
-              !isCollapsed || entry[Constants.RELEVANT_FOR_ORVERVIEW_STRING]
-          ) // Filter if collapsible is true, otherwise show all
+      {tradeElement[Constants.TRADE_ENTRIES_STRING]
           .map((entry, index) => (
             <li key={entry.id} style={listItemStyle}>
-              <Cell cellInfo={entry} onCellUpdate={processCellUpdate} style={index !== 0 ? { marginLeft: "10px" } : {}}/>
+              <DataElement cellInfo={entry} onCellUpdate={processCellUpdate} style={index !== 0 ? { marginLeft: "10px" } : {}}/>
             </li>
           ))}
       </ul>
-    </div>
+    </>
   );
 }
 
