@@ -4,6 +4,12 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <BaseOutputPath>..\bin</BaseOutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HsR.Price.Entities\HsR.Price.Entities.csproj" />
+    <ProjectReference Include="..\HsR.Ticker.Entity\HsR.Ticker.Entity.csproj" />
+  </ItemGroup>
 
 </Project>
