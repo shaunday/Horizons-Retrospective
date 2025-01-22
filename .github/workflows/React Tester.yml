@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest  
     env:
-      CLIENT_PATH: .Client.AssetsFlow.React  
+      CLIENT_PATH: ./Client.AssetsFlow.React  
       
     steps:
       # Step 1: Checkout the code from the repository
