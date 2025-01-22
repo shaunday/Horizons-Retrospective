@@ -18,8 +18,8 @@ jobs:
     strategy:
       matrix:
         server-path:  # Define all paths to test/build
-          - ./Server1
-          - ./Server2
+          - ./Server.AssetsFlow
+          - ./Server.PriceAlerts
 
     steps:
     - name: Checkout repository
