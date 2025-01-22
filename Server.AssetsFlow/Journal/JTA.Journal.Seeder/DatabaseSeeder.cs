@@ -14,7 +14,7 @@ namespace HsR.Journal.Seeder
         internal static async Task SeedAsync(TradingJournalDataContext context)
         {
             // Check if any data exists in a specific table to avoid reseeding
-            //if (!await context.TradeComposites.AnyAsync())
+            if (!await context.TradeComposites.AnyAsync())
             {
                 // Drop the database if it exists
                 context.Database.EnsureDeleted();

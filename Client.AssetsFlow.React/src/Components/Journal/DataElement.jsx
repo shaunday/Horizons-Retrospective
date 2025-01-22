@@ -52,7 +52,13 @@ function DataElement({ cellInfo, onCellUpdate }) {
 
   return (
     <>
-      <p>{cellInfo[Constants.DATAELEMENT_TITLE_STRING]}</p>
+      <p 
+      style={{
+        width: "125px", // Match the width of the input
+        whiteSpace: "normal", // Allow text wrapping
+        overflowWrap: "break-word", // Break long words onto the next line if needed
+        margin: 0, // Optional: Remove extra margin for better alignment
+  }}>{cellInfo[Constants.DATAELEMENT_TITLE_STRING]}</p>
       <input
         id="cellInput"
         type="text"
@@ -64,6 +70,7 @@ function DataElement({ cellInfo, onCellUpdate }) {
         style={{
           ...(success ? { borderColor: "green" } : {}),
           cursor: isEditing ? "text" : "pointer", // Show text cursor when editing
+          width: "125px",
         }}
       />
       {!processing && (

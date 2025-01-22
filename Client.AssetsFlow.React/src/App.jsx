@@ -14,9 +14,9 @@ function App() {
     <div id="vwrapper">
       <header>Header placeholder</header>
       <main>
-        <div className="flexChildCenter gotRightSideNeighbour">
+        {/* <div className="flexChildCenter gotRightSideNeighbour">
           Metrics placeholder
-        </div>
+        </div> */}
         <JournalContainer className="flexChildCenter" />
       </main>
       <footer>Footer placeholder</footer>
