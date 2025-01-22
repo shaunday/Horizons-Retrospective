@@ -2,19 +2,22 @@
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
 using Microsoft.EntityFrameworkCore;
+using HsR.Common.ContentGenerators;
 
 namespace HsR.Journal.Seeder
 {
     internal static class DatabaseSeeder
     {
         private static RandomNumberGenerator _randomNumbersMachine = new();
-        private static RandomWordsGenerator _randomWordsMachine = new();
+        private static RandomWordGenerator _randomWordsMachine = new();
 
         internal static async Task SeedAsync(TradingJournalDataContext context)
         {
             // Check if any data exists in a specific table to avoid reseeding
             if (!await context.TradeComposites.AnyAsync())
             {
+                AddTradeCompositeToDbContext(context);
+                AddTradeCompositeToDbContext(context);
                 AddTradeCompositeToDbContext(context);
                 await context.SaveChangesAsync();
             }

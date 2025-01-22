@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HsR.Journal.Seeder
+﻿namespace HsR.Common.ContentGenerators
 {
-    internal class RandomNumberGenerator
+    public class RandomNumberGenerator
     {
-        private readonly Random _random = new Random();
+        private readonly Random _random = new();
 
         public string GenerateRandomNumber(int length)
         {

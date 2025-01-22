@@ -1,12 +1,13 @@
 ﻿
 // todo
-
 must flag on entries.. like broker? ticker.. how? temp ele?
 add restrictions - selection fileds
 add first position
 add investment timeframe
 add overview -- next trouble area, d/w/m strength/weakness
 position weight/ sector weight
+
+//testing= API tests (seeder?)
 
 //pies
 
@@ -22,7 +23,6 @@ Incdicators: double bottom on rsi/cci, ma, ema, wbb, dividends, report, news
 //pre production - 2nd stage
 filtering history
 users + authentication 
-expand testing (API tests, etc)
 
 // later on/ playing around
 Suspence? RQ Suspence

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Server.Common\HsR.Common\HsR.Common.csproj" />
     <ProjectReference Include="..\JTA.Journal.Entities\HsR.Journal.Entities.csproj" />
     <ProjectReference Include="..\JTA.Journal.Repository\HsR.Journal.Repository.csproj" />
   </ItemGroup>
