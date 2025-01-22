@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "./Server/**"
+      - "./Server*/**"
   workflow_dispatch:  # Allow manual triggers  
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
       image: mcr.microsoft.com/dotnet/sdk:9.0  # Docker container with .NET SDK 9
 
     env:
-      SERVER_PATH: ./Server  # Define the server path once here
+      SERVER_PATH: ./Server*  # Define the server path once here
 
     steps:
     - name: Checkout repository
