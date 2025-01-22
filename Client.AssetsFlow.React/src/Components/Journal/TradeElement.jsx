@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import * as Constants from "@constants/journalConstants";
-import Cell from "./Cell";
+import Cell from "./DataElement";
 
 const listStyle = {
   display: "flex",
@@ -32,6 +32,9 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
     setIsCollapsed((prev) => !prev);
   }, []);
 
+  if (initialEntriesValue === null || initialEntriesValue === undefined) {
+    console.log("initialEntriesValue is either null or undefined");}
+
   return (
     <div onClick={toggleCollapse}>
       <div>{isCollapsed ? "▼" : "▲"}</div>
@@ -41,7 +44,7 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
             (entry) =>
               !isCollapsed || entry[Constants.RELEVANT_FOR_ORVERVIEW_STRING]
           ) // Filter if collapsible is true, otherwise show all
-          .map((entry) => (
+          .map((entry, index) => (
             <li key={entry.id} style={listItemStyle}>
               <Cell cellInfo={entry} onCellUpdate={processCellUpdate} style={index !== 0 ? { marginLeft: "10px" } : {}}/>
             </li>

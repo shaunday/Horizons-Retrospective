@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as Constants from "@constants/journalConstants";
 import { useContentUpdateMutation } from "@hooks/Entry/useContentUpdateMutation";
 import SuccessMessage from "@components/SuccessMessage";
 
@@ -6,7 +7,7 @@ const MemoizedSuccessMessage = React.memo(SuccessMessage);
 
 function Cell({ cellInfo, onCellUpdate }) {
   const [displayValue, setDisplayValue] = useState(
-    cellInfo.ContentWrapper.Content
+    cellInfo.ContentWrapper?.[Constants.DATAELEMENT_CONTENT_STRING] ?? {}
   );
   const [isEditing, setIsEditing] = useState(false);
   const { contentUpdateMutation, processing, success } =
@@ -51,7 +52,7 @@ function Cell({ cellInfo, onCellUpdate }) {
 
   return (
     <>
-      <p>{cellInfo.ContentWrapper.Title}</p>
+      <p>{cellInfo[Constants.DATAELEMENT_TITLE_STRING]}</p>
       <input
         id="cellInput"
         type="text"

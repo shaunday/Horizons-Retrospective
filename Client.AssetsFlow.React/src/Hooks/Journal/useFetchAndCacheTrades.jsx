@@ -8,8 +8,6 @@ export function useFetchAndCacheTrades() {
   const getAndCacheTrades = async () => {
     const fetchedTrades = await getAllTrades();
     
-    console.log("Fetched data:", fetchedTrades);
-
     // Cache the trades here
     const tradeIds = fetchedTrades.map((trade) => trade["id"]);
     queryClient.setQueryData(tradeKeysFactory.tradeIdsKey, tradeIds);

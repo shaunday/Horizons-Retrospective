@@ -6,14 +6,14 @@ import { useTrade } from "@hooks/useTrade";
 import { useTradeStateAndManagement } from "@hooks/Composite/useTradeStateAndManagement";
 
 function TradeComposite({ tradeId }) {
-  const { cachedTradeComposite } = useTrade(tradeId);
+  const { trade } = useTrade(tradeId);
   const { tradeSummary, processEntryUpdate, processTradeAction } =
-    useTradeStateAndManagement(cachedTradeComposite);
+    useTradeStateAndManagement(trade);
 
   return (
     <>
       <ul>
-        {cachedTradeComposite[Constants.TRADE_ELEMENTS_STRING].map((ele) => (
+        {trade[Constants.TRADE_ELEMENTS_STRING].map((ele, index) => (
           <li key={ele.id}>
             <TradeElement
               tradeElement={ele}
@@ -25,7 +25,7 @@ function TradeComposite({ tradeId }) {
       </ul>
       {tradeSummary && <TradeElement tradeElement={tradeSummary} />}
       <CompositeControls
-        tradeComposite={cachedTradeComposite}
+        tradeComposite={trade}
         onTradeActionExecuted={processTradeAction}
       />
     </>

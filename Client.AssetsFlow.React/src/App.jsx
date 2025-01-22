@@ -4,11 +4,11 @@ import { useFetchAndCacheTrades } from "@hooks/useFetchAndCacheTrades";
 import JournalContainer from "@views/JournalContainer";
 
 function App() {
-  const { prefetchTrades } = useFetchAndCacheTrades();
+  // const { prefetchTrades } = useFetchAndCacheTrades();
 
-  useEffect(() => {
-    prefetchTrades();
-  }, []); 
+  // useEffect(() => {
+  //   prefetchTrades();
+  // }, []); //todo
 
   return (
     <div id="vwrapper">
