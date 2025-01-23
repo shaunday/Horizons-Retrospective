@@ -1,4 +1,5 @@
 using HsR.Journal.Entities;
+using HsR.Journal.Entities.Factory;
 using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.DataContext

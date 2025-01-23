@@ -22,27 +22,57 @@ namespace HsR.Journal.Seeder
                 // Recreate the database
                 context.Database.EnsureCreated();
 
-                AddTradeCompositeToDbContext(context);
-                AddTradeCompositeToDbContext(context);
-                AddTradeCompositeToDbContext(context);
+                AddTradeIdeaToDbContext(context);
+
+                AddOngoingTradeToDbContext(context);
+                AddOngoingTradeToDbContext(context);
+
+                AddClosedTradeToDbContext(context);
+
                 await context.SaveChangesAsync();
             }
         }
 
-        private static void AddTradeCompositeToDbContext(TradingJournalDataContext context)
+        private static void AddTradeIdeaToDbContext(TradingJournalDataContext context)
+        {
+            TradeComposite trade = GetTradeIdea();
+            context.TradeComposites.Add(trade);
+        }
+
+        private static void AddOngoingTradeToDbContext(TradingJournalDataContext context)
+        {
+            TradeComposite trade = GetOngoingTrade();
+            context.TradeComposites.Add(trade);
+        }
+
+        private static void AddClosedTradeToDbContext(TradingJournalDataContext context)
+        {
+            TradeComposite trade = GetOngoingTrade();
+            TradeCompositeUpdates.CloseTrade(trade, "1000");
+
+            context.TradeComposites.Add(trade);
+        }
+
+        private static TradeComposite GetOngoingTrade()
+        {
+            TradeComposite trade = GetTradeIdea();
+
+            AddElementToTrade(trade);
+            AddElementToTrade(trade);
+            AddElementToTrade(trade);
+
+            TradeCompositeUpdates.RecreateSummary(trade);
+            return trade;
+        }
+
+        private static TradeComposite GetTradeIdea()
         {
             TradeComposite trade = new();
-
             TradeElement originElement = new(trade, TradeActionType.Origin);
             originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
             PopulateElementWithData(originElement);
             trade.TradeElements.Add(originElement);
-
-            AddElementToTrade(trade);
-            AddElementToTrade(trade);
-            AddElementToTrade(trade);
-
-            context.TradeComposites.Add(trade);
+            return trade;
         }
 
         private static void AddElementToTrade(TradeComposite trade)
@@ -54,6 +84,7 @@ namespace HsR.Journal.Seeder
             trade.TradeElements.Add(addElement);
         }
 
+        //populate related
         private static readonly Random _lengthRandom = new();
         private static TradeElement PopulateElementWithData(TradeElement element)
         {

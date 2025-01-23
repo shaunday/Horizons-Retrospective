@@ -1,4 +1,5 @@
 using HsR.Journal.Entities;
+using HsR.Journal.Entities.Factory;
 using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.DataContext
@@ -9,10 +10,9 @@ namespace HsR.Journal.DataContext
         {
             var trade = await GetTradeCompositeAsync(tradeId);
             TradeElement tradeInput = TradeElementCRUDs.CreateInterimTradeElement(trade, isAdd);
-
             trade.TradeElements.Add(tradeInput);
-            TradeElement summary = TradeElementCRUDs.GetInterimSummary(trade);
-            trade.Summary = summary;
+
+            TradeElement summary = TradeCompositeUpdates.RecreateSummary(trade);
 
             await _dataContext.SaveChangesAsync();
             return (tradeInput, summary);
@@ -26,7 +26,7 @@ namespace HsR.Journal.DataContext
                 throw new InvalidOperationException($"No entries to remove on trade ID {tradeId} .");
             }
 
-            TradeElementCRUDs.RemoveInterimInput(trade, tradeInputId);
+            TradeElementCRUDs.RemoveInterimInputById(trade, tradeInputId);
             TradeElement summary = TradeElementCRUDs.GetInterimSummary(trade);
             trade.Summary = summary;
 
@@ -37,11 +37,7 @@ namespace HsR.Journal.DataContext
         public async Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
-            var tradeInput = TradeElementCRUDs.CreateTradeElementForClosure(trade, closingPrice);
-
-            trade.TradeElements.Add(tradeInput);
-            TradeElement summary = TradeElementCRUDs.GetInterimSummary(trade);
-            trade.Summary = summary;
+            TradeCompositeUpdates.CloseTrade(trade, closingPrice);
 
             await _dataContext.SaveChangesAsync();
             return trade.Summary!;

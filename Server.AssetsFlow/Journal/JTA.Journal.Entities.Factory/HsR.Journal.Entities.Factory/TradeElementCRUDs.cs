@@ -1,13 +1,11 @@
 ﻿using HsR.Common.Extenders;
-using HsR.Journal.Entities;
-using HsR.Journal.Entities.Factory;
 using HsR.Journal.TradeAnalytics;
 
-namespace HsR.Journal.DataContext
+namespace HsR.Journal.Entities.Factory
 {
-    internal static class TradeElementCRUDs
+    public static class TradeElementCRUDs
     {
-        internal static TradeElement CreateTradeElementForClosure(TradeComposite trade, string closingPrice)
+        public static TradeElement CreateTradeElementForClosure(TradeComposite trade, string closingPrice)
         {
             // Create a TradeElement for ReducePosition
             var tradeInput = new TradeElement(trade, TradeActionType.ReducePosition);
@@ -47,12 +45,12 @@ namespace HsR.Journal.DataContext
             else
             {
                 throw new FormatException("Could not parse closing price");
-            }            
+            }
 
             return tradeInput; // Return tradeInput, as this is the entry we are adding
         }
 
-        internal static TradeElement CreateInterimTradeElement(TradeComposite trade, bool isAdd)
+        public static TradeElement CreateInterimTradeElement(TradeComposite trade, bool isAdd)
         {
             TradeElement tradeInput = new(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);
             if (isAdd)
@@ -66,8 +64,7 @@ namespace HsR.Journal.DataContext
             return tradeInput;
         }
 
-
-        internal static TradeElement GetInterimSummary(TradeComposite trade)
+        public static TradeElement GetInterimSummary(TradeComposite trade)
         {
             var analytics = Analytics.GetTradingCosts(trade);
             TradeAnalyticsSummary analyticsSummary = new(analytics);
@@ -78,7 +75,7 @@ namespace HsR.Journal.DataContext
             return summary;
         }
 
-        internal static void RemoveInterimInput(TradeComposite trade, string tradeInputId)
+        public static void RemoveInterimInputById(TradeComposite trade, string tradeInputId)
         {
             if (!int.TryParse(tradeInputId, out var parsedId))
             {
@@ -87,6 +84,11 @@ namespace HsR.Journal.DataContext
 
             var tradeInputToRemove = trade.TradeElements.Where(t => t.Id == parsedId).SingleOrDefault();
 
+            RemoveInterimInput(trade, tradeInputToRemove);
+        }
+
+        public static void RemoveInterimInput(TradeComposite trade, TradeElement? tradeInputToRemove)
+        {
             if (tradeInputToRemove != null && (tradeInputToRemove.TradeActionType == TradeActionType.ReducePosition || tradeInputToRemove.TradeActionType == TradeActionType.ReducePosition))
             {
                 trade.TradeElements.Remove(tradeInputToRemove);
@@ -94,7 +96,7 @@ namespace HsR.Journal.DataContext
             else
             {
                 throw new Exception("weird");
-            } 
+            }
         }
     }
 }
