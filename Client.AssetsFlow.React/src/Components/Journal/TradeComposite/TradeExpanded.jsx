@@ -2,11 +2,11 @@ import React from "react";
 import * as Constants from "@constants/journalConstants";
 import TradeElement from "@journalComponents/TradeElement";
 import CompositeControls from "./CompositeControls";
-import { useTrade } from "@hooks/useTrade";
+import { useGetTradeById } from "@hooks/useGetTradeById";
 import { useTradeStateAndManagement } from "@hooks/Composite/useTradeStateAndManagement";
 
 function TradeExpanded({ tradeId }) {
-  const { trade } = useTrade(tradeId);
+  const { trade } = useGetTradeById(tradeId);
   const { tradeSummary, processEntryUpdate, processTradeAction } =
     useTradeStateAndManagement(trade);
 

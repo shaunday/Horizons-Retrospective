@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import * as Constants from "@constants/journalConstants";
 import TradeElement from "@journalComponents/TradeElement";
-import { useTrade } from "@hooks/useTrade";
+import { useGetTradeById } from "@hooks/useGetTradeById";
 
 function TradeCollapsed({ tradeId }) {
-  const { trade } = useTrade(tradeId);
+  const { trade } = useGetTradeById(tradeId);
   const [simulatedEle, setSimulatedEle] = useState(null);
 
   useEffect(() => {

@@ -7,7 +7,7 @@
 1a. **Actual UseQuery Hook in JournalContainer (1 level below App.Js)
    - Same fetch function, should be using prefetch's data as it comes up
 
-2. **Trade Data Fetching (`useTrade`):**
+2. **Trade Data Fetching (`useGetTradeById`):**
    - Retrieves trade data from the cache or fetches if missing.
    - Updates cache with new data if fetched.
 

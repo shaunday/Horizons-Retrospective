@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import * as Constants from "@constants/journalConstants";
-import DataElement from "./DataElement";
+import DataElement from "../DataElement/DataElement";
 
 const listStyle = {
   display: "flex",

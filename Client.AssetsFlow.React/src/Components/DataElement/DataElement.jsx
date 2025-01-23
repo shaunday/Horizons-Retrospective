@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import * as Constants from "@constants/journalConstants";
 import { useContentUpdateMutation } from "@hooks/Entry/useContentUpdateMutation";
 import SuccessMessage from "@components/SuccessMessage";
+import { getContent } from "./contentGetters"; 
 
 const MemoizedSuccessMessage = React.memo(SuccessMessage);
 
 function DataElement({ cellInfo, onCellUpdate }) {
-  const [displayValue, setDisplayValue] = useState(
-    cellInfo.ContentWrapper?.[Constants.DATAELEMENT_CONTENT_STRING] ?? ""
-  );
+  const { contentValue } = getContent(cellInfo);
+  const [displayValue, setDisplayValue] = useState(contentValue);
   const [isEditing, setIsEditing] = useState(false);
   const { contentUpdateMutation, processing, success } =
     useContentUpdateMutation(cellInfo, onCellUpdate);
