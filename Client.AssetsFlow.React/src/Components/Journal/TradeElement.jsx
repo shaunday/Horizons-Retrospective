@@ -5,6 +5,7 @@ import DataElement from "./DataElement/DataElement";
 const listStyle = {
   display: "flex",
   listStyleType: "none", // Removes default list bullets
+  flexWrap: "wrap", // Allow items to wrap to the next line
   padding: 0, // Removes default padding
   margin: 0, // Removes default margin
 };
@@ -14,15 +15,10 @@ const listItemStyle = {
   padding: "5px", 
   borderRadius: "4px", 
   marginLeft: "5px",
+  width: "210px", // Set a fixed width for each item
 };
 
 function TradeElement({ tradeElement, onElementContentUpdate }) {
-  // Check if tradeElement is an empty object or undefined
-  if (!tradeElement || Object.keys(tradeElement).length === 0) {
-    console.warn("Received an empty or invalid tradeElement:", tradeElement);
-    return <div>No valid trade element to display</div>;
-  }
-  
   const processCellUpdate = useCallback(
     (data) => {
       //todo handle inter-connectedness
@@ -30,13 +26,6 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
     },
     [onElementContentUpdate]
   );
-
-  const entries = tradeElement[Constants.TRADE_ENTRIES_STRING];
-
-  if (!Array.isArray(entries)) {
-    console.warn(`Expected an array for entries, but got:`, entries);
-    return <div>No valid entries to display</div>;
-  }
 
   return (
     <>

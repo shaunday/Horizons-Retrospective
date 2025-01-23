@@ -13,14 +13,29 @@ function TradeExpanded({ tradeId }) {
   const containerStyle = {
     display: "flex",
     flexDirection: "column", // Stack children vertically
+    listStyleType: "none", // Removes default list bullets
     alignItems: "flex-start", // Optional: Align children to the left (default)
+  };
+
+  const listStyle = {
+    listStyleType: "none", // Removes default list bullets
+    padding: 0, // Removes default padding
+    margin: 0, // Removes default margin
+    marginLeft: "10px",
+  };
+
+  const listItemStyle = {
+    border: "1.5px solid purple", 
+    padding: "5px", 
+    borderRadius: "4px",
+    margin: "5px",
   };
 
   return (
     <div style={containerStyle}>
-      <ul>
+      <ul style={listStyle}>
         {trade[Constants.TRADE_ELEMENTS_STRING].map((ele, index) => (
-          <li key={ele.id}>
+          <li key={ele.id} style={listItemStyle}>
             <TradeElement
               tradeElement={ele}
               onElementContentUpdate={processEntryUpdate}

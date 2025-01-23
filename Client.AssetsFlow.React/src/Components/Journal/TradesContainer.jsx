@@ -12,7 +12,7 @@ const listStyle = {
 };
 
 const listItemStyle = {
-  border: "1px solid blue", 
+  border: "1.5px solid blue", 
   padding: "5px", 
   borderRadius: "4px", 
   marginBottom: "5px",

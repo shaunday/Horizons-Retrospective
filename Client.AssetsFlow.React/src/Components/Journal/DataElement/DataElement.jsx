@@ -57,24 +57,30 @@ function DataElement({ cellInfo, onCellUpdate }) {
         whiteSpace: "normal", // Allow text wrapping
         overflowWrap: "break-word", // Break long words onto the next line 
            }}>{cellInfo[Constants.DATAELEMENT_TITLE_STRING]}</p>
-      <input
-        id="cellInput"
-        type="text"
-        value={displayValue}
-        onClick={handleInputClick}
-        onChange={(e) => setDisplayValue(e.target.value)}
-        onKeyDown={handleKeyPress}
-        disabled={processing}
-        style={{
-          ...(success ? { borderColor: "green" } : {}),
-          cursor: isEditing ? "text" : "pointer", // Show text cursor when editing
-        }}
-      />
-      {!processing && (
-        <button onClick={handleEditClick} style={{ cursor: "pointer" }}>
-          {isEditing ? "✔️" : "✏️"}
-        </button>
-      )}
+       {/* Container with flex to align input and button horizontally */}
+       <div style={{ display: "flex", alignItems: "center" }}>
+        <input
+          id="cellInput"
+          type="text"
+          value={displayValue}
+          onClick={handleInputClick}
+          onChange={(e) => setDisplayValue(e.target.value)}
+          onKeyDown={handleKeyPress}
+          disabled={processing}
+          style={{
+            ...(success ? { borderColor: "green" } : {}),
+            cursor: isEditing ? "text" : "pointer", // Show text cursor when editing
+            marginRight: "3px", // Add some space between input and button
+          }}
+        />
+        
+        {/* Edit button next to the input */}
+        {!processing && (
+          <button onClick={handleEditClick} style={{ cursor: "pointer" }}>
+            {isEditing ? "✔️" : "✏️"}
+          </button>
+        )}
+      </div>
       {processing && <div className="spinner">Processing...</div>}
       {success && <MemoizedSuccessMessage />}
     </>
