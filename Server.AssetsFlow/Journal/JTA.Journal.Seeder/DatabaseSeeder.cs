@@ -41,9 +41,9 @@ namespace HsR.Journal.Seeder
         private static async Task<TradeComposite> CreateAndSaveTradeInstance(TradingJournalDataContext context)
         {
             TradeComposite trade = new();
+            context.TradeComposites.Add(trade);
             await context.SaveChangesAsync();
             AddTradeIdea(trade);
-            context.TradeComposites.Add(trade);
             await context.SaveChangesAsync();
             return trade;
         }
