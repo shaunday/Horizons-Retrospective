@@ -17,7 +17,7 @@ namespace HsR.Journal.Seeder
         internal async Task SeedAsync()
         {
             // Check if any data exists in a specific table to avoid reseeding
-            //if (!await context.TradeComposites.AnyAsync())
+            if (!await _dbContext.TradeComposites.AnyAsync())
             {
                 // Drop the database if it exists
                 dbContext.Database.EnsureDeleted();
@@ -29,31 +29,18 @@ namespace HsR.Journal.Seeder
                 TradeComposite trade = await CreateAndSaveTradeInstance();
                 dbContext.TradeComposites.Update(trade); 
 
-                ////ongoing
+                //ongoing
                 trade = await CreateAndSaveTradeInstance();
                 AddPositionsAndSummary(trade);
                 dbContext.TradeComposites.Update(trade);
 
-                //////closed
+                //closed
                 trade = await CreateAndSaveTradeInstance();
                 AddPositionsAndSummary(trade);
                 TradeCompositeUpdates.CloseTrade(trade, "1000");
                 dbContext.TradeComposites.Update(trade);
 
-
                 await _dbContext.SaveChangesAsync();
-
-
-                //TradeComposite trade = new();
-                //AddTradeIdea(trade);
-                //dbContext.TradeComposites.Add(trade);
-                //await dbContext.SaveChangesAsync();
-
-                var query = _dbContext.TradeComposites.AsNoTracking().AsQueryable();
-                var totalCount = await query.CountAsync();
-
-                var trades = await query.OrderBy(t => t.Id)
-                            .ToListAsync();
             }
         }
 
