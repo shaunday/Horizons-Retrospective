@@ -27,7 +27,7 @@ namespace HsR.Journal.Seeder
                 AddOngoingTradeToDbContext(context);
                 AddOngoingTradeToDbContext(context);
 
-                //AddClosedTradeToDbContext(context);
+                AddClosedTradeToDbContext(context);
 
                 await context.SaveChangesAsync();
             }
@@ -48,6 +48,8 @@ namespace HsR.Journal.Seeder
         private static void AddClosedTradeToDbContext(TradingJournalDataContext context)
         {
             TradeComposite trade = GetOngoingTrade();
+
+            context.TradeElements.Remove(trade.Summary);    
             TradeCompositeUpdates.CloseTrade(trade, "1000");
 
             context.TradeComposites.Add(trade);
@@ -61,7 +63,9 @@ namespace HsR.Journal.Seeder
             AddElementToTrade(trade, TradeActionType.AddPosition);
             AddElementToTrade(trade, TradeActionType.ReducePosition);
 
+            // no need to remove old summary since its still null
             TradeCompositeUpdates.RecreateSummary(trade);
+
             return trade;
         }
 

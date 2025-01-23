@@ -37,6 +37,14 @@ namespace HsR.Journal.DataContext
         public async Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
+            if (trade.Summary != null)
+            {
+                _dataContext.TradeElements.Remove(trade.Summary);
+            }
+            else
+            {
+                throw new InvalidOperationException("Trade summary is missing.");
+            }
             TradeCompositeUpdates.CloseTrade(trade, closingPrice);
 
             await _dataContext.SaveChangesAsync();
