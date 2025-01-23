@@ -14,7 +14,7 @@ namespace HsR.Journal.Seeder
         internal static async Task SeedAsync(TradingJournalDataContext context)
         {
             // Check if any data exists in a specific table to avoid reseeding
-            if (!await context.TradeComposites.AnyAsync())
+            //if (!await context.TradeComposites.AnyAsync())
             {
                 // Drop the database if it exists
                 context.Database.EnsureDeleted();
@@ -22,61 +22,47 @@ namespace HsR.Journal.Seeder
                 // Recreate the database
                 context.Database.EnsureCreated();
 
-                AddTradeIdeaToDbContext(context);
+                //idea
+                TradeComposite trade = await CreateAndSaveTradeInstance(context);
 
-                AddOngoingTradeToDbContext(context);
-                AddOngoingTradeToDbContext(context);
+                //ongoing
+                trade = await CreateAndSaveTradeInstance(context);
+                AddPositionsAndSummary(trade);
+                await context.SaveChangesAsync();
 
-                AddClosedTradeToDbContext(context);
-
+                //closed
+                trade = await CreateAndSaveTradeInstance(context);
+                AddPositionsAndSummary(trade);
+                TradeCompositeUpdates.CloseTrade(trade, "1000");
                 await context.SaveChangesAsync();
             }
         }
 
-        private static void AddTradeIdeaToDbContext(TradingJournalDataContext context)
+        private static async Task<TradeComposite> CreateAndSaveTradeInstance(TradingJournalDataContext context)
         {
-            TradeComposite trade = GetTradeIdea();
+            TradeComposite trade = new();
+            await context.SaveChangesAsync();
+            AddTradeIdea(trade);
             context.TradeComposites.Add(trade);
+            await context.SaveChangesAsync();
+            return trade;
         }
 
-        private static void AddOngoingTradeToDbContext(TradingJournalDataContext context)
+        private static void AddPositionsAndSummary(TradeComposite trade)
         {
-            TradeComposite trade = GetOngoingTrade();
-            context.TradeComposites.Add(trade);
-        }
-
-        private static void AddClosedTradeToDbContext(TradingJournalDataContext context)
-        {
-            TradeComposite trade = GetOngoingTrade();
-
-            context.TradeElements.Remove(trade.Summary);    
-            TradeCompositeUpdates.CloseTrade(trade, "1000");
-
-            context.TradeComposites.Add(trade);
-        }
-
-        private static TradeComposite GetOngoingTrade()
-        {
-            TradeComposite trade = GetTradeIdea();
-
             AddElementToTrade(trade, TradeActionType.AddPosition);
             AddElementToTrade(trade, TradeActionType.AddPosition);
             AddElementToTrade(trade, TradeActionType.ReducePosition);
 
-            // no need to remove old summary since its still null
             TradeCompositeUpdates.RecreateSummary(trade);
-
-            return trade;
         }
 
-        private static TradeComposite GetTradeIdea()
+        private static void AddTradeIdea(TradeComposite trade)
         {
-            TradeComposite trade = new();
             TradeElement originElement = new(trade, TradeActionType.Origin);
             originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
             PopulateElementWithData(originElement);
             trade.TradeElements.Add(originElement);
-            return trade;
         }
 
         private static void AddElementToTrade(TradeComposite trade, TradeActionType type)
