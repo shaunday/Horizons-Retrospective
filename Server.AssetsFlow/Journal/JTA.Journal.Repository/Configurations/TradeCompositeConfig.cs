@@ -15,11 +15,7 @@ namespace HsR.Journal.Repository.Configurations
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Navigation(tc => tc.TradeElements).AutoInclude();
-
-            builder.HasOne(t => t.Summary)
-                .WithOne()
-                .HasForeignKey<TradeElement>(te => te.CompositeFK)  
-                .OnDelete(DeleteBehavior.SetNull); // Allows deletion without affecting the related entity
+            builder.Navigation(tc => tc.Summary).AutoInclude();
 
             // Enum to string conversion
             builder.Property(te => te.Status)

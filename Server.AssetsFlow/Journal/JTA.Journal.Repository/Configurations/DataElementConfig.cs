@@ -11,6 +11,7 @@ namespace HsR.Journal.Repository.Configurations
             builder.OwnsOne(c => c.ContentWrapper)
                 .WithOwner()
                 .HasForeignKey(h => h.DataElementFK);
+
             builder.Navigation(c => c.ContentWrapper).AutoInclude();
 
             builder.OwnsMany(t => t.History)

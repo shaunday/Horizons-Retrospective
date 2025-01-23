@@ -3,6 +3,7 @@ using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
 using Microsoft.EntityFrameworkCore;
 using HsR.Common.ContentGenerators;
+using HsR.Common;
 
 namespace HsR.Journal.Seeder
 {
@@ -11,30 +12,40 @@ namespace HsR.Journal.Seeder
         private static RandomNumberGeneratorEx _randomNumbersMachine = new();
         private static RandomWordGenerator _randomWordsMachine = new();
 
-        internal static async Task SeedAsync(TradingJournalDataContext context)
+        internal static async Task SeedAsync(TradingJournalDataContext dbContext)
         {
             // Check if any data exists in a specific table to avoid reseeding
             //if (!await context.TradeComposites.AnyAsync())
             {
                 // Drop the database if it exists
-                context.Database.EnsureDeleted();
+                //dbContext.Database.EnsureDeleted();
 
                 // Recreate the database
-                context.Database.EnsureCreated();
+                //dbContext.Database.EnsureCreated();
 
                 //idea
-                TradeComposite trade = await CreateAndSaveTradeInstance(context);
+                TradeComposite trade = await CreateAndSaveTradeInstance(dbContext);
 
                 //ongoing
-                trade = await CreateAndSaveTradeInstance(context);
+                trade = await CreateAndSaveTradeInstance(dbContext);
                 AddPositionsAndSummary(trade);
-                await context.SaveChangesAsync();
+                await dbContext.SaveChangesAsync();
 
-                //closed
-                trade = await CreateAndSaveTradeInstance(context);
+                ////closed
+                trade = await CreateAndSaveTradeInstance(dbContext);
                 AddPositionsAndSummary(trade);
                 TradeCompositeUpdates.CloseTrade(trade, "1000");
-                await context.SaveChangesAsync();
+                await dbContext.SaveChangesAsync();
+
+                var query = dbContext.TradeComposites.AsNoTracking().AsQueryable();
+
+                var totalCount = await query.CountAsync();
+
+                var trades = await query.OrderBy(t => t.Id)
+                    .Include(tc => tc.TradeElements)
+                            .ToListAsync();
+
+
             }
         }
 
@@ -42,7 +53,7 @@ namespace HsR.Journal.Seeder
         {
             TradeComposite trade = new();
             context.TradeComposites.Add(trade);
-            await context.SaveChangesAsync();
+            //await context.SaveChangesAsync();
             AddTradeIdea(trade);
             await context.SaveChangesAsync();
             return trade;

@@ -34,6 +34,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.TradeAnalytics"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{F160C4C3-5E21-4DDF-B119-BB651086EF4B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DbSetupInformation", "DbSetupInformation", "{EAA1E7BB-2B5C-421C-A137-98DDCDC9BB95}"
+	ProjectSection(SolutionItems) = preProject
+		Journal\JTA.Infrastructure\Db and Migrations.Info\1. PgAndDbCreation.txt = Journal\JTA.Infrastructure\Db and Migrations.Info\1. PgAndDbCreation.txt
+		Journal\JTA.Infrastructure\Db and Migrations.Info\2. EnvironmentVars.txt = Journal\JTA.Infrastructure\Db and Migrations.Info\2. EnvironmentVars.txt
+		Journal\JTA.Infrastructure\Db and Migrations.Info\3. Migrations.txt = Journal\JTA.Infrastructure\Db and Migrations.Info\3. Migrations.txt
+		Journal\JTA.Infrastructure\Db and Migrations.Info\4. Optimization.txt = Journal\JTA.Infrastructure\Db and Migrations.Info\4. Optimization.txt
+		Journal\JTA.Infrastructure\Db and Migrations.Info\SQL_Roles.txt = Journal\JTA.Infrastructure\Db and Migrations.Info\SQL_Roles.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

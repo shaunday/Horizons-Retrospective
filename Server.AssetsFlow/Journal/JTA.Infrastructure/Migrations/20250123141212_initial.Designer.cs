@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HsR.Journal.Infrastructure.Migrations
 {
     [DbContext(typeof(TradingJournalDataContext))]
-    [Migration("20250113101522_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250123141212_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,21 +41,21 @@ namespace HsR.Journal.Infrastructure.Migrations
                     b.Property<int>("CompositeFK")
                         .HasColumnType("integer");
 
-                    b.Property<string>("CostRelevance")
-                        .HasColumnType("text");
-
                     b.Property<bool>("IsRelevantForOverview")
                         .HasColumnType("boolean");
-
-                    b.Property<string>("PriceRelevance")
-                        .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("TotalCostRelevance")
+                        .HasColumnType("text");
+
                     b.Property<int>("TradeElementFK")
                         .HasColumnType("integer");
+
+                    b.Property<string>("UnitPriceRelevance")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -75,38 +75,6 @@ namespace HsR.Journal.Infrastructure.Migrations
                         .HasColumnType("jsonb");
 
                     b.ToTable("JournalData");
-                });
-
-            modelBuilder.Entity("HsR.Journal.Entities.TradeComposite", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("ClosedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("OpenedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.PrimitiveCollection<List<string>>("Sectors")
-                        .IsRequired()
-                        .HasColumnType("text[]");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int?>("SummaryId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SummaryId");
-
-                    b.ToTable("TradeComposites");
                 });
 
             modelBuilder.Entity("HsR.Journal.Entities.TradeElement", b =>
@@ -131,9 +99,41 @@ namespace HsR.Journal.Infrastructure.Migrations
                     b.ToTable("TradeElements");
                 });
 
+            modelBuilder.Entity("TradeComposite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("ClosedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("OpenedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.PrimitiveCollection<string[]>("Sectors")
+                        .IsRequired()
+                        .HasColumnType("text[]");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("SummaryId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SummaryId");
+
+                    b.ToTable("TradeComposites");
+                });
+
             modelBuilder.Entity("HsR.Journal.Entities.DataElement", b =>
                 {
-                    b.HasOne("HsR.Journal.Entities.TradeComposite", "CompositeRef")
+                    b.HasOne("TradeComposite", "CompositeRef")
                         .WithMany()
                         .HasForeignKey("CompositeFK")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -201,7 +201,18 @@ namespace HsR.Journal.Infrastructure.Migrations
                     b.Navigation("TradeElementRef");
                 });
 
-            modelBuilder.Entity("HsR.Journal.Entities.TradeComposite", b =>
+            modelBuilder.Entity("HsR.Journal.Entities.TradeElement", b =>
+                {
+                    b.HasOne("TradeComposite", "CompositeRef")
+                        .WithMany("TradeElements")
+                        .HasForeignKey("CompositeFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CompositeRef");
+                });
+
+            modelBuilder.Entity("TradeComposite", b =>
                 {
                     b.HasOne("HsR.Journal.Entities.TradeElement", "Summary")
                         .WithMany()
@@ -212,23 +223,12 @@ namespace HsR.Journal.Infrastructure.Migrations
 
             modelBuilder.Entity("HsR.Journal.Entities.TradeElement", b =>
                 {
-                    b.HasOne("HsR.Journal.Entities.TradeComposite", "CompositeRef")
-                        .WithMany("TradeElements")
-                        .HasForeignKey("CompositeFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CompositeRef");
+                    b.Navigation("Entries");
                 });
 
-            modelBuilder.Entity("HsR.Journal.Entities.TradeComposite", b =>
+            modelBuilder.Entity("TradeComposite", b =>
                 {
                     b.Navigation("TradeElements");
-                });
-
-            modelBuilder.Entity("HsR.Journal.Entities.TradeElement", b =>
-                {
-                    b.Navigation("Entries");
                 });
 #pragma warning restore 612, 618
         }
