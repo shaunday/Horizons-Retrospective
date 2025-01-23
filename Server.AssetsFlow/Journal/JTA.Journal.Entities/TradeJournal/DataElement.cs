@@ -43,7 +43,6 @@ namespace HsR.Journal.Entities
         }
         #endregion
 
-        [Required]
         public ContentRecord? ContentWrapper { get; set; }
 
         public string? Content => ContentWrapper?.ContentValue ;
@@ -78,6 +77,10 @@ namespace HsR.Journal.Entities
             CompositeRef = refObj.CompositeRef;
         }
         #endregion
-    }
 
+        public override string ToString()
+        {
+            return $"Id={Id}, Title={Title}, Content={ContentWrapper?.ContentValue}";
+        }
+    }
 }

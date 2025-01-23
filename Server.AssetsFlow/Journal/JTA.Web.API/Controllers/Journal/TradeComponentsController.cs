@@ -27,11 +27,11 @@ namespace HsR.Web.API.Controllers.Journal
         {
             pageSize = ValidatePageSize(pageSize);
 
-            var (tradesEntities, paginationMetadata) = await _journalAccess.GetAllTradeCompositesAsync(pageNumber, pageSize);
+            var (tradeEntities, paginationMetadata) = await _journalAccess.GetAllTradeCompositesAsync(pageNumber, pageSize);
 
             SetPaginationHeader(paginationMetadata);
 
-            IEnumerable<TradeCompositeModel> resAsModels = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradesEntities);
+            IEnumerable<TradeCompositeModel> resAsModels = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradeEntities);
 
             return Ok(resAsModels);
         }

@@ -4,62 +4,71 @@ using HsR.Journal.Entities.Factory;
 using Microsoft.EntityFrameworkCore;
 using HsR.Common.ContentGenerators;
 using HsR.Common;
+using System.Xml.Linq;
 
 namespace HsR.Journal.Seeder
 {
-    internal static class DatabaseSeeder
+    internal class DatabaseSeeder(TradingJournalDataContext dbContext)
     {
-        private static RandomNumberGeneratorEx _randomNumbersMachine = new();
-        private static RandomWordGenerator _randomWordsMachine = new();
+        private TradingJournalDataContext _dbContext = dbContext;
+        private RandomNumberGeneratorEx _randomNumbersMachine = new();
+        private RandomWordGenerator _randomWordsMachine = new();
 
-        internal static async Task SeedAsync(TradingJournalDataContext dbContext)
+        internal async Task SeedAsync()
         {
             // Check if any data exists in a specific table to avoid reseeding
             //if (!await context.TradeComposites.AnyAsync())
             {
                 // Drop the database if it exists
-                //dbContext.Database.EnsureDeleted();
+                dbContext.Database.EnsureDeleted();
 
                 // Recreate the database
-                //dbContext.Database.EnsureCreated();
+                dbContext.Database.EnsureCreated();
 
                 //idea
-                TradeComposite trade = await CreateAndSaveTradeInstance(dbContext);
+                TradeComposite trade = await CreateAndSaveTradeInstance();
+                dbContext.TradeComposites.Update(trade); 
 
-                //ongoing
-                trade = await CreateAndSaveTradeInstance(dbContext);
+                ////ongoing
+                trade = await CreateAndSaveTradeInstance();
                 AddPositionsAndSummary(trade);
-                await dbContext.SaveChangesAsync();
+                dbContext.TradeComposites.Update(trade);
 
-                ////closed
-                trade = await CreateAndSaveTradeInstance(dbContext);
+                //////closed
+                trade = await CreateAndSaveTradeInstance();
                 AddPositionsAndSummary(trade);
                 TradeCompositeUpdates.CloseTrade(trade, "1000");
-                await dbContext.SaveChangesAsync();
+                dbContext.TradeComposites.Update(trade);
 
-                var query = dbContext.TradeComposites.AsNoTracking().AsQueryable();
 
+                await _dbContext.SaveChangesAsync();
+
+
+                //TradeComposite trade = new();
+                //AddTradeIdea(trade);
+                //dbContext.TradeComposites.Add(trade);
+                //await dbContext.SaveChangesAsync();
+
+                var query = _dbContext.TradeComposites.AsNoTracking().AsQueryable();
                 var totalCount = await query.CountAsync();
 
                 var trades = await query.OrderBy(t => t.Id)
-                    .Include(tc => tc.TradeElements)
                             .ToListAsync();
-
-
             }
         }
 
-        private static async Task<TradeComposite> CreateAndSaveTradeInstance(TradingJournalDataContext context)
+        private async Task<TradeComposite> CreateAndSaveTradeInstance()
         {
             TradeComposite trade = new();
-            context.TradeComposites.Add(trade);
-            //await context.SaveChangesAsync();
+            _dbContext.TradeComposites.Add(trade);
+            await _dbContext.SaveChangesAsync();
+
             AddTradeIdea(trade);
-            await context.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
             return trade;
         }
 
-        private static void AddPositionsAndSummary(TradeComposite trade)
+        private void AddPositionsAndSummary(TradeComposite trade)
         {
             AddElementToTrade(trade, TradeActionType.AddPosition);
             AddElementToTrade(trade, TradeActionType.AddPosition);
@@ -68,7 +77,7 @@ namespace HsR.Journal.Seeder
             TradeCompositeUpdates.RecreateSummary(trade);
         }
 
-        private static void AddTradeIdea(TradeComposite trade)
+        private void AddTradeIdea(TradeComposite trade)
         {
             TradeElement originElement = new(trade, TradeActionType.Origin);
             originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
@@ -76,18 +85,18 @@ namespace HsR.Journal.Seeder
             trade.TradeElements.Add(originElement);
         }
 
-        private static void AddElementToTrade(TradeComposite trade, TradeActionType type)
+        private void AddElementToTrade(TradeComposite trade, TradeActionType type)
         {
-            TradeElement addElement = new(trade, type);
-            addElement.Entries = EntriesFactory.GetAddPositionEntries(addElement);
+            TradeElement newElement = new(trade, type);
+            newElement.Entries = EntriesFactory.GetAddPositionEntries(newElement);
 
-            PopulateElementWithData(addElement);
-            trade.TradeElements.Add(addElement);
+            PopulateElementWithData(newElement);
+            trade.TradeElements.Add(newElement);
         }
 
         //populate related
-        private static readonly Random _lengthRandom = new();
-        private static TradeElement PopulateElementWithData(TradeElement element)
+        private readonly Random _lengthRandom = new();
+        private TradeElement PopulateElementWithData(TradeElement element)
         {
             int length;
             for (int i = 0; i < element.Entries.Count; i++)

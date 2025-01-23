@@ -10,7 +10,8 @@ namespace HsR.Journal.DataSeeder
         {
             using var scope = services.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<TradingJournalDataContext>();
-            await DatabaseSeeder.SeedAsync(dbContext);
+            var seeder = new DatabaseSeeder(dbContext);
+            await seeder.SeedAsync();
         }
     }
 }

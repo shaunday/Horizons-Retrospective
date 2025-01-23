@@ -5,50 +5,6 @@ namespace HsR.Journal.Entities.Factory
 {
     public static class TradeElementCRUDs
     {
-        public static TradeElement CreateTradeElementForClosure(TradeComposite trade, string closingPrice)
-        {
-            // Create a TradeElement for ReducePosition
-            var tradeInput = new TradeElement(trade, TradeActionType.ReducePosition);
-            tradeInput.Entries = EntriesFactory.GetReducePositionEntries(tradeInput);
-
-            // Find price entry
-            var priceEntry = tradeInput.Entries.SingleOrDefault(ti => ti.UnitPriceRelevance == ValueRelevance.Negative);
-            if (priceEntry == null)
-            {
-                throw new InvalidOperationException("Could not find price entry to reduce / close position");
-            }
-            priceEntry.ContentWrapper = new ContentRecord(closingPrice);
-
-            // Find cost entry
-            var costEntry = tradeInput.Entries.SingleOrDefault(ti => ti.TotalCostRelevance == ValueRelevance.Negative);
-            if (costEntry == null)
-            {
-                throw new InvalidOperationException("Could not find cost entry to reduce / close position");
-            }
-
-            if (double.TryParse(closingPrice, out double closingPriceValue))
-            {
-                var analytics = Analytics.GetTradingCosts(trade);
-                double netAmountInPosition = analytics.addPositions.TotalAmount - analytics.reducePositions.TotalAmount;
-                double costToClose = closingPriceValue * netAmountInPosition;
-                costEntry.ContentWrapper = new ContentRecord(costToClose.ToF2String());
-
-                // Create TradeElement for Closure
-
-                analytics.reducePositions.TotalCost += costToClose;
-                analytics.reducePositions.TotalAmount += netAmountInPosition;
-
-                var tradeClosure = new TradeElement(trade, TradeActionType.Closure);
-                TradeAnalyticsSummary analyticsSummary = new(analytics);
-                tradeClosure.Entries = EntriesFactory.GetTradeClosureComponents(tradeClosure, analyticsSummary);
-            }
-            else
-            {
-                throw new FormatException("Could not parse closing price");
-            }
-
-            return tradeInput; // Return tradeInput, as this is the entry we are adding
-        }
 
         public static TradeElement CreateInterimTradeElement(TradeComposite trade, bool isAdd)
         {

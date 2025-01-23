@@ -1,5 +1,9 @@
 ﻿
 // todo
+handle possible summary issues (delete on trade delete)
+handle add/save on addele
+same for entry
+
 activate trade : add first position change state add date
 must flag on entries.. like broker? ticker.. how? temp ele?
 add restrictions - selection fileds
