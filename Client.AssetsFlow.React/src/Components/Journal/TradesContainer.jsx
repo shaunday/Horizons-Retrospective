@@ -11,7 +11,7 @@ function TradesContainer() {
     queryClient.getQueryData(tradeKeysFactory.tradeIdsKey) || [];
 
   return (
-    <ul>
+    <ul style={{ listStyleType: 'none' }}>
       {cachedTradeIds.map((tradeId) => (
         <li key={tradeId}>
           <TradeWrapper tradeId={tradeId} />

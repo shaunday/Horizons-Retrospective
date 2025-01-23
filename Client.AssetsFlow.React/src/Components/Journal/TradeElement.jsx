@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import * as Constants from "@constants/journalConstants";
-import DataElement from "../DataElement/DataElement";
+import DataElement from "./DataElement/DataElement";
 
 const listStyle = {
   display: "flex",
@@ -37,7 +37,8 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
       {tradeElement[Constants.TRADE_ENTRIES_STRING]
           .map((entry, index) => (
             <li key={entry.id} style={listItemStyle}>
-              <DataElement cellInfo={entry} onCellUpdate={processCellUpdate} style={index !== 0 ? { marginLeft: "10px" } : {}}/>
+              <DataElement cellInfo={entry} onCellUpdate={processCellUpdate} 
+              style={index !== 0 ? { marginLeft: "10px" } : {}}/>
             </li>
           ))}
       </ul>

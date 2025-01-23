@@ -10,8 +10,8 @@ function TradeWrapper({ tradeId }) {
   }, []);
 
   return (
-    <div onClick={toggleCollapse}>
-      <div>{isCollapsed ? "▼" : "▲"}</div>
+    <div onClick={toggleCollapse} style={{ display: "flex", alignItems: "center" }}>
+      <div>{isCollapsed ? "▶" : "◁"}</div>
       {isCollapsed ? (
         <TradeCollapsed tradeId={tradeId} />
       ) : (
