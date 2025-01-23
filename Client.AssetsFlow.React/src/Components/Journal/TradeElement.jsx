@@ -10,12 +10,19 @@ const listStyle = {
 };
 
 const listItemStyle = {
-  border: "1px solid lightblue", // Adds a solid black border
-  padding: "5px", // Adds some padding inside the border
-  borderRadius: "4px", // Optional: Adds rounded corners
+  border: "1px solid grey", 
+  padding: "5px", 
+  borderRadius: "4px", 
+  marginLeft: "5px",
 };
 
 function TradeElement({ tradeElement, onElementContentUpdate }) {
+  // Check if tradeElement is an empty object or undefined
+  if (!tradeElement || Object.keys(tradeElement).length === 0) {
+    console.warn("Received an empty or invalid tradeElement:", tradeElement);
+    return <div>No valid trade element to display</div>;
+  }
+  
   const processCellUpdate = useCallback(
     (data) => {
       //todo handle inter-connectedness

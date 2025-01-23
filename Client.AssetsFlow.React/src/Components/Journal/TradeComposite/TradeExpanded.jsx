@@ -10,8 +10,14 @@ function TradeExpanded({ tradeId }) {
   const { tradeSummary, processEntryUpdate, processTradeAction } =
     useTradeStateAndManagement(trade);
 
+  const containerStyle = {
+    display: "flex",
+    flexDirection: "column", // Stack children vertically
+    alignItems: "flex-start", // Optional: Align children to the left (default)
+  };
+
   return (
-    <>
+    <div style={containerStyle}>
       <ul>
         {trade[Constants.TRADE_ELEMENTS_STRING].map((ele, index) => (
           <li key={ele.id}>
@@ -23,12 +29,12 @@ function TradeExpanded({ tradeId }) {
           </li>
         ))}
       </ul>
-      {tradeSummary && <TradeElement tradeElement={tradeSummary} />}
+      {tradeSummary && <TradeElement tradeElement={tradeSummary}/>}
       <CompositeControls
         tradeComposite={trade}
         onTradeActionExecuted={processTradeAction}
       />
-    </>
+    </div>
   );
 }
 
