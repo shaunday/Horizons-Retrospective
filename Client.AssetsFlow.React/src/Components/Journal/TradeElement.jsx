@@ -24,6 +24,13 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
     [onElementContentUpdate]
   );
 
+  const entries = tradeElement[Constants.TRADE_ENTRIES_STRING];
+
+  if (!Array.isArray(entries)) {
+    console.warn(`Expected an array for entries, but got:`, entries);
+    return <div>No valid entries to display</div>;
+  }
+
   return (
     <>
       <ul style={listStyle}>

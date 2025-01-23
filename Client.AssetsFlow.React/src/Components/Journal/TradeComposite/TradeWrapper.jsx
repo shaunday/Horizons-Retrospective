@@ -1,10 +1,9 @@
 import React, { useState, useCallback } from "react";
-import * as Constants from "@constants/journalConstants";
 import TradeExpanded from "./TradeExpanded";
 import TradeCollapsed from "./TradeCollapsed";
 
 function TradeWrapper({ tradeId }) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleCollapse = useCallback(() => {
     setIsCollapsed((prev) => !prev);

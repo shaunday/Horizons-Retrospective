@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Constants from "@constants/journalConstants";
 import TradeElement from "@journalComponents/TradeElement";
 import { useTrade } from "@hooks/useTrade";
@@ -9,29 +9,27 @@ function TradeCollapsed({ tradeId }) {
 
   useEffect(() => {
     // Generate a simulated trade element
-    const simulatedElement = trade.tradeElements.map((tradeElement) => {
-      // Filter Entries based on the relevant property
-      const relevantEntries = tradeElement.Entries?.filter(
-        (entry) => entry[Constants.RELEVANT_FOR_ORVERVIEW_STRING]
-      );
+    
+    const simulatedEntries = trade.tradeElements
+    .flatMap((tradeElement) => {
+        return tradeElement[Constants.TRADE_ENTRIES_STRING].filter(
+            (entry) => entry[Constants.RELEVANT_FOR_ORVERVIEW_STRING]);
+        })
 
-      return {
-        id: `Simulated-${tradeElement.id}`, // Assign a new ID or unique property
-        simulated: true, // Mark this as a simulated element
-        Entries: relevantEntries,
-      };
-    });
+    const simulatedElement = {
+      id: `Simulated-${tradeId}`, // Assign a unique ID based on tradeId
+      simulated: true, // Mark this as a simulated element
+      entries: simulatedEntries, // Add the simulated entries array
+    };
 
-    // Set the simulated trade element in state
     setSimulatedEle(simulatedElement);
-  }, [trade]);
-  
+  }, []);
+
   return (
     <>
-       <TradeElement
-              tradeElement={simulatedEle}
-              style={index !== 0 ? { marginTop: "10px" } : {}}
-            />
+       {simulatedEle ? ( <TradeElement tradeElement={simulatedEle} />) : (
+        <div>Loading...</div>
+        )}
     </>
   );
 }
