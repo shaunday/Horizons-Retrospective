@@ -84,18 +84,14 @@ namespace HsR.Journal.Entities.Factory
 
             var tradeInputToRemove = trade.TradeElements.Where(t => t.Id == parsedId).SingleOrDefault();
 
-            RemoveInterimInput(trade, tradeInputToRemove);
-        }
-
-        public static void RemoveInterimInput(TradeComposite trade, TradeElement? tradeInputToRemove)
-        {
-            if (tradeInputToRemove != null && (tradeInputToRemove.TradeActionType == TradeActionType.ReducePosition || tradeInputToRemove.TradeActionType == TradeActionType.ReducePosition))
+            if (tradeInputToRemove != null)
             {
                 trade.TradeElements.Remove(tradeInputToRemove);
             }
             else
             {
-                throw new Exception("weird");
+                throw new ArgumentException($"The trade input (Id '{tradeInputId}') to remove is null.", nameof(tradeInputId));
+
             }
         }
     }

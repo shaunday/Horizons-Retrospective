@@ -24,7 +24,7 @@ namespace HsR.Journal.Entities
         [Required]
         public bool IsRelevantForOverview { get; set; } = false;
 
-        public ICollection<ContentRecord>? History { get; set; }
+        public List<ContentRecord>? History { get; set; }
 
         #endregion
 

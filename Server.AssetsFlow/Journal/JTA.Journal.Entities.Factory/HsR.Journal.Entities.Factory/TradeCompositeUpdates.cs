@@ -10,10 +10,8 @@ namespace HsR.Journal.Entities.Factory
     {
         public static TradeComposite CloseTrade(TradeComposite trade, string closingPrice)
         {
-            TradeElementCRUDs.RemoveInterimInput(trade, trade.Summary);
-
             var closureElement = TradeElementCRUDs.CreateTradeElementForClosure(trade, closingPrice);
-            trade.TradeElements.Add(closureElement);
+            trade.Summary = closureElement;
 
             return trade;
         }

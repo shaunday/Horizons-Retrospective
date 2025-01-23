@@ -41,7 +41,7 @@ namespace HsR.Journal.TradeAnalytics
                     }
                 }
             }
-            return (positionsData[TradeActionType.AddPosition], positionsData[TradeActionType.AddPosition]);
+            return (positionsData[TradeActionType.AddPosition], positionsData[TradeActionType.ReducePosition]);
         }  
     }
 }

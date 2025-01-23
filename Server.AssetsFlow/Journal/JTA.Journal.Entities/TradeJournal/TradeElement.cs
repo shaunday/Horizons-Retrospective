@@ -10,7 +10,7 @@ namespace HsR.Journal.Entities
         [Required]
         public TradeActionType TradeActionType { get; set; }
 
-        public List<DataElement> Entries { get; set; } = [];
+        public List<DataElement> Entries { get; set; } = new List<DataElement>();
 
         [Required]
         public DateTime CreatedAt { get; } = DateTime.Now;
@@ -30,5 +30,10 @@ namespace HsR.Journal.Entities
 
         [Required]
         public TradeComposite CompositeRef { get; set; } = null!;
+
+        public override string ToString()
+        {
+            return $"Id={Id}, Typr={TradeActionType}, Entries Count={Entries.Count}";
+        }
     }
 }

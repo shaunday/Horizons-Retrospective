@@ -8,7 +8,7 @@ namespace HsR.Journal.Seeder
 {
     internal static class DatabaseSeeder
     {
-        private static RandomNumberGenerator _randomNumbersMachine = new();
+        private static RandomNumberGeneratorEx _randomNumbersMachine = new();
         private static RandomWordGenerator _randomWordsMachine = new();
 
         internal static async Task SeedAsync(TradingJournalDataContext context)
@@ -27,7 +27,7 @@ namespace HsR.Journal.Seeder
                 AddOngoingTradeToDbContext(context);
                 AddOngoingTradeToDbContext(context);
 
-                AddClosedTradeToDbContext(context);
+                //AddClosedTradeToDbContext(context);
 
                 await context.SaveChangesAsync();
             }
@@ -57,9 +57,9 @@ namespace HsR.Journal.Seeder
         {
             TradeComposite trade = GetTradeIdea();
 
-            AddElementToTrade(trade);
-            AddElementToTrade(trade);
-            AddElementToTrade(trade);
+            AddElementToTrade(trade, TradeActionType.AddPosition);
+            AddElementToTrade(trade, TradeActionType.AddPosition);
+            AddElementToTrade(trade, TradeActionType.ReducePosition);
 
             TradeCompositeUpdates.RecreateSummary(trade);
             return trade;
@@ -75,9 +75,9 @@ namespace HsR.Journal.Seeder
             return trade;
         }
 
-        private static void AddElementToTrade(TradeComposite trade)
+        private static void AddElementToTrade(TradeComposite trade, TradeActionType type)
         {
-            TradeElement addElement = new(trade, TradeActionType.AddPosition);
+            TradeElement addElement = new(trade, type);
             addElement.Entries = EntriesFactory.GetAddPositionEntries(addElement);
 
             PopulateElementWithData(addElement);
