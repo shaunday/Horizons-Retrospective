@@ -1,11 +1,14 @@
 using HsR.Common;
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
+using HsR.Journal.Repository.Services.Base;
+using HsR.Journal.Repository.Services.TradeCompositeRepo;
 using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.DataContext
 {
-    public partial class TradeCompositeRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), ITradeCompositeRepository
+    public partial class TradeCompositeRepository(TradingJournalDataContext dataContext) 
+                                                : JournalRepositoryBase(dataContext), ITradeCompositeRepository
     {
         public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
         {
@@ -37,7 +40,6 @@ namespace HsR.Journal.DataContext
 
             return (trades, paginationMetadata);
         }
-
 
         public async Task<TradeComposite> AddTradeCompositeAsync()
         {

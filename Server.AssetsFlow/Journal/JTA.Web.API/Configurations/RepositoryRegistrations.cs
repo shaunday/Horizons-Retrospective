@@ -10,7 +10,7 @@ namespace HsR.Web.API.Repositories
             services.AddScoped<ITradeCompositeRepository, TradeCompositeRepository>();
             services.AddScoped<ITradeElementRepository, TradeElementRepository>();
             services.AddScoped<IDataElementRepository, DataElementRepository>();
-            services.AddScoped<IJournalRepository, JournalRepository>();
+            services.AddScoped<IJournalRepositoryWrapper, JournalRepositoryWrapper>();
         }
     }
 }

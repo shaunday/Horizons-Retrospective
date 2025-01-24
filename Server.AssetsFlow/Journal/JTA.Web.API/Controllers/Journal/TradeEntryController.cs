@@ -14,7 +14,7 @@ namespace HsR.Web.API.Controllers.Journal
     {
         #region Ctor
 
-        public ContentUpdateController(JournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
+        public ContentUpdateController(JournalRepositoryWrapper journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
                                                                                                         base(journalAccess, logger, mapper)
         { }
 

@@ -3,7 +3,7 @@ using HsR.Journal.Entities;
 
 namespace HsR.Journal.DataContext
 {
-    public class JournalRepository : IJournalRepository
+    public class JournalRepositoryWrapper : IJournalRepositoryWrapper
     {
         #region Members
         private readonly ITradeCompositeRepository _tradeCompositeRepository;
@@ -13,7 +13,7 @@ namespace HsR.Journal.DataContext
         #endregion
 
         #region ctor
-        public JournalRepository(
+        public JournalRepositoryWrapper(
             ITradeCompositeRepository tradeCompositeRepository,
             ITradeElementRepository tradeElementRepository,
             IDataElementRepository dataElementRepository,

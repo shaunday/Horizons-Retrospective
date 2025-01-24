@@ -11,18 +11,17 @@ namespace HsR.Journal.Repository.Configurations
             builder.OwnsOne(c => c.ContentWrapper)
                 .WithOwner()
                 .HasForeignKey(h => h.DataElementFK);
-
             builder.Navigation(c => c.ContentWrapper).AutoInclude();
 
             builder.OwnsMany(t => t.History)
                 .WithOwner()
                 .HasForeignKey(h => h.DataElementFK);
+            builder.Navigation(c => c.History).AutoInclude();
 
             builder.HasOne(c => c.CompositeRef)
                 .WithMany()
                 .HasForeignKey(c => c.CompositeFK)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .IsRequired();
 
             // Enum to string conversions
             builder.Property(c => c.ComponentType)

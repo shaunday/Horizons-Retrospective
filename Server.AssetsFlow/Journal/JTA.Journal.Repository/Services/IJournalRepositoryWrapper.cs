@@ -3,7 +3,7 @@ using HsR.Journal.Entities;
 
 namespace HsR.Journal.DataContext
 {
-    public interface IJournalRepository
+    public interface IJournalRepositoryWrapper
     {
         //composites
         Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10);

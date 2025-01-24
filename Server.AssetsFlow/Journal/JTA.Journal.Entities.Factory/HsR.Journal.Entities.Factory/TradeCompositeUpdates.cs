@@ -56,13 +56,5 @@ namespace HsR.Journal.Entities.Factory
 
             return trade;
         }
-
-        public static TradeElement RecreateSummary(TradeComposite trade)
-        {
-            TradeElement summary = TradeElementCRUDs.GetInterimSummary(trade);
-            trade.Summary = summary;
-
-            return summary;
-        }
     }
 }

@@ -1,5 +1,6 @@
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
+using HsR.Journal.Repository.Services.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.DataContext
@@ -27,8 +28,7 @@ namespace HsR.Journal.DataContext
                     .LoadAsync();
 
                 var trade = cell.CompositeRef;
-                newSummary = TradeElementCRUDs.GetInterimSummary(trade);
-                trade.Summary = newSummary;
+                newSummary = RefreshSummary(trade);
             }
 
             await _dataContext.SaveChangesAsync();

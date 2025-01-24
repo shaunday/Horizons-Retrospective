@@ -5,7 +5,6 @@ namespace HsR.Journal.Entities.Factory
 {
     public static class TradeElementCRUDs
     {
-
         public static TradeElement CreateInterimTradeElement(TradeComposite trade, bool isAdd)
         {
             TradeElement tradeInput = new(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);

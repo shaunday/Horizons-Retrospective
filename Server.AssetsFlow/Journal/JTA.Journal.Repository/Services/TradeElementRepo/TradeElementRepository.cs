@@ -1,10 +1,12 @@
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
+using HsR.Journal.Repository.Services.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.DataContext
 {
-    public class TradeElementRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), ITradeElementRepository
+    public class TradeElementRepository(TradingJournalDataContext dataContext) 
+                                            : JournalRepositoryBase(dataContext), ITradeElementRepository
     {
         public async Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
@@ -12,10 +14,10 @@ namespace HsR.Journal.DataContext
             TradeElement tradeInput = TradeElementCRUDs.CreateInterimTradeElement(trade, isAdd);
             trade.TradeElements.Add(tradeInput);
 
-            TradeElement summary = TradeCompositeUpdates.RecreateSummary(trade);
+            TradeElement newSummary = RefreshSummary(trade);
 
             await _dataContext.SaveChangesAsync();
-            return (tradeInput, summary);
+            return (tradeInput, newSummary);
         }
 
         public async Task<TradeElement> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
@@ -27,11 +29,10 @@ namespace HsR.Journal.DataContext
             }
 
             TradeElementCRUDs.RemoveInterimInputById(trade, tradeInputId);
-            TradeElement summary = TradeElementCRUDs.GetInterimSummary(trade);
-            trade.Summary = summary;
+            TradeElement newSummary = RefreshSummary(trade); 
 
             await _dataContext.SaveChangesAsync();
-            return summary;
+            return newSummary;
         }
 
         public async Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice)
@@ -51,6 +52,7 @@ namespace HsR.Journal.DataContext
             return trade.Summary!;
         }
 
+        //helper
         private async Task<TradeComposite> GetTradeCompositeAsync(string tradeId)
         {
             if (!int.TryParse(tradeId, out var parsedId))

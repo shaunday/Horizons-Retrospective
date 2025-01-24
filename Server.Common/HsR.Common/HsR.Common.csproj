@@ -7,4 +7,8 @@
     <BaseOutputPath>..\Journal\bin</BaseOutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="BaseClasses\" />
+  </ItemGroup>
+
 </Project>

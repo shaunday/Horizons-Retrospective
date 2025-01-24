@@ -8,14 +8,19 @@ namespace HsR.Journal.Repository.Configurations
     {
         public void Configure(EntityTypeBuilder<TradeComposite> builder)
         {
-            builder.HasMany(t => t.TradeElements)
-                .WithOne(t => t.CompositeRef)
+            builder.HasOne(tc => tc.Summary)
+                .WithOne()
+                .HasForeignKey<TradeComposite>("SummaryId"); //shadow prop
+
+            builder.Navigation(tc => tc.Summary).AutoInclude();
+
+            builder.HasMany(tc => tc.TradeElements)
+                .WithOne(tc => tc.CompositeRef)
                 .HasForeignKey(t => t.CompositeFK)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Navigation(tc => tc.TradeElements).AutoInclude();
-            builder.Navigation(tc => tc.Summary).AutoInclude();
 
             // Enum to string conversion
             builder.Property(te => te.Status)

@@ -14,7 +14,7 @@ namespace HsR.Web.API.Controllers.Journal
     {
         #region Ctor
 
-        public TradeElementsController(JournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
+        public TradeElementsController(JournalRepositoryWrapper journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
                                                                                                         base(journalAccess, logger, mapper)
         { }
         #endregion

@@ -17,7 +17,7 @@ namespace HsR.Journal.Seeder
         internal async Task SeedAsync()
         {
             // Check if any data exists in a specific table to avoid reseeding
-            if (!await _dbContext.TradeComposites.AnyAsync())
+           // if (!await _dbContext.TradeComposites.AnyAsync())
             {
                 // Drop the database if it exists
                 dbContext.Database.EnsureDeleted();
@@ -61,7 +61,8 @@ namespace HsR.Journal.Seeder
             AddElementToTrade(trade, TradeActionType.AddPosition);
             AddElementToTrade(trade, TradeActionType.ReducePosition);
 
-            TradeCompositeUpdates.RecreateSummary(trade);
+            TradeElement newSummary = TradeElementCRUDs.GetInterimSummary(trade);
+            trade.Summary = newSummary;
         }
 
         private void AddTradeIdea(TradeComposite trade)

@@ -7,11 +7,11 @@ namespace HsR.Web.API.Controllers.Journal
 {
     public class JournalControllerBase : DayJControllerBase
     {
-        protected readonly IJournalRepository _journalAccess;
+        protected readonly IJournalRepositoryWrapper _journalAccess;
         protected readonly ILogger<JournalControllerBase> _logger;
         protected readonly IMapper _mapper;
 
-        public JournalControllerBase(IJournalRepository journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper)
+        public JournalControllerBase(IJournalRepositoryWrapper journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper)
         {
             _journalAccess = journalAccess ?? throw new ArgumentNullException(nameof(journalAccess));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));

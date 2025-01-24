@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HsR.Journal.DataContext
+namespace HsR.Journal.Repository.Services.TradeCompositeRepo
 {
     public static class TradesFiltering
     {
