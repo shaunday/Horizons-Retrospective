@@ -5,37 +5,36 @@ import CompositeControls from "./CompositeControls";
 import { useGetTradeById } from "@hooks/useGetTradeById";
 import { useTradeStateAndManagement } from "@hooks/Composite/useTradeStateAndManagement";
 
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column", // Stack children vertically
+    listStyleType: "none", // Removes default list bullets
+    alignItems: "flex-start", // Align children to the left
+  },
+  list: {
+    listStyleType: "none", // Removes default list bullets
+    padding: 0, // Removes default padding
+    margin: 0, // Removes default margin
+  },
+  listItem: {
+    border: "1.5px solid purple",
+    padding: "5px",
+    borderRadius: "4px",
+    margin: "5px",
+  },
+};
+
 function TradeExpanded({ tradeId }) {
   const { trade } = useGetTradeById(tradeId);
   const { tradeSummary, processEntryUpdate, processTradeAction } =
     useTradeStateAndManagement(trade);
 
-  const containerStyle = {
-    display: "flex",
-    flexDirection: "column", // Stack children vertically
-    listStyleType: "none", // Removes default list bullets
-    alignItems: "flex-start", // Optional: Align children to the left (default)
-  };
-
-  const listStyle = {
-    listStyleType: "none", // Removes default list bullets
-    padding: 0, // Removes default padding
-    margin: 0, // Removes default margin
-    marginLeft: "10px",
-  };
-
-  const listItemStyle = {
-    border: "1.5px solid purple", 
-    padding: "5px", 
-    borderRadius: "4px",
-    margin: "5px",
-  };
-
   return (
-    <div style={containerStyle}>
-      <ul style={listStyle}>
+    <div style={styles.container}>
+      <ul style={styles.list}>
         {trade[Constants.TRADE_ELEMENTS_STRING].map((ele, index) => (
-          <li key={ele.id} style={listItemStyle}>
+          <li key={ele.id} style={styles.listItem}>
             <TradeElement
               tradeElement={ele}
               onElementContentUpdate={processEntryUpdate}
@@ -44,7 +43,7 @@ function TradeExpanded({ tradeId }) {
           </li>
         ))}
       </ul>
-      {tradeSummary && <TradeElement tradeElement={tradeSummary}/>}
+      {tradeSummary && <TradeElement tradeElement={tradeSummary} />}
       <CompositeControls
         tradeComposite={trade}
         onTradeActionExecuted={processTradeAction}

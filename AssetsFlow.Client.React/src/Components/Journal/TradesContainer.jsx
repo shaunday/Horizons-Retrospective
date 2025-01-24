@@ -3,19 +3,20 @@ import { tradeKeysFactory } from "@services/query-key-factory";
 import TradeWrapper from "./TradeComposite/TradeWrapper";
 import { useQueryClient } from "@tanstack/react-query";
 
-const listStyle = {
-  display: "flex",
-  listStyleType: "none", // Removes default list bullets
-  flexDirection: "column", 
-  padding: 0, // Removes default padding
-  margin: "2px", // Removes default margin
-};
-
-const listItemStyle = {
-  border: "1.5px solid blue", 
-  padding: "5px", 
-  borderRadius: "4px", 
-  marginBottom: "5px",
+const styles = {
+  list: {
+    display: "flex",
+    listStyleType: "none", // Removes default list bullets
+    flexDirection: "column",
+    padding: 0, // Removes default padding
+    margin: "2px", // Removes default margin
+  },
+  listItem: {
+    border: "1.5px solid blue",
+    padding: "5px",
+    borderRadius: "4px",
+    marginBottom: "5px",
+  },
 };
 
 function TradesContainer() {
@@ -26,9 +27,9 @@ function TradesContainer() {
     queryClient.getQueryData(tradeKeysFactory.tradeIdsKey) || [];
 
   return (
-    <ul style={listStyle}>
+    <ul style={styles.list}>
       {cachedTradeIds.map((tradeId) => (
-        <li key={tradeId} style={listItemStyle}>
+        <li key={tradeId} style={styles.listItem}>
           <TradeWrapper tradeId={tradeId} />
         </li>
       ))}
