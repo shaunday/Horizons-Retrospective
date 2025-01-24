@@ -10,7 +10,6 @@
                 new DataElement("Long / Short", ComponentType.Header) { IsRelevantForOverview = true },
 
                 new DataElement("Thesis", ComponentType.Thesis) { IsRelevantForOverview = true },
-                new DataElement("Expanded", ComponentType.Thesis),
                 new DataElement("Confluences", ComponentType.Thesis),
                 new DataElement("Confidence level", ComponentType.Thesis),
                 new DataElement("Triggers", ComponentType.Thesis),
