@@ -1,6 +1,3 @@
-edit only if input changed and not overview
-
-
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 
 https

@@ -13,7 +13,7 @@ function TradeCollapsed({ tradeId }) {
     const simulatedEntries = trade.tradeElements
     .flatMap((tradeElement) => {
         return tradeElement[Constants.TRADE_ENTRIES_STRING].filter(
-            (entry) => entry[Constants.RELEVANT_FOR_ORVERVIEW_STRING]);
+            (entry) => entry[Constants.DATA_RELEVANT_FOR_ORVERVIEW_STRING]);
         })
 
     const simulatedElement = {

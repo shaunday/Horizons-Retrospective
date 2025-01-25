@@ -28,9 +28,10 @@ function TradesContainer() {
 
   return (
     <ul style={styles.list}>
-      {cachedTradeIds.map((tradeId) => (
+      {cachedTradeIds.map((tradeId, index) => (
         <li key={tradeId} style={styles.listItem}>
-          <TradeWrapper tradeId={tradeId} />
+          <TradeWrapper tradeId={tradeId}  
+          style={index !== 0 ? { marginTop: "10px" } : {}}/>
         </li>
       ))}
     </ul>
