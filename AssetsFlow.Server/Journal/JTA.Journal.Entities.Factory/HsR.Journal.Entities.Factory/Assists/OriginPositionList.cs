@@ -7,8 +7,8 @@
             var tradeOriginObjects = new List<DataElement>
             {
                 new DataElement("Ticker", ComponentType.Header) { IsRelevantForOverview = true },
-                new DataElement("Long / Short", ComponentType.Header) { IsRelevantForOverview = true },
-
+                new DataElement("Long / Short", ComponentType.Header, "") 
+                                          { IsRelevantForOverview = true, Restrictions = ["Long", "Short"]},
                 new DataElement("Thesis", ComponentType.Thesis) { IsRelevantForOverview = true },
                 new DataElement("Confluences", ComponentType.Thesis),
                 new DataElement("Confidence level", ComponentType.Thesis),

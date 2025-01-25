@@ -89,6 +89,10 @@ namespace HsR.Journal.Seeder
             int length;
             for (int i = 0; i < element.Entries.Count; i++)
             {
+                if (element.Entries[i].Restrictions != null)
+                {
+                    continue;
+                }
                 length = _lengthRandom.Next(3, 8);
                 if (element.Entries[i].IsCostRelevant)
                 {

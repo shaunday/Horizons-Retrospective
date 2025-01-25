@@ -32,6 +32,9 @@ namespace HsR.Journal.Repository.Configurations
 
             builder.Property(c => c.UnitPriceRelevance)
                 .HasConversion<string>();
+
+            //builder.Property(e => e.Restrictions)
+            //  .HasColumnType("jsonb"); //todo
         }
     }
 }

@@ -6,9 +6,7 @@ import { getContent } from "./contentGetters";
 
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const { contentValue } = getContent(cellInfo);
-  //const shouldRenderDialog  = cellInfo[Constants.DATA_RESTRICTION_STRING]?.length === 0;
-
-  const shouldRenderDialog = true; //override until i add restrictions support in the be
+  const shouldRenderDialog  = cellInfo[Constants.DATA_RESTRICTION_STRING]?.length === 0;
 
   return (
     <>

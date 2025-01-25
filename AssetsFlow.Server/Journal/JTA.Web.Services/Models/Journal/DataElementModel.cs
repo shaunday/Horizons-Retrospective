@@ -17,6 +17,7 @@ namespace HsR.Web.Services.Models.Journal
         [Required]
         public ContentRecord? ContentWrapper { get; set; }
         public ICollection<ContentRecord>? History { get; set; }
+        public ICollection<string>? Restrictions { get; set; }
 
         public ValueRelevance? TotalCostRelevance { get; set; }
         public ValueRelevance? UnitPriceRelevance { get; set; }

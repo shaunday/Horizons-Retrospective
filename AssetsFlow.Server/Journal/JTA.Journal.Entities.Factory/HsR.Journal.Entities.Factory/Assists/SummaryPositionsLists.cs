@@ -28,7 +28,8 @@ namespace HsR.Journal.Entities.Factory
                     new("Average Entry", ComponentType.Closure, analytics.AverageEntryPrice.ToF2String())
                                                                                  { IsRelevantForOverview = true },
                     new("Net Result", ComponentType.Closure, analytics.Profit.ToF2String()) { IsRelevantForOverview = true },
-                    new("W/L", ComponentType.Closure, "") { IsRelevantForOverview = true },
+                    new("W/L", ComponentType.Closure, "") 
+                                            { IsRelevantForOverview = true, Restrictions = ["W", "L"] },
                     new("Actual R:R", ComponentType.Closure, "") { IsRelevantForOverview = true },
                     new("Lessons", ComponentType.Closure, "")
                 };

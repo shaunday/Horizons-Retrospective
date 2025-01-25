@@ -1,7 +1,6 @@
 1. ICollection vs List
 2. Add props in DTO (In Web.Services)
 3. R/ships in Repo config:
- - AutoInclude?
- - Ownership
  - Enum to string conversion
  - Collections to json
+ - Class: Ownership, AutoInclude

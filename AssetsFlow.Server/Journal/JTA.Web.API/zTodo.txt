@@ -7,9 +7,10 @@ handle possible summary issues :
 handle add/save on addele
 same for entry
 
+ .HasColumnType("jsonb"); //todo
+
 activate trade : add first position change state add date
 must flag on entries.. like broker? ticker.. how? temp ele?
-add restrictions - selection fileds
 add first position
 add investment timeframe
 add overview -- next trouble area, d/w/m strength/weakness
