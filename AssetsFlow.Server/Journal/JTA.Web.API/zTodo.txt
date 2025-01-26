@@ -9,7 +9,7 @@ same for entry
 
  .HasColumnType("jsonb"); //todo
 
-activate trade : add first position change state add date
+activate trade : add first position change state add date, and obv on close
 must flag on entries.. like broker? ticker.. how? temp ele?
 add first position
 add investment timeframe

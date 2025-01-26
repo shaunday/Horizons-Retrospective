@@ -1,6 +1,6 @@
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 
-https
+https ?
 
 how to adjust trade status?
 filtering - adjust data call api
