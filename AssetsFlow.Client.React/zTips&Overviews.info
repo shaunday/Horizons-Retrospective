@@ -1,3 +1,4 @@
+general:
 npm run dev
 auto arrange = Shift + Alt + F.
 rename all atrl + h
@@ -5,7 +6,10 @@ rename all atrl + h
 
 
 index.html - everything always starts here. vite adds main, which goes to app.jsx 
-
 index.html handles the basic HTML structure and bootstrapping.
 main.js serves as the glue between your HTML and your application logic.
 App.vue or App.jsx contains your app's core UI and logic.
+
+
+production:
+env values will not load in production.. 
