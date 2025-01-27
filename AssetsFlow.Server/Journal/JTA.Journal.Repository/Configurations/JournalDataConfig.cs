@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HsR.Journal.Repository.Configurations
 {
-    public class JournalDataConfig : IEntityTypeConfiguration<JournalData>
+    public class JournalDataConfig : IEntityTypeConfiguration<UserData>
     {
-        public void Configure(EntityTypeBuilder<JournalData> builder)
+        public void Configure(EntityTypeBuilder<UserData> builder)
         {
             builder.HasNoKey();
 

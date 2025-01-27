@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HsR.Journal.Entities
 {
-    public class JournalData
+    public class UserData
     {
         public List<string>? SavedSectors { get; set; }
 
