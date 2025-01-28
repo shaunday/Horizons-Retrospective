@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HsR.Journal.Entities
+﻿namespace HsR.Journal.Entities
 {
     public class UserData
     {
-        public List<string>? SavedSectors { get; set; }
+        public ICollection<string>? SavedSectors { get; set; }
 
-        public List<string>? SavedBrokers { get; set; }
+        public ICollection<string>? SavedBrokers { get; set; }
 
     }
 }

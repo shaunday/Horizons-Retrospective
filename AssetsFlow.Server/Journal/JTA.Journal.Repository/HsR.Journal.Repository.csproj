@@ -31,9 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common.Net\HsR.Common.Db\HsR.Common.Db.csproj" />
     <ProjectReference Include="..\..\..\Common.Net\HsR.Common\HsR.Common.csproj" />
-    <ProjectReference Include="..\HsR.Journal.TradeAnalytics\HsR.Journal.TradeAnalytics\HsR.Journal.TradeAnalytics.csproj" />
-    <ProjectReference Include="..\JTA.Journal.Entities.Factory\HsR.Journal.Entities.Factory\HsR.Journal.Entities.Factory.csproj" />
+    <ProjectReference Include="..\HsR.Journal.TradeAnalytics\HsR.Journal.TradeAnalytics.csproj" />
+    <ProjectReference Include="..\JTA.Journal.Entities.Factory\HsR.Journal.Entities.Factory.csproj" />
     <ProjectReference Include="..\JTA.Journal.Entities\HsR.Journal.Entities.csproj" />
   </ItemGroup>
 

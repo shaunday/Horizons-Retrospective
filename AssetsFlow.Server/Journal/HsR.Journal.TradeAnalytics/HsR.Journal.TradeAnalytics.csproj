@@ -4,10 +4,11 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <BaseOutputPath>..\..\bin</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\JTA.Journal.Entities\HsR.Journal.Entities.csproj" />
+    <ProjectReference Include="..\JTA.Journal.Entities\HsR.Journal.Entities.csproj" />
   </ItemGroup>
 
 </Project>

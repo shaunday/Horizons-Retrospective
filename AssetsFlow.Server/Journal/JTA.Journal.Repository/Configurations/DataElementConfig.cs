@@ -1,6 +1,7 @@
 using HsR.Journal.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace HsR.Journal.Repository.Configurations
 {
@@ -31,10 +32,12 @@ namespace HsR.Journal.Repository.Configurations
                 .HasConversion<string>();
 
             builder.Property(c => c.UnitPriceRelevance)
-                .HasConversion<string>();
+            .HasConversion<string>();
 
-            //builder.Property(e => e.Restrictions)
-            //  .HasColumnType("jsonb"); //todo
+            builder
+                .Property(e => e.Restrictions)
+                .HasConversion(new JsonCollectionConverter())
+                .HasColumnType("jsonb");  // Make sure it's stored as json in PostgreSQL
         }
     }
 }

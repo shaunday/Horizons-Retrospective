@@ -16,7 +16,7 @@ namespace HsR.Journal.DataContext
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new JournalDataConfig());
+            modelBuilder.ApplyConfiguration(new UserDataConfig());
 
             modelBuilder.ApplyConfiguration(new TradeCompositeConfig());
             modelBuilder.ApplyConfiguration(new TradeElementConfig());
