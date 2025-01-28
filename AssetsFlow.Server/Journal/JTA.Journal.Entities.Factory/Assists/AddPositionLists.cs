@@ -6,7 +6,8 @@
         {
             var firstPositionObjects = new List<DataElement>
             {
-                new DataElement("Broker", ComponentType.Header) { IsRelevantForOverview = true },
+                new DataElement("Broker", ComponentType.Header) 
+                                { IsRelevantForOverview = true, Restrictions = ["Temp1", "Temp2"]},
                 new DataElement("Sector", ComponentType.Header) { IsRelevantForOverview = true },
             };
 

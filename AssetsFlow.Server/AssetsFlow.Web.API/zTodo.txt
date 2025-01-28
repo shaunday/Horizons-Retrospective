@@ -19,6 +19,7 @@ how to obfuscate amounts/costs for anon view?
 Indicator alerts, upcoming reports 
 Incdicators: double bottom on rsi/cci, ma, ema, wbb, dividends, report, news
 
+//ledger - populate brokers list with actual data
 
 //pre production - 2nd stage
 filtering history
