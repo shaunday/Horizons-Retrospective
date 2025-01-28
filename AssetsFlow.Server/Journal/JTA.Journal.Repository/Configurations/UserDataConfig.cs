@@ -14,11 +14,6 @@ namespace HsR.Journal.Repository.Configurations
                .Property(e => e.SavedSectors)
                .HasConversion(new JsonCollectionConverter())
                .HasColumnType("jsonb");  // Make sure it's stored as json in PostgreSQL
-
-            builder
-               .Property(e => e.SavedBrokers)
-               .HasConversion(new JsonCollectionConverter())
-               .HasColumnType("jsonb");  // Make sure it's stored as json in PostgreSQL
         }
     }
 }

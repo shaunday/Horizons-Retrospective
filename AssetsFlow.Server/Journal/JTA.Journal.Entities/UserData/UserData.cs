@@ -4,7 +4,9 @@
     {
         public ICollection<string>? SavedSectors { get; set; }
 
-        public ICollection<string>? SavedBrokers { get; set; }
+        public bool AllowPublicView { get; set; }
+
+        public bool AnonymizedPublicView { get; set; }
 
     }
 }
