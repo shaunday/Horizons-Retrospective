@@ -1,6 +1,5 @@
 ﻿
 // todo
-activate trade : add first position change state add date
 must flag on entries.. like broker? ticker.. how? temp ele?
 
 add investment timeframe

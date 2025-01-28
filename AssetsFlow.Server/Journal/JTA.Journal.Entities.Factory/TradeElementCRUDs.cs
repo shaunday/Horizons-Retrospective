@@ -10,7 +10,14 @@ namespace HsR.Journal.Entities.Factory
             TradeElement tradeInput = new(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);
             if (isAdd)
             {
-                tradeInput.Entries = EntriesFactory.GetAddPositionEntries(tradeInput);
+                if (trade.Status == TradeStatus.AnIdea)
+                {
+                    tradeInput.Entries = EntriesFactory.GetFirstPositionEntries(tradeInput);
+                }
+                else
+                {
+                    tradeInput.Entries = EntriesFactory.GetAddPositionEntries(tradeInput);
+                }
             }
             else
             {

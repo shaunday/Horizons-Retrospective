@@ -14,6 +14,11 @@ namespace HsR.Journal.DataContext
             TradeElement tradeInput = TradeElementCRUDs.CreateInterimTradeElement(trade, isAdd);
             trade.TradeElements.Add(tradeInput);
 
+            if (trade.Status == TradeStatus.AnIdea)
+            {
+                trade.Status = TradeStatus.Open;
+            }
+
             TradeElement newSummary = RefreshSummary(trade);
 
             await _dataContext.SaveChangesAsync();
