@@ -24,10 +24,19 @@ namespace HsR.Journal.Entities.Factory
             var analytics = Analytics.GetTradingCosts(trade);
             TradeAnalyticsSummary analyticsSummary = new(analytics);
 
-            TradeElement summary = new(trade, TradeActionType.InterimSummary);
-            summary.Entries = EntriesFactory.GetSummaryComponents(summary, analyticsSummary);
+            TradeElement newSummary;
+            if (analyticsSummary.NetAmount == 0.0)
+            {
+                newSummary = new TradeElement(trade, TradeActionType.Closure);
+                newSummary.Entries = EntriesFactory.GetTradeClosureComponents(newSummary, analyticsSummary);
+            }
+            else
+            {
+                newSummary = new(trade, TradeActionType.InterimSummary);
+                newSummary.Entries = EntriesFactory.GetSummaryComponents(newSummary, analyticsSummary);
+            }
 
-            return summary;
+            return newSummary;
         }
 
         public static void RemoveInterimInputById(TradeComposite trade, string tradeInputId)

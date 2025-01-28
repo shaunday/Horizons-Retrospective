@@ -24,6 +24,12 @@ namespace HsR.Journal.Repository.Services.Base
                 _dataContext.TradeElements.Remove(trade.Summary);
             }
 
+            // Update trade status, if we got a closure as summary
+            if (newSummary.TradeActionType == TradeActionType.Closure)
+            {
+                trade.Status = TradeStatus.Closed;
+            }
+
             trade.Summary = newSummary;
 
             return newSummary;

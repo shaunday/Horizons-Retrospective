@@ -1,15 +1,9 @@
 ﻿
 // todo
-handle possible summary issues :
-    datacontext update on refresh
-    close trade on reduction that brings net position to zero
-
-handle add/save on addele
-same for entry
 
  .HasColumnType("jsonb"); //todo
 
-activate trade : add first position change state add date, and obv on close
+activate trade : add first position change state add date
 must flag on entries.. like broker? ticker.. how? temp ele?
 add first position
 add investment timeframe

@@ -34,8 +34,6 @@ namespace HsR.Journal.DataContext
             await _dataContext.SaveChangesAsync();
             return (cell, newSummary);
         }
-
-      
     }
 
 }
