@@ -10,7 +10,7 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/components")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class ContentUpdateController : JournalControllerBase
+    internal class ContentUpdateController : JournalControllerBase
     {
         #region Ctor
 
@@ -21,7 +21,7 @@ namespace HsR.Web.API.Controllers.Journal
         #endregion
 
         [HttpPut("{componentId}")]
-        public async Task<ActionResult<(DataElementModel newEntry, TradeElementModel? summary)>> 
+        internal async Task<ActionResult<(DataElementModel newEntry, TradeElementModel? summary)>> 
                                                             UpdateDataComponent(string componentId, string newContent, string changeNote)
         {
             (DataElement updatedComponent, TradeElement? summary) = await _journalAccess.UpdateCellContentAsync(componentId, newContent, changeNote);

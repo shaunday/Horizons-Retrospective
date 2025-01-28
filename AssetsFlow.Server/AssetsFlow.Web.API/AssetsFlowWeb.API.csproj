@@ -4,7 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <DocumentationFile>$(OutputPath)HsR.Web.API.xml</DocumentationFile>
     <BaseOutputPath>..\bin</BaseOutputPath>
   </PropertyGroup>

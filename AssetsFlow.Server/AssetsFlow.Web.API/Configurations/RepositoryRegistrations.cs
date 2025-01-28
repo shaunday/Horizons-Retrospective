@@ -2,9 +2,9 @@ using HsR.Journal.DataContext;
 
 namespace HsR.Web.API.Repositories
 {
-    public static class RepositoryRegistrations
+    internal static class RepositoryRegistrations
     {
-        public static void AddRepositories(this IServiceCollection services)
+        internal static void AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IGeneralDataRepository, GeneralDataRepository>();
             services.AddScoped<ITradeCompositeRepository, TradeCompositeRepository>();

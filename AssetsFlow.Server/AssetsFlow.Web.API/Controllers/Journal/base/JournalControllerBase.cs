@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HsR.Web.API.Controllers.Journal
 {
-    public class JournalControllerBase : DayJControllerBase
+    internal class JournalControllerBase : DayJControllerBase
     {
         protected readonly IJournalRepositoryWrapper _journalAccess;
         protected readonly ILogger<JournalControllerBase> _logger;
         protected readonly IMapper _mapper;
 
-        public JournalControllerBase(IJournalRepositoryWrapper journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper)
+        internal JournalControllerBase(IJournalRepositoryWrapper journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper)
         {
             _journalAccess = journalAccess ?? throw new ArgumentNullException(nameof(journalAccess));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));

@@ -6,17 +6,17 @@ namespace HsR.Web.API.Controllers
     [Route("api/v{version:apiVersion}/files")]
     //[ApiController]
     //[ApiVersion("1.0")]
-    public class FilesController : ControllerBase
+    internal class FilesController : ControllerBase
     {
         private readonly FileExtensionContentTypeProvider _fileExtensionContentTypeProvider;
 
-        public FilesController(FileExtensionContentTypeProvider fileExtensionContentTypeProvider)
+        internal FilesController(FileExtensionContentTypeProvider fileExtensionContentTypeProvider)
         {
             _fileExtensionContentTypeProvider = fileExtensionContentTypeProvider ?? throw new ArgumentNullException(nameof(fileExtensionContentTypeProvider));
         }
 
         [HttpGet("{fileId}")]
-        public ActionResult GetFile(string fileId)
+        internal ActionResult GetFile(string fileId)
         {
             var pathToFile = "//todo";
 

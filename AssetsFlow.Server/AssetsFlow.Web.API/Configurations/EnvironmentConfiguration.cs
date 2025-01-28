@@ -2,9 +2,9 @@
 
 namespace HsR.Web.API.Configurations
 {
-    public static class EnvironmentConfiguration
+    internal static class EnvironmentConfiguration
     {
-        public static void ConfigureForEnvironment(this WebApplicationBuilder builder)
+        internal static void ConfigureForEnvironment(this WebApplicationBuilder builder)
         {
             if (builder.Environment.IsDevelopment())
             {
