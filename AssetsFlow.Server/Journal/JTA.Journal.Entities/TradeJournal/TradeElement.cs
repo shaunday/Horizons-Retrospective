@@ -13,7 +13,10 @@ namespace HsR.Journal.Entities
         public List<DataElement> Entries { get; set; } = new List<DataElement>();
 
         [Required]
-        public DateTime CreatedAt { get; } = DateTime.Now;
+        public DateTime TimeStamp { get; set; }
+
+        [Required]
+        public bool IsActive { get; private set; } = false;
 
         #region Ctors
         public TradeElement() { }
@@ -24,6 +27,12 @@ namespace HsR.Journal.Entities
             TradeActionType = actionType;
         } 
         #endregion
+
+        public void Activate()
+        {
+            IsActive = true;
+            TimeStamp = DateTime.Now;
+        }
 
         [Required]
         public int CompositeFK { get; set; }

@@ -9,7 +9,7 @@ namespace HsR.Web.Services.Models.Journal
 
         public string? ChangeNote { get; set; } 
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime TimeStamp { get; set; }
 
         [Required]
         public int DataElementFK { get; set; }

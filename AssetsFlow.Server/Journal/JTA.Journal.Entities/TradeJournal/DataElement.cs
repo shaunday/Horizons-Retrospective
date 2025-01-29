@@ -4,7 +4,7 @@ namespace HsR.Journal.Entities
 {
     public class DataElement
     {
-        #region Props 
+        #region Base Props 
 
         [Key]
         public int Id { get; private set; }
@@ -15,7 +15,16 @@ namespace HsR.Journal.Entities
         [Required]
         public ComponentType ComponentType { get; set; }
 
-        public ValueRelevance? UnitPriceRelevance { get; set; } 
+        public ICollection<ContentRecord>? History { get; set; }
+
+        #endregion
+
+        #region Flags / Restrictions
+
+        [Required]
+        public bool IsMustHave { get; set; } = false;
+
+        public ValueRelevance? UnitPriceRelevance { get; set; }
 
         public ValueRelevance? TotalCostRelevance { get; set; }
 
@@ -24,14 +33,12 @@ namespace HsR.Journal.Entities
         [Required]
         public bool IsRelevantForOverview { get; set; } = false;
 
-        public ICollection<ContentRecord>? History { get; set; }
-
         public ICollection<string>? Restrictions { get; set; }
 
         #endregion
 
         #region Ctors
-        private DataElement() { } //for ef
+        private DataElement() { } //for EF
 
         public DataElement(string title, ComponentType componentType, string content = "")
         {
@@ -80,9 +87,11 @@ namespace HsR.Journal.Entities
         }
         #endregion
 
+        #region ToString override
         public override string ToString()
         {
             return $"Id={Id}, Title={Title}, Content={ContentWrapper?.ContentValue}";
-        }
+        } 
+        #endregion
     }
 }

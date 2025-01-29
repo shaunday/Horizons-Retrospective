@@ -11,9 +11,13 @@ namespace HsR.Web.Services.Models.Journal
         [Required]
         public TradeActionType TradeActionType { get; set; }
 
+        [Required]
         public List<DataElementModel> Entries { get; set; } = null!;
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime TimeStamp { get; set; }
+
+        [Required]
+        public bool IsActive { get; set; } = false;
 
         [Required]
         public int TradeCompositeFK { get; set; }
