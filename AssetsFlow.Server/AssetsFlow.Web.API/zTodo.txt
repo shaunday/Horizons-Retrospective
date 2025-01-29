@@ -1,12 +1,12 @@
 ﻿
 // todo
-must flag on entries.. like broker? ticker.. how? temp ele?
+add activation to controllers
 
 add investment timeframe
 add overview -- next trouble area, d/w/m strength/weakness
 position weight/ sector weight
 how to obfuscate amounts/costs for anon view? 
-save sectors
+save sectors to userdata
 
 //testing= API tests (seeder?)
 

@@ -40,36 +40,21 @@ namespace HsR.Journal.DataContext
             return newSummary;
         }
 
-        public async Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice)
+        public async Task<TradeElement> ActivateTradeElement(string tradeEleId)
         {
-            var trade = await GetTradeCompositeAsync(tradeId);
-            if (trade.Summary != null)
-            {
-                _dataContext.TradeElements.Remove(trade.Summary);
-            }
-            else
-            {
-                throw new InvalidOperationException("Trade summary is missing.");
-            }
-            TradeCompositeUpdates.CloseTrade(trade, closingPrice);
+            var tradeEle = await GetTradeElementAsync(tradeEleId);
 
-            await _dataContext.SaveChangesAsync();
-            return trade.Summary!;
+            bool okForActivate = !tradeEle.Entries.Select(e => e.IsMustHave && string.IsNullOrEmpty(e.Content)).Any();
+            
+            if (okForActivate)
+            {
+                tradeEle.Activate();
+                await _dataContext.SaveChangesAsync();
+            }
+
+            return tradeEle;
         }
 
-        //helper
-        private async Task<TradeComposite> GetTradeCompositeAsync(string tradeId)
-        {
-            if (!int.TryParse(tradeId, out var parsedId))
-            {
-                throw new ArgumentException($"The tradeId '{tradeId}' is not a valid integer.", nameof(tradeId));
-            }
-
-            var trade = await _dataContext.TradeComposites
-                                            .Where(t => t.Id == parsedId)
-                                            .SingleOrDefaultAsync() ?? throw new InvalidOperationException($"Trade with ID {tradeId} not found.");
-            return trade!;
-        }
     }
 
 }

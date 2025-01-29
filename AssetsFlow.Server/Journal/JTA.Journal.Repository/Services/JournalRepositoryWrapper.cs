@@ -6,20 +6,20 @@ namespace HsR.Journal.DataContext
     public class JournalRepositoryWrapper : IJournalRepositoryWrapper
     {
         #region Members
-        private readonly ITradeCompositeRepository _tradeCompositeRepository;
+        private readonly ITradeCompositesRepository _tradeCompositesRepository;
         private readonly ITradeElementRepository _tradeElementRepository;
         private readonly IDataElementRepository _dataElementRepository;
-        private readonly IGeneralDataRepository _generalDataRepository;
+        private readonly IUserDataRepository _generalDataRepository;
         #endregion
 
-        #region ctor
+        #region Ctor
         public JournalRepositoryWrapper(
-            ITradeCompositeRepository tradeCompositeRepository,
+            ITradeCompositesRepository tradeCompositesRepository,
             ITradeElementRepository tradeElementRepository,
             IDataElementRepository dataElementRepository,
-            IGeneralDataRepository generalDataRepository)
+            IUserDataRepository generalDataRepository)
         {
-            _tradeCompositeRepository = tradeCompositeRepository;
+            _tradeCompositesRepository = tradeCompositesRepository;
             _tradeElementRepository = tradeElementRepository;
             _dataElementRepository = dataElementRepository;
             _generalDataRepository = generalDataRepository;
@@ -28,22 +28,22 @@ namespace HsR.Journal.DataContext
 
         public Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
         {
-            return _tradeCompositeRepository.GetAllTradeCompositesAsync(pageNumber, pageSize);
+            return _tradeCompositesRepository.GetAllTradeCompositesAsync(pageNumber, pageSize);
         }
 
         public Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetFilteredTradesAsync(TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
         {
-            return _tradeCompositeRepository.GetFilteredTradesAsync(filter, pageNumber, pageSize);
+            return _tradeCompositesRepository.GetFilteredTradesAsync(filter, pageNumber, pageSize);
         }
 
         public Task<TradeComposite> AddTradeCompositeAsync()
         {
-            return _tradeCompositeRepository.AddTradeCompositeAsync();
+            return _tradeCompositesRepository.AddTradeCompositeAsync();
         }
 
         public Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice)
         {
-            return _tradeElementRepository.CloseTradeAsync(tradeId, closingPrice);
+            return _tradeCompositesRepository.CloseTradeAsync(tradeId, closingPrice);
         }
 
 
@@ -57,6 +57,10 @@ namespace HsR.Journal.DataContext
             return _tradeElementRepository.RemoveInterimPositionAsync(tradeId, tradeInputId);
         }
 
+        public Task<TradeElement> ActivateTradeElement(string tradeEleId)
+        {
+            return _tradeElementRepository.ActivateTradeElement(tradeEleId);
+        }
 
         public Task<(DataElement updatedCell, TradeElement? summary)> UpdateCellContentAsync(string componentId, string newContent, string changeNote)
         {

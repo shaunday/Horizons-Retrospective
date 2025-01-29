@@ -4,7 +4,7 @@ using HsR.Journal.Repository;
 
 namespace HsR.Journal.DataContext
 {
-    public interface IGeneralDataRepository
+    public interface IUserDataRepository
     {
         Task<List<string>?> GetAllSavedSectors();
     } 
