@@ -28,8 +28,6 @@ namespace HsR.Journal.Entities
 
         public ValueRelevance? TotalCostRelevance { get; set; }
 
-        public bool IsCostRelevant => UnitPriceRelevance != null || TotalCostRelevance != null;
-
         [Required]
         public bool IsRelevantForOverview { get; set; } = false;
 

@@ -94,7 +94,7 @@ namespace HsR.Journal.Seeder
                     continue;
                 }
                 length = _lengthRandom.Next(3, 8);
-                if (element.Entries[i].IsCostRelevant)
+                if (element.Entries[i].IsCostRelevant())
                 {
                     element.Entries[i].ContentWrapper = new ContentRecord(_randomNumbersMachine.GenerateRandomNumber(length));
                 }

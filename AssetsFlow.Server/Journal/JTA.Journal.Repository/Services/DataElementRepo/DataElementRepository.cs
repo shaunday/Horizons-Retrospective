@@ -21,7 +21,7 @@ namespace HsR.Journal.DataContext
             cell.SetFollowupContent(newContent, changeNote);
 
             TradeElement? newSummary = null;
-            if (cell.IsCostRelevant)
+            if (cell.IsCostRelevant())
             {
                 await _dataContext.Entry(cell)
                     .Reference(c => c.CompositeRef)

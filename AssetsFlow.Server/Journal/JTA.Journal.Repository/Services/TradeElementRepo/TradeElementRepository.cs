@@ -44,7 +44,7 @@ namespace HsR.Journal.DataContext
         {
             var tradeEle = await GetTradeElementAsync(tradeEleId);
 
-            bool okForActivate = !tradeEle.Entries.Select(e => e.IsMustHave && string.IsNullOrEmpty(e.Content)).Any();
+            bool okForActivate = !tradeEle.AllowActivation();
             
             if (okForActivate)
             {
