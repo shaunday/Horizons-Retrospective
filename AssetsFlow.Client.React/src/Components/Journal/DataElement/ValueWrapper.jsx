@@ -26,4 +26,4 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   );
 }
 
-export default ValueWrapper;
+export default React.memo(ValueWrapper);

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LabeledField from "@components/LabeledField"; 
 import { createFilterHash } from "./createFilterHash"; 
 
-export default function FilterControl() {
+function FilterControl() {
   // Initialize the filters hashtable
   const filters = createFilterHash();
 
@@ -37,3 +37,5 @@ export default function FilterControl() {
       </div>
   );
 }
+
+export default React.memo(FilterControl);

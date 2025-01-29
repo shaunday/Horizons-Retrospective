@@ -1,3 +1,5 @@
+import React from "react";
+
 const styles = {
   select: {
     padding: "5px",
@@ -33,4 +35,4 @@ function SelectionForDataElement({ selected, options, onSelect }) {
   );
 }
 
-export default SelectionForDataElement;
+export default React.memo(SelectionForDataElement);

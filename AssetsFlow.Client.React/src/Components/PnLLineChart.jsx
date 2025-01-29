@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   LineChart,
   Line,
@@ -47,4 +49,4 @@ const PnLLineChart = () => {
   );
 };
 
-export default PnLLineChart;
+export default React.memo(PnLLineChart);
