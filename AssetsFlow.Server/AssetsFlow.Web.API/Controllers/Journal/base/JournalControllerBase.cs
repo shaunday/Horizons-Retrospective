@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HsR.Web.API.Controllers.Journal
 {
-    internal class JournalControllerBase : DayJControllerBase
+    internal class JournalControllerBase : HsRControllerBase
     {
         protected readonly IJournalRepositoryWrapper _journalAccess;
         protected readonly ILogger<JournalControllerBase> _logger;

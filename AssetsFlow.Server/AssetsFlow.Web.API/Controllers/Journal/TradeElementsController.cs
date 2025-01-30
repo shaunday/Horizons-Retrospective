@@ -64,10 +64,28 @@ namespace HsR.Web.API.Controllers.Journal
 
             TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
             TradeElement? filler = null;
-            return ResultHandling((filler, resAsModel), $"Could not delete interim element on : {tradeId}");
+            return ResultHandling((filler, resAsModel), $"Could not close trade on : {tradeId}");
         }
 
         #endregion
 
+        #region Activate
+
+        [HttpPost("activate")]
+        internal async Task<ActionResult<(TradeElementModel? filler, TradeElementModel summary)>> ActivateTradeElment(string tradeEleId)
+        {
+            TradeElement tradeElement = await _journalAccess.ActivateTradeElement(tradeEleId);
+
+            if (tradeElement == null)
+            {
+                return NotFound();
+            }
+
+            TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(tradeElement);
+            TradeElement? filler = null;
+            return ResultHandling((filler, resAsModel), $"Could not activate element on : {tradeEleId}");
+        }
+
+        #endregion
     }
 }

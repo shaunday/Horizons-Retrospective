@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetsFlowWeb.Services", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Entities.Factory", "Journal\JTA.Journal.Entities.Factory\HsR.Journal.Entities.Factory.csproj", "{07987639-CCDB-4836-9133-750BC843775C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common.Asp.NET", "..\Common.Net\HsR.Common.Asp.NET\HsR.Common.Asp.NET.csproj", "{DF3880CD-316D-40F7-823E-0890EA3B7D0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{07987639-CCDB-4836-9133-750BC843775C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07987639-CCDB-4836-9133-750BC843775C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07987639-CCDB-4836-9133-750BC843775C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF3880CD-316D-40F7-823E-0890EA3B7D0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF3880CD-316D-40F7-823E-0890EA3B7D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF3880CD-316D-40F7-823E-0890EA3B7D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF3880CD-316D-40F7-823E-0890EA3B7D0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{B6DA8FEB-823A-414D-911B-08CAAC8AD61B} = {F160C4C3-5E21-4DDF-B119-BB651086EF4B}
 		{5B0F30C3-5ECA-4964-BA70-EB4D6F7695B3} = {F160C4C3-5E21-4DDF-B119-BB651086EF4B}
 		{07987639-CCDB-4836-9133-750BC843775C} = {E2F11EF4-F624-492C-83BE-36B75D46AA56}
+		{DF3880CD-316D-40F7-823E-0890EA3B7D0A} = {F160C4C3-5E21-4DDF-B119-BB651086EF4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6CD0AE80-6A63-459E-884D-64F6D12582F5}

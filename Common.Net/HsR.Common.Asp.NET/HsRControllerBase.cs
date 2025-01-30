@@ -4,7 +4,7 @@ using System.Net;
 
 namespace HsR.Web.API.Controllers
 {
-    internal class CustomExceptionFilterAttribute : ExceptionFilterAttribute
+    public class CustomExceptionFilterAttribute : ExceptionFilterAttribute
     {
         public override void OnException(ExceptionContext context)
         {
@@ -20,5 +20,5 @@ namespace HsR.Web.API.Controllers
     }
 
     [ServiceFilter(typeof(CustomExceptionFilterAttribute))]
-    internal class DayJControllerBase : ControllerBase { }   
+    public class HsRControllerBase : ControllerBase { }   
 }

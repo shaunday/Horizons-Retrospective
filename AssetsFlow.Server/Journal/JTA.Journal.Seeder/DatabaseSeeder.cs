@@ -10,7 +10,6 @@ namespace HsR.Journal.Seeder
 {
     internal class DatabaseSeeder(TradingJournalDataContext dbContext)
     {
-        private TradingJournalDataContext _dbContext = dbContext;
         private RandomNumberGeneratorEx _randomNumbersMachine = new();
         private RandomWordGenerator _randomWordsMachine = new();
 
@@ -40,18 +39,18 @@ namespace HsR.Journal.Seeder
                 TradeCompositeUpdates.CloseTrade(trade, "1000");
                 dbContext.TradeComposites.Update(trade);
 
-                await _dbContext.SaveChangesAsync();
+                await dbContext.SaveChangesAsync();
             }
         }
 
         private async Task<TradeComposite> CreateAndSaveTradeInstance()
         {
             TradeComposite trade = new();
-            _dbContext.TradeComposites.Add(trade);
-            await _dbContext.SaveChangesAsync();
+            dbContext.TradeComposites.Add(trade);
+            await dbContext.SaveChangesAsync();
 
             AddTradeIdea(trade);
-            await _dbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
             return trade;
         }
 
