@@ -15,8 +15,8 @@ const listItemStyle = {
   padding: "5px", 
   borderRadius: "4px", 
   marginLeft: "5px",
-   maxWidth: "95px", // Maximum width is 100px
-  width: "100%", // Allow it to shrink if needed
+  maxWidth: "95px", // Maximum width is 100px
+  width: "100%", 
   flexShrink: 1, // Allow the item to shrink if needed
 };
 
