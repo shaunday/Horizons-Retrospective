@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HsR.Price.Entities\HsR.Price.Entities.csproj" />
-    <ProjectReference Include="..\HsR.Ticker.Entity\HsR.Ticker.Entity.csproj" />
   </ItemGroup>
 
 </Project>

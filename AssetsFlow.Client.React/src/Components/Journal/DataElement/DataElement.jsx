@@ -20,6 +20,12 @@ function DataElement({ cellInfo, onCellUpdate }) {
     ...(success ? { borderColor: "green" } : {}),
     pointerEvents: processing ? "none" : "auto", // Disable pointer events when processing
     opacity: processing ? 0.5 : 1, // Reduce opacity when processing
+    display: "flex",  // Enables flexbox
+    flexGrow: 1,
+    justifyContent: "center", // Centers horizontally
+    alignItems: "center", // Centers vertically
+    width: "100%", // Full width minus 3px margin on each side
+    margin: "0 3px", // 3px margin on left & right
   };
 
   return (

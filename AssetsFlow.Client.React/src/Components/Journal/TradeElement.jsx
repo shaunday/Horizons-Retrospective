@@ -15,7 +15,9 @@ const listItemStyle = {
   padding: "5px", 
   borderRadius: "4px", 
   marginLeft: "5px",
-  width: "210px", // Set a fixed width for each item
+   maxWidth: "95px", // Maximum width is 100px
+  width: "100%", // Allow it to shrink if needed
+  flexShrink: 1, // Allow the item to shrink if needed
 };
 
 function TradeElement({ tradeElement, onElementContentUpdate }) {

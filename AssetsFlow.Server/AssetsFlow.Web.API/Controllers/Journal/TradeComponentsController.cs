@@ -12,7 +12,7 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/trades")]
     [ApiVersion("1.0")]
     [ApiController]
-    internal class TradeComponentsController : JournalControllerBase
+    public class TradeComponentsController : JournalControllerBase
     {
         const int maxTradesPageSize = 20;
 
@@ -23,7 +23,7 @@ namespace HsR.Web.API.Controllers.Journal
         #endregion
 
         [HttpGet]
-        internal async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(int pageNumber = 1, int pageSize = 10)
+        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(int pageNumber = 1, int pageSize = 10)
         {
             pageSize = ValidatePageSize(pageSize);
 
@@ -37,7 +37,7 @@ namespace HsR.Web.API.Controllers.Journal
         }
 
         [HttpGet("byFilter")]
-        internal async Task<ActionResult<IEnumerable<TradeCompositeModel>>> 
+        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> 
                                                     GetFilteredTrades(TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
         {
             pageSize = ValidatePageSize(pageSize);
@@ -52,7 +52,7 @@ namespace HsR.Web.API.Controllers.Journal
         }
 
         [HttpPost]
-        internal async Task<ActionResult<TradeCompositeModel>> AddTrade()
+        public async Task<ActionResult<TradeCompositeModel>> AddTrade()
         {
             var positionComposite = await _journalAccess.AddTradeCompositeAsync();
 

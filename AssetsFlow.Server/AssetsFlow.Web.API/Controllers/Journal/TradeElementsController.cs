@@ -10,7 +10,7 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/trades/{tradeId}")]
     [ApiVersion("1.0")]
     [ApiController]
-    internal class TradeElementsController : JournalControllerBase
+    public class TradeElementsController : JournalControllerBase
     {
         #region Ctor
 
@@ -22,7 +22,7 @@ namespace HsR.Web.API.Controllers.Journal
         #region Add / Delete
 
         [HttpPost]
-        internal async Task<ActionResult<(TradeElementModel newEntry, TradeElementModel? summary)>> AddReduceInterimPosition(string tradeId, bool isAdd)
+        public async Task<ActionResult<(TradeElementModel newEntry, TradeElementModel? summary)>> AddReduceInterimPosition(string tradeId, bool isAdd)
         {
             (TradeElement newEntry, TradeElement? summary) entryAndSummary;
             entryAndSummary = await _journalAccess.AddInterimPositionAsync(tradeId, isAdd);
@@ -34,7 +34,7 @@ namespace HsR.Web.API.Controllers.Journal
         }
 
         [HttpDelete("{tradeInputId}")]
-        internal async Task<ActionResult> DeleteInterimTradeInput(string tradeId, string tradeInputId)
+        public async Task<ActionResult<TradeElementModel>> DeleteInterimTradeInput(string tradeId, string tradeInputId)
         {
             TradeElement? summary = await _journalAccess.RemoveInterimPositionAsync(tradeId, tradeInputId);
 
@@ -72,7 +72,7 @@ namespace HsR.Web.API.Controllers.Journal
         #region Activate
 
         [HttpPost("activate")]
-        internal async Task<ActionResult<(TradeElementModel? filler, TradeElementModel summary)>> ActivateTradeElment(string tradeEleId)
+        internal async Task<ActionResult<TradeElementModel>> ActivateTradeElment(string tradeId, string tradeEleId)
         {
             TradeElement tradeElement = await _journalAccess.ActivateTradeElement(tradeEleId);
 
@@ -82,8 +82,7 @@ namespace HsR.Web.API.Controllers.Journal
             }
 
             TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(tradeElement);
-            TradeElement? filler = null;
-            return ResultHandling((filler, resAsModel), $"Could not activate element on : {tradeEleId}");
+            return ResultHandling((resAsModel), $"Could not activate element on : {tradeEleId}");
         }
 
         #endregion
