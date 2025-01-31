@@ -26,11 +26,8 @@ TBD Stage2: Trade alerts, based on current price action + indicators.
    - Updates both the trade IDs list and individual trade caches.
 
 ## Part2: Server; PostgreSQL, EF Core, ASP.NET Core, REST API
-### Data Structure:
+### Entities (Rough) Design Overview:
 
-Each Trade Position composed of Trade Elements  (origin, entry, exit, alerts, general thoughts)
+![image](https://github.com/user-attachments/assets/37b0def3-7901-4748-b2e8-2acb93e9d59e)
 
-Entities Design Overview
-
-![image](https://github.com/user-attachments/assets/5df8bf98-60ed-41c9-9e9d-9cda138a2dde)
 
