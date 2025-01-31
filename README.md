@@ -30,14 +30,7 @@ TBD Stage2: Trade alerts, based on current price action + indicators.
 
 Each Trade Position composed of Trade Elements  (origin, entry, exit, alerts, general thoughts)
 
-Each Element (line) is composed of Data (cell) objects
+Entities Design Overview
 
-TradeComposite:  
+![image](https://github.com/user-attachments/assets/5df8bf98-60ed-41c9-9e9d-9cda138a2dde)
 
-                 (Origin)    [ ] [ ] [ ] [ ]
-
-                 (Increase)  [ ] [ ] [ ] [ ]
-                 
-                 (Reduction) [ ] [ ] [ ] [ ]
-
-                 (Summary)   [ ] [ ] [ ] [ ] 
