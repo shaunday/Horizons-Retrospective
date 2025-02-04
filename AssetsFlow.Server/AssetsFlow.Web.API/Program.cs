@@ -14,7 +14,7 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
 
 #pragma warning disable CS8604 // Disable warning for possible null reference argument
 string? connectionString = Environment.GetEnvironmentVariable(TradingJournalContextFactory.AdminConnectionString); //todo change to user
-builder.Services.AddInfrastructureWithLogging(connectionString, builder.Environment);
+builder.Services.ConfigureTradingJournalDbContext(connectionString, isProduction:  !builder.Environment.IsDevelopment());
 
 builder.ConfigureForEnvironment();
 

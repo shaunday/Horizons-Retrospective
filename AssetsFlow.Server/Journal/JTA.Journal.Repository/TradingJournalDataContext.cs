@@ -23,11 +23,10 @@ namespace HsR.Journal.DataContext
             modelBuilder.ApplyConfiguration(new DataElementConfig());
         }
 
-        //override save changes to clear tracker after saving
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             int saveRes = await base.SaveChangesAsync(cancellationToken);
-            ChangeTracker.Clear(); // Clear tracker after saving
+            //ChangeTracker.Clear(); // Clear tracker after saving //todo - reconsider
             return saveRes;
         }
     }
