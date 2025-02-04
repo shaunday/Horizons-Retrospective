@@ -43,9 +43,9 @@ namespace HsR.Journal.Repository.Services.Base
                 throw new ArgumentException($"The tradeId '{tradeId}' is not a valid integer.", nameof(tradeId));
             }
 
-            var trade = await _dataContext.TradeComposites
-                                            .Where(t => t.Id == parsedId)
-                                            .SingleOrDefaultAsync() ?? throw new InvalidOperationException($"Trade with ID {tradeId} not found.");
+            var trade = await _dataContext.TradeComposites.FindAsync(parsedId)
+                ?? throw new InvalidOperationException($"Trade with ID {tradeId} not found.");
+
             return trade!;
         }
 
@@ -56,10 +56,10 @@ namespace HsR.Journal.Repository.Services.Base
                 throw new ArgumentException($"The tradeElementId '{tradeEleId}' is not a valid integer.", nameof(tradeEleId));
             }
 
-            var trade = await _dataContext.TradeElements
-                                            .Where(t => t.Id == parsedId)
-                                            .SingleOrDefaultAsync() ?? throw new InvalidOperationException($"TradeElement with ID {tradeEleId} not found.");
-            return trade!;
+            var tradeElement = await _dataContext.TradeElements.FindAsync(parsedId)
+                 ?? throw new InvalidOperationException($"TradeElement with ID {tradeEleId} not found.");
+
+            return tradeElement!;
         }
     }
 }
