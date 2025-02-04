@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace HsR.Journal.Entities
 {
@@ -10,10 +11,10 @@ namespace HsR.Journal.Entities
         public int Id { get; private set; }
 
         [Required]
-        public string Title { get; set; } = string.Empty;
+        public required string Title { get; set; } = string.Empty;
 
         [Required]
-        public ComponentType ComponentType { get; set; }
+        public required ComponentType ComponentType { get; set; }
 
         public ICollection<ContentRecord>? History { get; set; }
 
@@ -38,6 +39,7 @@ namespace HsR.Journal.Entities
         #region Ctors
         private DataElement() { } //for EF
 
+        [SetsRequiredMembers]
         public DataElement(string title, ComponentType componentType, string content = "")
         {
             Title = title;

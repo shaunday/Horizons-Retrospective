@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace HsR.Journal.Entities
 {
@@ -8,7 +9,7 @@ namespace HsR.Journal.Entities
         public int Id { get; private set; }
 
         [Required]
-        public TradeActionType TradeActionType { get; set; }
+        public required TradeActionType TradeActionType { get; set; }
 
         public List<DataElement> Entries { get; set; } = new List<DataElement>();
 
@@ -21,6 +22,7 @@ namespace HsR.Journal.Entities
         #region Ctors
         public TradeElement() { }
 
+        [SetsRequiredMembers]
         public TradeElement(TradeComposite trade, TradeActionType actionType)
         {
             CompositeRef = trade;
@@ -38,7 +40,7 @@ namespace HsR.Journal.Entities
         public int CompositeFK { get; set; }
 
         [Required]
-        public TradeComposite CompositeRef { get; set; } = null!;
+        public required TradeComposite CompositeRef { get; set; } = null!;
 
         public override string ToString()
         {

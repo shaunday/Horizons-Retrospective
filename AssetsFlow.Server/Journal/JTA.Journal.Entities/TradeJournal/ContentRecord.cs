@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace HsR.Journal.Entities
 {
@@ -7,13 +8,14 @@ namespace HsR.Journal.Entities
         // Private parameterless constructor for EF Core
         private ContentRecord() { }
 
+        [SetsRequiredMembers]
         public ContentRecord(string content)
         {
             ContentValue = content;
         }
 
         [Required]
-        public string ContentValue { get; set; } = string.Empty;
+        public required string ContentValue { get; set; } = string.Empty;
 
         public string? ChangeNote { get; set; }
 
