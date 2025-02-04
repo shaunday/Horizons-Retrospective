@@ -10,7 +10,7 @@ namespace HsR.Journal.DataContext
         public DbSet<TradeElement> TradeElements { get; set; } = null!;  //must have this to allow principality of TradeElement in the r/ship with cell
         public DbSet<DataElement> Entries { get; set; } = null!;
         
-        public DbSet<UserData> JournalData { get; set; } = null!;
+        public DbSet<UserData> UserData { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

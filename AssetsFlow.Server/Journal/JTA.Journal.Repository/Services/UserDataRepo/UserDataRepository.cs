@@ -8,8 +8,8 @@ namespace HsR.Journal.DataContext
     {
         public async Task<List<string>?> GetAllSavedSectors()
         {
-            var journalData = await _dataContext.JournalData.AsNoTracking().SingleOrDefaultAsync();
-            return journalData?.SavedSectors?.OrderBy(s => s).ToList();
+            var userData = await _dataContext.UserData.AsNoTracking().SingleOrDefaultAsync();
+            return userData?.SavedSectors?.OrderBy(s => s).ToList();
         }
     }
 }
