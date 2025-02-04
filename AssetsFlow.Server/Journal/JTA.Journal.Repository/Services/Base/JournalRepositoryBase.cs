@@ -8,14 +8,14 @@ namespace HsR.Journal.Repository.Services.Base
 {
     public abstract class JournalRepositoryBase
     {
-        protected readonly TradingJournalDataContext _dataContext;
+        private protected readonly TradingJournalDataContext _dataContext;
 
-        protected JournalRepositoryBase(TradingJournalDataContext dataContext)
+        private protected JournalRepositoryBase(TradingJournalDataContext dataContext)
         {
             _dataContext = dataContext ?? throw new ArgumentNullException(nameof(dataContext));
         }
 
-        protected TradeElement RefreshSummary(TradeComposite trade)
+        private protected TradeElement RefreshSummary(TradeComposite trade)
         {
             TradeElement newSummary = TradeElementsFactory.GetNewSummary(trade);
 
@@ -36,7 +36,7 @@ namespace HsR.Journal.Repository.Services.Base
             return newSummary;
         }
 
-        protected async Task<TradeComposite> GetTradeCompositeAsync(string tradeId)
+        private protected async Task<TradeComposite> GetTradeCompositeAsync(string tradeId)
         {
             if (!int.TryParse(tradeId, out var parsedId))
             {

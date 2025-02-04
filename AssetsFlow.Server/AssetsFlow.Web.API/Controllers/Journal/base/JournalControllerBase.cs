@@ -7,9 +7,9 @@ namespace HsR.Web.API.Controllers.Journal
 {
     public class JournalControllerBase : HsRControllerBase
     {
-        protected readonly IJournalRepositoryWrapper _journalAccess;
-        protected readonly ILogger<JournalControllerBase> _logger;
-        protected readonly IMapper _mapper;
+        private protected readonly IJournalRepositoryWrapper _journalAccess;
+        private protected readonly ILogger<JournalControllerBase> _logger;
+        private protected readonly IMapper _mapper;
 
         public JournalControllerBase(IJournalRepositoryWrapper journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper)
         {

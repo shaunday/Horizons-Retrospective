@@ -1,6 +1,6 @@
 ﻿namespace HsR.Journal.TradeAnalytics
 {
-    public struct TradeAnalyticsSummary
+    public readonly struct TradeAnalyticsSummary
     {
         public TradeAnalyticsInfo AddTrades { get; }
         public TradeAnalyticsInfo ReduceTrades { get; }
@@ -9,7 +9,6 @@
         public double AverageExitPrice => ReduceTrades.AveragePrice;
 
         public double Profit => AddTrades.TotalCost - ReduceTrades.TotalCost;
-
 
         public double NetAmount => AddTrades.TotalAmount - ReduceTrades.TotalAmount;
         public double NetCost => AddTrades.TotalCost - ReduceTrades.TotalCost;
