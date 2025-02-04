@@ -4,7 +4,7 @@ npm run dev
 auto arrange = Shift + Alt + F.
 rename all = ctrl + F > atrl + H
 select all = ctrl + T
-
+comments: ctrl + /, shift alt a
 
 index.html - everything always starts here. vite adds main, which goes to app.jsx 
 index.html handles the basic HTML structure and bootstrapping.

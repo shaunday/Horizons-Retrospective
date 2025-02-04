@@ -14,6 +14,7 @@ export function useGetTradeById(tradeId) {
     keepPreviousData: true,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
+    throwOnError: true,
   });
 
   return { trade, ...queryState };

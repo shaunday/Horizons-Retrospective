@@ -7,7 +7,13 @@ function App() {
   // const { prefetchTrades } = useFetchAndCacheTrades();
 
   // useEffect(() => {
-  //   prefetchTrades();
+  //   prefetchTrades()
+  //     .then(() => {
+  //       console.log("Trades prefetched successfully");
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error prefetching trades:", error);
+  //     });
   // }, []); //todo
 
   return (
