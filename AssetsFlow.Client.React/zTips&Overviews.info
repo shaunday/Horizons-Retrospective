@@ -2,9 +2,11 @@ general:
 npm run dev
 
 auto arrange = Shift + Alt + F.
-rename all = ctrl + F > atrl + H
-select all = ctrl + T
+rename all = ctrl + F → atrl + H
 comments: ctrl + /, shift alt a
+
+Quick Open = Ctrl + P → Type filename 
+search for code/symbols = ctrl + T 
 
 index.html - everything always starts here. vite adds main, which goes to app.jsx 
 index.html handles the basic HTML structure and bootstrapping.
