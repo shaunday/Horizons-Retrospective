@@ -47,7 +47,7 @@ namespace HsR.Journal.DataContext
             {
                 throw new InvalidOperationException("Trade summary is missing.");
             }
-            TradeCompositeUpdates.CloseTrade(trade, closingPrice);
+            TradeCompositeOperations.CloseTrade(trade, closingPrice);
 
             await _dataContext.SaveChangesAsync();
             return trade.Summary!;

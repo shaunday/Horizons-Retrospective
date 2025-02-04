@@ -11,7 +11,7 @@ namespace HsR.Journal.DataContext
         public async Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
-            TradeElement tradeInput = TradeElementCRUDs.CreateInterimTradeElement(trade, isAdd);
+            TradeElement tradeInput = TradeElementsFactory.GetNewInterimTradeElement(trade, isAdd);
             trade.TradeElements.Add(tradeInput);
 
             if (trade.Status == TradeStatus.AnIdea)
@@ -27,13 +27,23 @@ namespace HsR.Journal.DataContext
 
         public async Task<TradeElement> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
         {
-            var trade = await GetTradeCompositeAsync(tradeId);
-            if (trade.TradeElements.Count <= 1)
+            if (!int.TryParse(tradeInputId, out var parsedId))
             {
-                throw new InvalidOperationException($"No entries to remove on trade ID {tradeId} .");
+                throw new ArgumentException($"The element Id '{tradeInputId}' is not a valid integer.", nameof(tradeInputId));
             }
 
-            TradeElementCRUDs.RemoveInterimInputById(trade, tradeInputId);
+            var trade = await GetTradeCompositeAsync(tradeId);
+
+            var tradeInputToRemove = trade.TradeElements.Where(t => t.Id == parsedId).SingleOrDefault();
+            if (tradeInputToRemove != null)
+            {
+                trade.TradeElements.Remove(tradeInputToRemove); //trade is being tracked so change will be commited on save
+            }
+            else
+            {
+                throw new ArgumentException($"The trade input (Id '{tradeInputId}') to remove is null.", nameof(tradeInputId));
+
+            }
             TradeElement newSummary = RefreshSummary(trade); 
 
             await _dataContext.SaveChangesAsync();

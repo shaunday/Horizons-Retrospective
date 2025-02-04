@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HsR.Journal.Entities.Factory
 {
-    public class TradeCompositeUpdates
+    public class TradeCompositeOperations
     {
         public static TradeComposite CloseTrade(TradeComposite trade, string closingPrice)
         {

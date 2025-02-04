@@ -17,7 +17,7 @@ namespace HsR.Journal.Repository.Services.Base
 
         protected TradeElement RefreshSummary(TradeComposite trade)
         {
-            TradeElement newSummary = TradeElementCRUDs.GetInterimSummary(trade);
+            TradeElement newSummary = TradeElementsFactory.GetNewSummary(trade);
 
             // Remove the old Summary if it exists
             if (trade.Summary != null)

@@ -3,9 +3,9 @@ using HsR.Journal.TradeAnalytics;
 
 namespace HsR.Journal.Entities.Factory
 {
-    public static class TradeElementCRUDs
+    public static class TradeElementsFactory
     {
-        public static TradeElement CreateInterimTradeElement(TradeComposite trade, bool isAdd)
+        public static TradeElement GetNewInterimTradeElement(TradeComposite trade, bool isAdd)
         {
             TradeElement tradeInput = new(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);
             if (isAdd)
@@ -26,7 +26,7 @@ namespace HsR.Journal.Entities.Factory
             return tradeInput;
         }
 
-        public static TradeElement GetInterimSummary(TradeComposite trade)
+        public static TradeElement GetNewSummary(TradeComposite trade)
         {
             var analytics = Analytics.GetTradingCosts(trade);
             TradeAnalyticsSummary analyticsSummary = new(analytics);
@@ -48,22 +48,7 @@ namespace HsR.Journal.Entities.Factory
 
         public static void RemoveInterimInputById(TradeComposite trade, string tradeInputId)
         {
-            if (!int.TryParse(tradeInputId, out var parsedId))
-            {
-                throw new ArgumentException($"The element Id '{tradeInputId}' is not a valid integer.", nameof(tradeInputId));
-            }
-
-            var tradeInputToRemove = trade.TradeElements.Where(t => t.Id == parsedId).SingleOrDefault();
-
-            if (tradeInputToRemove != null)
-            {
-                trade.TradeElements.Remove(tradeInputToRemove);
-            }
-            else
-            {
-                throw new ArgumentException($"The trade input (Id '{tradeInputId}') to remove is null.", nameof(tradeInputId));
-
-            }
+            
         }
     }
 }

@@ -36,7 +36,7 @@ namespace HsR.Journal.Seeder
                 //closed
                 trade = await CreateAndSaveTradeInstance();
                 AddPositionsAndSummary(trade);
-                TradeCompositeUpdates.CloseTrade(trade, "1000");
+                TradeCompositeOperations.CloseTrade(trade, "1000");
                 dbContext.TradeComposites.Update(trade);
 
                 await dbContext.SaveChangesAsync();
@@ -60,7 +60,7 @@ namespace HsR.Journal.Seeder
             AddElementToTrade(trade, TradeActionType.AddPosition);
             AddElementToTrade(trade, TradeActionType.ReducePosition);
 
-            TradeElement newSummary = TradeElementCRUDs.GetInterimSummary(trade);
+            TradeElement newSummary = TradeElementsFactory.GetNewSummary(trade);
             trade.Summary = newSummary;
         }
 
