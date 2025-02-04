@@ -18,8 +18,5 @@ public class TradeComposite
 
     public DateTime? ClosedAt { get; set; }
 
-    public override string ToString()
-    {
-        return $"Id={Id}, Status={Status}, Trade Eles Count={TradeElements.Count}";
-    }
+    public override string ToString() => $"Id={Id}, Status={Status}, Trade Eles Count={TradeElements.Count}";
 }

@@ -42,9 +42,6 @@ namespace HsR.Journal.Entities
         [Required]
         public required TradeComposite CompositeRef { get; set; } = null!;
 
-        public override string ToString()
-        {
-            return $"Id={Id}, Typr={TradeActionType}, Entries Count={Entries.Count}";
-        }
+        public override string ToString() =>  return $"Id={Id}, Typr={TradeActionType}, Entries Count={Entries.Count}";
     }
 }

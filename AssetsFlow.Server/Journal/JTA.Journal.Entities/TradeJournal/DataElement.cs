@@ -87,11 +87,6 @@ namespace HsR.Journal.Entities
         }
         #endregion
 
-        #region ToString override
-        public override string ToString()
-        {
-            return $"Id={Id}, Title={Title}, Content={ContentWrapper?.ContentValue}";
-        } 
-        #endregion
+        public override string ToString() => $"Id={Id}, Title={Title}, Content={ContentWrapper?.ContentValue}";
     }
 }

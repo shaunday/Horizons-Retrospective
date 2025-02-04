@@ -24,5 +24,7 @@ namespace HsR.Journal.Entities
 
         [Required]
         public int DataElementFK { get; set; }  // FK property to the owning DataCell
+
+        public override string ToString() => $"Content={ContentValue}";
     }
 }
