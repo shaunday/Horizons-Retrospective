@@ -4,7 +4,7 @@ import TradesContainer from "@journalComponents/TradesContainer";
 import { useFetchAndCacheTrades } from "@hooks/useFetchAndCacheTrades";
 import { useAddTrade } from "@hooks/useAddTrade";
 
-function JournalContainer() {
+function JournalView() {
   const { isLoading, isError, trades } = useFetchAndCacheTrades();
   const { addTrade } = useAddTrade();
 
@@ -37,4 +37,4 @@ function JournalContainer() {
   );
 }
 
-export default JournalContainer;
+export default JournalView;

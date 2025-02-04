@@ -23,16 +23,13 @@ export function useFetchAndCacheTrades() {
   const tradesQuery = useQuery({
     queryKey: tradeKeysFactory.tradesKey,
     queryFn: getAndCacheTrades,
-    onError: (error) => console.log("error in tradesQ:", error),
-    onSuccess: (data) => console.log("Success in usequery:", data),
+    throwOnError: true,
   });
 
   const prefetchTrades = async () => {
     queryClient.prefetchQuery({
       queryKey: tradeKeysFactory.tradesKey,
       queryFn: getAndCacheTrades,
-      onError: (error) => console.log("error in tradesQ:", error),
-     onSuccess: (data) => console.log("Success in prefetch:", data),
     });
   };
 
