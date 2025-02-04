@@ -23,23 +23,24 @@ namespace HsR.Journal.Repository.Services.TradeCompositeRepo
 
             if (filter.CloseLowerLimit.HasValue)
             {
-                query = query.Where(t => t.OpenedAt >= filter.CloseLowerLimit.Value);
+                query = query.Where(t => t.ClosedAt >= filter.CloseLowerLimit.Value);
             }
 
             if (filter.CloseUpperLimit.HasValue)
             {
-                query = query.Where(t => t.OpenedAt <= filter.CloseUpperLimit.Value);
+                query = query.Where(t => t.ClosedAt <= filter.CloseUpperLimit.Value); 
             }
 
-            if (filter.FilterObjects != null && filter.FilterObjects.Count != 0)
+            if (filter.FilterObjects?.Any() == true)
             {
-                foreach (var filterObject in filter.FilterObjects)
-                {
-                    query = query.Where(t => t.TradeElements.Any(te => te.Entries.Any(e =>
-                                    e.Title == filterObject.Title &&
-                                     (e.Content == null && string.IsNullOrEmpty(filterObject.FilterValue) ||
-                                      e.Content != null && e.Content.Contains(filterObject.FilterValue)))));
-                }
+                query = query.Where(t =>
+                    t.TradeElements.Any(te =>
+                        te.Entries.Any(e => filter.FilterObjects.Any(f =>
+                            e.Title == f.Title &&
+                            (string.IsNullOrEmpty(f.FilterValue) || (e.Content != null && e.Content.Contains(f.FilterValue)))
+                        ))
+                    )
+                );
             }
 
             return query;
