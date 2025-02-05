@@ -4,12 +4,20 @@ import TradeWrapper from "./TradeComposite/TradeWrapper";
 import { useQueryClient } from "@tanstack/react-query";
 
 const styles = {
+  container: {
+    flex: 1,
+    overflowY: "auto",
+    maxHeight: "100vh", 
+    margin: "3px",
+    padding: "5px",
+    background: "rgb(225, 167, 167)",
+  },
   list: {
     display: "flex",
-    listStyleType: "none", // Removes default list bullets
+    listStyleType: "none",
     flexDirection: "column",
-    padding: 0, // Removes default padding
-    margin: "2px", // Removes default margin
+    padding: 0,
+    margin: "2px",
   },
   listItem: {
     border: "1.5px solid blue",
@@ -27,6 +35,7 @@ function TradesContainer() {
     queryClient.getQueryData(tradeKeysFactory.tradeIdsKey) || [];
 
   return (
+    <div style={styles.container}>
     <ul style={styles.list}>
       {cachedTradeIds.map((tradeId, index) => (
         <li key={tradeId} style={styles.listItem}>
@@ -35,6 +44,7 @@ function TradesContainer() {
         </li>
       ))}
     </ul>
+  </div>
   );
 }
 

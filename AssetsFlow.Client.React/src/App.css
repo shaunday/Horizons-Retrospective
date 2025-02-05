@@ -26,7 +26,6 @@ main {
   flex-direction: column;
   margin: 0.5rem;
   flex: 2 1 auto;
-  background: rgb(225, 167, 167);
 }
 
 #tradesMainBody {
