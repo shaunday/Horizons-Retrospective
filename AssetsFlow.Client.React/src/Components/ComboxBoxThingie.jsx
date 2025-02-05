@@ -7,6 +7,7 @@ const styles = {
     border: "1px solid #ccc",
     background: "white",
     cursor: "pointer",
+    verticalAlign: "middle", 
   },
 };
 

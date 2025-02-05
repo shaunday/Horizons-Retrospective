@@ -5,6 +5,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     cursor: "pointer",
+    verticalAlign: "middle", 
   },
   editableBox: {
     padding: "5px",

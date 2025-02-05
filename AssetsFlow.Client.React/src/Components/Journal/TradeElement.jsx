@@ -15,7 +15,7 @@ const listItemStyle = {
   padding: "5px", 
   borderRadius: "4px", 
   marginLeft: "5px",
-  width: "95px",    
+  width: "105px",    
 };
 
 function TradeElement({ tradeElement, onElementContentUpdate }) {

@@ -28,14 +28,16 @@ function DataElement({ cellInfo, onCellUpdate }) {
     margin: "0 3px", // 3px margin on left & right
   };
 
+  const textStyle = {
+    whiteSpace: "nowrap", // Prevents the text from wrapping
+    overflow: "hidden", // Hides overflowed content
+    textOverflow: "ellipsis", // Adds ellipsis when content overflows
+    width: "100%", // Make sure it takes up the full width
+  };
+
   return (
     <>
-      <p
-        style={{
-          whiteSpace: "normal", // Allow text wrapping
-          overflowWrap: "break-word", // Break long words onto the next line
-        }}
-      >
+    <p style={textStyle}>
         {cellInfo[Constants.DATA_TITLE_STRING]}
       </p>
       <div style={containerStyle}>
