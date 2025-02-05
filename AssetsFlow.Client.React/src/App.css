@@ -1,13 +1,8 @@
-html, body, #root {
-  background-color: rgb(139, 154, 168);
-}
-
 #vwrapper {
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  background-color: lightslategray;
 }
 
 header {
@@ -23,16 +18,15 @@ footer {
 main {
   display: flex;
   flex-direction: row;
-  background-color: lightpink;
   height: calc(100vh - 80px)
 }
 
 #journalMainBody {
   display: flex;
   flex-direction: column;
-  background-color: lightgreen;
   margin: 0.5rem;
   flex: 2 1 auto;
+  background: rgb(225, 167, 167);
 }
 
 #tradesMainBody {
@@ -46,7 +40,6 @@ main {
 
 .flexChildCenter {
   display: flex;
-  background-color: lightblue;
   justify-content: center;
   align-items: center;
   margin: 0.5rem;
