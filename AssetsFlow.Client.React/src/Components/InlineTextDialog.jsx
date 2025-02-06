@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const styles = {
   container: {
@@ -15,12 +15,10 @@ const styles = {
 };
 
 function InlineTextDialog({ valueForDisplay, onApplyChanges }) {
-  const [displayValue, setDisplayValue] = useState(valueForDisplay);
-
   const handleClickOnInput = () => {
-    const userInput = window.prompt("Edit Value:", displayValue);
+    const userInput = window.prompt("Edit Value:", valueForDisplay);
     if (userInput !== null) { // null means the user canceled
-      onApplyChanges(userInput);
+      onApplyChanges(userInput); // Apply changes via the parent callback
     }
   };
 

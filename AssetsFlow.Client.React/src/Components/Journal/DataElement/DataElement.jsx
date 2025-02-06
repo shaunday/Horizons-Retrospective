@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import * as Constants from "@constants/journalConstants";
 import { useContentUpdateMutation } from "@hooks/Entry/useContentUpdateMutation";
 import SuccessMessage from "@components/SuccessMessage";
@@ -11,40 +11,37 @@ function DataElement({ cellInfo, onCellUpdate }) {
     useContentUpdateMutation(cellInfo, onCellUpdate);
 
   // Initiate mutation (apply changes)
-  const initiateMutation = (newValue) => {
-    contentUpdateMutation.mutate(newValue);
-  };
+  const initiateMutation = useCallback(
+    (newValue) => {
+      contentUpdateMutation.mutate(newValue);
+    },
+    [contentUpdateMutation] // Depend only on the mutation function
+  );
 
-  // Conditionally apply styles
   const containerStyle = {
     ...(success ? { borderColor: "green" } : {}),
-    pointerEvents: processing ? "none" : "auto", // Disable pointer events when processing
-    opacity: processing ? 0.5 : 1, // Reduce opacity when processing
-    display: "flex",  // Enables flexbox
+    pointerEvents: processing ? "none" : "auto",
+    opacity: processing ? 0.5 : 1,
+    display: "flex",
     flexGrow: 1,
-    justifyContent: "center", // Centers horizontally
-    alignItems: "center", // Centers vertically
-    width: "100%", // Full width minus 3px margin on each side
-    margin: "0 3px", // 3px margin on left & right
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    margin: "0 3px",
   };
 
   const textStyle = {
-    whiteSpace: "nowrap", // Prevents the text from wrapping
-    overflow: "hidden", // Hides overflowed content
-    textOverflow: "ellipsis", // Adds ellipsis when content overflows
-    width: "100%", // Make sure it takes up the full width
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    width: "100%",
   };
 
   return (
     <>
-    <p style={textStyle}>
-        {cellInfo[Constants.DATA_TITLE_STRING]}
-      </p>
+      <p style={textStyle}>{cellInfo[Constants.DATA_TITLE_STRING]}</p>
       <div style={containerStyle}>
-        <ValueWrapper
-          cellInfo={cellInfo}
-          onValueChangeInitiated={initiateMutation}
-        />
+        <ValueWrapper cellInfo={cellInfo} onValueChangeInitiated={initiateMutation} />
       </div>
 
       {processing && <div className="spinner">Processing...</div>}
