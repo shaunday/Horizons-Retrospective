@@ -6,17 +6,18 @@ import { getContent } from "./contentGetters";
 
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const { contentValue } = getContent(cellInfo);
-  const shouldRenderDialog  = cellInfo[Constants.DATA_RESTRICTION_STRING]?.length === 0;
+  const shouldRenderDialog = cellInfo[Constants.DATA_RESTRICTION_STRING]?.length === 0;
 
   const wrapperStyle = {
     display: "flex",
     alignItems: "center", // Ensure vertical alignment of children
     height: "40px",
+    width: "100%",
   };
 
   return (
     <div style={wrapperStyle}>
-      {shouldRenderDialog  ? (
+      {shouldRenderDialog ? (
         <InlineTextDialog
           valueForDisplay={contentValue}
           onApplyChanges={onValueChangeInitiated}
@@ -28,7 +29,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
           onSelect={onValueChangeInitiated}
         />
       )}
-     </div>
+    </div>
   );
 }
 

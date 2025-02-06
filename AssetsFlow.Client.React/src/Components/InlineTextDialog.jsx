@@ -5,12 +5,14 @@ const styles = {
     display: "flex",
     alignItems: "center",
     cursor: "pointer",
-    verticalAlign: "middle", 
+    verticalAlign: "middle",
+    width:"100%",
   },
   editableBox: {
     padding: "5px",
     border: "1px solid #ccc",
     borderRadius: "4px",
+    width:"100%",
   }
 };
 
