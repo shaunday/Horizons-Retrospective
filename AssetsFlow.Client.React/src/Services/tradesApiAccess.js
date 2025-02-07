@@ -40,6 +40,10 @@ export async function updateEntry(componentId, newContent, changeNote) {
     content: newContent,
     info: changeNote,
   };
-  const response = await componentsClient.put(`${componentId}`, payload);
+  const response = await componentsClient.put(`${componentId}`, payload, {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
   return response.data;
 }

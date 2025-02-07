@@ -21,15 +21,26 @@ namespace HsR.Web.API.Controllers.Journal
         #endregion
 
         [HttpPut("{componentId}")]
-        public async Task<ActionResult<(DataElementModel newEntry, TradeElementModel? summary)>> 
-                                                            UpdateDataComponent(string componentId, string newContent, string changeNote)
+        public async Task<ActionResult<(DataElementModel newEntry, TradeElementModel? summary)>>
+                                                UpdateDataComponent(string componentId, [FromBody] UpdateDataComponentRequest request)
         {
-            (DataElement updatedComponent, TradeElement? summary) = await _journalAccess.UpdateCellContentAsync(componentId, newContent, changeNote);
+            if (string.IsNullOrEmpty(request.Content))
+            {
+                return BadRequest("Content is required.");
+            }
+
+            (DataElement updatedComponent, TradeElement? summary) = await _journalAccess.UpdateCellContentAsync(componentId, request.Content, request.Info);
 
             (DataElementModel, TradeElementModel?) resAsModel = (_mapper.Map<DataElementModel>(updatedComponent), _mapper.Map<TradeElementModel>(summary));
 
             return ResultHandling(resAsModel, $"Could not update component: {componentId}");
         }
 
-    }
+        public class UpdateDataComponentRequest
+        {
+            public string Content { get; set; } = "";
+            public string Info { get; set; } = "";
+        }
+
+    }    
 }
