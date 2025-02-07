@@ -18,7 +18,7 @@ function TradeCollapsed({ tradeId }) {
 
     const simulatedElement = {
       id: `Simulated-${tradeId}`, // Assign a unique ID based on tradeId
-      simulated: true, // Mark this as a simulated element
+      isSimulated: true, // Mark this as a simulated element
       entries: simulatedEntries, // Add the simulated entries array
     };
 

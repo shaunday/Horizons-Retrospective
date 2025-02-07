@@ -10,14 +10,16 @@ export function useContentUpdateMutation(cellInfo, onCellUpdate) {
     mutationFn: (newContent) => {
       setProcessing(true);
       setSuccess(false);
-      updateEntry(cellInfo.Id, newContent, "");
+      updateEntry(cellInfo.id, newContent, "");
     },
     onError: (error) => {
       setProcessing(false);
       console.error("Error updating content:", error);
     },
     onSuccess: (updatedEntry, newSummary) => {
-      onCellUpdate(updatedEntry, newSummary);
+      if (onCellUpdate) {
+        onCellUpdate(updatedEntry, newSummary);
+      }
       setProcessing(false);
       setSuccess(true); // Mark success
       setTimeout(() => setSuccess(false), 2000); // Clear success state after 2 seconds

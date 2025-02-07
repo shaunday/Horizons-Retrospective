@@ -11,30 +11,36 @@ const listStyle = {
 };
 
 const listItemStyle = {
-  border: "1px solid grey", 
-  padding: "5px", 
-  borderRadius: "4px", 
+  border: "1px solid grey",
+  padding: "5px",
+  borderRadius: "4px",
   marginLeft: "5px",
-  width: "105px",    
+  width: "105px",
 };
 
 function TradeElement({ tradeElement, onElementContentUpdate }) {
-  const processCellUpdate = useCallback(
-    (data) => {
-      //todo handle inter-connectedness
-      onElementContentUpdate(data);
-    },
-    [onElementContentUpdate]
-  );
+  const isOverview = tradeElement.isSimulated;
+  if (!isOverview) {
+    const processCellUpdate = useCallback(
+      (data) => {
+        //todo handle inter-connectedness
+        onElementContentUpdate(data);
+      },
+      [onElementContentUpdate]
+    );
+  }
 
   return (
     <>
       <ul style={listStyle}>
-      {tradeElement[Constants.TRADE_ENTRIES_STRING]
+        {tradeElement[Constants.TRADE_ENTRIES_STRING]
           .map((entry, index) => (
             <li key={entry.id} style={listItemStyle}>
-              <DataElement cellInfo={entry} onCellUpdate={processCellUpdate} 
-              style={index !== 0 ? { marginLeft: "10px" } : {}}/>
+              <DataElement
+                cellInfo={entry}
+                {...(!isOverview && { onCellUpdate: processCellUpdate })} 
+                style={index !== 0 ? { marginLeft: "10px" } : {}}
+              />
             </li>
           ))}
       </ul>
