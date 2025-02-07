@@ -19,16 +19,15 @@ const listItemStyle = {
 };
 
 function TradeElement({ tradeElement, onElementContentUpdate }) {
-  const isOverview = tradeElement.isSimulated;
-  if (!isOverview) {
-    const processCellUpdate = useCallback(
-      (data) => {
-        //todo handle inter-connectedness
-        onElementContentUpdate(data);
-      },
-      [onElementContentUpdate]
-    );
-  }
+  const isOverview = tradeElement.isSimulated !== undefined;
+
+ const processCellUpdate = useCallback(
+  (data) => {
+    // Handle inter-connectedness here
+    onElementContentUpdate(data);
+  },
+  [onElementContentUpdate]
+);
 
   return (
     <>

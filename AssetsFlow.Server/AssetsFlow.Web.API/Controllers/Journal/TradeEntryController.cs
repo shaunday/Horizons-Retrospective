@@ -10,19 +10,12 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/components")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class ContentUpdateController : JournalControllerBase
+    public class ContentUpdateController(IJournalRepositoryWrapper journalAccess, 
+            ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
     {
-        #region Ctor
-
-        public ContentUpdateController(JournalRepositoryWrapper journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
-                                                                                                        base(journalAccess, logger, mapper)
-        { }
-
-        #endregion
-
         [HttpPut("{componentId}")]
         public async Task<ActionResult<(DataElementModel newEntry, TradeElementModel? summary)>>
-                                                UpdateDataComponent(string componentId, [FromBody] UpdateDataComponentRequest request)
+                                                  UpdateDataComponent(string componentId, [FromBody] UpdateDataComponentRequest request)
         {
             if (string.IsNullOrEmpty(request.Content))
             {

@@ -7,6 +7,7 @@ import ValueWrapper from "./ValueWrapper";
 const MemoizedSuccessMessage = React.memo(SuccessMessage);
 
 function DataElement({ cellInfo, onCellUpdate }) {
+  const isOverview = onCellUpdate == undefined;
   const { contentUpdateMutation, processing, success } =
     useContentUpdateMutation(cellInfo, onCellUpdate);
 
@@ -41,7 +42,10 @@ function DataElement({ cellInfo, onCellUpdate }) {
     <>
       <p style={textStyle}>{cellInfo[Constants.DATA_TITLE_STRING]}</p>
       <div style={containerStyle}>
-        <ValueWrapper cellInfo={cellInfo} onValueChangeInitiated={initiateMutation} />
+      <ValueWrapper
+          cellInfo={cellInfo}
+          onValueChangeInitiated={!isOverview ? initiateMutation : undefined}
+        />
       </div>
 
       {processing && <div className="spinner">Processing...</div>}

@@ -12,15 +12,10 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/trades")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class TradeComponentsController : JournalControllerBase
+    public class TradeComponentsController(IJournalRepositoryWrapper journalAccess, 
+            ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
     {
         const int maxTradesPageSize = 20;
-
-        #region Ctor
-
-        public TradeComponentsController(IJournalRepositoryWrapper journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :  
-                                                                                                    base(journalAccess, logger, mapper) { }
-        #endregion
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(int pageNumber = 1, int pageSize = 10)

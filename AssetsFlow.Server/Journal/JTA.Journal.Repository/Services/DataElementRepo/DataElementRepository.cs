@@ -14,10 +14,11 @@ namespace HsR.Journal.DataContext
                 throw new ArgumentException($"The EntryId '{componentId}' is not a valid integer.", nameof(componentId));
             }
 
-            var cell = await _dataContext.Entries.FindAsync(parsedId)
+            var cell = await _dataContext.Entries
+                .Include(e => e.History)
+                .FirstOrDefaultAsync(e => e.Id == parsedId)
                 ?? throw new InvalidOperationException($"Entry with ID {componentId} not found.");
 
-            await _dataContext.Entry(cell).Reference(t => t.History).LoadAsync(); // Explicitly load History
 
             cell.SetFollowupContent(newContent, changeNote);
 

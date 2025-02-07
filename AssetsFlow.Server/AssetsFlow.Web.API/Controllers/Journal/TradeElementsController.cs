@@ -10,14 +10,9 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/trades/{tradeId}")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class TradeElementsController : JournalControllerBase
+    public class TradeElementsController(IJournalRepositoryWrapper journalAccess, 
+            ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
     {
-        #region Ctor
-
-        public TradeElementsController(JournalRepositoryWrapper journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper) :
-                                                                                                        base(journalAccess, logger, mapper)
-        { }
-        #endregion
 
         #region Add / Delete
 
