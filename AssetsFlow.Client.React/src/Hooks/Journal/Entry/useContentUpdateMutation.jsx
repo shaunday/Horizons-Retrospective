@@ -1,8 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { updateEntry } from "@services/tradesApiAccess";
+import * as Constants from "@constants/journalConstants";
 import { useState } from "react";
 
-export function useContentUpdateMutation(cellInfo, onCellUpdate) {
+export function useContentUpdateMutation(cellInfo, onDataUpdateSuccess) {
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -10,15 +11,17 @@ export function useContentUpdateMutation(cellInfo, onCellUpdate) {
     mutationFn: (newContent) => {
       setProcessing(true);
       setSuccess(false);
-      updateEntry(cellInfo.id, newContent, "");
+      const updatedData = updateEntry(cellInfo.id, newContent, "");
+      return updatedData;
     },
     onError: (error) => {
       setProcessing(false);
       console.error("Error updating content:", error);
     },
-    onSuccess: (updatedEntry, newSummary) => {
-      if (onCellUpdate) {
-        onCellUpdate(updatedEntry, newSummary);
+    onSuccess: (response) => {
+      const { [Constants.NEW_DATA_RESPONSE_TAG]: newData, [Constants.updatedSummary]: updatedSummary } = response;
+      if (onDataUpdateSuccess) {
+        onDataUpdateSuccess(newData, updatedSummary);
       }
       setProcessing(false);
       setSuccess(true); // Mark success

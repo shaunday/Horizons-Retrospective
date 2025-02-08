@@ -7,6 +7,10 @@ namespace HsR.Web.API.Controllers.Journal
 {
     public class JournalControllerBase : HsRControllerBase
     {
+        private protected readonly string NEW_CELL_DATA = "updatedCellData";
+        private protected readonly string NEW_ELEMENT_DATA = "updatedeElement";
+        private protected readonly string NEW_SUMMARY = "updatedSummary";
+
         private protected readonly IJournalRepositoryWrapper _journalAccess;
         private protected readonly ILogger<JournalControllerBase> _logger;
         private protected readonly IMapper _mapper;
@@ -18,17 +22,31 @@ namespace HsR.Web.API.Controllers.Journal
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        protected ActionResult ResultHandling(object? result, string logEntry)
+        protected ActionResult ResultHandling(object? result, string logEntry, params string[] propertyNames)
         {
-            if (result == null || (result is Tuple<object, object> tuple && (tuple.Item1 == null || tuple.Item2 == null)))
+            if (result == null)
             {
                 _logger.LogWarning(logEntry);
                 return NotFound();
             }
-            else
+
+            // Check if result is a ValueTuple (of any size, any type)
+            if (result.GetType().Name.StartsWith("ValueTuple"))
             {
-                return Ok(result);
+                var responseObject = new Dictionary<string, object?>();
+
+                var props = result.GetType().GetFields();
+
+                for (int i = 0; i < props.Length; i++)
+                {
+                    var value = props[i].GetValue(result);
+                    responseObject[propertyNames.Length > i ? propertyNames[i] : $"item{i + 1}"] = value;
+                }
+
+                return Ok(responseObject);
             }
+
+            return Ok(result);
         }
     }
 }

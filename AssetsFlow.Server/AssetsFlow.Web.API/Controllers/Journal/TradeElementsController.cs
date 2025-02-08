@@ -25,7 +25,7 @@ namespace HsR.Web.API.Controllers.Journal
             (TradeElementModel, TradeElementModel) resAsModel =
                             (_mapper.Map<TradeElementModel>(entryAndSummary.newEntry), _mapper.Map<TradeElementModel>(entryAndSummary.summary));
 
-            return ResultHandling(resAsModel, $"Could not add interim element on : {tradeId}");
+            return ResultHandling(resAsModel, $"Could not add interim element on : {tradeId}", [NEW_ELEMENT_DATA, NEW_SUMMARY]);
         }
 
         [HttpDelete("{tradeInputId}")]

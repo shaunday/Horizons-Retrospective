@@ -26,7 +26,7 @@ namespace HsR.Web.API.Controllers.Journal
 
             (DataElementModel, TradeElementModel?) resAsModel = (_mapper.Map<DataElementModel>(updatedComponent), _mapper.Map<TradeElementModel>(summary));
 
-            return ResultHandling(resAsModel, $"Could not update component: {componentId}");
+            return ResultHandling(resAsModel, $"Could not update component: {componentId}", [NEW_CELL_DATA, NEW_SUMMARY]);
         }
 
         public class UpdateDataComponentRequest

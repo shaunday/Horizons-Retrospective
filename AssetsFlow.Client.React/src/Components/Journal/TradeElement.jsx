@@ -23,8 +23,10 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
 
  const processCellUpdate = useCallback(
   (data) => {
-    // Handle inter-connectedness here
-    onElementContentUpdate(data);
+    // Handle inter-connectedness here - element might affect other elements
+
+    if (tradeElement.isSimulated !== undefined)
+      onElementContentUpdate(data);
   },
   [onElementContentUpdate]
 );
