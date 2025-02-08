@@ -10,13 +10,13 @@ export const useTradeAction = (tradeComposite, onElementAddition) => {
     mutationFn: async (action) => {
       switch (action) {
         case Constants.TradeActions.ADD:
-          await addReduceInterimPosition(tradeComposite.id, "true");
+          return addReduceInterimPosition(tradeComposite.id, "true");
           break;
         case Constants.TradeActions.REDUCE:
-          await addReduceInterimPosition(tradeComposite.id, "false");
+          return addReduceInterimPosition(tradeComposite.id, "false");
           break;
         case Constants.TradeActions.CLOSE:
-          await closeTrade(tradeComposite.id); //todo find closing price
+          return closeTrade(tradeComposite.id, "1001"); //todo find closing price
           break;
         default:
           throw new Error("Unknown action");
@@ -25,8 +25,9 @@ export const useTradeAction = (tradeComposite, onElementAddition) => {
     onError: (error) => {
       console.error("Error adding/reducing position:", error);
     },
-    onSuccess: (newElement, newSummary) => {
-      onElementAddition(newElement, newSummary);
+    onSuccess: (response) => {
+      const { [Constants.NEW_ELEMENT_RESPONSE_TAG]: newElement, [Constants.NEW_SUMMARY_RESPONSE_TAG]: updatedSummary } = response;
+      onElementAddition(newElement, updatedSummary);
     },
   });
 };

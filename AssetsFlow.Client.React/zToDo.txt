@@ -1,4 +1,5 @@
-add/remove/activate on ele : elementControls
+closing price on trade close
+remove/activate on ele : elementControls
 filter in client?
 
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?

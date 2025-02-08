@@ -30,11 +30,11 @@ namespace HsR.Web.API.Controllers.Journal
                 return NotFound();
             }
 
+            var responseObject = new Dictionary<string, object?>();
+
             // Check if result is a ValueTuple (of any size, any type)
             if (result.GetType().Name.StartsWith("ValueTuple"))
             {
-                var responseObject = new Dictionary<string, object?>();
-
                 var props = result.GetType().GetFields();
 
                 for (int i = 0; i < props.Length; i++)
@@ -42,11 +42,13 @@ namespace HsR.Web.API.Controllers.Journal
                     var value = props[i].GetValue(result);
                     responseObject[propertyNames.Length > i ? propertyNames[i] : $"item{i + 1}"] = value;
                 }
-
-                return Ok(responseObject);
+            }
+            else
+            {
+                responseObject[propertyNames.Length > 0 ? propertyNames[0] : "item1"] = result;
             }
 
-            return Ok(result);
+            return Ok(responseObject);
         }
     }
 }

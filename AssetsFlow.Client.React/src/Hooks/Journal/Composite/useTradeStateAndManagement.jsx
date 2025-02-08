@@ -19,7 +19,7 @@ export function useTradeStateAndManagement(cachedTradeComposite) {
 
   const { onElementUpdate } = useCacheNewElement(cachedTradeComposite);
   const processTradeAction = useCallback(
-    ({ newElement, newSummary }) => {
+    ( newElement, newSummary ) => {
       if (newElement) {
         onElementUpdate(newElement);
       }

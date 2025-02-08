@@ -31,7 +31,7 @@ export async function addReduceInterimPosition(tradeId, isAdd) {
 }
 
 export async function closeTrade(tradeId, closingPrice) {
-  const response = await tradesClient.post(`${tradeId}/close`, closingPrice);
+  const response = await tradesClient.post(`${tradeId}/close`);
   return response.data;
 }
 
@@ -40,10 +40,6 @@ export async function updateEntry(componentId, newContent, changeNote) {
     content: newContent,
     info: changeNote,
   };
-  const response = await componentsClient.put(`${componentId}`, payload, {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+  const response = await componentsClient.put(`${componentId}`, newContent);
   return response.data;
 }

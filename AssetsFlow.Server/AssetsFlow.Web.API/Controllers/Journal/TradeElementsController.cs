@@ -40,7 +40,7 @@ namespace HsR.Web.API.Controllers.Journal
 
             TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
 
-            return ResultHandling(resAsModel, $"Could not delete interim element on : {tradeId}");
+            return ResultHandling(resAsModel, $"Could not delete interim element on : {tradeId}", [NEW_SUMMARY]);
         }
 
         #endregion
@@ -48,9 +48,9 @@ namespace HsR.Web.API.Controllers.Journal
         #region Closure
 
         [HttpPost("close")]
-        internal async Task<ActionResult<(TradeElementModel? filler, TradeElementModel summary)>> CloseTrade(string tradeId, string closingPrice)
+        internal async Task<ActionResult<TradeElementModel>> CloseTrade(string tradeId)
         {
-            TradeElement summary = await _journalAccess.CloseTradeAsync(tradeId, closingPrice);
+            TradeElement summary = await _journalAccess.CloseTradeAsync(tradeId, "1010"); //todo
 
             if (summary == null)
             {
@@ -58,8 +58,7 @@ namespace HsR.Web.API.Controllers.Journal
             }
 
             TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
-            TradeElement? filler = null;
-            return ResultHandling((filler, resAsModel), $"Could not close trade on : {tradeId}");
+            return ResultHandling(resAsModel, $"Could not close trade on : {tradeId}", [NEW_SUMMARY]);
         }
 
         #endregion
@@ -77,7 +76,7 @@ namespace HsR.Web.API.Controllers.Journal
             }
 
             TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(tradeElement);
-            return ResultHandling((resAsModel), $"Could not activate element on : {tradeEleId}");
+            return ResultHandling((resAsModel), $"Could not activate element on : {tradeEleId}", [NEW_ELEMENT_DATA]);
         }
 
         #endregion
