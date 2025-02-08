@@ -1,6 +1,9 @@
 closing price on trade close
+only allow close/reduce on open trades
 remove/activate on ele : elementControls
 filter in client?
+
+close doesnt work well.. poss tied to summary issues
 
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 
@@ -8,7 +11,7 @@ https ?
 
 how to adjust trade status?
 filtering - adjust data call api
-add sectors combobox or whatevs
+sectors combobox ? autofill?
 
 Testing:
  -[] RQ: https://tanstack.com/query/latest/docs/framework/react/guides/testing

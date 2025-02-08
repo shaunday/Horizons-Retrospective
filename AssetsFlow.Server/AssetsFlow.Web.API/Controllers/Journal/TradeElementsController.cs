@@ -48,9 +48,9 @@ namespace HsR.Web.API.Controllers.Journal
         #region Closure
 
         [HttpPost("close")]
-        internal async Task<ActionResult<TradeElementModel>> CloseTrade(string tradeId)
+        public async Task<ActionResult<TradeElementModel>> CloseTrade(string tradeId, [FromQuery] string closingPrice)
         {
-            TradeElement summary = await _journalAccess.CloseTradeAsync(tradeId, "1010"); //todo
+            TradeElement summary = await _journalAccess.CloseTradeAsync(tradeId, closingPrice); 
 
             if (summary == null)
             {
@@ -66,7 +66,7 @@ namespace HsR.Web.API.Controllers.Journal
         #region Activate
 
         [HttpPost("activate")]
-        internal async Task<ActionResult<TradeElementModel>> ActivateTradeElment(string tradeId, string tradeEleId)
+        public async Task<ActionResult<TradeElementModel>> ActivateTradeElment(string tradeId, string tradeEleId)
         {
             TradeElement tradeElement = await _journalAccess.ActivateTradeElement(tradeEleId);
 

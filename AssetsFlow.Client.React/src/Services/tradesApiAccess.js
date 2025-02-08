@@ -31,7 +31,7 @@ export async function addReduceInterimPosition(tradeId, isAdd) {
 }
 
 export async function closeTrade(tradeId, closingPrice) {
-  const response = await tradesClient.post(`${tradeId}/close`);
+  const response = await tradesClient.post(`${tradeId}/close?closingPrice=${encodeURIComponent(closingPrice)}`);
   return response.data;
 }
 
