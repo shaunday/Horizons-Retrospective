@@ -22,7 +22,7 @@ namespace HsR.Journal.Repository.Services.Base
             // Remove the old Summary if it exists
             if (trade.Summary != null)
             {
-                _dataContext.TradeElements.Remove(trade.Summary);
+                _dataContext.Entry(trade.Summary).State = EntityState.Deleted;
             }
 
             // Update trade status, if we got a closure as summary
