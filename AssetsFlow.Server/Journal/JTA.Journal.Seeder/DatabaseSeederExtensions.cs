@@ -9,8 +9,7 @@ namespace HsR.Journal.DataSeeder
         public static async Task SeedDatabaseAsync(this IServiceProvider services)
         {
             using var scope = services.CreateScope();
-            var dbContext = scope.ServiceProvider.GetRequiredService<TradingJournalDataContext>();
-            var seeder = new DatabaseSeeder(dbContext);
+            var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
             await seeder.SeedAsync();
         }
     }

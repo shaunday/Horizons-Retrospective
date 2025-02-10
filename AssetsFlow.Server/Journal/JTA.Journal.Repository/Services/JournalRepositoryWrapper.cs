@@ -9,7 +9,7 @@ namespace HsR.Journal.DataContext
         private readonly ITradeCompositesRepository _tradeCompositesRepository;
         private readonly ITradeElementRepository _tradeElementRepository;
         private readonly IDataElementRepository _dataElementRepository;
-        private readonly IUserDataRepository _generalDataRepository;
+        private readonly IUserDataRepository _userDataRepository;
         #endregion
 
         #region Ctor
@@ -17,12 +17,12 @@ namespace HsR.Journal.DataContext
             ITradeCompositesRepository tradeCompositesRepository,
             ITradeElementRepository tradeElementRepository,
             IDataElementRepository dataElementRepository,
-            IUserDataRepository generalDataRepository)
+            IUserDataRepository userDataRepository)
         {
             _tradeCompositesRepository = tradeCompositesRepository;
             _tradeElementRepository = tradeElementRepository;
             _dataElementRepository = dataElementRepository;
-            _generalDataRepository = generalDataRepository;
+            _userDataRepository = userDataRepository;
         } 
         #endregion
 
@@ -70,7 +70,7 @@ namespace HsR.Journal.DataContext
 
         public Task<List<string>?> GetAllSavedSectors()
         {
-            return _generalDataRepository.GetAllSavedSectors();
+            return _userDataRepository.GetAllSavedSectors();
         }
     } 
 }

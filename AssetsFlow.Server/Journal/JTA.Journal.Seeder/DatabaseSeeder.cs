@@ -8,12 +8,21 @@ using System.Xml.Linq;
 
 namespace HsR.Journal.Seeder
 {
-    internal class DatabaseSeeder(TradingJournalDataContext dbContext)
+    public class DatabaseSeeder(TradingJournalDataContext dbContext, ITradeCompositesRepository tradeCompositesRepository,
+            ITradeElementRepository tradeElementRepository,
+            IDataElementRepository dataElementRepository)
     {
+
+        #region Members
         private RandomNumberGeneratorEx _randomNumbersMachine = new();
         private RandomWordGenerator _randomWordsMachine = new();
 
-        internal async Task SeedAsync()
+        private readonly ITradeCompositesRepository _tradeCompositesRepository = tradeCompositesRepository;
+        private readonly ITradeElementRepository _tradeElementRepository = tradeElementRepository;
+        private readonly IDataElementRepository _dataElementRepository = dataElementRepository;
+        #endregion
+
+        public async Task SeedAsync()
         {
             // Check if any data exists in a specific table to avoid reseeding
            // if (!await _dbContext.TradeComposites.AnyAsync())
@@ -26,7 +35,7 @@ namespace HsR.Journal.Seeder
 
                 //idea
                 TradeComposite trade = await CreateAndSaveTradeInstance();
-                dbContext.TradeComposites.Update(trade); 
+                dbContext.TradeComposites.Update(trade);
 
                 //ongoing
                 trade = await CreateAndSaveTradeInstance();

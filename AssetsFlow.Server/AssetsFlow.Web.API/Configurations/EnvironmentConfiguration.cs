@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Logging;
+﻿using HsR.Journal.Seeder;
+using Microsoft.IdentityModel.Logging;
 
 namespace HsR.Web.API.Configurations
 {
@@ -20,6 +21,8 @@ namespace HsR.Web.API.Configurations
                               .AllowAnyHeader();                  // Allow all headers
                     });
                 });
+
+                builder.Services.AddScoped<DatabaseSeeder>();
             }
         }
     }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.DataContext
 {
-    public partial class UserDataRepository(TradingJournalDataContext dataContext) : 
+    public class UserDataRepository(TradingJournalDataContext dataContext) : 
                                                         JournalRepositoryBase(dataContext), IUserDataRepository
     {
         public async Task<List<string>?> GetAllSavedSectors()
