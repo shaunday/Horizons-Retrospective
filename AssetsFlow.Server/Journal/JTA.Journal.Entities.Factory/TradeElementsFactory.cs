@@ -44,11 +44,6 @@ namespace HsR.Journal.Entities.Factory
             }
 
             return newSummary;
-        }
-
-        public static void RemoveInterimInputById(TradeComposite trade, string tradeInputId)
-        {
-            
-        }
+        } 
     }
 }
