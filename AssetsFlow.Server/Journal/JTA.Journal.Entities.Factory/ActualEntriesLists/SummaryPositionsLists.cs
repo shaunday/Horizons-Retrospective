@@ -9,13 +9,13 @@ namespace HsR.Journal.Entities.Factory
         {
             var summaryCells = new List<DataElement>
                 {
-                    new("Average Entry", ComponentType.InterimSummary, analytics.AverageEntryPrice.ToF2String()) 
+                    new("Average Entry", ComponentType.Summary, analytics.AverageEntryPrice.ToF2String()) 
                                                                                    { IsRelevantForOverview = true },
-                    new("Average Close", ComponentType.InterimSummary, analytics.AverageExitPrice.ToF2String())
+                    new("Average Close", ComponentType.Summary, analytics.AverageExitPrice.ToF2String())
                                                                                    { IsRelevantForOverview = true },
-                    new("Total Amount", ComponentType.InterimSummary, analytics.NetAmount.ToF2String()) 
+                    new("Total Amount", ComponentType.Summary, analytics.NetAmount.ToF2String()) 
                                                                                    { IsRelevantForOverview = true },
-                    new("Total Cost", ComponentType.InterimSummary, analytics.NetCost.ToF2String()) 
+                    new("Total Cost", ComponentType.Summary, analytics.NetCost.ToF2String()) 
                                                                                   { IsRelevantForOverview = true },
                 };
             return summaryCells;
@@ -25,13 +25,13 @@ namespace HsR.Journal.Entities.Factory
         {
             var closureCells = new List<DataElement>
                 {
-                    new("Average Entry", ComponentType.Closure, analytics.AverageEntryPrice.ToF2String())
+                    new("Average Entry", ComponentType.Summary, analytics.AverageEntryPrice.ToF2String())
                                                                                  { IsRelevantForOverview = true },
-                    new("Net Result", ComponentType.Closure, analytics.Profit.ToF2String()) { IsRelevantForOverview = true },
-                    new("W/L", ComponentType.Closure, "") 
+                    new("Net Result", ComponentType.Summary, analytics.Profit.ToF2String()) { IsRelevantForOverview = true },
+                    new("W/L", ComponentType.Summary, "") 
                                             { IsRelevantForOverview = true, Restrictions = ["W", "L"] },
-                    new("Actual R:R", ComponentType.Closure, "") { IsRelevantForOverview = true },
-                    new("Lessons", ComponentType.Closure, "")
+                    new("Actual R:R", ComponentType.Summary, "") { IsRelevantForOverview = true },
+                    new("Lessons", ComponentType.Summary, "")
                 };
 
             return closureCells;

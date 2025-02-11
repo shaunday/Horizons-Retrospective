@@ -1,4 +1,5 @@
 ﻿using HsR.Common.Extenders;
+using HsR.Journal.Entities.TradeJournal;
 using HsR.Journal.TradeAnalytics;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace HsR.Journal.Entities.Factory
         public static TradeComposite CloseTrade(TradeComposite trade, string closingPrice)
         {
             // Create a TradeElement for ReducePosition
-            var reductionEle = new TradeElement(trade, TradeActionType.ReducePosition);
+            var reductionEle = new TradeAction(trade, TradeActionType.ReducePosition);
             reductionEle.Entries = EntriesFactory.GetReducePositionEntries(reductionEle);
 
             // Find price entry
@@ -43,7 +44,7 @@ namespace HsR.Journal.Entities.Factory
                 analytics.reducePositions.TotalCost += costToClose;
                 analytics.reducePositions.TotalAmount += netAmountInPosition;
 
-                var tradeClosure = new TradeElement(trade, TradeActionType.Closure);
+                var tradeClosure = new TradeSummary(trade, TradeActionType.Summary);
                 TradeAnalyticsSummary analyticsSummary = new(analytics);
                 tradeClosure.Entries = EntriesFactory.GetTradeClosureComponents(tradeClosure, analyticsSummary);
 

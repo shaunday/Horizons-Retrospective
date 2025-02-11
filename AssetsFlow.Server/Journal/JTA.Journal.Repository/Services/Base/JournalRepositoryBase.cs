@@ -2,6 +2,8 @@ using HsR.Common;
 using HsR.Journal.DataContext;
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
+using HsR.Journal.Entities.TradeJournal;
+using HsR.Journal.TradeAnalytics;
 using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.Repository.Services.Base
@@ -15,24 +17,20 @@ namespace HsR.Journal.Repository.Services.Base
             _dataContext = dataContext ?? throw new ArgumentNullException(nameof(dataContext));
         }
 
-        private protected TradeElement RefreshSummary(TradeComposite trade)
+        private protected TradeSummary RefreshSummary(TradeComposite trade)
         {
-            TradeElement newSummary = TradeElementsFactory.GetNewSummary(trade);
+            var (newSummary, shouldBeClosed) = TradeElementsFactory.GetNewSummary(trade);
 
-            // Remove the old Summary if it exists
             if (trade.Summary != null)
             {
                 _dataContext.Entry(trade.Summary).State = EntityState.Deleted;
             }
-
-            // Update trade status, if we got a closure as summary
-            if (newSummary.TradeActionType == TradeActionType.Closure)
+            if (shouldBeClosed)
             {
                 trade.Status = TradeStatus.Closed;
             }
 
             trade.Summary = newSummary;
-
             return newSummary;
         }
 
@@ -49,7 +47,7 @@ namespace HsR.Journal.Repository.Services.Base
             return trade!;
         }
 
-        protected async Task<TradeElement> GetTradeElementAsync(string tradeEleId)
+        protected async Task<TradeAction> GetTradeElementAsync(string tradeEleId)
         {
             if (!int.TryParse(tradeEleId, out var parsedId))
             {

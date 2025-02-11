@@ -1,5 +1,6 @@
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
+using HsR.Journal.Entities.TradeJournal;
 using HsR.Journal.Repository.Services.Base;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +8,7 @@ namespace HsR.Journal.DataContext
 {
     public class DataElementRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), IDataElementRepository
     {
-        public async Task<(DataElement updatedCell, TradeElement? summary)> UpdateCellContentAsync(string componentId, string newContent, string changeNote)
+        public async Task<(DataElement updatedCell, TradeSummary? summary)> UpdateCellContentAsync(string componentId, string newContent, string changeNote)
         {
             if (!int.TryParse(componentId, out var parsedId))
             {
@@ -22,7 +23,7 @@ namespace HsR.Journal.DataContext
 
             cell.SetFollowupContent(newContent, changeNote);
 
-            TradeElement? newSummary = null;
+            TradeSummary? newSummary = null;
             if (cell.IsCostRelevant())
             {
                 await _dataContext.Entry(cell)

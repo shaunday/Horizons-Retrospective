@@ -1,4 +1,5 @@
 ﻿using HsR.Journal.Entities;
+using HsR.Journal.Entities.TradeJournal;
 using System.ComponentModel.DataAnnotations;
 
 public class TradeComposite
@@ -6,11 +7,11 @@ public class TradeComposite
     [Key]
     public int Id { get; private set; }
 
-    public ICollection<TradeElement> TradeElements { get; set; } = new List<TradeElement>();
+    public ICollection<TradeAction> TradeElements { get; set; } = new List<TradeAction>();
 
     public ICollection<string> Sectors { get; set; } = new List<string>();
 
-    public TradeElement? Summary { get; set; }
+    public TradeSummary? Summary { get; set; }
 
     public TradeStatus Status { get; set; } = TradeStatus.AnIdea;
 

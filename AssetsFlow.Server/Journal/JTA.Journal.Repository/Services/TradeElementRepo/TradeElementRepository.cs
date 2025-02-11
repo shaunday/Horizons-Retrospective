@@ -1,5 +1,6 @@
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
+using HsR.Journal.Entities.TradeJournal;
 using HsR.Journal.Repository.Services.Base;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,10 +9,10 @@ namespace HsR.Journal.DataContext
     public class TradeElementRepository(TradingJournalDataContext dataContext) 
                                             : JournalRepositoryBase(dataContext), ITradeElementRepository
     {
-        public async Task<(TradeElement newEntry, TradeElement summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
+        public async Task<(TradeAction newEntry, TradeSummary summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
-            TradeElement tradeInput = TradeElementsFactory.GetNewInterimTradeElement(trade, isAdd);
+            TradeAction tradeInput = TradeElementsFactory.GetNewInterimTradeElement(trade, isAdd);
             trade.TradeElements.Add(tradeInput);
 
             if (trade.Status == TradeStatus.AnIdea)
@@ -19,13 +20,13 @@ namespace HsR.Journal.DataContext
                 trade.Status = TradeStatus.Open;
             }
 
-            TradeElement newSummary = RefreshSummary(trade);
+            TradeSummary newSummary = RefreshSummary(trade);
 
             await _dataContext.SaveChangesAsync();
             return (tradeInput, newSummary);
         }
 
-        public async Task<TradeElement> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
+        public async Task<TradeSummary> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
         {
             if (!int.TryParse(tradeInputId, out var parsedId))
             {
@@ -44,13 +45,13 @@ namespace HsR.Journal.DataContext
                 throw new ArgumentException($"The trade input (Id '{tradeInputId}') to remove is null.", nameof(tradeInputId));
 
             }
-            TradeElement newSummary = RefreshSummary(trade); 
+            var newSummary = RefreshSummary(trade); 
 
             await _dataContext.SaveChangesAsync();
             return newSummary;
         }
 
-        public async Task<TradeElement> ActivateTradeElement(string tradeEleId)
+        public async Task<TradeAction> ActivateTradeElement(string tradeEleId)
         {
             var tradeEle = await GetTradeElementAsync(tradeEleId);
 

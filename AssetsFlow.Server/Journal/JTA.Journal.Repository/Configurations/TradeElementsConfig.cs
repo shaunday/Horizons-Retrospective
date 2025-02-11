@@ -1,13 +1,21 @@
 using HsR.Journal.Entities;
+using HsR.Journal.Entities.TradeJournal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace HsR.Journal.Repository.Configurations
 {
-    public class TradeElementConfig : IEntityTypeConfiguration<TradeElement>
+    public class TradeElementsConfig : IEntityTypeConfiguration<TradeElement>
     {
         public void Configure(EntityTypeBuilder<TradeElement> builder)
         {
+            // Configuring the inheritance hierarchy
+            builder
+                .HasDiscriminator<string>("TradeElementType")
+                .HasValue<TradeSummary>("Summary")
+                .HasValue<TradeAction>("Action");
+
             builder.HasMany(t => t.Entries)
                 .WithOne(t => t.TradeElementRef)
                 .HasForeignKey(t => t.TradeElementFK)
@@ -21,4 +29,8 @@ namespace HsR.Journal.Repository.Configurations
                 .HasConversion<string>();
         }
     }
+
+
+
+
 }

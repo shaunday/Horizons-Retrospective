@@ -4,6 +4,7 @@ using Asp.Versioning;
 using HsR.Journal.Entities;
 using HsR.Web.Services.Models.Journal;
 using HsR.Journal.DataContext;
+using HsR.Journal.Entities.TradeJournal;
 
 namespace HsR.Web.API.Controllers.Journal
 {
@@ -22,7 +23,7 @@ namespace HsR.Web.API.Controllers.Journal
                 return BadRequest("Content is required.");
             }
 
-            (DataElement updatedComponent, TradeElement? summary) = await _journalAccess.UpdateCellContentAsync(componentId, request.Content, request.Info);
+            (DataElement updatedComponent, TradeSummary? summary) = await _journalAccess.UpdateCellContentAsync(componentId, request.Content, request.Info);
 
             (DataElementModel, TradeElementModel?) resAsModel = (_mapper.Map<DataElementModel>(updatedComponent), _mapper.Map<TradeElementModel>(summary));
 

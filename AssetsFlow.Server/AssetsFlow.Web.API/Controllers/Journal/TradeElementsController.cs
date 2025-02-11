@@ -2,6 +2,7 @@
 using AutoMapper;
 using HsR.Journal.DataContext;
 using HsR.Journal.Entities;
+using HsR.Journal.Entities.TradeJournal;
 using HsR.Web.Services.Models.Journal;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,8 +20,7 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpPost]
         public async Task<ActionResult<(TradeElementModel newEntry, TradeElementModel? summary)>> AddReduceInterimPosition(string tradeId, bool isAdd)
         {
-            (TradeElement newEntry, TradeElement? summary) entryAndSummary;
-            entryAndSummary = await _journalAccess.AddInterimPositionAsync(tradeId, isAdd);
+            (TradeAction newEntry, TradeSummary? summary) entryAndSummary= await _journalAccess.AddInterimPositionAsync(tradeId, isAdd);
 
             (TradeElementModel, TradeElementModel) resAsModel =
                             (_mapper.Map<TradeElementModel>(entryAndSummary.newEntry), _mapper.Map<TradeElementModel>(entryAndSummary.summary));
@@ -31,9 +31,8 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpDelete("{tradeInputId}")]
         public async Task<ActionResult<TradeElementModel>> DeleteInterimTradeInput(string tradeId, string tradeInputId)
         {
-            TradeElement? summary = await _journalAccess.RemoveInterimPositionAsync(tradeId, tradeInputId);
-
-            if (summary ==null)
+            var summary = await _journalAccess.RemoveInterimPositionAsync(tradeId, tradeInputId);
+            if (summary == null)
             {
                 return NotFound();
             }
@@ -50,8 +49,7 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpPost("close")]
         public async Task<ActionResult<TradeElementModel>> CloseTrade(string tradeId, [FromQuery] string closingPrice)
         {
-            TradeElement summary = await _journalAccess.CloseTradeAsync(tradeId, closingPrice); 
-
+            var summary = await _journalAccess.CloseTradeAsync(tradeId, closingPrice); 
             if (summary == null)
             {
                 return NotFound();
@@ -68,7 +66,7 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpPost("activate")]
         public async Task<ActionResult<TradeElementModel>> ActivateTradeElment(string tradeId, string tradeEleId)
         {
-            TradeElement tradeElement = await _journalAccess.ActivateTradeElement(tradeEleId);
+            var tradeElement = await _journalAccess.ActivateTradeElement(tradeEleId);
 
             if (tradeElement == null)
             {

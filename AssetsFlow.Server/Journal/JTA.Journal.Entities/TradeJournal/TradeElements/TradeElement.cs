@@ -13,11 +13,7 @@ namespace HsR.Journal.Entities
 
         public List<DataElement> Entries { get; set; } = new List<DataElement>();
 
-        [Required]
-        public DateTime TimeStamp { get; set; }
-
-        [Required]
-        public bool IsActive { get; private set; } = false;
+        public DateTime? TimeStamp { get; set; }
 
         #region Ctors
         public TradeElement() { }
@@ -26,15 +22,10 @@ namespace HsR.Journal.Entities
         public TradeElement(TradeComposite trade, TradeActionType actionType)
         {
             CompositeRef = trade;
+            CompositeFK = trade.Id;
             TradeActionType = actionType;
         } 
         #endregion
-
-        public void Activate()
-        {
-            IsActive = true;
-            TimeStamp = DateTime.Now;
-        }
 
         [Required]
         public int CompositeFK { get; set; }

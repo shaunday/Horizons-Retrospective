@@ -1,4 +1,5 @@
 ﻿using HsR.Journal.Entities.Factory.Assists;
+using HsR.Journal.Entities.TradeJournal;
 using HsR.Journal.TradeAnalytics;
 
 namespace HsR.Journal.Entities.Factory
@@ -6,37 +7,37 @@ namespace HsR.Journal.Entities.Factory
     public static class EntriesFactory
     {
         #region Origin
-        public static List<DataElement> GetOriginEntries(TradeElement elementRef)
+        public static List<DataElement> GetOriginEntries(TradeAction elementRef)
         {
             return CreateEntries(OriginPositionList.GetTradeOriginObjects(), elementRef);
         }
         #endregion
 
         #region Interim elements
-        public static List<DataElement> GetAddPositionEntries(TradeElement elementRef)
+        public static List<DataElement> GetAddPositionEntries(TradeAction elementRef)
         {
             return CreateEntries(AddPositionLists.GetAddToPositionObjects(), elementRef);
         }
 
-        public static List<DataElement> GetFirstPositionEntries(TradeElement elementRef)
+        public static List<DataElement> GetFirstPositionEntries(TradeAction elementRef)
         {
             return CreateEntries(AddPositionLists.GetFirstPositionObjects(), elementRef);
         }
 
-        public static List<DataElement> GetReducePositionEntries(TradeElement elementRef)
+        public static List<DataElement> GetReducePositionEntries(TradeAction elementRef)
         {
             return CreateEntries(ReducePositionList.GetReducePositionObjects(), elementRef);
         }
         #endregion
 
         #region Summary and Closure
-        public static List<DataElement> GetSummaryComponents(TradeElement elementRef, TradeAnalyticsSummary analytics)
+        public static List<DataElement> GetSummaryComponents(TradeSummary elementRef, TradeAnalyticsSummary analytics)
         {
             var summaryCells = SummaryPositionsLists.GetSummaryComponents(analytics);
             return CreateEntries(summaryCells, elementRef);
         }
 
-        public static List<DataElement> GetTradeClosureComponents(TradeElement elementRef, TradeAnalyticsSummary analytics)
+        public static List<DataElement> GetTradeClosureComponents(TradeSummary elementRef, TradeAnalyticsSummary analytics)
         {
             var closureCells = SummaryPositionsLists.GetTradeClosureComponents(analytics);
             return CreateEntries(closureCells, elementRef);

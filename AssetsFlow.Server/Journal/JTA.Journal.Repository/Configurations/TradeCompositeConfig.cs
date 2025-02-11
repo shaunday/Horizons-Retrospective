@@ -1,4 +1,4 @@
-using HsR.Journal.Entities;
+using HsR.Journal.Entities.TradeJournal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,9 +9,13 @@ namespace HsR.Journal.Repository.Configurations
         public void Configure(EntityTypeBuilder<TradeComposite> builder)
         {
             builder.HasOne(tc => tc.Summary)
-                .WithOne()
-                .HasForeignKey<TradeComposite>("SummaryId"); //shadow prop
+                 .WithOne()
+                 .HasForeignKey<TradeComposite>("SummaryId"); //shadow prop
 
+            //builder
+            //    .HasOne(t => t.Summary)
+            //    .WithOne() 
+            //    .HasForeignKey<TradeSummary>(t => t.CompositeFK);
             builder.Navigation(tc => tc.Summary).AutoInclude();
 
             builder.HasMany(tc => tc.TradeElements)

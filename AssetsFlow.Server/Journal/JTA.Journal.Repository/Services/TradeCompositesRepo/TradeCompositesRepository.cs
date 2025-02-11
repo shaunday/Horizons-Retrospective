@@ -27,7 +27,7 @@ namespace HsR.Journal.DataContext
         public async Task<TradeComposite> AddTradeCompositeAsync()
         {
             TradeComposite trade = new();
-            TradeElement originElement = new(trade, TradeActionType.Origin);
+            TradeAction originElement = new(trade, TradeActionType.Origin);
             originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
             trade.TradeElements.Add(originElement);
 
@@ -41,7 +41,7 @@ namespace HsR.Journal.DataContext
             var trade = await GetTradeCompositeAsync(tradeId);
             if (trade.Summary != null)
             {
-                _dataContext.TradeElements.Remove(trade.Summary);
+                _dataContext.Entry(trade.Summary).State = EntityState.Deleted;
             }
             else
             {
