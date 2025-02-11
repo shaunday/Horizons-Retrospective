@@ -43,7 +43,7 @@ function TradeExpanded({ tradeId }) {
           </li>
         ))}
       </ul>
-      {tradeSummary && <TradeElement tradeElement={tradeSummary} />}
+      {tradeSummary && <TradeElement tradeElement={{ ...tradeSummary, isOverview: true }} />}
       <CompositeControls
         tradeComposite={trade}
         onTradeActionExecuted={processTradeAction}

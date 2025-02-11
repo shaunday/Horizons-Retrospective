@@ -1,15 +1,18 @@
-closing price on trade close
 only allow close/reduce on open trades
-remove/activate on ele : elementControls
+
+add activate mechanism
+remove/activate on ele : elementControls - dont allow add/reduce if ongoing action
+
+closing price on trade close
 filter in client?
 
-close doesnt work well.. poss tied to summary issues
+style for trade status
+style for temp element
 
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 
 https ?
 
-how to adjust trade status?
 filtering - adjust data call api
 sectors combobox ? autofill?
 

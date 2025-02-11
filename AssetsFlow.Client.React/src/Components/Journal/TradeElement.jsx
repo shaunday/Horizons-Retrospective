@@ -19,13 +19,13 @@ const listItemStyle = {
 };
 
 function TradeElement({ tradeElement, onElementContentUpdate }) {
-  const isOverview = tradeElement.isSimulated !== undefined;
+  const isOverview = tradeElement.isOverview !== undefined;
 
  const processCellUpdate = useCallback(
   (data) => {
     // Handle inter-connectedness here - element might affect other elements
 
-    if (tradeElement.isSimulated !== undefined)
+    if (isOverview)
       onElementContentUpdate(data);
   },
   [onElementContentUpdate]
