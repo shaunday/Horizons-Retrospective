@@ -44,10 +44,10 @@ function TradeExpanded({ tradeId }) {
         ))}
       </ul>
       {tradeSummary && <TradeElement tradeElement={{ ...tradeSummary, isOverview: true }} />}
-      <CompositeControls
+      {trade[Constants.TRADE_STATUS_STRING] != Constants.TradeStatus.CLOSED && <CompositeControls
         tradeComposite={trade}
         onTradeActionExecuted={processTradeAction}
-      />
+      />}
     </div>
   );
 }

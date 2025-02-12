@@ -25,8 +25,8 @@ namespace HsR.Web.API.Configurations
                 })
                 .AddJsonOptions(options =>
                 {
-                    // Configure the JSON serializer to write indented JSON
                     options.JsonSerializerOptions.WriteIndented = true;
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 });
         }

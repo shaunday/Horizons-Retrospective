@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using HsR.Journal.Entities;
 
 namespace HsR.Web.Services.Models.Journal
@@ -12,6 +13,7 @@ namespace HsR.Web.Services.Models.Journal
         public string Title { get; set; } = string.Empty;
 
         [Required]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public ComponentType ComponentType { get; set; }
 
         [Required]
@@ -19,9 +21,11 @@ namespace HsR.Web.Services.Models.Journal
         public ICollection<ContentRecord>? History { get; set; }
 
         [Required]
-        public bool IsMustHave { get; set; } 
+        public bool IsMustHave { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public ValueRelevance? TotalCostRelevance { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public ValueRelevance? UnitPriceRelevance { get; set; }
         public bool IsRelevantForOverview { get; set; }
         public ICollection<string>? Restrictions { get; set; }

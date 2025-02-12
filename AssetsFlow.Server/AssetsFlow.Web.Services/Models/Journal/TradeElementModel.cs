@@ -1,5 +1,6 @@
 ﻿using HsR.Journal.Entities;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace HsR.Web.Services.Models.Journal
 {
@@ -9,6 +10,7 @@ namespace HsR.Web.Services.Models.Journal
         public int Id { get; set; }
 
         [Required]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public TradeActionType TradeActionType { get; set; }
 
         [Required]

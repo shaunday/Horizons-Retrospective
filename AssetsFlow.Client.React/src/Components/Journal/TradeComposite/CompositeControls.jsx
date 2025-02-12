@@ -38,22 +38,22 @@ function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
         >
           Add to position
         </button>
-        <button
+        {tradeComposite[Constants.TRADE_STATUS_STRING] == Constants.TradeStatus.OPEN && <button
           className="button-38"
           type="button"
           style={{ display: "inline-block" }}
           onClick={handleActionClick(Constants.TradeActions.REDUCE)}
         >
           Reduce position
-        </button>
-        <button
+        </button>}
+        {tradeComposite[Constants.TRADE_STATUS_STRING] == Constants.TradeStatus.OPEN && <button
           className="button-38"
           type="button"
           style={{ display: "inline-block" }}
           onClick={handleActionClick(Constants.TradeActions.CLOSE)}
         >
           Close Trade
-        </button>
+        </button>}
       </div>
       {processing && <div className="spinner">Processing...</div>}
       {success && <MemoizedSuccessMessage />}

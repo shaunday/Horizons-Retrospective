@@ -53,6 +53,7 @@ namespace HsR.Journal.Seeder
             await dbContext.SaveChangesAsync();
 
             AddTradeIdea(trade);
+            trade.Status = TradeStatus.AnIdea;
             await dbContext.SaveChangesAsync();
             return trade;
         }
@@ -63,14 +64,17 @@ namespace HsR.Journal.Seeder
             AddElementToTrade(trade, TradeActionType.AddPosition);
             AddElementToTrade(trade, TradeActionType.ReducePosition);
 
+
             if (close)
             {
                 TradeCompositeOperations.CloseTrade(trade, "1000");
+                trade.Status = TradeStatus.Closed;
             }
             else
             {
                 var (newSummary, _) = TradeElementsFactory.GetNewSummary(trade);
                 trade.Summary = newSummary;
+                trade.Status = TradeStatus.Open;
             }
 
             dbContext.TradeComposites.Update(trade);
