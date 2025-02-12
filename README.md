@@ -1,11 +1,12 @@
 ## Overview: 
 Stage1: A Trading Journal, allows the user to add and manage trade ideas and ongoing trade positions.
 
-TBD1: Add Ledger: withdraw, deposit, convert (per broker) + time stamps           .....> expand to Asset / Trading Flow
+(EDIT Feb2015 : Logic/ connection is mostly done, finish leftovers then -> styles work + MantineUI)
 
-TBD2: Positions/allocations pie charts
 
-TBD Stage2: Trade alerts, based on current price action + indicators.
+TBD1: Add Ledger: withdraw, deposit, convert (per broker) + time stamps (=position snapshots)
+
+TBD2: Positions/allocations pie charts per timestamp
 
 ## Part 1: Client; React 18, SAA
 ### Fetch Flow and Cache Management:
