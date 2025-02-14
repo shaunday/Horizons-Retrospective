@@ -1,0 +1,11 @@
+import axios from "axios";
+
+const baseURL = import.meta.env.VITE_API_URL;
+const elementsSuffix = import.meta.env.VITE_JOURNAL_ELEMENTS_SUFFIX;
+
+const elmentsClient = axios.create({ baseURL: `${baseURL}${elementsSuffix}` });
+
+export async function activateElementAPI(elementId) {
+  const response = await elmentsClient.put(`${elementId}`);
+  return response.data;
+}

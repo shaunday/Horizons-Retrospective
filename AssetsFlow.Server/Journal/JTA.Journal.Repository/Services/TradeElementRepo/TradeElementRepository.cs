@@ -9,24 +9,23 @@ namespace HsR.Journal.DataContext
     public class TradeElementRepository(TradingJournalDataContext dataContext) 
                                             : JournalRepositoryBase(dataContext), ITradeElementRepository
     {
-        public async Task<(TradeAction newEntry, TradeSummary summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
+        public async Task<(TradeAction newEntry, TradeSummary? summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
             TradeAction tradeInput = TradeElementsFactory.GetNewInterimTradeElement(trade, isAdd);
             trade.TradeElements.Add(tradeInput);
 
-            if (trade.Status == TradeStatus.AnIdea)
+            TradeSummary? newSummary = null;
+            if (trade.Status == TradeStatus.Open)
             {
-                trade.Status = TradeStatus.Open;
+                newSummary = RefreshSummary(trade);
             }
-
-            TradeSummary newSummary = RefreshSummary(trade);
 
             await _dataContext.SaveChangesAsync();
             return (tradeInput, newSummary);
         }
 
-        public async Task<TradeSummary> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
+        public async Task<TradeSummary?> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
         {
             if (!int.TryParse(tradeInputId, out var parsedId))
             {
@@ -45,10 +44,20 @@ namespace HsR.Journal.DataContext
                 throw new ArgumentException($"The trade input (Id '{tradeInputId}') to remove is null.", nameof(tradeInputId));
 
             }
-            var newSummary = RefreshSummary(trade); 
+
+            //check if any positions are still active
+            TradeSummary? summary = null;
+            if (trade.IsTadeActive())
+            {
+                summary = RefreshSummary(trade);
+            }
+            else
+            {
+                trade.Status = TradeStatus.AnIdea;
+            }
 
             await _dataContext.SaveChangesAsync();
-            return newSummary;
+            return summary;
         }
 
         public async Task<TradeAction> ActivateTradeElement(string tradeEleId)
@@ -60,6 +69,10 @@ namespace HsR.Journal.DataContext
             if (okForActivate)
             {
                 tradeEle.Activate();
+                if (tradeEle.CompositeRef.Status == TradeStatus.AnIdea)
+                {
+                    tradeEle.CompositeRef.Status = TradeStatus.Open;
+                }
                 await _dataContext.SaveChangesAsync();
             }
 

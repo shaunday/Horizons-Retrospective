@@ -12,7 +12,7 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/trades")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class TradeComponentsController(IJournalRepositoryWrapper journalAccess, 
+    public class TradesJournalController(IJournalRepositoryWrapper journalAccess, 
             ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
     {
         const int maxTradesPageSize = 20;

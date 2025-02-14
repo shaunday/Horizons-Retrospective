@@ -12,8 +12,8 @@ namespace HsR.Journal.DataContext
         Task<TradeComposite> AddTradeCompositeAsync();
 
         //interim elements
-        Task<(TradeAction newEntry, TradeSummary summary)> AddInterimPositionAsync(string tradeId, bool isAdd);
-        Task<TradeSummary> RemoveInterimPositionAsync(string tradeId, string tradeInputId);
+        Task<(TradeAction newEntry, TradeSummary? summary)> AddInterimPositionAsync(string tradeId, bool isAdd);
+        Task<TradeSummary?> RemoveInterimPositionAsync(string tradeId, string tradeInputId);
         Task<TradeAction> ActivateTradeElement(string tradeEleId);
 
         //components

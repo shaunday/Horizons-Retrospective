@@ -6,6 +6,7 @@ filter in client?
 
 style for trade status
 style for temp element
+element title = date 
 
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 

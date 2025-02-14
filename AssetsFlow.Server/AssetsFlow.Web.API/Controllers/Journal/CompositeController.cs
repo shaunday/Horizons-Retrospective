@@ -11,7 +11,7 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("api/v{version:apiVersion}/journal/trades/{tradeId}")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class TradeElementsController(IJournalRepositoryWrapper journalAccess, 
+    public class CompositeController(IJournalRepositoryWrapper journalAccess, 
             ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
     {
 
@@ -57,24 +57,6 @@ namespace HsR.Web.API.Controllers.Journal
 
             TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
             return ResultHandling(resAsModel, $"Could not close trade on : {tradeId}", [NEW_SUMMARY]);
-        }
-
-        #endregion
-
-        #region Activate
-
-        [HttpPost("activate")]
-        public async Task<ActionResult<TradeElementModel>> ActivateTradeElment(string tradeId, string tradeEleId)
-        {
-            var tradeElement = await _journalAccess.ActivateTradeElement(tradeEleId);
-
-            if (tradeElement == null)
-            {
-                return NotFound();
-            }
-
-            TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(tradeElement);
-            return ResultHandling((resAsModel), $"Could not activate element on : {tradeEleId}", [NEW_ELEMENT_DATA]);
         }
 
         #endregion
