@@ -20,7 +20,7 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpPost]
         public async Task<ActionResult<(TradeElementModel newEntry, TradeElementModel? summary)>> AddReduceInterimPosition(string tradeId, bool isAdd)
         {
-            (TradeAction newEntry, TradeSummary? summary) entryAndSummary= await _journalAccess.AddInterimPositionAsync(tradeId, isAdd);
+            (InterimTradeElement newEntry, TradeSummary? summary) entryAndSummary= await _journalAccess.AddInterimPositionAsync(tradeId, isAdd);
 
             (TradeElementModel, TradeElementModel) resAsModel =
                             (_mapper.Map<TradeElementModel>(entryAndSummary.newEntry), _mapper.Map<TradeElementModel>(entryAndSummary.summary));

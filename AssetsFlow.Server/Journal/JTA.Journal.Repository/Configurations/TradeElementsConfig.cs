@@ -14,7 +14,7 @@ namespace HsR.Journal.Repository.Configurations
             builder
                 .HasDiscriminator<string>("TradeElementType")
                 .HasValue<TradeSummary>("Summary")
-                .HasValue<TradeAction>("Action");
+                .HasValue<InterimTradeElement>("Action");
 
             builder.HasMany(t => t.Entries)
                 .WithOne(t => t.TradeElementRef)

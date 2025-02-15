@@ -9,10 +9,10 @@ namespace HsR.Journal.DataContext
     public class TradeElementRepository(TradingJournalDataContext dataContext) 
                                             : JournalRepositoryBase(dataContext), ITradeElementRepository
     {
-        public async Task<(TradeAction newEntry, TradeSummary? summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
+        public async Task<(InterimTradeElement newEntry, TradeSummary? summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
-            TradeAction tradeInput = TradeElementsFactory.GetNewInterimTradeElement(trade, isAdd);
+            InterimTradeElement tradeInput = TradeElementsFactory.GetNewInterimTradeElement(trade, isAdd);
             trade.TradeElements.Add(tradeInput);
 
             TradeSummary? newSummary = null;
@@ -23,6 +23,13 @@ namespace HsR.Journal.DataContext
 
             await _dataContext.SaveChangesAsync();
             return (tradeInput, newSummary);
+        }
+
+        public async Task<InterimTradeElement> AddInterimEvalutationAsync(string tradeId)
+        {
+            var trade = await GetTradeCompositeAsync(tradeId);
+            InterimTradeElement tradeOverview = TradeElementsFactory.GetNewEvalutationElement(trade);
+            return tradeOverview;
         }
 
         public async Task<TradeSummary?> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
@@ -60,7 +67,7 @@ namespace HsR.Journal.DataContext
             return summary;
         }
 
-        public async Task<TradeAction> ActivateTradeElement(string tradeEleId)
+        public async Task<InterimTradeElement> ActivateTradeElement(string tradeEleId)
         {
             var tradeEle = await GetTradeElementAsync(tradeEleId);
 

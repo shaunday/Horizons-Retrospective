@@ -1,7 +1,7 @@
 ﻿
 // todo
 
-add investment timeframe
+add investment timeframe, stretch levels
 position weight/ sector weight
 how to obfuscate amounts/costs for anon view? 
 save sectors to userdata

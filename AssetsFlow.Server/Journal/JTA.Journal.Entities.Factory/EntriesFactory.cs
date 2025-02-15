@@ -7,24 +7,29 @@ namespace HsR.Journal.Entities.Factory
     public static class EntriesFactory
     {
         #region Origin
-        public static List<DataElement> GetOriginEntries(TradeAction elementRef)
+        public static List<DataElement> GetOriginEntries(InterimTradeElement elementRef)
         {
             return CreateEntries(OriginPositionList.GetTradeOriginObjects(), elementRef);
         }
         #endregion
 
         #region Interim elements
-        public static List<DataElement> GetAddPositionEntries(TradeAction elementRef)
+        public static List<DataElement> GetAddPositionEntries(InterimTradeElement elementRef)
         {
             return CreateEntries(AddPositionLists.GetAddToPositionObjects(), elementRef);
         }
 
-        public static List<DataElement> GetFirstPositionEntries(TradeAction elementRef)
+        public static List<DataElement> GetEvalutationEntries(InterimTradeElement elementRef)
+        {
+            return CreateEntries(AddPositionLists.GetEvalutationObjects(), elementRef);
+        }
+
+        public static List<DataElement> GetFirstPositionEntries(InterimTradeElement elementRef)
         {
             return CreateEntries(AddPositionLists.GetFirstPositionObjects(), elementRef);
         }
 
-        public static List<DataElement> GetReducePositionEntries(TradeAction elementRef)
+        public static List<DataElement> GetReducePositionEntries(InterimTradeElement elementRef)
         {
             return CreateEntries(ReducePositionList.GetReducePositionObjects(), elementRef);
         }

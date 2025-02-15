@@ -27,7 +27,7 @@ namespace HsR.Journal.DataContext
         public async Task<TradeComposite> AddTradeCompositeAsync()
         {
             TradeComposite trade = new();
-            TradeAction originElement = new(trade, TradeActionType.Origin);
+            InterimTradeElement originElement = new(trade, TradeActionType.Origin);
             originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
             trade.TradeElements.Add(originElement);
 

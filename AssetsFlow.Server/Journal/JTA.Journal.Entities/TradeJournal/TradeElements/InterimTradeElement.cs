@@ -3,15 +3,15 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace HsR.Journal.Entities
 {
-    public class TradeAction : TradeElement
+    public class InterimTradeElement : TradeElement
     {
         [Required]
         public bool IsActive { get; private set; } = false;
 
-        public TradeAction() : base() { }
+        public InterimTradeElement() : base() { }
 
         [SetsRequiredMembers]
-        public TradeAction(TradeComposite trade, TradeActionType actionType) : base(trade, actionType) { }
+        public InterimTradeElement(TradeComposite trade, TradeActionType actionType) : base(trade, actionType) { }
 
         public void Activate()
         {

@@ -35,7 +35,7 @@
             return addToPositionObjects;
         }
 
-        internal static List<DataElement> GetOverviewObjects()
+        internal static List<DataElement> GetEvalutationObjects()
         {
             var addToPositionObjects = new List<DataElement>
             {

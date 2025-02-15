@@ -6,9 +6,9 @@ namespace HsR.Journal.Entities.Factory
 {
     public static class TradeElementsFactory
     {
-        public static TradeAction GetNewInterimTradeElement(TradeComposite trade, bool isAdd)
+        public static InterimTradeElement GetNewInterimTradeElement(TradeComposite trade, bool isAdd)
         {
-            TradeAction tradeInput = new(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);
+            InterimTradeElement tradeInput = new(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);
             if (isAdd)
             {
                 if (trade.Status == TradeStatus.AnIdea)
@@ -44,6 +44,13 @@ namespace HsR.Journal.Entities.Factory
             }
 
             return (newSummary, shouldBeClosed);
-        } 
+        }
+
+        public static InterimTradeElement GetNewEvalutationElement(TradeComposite trade)
+        {
+            InterimTradeElement tradeOverview = new(trade, TradeActionType.Overview);
+            tradeOverview.Entries = EntriesFactory.GetEvalutationEntries(tradeOverview);
+            return tradeOverview;
+        }
     }
 }

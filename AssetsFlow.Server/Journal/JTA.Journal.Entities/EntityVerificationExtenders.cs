@@ -17,7 +17,7 @@ namespace HsR.Journal.Entities
 
 
         //trade elements
-        public static bool AllowActivation(this TradeAction element)
+        public static bool AllowActivation(this InterimTradeElement element)
         {
             return !element.Entries.Select(e => e.IsMustHave && string.IsNullOrEmpty(e.Content)).Any();
         }

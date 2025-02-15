@@ -7,7 +7,7 @@ public class TradeComposite
     [Key]
     public int Id { get; private set; }
 
-    public ICollection<TradeAction> TradeElements { get; set; } = new List<TradeAction>();
+    public ICollection<InterimTradeElement> TradeElements { get; set; } = new List<InterimTradeElement>();
 
     public ICollection<string> Sectors { get; set; } = new List<string>();
 

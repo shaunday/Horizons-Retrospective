@@ -7,7 +7,7 @@ namespace HsR.Journal.DataContext
     public class TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : DbContext(options)
     {
         public DbSet<TradeComposite> TradeComposites { get; set; } = null!;
-        public DbSet<TradeAction> TradeElements { get; set; } = null!; 
+        public DbSet<InterimTradeElement> TradeElements { get; set; } = null!; 
         public DbSet<DataElement> Entries { get; set; } = null!;
         
         public DbSet<UserData> UserData { get; set; } = null!;

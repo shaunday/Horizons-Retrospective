@@ -83,7 +83,7 @@ namespace HsR.Journal.Seeder
 
         private void AddTradeIdea(TradeComposite trade)
         {
-            TradeAction originElement = new(trade, TradeActionType.Origin);
+            InterimTradeElement originElement = new(trade, TradeActionType.Origin);
             originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
             PopulateElementWithData(originElement);
             trade.TradeElements.Add(originElement);
@@ -91,7 +91,7 @@ namespace HsR.Journal.Seeder
 
         private void AddElementToTrade(TradeComposite trade, TradeActionType type)
         {
-            TradeAction newElement = new(trade, type);
+            InterimTradeElement newElement = new(trade, type);
             newElement.Entries = EntriesFactory.GetAddPositionEntries(newElement);
 
             PopulateElementWithData(newElement);
@@ -100,7 +100,7 @@ namespace HsR.Journal.Seeder
 
         //populate related
         private readonly Random _lengthRandom = new();
-        private TradeAction PopulateElementWithData(TradeAction element)
+        private InterimTradeElement PopulateElementWithData(InterimTradeElement element)
         {
             int length;
             for (int i = 0; i < element.Entries.Count; i++)

@@ -48,9 +48,14 @@ namespace HsR.Journal.DataContext
         }
 
 
-        public Task<(TradeAction newEntry, TradeSummary? summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
+        public Task<(InterimTradeElement newEntry, TradeSummary? summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             return _tradeElementRepository.AddInterimPositionAsync(tradeId, isAdd);
+        }
+
+        public Task<InterimTradeElement> AddInterimEvalutationAsync(string tradeId)
+        {
+            return _tradeElementRepository.AddInterimEvalutationAsync(tradeId);
         }
 
         public Task<TradeSummary?> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
@@ -58,7 +63,7 @@ namespace HsR.Journal.DataContext
             return _tradeElementRepository.RemoveInterimPositionAsync(tradeId, tradeInputId);
         }
 
-        public Task<TradeAction> ActivateTradeElement(string tradeEleId)
+        public Task<InterimTradeElement> ActivateTradeElement(string tradeEleId)
         {
             return _tradeElementRepository.ActivateTradeElement(tradeEleId);
         }

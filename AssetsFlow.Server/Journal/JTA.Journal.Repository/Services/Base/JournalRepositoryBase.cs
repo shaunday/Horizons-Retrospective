@@ -47,7 +47,7 @@ namespace HsR.Journal.Repository.Services.Base
             return trade!;
         }
 
-        protected async Task<TradeAction> GetTradeElementAsync(string tradeEleId)
+        protected async Task<InterimTradeElement> GetTradeElementAsync(string tradeEleId)
         {
             if (!int.TryParse(tradeEleId, out var parsedId))
             {
