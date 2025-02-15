@@ -6,12 +6,12 @@
         {
             return new List<DataElement>
             {
-                new("Emotions", ComponentType.Reduction),
-                new("Exit Price", ComponentType.Reduction) { UnitPriceRelevance = ValueRelevance.Negative },
-                new("Amount", ComponentType.Reduction),
-                new("Cost", ComponentType.Reduction) { TotalCostRelevance = ValueRelevance.Negative },
-                new("Rationale", ComponentType.Reduction),
-                new("R:R", ComponentType.RiskReward)
+                new("Emotions", ComponentType.Emotions),
+                new("Exit Price", ComponentType.PriceRelated) { UnitPriceRelevance = ValueRelevance.Negative },
+                new("Amount", ComponentType.PriceRelated),
+                new("Cost", ComponentType.PriceRelated) { TotalCostRelevance = ValueRelevance.Negative },
+                new("Rationale", ComponentType.Thoughts),
+                new("R:R", ComponentType.Risk)
             };
         }
     }

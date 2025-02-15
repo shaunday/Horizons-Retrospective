@@ -9,13 +9,13 @@
                 new DataElement("Ticker", ComponentType.Header) { IsRelevantForOverview = true },
                 new DataElement("Long/Short", ComponentType.Header, "") 
                                           { IsRelevantForOverview = true, Restrictions = ["Long", "Short"]},
-                new DataElement("Thesis", ComponentType.Thesis) { IsRelevantForOverview = true },
-                new DataElement("Confluences", ComponentType.Thesis),
-                new DataElement("Confidence lvl", ComponentType.Thesis),
-                new DataElement("Triggers", ComponentType.Thesis),
-                new DataElement("Position Plans", ComponentType.Thesis),
-                new DataElement("Am I wrong?", ComponentType.DevilsAdvocate),
-                new DataElement("Contra indictr", ComponentType.DevilsAdvocate)
+                new DataElement("Thesis", ComponentType.Thoughts) { IsRelevantForOverview = true },
+                new DataElement("Confluences", ComponentType.Technicals),
+                new DataElement("Confidence lvl", ComponentType.Emotions),
+                new DataElement("Triggers", ComponentType.Technicals),
+                new DataElement("Position Plans", ComponentType.Thoughts),
+                new DataElement("Am I wrong?", ComponentType.Technicals),
+                new DataElement("Contra indictr", ComponentType.Technicals)
             };
 
             // Add Position Boundaries objects to the list

@@ -2,7 +2,6 @@
 // todo
 
 add investment timeframe
-add overview -- next trouble area, d/w/m strength/weakness, change momentum (could be dangerous..)
 position weight/ sector weight
 how to obfuscate amounts/costs for anon view? 
 save sectors to userdata
