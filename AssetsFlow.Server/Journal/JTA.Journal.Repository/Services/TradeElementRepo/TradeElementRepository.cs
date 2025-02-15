@@ -29,6 +29,12 @@ namespace HsR.Journal.DataContext
         {
             var trade = await GetTradeCompositeAsync(tradeId);
             InterimTradeElement tradeOverview = TradeElementsFactory.GetNewEvalutationElement(trade);
+
+            if (trade.Summary != null)
+            {
+                tradeOverview.Entries.AddRange(trade.Summary.Entries);
+            }
+
             return tradeOverview;
         }
 

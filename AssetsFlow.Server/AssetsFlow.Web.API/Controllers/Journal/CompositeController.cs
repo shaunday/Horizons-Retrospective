@@ -15,7 +15,7 @@ namespace HsR.Web.API.Controllers.Journal
             ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
     {
 
-        #region Add / Delete
+        #region Interim positions
 
         [HttpPost]
         public async Task<ActionResult<(TradeElementModel newEntry, TradeElementModel? summary)>> AddReduceInterimPosition(string tradeId, bool isAdd)
@@ -26,6 +26,16 @@ namespace HsR.Web.API.Controllers.Journal
                             (_mapper.Map<TradeElementModel>(entryAndSummary.newEntry), _mapper.Map<TradeElementModel>(entryAndSummary.summary));
 
             return ResultHandling(resAsModel, $"Could not add interim element on : {tradeId}", [NEW_ELEMENT_DATA, NEW_SUMMARY]);
+        }
+
+        [HttpPost("evaluate")]
+        public async Task<ActionResult<TradeElementModel>> AddEvaluationPosition(string tradeId)
+        {
+            InterimTradeElement newEval = await _journalAccess.AddInterimEvalutationAsync(tradeId);
+
+            TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(newEval);
+
+            return ResultHandling(resAsModel, $"Could not add new evaluation element on : {tradeId}");
         }
 
         [HttpDelete("{tradeInputId}")]
