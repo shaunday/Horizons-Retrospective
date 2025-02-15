@@ -6,7 +6,8 @@ import { useAddTrade } from "@hooks/useAddTrade";
 
 function JournalView() {
   const { isLoading, isError, trades } = useFetchAndCacheTrades();
-  const { addTrade } = useAddTrade();
+  const { addTrade, isAddingTrade } = useAddTrade();
+
 
   if (isLoading) {
     return <div>Loading trades...</div>;
@@ -20,6 +21,10 @@ function JournalView() {
     return <div>No trades available.</div>;
   }
 
+  const onAddTrade = ()=> {
+    addTrade();
+  }
+
   return (
     <div id="journalMainBody">
       {/* <FilterControl />
@@ -29,9 +34,10 @@ function JournalView() {
         className="button-38"
         type="button"
         style={{ justifyContent: "center", marginTop: "auto" }}
-        onClick={addTrade}
+        onClick={onAddTrade}
+        disabled={isAddingTrade} // ✅ Disable button while adding trade
       >
-        Add a Trade
+        {isAddingTrade ? "Adding Trade..." : "Add a Trade"}
       </button>
     </div>
   );

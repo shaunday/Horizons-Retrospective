@@ -30,5 +30,5 @@ export function useAddTrade() {
     },
   });
 
-  return { addTrade, isAddingTrade, isAddTradeError };
+  return { addTrade, isAddingTrade, isAddTradeError }; //todo use those ?
 }

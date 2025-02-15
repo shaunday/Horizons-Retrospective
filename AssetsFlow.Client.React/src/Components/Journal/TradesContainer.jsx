@@ -7,7 +7,7 @@ const styles = {
   container: {
     flex: 1,
     overflowY: "auto",
-    maxHeight: "100vh", 
+    maxHeight: "100vh",
     margin: "3px",
     padding: "5px",
     background: "rgb(225, 167, 167)",
@@ -36,15 +36,15 @@ function TradesContainer() {
 
   return (
     <div style={styles.container}>
-    <ul style={styles.list}>
-      {cachedTradeIds.map((tradeId, index) => (
-        <li key={tradeId} style={styles.listItem}>
-          <TradeWrapper tradeId={tradeId}  
-          style={index !== 0 ? { marginTop: "10px" } : {}}/>
-        </li>
-      ))}
-    </ul>
-  </div>
+      <ul style={styles.list}>
+        {cachedTradeIds.map((tradeId, index) => (
+          <li key={tradeId} style={styles.listItem}>
+            <TradeWrapper tradeId={tradeId}
+              style={index !== 0 ? { marginTop: "10px" } : {}} />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

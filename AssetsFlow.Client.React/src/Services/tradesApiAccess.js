@@ -17,7 +17,7 @@ export async function getTradeById(tradeId) {
 }
 
 export async function addTradeComposite() {
-  const response = await tradesClient.get("");
+  const response = await tradesClient.post("");
   return response.data;
 }
 

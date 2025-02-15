@@ -18,7 +18,7 @@ export const TradeStatus = Object.freeze({
 
 //element
 export const ELEMENT_COMPOSITEFK_STING = 'compositeFK'
-export const ELEMENT_TYPE_STING = 'TradeActionType'
+export const ELEMENT_TYPE_STING = 'tradeActionType'
 
 export const ElementType = Object.freeze({
   ORIGIN: "Origin",
