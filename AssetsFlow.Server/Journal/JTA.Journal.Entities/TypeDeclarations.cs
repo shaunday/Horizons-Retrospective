@@ -7,7 +7,7 @@
 
     public enum TradeActionType
     {
-        Origin, AddPosition, ReducePosition, Overview, Summary,
+        Origin, Add, Reduce, Evaluation, Summary,
     }
 
     public enum ValueRelevance

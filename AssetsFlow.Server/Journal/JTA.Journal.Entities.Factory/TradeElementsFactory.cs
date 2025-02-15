@@ -8,7 +8,7 @@ namespace HsR.Journal.Entities.Factory
     {
         public static InterimTradeElement GetNewInterimTradeElement(TradeComposite trade, bool isAdd)
         {
-            InterimTradeElement tradeInput = new(trade, isAdd ? TradeActionType.AddPosition : TradeActionType.ReducePosition);
+            InterimTradeElement tradeInput = new(trade, isAdd ? TradeActionType.Add : TradeActionType.Reduce);
             if (isAdd)
             {
                 if (trade.Status == TradeStatus.AnIdea)
@@ -48,7 +48,7 @@ namespace HsR.Journal.Entities.Factory
 
         public static InterimTradeElement GetNewEvalutationElement(TradeComposite trade)
         {
-            InterimTradeElement tradeOverview = new(trade, TradeActionType.Overview);
+            InterimTradeElement tradeOverview = new(trade, TradeActionType.Evaluation);
             tradeOverview.Entries = EntriesFactory.GetEvalutationEntries(tradeOverview);
             return tradeOverview;
         }

@@ -14,7 +14,7 @@ namespace HsR.Journal.Entities.Factory
         public static TradeComposite CloseTrade(TradeComposite trade, string closingPrice)
         {
             // Create a TradeElement for ReducePosition
-            var reductionEle = new InterimTradeElement(trade, TradeActionType.ReducePosition);
+            var reductionEle = new InterimTradeElement(trade, TradeActionType.Reduce);
             reductionEle.Entries = EntriesFactory.GetReducePositionEntries(reductionEle);
 
             // Find price entry

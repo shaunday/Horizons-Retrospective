@@ -1,5 +1,10 @@
-add activate mechanism
-remove/activate on ele : elementControls - dont allow add/reduce if ongoing action
+
+ongoing: 
+add trade, activate element
+
+elementControls : remove 
+tradeControls: dont allow add/reduce if not activated
+why setcell locally if i update above anyway?
 
 closing price on trade close
 filter in client?

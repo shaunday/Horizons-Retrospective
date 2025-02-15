@@ -14,7 +14,7 @@ using System.Diagnostics;
 public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
         ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
 {
-    [HttpPost("activate")]
+    [HttpPatch("activate")]
     public async Task<ActionResult<bool>> ActivateTradeElment(string elementId)
     {
         var tradeElement = await _journalAccess.ActivateTradeElement(elementId);

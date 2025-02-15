@@ -14,7 +14,7 @@ namespace HsR.Web.API.Controllers.Journal
     public class ContentUpdateController(IJournalRepositoryWrapper journalAccess, 
             ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
     {
-        [HttpPut("{componentId}")]
+        [HttpPatch("{componentId}")]
         public async Task<ActionResult<(DataElementModel newEntry, TradeElementModel? summary)>>
                                                   UpdateDataComponent(string componentId, [FromBody] UpdateDataComponentRequest request)
         {

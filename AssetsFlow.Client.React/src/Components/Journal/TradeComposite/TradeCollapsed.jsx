@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as Constants from "@constants/journalConstants";
-import TradeElement from "@journalComponents/TradeElement";
+import TradeElementContainer from "@journalComponents/TradeElement/TradeElementContainer";
 import { useGetTradeById } from "@hooks/useGetTradeById";
 
 function TradeCollapsed({ tradeId }) {
@@ -27,7 +27,7 @@ function TradeCollapsed({ tradeId }) {
 
   return (
     <>
-       {simulatedEle ? ( <TradeElement tradeElement={simulatedEle} />) : (
+       {simulatedEle ? ( <TradeElementContainer tradeElement={simulatedEle} />) : (
         <div>Loading...</div>
         )}
     </>

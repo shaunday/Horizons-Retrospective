@@ -7,12 +7,12 @@ namespace HsR.Journal.TradeAnalytics
         public static (TradeAnalyticsInfo addPositions, TradeAnalyticsInfo reducePositions) GetTradingCosts(TradeComposite trade)
         {
             Dictionary<TradeActionType, TradeAnalyticsInfo> positionsData = [];
-            positionsData.Add(TradeActionType.AddPosition, new TradeAnalyticsInfo());
-            positionsData.Add(TradeActionType.ReducePosition, new TradeAnalyticsInfo());
+            positionsData.Add(TradeActionType.Add, new TradeAnalyticsInfo());
+            positionsData.Add(TradeActionType.Reduce, new TradeAnalyticsInfo());
 
             // Filter TradeElements based on action type
             var interims = trade.TradeElements
-                .Where(t => t.TradeActionType == TradeActionType.AddPosition || t.TradeActionType == TradeActionType.ReducePosition)
+                .Where(t => t.TradeActionType == TradeActionType.Add || t.TradeActionType == TradeActionType.Reduce)
                 .ToList();
 
             foreach (var tradeInput in interims)
@@ -41,7 +41,7 @@ namespace HsR.Journal.TradeAnalytics
                     }
                 }
             }
-            return (positionsData[TradeActionType.AddPosition], positionsData[TradeActionType.ReducePosition]);
+            return (positionsData[TradeActionType.Add], positionsData[TradeActionType.Reduce]);
         }  
     }
 }

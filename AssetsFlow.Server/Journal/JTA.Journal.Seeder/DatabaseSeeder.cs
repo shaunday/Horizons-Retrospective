@@ -60,9 +60,9 @@ namespace HsR.Journal.Seeder
 
         private async Task AddManagePositions(TradeComposite trade, bool close = false)
         {
-            AddElementToTrade(trade, TradeActionType.AddPosition);
-            AddElementToTrade(trade, TradeActionType.AddPosition);
-            AddElementToTrade(trade, TradeActionType.ReducePosition);
+            AddElementToTrade(trade, TradeActionType.Add);
+            AddElementToTrade(trade, TradeActionType.Add);
+            AddElementToTrade(trade, TradeActionType.Reduce);
 
 
             if (close)

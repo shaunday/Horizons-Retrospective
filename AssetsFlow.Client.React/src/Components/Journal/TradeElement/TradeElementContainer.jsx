@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import * as Constants from "@constants/journalConstants";
-import DataElement from "./DataElement/DataElement";
+import DataElement from "../DataElement/DataElement";
+import ElementControls from "./ElementControls";
 
 const listStyle = {
   display: "flex",
@@ -18,18 +19,20 @@ const listItemStyle = {
   width: "105px",
 };
 
-function TradeElement({ tradeElement, onElementContentUpdate }) {
+function TradeElementContainer({ tradeElement, onElementContentUpdate }) {
   const isOverview = tradeElement.isOverview !== undefined;
+  const elemntType = tradeElement[ELEMENT_TYPE_STING];
+  const isAllowControls = elemntType !== Constants.ElementType.ORIGIN && elemntType !== Constants.ElementType.SUMMARY;
 
- const processCellUpdate = useCallback(
-  (data) => {
-    // Handle inter-connectedness here - element might affect other elements
+  const processCellUpdate = useCallback(
+    (data) => {
+      // Handle inter-connectedness here - element might affect other elements
 
-    if (isOverview)
-      onElementContentUpdate(data);
-  },
-  [onElementContentUpdate]
-);
+      if (isOverview)
+        onElementContentUpdate(data);
+    },
+    [onElementContentUpdate]
+  );
 
   return (
     <>
@@ -39,14 +42,15 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
             <li key={entry.id} style={listItemStyle}>
               <DataElement
                 cellInfo={entry}
-                {...(!isOverview && { onCellUpdate: processCellUpdate })} 
+                {...(!isOverview && { onCellUpdate: processCellUpdate })}
                 style={index !== 0 ? { marginLeft: "10px" } : {}}
               />
             </li>
           ))}
+        {isAllowControls && <li><ElementControls tradeElement={tradeElement} /></li>}
       </ul>
     </>
   );
 }
 
-export default React.memo(TradeElement);
+export default React.memo(TradeElementContainer);

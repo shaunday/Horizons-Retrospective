@@ -16,6 +16,18 @@ export const TradeStatus = Object.freeze({
   CLOSED: "Closed",
 });
 
+//element
+export const ELEMENT_COMPOSITEFK_STING = 'compositeFK'
+export const ELEMENT_TYPE_STING = 'TradeActionType'
+
+export const ElementType = Object.freeze({
+  ORIGIN: "Origin",
+  ADD: "Add",
+  REDUCE: "Reduce",
+  EVALUATION: "Evaluation",
+  SUMMARY: "Summary",
+});
+
 //entry
 export const DATA_TITLE_STRING = 'title'
 export const DATA_RELEVANT_FOR_ORVERVIEW_STRING = 'isRelevantForOverview'
