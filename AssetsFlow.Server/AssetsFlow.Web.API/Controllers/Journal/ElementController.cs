@@ -24,7 +24,7 @@ public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
             return NotFound();
         }
 
-        return ResultHandling((tradeElement.IsActive), $"Could not activate element on : {elementId}", [NEW_ELEMENT_DATA]);
+        return ResultHandling((tradeElement.IsActive), $"Could not activate element on : {elementId}");
     }
 }
     

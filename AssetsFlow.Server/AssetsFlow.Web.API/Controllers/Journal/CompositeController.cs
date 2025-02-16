@@ -49,7 +49,7 @@ namespace HsR.Web.API.Controllers.Journal
 
             TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
 
-            return ResultHandling(resAsModel, $"Could not delete interim element on : {tradeId}", [NEW_SUMMARY]);
+            return ResultHandling(resAsModel, $"Could not delete interim element on : {tradeId}");
         }
 
         #endregion

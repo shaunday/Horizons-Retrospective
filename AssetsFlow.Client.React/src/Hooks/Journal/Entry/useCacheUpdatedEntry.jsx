@@ -1,6 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { produce } from "immer";
 import { tradeKeysFactory } from "@services/query-key-factory";
+import * as Constants from "@constants/journalConstants";
 
 export function useCacheUpdatedEntry(tradeComposite) {
   const queryClient = useQueryClient();
@@ -11,9 +12,9 @@ export function useCacheUpdatedEntry(tradeComposite) {
       tradeKeysFactory.tradeAndIdArrayKey(tradeComposite.id),
       (oldTradeComposite) =>
         produce(oldTradeComposite, (draft) => {
-          const tradeElements = draft.tradeElements;
+          const tradeElements = draft[Constants.TRADE_ELEMENTS_STRING];
           for (const tradeElement of tradeElements) {
-            const entryIndex = tradeElement.entries.findIndex(
+            const entryIndex = tradeElement[Constants.TRADE_ENTRIES_STRING].findIndex(
               (entry) => entry.id === updatedEntry.id
             );
             if (entryIndex !== -1) {

@@ -75,7 +75,7 @@ namespace HsR.Journal.DataContext
 
         public async Task<InterimTradeElement> ActivateTradeElement(string tradeEleId)
         {
-            var tradeEle = await GetTradeElementAsync(tradeEleId);
+            var tradeEle = await GetTradeElementAsync(tradeEleId, loadComposite: true);
 
             bool okForActivate = !tradeEle.AllowActivation();
             

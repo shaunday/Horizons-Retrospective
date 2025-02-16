@@ -47,17 +47,24 @@ namespace HsR.Journal.Repository.Services.Base
             return trade!;
         }
 
-        protected async Task<InterimTradeElement> GetTradeElementAsync(string tradeEleId)
+        protected async Task<InterimTradeElement> GetTradeElementAsync(string tradeEleId, bool loadComposite = false)
         {
             if (!int.TryParse(tradeEleId, out var parsedId))
             {
                 throw new ArgumentException($"The tradeElementId '{tradeEleId}' is not a valid integer.", nameof(tradeEleId));
             }
 
-            var tradeElement = await _dataContext.TradeElements.FindAsync(parsedId)
-                 ?? throw new InvalidOperationException($"TradeElement with ID {tradeEleId} not found.");
+            var query = _dataContext.TradeElements.AsQueryable();
 
-            return tradeElement!;
+            if (loadComposite)
+            {
+                query = query.Include(te => te.CompositeRef);
+            }
+
+            var tradeElement = await query.FirstOrDefaultAsync(te => te.Id == parsedId)
+                ?? throw new InvalidOperationException($"TradeElement with ID {tradeEleId} not found.");
+
+            return tradeElement;
         }
     }
 }

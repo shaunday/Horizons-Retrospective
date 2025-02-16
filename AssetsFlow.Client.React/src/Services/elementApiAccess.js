@@ -6,6 +6,6 @@ const elementsSuffix = import.meta.env.VITE_JOURNAL_ELEMENTS_SUFFIX;
 const elmentsClient = axios.create({ baseURL: `${baseURL}${elementsSuffix}` });
 
 export async function activateElementAPI(elementId) {
-  const response = await elmentsClient.put(`${elementId}`);
+  const response = await elmentsClient.patch(`${elementId}/activate`);
   return response.data;
 }

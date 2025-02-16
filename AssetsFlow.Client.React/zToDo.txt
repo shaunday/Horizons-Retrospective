@@ -1,7 +1,7 @@
-activate element
+activate element, 
 
 elementControls : remove 
-tradeControls: dont allow add/reduce if not activated
+tradeControls: add evaluate, dont allow add/reduce if not activated
 why setcell locally if i update above anyway?
 
 closing price on trade close

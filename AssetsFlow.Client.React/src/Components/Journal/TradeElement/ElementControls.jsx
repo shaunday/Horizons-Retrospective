@@ -8,7 +8,7 @@ const MemoizedSuccessMessage = React.memo(SuccessMessage);
 
 function ElementControls({ tradeElement }) {
   const allowActivate = canActivateElement(tradeElement);
-  const setNewActiveState = useCacheElementActivation(tradeElement);
+  const { setNewActiveState } = useCacheElementActivation(tradeElement);
 
   const { elementActivationMutation, processing, success } =
     useElementActivationMutation(() => {

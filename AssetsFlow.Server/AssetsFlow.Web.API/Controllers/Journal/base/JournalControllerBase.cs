@@ -8,7 +8,7 @@ namespace HsR.Web.API.Controllers.Journal
     public class JournalControllerBase : HsRControllerBase
     {
         private protected readonly string NEW_CELL_DATA = "updatedCellData";
-        private protected readonly string NEW_ELEMENT_DATA = "updatedeElement";
+        private protected readonly string NEW_ELEMENT_DATA = "updatedElement";
         private protected readonly string NEW_SUMMARY = "updatedSummary";
 
         private protected readonly IJournalRepositoryWrapper _journalAccess;
@@ -30,11 +30,10 @@ namespace HsR.Web.API.Controllers.Journal
                 return NotFound();
             }
 
-            var responseObject = new Dictionary<string, object?>();
-
-            // Check if result is a ValueTuple (of any size, any type)
+            // If the result is a ValueTuple, extract its values into a dictionary
             if (result.GetType().Name.StartsWith("ValueTuple"))
             {
+                var responseObject = new Dictionary<string, object?>();
                 var props = result.GetType().GetFields();
 
                 for (int i = 0; i < props.Length; i++)
@@ -42,13 +41,13 @@ namespace HsR.Web.API.Controllers.Journal
                     var value = props[i].GetValue(result);
                     responseObject[propertyNames.Length > i ? propertyNames[i] : $"item{i + 1}"] = value;
                 }
-            }
-            else
-            {
-                responseObject[propertyNames.Length > 0 ? propertyNames[0] : "item1"] = result;
+
+                return Ok(responseObject);
             }
 
-            return Ok(responseObject);
+            // If it's a single class, return it directly without wrapping in a dictionary
+            return Ok(result);
         }
+
     }
 }

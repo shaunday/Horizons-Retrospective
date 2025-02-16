@@ -36,5 +36,5 @@ export const DATA_RESTRICTION_STRING = 'restrictions'
 //respones
 export const NEW_DATA_RESPONSE_TAG = 'updatedCellData'
 export const NEW_SUMMARY_RESPONSE_TAG = 'updatedSummary'
-export const NEW_ELEMENT_RESPONSE_TAG = 'updatedeElement'
+export const NEW_ELEMENT_RESPONSE_TAG = 'updatedElement'
 

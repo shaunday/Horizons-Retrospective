@@ -7,17 +7,17 @@ export function useCacheElementActivation(tradeElement) {
   const queryClient = useQueryClient();
 
   const setNewActiveState = (newState) => {
-    const tradeId = tradeElement[Constants.ELEMENT_COMPOSITEFK_STING].id;
-    
+    const tradeId = tradeElement[Constants.ELEMENT_COMPOSITEFK_STING];
+
     queryClient.setQueryData(
       tradeKeysFactory.tradeAndIdArrayKey(tradeId),
       (oldTradeComposite) =>
         produce(oldTradeComposite, (draft) => {
-          const element = draft.tradeElements.find(
-            (el) => el.id === tradeElement.id
-          );
-          if (element) {
-            element.isActive = newState;
+          const tradeElements = draft[Constants.TRADE_ELEMENTS_STRING];
+          for (const element of tradeElements) {
+            if (element.id === tradeElement.id) {
+              element.isActive = newState;
+            }
           }
         })
     );

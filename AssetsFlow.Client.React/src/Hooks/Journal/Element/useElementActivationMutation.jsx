@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { activateElementAPI } from "@services/elementApiAccess"; 
+import { activateElementAPI } from "@services/elementApiAccess";
 
 export function useElementActivationMutation(onActivationSuccess) {
   const [processing, setProcessing] = useState(false);
@@ -18,7 +18,7 @@ export function useElementActivationMutation(onActivationSuccess) {
       console.error("Error activating:", error);
     },
     onSuccess: (response) => {
-      if (response === true  && onDataUpdateSuccess) {
+      if (response === true && onActivationSuccess) {
         onActivationSuccess();
       }
       setProcessing(false);

@@ -20,7 +20,7 @@ namespace HsR.Journal.Entities
         public string? ChangeNote { get; set; }
 
         [Required]
-        public DateTime TimeStamp { get; } = DateTime.Now;
+        public DateTime TimeStamp { get; } = DateTime.UtcNow;
 
         [Required]
         public int DataElementFK { get; set; }  // FK property to the owning DataCell
