@@ -14,7 +14,6 @@ namespace HsR.Web.API.Controllers.Journal
     public class CompositeController(IJournalRepositoryWrapper journalAccess, 
             ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
     {
-
         #region Interim positions
 
         [HttpPost]

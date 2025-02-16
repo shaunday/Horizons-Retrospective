@@ -77,7 +77,7 @@ namespace HsR.Journal.DataContext
         {
             var tradeEle = await GetTradeElementAsync(tradeEleId, loadComposite: true);
 
-            bool okForActivate = !tradeEle.AllowActivation();
+            bool okForActivate = tradeEle.AllowActivation();
             
             if (okForActivate)
             {

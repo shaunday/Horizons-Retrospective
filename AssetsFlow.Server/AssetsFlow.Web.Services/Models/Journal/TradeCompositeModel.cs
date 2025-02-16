@@ -9,6 +9,7 @@ namespace HsR.Web.Services.Models.Journal
         [Required]
         public int Id { get; set; }
         public ICollection<TradeElementModel> TradeElements { get; set; } = null!;
+
         public TradeElementModel? Summary { get; set; }
 
         public ICollection<string> Sectors { get; set; } = null!;

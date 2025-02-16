@@ -22,6 +22,6 @@ namespace HsR.Web.Services.Models.Journal
         public bool IsActive { get; set; } = false;
 
         [Required]
-        public int TradeCompositeFK { get; set; }
+        public int CompositeFK { get; set; }
     }
 }
