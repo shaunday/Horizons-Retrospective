@@ -14,7 +14,6 @@
                 new DataElement("Confidence lvl", ComponentType.Emotions),
                 new DataElement("Triggers", ComponentType.Technicals),
                 new DataElement("Position Plans", ComponentType.Thoughts),
-                new DataElement("Am I wrong?", ComponentType.Technicals),
                 new DataElement("Contra indictr", ComponentType.Technicals)
             };
 

@@ -8,7 +8,7 @@ export function useCacheUpdatedEntry(tradeComposite) {
   const onEntryUpdate = (data) => {
     const { updatedEntry } = data;
     queryClient.setQueryData(
-      tradeKeysFactory.tradeByIdKey(tradeComposite.id),
+      tradeKeysFactory.tradeAndIdArrayKey(tradeComposite.id),
       (oldTradeComposite) =>
         produce(oldTradeComposite, (draft) => {
           const tradeElements = draft.tradeElements;

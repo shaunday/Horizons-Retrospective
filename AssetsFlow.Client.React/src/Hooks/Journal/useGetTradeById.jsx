@@ -5,7 +5,7 @@ import { getTradeById } from "@services/tradesApiAccess";
 export function useGetTradeById(tradeId) {
   const queryClient = useQueryClient();
 
-  const queryKey = tradeKeysFactory.tradeByIdKey(tradeId);
+  const queryKey = tradeKeysFactory.tradeAndIdArrayKey(tradeId);
 
   const { data: trade, ...queryState } = useQuery({
     queryKey,

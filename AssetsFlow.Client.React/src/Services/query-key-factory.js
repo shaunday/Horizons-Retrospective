@@ -5,5 +5,5 @@ const TRADE_IDS_ARRAY_KEY = "TradeIds"
 export const tradeKeysFactory = {
     tradesKey: [TRADES_ARRAY_KEY],
     tradeIdsKey: [TRADE_IDS_ARRAY_KEY],
-    tradeByIdKey: (tradeId) => [TRADE_KEY, tradeId]
+    tradeAndIdArrayKey: (tradeId) => [TRADE_KEY, tradeId]
 }

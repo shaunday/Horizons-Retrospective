@@ -10,7 +10,7 @@ export function useCacheElementActivation(tradeElement) {
     const tradeId = tradeElement[Constants.ELEMENT_COMPOSITEFK_STING].id;
     
     queryClient.setQueryData(
-      tradeKeysFactory.tradeByIdKey(tradeId),
+      tradeKeysFactory.tradeAndIdArrayKey(tradeId),
       (oldTradeComposite) =>
         produce(oldTradeComposite, (draft) => {
           const element = draft.tradeElements.find(

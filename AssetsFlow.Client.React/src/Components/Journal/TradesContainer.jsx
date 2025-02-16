@@ -1,7 +1,7 @@
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import { tradeKeysFactory } from "@services/query-key-factory";
 import TradeWrapper from "./TradeComposite/TradeWrapper";
-import { useQueryClient } from "@tanstack/react-query";
 
 const styles = {
   container: {
@@ -28,19 +28,18 @@ const styles = {
 };
 
 function TradesContainer() {
-  const queryClient = useQueryClient();
-
-  // Get the list of trade IDs from the query cache
-  const cachedTradeIds =
-    queryClient.getQueryData(tradeKeysFactory.tradeIdsKey) || [];
+  // 🔥 Subscribe to trade IDs query
+  const { data: cachedTradeIds = [] } = useQuery({
+    queryKey: tradeKeysFactory.tradeIdsKey,
+    queryFn: () => [], // No fetch needed, just cache tracking
+  });
 
   return (
     <div style={styles.container}>
       <ul style={styles.list}>
         {cachedTradeIds.map((tradeId, index) => (
           <li key={tradeId} style={styles.listItem}>
-            <TradeWrapper tradeId={tradeId}
-              style={index !== 0 ? { marginTop: "10px" } : {}} />
+            <TradeWrapper tradeId={tradeId} style={index !== 0 ? { marginTop: "10px" } : {}} />
           </li>
         ))}
       </ul>

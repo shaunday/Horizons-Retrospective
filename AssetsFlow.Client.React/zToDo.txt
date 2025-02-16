@@ -1,6 +1,4 @@
-
-ongoing: 
-add trade, activate element
+activate element
 
 elementControls : remove 
 tradeControls: dont allow add/reduce if not activated
