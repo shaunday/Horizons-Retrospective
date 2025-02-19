@@ -12,12 +12,12 @@ namespace HsR.Journal.Entities
         //composite
         public static bool IsTadeActive(this TradeComposite trade)
         {
-            return trade.TradeElements.Where(ele => ele.IsActive && ele.TradeActionType == TradeActionType.Add).Count() > 0;
+            return trade.TradeElements.Any(ele => ele.AllowActivation() && ele.TradeActionType == TradeActionType.Add);
         }
 
 
         //trade elements
-        public static bool AllowActivation(this InterimTradeElement element)
+        public static bool AllowActivation(this TradeElement element)
         {
             return !element.Entries.Any(e => e.IsMustHave && string.IsNullOrEmpty(e.Content));
         }

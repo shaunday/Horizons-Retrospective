@@ -15,7 +15,7 @@ public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
         ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
 {
     [HttpPatch("activate")]
-    public async Task<ActionResult<bool>> ActivateTradeElment(string elementId)
+    public async Task<ActionResult<DateTime>> ActivateTradeElment(string elementId)
     {
         var tradeElement = await _journalAccess.ActivateTradeElement(elementId);
 
@@ -24,7 +24,7 @@ public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
             return NotFound();
         }
 
-        return ResultHandling((tradeElement.IsActive), $"Could not activate element on : {elementId}");
+        return ResultHandling((tradeElement.TimeStamp), $"Could not activate element on : {elementId}");
     }
 }
     

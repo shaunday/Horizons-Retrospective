@@ -15,6 +15,11 @@ public class TradeComposite
 
     public TradeStatus Status { get; set; } = TradeStatus.AnIdea;
 
+    public void Activate()
+    {
+        Status = TradeStatus.Open;
+    }
+
     public DateTime? OpenedAt { get; set; }
 
     public DateTime? ClosedAt { get; set; }

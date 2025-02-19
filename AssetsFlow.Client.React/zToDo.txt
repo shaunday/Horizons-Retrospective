@@ -1,15 +1,16 @@
-activate element, 
+tradeControls: add evaluate
+elementControls: add remove, add timestamp
 
-elementControls : remove 
-tradeControls: add evaluate, dont allow add/reduce if not activated
 why setcell locally if i update above anyway?
 
 closing price on trade close
 filter in client?
 
 style for trade status
-style for temp element
-element title = date 
+style for empty data
+musthave data, cant be edited to empty
+element title = date
+update date on content update
 
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 

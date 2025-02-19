@@ -1,7 +1,6 @@
 import React, { useMemo, useCallback } from "react";
 import * as Constants from "@constants/journalConstants";
 import DataElement from "../DataElement/DataElement";
-import ElementControls from "./ElementControls";
 
 const listStyle = {
   display: "flex",
@@ -22,11 +21,11 @@ const listItemStyle = {
 function TradeElementContainer({ tradeElement, onElementContentUpdate }) {
   const isOverview = tradeElement.isOverview !== undefined;
 
-  const isAllowControls = useMemo(() => {
-    if (isOverview) return false;
-    const elemntType = tradeElement[Constants.ELEMENT_TYPE_STING];
-    return elemntType !== Constants.ElementType.ORIGIN && elemntType !== Constants.ElementType.SUMMARY;
-  }, [tradeElement]);
+  // const isAllowControls = useMemo(() => {
+  //   if (isOverview) return false;
+  //   const elemntType = tradeElement[Constants.ELEMENT_TYPE_STING];
+  //   return elemntType !== Constants.ElementType.ORIGIN && elemntType !== Constants.ElementType.SUMMARY;
+  // }, [tradeElement]);
 
   const processCellUpdate = useCallback(
     (data) => {
@@ -51,7 +50,7 @@ function TradeElementContainer({ tradeElement, onElementContentUpdate }) {
               />
             </li>
           ))}
-        {isAllowControls && <li><ElementControls tradeElement={tradeElement} /></li>}
+        {/* {isAllowControls && <li><ElementControls tradeElement={tradeElement} /></li>} */}
       </ul>
     </>
   );

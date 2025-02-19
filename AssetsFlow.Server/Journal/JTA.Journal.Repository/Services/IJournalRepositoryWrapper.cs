@@ -18,7 +18,7 @@ namespace HsR.Journal.DataContext
         Task<InterimTradeElement> ActivateTradeElement(string tradeEleId);
 
         //components
-        Task<(DataElement updatedCell, TradeSummary? summary)> UpdateCellContentAsync(string componentId, string newContent, string changeNote);
+        Task<(DataElement updatedCell, TradeSummary? summary, DateTime? newTimeStamp)> UpdateCellContentAsync(string componentId, string newContent, string changeNote);
 
         //closure
         Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice);

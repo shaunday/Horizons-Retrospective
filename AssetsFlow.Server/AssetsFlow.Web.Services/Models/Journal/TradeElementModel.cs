@@ -19,9 +19,6 @@ namespace HsR.Web.Services.Models.Journal
         public DateTime? TimeStamp { get; set; }
 
         [Required]
-        public bool IsActive { get; set; } = false;
-
-        [Required]
         public int CompositeFK { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace HsR.Web.API.Controllers.Journal
             ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
     {
         [HttpPatch("{componentId}")]
-        public async Task<ActionResult<(DataElementModel newEntry, TradeElementModel? summary)>>
+        public async Task<ActionResult<(DataElementModel newEntry, TradeElementModel? summary, DateTime? newTimeStamp)>>
                                                   UpdateDataComponent(string componentId, [FromBody] UpdateDataComponentRequest request)
         {
             if (string.IsNullOrEmpty(request.Content))
@@ -23,11 +23,12 @@ namespace HsR.Web.API.Controllers.Journal
                 return BadRequest("Content is required.");
             }
 
-            (DataElement updatedComponent, TradeSummary? summary) = await _journalAccess.UpdateCellContentAsync(componentId, request.Content, request.Info);
+            (DataElement updatedComponent, TradeSummary? summary, DateTime? newTimeStamp) = 
+                                                await _journalAccess.UpdateCellContentAsync(componentId, request.Content, request.Info);
 
             (DataElementModel, TradeElementModel?) resAsModel = (_mapper.Map<DataElementModel>(updatedComponent), _mapper.Map<TradeElementModel>(summary));
 
-            return ResultHandling(resAsModel, $"Could not update component: {componentId}", [NEW_CELL_DATA, NEW_SUMMARY]);
+            return ResultHandling(resAsModel, $"Could not update component: {componentId}", [NEW_CELL_DATA, NEW_SUMMARY, NEW_TIMESTAMP]);
         }
 
         public class UpdateDataComponentRequest

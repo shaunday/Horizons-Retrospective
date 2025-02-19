@@ -68,7 +68,8 @@ namespace HsR.Journal.DataContext
             return _tradeElementRepository.ActivateTradeElement(tradeEleId);
         }
 
-        public Task<(DataElement updatedCell, TradeSummary? summary)> UpdateCellContentAsync(string componentId, string newContent, string changeNote)
+        public Task<(DataElement updatedCell, TradeSummary? summary, DateTime? newTimeStamp)> 
+                                                UpdateCellContentAsync(string componentId, string newContent, string changeNote)
         {
             return _dataElementRepository.UpdateCellContentAsync(componentId, newContent, changeNote);
         }

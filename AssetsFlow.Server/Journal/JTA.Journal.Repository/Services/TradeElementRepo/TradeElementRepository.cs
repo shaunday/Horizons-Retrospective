@@ -78,14 +78,10 @@ namespace HsR.Journal.DataContext
             var tradeEle = await GetTradeElementAsync(tradeEleId, loadComposite: true);
 
             bool okForActivate = tradeEle.AllowActivation();
-            
             if (okForActivate)
             {
                 tradeEle.Activate();
-                if (tradeEle.CompositeRef.Status == TradeStatus.AnIdea)
-                {
-                    tradeEle.CompositeRef.Status = TradeStatus.Open;
-                }
+                tradeEle.CompositeRef.Activate();
                 await _dataContext.SaveChangesAsync();
             }
 

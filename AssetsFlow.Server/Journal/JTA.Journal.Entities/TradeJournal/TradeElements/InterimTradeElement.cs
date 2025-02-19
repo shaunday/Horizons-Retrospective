@@ -15,7 +15,6 @@ namespace HsR.Journal.Entities
 
         public void Activate()
         {
-            IsActive = true;
             TimeStamp = DateTime.UtcNow;
         }
     }
