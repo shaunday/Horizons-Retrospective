@@ -27,7 +27,7 @@ namespace HsR.Journal.Repository.Services.Base
             }
             if (shouldBeClosed)
             {
-                trade.Status = TradeStatus.Closed;
+                trade.Close();
             }
 
             trade.Summary = newSummary;
