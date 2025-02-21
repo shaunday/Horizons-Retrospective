@@ -19,13 +19,13 @@ namespace HsR.Journal.Repository.Services.Base
 
         private protected TradeSummary RefreshSummary(TradeComposite trade)
         {
-            var (newSummary, shouldBeClosed) = TradeElementsFactory.GetNewSummary(trade);
+            TradeElement newSummary = TradeElementsFactory.GetNewElement(trade, TradeActionType.Summary);
 
             if (trade.Summary != null)
             {
                 _dataContext.Entry(trade.Summary).State = EntityState.Deleted;
             }
-            if (shouldBeClosed)
+            if (newSummary is TradeSummary sum && !sum.IsInterim)
             {
                 trade.Close();
             }

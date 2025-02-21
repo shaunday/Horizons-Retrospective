@@ -10,6 +10,8 @@ namespace HsR.Journal.Entities.TradeJournal
 {
     public class TradeSummary : TradeElement
     {
+        public bool IsInterim { get; set; } = true;
+
         public TradeSummary() : base() { }
 
         [SetsRequiredMembers]

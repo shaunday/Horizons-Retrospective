@@ -72,7 +72,7 @@ namespace HsR.Journal.Seeder
             }
             else
             {
-                var (newSummary, _) = TradeElementsFactory.GetNewSummary(trade);
+                var newSummary = TradeElementsFactory.GetNewSummary(trade);
                 trade.Summary = newSummary;
                 trade.Status = TradeStatus.Open;
             }
