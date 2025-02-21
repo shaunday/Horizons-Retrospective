@@ -12,7 +12,13 @@ namespace HsR.Journal.DataContext
         public async Task<(InterimTradeElement newEntry, TradeSummary? summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
-            InterimTradeElement tradeInput = TradeElementsFactory.GetNewInterimTradeElement(trade, isAdd);
+
+            if (TradeElementsFactory.GetNewElement(trade, isAdd ? TradeActionType.Add : TradeActionType.Reduce)
+                is not InterimTradeElement tradeInput)
+            {
+                throw new InvalidOperationException("TradeElementsFactory returned an invalid type for InterimTradeElement.");
+            }
+
             trade.TradeElements.Add(tradeInput);
 
             TradeSummary? newSummary = null;
@@ -28,7 +34,12 @@ namespace HsR.Journal.DataContext
         public async Task<InterimTradeElement> AddInterimEvalutationAsync(string tradeId)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
-            InterimTradeElement tradeOverview = TradeElementsFactory.GetNewEvalutationElement(trade);
+
+            if (TradeElementsFactory.GetNewElement(trade, TradeActionType.Evaluation)
+                is not InterimTradeElement tradeOverview)
+            {
+                throw new InvalidOperationException("TradeElementsFactory returned an invalid type for Evaluation.");
+            }
 
             if (trade.Summary != null)
             {
@@ -37,6 +48,7 @@ namespace HsR.Journal.DataContext
 
             return tradeOverview;
         }
+
 
         public async Task<TradeSummary?> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
         {

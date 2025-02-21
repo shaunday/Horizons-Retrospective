@@ -45,7 +45,7 @@ namespace HsR.Journal.Entities.Factory
             return tradeInput;
         }
 
-        private static TradeSummary GetNewSummary(TradeComposite trade)
+        public static TradeSummary GetNewSummary(TradeComposite trade)
         {
             var analytics = Analytics.GetTradingCosts(trade);
             TradeAnalyticsSummary analyticsSummary = new(analytics);

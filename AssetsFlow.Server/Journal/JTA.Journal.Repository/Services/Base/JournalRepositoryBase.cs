@@ -19,13 +19,17 @@ namespace HsR.Journal.Repository.Services.Base
 
         private protected TradeSummary RefreshSummary(TradeComposite trade)
         {
-            TradeElement newSummary = TradeElementsFactory.GetNewElement(trade, TradeActionType.Summary);
+            if (TradeElementsFactory.GetNewElement(trade, TradeActionType.Summary) is not TradeSummary newSummary)
+            {
+                throw new InvalidOperationException("TradeElementsFactory returned an invalid type for Summary.");
+            }
 
             if (trade.Summary != null)
             {
                 _dataContext.Entry(trade.Summary).State = EntityState.Deleted;
             }
-            if (newSummary is TradeSummary sum && !sum.IsInterim)
+
+            if (!newSummary.IsInterim)
             {
                 trade.Close();
             }
@@ -33,6 +37,7 @@ namespace HsR.Journal.Repository.Services.Base
             trade.Summary = newSummary;
             return newSummary;
         }
+
 
         private protected async Task<TradeComposite> GetTradeCompositeAsync(string tradeId)
         {
