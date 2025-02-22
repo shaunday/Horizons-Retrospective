@@ -23,9 +23,10 @@
             var addToPositionObjects = new List<DataElement>
             {
                 new DataElement("Emotions", ComponentType.Header),
-                new DataElement("Price", ComponentType.Thoughts) { UnitPriceRelevance = ValueRelevance.Positive },
-                new DataElement("Amount", ComponentType.Thoughts),
-                new DataElement("Total Cost", ComponentType.Thoughts) { TotalCostRelevance = ValueRelevance.Positive },
+                new DataElement("Time Frame", ComponentType.Technicals),
+                new DataElement("Price", ComponentType.PriceRelated) { UnitPriceRelevance = ValueRelevance.Positive },
+                new DataElement("Amount", ComponentType.PriceRelated),
+                new DataElement("Total Cost", ComponentType.PriceRelated) { TotalCostRelevance = ValueRelevance.Positive },
             };
 
             // Add Position Boundaries objects to the list
@@ -40,15 +41,11 @@
             var addToPositionObjects = new List<DataElement>
             {
                 new DataElement("General", ComponentType.Header),
-                new DataElement("Fta reached?", ComponentType.Thoughts) ,
-                new DataElement("NTA", ComponentType.Thoughts),
                 new DataElement("D/W/M str?", ComponentType.Technicals),
                 new DataElement("Momentum", ComponentType.Technicals),
+                new DataElement("Fta reached?", ComponentType.Thoughts) ,
+                new DataElement("NTA", ComponentType.Thoughts),
             };
-
-            // Add Position Boundaries objects to the list
-            var positionBoundariesObjects = PositionBoundariesHelper.GetPositionBoundariesObjects();
-            addToPositionObjects.AddRange(positionBoundariesObjects);
 
             return addToPositionObjects;
         }

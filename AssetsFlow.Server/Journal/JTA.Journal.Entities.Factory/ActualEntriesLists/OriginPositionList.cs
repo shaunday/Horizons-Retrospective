@@ -11,10 +11,11 @@
                                           { IsRelevantForOverview = true, Restrictions = ["Long", "Short"]},
                 new DataElement("Thesis", ComponentType.Thoughts) { IsRelevantForOverview = true },
                 new DataElement("Confluences", ComponentType.Technicals),
-                new DataElement("Confidence lvl", ComponentType.Emotions),
                 new DataElement("Triggers", ComponentType.Technicals),
+                new DataElement("Time Frame", ComponentType.Technicals),
+                new DataElement("Contra Indictr", ComponentType.Technicals),
+                new DataElement("Confidence Lvl", ComponentType.Emotions),
                 new DataElement("Position Plans", ComponentType.Thoughts),
-                new DataElement("Contra indictr", ComponentType.Technicals)
             };
 
             // Add Position Boundaries objects to the list
