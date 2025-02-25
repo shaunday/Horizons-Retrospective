@@ -1,6 +1,6 @@
-tradeControls: add evaluate
-elementControls: add remove, add timestamp
+evaluate (debug), remove(connect api), change data (debug)
 
+elementControls: add timestamp
 why setcell locally if i update above anyway?
 
 closing price on trade close

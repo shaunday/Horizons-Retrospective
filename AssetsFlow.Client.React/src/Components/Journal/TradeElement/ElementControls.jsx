@@ -1,35 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import SuccessMessage from "@components/SuccessMessage";
-import { useElementActivationMutation } from "@hooks/Element/useElementActivationMutation";
-import { canActivateElement } from "@services/elementActivation";
-import {useCacheElementActivation} from "@hooks/Element/useCacheElementActivation"
 
 const MemoizedSuccessMessage = React.memo(SuccessMessage);
 
+// Extracted style for button container (center alignment for both axes)
+const buttonContainerStyle = {
+  display: "flex",
+  justifyContent: "center", // Center horizontally
+  alignItems: "center", // Center vertically
+  marginRight: "10px",
+  height: "100%", // Ensure full height to center vertically
+};
+
+const buttonStyle = {
+  display: "inline-block",
+  marginLeft:"5px"
+};
+
 function ElementControls({ tradeElement }) {
-  const allowActivate = canActivateElement(tradeElement);
-  const { setNewActiveState } = useCacheElementActivation(tradeElement);
+  const [processing, setProcessing] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const { elementActivationMutation, processing, success } =
-    useElementActivationMutation(() => {
-      setNewActiveState(true);
-    });
-
-  const initiateActivation = () => {
-    elementActivationMutation.mutate(tradeElement);
+  const handleAction = (action) => {
+    setProcessing(true);
+    setSuccess(false);
+    // tradeActionMutation.mutate(action);
   };
 
   return (
     <>
-      <div style={{ textAlign: "right", marginRight: "10px" }}>
-        {allowActivate && <button
-          className="button-38"
+      <div style={buttonContainerStyle}>
+        <button
           type="button"
-          style={{ display: "inline-block", marginRight: "10px" }}
-          onClick={initiateActivation}
+          style={buttonStyle}
+          onClick={handleAction}
         >
-          Activate
-        </button>}
+          X
+        </button>
       </div>
       {processing && <div className="spinner">Processing...</div>}
       {success && <MemoizedSuccessMessage />}

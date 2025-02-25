@@ -50,6 +50,14 @@ function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
           className="button-38"
           type="button"
           style={{ display: "inline-block" }}
+          onClick={handleActionClick(Constants.TradeActions.EVALUATE)}
+        >
+          Add Evaluation
+        </button>}
+        {tradeComposite[Constants.TRADE_STATUS_STRING] == Constants.TradeStatus.OPEN && <button
+          className="button-38"
+          type="button"
+          style={{ display: "inline-block" }}
           onClick={handleActionClick(Constants.TradeActions.CLOSE)}
         >
           Close Trade

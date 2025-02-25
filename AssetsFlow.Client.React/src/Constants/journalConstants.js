@@ -7,6 +7,7 @@ export const TRADE_STATUS_STRING = 'status'
 export const TradeActions = Object.freeze({
   ADD: "Add",
   REDUCE: "Reduce",
+  EVALUATE: "Evaluate",
   CLOSE: "Close",
 });
 

@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import {
   addReduceInterimPosition,
   closeTrade,
+  addEvaluation,
 } from "@services/tradesApiAccess";
 import * as Constants from "@constants/journalConstants";
 
@@ -15,6 +16,9 @@ export const useTradeAction = (tradeComposite, onElementAddition) => {
         case Constants.TradeActions.REDUCE:
           return addReduceInterimPosition(tradeComposite.id, "false");
           break;
+        case Constants.TradeActions.EVALUATE:
+            return addEvaluation(tradeComposite.id);
+            break;
         case Constants.TradeActions.CLOSE:
           return closeTrade(tradeComposite.id, "1001"); //todo find closing price
           break;
