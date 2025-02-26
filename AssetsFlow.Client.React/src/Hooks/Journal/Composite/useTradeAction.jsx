@@ -30,7 +30,9 @@ export const useTradeAction = (tradeComposite, onElementAddition) => {
       console.error("Error adding/reducing position:", error);
     },
     onSuccess: (response) => {
-      const { [Constants.NEW_ELEMENT_RESPONSE_TAG]: newElement, [Constants.NEW_SUMMARY_RESPONSE_TAG]: updatedSummary } = response;
+      const newElement = response[Constants.NEW_ELEMENT_RESPONSE_TAG];
+      const updatedSummary = response[Constants.NEW_SUMMARY_RESPONSE_TAG];
+      
       onElementAddition(newElement, updatedSummary);
     },
   });

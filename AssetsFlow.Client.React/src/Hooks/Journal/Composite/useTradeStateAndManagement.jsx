@@ -23,7 +23,9 @@ export function useTradeStateAndManagement(cachedTradeComposite) {
       if (newElement) {
         onElementUpdate(newElement);
       }
-      setTradeSummary(newSummary);
+      if (newSummary) {
+        setTradeSummary(newSummary);
+      }
     },
     [onElementUpdate]
   );

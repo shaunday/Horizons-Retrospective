@@ -34,7 +34,7 @@ namespace HsR.Web.API.Controllers.Journal
 
             TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(newEval);
 
-            return ResultHandling(resAsModel, $"Could not add new evaluation element on : {tradeId}");
+            return ResultHandling(resAsModel, $"Could not add new evaluation element on : {tradeId}", [NEW_ELEMENT_DATA]);
         }
 
         [HttpDelete("{tradeInputId}")]

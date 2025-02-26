@@ -31,24 +31,26 @@ namespace HsR.Web.API.Controllers.Journal
                 return NotFound();
             }
 
-            // If the result is a ValueTuple, extract its values into a dictionary
-            if (result.GetType().Name.StartsWith("ValueTuple"))
-            {
-                var responseObject = new Dictionary<string, object?>();
-                var props = result.GetType().GetFields();
+            Type resultType = result.GetType();
+            var responseObject = new Dictionary<string, object?>();
 
-                for (int i = 0; i < props.Length; i++)
+            // Check if result is a tuple (Tuples store values in fields)
+            if (resultType.Name.StartsWith("ValueTuple"))
+            {
+                var fields = resultType.GetFields();
+                for (int i = 0; i < fields.Length; i++)
                 {
-                    var value = props[i].GetValue(result);
+                    var value = fields[i].GetValue(result);
                     responseObject[propertyNames.Length > i ? propertyNames[i] : $"item{i + 1}"] = value;
                 }
-
-                return Ok(responseObject);
+            }
+            else if (propertyNames.Length > 0) // If result is a class and propertyNames exist
+            {
+                responseObject[propertyNames[0]] = result; // Pair with the first property name
             }
 
-            // If it's a single class, return it directly without wrapping in a dictionary
-            return Ok(result);
+            // Return dictionary if propertyNames were provided, otherwise return the object
+            return responseObject.Count > 0 ? Ok(responseObject) : Ok(result);
         }
-
     }
 }
