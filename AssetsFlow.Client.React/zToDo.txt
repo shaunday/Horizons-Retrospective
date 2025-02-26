@@ -1,7 +1,5 @@
-remove(connect api), change data - add timestamp
-
+remove(connect api)
 elementControls: add timestamp
-why setcell locally if i update above anyway?
 
 closing price on trade close
 filter in client?

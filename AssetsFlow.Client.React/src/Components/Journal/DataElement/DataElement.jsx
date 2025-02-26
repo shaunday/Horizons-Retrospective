@@ -22,15 +22,11 @@ const textStyle = {
   width: "100%",
 };
 
-function DataElement({ cellInfo: initialCellInfo, onCellUpdate }) {
+function DataElement({ cellInfo , onCellUpdate }) {
   const isOverview = onCellUpdate === undefined;
-  const [cellInfo, setCellInfo] = useState(initialCellInfo);
 
   const { contentUpdateMutation, processing, success } =
     useContentUpdateMutation(cellInfo, (cellUpdateResponse) => {
-      const newData = cellUpdateResponse[Constants.NEW_DATA_RESPONSE_TAG];
-
-      setCellInfo(newData); // Update local state with new entry
       if (onCellUpdate) {
         onCellUpdate(cellUpdateResponse);
       }
