@@ -29,11 +29,16 @@ function TradeElementContainer({ tradeElement, onElementContentUpdate }) {
   }, [tradeElement]);
 
   const processCellUpdate = useCallback(
-    (data) => {
+    (cellUpdateResponse) => {
       // Handle inter-connectedness here - element might affect other elements
 
-      if (isOverview)
-        onElementContentUpdate(data);
+      if (!isOverview)
+        onElementContentUpdate(cellUpdateResponse);
+
+      const updatedTimestamp = cellUpdateResponse[Constants.NEW_TIMESTAMP_RESPONSE_TAG];
+      if (updatedTimestamp) {
+        tradeElement[Constants.ELEMENT_TIMESTAMP_STING] = updatedTimestamp
+      }
     },
     [onElementContentUpdate]
   );

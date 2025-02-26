@@ -8,13 +8,16 @@ export function useTradeStateAndManagement(cachedTradeComposite) {
     cachedTradeComposite[Constants.TRADE_SUMMARY_STRING] ?? null
   );
 
-  const entryUpdate = useCacheUpdatedEntry(cachedTradeComposite);
+  const { cacheUpdatedEntry } = useCacheUpdatedEntry(cachedTradeComposite);
   const processEntryUpdate = useCallback(
-    ({ updatedEntry, newSummary }) => {
-      entryUpdate(updatedEntry);
+    (cellUpdateResponse) => {
+      const updatedEntry = cellUpdateResponse[Constants.NEW_DATA_RESPONSE_TAG];
+      const newSummary = cellUpdateResponse[Constants.NEW_SUMMARY_RESPONSE_TAG];
+
+      cacheUpdatedEntry(updatedEntry);
       setTradeSummary(newSummary);
     },
-    [entryUpdate]
+    [cacheUpdatedEntry]
   );
 
   const { onElementUpdate } = useCacheNewElement(cachedTradeComposite);

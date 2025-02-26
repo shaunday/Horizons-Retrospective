@@ -27,10 +27,12 @@ function DataElement({ cellInfo: initialCellInfo, onCellUpdate }) {
   const [cellInfo, setCellInfo] = useState(initialCellInfo);
 
   const { contentUpdateMutation, processing, success } =
-    useContentUpdateMutation(cellInfo, (newData, updatedSummary) => {
+    useContentUpdateMutation(cellInfo, (cellUpdateResponse) => {
+      const newData = cellUpdateResponse[Constants.NEW_DATA_RESPONSE_TAG];
+
       setCellInfo(newData); // Update local state with new entry
       if (onCellUpdate) {
-        onCellUpdate(updatedSummary);
+        onCellUpdate(cellUpdateResponse);
       }
     });
 

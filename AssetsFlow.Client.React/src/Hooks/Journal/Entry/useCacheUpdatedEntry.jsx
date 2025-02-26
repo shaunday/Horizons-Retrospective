@@ -6,8 +6,7 @@ import * as Constants from "@constants/journalConstants";
 export function useCacheUpdatedEntry(tradeComposite) {
   const queryClient = useQueryClient();
 
-  const onEntryUpdate = (data) => {
-    const { updatedEntry } = data;
+  const cacheUpdatedEntry = (updatedEntry) => {
     queryClient.setQueryData(
       tradeKeysFactory.tradeAndIdArrayKey(tradeComposite.id),
       (oldTradeComposite) =>
@@ -18,7 +17,7 @@ export function useCacheUpdatedEntry(tradeComposite) {
               (entry) => entry.id === updatedEntry.id
             );
             if (entryIndex !== -1) {
-              tradeElement.entries[entryIndex] = updatedEntry;
+              tradeElement[Constants.TRADE_ENTRIES_STRING][entryIndex] = updatedEntry;
               break;
             }
           }
@@ -26,5 +25,5 @@ export function useCacheUpdatedEntry(tradeComposite) {
     );
   };
 
-  return { onEntryUpdate };
+  return { cacheUpdatedEntry };
 }

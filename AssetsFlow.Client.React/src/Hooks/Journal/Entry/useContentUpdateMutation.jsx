@@ -19,9 +19,8 @@ export function useContentUpdateMutation(cellInfo, onDataUpdateSuccess) {
       console.error("Error updating content:", error);
     },
     onSuccess: (response) => {
-      const { [Constants.NEW_DATA_RESPONSE_TAG]: newData, [Constants.NEW_SUMMARY_RESPONSE_TAG]: updatedSummary } = response;
       if (onDataUpdateSuccess) {
-        onDataUpdateSuccess(newData, updatedSummary);
+        onDataUpdateSuccess(response);
       }
       setProcessing(false);
       setSuccess(true); // Mark success
