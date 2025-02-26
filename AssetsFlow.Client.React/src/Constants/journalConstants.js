@@ -38,4 +38,5 @@ export const DATA_RESTRICTION_STRING = 'restrictions'
 export const NEW_DATA_RESPONSE_TAG = 'updatedCellData'
 export const NEW_SUMMARY_RESPONSE_TAG = 'updatedSummary'
 export const NEW_ELEMENT_RESPONSE_TAG = 'updatedElement'
+export const NEW_TIMESTAMP_RESPONSE_TAG = 'updatedTimeStamp'
 
