@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SuccessMessage from "@components/SuccessMessage";
+import { Button } from '@mantine/core';
 
 const MemoizedSuccessMessage = React.memo(SuccessMessage);
 
@@ -8,13 +9,12 @@ const buttonContainerStyle = {
   display: "flex",
   justifyContent: "center", // Center horizontally
   alignItems: "center", // Center vertically
-  marginRight: "10px",
+  marginLeft: "5px",
   height: "100%", // Ensure full height to center vertically
 };
 
 const buttonStyle = {
-  display: "inline-block",
-  marginLeft:"5px"
+  marginRight: "5px"
 };
 
 function ElementControls({ tradeElement }) {
@@ -30,13 +30,15 @@ function ElementControls({ tradeElement }) {
   return (
     <>
       <div style={buttonContainerStyle}>
-        <button
-          type="button"
+        <Button
+          size="xs"
           style={buttonStyle}
           onClick={handleAction}
         >
-          X
-        </button>
+          Delete
+          <br />
+          Element
+        </Button>
       </div>
       {processing && <div className="spinner">Processing...</div>}
       {success && <MemoizedSuccessMessage />}
