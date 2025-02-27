@@ -8,9 +8,10 @@ const styles = {
     flex: 1,
     overflowY: "auto",
     maxHeight: "100vh",
+    borderRadius: "4px",
     margin: "3px",
     padding: "5px",
-    background: "rgb(225, 167, 167)",
+    background: "rgb(241, 243, 237)",
   },
   list: {
     display: "flex",
