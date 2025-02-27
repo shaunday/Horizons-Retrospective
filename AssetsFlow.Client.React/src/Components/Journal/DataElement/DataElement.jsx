@@ -1,25 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import * as Constants from "@constants/journalConstants";
 import { useContentUpdateMutation } from "@hooks/Entry/useContentUpdateMutation";
 import SuccessMessage from "@components/SuccessMessage";
 import ValueWrapper from "./ValueWrapper";
+import { Card, Text } from '@mantine/core';
 
 const MemoizedSuccessMessage = React.memo(SuccessMessage);
-
-const baseContainerStyle = {
-  display: "flex",
-  flexGrow: 1,
-  justifyContent: "center",
-  alignItems: "center",
-  width: "100%",
-  margin: "0 3px",
-};
 
 const textStyle = {
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  width: "100%",
 };
 
 function DataElement({ cellInfo, onCellUpdate }) {
@@ -37,15 +28,14 @@ function DataElement({ cellInfo, onCellUpdate }) {
   };
 
   const containerStyle = {
-    ...baseContainerStyle,
     ...(success ? { borderColor: "green" } : {}),
     pointerEvents: processing ? "none" : "auto",
     opacity: processing ? 0.5 : 1,
   };
 
   return (
-    <>
-      <p style={textStyle}>{cellInfo[Constants.DATA_TITLE_STRING]}</p>
+    <Card shadow="sm" padding="lg" radius="md" withBorder>
+      <Text style={textStyle}>{cellInfo[Constants.DATA_TITLE_STRING]}</Text>
       <div style={containerStyle}>
         <ValueWrapper
           cellInfo={cellInfo}
@@ -54,7 +44,7 @@ function DataElement({ cellInfo, onCellUpdate }) {
       </div>
       {processing && <div className="spinner">Processing...</div>}
       {success && <MemoizedSuccessMessage />}
-    </>
+    </Card>
   );
 }
 export default React.memo(DataElement);

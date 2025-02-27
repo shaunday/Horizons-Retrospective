@@ -12,11 +12,8 @@ const listStyle = {
 };
 
 const listItemStyle = {
-  border: "1px solid grey",
   padding: "5px",
-  borderRadius: "4px",
-  marginLeft: "5px",
-  width: "105px",
+  width: "150px",
 };
 
 function TradeElementContainer({ tradeElement, onElementContentUpdate }) {
