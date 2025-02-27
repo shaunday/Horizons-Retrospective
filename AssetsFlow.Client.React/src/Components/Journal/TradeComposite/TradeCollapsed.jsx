@@ -9,16 +9,16 @@ function TradeCollapsed({ tradeId }) {
 
   useEffect(() => {
     // Generate a simulated trade element
-    
+
     const simulatedEntries = [
       ...trade.tradeElements,
       ...(trade[Constants.TRADE_SUMMARY_STRING] ? [trade[Constants.TRADE_SUMMARY_STRING]] : [])
-  ]
-      .flatMap((tradeElement) => 
-          tradeElement[Constants.TRADE_ENTRIES_STRING].filter(
-              (entry) => entry[Constants.DATA_RELEVANT_FOR_ORVERVIEW_STRING]
-          )
-      );  
+    ]
+      .flatMap((tradeElement) =>
+        tradeElement[Constants.TRADE_ENTRIES_STRING].filter(
+          (entry) => entry[Constants.DATA_RELEVANT_FOR_ORVERVIEW_STRING]
+        )
+      );
 
     const simulatedElement = {
       id: `Simulated-${tradeId}`, // Assign a unique ID based on tradeId
@@ -31,9 +31,9 @@ function TradeCollapsed({ tradeId }) {
 
   return (
     <>
-       {simulatedEle ? ( <TradeElementContainer tradeElement={simulatedEle} />) : (
+      {simulatedEle ? (<TradeElementContainer tradeElement={simulatedEle} />) : (
         <div>Loading...</div>
-        )}
+      )}
     </>
   );
 }

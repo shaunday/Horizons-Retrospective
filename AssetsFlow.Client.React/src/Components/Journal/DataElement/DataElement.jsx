@@ -22,7 +22,7 @@ const textStyle = {
   width: "100%",
 };
 
-function DataElement({ cellInfo , onCellUpdate }) {
+function DataElement({ cellInfo, onCellUpdate }) {
   const isOverview = onCellUpdate === undefined;
 
   const { contentUpdateMutation, processing, success } =
@@ -32,16 +32,16 @@ function DataElement({ cellInfo , onCellUpdate }) {
       }
     });
 
-    const initiateMutation = (newValue) => {
-      contentUpdateMutation.mutate(newValue);
-    };    
+  const initiateMutation = (newValue) => {
+    contentUpdateMutation.mutate(newValue);
+  };
 
-    const containerStyle = {
-      ...baseContainerStyle,
-      ...(success ? { borderColor: "green" } : {}),
-      pointerEvents: processing ? "none" : "auto",
-      opacity: processing ? 0.5 : 1,
-    };
+  const containerStyle = {
+    ...baseContainerStyle,
+    ...(success ? { borderColor: "green" } : {}),
+    pointerEvents: processing ? "none" : "auto",
+    opacity: processing ? 0.5 : 1,
+  };
 
   return (
     <>
@@ -52,7 +52,6 @@ function DataElement({ cellInfo , onCellUpdate }) {
           onValueChangeInitiated={!isOverview ? initiateMutation : undefined}
         />
       </div>
-
       {processing && <div className="spinner">Processing...</div>}
       {success && <MemoizedSuccessMessage />}
     </>
