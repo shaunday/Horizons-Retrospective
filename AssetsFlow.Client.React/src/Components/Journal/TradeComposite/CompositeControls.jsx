@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import * as Constants from "@constants/journalConstants";
 import SuccessMessage from "@components/SuccessMessage";
-import { useTradeActionMutation } from "@hooks/Composite/useTradeActionMutation"; 
+import { useTradeActionMutation } from "@hooks/Composite/useTradeActionMutation";
+import { Button } from "@mantine/core";
 
 const MemoizedSuccessMessage = React.memo(SuccessMessage);
+
+const buttonStyles = { marginRight: "5px" };
+const containerStyle = { marginTop: "5px", marginRight: "auto", marginLeft: "auto"};
 
 function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
   const [processing, setProcessing] = useState(false);
@@ -29,39 +33,37 @@ function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
 
   return (
     <>
-      <div style={{ textAlign: "right", marginRight: "10px" }}>
-        <button
-          className="button-38"
-          type="button"
-          style={{ display: "inline-block", marginRight: "10px" }}
+      <div style={containerStyle}>
+        <Button
+          style={buttonStyles}
           onClick={handleActionClick(Constants.TradeActions.ADD)}
         >
           Add to position
-        </button>
-        {tradeComposite[Constants.TRADE_STATUS_STRING] == Constants.TradeStatus.OPEN && <button
-          className="button-38"
-          type="button"
-          style={{ display: "inline-block" }}
-          onClick={handleActionClick(Constants.TradeActions.REDUCE)}
-        >
-          Reduce position
-        </button>}
-        {tradeComposite[Constants.TRADE_STATUS_STRING] == Constants.TradeStatus.OPEN && <button
-          className="button-38"
-          type="button"
-          style={{ display: "inline-block" }}
-          onClick={handleActionClick(Constants.TradeActions.EVALUATE)}
-        >
-          Add Evaluation
-        </button>}
-        {tradeComposite[Constants.TRADE_STATUS_STRING] == Constants.TradeStatus.OPEN && <button
-          className="button-38"
-          type="button"
-          style={{ display: "inline-block" }}
-          onClick={handleActionClick(Constants.TradeActions.CLOSE)}
-        >
-          Close Trade
-        </button>}
+        </Button>
+        {tradeComposite[Constants.TRADE_STATUS_STRING] === Constants.TradeStatus.OPEN && (
+          <Button
+            style={buttonStyles}
+            onClick={handleActionClick(Constants.TradeActions.REDUCE)}
+          >
+            Reduce position
+          </Button>
+        )}
+        {tradeComposite[Constants.TRADE_STATUS_STRING] === Constants.TradeStatus.OPEN && (
+          <Button
+            style={buttonStyles}
+            onClick={handleActionClick(Constants.TradeActions.EVALUATE)}
+          >
+            Add Evaluation
+          </Button>
+        )}
+        {tradeComposite[Constants.TRADE_STATUS_STRING] === Constants.TradeStatus.OPEN && (
+          <Button
+            style={buttonStyles}
+            onClick={handleActionClick(Constants.TradeActions.CLOSE)}
+          >
+            Close Trade
+          </Button>
+        )}
       </div>
       {processing && <div className="spinner">Processing...</div>}
       {success && <MemoizedSuccessMessage />}
