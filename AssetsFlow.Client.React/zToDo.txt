@@ -1,5 +1,5 @@
 remove(connect api)
-elementControls: add timestamp
+elementControls: add timestamp + activate button
 
 closing price on trade close
 filter in client?

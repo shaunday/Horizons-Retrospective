@@ -3,7 +3,7 @@ import { produce } from "immer";
 import * as Constants from "@constants/journalConstants";
 import { tradeKeysFactory } from "@services/query-key-factory";
 
-export function useCacheElementsNewTimeStamp(tradeElement) {
+export function useElementCacheNewTimestamp(tradeElement) {
   const queryClient = useQueryClient();
 
   const setNewTimeStamp = (newStamp) => {

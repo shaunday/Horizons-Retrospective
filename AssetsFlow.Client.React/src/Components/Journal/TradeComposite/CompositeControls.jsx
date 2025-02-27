@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as Constants from "@constants/journalConstants";
 import SuccessMessage from "@components/SuccessMessage";
-import { useTradeAction } from "@hooks/Composite/useTradeAction"; // Import custom hook
+import { useTradeActionMutation } from "@hooks/Composite/useTradeActionMutation"; 
 
 const MemoizedSuccessMessage = React.memo(SuccessMessage);
 
@@ -9,7 +9,7 @@ function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const tradeActionMutation = useTradeAction(
+  const tradeActionMutation = useTradeActionMutation(
     tradeComposite,
     (newElement, newSummary) => {
       onTradeActionExecuted(newElement, newSummary);

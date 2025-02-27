@@ -6,7 +6,7 @@ import {
 } from "@services/tradesApiAccess";
 import * as Constants from "@constants/journalConstants";
 
-export const useTradeAction = (tradeComposite, onElementAddition) => {
+export const useTradeActionMutation = (tradeComposite, onElementAddition) => {
   return useMutation({
     mutationFn: async (action) => {
       switch (action) {
