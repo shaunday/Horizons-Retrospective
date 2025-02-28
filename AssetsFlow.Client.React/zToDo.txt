@@ -1,14 +1,13 @@
 remove(connect api)
 elementControls: add timestamp + activate button
+element title = date
 
 closing price on trade close
 filter in client?
 
 style for trade status
-style for empty data
+style for empty/missing data (border?)
 musthave data, cant be edited to empty
-element title = date
-update date on content update
 
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 
