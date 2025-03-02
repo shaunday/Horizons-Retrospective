@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import ComboxBoxThingie from "../../ComboxBoxThingie";
-import InlineTextDialog from "../../InlineTextDialog";
+import TextWithEditTag from "../../TextWithEditTag";
 import * as Constants from "@constants/journalConstants";
-import { getContent } from "./contentGetters";
+import { dataParser } from "./dataParser";
+import DataUpdateModal from "./DataUpdateModal";
 
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const isOverview = onValueChangeInitiated === undefined;
-  const { contentValue } = getContent(cellInfo);
+  const { contentValue } = dataParser(cellInfo);
   const shouldRenderDialog = cellInfo[Constants.DATA_RESTRICTION_STRING]?.length === 0;
+  const [modalOpened, setModalOpened] = useState(false);
 
   const wrapperStyle = {
     display: "flex",
@@ -24,15 +26,26 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
     height: "100%",
   };
 
+  const onEditRequested = () => {
+    setModalOpened(true);
+  }
+
   return (
     <div style={wrapperStyle}>
       {isOverview ? (
-        <span style={textStyle}>{contentValue}</span> 
+        <span style={textStyle}>{contentValue}</span>
       ) : shouldRenderDialog ? (
-        <InlineTextDialog
-          valueForDisplay={contentValue}
-          onApplyChanges={onValueChangeInitiated}
-        />
+        <div>
+          <TextWithEditTag
+            valueForDisplay={contentValue}
+            onEditRequested={onEditRequested}
+          />
+          <DataUpdateModal
+            opened={modalOpened}
+            onClose={() => setModalOpened(false)}
+            data={cellInfo}
+            onSubmit={onValueChangeInitiated} />
+        </div>
       ) : (
         <ComboxBoxThingie
           selected={contentValue}

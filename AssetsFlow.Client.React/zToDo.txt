@@ -2,7 +2,7 @@ remove(connect api)
 elementControls: add timestamp + activate button
 element title = date
 
-closing price on trade close
+closing price on trade close (modal?)
 filter in client?
 
 style for trade status
