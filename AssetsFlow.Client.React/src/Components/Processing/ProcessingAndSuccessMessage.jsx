@@ -14,7 +14,7 @@ function SuccessMessage() {
 
 const MemoizedSuccessMessage = React.memo(SuccessMessage);
 
-const ProcessingAndSuccessMessage = ({ status }) => {
+function ProcessingAndSuccessMessage ({ status }) {
   return (
     <>
       {status === ProcessingStatus.PROCESSING && (

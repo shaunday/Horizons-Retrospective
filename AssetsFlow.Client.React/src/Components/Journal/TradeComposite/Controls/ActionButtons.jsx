@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 
-const ActionButtons = ({ tradeStatus, handleActionClick }) => {
+function ActionButtons ({ tradeStatus, handleActionClick }) {
     return (
         <div style={{ marginTop: "5px", marginRight: "auto", marginLeft: "auto" }}>
             <Button mr={5} onClick={() => handleActionClick(Constants.TradeActions.ADD)}>

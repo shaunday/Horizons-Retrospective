@@ -26,6 +26,7 @@ function JournalView() {
         onClick={onAddTrade}
         style={buttonStyles} 
         disabled={isAddingTrade} 
+        
       >
         {isAddingTrade ? "Adding Trade..." : "Add a Trade"}
       </Button>

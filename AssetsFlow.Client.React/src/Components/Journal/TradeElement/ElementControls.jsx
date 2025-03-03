@@ -29,6 +29,7 @@ function ElementControls({ tradeElement }) {
       <div style={buttonContainerStyle}>
         <Button
           size="xs"
+          variant="outline"
           style={buttonStyle}
           onClick={handleAction}
         >
