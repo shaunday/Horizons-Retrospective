@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import ComboxBoxThingie from "../../ComboxBoxThingie";
-import TextWithEditTag from "../../TextWithEditTag";
 import * as Constants from "@constants/journalConstants";
 import { dataParser } from "./dataParser";
 import DataUpdateModal from "./DataUpdateModal";
+import ComboxBoxThingie from "../../ComboxBoxThingie";
+import TextWithEditTag from "../../TextWithEditTag";
 
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const isOverview = onValueChangeInitiated === undefined;

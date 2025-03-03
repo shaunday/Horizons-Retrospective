@@ -1,8 +1,8 @@
 import React from 'react';
 import { Modal, TextInput, Button } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { dataParser } from "./dataParser";
 import * as Constants from "@constants/journalConstants";
+import { dataParser } from "./dataParser";
 
 function DataUpdateModal({ opened, onClose, onSubmit, data }) {
     const { contentValue } = dataParser(data);

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import * as Constants from "@constants/journalConstants";
-import { useTradeActionMutation } from "@hooks/Journal/Composite/useTradeActionMutation";
+import {ProcessingStatus} from "@constants/constants";
+import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
 import ActionButtons from "./ActionButtons";
 import TradeClosingModal from "./TradeClosingModal";
-import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
+import { useTradeActionMutation } from "@hooks/Journal/Composite/useTradeActionMutation";
 import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
-import {ProcessingStatus} from "@constants/constants";
 
 function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
   const { processingStatus, setNewStatus } = useProcessingWrapper(ProcessingStatus.NONE); 

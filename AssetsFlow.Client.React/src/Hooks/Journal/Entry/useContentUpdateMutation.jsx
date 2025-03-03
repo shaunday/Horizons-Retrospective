@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { updateEntry } from "@services/entryApiAccess";
-import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
 import {ProcessingStatus} from "@constants/constants";
+import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
 
 export function useContentUpdateMutation(cellInfo, onDataUpdateSuccess) {
   const { processingStatus, setNewStatus } = useProcessingWrapper(ProcessingStatus.NONE);

@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
+import * as Constants from "@constants/journalConstants";
 import {
   addReduceInterimPosition,
   closeTrade,
   addEvaluation,
 } from "@services/tradesApiAccess";
-import * as Constants from "@constants/journalConstants";
 
 export const useTradeActionMutation = (tradeComposite, onElementAddition) => {
   return useMutation({

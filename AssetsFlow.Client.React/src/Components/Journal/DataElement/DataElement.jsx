@@ -2,9 +2,9 @@ import React from "react";
 import { Card, Text } from '@mantine/core';
 import * as Constants from "@constants/journalConstants";
 import { ProcessingStatus } from "@constants/Constants";
-import { useContentUpdateMutation } from "@hooks/Journal/Entry/useContentUpdateMutation";
 import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
 import ValueWrapper from "./ValueWrapper";
+import { useContentUpdateMutation } from "@hooks/Journal/Entry/useContentUpdateMutation";
 
 const textStyle = {
   whiteSpace: "nowrap",

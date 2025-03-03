@@ -5,7 +5,7 @@ element title = date
 style for trade status
 style for empty/missing data (border?)
  
-
+ 
 filter in client?
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 https ?

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import {ProcessingStatus} from "@constants/constants";
 import { activateElementAPI } from "@services/elementApiAccess";
 import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
-import {ProcessingStatus} from "@constants/constants";
-
 
 export function useElementActivationMutation(onActivationSuccess) {
   const { processingStatus, setNewStatus } = useProcessingWrapper(ProcessingStatus.NONE);
