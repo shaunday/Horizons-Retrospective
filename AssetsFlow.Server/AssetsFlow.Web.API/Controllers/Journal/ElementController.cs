@@ -24,7 +24,21 @@ public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
             return NotFound();
         }
 
-        return ResultHandling((tradeElement.TimeStamp), $"Could not activate element on : {elementId}");
+        return ResultHandling((tradeElement.TimeStamp), $"Could not activate element with Id: {elementId}");
+    }
+
+    [HttpDelete("{tradeInputId}")]
+    public async Task<ActionResult<TradeElementModel>> DeleteInterimTradeInput(string elementId)
+    {
+        var summary = await _journalAccess.RemoveInterimPositionAsync(elementId);
+        if (summary == null)
+        {
+            return NotFound();
+        }
+
+        TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
+
+        return ResultHandling(resAsModel, $"Could not delete element with Id: {elementId}");
     }
 }
     

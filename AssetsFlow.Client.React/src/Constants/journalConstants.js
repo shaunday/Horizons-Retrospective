@@ -22,6 +22,11 @@ export const ELEMENT_COMPOSITEFK_STING = 'compositeFK'
 export const ELEMENT_TYPE_STING = 'tradeActionType'
 export const ELEMENT_TIMESTAMP_STING = 'timeStamp'
 
+export const ElementActions = Object.freeze({
+  ACTIVATE: "Activate",
+  DELETE: "Delete",
+});
+
 export const ElementType = Object.freeze({
   ORIGIN: "Origin",
   ADD: "Add",

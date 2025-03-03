@@ -37,20 +37,6 @@ namespace HsR.Web.API.Controllers.Journal
             return ResultHandling(resAsModel, $"Could not add new evaluation element on : {tradeId}", [NEW_ELEMENT_DATA]);
         }
 
-        [HttpDelete("{tradeInputId}")]
-        public async Task<ActionResult<TradeElementModel>> DeleteInterimTradeInput(string tradeId, string tradeInputId)
-        {
-            var summary = await _journalAccess.RemoveInterimPositionAsync(tradeId, tradeInputId);
-            if (summary == null)
-            {
-                return NotFound();
-            }
-
-            TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
-
-            return ResultHandling(resAsModel, $"Could not delete interim element on : {tradeId}");
-        }
-
         #endregion
 
         #region Closure

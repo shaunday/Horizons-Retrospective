@@ -50,29 +50,29 @@ namespace HsR.Journal.DataContext
         }
 
 
-        public async Task<TradeSummary?> RemoveInterimPositionAsync(string tradeId, string tradeInputId)
+        public async Task<TradeSummary?> RemoveInterimPositionAsync(string tradeInputId)
         {
             if (!int.TryParse(tradeInputId, out var parsedId))
             {
                 throw new ArgumentException($"The element Id '{tradeInputId}' is not a valid integer.", nameof(tradeInputId));
             }
 
-            var trade = await GetTradeCompositeAsync(tradeId);
-
-            var tradeInputToRemove = trade.TradeElements.Where(t => t.Id == parsedId).SingleOrDefault();
-            if (tradeInputToRemove != null)
-            {
-                trade.TradeElements.Remove(tradeInputToRemove); //trade is being tracked so change will be commited on save
-            }
-            else
+            var tradeInputToRemove = await _dataContext.TradeElements.FindAsync(parsedId);
+            if (tradeInputToRemove == null)
             {
                 throw new ArgumentException($"The trade input (Id '{tradeInputId}') to remove is null.", nameof(tradeInputId));
-
             }
 
-            //check if any positions are still active
+            var trade = await GetTradeCompositeAsync(tradeInputToRemove.CompositeFK);
+            if (trade == null)
+            {
+                throw new InvalidOperationException($"TradeComposite with Id '{tradeInputToRemove.CompositeFK}' not found.");
+            }
+
+            _dataContext.TradeElements.Remove(tradeInputToRemove);
+
             TradeSummary? summary = null;
-            if (trade.IsTadeActive())
+            if (trade.IsTradeActive()) 
             {
                 summary = RefreshSummary(trade);
             }
@@ -84,6 +84,7 @@ namespace HsR.Journal.DataContext
             await _dataContext.SaveChangesAsync();
             return summary;
         }
+
 
         public async Task<InterimTradeElement> ActivateTradeElement(string tradeEleId)
         {

@@ -46,8 +46,13 @@ namespace HsR.Journal.Repository.Services.Base
                 throw new ArgumentException($"The tradeId '{tradeId}' is not a valid integer.", nameof(tradeId));
             }
 
+            return await GetTradeCompositeAsync(parsedId);
+        }
+
+        private protected async Task<TradeComposite> GetTradeCompositeAsync(int parsedId)
+        {
             var trade = await _dataContext.TradeComposites.FindAsync(parsedId)
-                ?? throw new InvalidOperationException($"Trade with ID {tradeId} not found.");
+                ?? throw new InvalidOperationException($"Trade with ID {parsedId} not found.");
 
             return trade!;
         }

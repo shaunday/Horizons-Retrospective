@@ -10,7 +10,7 @@ namespace HsR.Journal.Entities
     public static class EntityVerificationExtenders
     {
         //composite
-        public static bool IsTadeActive(this TradeComposite trade)
+        public static bool IsTradeActive(this TradeComposite trade)
         {
             return trade.TradeElements.Any(ele => ele.AllowActivation() && ele.TradeActionType == TradeActionType.Add);
         }

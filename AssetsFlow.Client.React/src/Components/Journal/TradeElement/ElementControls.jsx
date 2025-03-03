@@ -20,7 +20,7 @@ function ElementControls({ tradeElement }) {
   const { processingStatus, setNewStatus } = useProcessingWrapper();
 
   const handleAction = (action) => {
-    setNewStatus(ProcessingStatus.SUCCESS)
+    setNewStatus(ProcessingStatus.PROCESSING)
     // tradeActionMutation.mutate(action);
   };
 
