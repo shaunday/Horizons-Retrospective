@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { ElementActions } from "@constants/journalConstants";
 import { ProcessingStatus } from "@constants/constants";
-import { activateElementAPI, deleteElementAPI } from "@services/elementApiAccess";
+import { activateElementAPI,  } from "@services/elementApiAccess";
 import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
 
 export function useElementActionMutation(onActionSuccess) {
