@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, TextInput, Button, Group } from '@mantine/core';
+import { Modal, TextInput, Button } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { dataParser } from "./dataParser";
 import * as Constants from "@constants/journalConstants";

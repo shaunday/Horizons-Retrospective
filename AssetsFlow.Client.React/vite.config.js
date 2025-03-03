@@ -10,7 +10,7 @@ export default defineConfig({
         '@components': path.resolve(__dirname, 'src/Components'),
         '@journalComponents': path.resolve(__dirname, 'src/Components/Journal'),
         '@views': path.resolve(__dirname, 'src/Views'),
-        '@hooks': path.resolve(__dirname, 'src/Hooks/Journal'),
+        '@hooks': path.resolve(__dirname, 'src/Hooks'),
         '@services': path.resolve(__dirname, 'src/Services'),
         '@constants': path.resolve(__dirname, 'src/Constants'),
     },

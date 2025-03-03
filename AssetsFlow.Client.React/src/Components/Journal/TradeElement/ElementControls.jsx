@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import SuccessMessage from "@components/SuccessMessage";
+import React from "react";
 import { Button } from '@mantine/core';
+import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
+import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
+import { ProcessingStatus } from "@constants/Constants"; 
 
-const MemoizedSuccessMessage = React.memo(SuccessMessage);
-
-// Extracted style for button container (center alignment for both axes)
 const buttonContainerStyle = {
   display: "flex",
   justifyContent: "center", // Center horizontally
@@ -18,12 +17,10 @@ const buttonStyle = {
 };
 
 function ElementControls({ tradeElement }) {
-  const [processing, setProcessing] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const { processingStatus, setNewStatus } = useProcessingWrapper();
 
   const handleAction = (action) => {
-    setProcessing(true);
-    setSuccess(false);
+    setNewStatus(ProcessingStatus.SUCCESS)
     // tradeActionMutation.mutate(action);
   };
 
@@ -40,8 +37,7 @@ function ElementControls({ tradeElement }) {
           Element
         </Button>
       </div>
-      {processing && <div className="spinner">Processing...</div>}
-      {success && <MemoizedSuccessMessage />}
+      <ProcessingAndSuccessMessage status={processingStatus} />
     </>
   );
 }

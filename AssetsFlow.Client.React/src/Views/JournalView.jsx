@@ -1,8 +1,8 @@
 import FilterControl from "@journalComponents/Filtering/FilterControl";
 import PnLLineChart from "@components/PnLLineChart";
-import TradesContainer from "@journalComponents/TradesContainer";
-import { useFetchAndCacheTrades } from "@hooks/useFetchAndCacheTrades";
-import { useAddTrade } from "@hooks/useAddTrade";
+import TradesGallery from "@journalComponents/TradesGallery";
+import { useFetchAndCacheTrades } from "@hooks/Journal/useFetchAndCacheTrades";
+import { useAddTrade } from "@hooks/Journal/useAddTrade";
 import { Button } from '@mantine/core';
 
 const buttonStyles = { marginTop: "5px", marginRight: "auto", marginLeft: "auto" };
@@ -21,7 +21,7 @@ function JournalView() {
     <div id="journalMainBody">
       {/* <FilterControl />
       <PnLLineChart /> */}
-      <TradesContainer />
+      <TradesGallery />
       <Button
         onClick={onAddTrade}
         style={buttonStyles} 

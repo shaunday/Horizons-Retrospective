@@ -1,9 +1,9 @@
 import React from "react";
 import * as Constants from "@constants/journalConstants";
-import TradeElementContainer from "@journalComponents/TradeElement/TradeElementContainer";
-import CompositeControls from "./CompositeControls";
-import { useGetTradeById } from "@hooks/useGetTradeById";
-import { useTradeStateAndManagement } from "@hooks/Composite/useTradeStateAndManagement";
+import TradeElement from "@journalComponents/TradeElement/TradeElement";
+import CompositeControls from "./Controls/CompositeControls";
+import { useGetTradeById } from "@hooks/Journal/useGetTradeById";
+import { useTradeStateAndManagement } from "@hooks/Journal/Composite/useTradeStateAndManagement";
 
 const styles = {
   container: {
@@ -35,7 +35,7 @@ function TradeExpanded({ tradeId }) {
       <ul style={styles.list}>
         {trade[Constants.TRADE_ELEMENTS_STRING].map((ele, index) => (
           <li key={ele.id} style={styles.listItem}>
-            <TradeElementContainer
+            <TradeElement
               tradeElement={ele}
               onElementContentUpdate={processEntryUpdate}
               style={index !== 0 ? { marginTop: "10px" } : {}}
@@ -43,7 +43,7 @@ function TradeExpanded({ tradeId }) {
           </li>
         ))}
       </ul>
-      {tradeSummary && <TradeElementContainer tradeElement={{ ...tradeSummary, isOverview: true }} />}
+      {tradeSummary && <TradeElement tradeElement={{ ...tradeSummary, isOverview: true }} />}
       {trade[Constants.TRADE_STATUS_STRING] != Constants.TradeStatus.CLOSED && <CompositeControls
         tradeComposite={trade}
         onTradeActionExecuted={processTradeAction}

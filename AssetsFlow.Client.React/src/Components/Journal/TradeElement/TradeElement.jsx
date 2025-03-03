@@ -16,7 +16,7 @@ const listItemStyle = {
   width: "150px",
 };
 
-function TradeElementContainer({ tradeElement, onElementContentUpdate }) {
+function TradeElement({ tradeElement, onElementContentUpdate }) {
   const isOverview = tradeElement.isOverview !== undefined;
 
   const isAllowControls = useMemo(() => {
@@ -59,4 +59,4 @@ function TradeElementContainer({ tradeElement, onElementContentUpdate }) {
   );
 }
 
-export default React.memo(TradeElementContainer);
+export default React.memo(TradeElement);

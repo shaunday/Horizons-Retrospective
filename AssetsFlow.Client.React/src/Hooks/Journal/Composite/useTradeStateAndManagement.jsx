@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
-import { useCacheUpdatedEntry } from "@hooks/Entry/useCacheUpdatedEntry";
-import { useCacheNewElement } from "@hooks/Element/useCacheNewElement";
+import { useCacheUpdatedEntry } from "@hooks/Journal/Entry/useCacheUpdatedEntry";
+import { useCacheNewElement } from "@hooks/Journal/Element/useCacheNewElement";
 import * as Constants from "@constants/journalConstants";
 
 export function useTradeStateAndManagement(cachedTradeComposite) {

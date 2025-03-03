@@ -1,31 +1,32 @@
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { activateElementAPI } from "@services/elementApiAccess";
+import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
+import {ProcessingStatus} from "@constants/constants";
+
 
 export function useElementActivationMutation(onActivationSuccess) {
-  const [processing, setProcessing] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const { processingStatus, setNewStatus } = useProcessingWrapper(ProcessingStatus.NONE);
 
   const elementActivationMutation = useMutation({
     mutationFn: (tradeElement) => {
-      setProcessing(true);
-      setSuccess(false);
       const activateResult = activateElementAPI(tradeElement.id);
       return activateResult;
     },
+    onMutate: () => {
+      setNewStatus(ProcessingStatus.PROCESSING); // Set to PROCESSING when mutation starts
+    },
     onError: (error) => {
-      setProcessing(false);
+      setNewStatus(ProcessingStatus.NONE); // Reset to NONE on error
       console.error("Error activating:", error);
     },
     onSuccess: (response) => {
       if (response === true && onActivationSuccess) {
         onActivationSuccess();
       }
-      setProcessing(false);
-      setSuccess(true); // Mark success
-      setTimeout(() => setSuccess(false), 2000); // Clear success state after 2 seconds
+      setNewStatus(ProcessingStatus.SUCCESS)
     },
   });
 
-  return { elementActivationMutation, processing, success };
+  return { elementActivationMutation, processingStatus };
 }

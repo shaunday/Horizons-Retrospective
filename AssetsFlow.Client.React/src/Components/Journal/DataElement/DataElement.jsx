@@ -1,11 +1,10 @@
 import React from "react";
-import * as Constants from "@constants/journalConstants";
-import { useContentUpdateMutation } from "@hooks/Entry/useContentUpdateMutation";
-import SuccessMessage from "@components/SuccessMessage";
-import ValueWrapper from "./ValueWrapper";
 import { Card, Text } from '@mantine/core';
-
-const MemoizedSuccessMessage = React.memo(SuccessMessage);
+import * as Constants from "@constants/journalConstants";
+import { ProcessingStatus } from "@constants/Constants";
+import { useContentUpdateMutation } from "@hooks/Journal/Entry/useContentUpdateMutation";
+import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
+import ValueWrapper from "./ValueWrapper";
 
 const textStyle = {
   whiteSpace: "nowrap",
@@ -16,7 +15,7 @@ const textStyle = {
 function DataElement({ cellInfo, onCellUpdate }) {
   const isOverview = onCellUpdate === undefined;
 
-  const { contentUpdateMutation, processing, success } =
+  const { contentUpdateMutation, processingStatus } =
     useContentUpdateMutation(cellInfo, (cellUpdateResponse) => {
       if (onCellUpdate) {
         onCellUpdate(cellUpdateResponse);
@@ -28,9 +27,9 @@ function DataElement({ cellInfo, onCellUpdate }) {
   };
 
   const containerStyle = {
-    ...(success ? { borderColor: "green" } : {}),
-    pointerEvents: processing ? "none" : "auto",
-    opacity: processing ? 0.5 : 1,
+    ...(processingStatus === ProcessingStatus.SUCCESS ? { borderColor: "green" } : {}),
+    pointerEvents: processingStatus === ProcessingStatus.PROCESSING ? "none" : "auto",
+    opacity: processingStatus === ProcessingStatus.PROCESSING ? 0.5 : 1,
   };
 
   return (
@@ -42,8 +41,7 @@ function DataElement({ cellInfo, onCellUpdate }) {
           onValueChangeInitiated={!isOverview ? initiateMutation : undefined}
         />
       </div>
-      {processing && <div className="spinner">Processing...</div>}
-      {success && <MemoizedSuccessMessage />}
+      <ProcessingAndSuccessMessage status={processingStatus} />
     </Card>
   );
 }

@@ -1,32 +1,30 @@
 import { useMutation } from "@tanstack/react-query";
 import { updateEntry } from "@services/entryApiAccess";
-import * as Constants from "@constants/journalConstants";
-import { useState } from "react";
+import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
+import {ProcessingStatus} from "@constants/constants";
 
 export function useContentUpdateMutation(cellInfo, onDataUpdateSuccess) {
-  const [processing, setProcessing] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const { processingStatus, setNewStatus } = useProcessingWrapper(ProcessingStatus.NONE);
 
   const contentUpdateMutation = useMutation({
     mutationFn: (newContent) => {
-      setProcessing(true);
-      setSuccess(false);
-      const updatedData = updateEntry(cellInfo.id, newContent, "");
-      return updatedData;
+      // Perform the update API call
+      return updateEntry(cellInfo.id, newContent, "");
+    },
+    onMutate: () => {
+      setNewStatus(ProcessingStatus.PROCESSING); // Set to PROCESSING when mutation starts
     },
     onError: (error) => {
-      setProcessing(false);
+      setNewStatus(ProcessingStatus.NONE); // Reset to NONE on error
       console.error("Error updating content:", error);
     },
     onSuccess: (response) => {
       if (onDataUpdateSuccess) {
         onDataUpdateSuccess(response);
       }
-      setProcessing(false);
-      setSuccess(true); // Mark success
-      setTimeout(() => setSuccess(false), 2000); // Clear success state after 2 seconds
+      setNewStatus(ProcessingStatus.SUCCESS); // Set to SUCCESS when mutation is successful
     },
   });
 
-  return { contentUpdateMutation, processing, success };
+  return { contentUpdateMutation, processingStatus };
 }

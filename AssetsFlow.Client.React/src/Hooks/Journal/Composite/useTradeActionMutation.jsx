@@ -8,7 +8,7 @@ import * as Constants from "@constants/journalConstants";
 
 export const useTradeActionMutation = (tradeComposite, onElementAddition) => {
   return useMutation({
-    mutationFn: async (action) => {
+    mutationFn: async (action, additionalParam) => {
       switch (action) {
         case Constants.TradeActions.ADD:
           return addReduceInterimPosition(tradeComposite.id, "true");
@@ -17,10 +17,10 @@ export const useTradeActionMutation = (tradeComposite, onElementAddition) => {
           return addReduceInterimPosition(tradeComposite.id, "false");
           break;
         case Constants.TradeActions.EVALUATE:
-            return addEvaluation(tradeComposite.id);
-            break;
+          return addEvaluation(tradeComposite.id);
+          break;
         case Constants.TradeActions.CLOSE:
-          return closeTrade(tradeComposite.id, "1001"); //todo find closing price
+          return closeTrade(tradeComposite.id, additionalParam); 
           break;
         default:
           throw new Error("Unknown action");
@@ -32,7 +32,7 @@ export const useTradeActionMutation = (tradeComposite, onElementAddition) => {
     onSuccess: (response) => {
       const newElement = response[Constants.NEW_ELEMENT_RESPONSE_TAG];
       const updatedSummary = response[Constants.NEW_SUMMARY_RESPONSE_TAG];
-      
+
       onElementAddition(newElement, updatedSummary);
     },
   });

@@ -28,7 +28,7 @@ const styles = {
   },
 };
 
-function TradesContainer() {
+function TradesGallery() {
   // 🔥 Subscribe to trade IDs query
   const { data: cachedTradeIds = [] } = useQuery({
     queryKey: tradeKeysFactory.tradeIdsKey,
@@ -48,4 +48,4 @@ function TradesContainer() {
   );
 }
 
-export default React.memo(TradesContainer);
+export default React.memo(TradesGallery);

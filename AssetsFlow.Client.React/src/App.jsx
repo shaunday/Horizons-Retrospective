@@ -1,6 +1,6 @@
 import "./App.css";
 import { useEffect } from "react";
-import { useFetchAndCacheTrades } from "@hooks/useFetchAndCacheTrades";
+import { useFetchAndCacheTrades } from "@hooks/Journal/useFetchAndCacheTrades";
 import JournalView from "@views/JournalView";
 import { withErrorBoundary } from "react-error-boundary";
 
