@@ -8,7 +8,6 @@ export function useContentUpdateMutation(cellInfo, onDataUpdateSuccess) {
 
   const contentUpdateMutation = useMutation({
     mutationFn: (newContent) => {
-      // Perform the update API call
       return updateEntry(cellInfo.id, newContent, "");
     },
     onMutate: () => {

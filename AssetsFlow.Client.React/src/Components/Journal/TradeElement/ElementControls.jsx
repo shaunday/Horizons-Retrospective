@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from '@mantine/core';
-import { ProcessingStatus } from "@constants/Constants"; 
+import { ElementActions } from "@constants/journalConstants";
 import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
-import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
+import { useElementActionMutation } from "@hooks/Journal/Element/useElementActionMutation"
 
 const buttonContainerStyle = {
   display: "flex",
@@ -16,12 +16,11 @@ const buttonStyle = {
   marginRight: "5px"
 };
 
-function ElementControls({ tradeElement }) {
-  const { processingStatus, setNewStatus } = useProcessingWrapper();
+function ElementControls({ tradeElement, onActionSuccess }) {
+  const { elementActionMutation, processingStatus } = useElementActionMutation(tradeElement, onActionSuccess);
 
   const handleAction = (action) => {
-    setNewStatus(ProcessingStatus.PROCESSING)
-    // tradeActionMutation.mutate(action);
+    elementActionMutation.mutate({action});
   };
 
   return (
@@ -31,7 +30,7 @@ function ElementControls({ tradeElement }) {
           size="xs"
           variant="outline"
           style={buttonStyle}
-          onClick={handleAction}
+          onClick={()=> handleAction(ElementActions.DELETE)}
         >
           Delete
           <br />

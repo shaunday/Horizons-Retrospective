@@ -15,9 +15,15 @@ export function useTradeStateAndManagement(cachedTradeComposite) {
       const newSummary = cellUpdateResponse[Constants.NEW_SUMMARY_RESPONSE_TAG];
 
       cacheUpdatedEntry(updatedEntry);
-      setTradeSummary(newSummary);
+      processSummaryUpdate(newSummary);
     },
     [cacheUpdatedEntry]
+  );
+
+  const processSummaryUpdate = useCallback(
+    (newSummary) => {
+      setTradeSummary(newSummary);
+    }
   );
 
   const { onElementUpdate } = useCacheNewElement(cachedTradeComposite);
@@ -37,5 +43,6 @@ export function useTradeStateAndManagement(cachedTradeComposite) {
     tradeSummary,
     processEntryUpdate,
     processTradeAction,
+    processSummaryUpdate,
   };
 }

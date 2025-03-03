@@ -27,8 +27,15 @@ const styles = {
 
 function TradeExpanded({ tradeId }) {
   const { trade } = useGetTradeById(tradeId);
-  const { tradeSummary, processEntryUpdate, processTradeAction } =
+  const { tradeSummary, processEntryUpdate, processTradeAction, processSummaryUpdate } =
     useTradeStateAndManagement(trade);
+
+  const processElementAction = (response) => {
+      const updatedSummary = response[Constants.NEW_SUMMARY_RESPONSE_TAG];
+      if (updatedSummary) {
+        processSummaryUpdate(updatedSummary);
+      }
+    }
 
   return (
     <div style={styles.container}>
@@ -38,6 +45,7 @@ function TradeExpanded({ tradeId }) {
             <TradeElement
               tradeElement={ele}
               onElementContentUpdate={processEntryUpdate}
+              onElementAction={processElementAction}
               style={index !== 0 ? { marginTop: "10px" } : {}}
             />
           </li>

@@ -16,7 +16,7 @@ const listItemStyle = {
   width: "150px",
 };
 
-function TradeElement({ tradeElement, onElementContentUpdate }) {
+function TradeElement({ tradeElement, onElementContentUpdate, onElementAction }) {
   const isOverview = tradeElement.isOverview !== undefined;
 
   const isAllowControls = useMemo(() => {
@@ -25,6 +25,16 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
     return elemntType !== Constants.ElementType.ORIGIN && elemntType !== Constants.ElementType.SUMMARY;
   }, [tradeElement]);
 
+  const processTimeStampUpdate = useCallback(
+    (response) => {
+      const updatedTimestamp = response[Constants.NEW_TIMESTAMP_RESPONSE_TAG];
+      if (updatedTimestamp) {
+        tradeElement[Constants.ELEMENT_TIMESTAMP_STING] = updatedTimestamp
+      }
+    },
+    [onElementContentUpdate]
+  );
+
   const processCellUpdate = useCallback(
     (cellUpdateResponse) => {
       // Handle inter-connectedness here - element might affect other elements
@@ -32,13 +42,16 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
       if (!isOverview)
         onElementContentUpdate(cellUpdateResponse);
 
-      const updatedTimestamp = cellUpdateResponse[Constants.NEW_TIMESTAMP_RESPONSE_TAG];
-      if (updatedTimestamp) {
-        tradeElement[Constants.ELEMENT_TIMESTAMP_STING] = updatedTimestamp
-      }
+      processTimeStampUpdate(cellUpdateResponse);
     },
     [onElementContentUpdate]
   );
+
+  const processElementActionSuccess  = useCallback((ElementActionResponse) =>
+  {
+    processTimeStampUpdate(ElementActionResponse);
+    onElementAction(ElementActionResponse);
+  });
 
   return (
     <>
@@ -53,7 +66,8 @@ function TradeElement({ tradeElement, onElementContentUpdate }) {
               />
             </li>
           ))}
-        {isAllowControls && <li><ElementControls tradeElement={tradeElement} /></li>}
+        {isAllowControls && 
+        <li><ElementControls tradeElement={tradeElement} onActionSuccess={processElementActionSuccess} /></li>}
       </ul>
     </>
   );

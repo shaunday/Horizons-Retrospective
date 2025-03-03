@@ -24,7 +24,7 @@ public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
             return NotFound();
         }
 
-        return ResultHandling((tradeElement.TimeStamp), $"Could not activate element with Id: {elementId}");
+        return ResultHandling((tradeElement.TimeStamp), $"Could not activate element with Id: {elementId}", [NEW_TIMESTAMP]);
     }
 
     [HttpDelete("{tradeInputId}")]
@@ -38,7 +38,7 @@ public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
 
         TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
 
-        return ResultHandling(resAsModel, $"Could not delete element with Id: {elementId}");
+        return ResultHandling(resAsModel, $"Could not delete element with Id: {elementId}", [NEW_SUMMARY]);
     }
 }
     

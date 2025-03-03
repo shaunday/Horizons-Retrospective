@@ -1,14 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
 import { ElementActions } from "@constants/journalConstants";
 import { ProcessingStatus } from "@constants/constants";
-import { activateElementAPI,  } from "@services/elementApiAccess";
+import { activateElementAPI, } from "@services/elementApiAccess";
 import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
 
-export function useElementActionMutation(onActionSuccess) {
+export function useElementActionMutation(tradeElement, onActionSuccess) {
   const { processingStatus, setNewStatus } = useProcessingWrapper(ProcessingStatus.NONE);
 
   const elementActionMutation = useMutation({
-    mutationFn: ({ action, tradeElement }) => {
+    mutationFn: ({ action }) => {
       switch (action) {
         case ElementActions.ACTIVATE:
           return activateElementAPI(tradeElement.id);
@@ -25,11 +25,11 @@ export function useElementActionMutation(onActionSuccess) {
       setNewStatus(ProcessingStatus.NONE); // Reset to NONE on error
       console.error("Error performing action:", error);
     },
-    onSuccess: (response, { action }) => {
-      if (response === true && onActionSuccess) {
-        onActionSuccess(action);
+    onSuccess: (response) => {
+      if (onActionSuccess) {
+        onActionSuccess(response);
       }
-      setNewStatus(ProcessingStatus.SUCCESS);
+      setNewStatus(ProcessingStatus.SUCCESS); // Set to SUCCESS when mutation is successful
     },
   });
 
