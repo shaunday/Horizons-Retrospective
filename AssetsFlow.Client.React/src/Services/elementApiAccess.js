@@ -11,6 +11,6 @@ export async function activateElementAPI(elementId) {
 }
 
 export async function deleteElementAPI(elementId) {
-  const response = await elmentsClient.patch(`${elementId}/activate`);
+  const response = await elmentsClient.delete(`${elementId}`);
   return response.data;
 }
