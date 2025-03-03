@@ -31,11 +31,11 @@ function TradeExpanded({ tradeId }) {
     useTradeStateAndManagement(trade);
 
   const processElementAction = (response) => {
-      const updatedSummary = response[Constants.NEW_SUMMARY_RESPONSE_TAG];
-      if (updatedSummary) {
-        processSummaryUpdate(updatedSummary);
-      }
+    const updatedSummary = response[Constants.NEW_SUMMARY_RESPONSE_TAG];
+    if (updatedSummary) {
+      processSummaryUpdate(updatedSummary);
     }
+  }
 
   return (
     <div style={styles.container}>

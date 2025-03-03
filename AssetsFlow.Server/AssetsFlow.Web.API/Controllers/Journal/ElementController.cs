@@ -27,7 +27,7 @@ public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
         return ResultHandling((tradeElement.TimeStamp), $"Could not activate element with Id: {elementId}", [NEW_TIMESTAMP]);
     }
 
-    [HttpDelete("{tradeInputId}")]
+    [HttpDelete]
     public async Task<ActionResult<TradeElementModel>> DeleteInterimTradeInput(string elementId)
     {
         var summary = await _journalAccess.RemoveInterimPositionAsync(elementId);

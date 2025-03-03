@@ -1,4 +1,4 @@
-remove(connect api)
+remove - figure out logic - need to invalidate/ remove from list
 elementControls: add timestamp + activate button
 element title = date
 
