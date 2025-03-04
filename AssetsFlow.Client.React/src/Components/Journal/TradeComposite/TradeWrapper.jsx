@@ -27,7 +27,7 @@ function TradeWrapper({ tradeId }) {
   return (
     <div style={styles.container}>
       <div onClick={toggleExpand} style={styles.toggleButton}>
-        {isCollapsed ? "▶" : "◁"}
+        {isCollapsed ? "🔽" : "🔼"}
       </div>
       {isCollapsed ? (
         <TradeCollapsed tradeId={tradeId} />

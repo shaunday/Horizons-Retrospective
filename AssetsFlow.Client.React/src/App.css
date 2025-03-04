@@ -71,7 +71,7 @@ main {
 }
 
 .editable-text:hover::before {
-  content: "🖊";
+  content: "✏️";
   font-size: 16px;
   position: absolute;
   left: 5%;
