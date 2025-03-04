@@ -1,32 +1,19 @@
 import React from 'react';
 
-const styles = {
-  container: {
-    display: "flex",
-    alignItems: "center",
-    cursor: "pointer",
-    verticalAlign: "middle",
-    width: "100%",
-  },
-  editableBox: {
+const editableBoxStyle = {
     padding: "5px",
-    border: "1px solid #ccc",
-    borderRadius: "4px",
-    width: "100%",
-  }
+    border: "1px dotted #ccc",
 };
 
 function TextWithEditTag({ valueForDisplay, onEditRequested }) {
 
   return (
-    <div style={styles.container}>
-      <div
+    <div className="centered-text editable-text"
         onClick={onEditRequested}
-        style={styles.editableBox}
+        style={editableBoxStyle}
       >
-        {valueForDisplay || "Click to edit"} {/* Show placeholder if empty */}
+       {valueForDisplay}
       </div>
-    </div>
   );
 }
 

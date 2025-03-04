@@ -6,12 +6,6 @@ import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuc
 import ValueWrapper from "./ValueWrapper";
 import { useContentUpdateMutation } from "@hooks/Journal/Entry/useContentUpdateMutation";
 
-const textStyle = {
-  whiteSpace: "nowrap",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-};
-
 function DataElement({ cellInfo, onCellUpdate }) {
   const isOverview = onCellUpdate === undefined;
 
@@ -27,15 +21,18 @@ function DataElement({ cellInfo, onCellUpdate }) {
   };
 
   const containerStyle = {
-    ...(processingStatus === ProcessingStatus.SUCCESS ? { borderColor: "green" } : {}),
     pointerEvents: processingStatus === ProcessingStatus.PROCESSING ? "none" : "auto",
-    opacity: processingStatus === ProcessingStatus.PROCESSING ? 0.5 : 1,
   };
 
   return (
-    <Card shadow="sm" padding="lg" radius="md" withBorder>
-      <Text style={textStyle}>{cellInfo[Constants.DATA_TITLE_STRING]}</Text>
+    <Card shadow="sm" padding="xs" radius="md" withBorder>
       <div style={containerStyle}>
+        <Text
+          className="no-overflow-text-style centered-text"
+          mb={5}
+        >
+          {cellInfo[Constants.DATA_TITLE_STRING]}
+        </Text>
         <ValueWrapper
           cellInfo={cellInfo}
           onValueChangeInitiated={!isOverview ? initiateMutation : undefined}

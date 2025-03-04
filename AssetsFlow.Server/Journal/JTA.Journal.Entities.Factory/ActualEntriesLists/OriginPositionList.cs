@@ -13,7 +13,7 @@
                 new DataElement("Confluences", ComponentType.Technicals),
                 new DataElement("Triggers", ComponentType.Technicals),
                 new DataElement("Time Frame", ComponentType.Technicals),
-                new DataElement("Contra Indictr", ComponentType.Technicals),
+                new DataElement("Contras", ComponentType.Technicals),
                 new DataElement("Confidence Lvl", ComponentType.Emotions),
                 new DataElement("Position Plans", ComponentType.Thoughts),
             };

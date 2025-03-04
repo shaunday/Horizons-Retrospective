@@ -22,16 +22,16 @@ function DataUpdateModal({ opened, onClose, onSubmit, data }) {
     };
 
     return (
-        <Modal opened={opened} onClose={onClose} title={`Edit: ${data[Constants.DATA_TITLE_STRING]}`} centered>
+        <Modal size="lg" opened={opened} onClose={onClose} title={data[Constants.DATA_TITLE_STRING]} centered>
             <form onSubmit={form.onSubmit(handleSubmit)}>
                 <TextInput
-                    label="Value:"
+                    label="Value"
                     {...form.getInputProps('value')}
-                    mb={5}
+                    mb={10}
                 />
                 <TextInput
-                    label="Change Details:"
-                    mb={15}
+                    label="Change Details"
+                    mb={20}
                 />
                 <Button type="submit" style={{ display: 'block', margin: '0 auto' }}>
                     Apply Changes

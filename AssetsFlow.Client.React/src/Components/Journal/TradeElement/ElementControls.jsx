@@ -14,10 +14,6 @@ const buttonContainerStyle = {
   height: "100%", // Ensure full height to center vertically
 };
 
-const buttonStyle = {
-  marginRight: "5px"
-};
-
 function ElementControls({ tradeElement, onActionSuccess }) {
   const tradeId = tradeElement[Constants.ELEMENT_COMPOSITEFK_STING];
   const { removeElement } = useRemoveElementFromTrade(tradeId);
@@ -40,7 +36,6 @@ function ElementControls({ tradeElement, onActionSuccess }) {
         <Button
           size="xs"
           variant="outline"
-          style={buttonStyle}
           onClick={() => handleAction(ElementActions.DELETE)}
         >
           Delete

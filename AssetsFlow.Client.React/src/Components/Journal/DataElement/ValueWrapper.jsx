@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Text } from '@mantine/core';
 import * as Constants from "@constants/journalConstants";
 import { dataParser } from "./dataParser";
 import DataUpdateModal from "./DataUpdateModal";
@@ -12,18 +13,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const [modalOpened, setModalOpened] = useState(false);
 
   const wrapperStyle = {
-    display: "flex",
-    alignItems: "center", // Ensure vertical alignment of children
-    height: "40px",
-    width: "100%",
-  };
-
-  const textStyle = {
-    display: "flex",
-    justifyContent: "center", // Center horizontally
-    alignItems: "center", // Center vertically
-    width: "100%",
-    height: "100%",
+    height: "40px"
   };
 
   const onEditRequested = () => {
@@ -33,7 +23,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   return (
     <div style={wrapperStyle}>
       {isOverview ? (
-        <span style={textStyle}>{contentValue}</span>
+        <Text className="centered-text">{contentValue}</Text>
       ) : shouldRenderDialog ? (
         <div>
           <TextWithEditTag
