@@ -8,15 +8,19 @@ export function useElementActionMutation(tradeElement, onActionSuccess) {
   const { processingStatus, setNewStatus } = useProcessingWrapper(ProcessingStatus.NONE);
 
   const elementActionMutation = useMutation({
-    mutationFn: ({ action }) => {
+    mutationFn: async ({ action }) => {
+      let response;
       switch (action) {
         case ElementActions.ACTIVATE:
-          return activateElementAPI(tradeElement.id);
+          response = await activateElementAPI(tradeElement.id);
+          break;
         case ElementActions.DELETE:
-          return deleteElementAPI(tradeElement.id);
+          response = await deleteElementAPI(tradeElement.id);
+          break;
         default:
           throw new Error(`Unsupported action: ${action}`);
       }
+      return { action, response }; 
     },
     onMutate: () => {
       setNewStatus(ProcessingStatus.PROCESSING); // Set to PROCESSING when mutation starts
@@ -25,9 +29,9 @@ export function useElementActionMutation(tradeElement, onActionSuccess) {
       setNewStatus(ProcessingStatus.NONE); // Reset to NONE on error
       console.error("Error performing action:", error);
     },
-    onSuccess: (response) => {
+    onSuccess: (action, response) => {
       if (onActionSuccess) {
-        onActionSuccess(response);
+        onActionSuccess(action, response);
       }
       setNewStatus(ProcessingStatus.SUCCESS); // Set to SUCCESS when mutation is successful
     },

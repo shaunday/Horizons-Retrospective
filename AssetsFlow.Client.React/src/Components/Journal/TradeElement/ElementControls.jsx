@@ -1,8 +1,10 @@
 import React from "react";
 import { Button } from '@mantine/core';
+import * as Constants from "@constants/journalConstants";
 import { ElementActions } from "@constants/journalConstants";
 import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
 import { useElementActionMutation } from "@hooks/Journal/Element/useElementActionMutation"
+import { useRemoveElementFromTrade } from "@hooks/Journal/Element/useRemoveElementFromTrade"
 
 const buttonContainerStyle = {
   display: "flex",
@@ -17,10 +19,19 @@ const buttonStyle = {
 };
 
 function ElementControls({ tradeElement, onActionSuccess }) {
-  const { elementActionMutation, processingStatus } = useElementActionMutation(tradeElement, onActionSuccess);
+  const tradeId = tradeElement[Constants.ELEMENT_COMPOSITEFK_STING];
+  const { removeElement } = useRemoveElementFromTrade(tradeId);
+
+  const processTradeAction = ({action, response}) => {
+    if (action === ElementActions.DELETE) {
+      removeElement(tradeElement.id);
+    }
+    onActionSuccess(response);
+  }
+  const { elementActionMutation, processingStatus } = useElementActionMutation(tradeElement, processTradeAction);
 
   const handleAction = (action) => {
-    elementActionMutation.mutate({action});
+    elementActionMutation.mutate({ action });
   };
 
   return (
@@ -30,7 +41,7 @@ function ElementControls({ tradeElement, onActionSuccess }) {
           size="xs"
           variant="outline"
           style={buttonStyle}
-          onClick={()=> handleAction(ElementActions.DELETE)}
+          onClick={() => handleAction(ElementActions.DELETE)}
         >
           Delete
           <br />

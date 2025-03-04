@@ -30,10 +30,12 @@ function TradeExpanded({ tradeId }) {
   const { tradeSummary, processEntryUpdate, processTradeAction, processSummaryUpdate } =
     useTradeStateAndManagement(trade);
 
-  const processElementAction = (response) => {
-    const updatedSummary = response[Constants.NEW_SUMMARY_RESPONSE_TAG];
-    if (updatedSummary) {
-      processSummaryUpdate(updatedSummary);
+  const processElementAction = (action, response) => {
+    if (action === Constants.ElementActions.DELETE) {
+      const updatedSummary = response[Constants.NEW_SUMMARY_RESPONSE_TAG];
+      if (updatedSummary) {
+        processSummaryUpdate(updatedSummary);
+      }
     }
   }
 
