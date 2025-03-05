@@ -1,8 +1,5 @@
 ## Overview: 
-Stage1: A Trading Journal, allows the user to add and manage trade ideas and ongoing trade positions.
-
-(EDIT Feb2015 : Logic/ connection is mostly done, finish leftovers then -> styles work + MantineUI)
-
+Stage1: A Trading Journal, allows the user to add and manage trade ideas and ongoing trade positions (logic done, styling in process).
 
 TBD1: Add Ledger: withdraw, deposit, convert (per broker) + time stamps (=position snapshots)
 
