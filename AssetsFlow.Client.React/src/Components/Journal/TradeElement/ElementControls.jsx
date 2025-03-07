@@ -1,5 +1,6 @@
 import React from "react";
-import { Button } from '@mantine/core';
+import { Menu, ActionIcon } from '@mantine/core';
+import { IconDots, IconTrash } from '@tabler/icons-react'; // Importing icons
 import * as Constants from "@constants/journalConstants";
 import { ElementActions } from "@constants/journalConstants";
 import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
@@ -18,7 +19,7 @@ function ElementControls({ tradeElement, onActionSuccess }) {
   const tradeId = tradeElement[Constants.ELEMENT_COMPOSITEFK_STING];
   const { removeElement } = useRemoveElementFromTrade(tradeId);
 
-  const processTradeAction = ({action, response}) => {
+  const processTradeAction = ({ action, response }) => {
     if (action === ElementActions.DELETE) {
       removeElement(tradeElement.id);
     }
@@ -33,15 +34,20 @@ function ElementControls({ tradeElement, onActionSuccess }) {
   return (
     <>
       <div style={buttonContainerStyle}>
-        <Button
-          size="xs"
-          variant="outline"
-          onClick={() => handleAction(ElementActions.DELETE)}
-        >
-          Delete
-          <br />
-          Element
-        </Button>
+        <Menu shadow="md" width={150} position="bottom-end">
+          <Menu.Target>
+            <ActionIcon variant="subtle">
+              <IconDots />
+            </ActionIcon>
+          </Menu.Target>
+          <Menu.Dropdown>
+            <Menu.Item leftSection={<IconTrash size={16} />}
+              onClick={() => handleAction(ElementActions.DELETE)}
+            >
+              Delete Element
+            </Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
       </div>
       <ProcessingAndSuccessMessage status={processingStatus} />
     </>
