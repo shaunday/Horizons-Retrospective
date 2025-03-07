@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Text } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 import { dataParser } from "./dataParser";
@@ -39,13 +39,35 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isEditHovered, setIsEditHovered] = useState(false);
 
+  const wrapperRef = useRef(null);
+
   const onEditRequested = () => setModalOpened(true);
+
+  const handleCloseModal = () => {
+    setModalOpened(false);
+    setIsHovered(false); // Force reset hover state
+  };
+
+  // Force reset hover state if the mouse leaves too quickly
+  useEffect(() => {
+    const handlePointerMove = (event) => {
+      if (isHovered && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsHovered(false);
+      }
+    };
+
+    document.addEventListener("pointermove", handlePointerMove);
+    return () => document.removeEventListener("pointermove", handlePointerMove);
+  }, [isHovered]);
 
   return (
     <div
+      ref={wrapperRef}
       style={wrapperStyle}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onPointerEnter={() => setIsHovered(true)}
+      onPointerLeave={() => setIsHovered(false)}
+      onBlur={() => setIsHovered(false)} // Reset when focus is lost
+      tabIndex={0} // Makes the div focusable for onBlur
     >
       {/* Always show text if it's an overview OR not hovered */}
       {isOverview || !isHovered ? <Text className="centered-text">{contentValue}</Text> : null}
@@ -65,8 +87,8 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
           <div
             style={{ ...editIconStyle, ...(isEditHovered ? editIconHoverStyle : {}) }}
             onClick={onEditRequested}
-            onMouseEnter={() => setIsEditHovered(true)}
-            onMouseLeave={() => setIsEditHovered(false)}
+            onPointerEnter={() => setIsEditHovered(true)}
+            onPointerLeave={() => setIsEditHovered(false)}
           >
             ✏️
           </div>
@@ -74,12 +96,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
         </>
       )}
 
-      <DataUpdateModal
-        opened={modalOpened}
-        onClose={() => setModalOpened(false)}
-        data={cellInfo}
-        onSubmit={onValueChangeInitiated}
-      />
+      <DataUpdateModal opened={modalOpened} onClose={handleCloseModal} data={cellInfo} onSubmit={onValueChangeInitiated} />
     </div>
   );
 }
