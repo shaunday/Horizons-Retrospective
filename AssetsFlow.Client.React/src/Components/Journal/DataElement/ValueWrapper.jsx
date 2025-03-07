@@ -1,40 +1,17 @@
 import React, { useState } from "react";
-import { Text } from "@mantine/core";
+import { ActionIcon, Text } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 import { dataParser } from "./dataParser";
 import DataUpdateModal from "./DataUpdateModal";
 import ComboxBoxThingie from "../../ComboxBoxThingie";
-import useHover from "@hooks/useHover"; // Import the custom hook
-
-// Extracted styles
-const wrapperStyle = {
-  height: "40px",
-  display: "flex",
-  alignItems: "center",
-  position: "relative",
-};
-
-const editIconStyle = {
-  marginRight: 8,
-  padding: "4px 6px",
-  border: "1px solid #ccc",
-  borderRadius: "4px",
-  cursor: "pointer",
-  fontSize: "14px",
-  backgroundColor: "#f8f8f8",
-  transition: "background-color 0.2s ease",
-};
-
-const editIconHoverStyle = {
-  backgroundColor: "#e0e0e0",
-};
+import useHover from "@hooks/useHover";
+import { IconEdit } from '@tabler/icons-react';
 
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const isOverview = onValueChangeInitiated === undefined;
   const { contentValue } = dataParser(cellInfo);
   const textRestrictionsExist = cellInfo[Constants.DATA_RESTRICTION_STRING]?.length > 0;
   const [modalOpened, setModalOpened] = useState(false);
-  const [isEditHovered, setIsEditHovered] = useState(false);
 
   const { ref: wrapperRef, isHovered, setIsHovered } = useHover(); // Only tracking wrapper hover
 
@@ -48,12 +25,13 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   return (
     <div
       ref={wrapperRef}
-      style={wrapperStyle}
+      style={{ height: "40px", display: "flex", alignItems: "center" }}
       onPointerEnter={() => setIsHovered(true)}
       onPointerLeave={() => setIsHovered(false)}
       onBlur={() => setIsHovered(false)} // Reset when focus is lost
       tabIndex={0} // Makes the div focusable for onBlur
     >
+
       {/* Always show text if it's an overview OR not hovered */}
       {isOverview || !isHovered ? <Text className="centered-text">{contentValue}</Text> : null}
 
@@ -66,17 +44,13 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
         />
       )}
 
-      {/* If hovered and no restrictions, show Edit button + text */}
+      {/* If hovered and no restrictions, show ActionIcon + text */}
       {!isOverview && isHovered && !textRestrictionsExist && (
         <>
-          <div
-            style={{ ...editIconStyle, ...(isEditHovered ? editIconHoverStyle : {}) }}
-            onClick={onEditRequested}
-            onPointerEnter={() => setIsEditHovered(true)}
-            onPointerLeave={() => setIsEditHovered(false)}
-          >
-            ✏️
-          </div>
+          <ActionIcon variant="subtle" onClick={onEditRequested}>
+            <IconEdit />
+          </ActionIcon>
+
           <Text className="centered-text">{contentValue}</Text>
         </>
       )}
