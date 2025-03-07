@@ -1,21 +1,8 @@
 import React, { useState, useCallback } from "react";
+import { ActionIcon } from "@mantine/core";
+import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import TradeExpanded from "./TradeExpanded";
 import TradeCollapsed from "./TradeCollapsed";
-
-const styles = {
-  container: {
-    display: "flex",
-    alignItems: "center",
-    height: "100%",
-  },
-  toggleButton: {
-    cursor: "pointer",
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-};
 
 function TradeWrapper({ tradeId }) {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -25,10 +12,10 @@ function TradeWrapper({ tradeId }) {
   }, []);
 
   return (
-    <div style={styles.container}>
-      <div onClick={toggleExpand} style={styles.toggleButton}>
-        {isCollapsed ? "🔽" : "🔼"}
-      </div>
+    <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
+      <ActionIcon variant="subtle" onClick={toggleExpand} style={{ cursor: "pointer" }}>
+        {isCollapsed ? <IconChevronDown /> : <IconChevronUp />}
+      </ActionIcon>
       {isCollapsed ? (
         <TradeCollapsed tradeId={tradeId} />
       ) : (
