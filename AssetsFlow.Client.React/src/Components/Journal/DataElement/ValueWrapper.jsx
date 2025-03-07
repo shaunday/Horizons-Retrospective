@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { ActionIcon, Text } from "@mantine/core";
+import { useHover } from '@mantine/hooks';
 import * as Constants from "@constants/journalConstants";
 import { dataParser } from "./dataParser";
 import DataUpdateModal from "./DataUpdateModal";
 import ComboxBoxThingie from "../../ComboxBoxThingie";
-import useHover from "@hooks/useHover";
 import { IconEdit } from '@tabler/icons-react';
 
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
@@ -13,7 +13,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const textRestrictionsExist = cellInfo[Constants.DATA_RESTRICTION_STRING]?.length > 0;
   const [modalOpened, setModalOpened] = useState(false);
 
-  const { ref: wrapperRef, isHovered } = useHover(); 
+  const { ref: wrapperRef, hovered : isHovered } = useHover(); 
 
   const onEditRequested = () => setModalOpened(true);
 
