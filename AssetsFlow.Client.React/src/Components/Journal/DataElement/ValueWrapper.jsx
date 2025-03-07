@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Text } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 import { dataParser } from "./dataParser";
 import DataUpdateModal from "./DataUpdateModal";
 import ComboxBoxThingie from "../../ComboxBoxThingie";
+import useHover from "@hooks/useHover"; // Import the custom hook
 
 // Extracted styles
 const wrapperStyle = {
@@ -19,9 +20,6 @@ const editIconStyle = {
   border: "1px solid #ccc",
   borderRadius: "4px",
   cursor: "pointer",
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
   fontSize: "14px",
   backgroundColor: "#f8f8f8",
   transition: "background-color 0.2s ease",
@@ -36,10 +34,9 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const { contentValue } = dataParser(cellInfo);
   const textRestrictionsExist = cellInfo[Constants.DATA_RESTRICTION_STRING]?.length > 0;
   const [modalOpened, setModalOpened] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const [isEditHovered, setIsEditHovered] = useState(false);
 
-  const wrapperRef = useRef(null);
+  const { ref: wrapperRef, isHovered, setIsHovered } = useHover(); // Only tracking wrapper hover
 
   const onEditRequested = () => setModalOpened(true);
 
@@ -47,18 +44,6 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
     setModalOpened(false);
     setIsHovered(false); // Force reset hover state
   };
-
-  // Force reset hover state if the mouse leaves too quickly
-  useEffect(() => {
-    const handlePointerMove = (event) => {
-      if (isHovered && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setIsHovered(false);
-      }
-    };
-
-    document.addEventListener("pointermove", handlePointerMove);
-    return () => document.removeEventListener("pointermove", handlePointerMove);
-  }, [isHovered]);
 
   return (
     <div
