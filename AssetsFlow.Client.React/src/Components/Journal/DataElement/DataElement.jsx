@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Text } from '@mantine/core';
+import { Paper, Text } from '@mantine/core';
 import * as Constants from "@constants/journalConstants";
 import { ProcessingStatus } from "@constants/Constants";
 import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
@@ -25,7 +25,7 @@ function DataElement({ cellInfo, onCellUpdate }) {
   };
 
   return (
-    <Card shadow="sm" padding="xs" radius="md" withBorder>
+    <Paper shadow="sm" p="xs" radius="md" withBorder>
       <div style={containerStyle}>
         <Text
           className="no-overflow-text-style centered-text"
@@ -39,7 +39,7 @@ function DataElement({ cellInfo, onCellUpdate }) {
         />
       </div>
       <ProcessingAndSuccessMessage status={processingStatus} />
-    </Card>
+    </Paper>
   );
 }
 export default React.memo(DataElement);
