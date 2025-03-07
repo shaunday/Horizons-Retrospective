@@ -1,56 +1,57 @@
 import React, { useState } from "react";
-import { ActionIcon, Text } from "@mantine/core";
-import { useHover } from '@mantine/hooks';
+import { Text, ActionIcon } from "@mantine/core";
+import { useHover, useDisclosure } from "@mantine/hooks";
+import { IconEdit } from "@tabler/icons-react";
+import DefaultSelect from "./DefaultSelect";  // Import the new Select wrapper
+import DataUpdateModal from "./DataUpdateModal";
 import * as Constants from "@constants/journalConstants";
 import { dataParser } from "./dataParser";
-import DataUpdateModal from "./DataUpdateModal";
-import ComboxBoxThingie from "../../ComboxBoxThingie";
-import { IconEdit } from '@tabler/icons-react';
 
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const isOverview = onValueChangeInitiated === undefined;
   const { contentValue } = dataParser(cellInfo);
   const textRestrictionsExist = cellInfo[Constants.DATA_RESTRICTION_STRING]?.length > 0;
-  const [modalOpened, setModalOpened] = useState(false);
 
-  const { ref: wrapperRef, hovered : isHovered } = useHover(); 
+  const { opened: modalOpened, open: openModal, close: closeModal } = useDisclosure();
+  const [dropdownOpened, setDropdownOpened] = useState(false);
 
-  const onEditRequested = () => setModalOpened(true);
+  const { hovered, ref: wrapperRef } = useHover();
 
-  const handleCloseModal = () => {
-    setModalOpened(false);
-  };
+  const onEditRequested = () => openModal();
+
+  const openDropdown = () => setDropdownOpened(true);
+  const closeDropdown = () => setDropdownOpened(false);
 
   return (
     <div
       ref={wrapperRef}
       style={{ height: "40px", display: "flex", alignItems: "center" }}
-      tabIndex={0} // Makes the div focusable for onBlur
     >
-      {/* Always show text if it's an overview OR not hovered */}
-      {isOverview || !isHovered ? <Text className="centered-text">{contentValue}</Text> : null}
+      {isOverview || (!hovered && !dropdownOpened) ? (
+        <Text className="centered-text">{contentValue}</Text>
+      ) : null}
 
-      {/* If hovered and has restrictions, show ComboxBoxThingie */}
-      {!isOverview && isHovered && textRestrictionsExist && (
-        <ComboxBoxThingie
-          selected={contentValue}
-          options={cellInfo[Constants.DATA_RESTRICTION_STRING]}
-          onSelect={onValueChangeInitiated}
+      {!isOverview && (hovered || dropdownOpened) && textRestrictionsExist && (
+        <DefaultSelect
+          value={contentValue}
+          onChange={onValueChangeInitiated}
+          data={cellInfo[Constants.DATA_RESTRICTION_STRING]}
+          opened={dropdownOpened}
+          onDropdownOpen={openDropdown}
+          onDropdownClose={closeDropdown}
         />
       )}
 
-      {/* If hovered and no restrictions, show ActionIcon + text */}
-      {!isOverview && isHovered && !textRestrictionsExist && (
+      {!isOverview && hovered && !textRestrictionsExist && (
         <>
           <ActionIcon variant="subtle" onClick={onEditRequested}>
             <IconEdit />
           </ActionIcon>
-
           <Text className="centered-text">{contentValue}</Text>
         </>
       )}
 
-      <DataUpdateModal opened={modalOpened} onClose={handleCloseModal} data={cellInfo} onSubmit={onValueChangeInitiated} />
+      <DataUpdateModal opened={modalOpened} onClose={closeModal} data={cellInfo} onSubmit={onValueChangeInitiated} />
     </div>
   );
 }
