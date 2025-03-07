@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Text, ActionIcon } from "@mantine/core";
 import { useHover, useDisclosure } from "@mantine/hooks";
 import { IconEdit } from "@tabler/icons-react";
-import DefaultSelect from "./DefaultSelect";  // Import the new Select wrapper
+import DefaultSelect from "./DefaultSelect"; 
 import DataUpdateModal from "./DataUpdateModal";
 import * as Constants from "@constants/journalConstants";
 import { dataParser } from "./dataParser";
@@ -12,15 +12,10 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const { contentValue } = dataParser(cellInfo);
   const textRestrictionsExist = cellInfo[Constants.DATA_RESTRICTION_STRING]?.length > 0;
 
-  const { opened: modalOpened, open: openModal, close: closeModal } = useDisclosure();
-  const [dropdownOpened, setDropdownOpened] = useState(false);
+  const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
+  const [dropdownOpened, { open: openDropdown, close: closeDropdown }] = useDisclosure(false);
 
   const { hovered, ref: wrapperRef } = useHover();
-
-  const onEditRequested = () => openModal();
-
-  const openDropdown = () => setDropdownOpened(true);
-  const closeDropdown = () => setDropdownOpened(false);
 
   return (
     <div
@@ -37,14 +32,14 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
           onChange={onValueChangeInitiated}
           data={cellInfo[Constants.DATA_RESTRICTION_STRING]}
           opened={dropdownOpened}
-          onDropdownOpen={openDropdown}
-          onDropdownClose={closeDropdown}
+          onDropdownOpen={openDropdown} // Directly use openDropdown
+          onDropdownClose={closeDropdown} // Directly use closeDropdown
         />
       )}
 
       {!isOverview && hovered && !textRestrictionsExist && (
         <>
-          <ActionIcon variant="subtle" onClick={onEditRequested}>
+          <ActionIcon variant="subtle" onClick={openModal}>  {/* Directly use openModal */}
             <IconEdit />
           </ActionIcon>
           <Text className="centered-text">{contentValue}</Text>
