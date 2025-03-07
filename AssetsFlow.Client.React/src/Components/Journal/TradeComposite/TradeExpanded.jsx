@@ -37,7 +37,7 @@ function TradeExpanded({ tradeId }) {
   return (
     <div style={styles.container}>
       <ul style={{ flexDirection: "column" }}>
-        {trade[Constants.TRADE_ELEMENTS_STRING].map((ele, index) => (
+        {trade[Constants.TRADE_ELEMENTS_STRING].map((ele) => (
           <li key={ele.id} style={styles.listItem}>
             <TradeElement
               tradeElement={ele}

@@ -49,7 +49,7 @@ function TradeElement({ tradeElement, onElementContentUpdate, onElementAction })
     <>
       <ul style={{ flexWrap: "wrap" }}>
         {tradeElement[Constants.TRADE_ENTRIES_STRING]
-          .map((entry, index) => (
+          .map((entry) => (
             <li key={entry.id} style={listItemStyle}>
               <DataElement
                 cellInfo={entry}
