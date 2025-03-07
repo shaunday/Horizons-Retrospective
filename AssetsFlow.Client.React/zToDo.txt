@@ -1,11 +1,13 @@
-elementControls: add timestamp + activate button
+elementControls: activate button?
 element title = date
+
+combobox styling (center/ mantine?)
 
 style for trade status
 style for empty/missing data (border?)
+style for component type
  
- 
-filter in client?
+filter... in client?
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 https ?
 

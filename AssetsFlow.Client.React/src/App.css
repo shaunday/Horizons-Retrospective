@@ -69,12 +69,3 @@ main {
   background-color: rgba(0, 0, 0, 0.05);
   text-decoration: underline;
 }
-
-.editable-text:hover::before {
-  content: "✏️";
-  font-size: 16px;
-  position: absolute;
-  left: 5%;
-  top: 0;
-  opacity: 0.7;
-}
