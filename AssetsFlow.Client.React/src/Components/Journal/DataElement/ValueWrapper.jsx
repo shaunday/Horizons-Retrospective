@@ -13,25 +13,20 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const textRestrictionsExist = cellInfo[Constants.DATA_RESTRICTION_STRING]?.length > 0;
   const [modalOpened, setModalOpened] = useState(false);
 
-  const { ref: wrapperRef, isHovered, setIsHovered } = useHover(); // Only tracking wrapper hover
+  const { ref: wrapperRef, isHovered } = useHover(); 
 
   const onEditRequested = () => setModalOpened(true);
 
   const handleCloseModal = () => {
     setModalOpened(false);
-    setIsHovered(false); // Force reset hover state
   };
 
   return (
     <div
       ref={wrapperRef}
       style={{ height: "40px", display: "flex", alignItems: "center" }}
-      onPointerEnter={() => setIsHovered(true)}
-      onPointerLeave={() => setIsHovered(false)}
-      onBlur={() => setIsHovered(false)} // Reset when focus is lost
       tabIndex={0} // Makes the div focusable for onBlur
     >
-
       {/* Always show text if it's an overview OR not hovered */}
       {isOverview || !isHovered ? <Text className="centered-text">{contentValue}</Text> : null}
 

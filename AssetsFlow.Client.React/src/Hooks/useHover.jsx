@@ -5,17 +5,24 @@ function useHover() {
   const ref = useRef(null);
 
   useEffect(() => {
-    const handlePointerMove = (event) => {
-      if (isHovered && ref.current && !ref.current.contains(event.target)) {
-        setIsHovered(false);
+    const handleMouseEnter = () => setIsHovered(true);
+    const handleMouseLeave = () => setIsHovered(false);
+
+    const currentRef = ref.current;
+    if (currentRef) {
+      currentRef.addEventListener("mouseenter", handleMouseEnter);
+      currentRef.addEventListener("mouseleave", handleMouseLeave);
+    }
+
+    return () => {
+      if (currentRef) {
+        currentRef.removeEventListener("mouseenter", handleMouseEnter);
+        currentRef.removeEventListener("mouseleave", handleMouseLeave);
       }
     };
+  }, []);
 
-    document.addEventListener("pointermove", handlePointerMove);
-    return () => document.removeEventListener("pointermove", handlePointerMove);
-  }, [isHovered]);
-
-  return { ref, isHovered, setIsHovered };
+  return { ref, isHovered };
 }
 
 export default useHover;
