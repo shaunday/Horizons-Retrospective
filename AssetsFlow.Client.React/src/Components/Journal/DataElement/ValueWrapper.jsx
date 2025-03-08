@@ -31,15 +31,15 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
           value={contentValue}
           onChange={onValueChangeInitiated}
           data={cellInfo[Constants.DATA_RESTRICTION_STRING]}
-          opened={dropdownOpened}
-          onDropdownOpen={openDropdown} // Directly use openDropdown
-          onDropdownClose={closeDropdown} // Directly use closeDropdown
+          opened={dropdownOpened ? "true" : "undefined"}
+          onDropdownOpen={openDropdown} 
+          onDropdownClose={closeDropdown} 
         />
       )}
 
       {!isOverview && hovered && !textRestrictionsExist && (
         <>
-          <ActionIcon variant="subtle" onClick={openModal}>  {/* Directly use openModal */}
+          <ActionIcon variant="subtle" onClick={openModal}> 
             <IconEdit />
           </ActionIcon>
           <Text className="centered-text">{contentValue}</Text>
