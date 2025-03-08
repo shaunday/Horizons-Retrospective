@@ -23,7 +23,7 @@
             var addToPositionObjects = new List<DataElement>
             {
                 new DataElement("Emotions", ComponentType.Header),
-                new DataElement("Time Frame", ComponentType.Technicals),
+                new DataElement("Time Frame", ComponentType.ExitLogic),
                 new DataElement("Price", ComponentType.PriceRelated) { UnitPriceRelevance = ValueRelevance.Positive },
                 new DataElement("Amount", ComponentType.PriceRelated),
                 new DataElement("Total Cost", ComponentType.PriceRelated) { TotalCostRelevance = ValueRelevance.Positive },
@@ -43,8 +43,8 @@
                 new DataElement("General", ComponentType.Header),
                 new DataElement("D/W/M str?", ComponentType.Technicals),
                 new DataElement("Momentum", ComponentType.Technicals),
-                new DataElement("Fta reached?", ComponentType.Thoughts) ,
-                new DataElement("NTA", ComponentType.Thoughts),
+                new DataElement("Fta reached?", ComponentType.Technicals) ,
+                new DataElement("NTA", ComponentType.ExitLogic),
             };
 
             return addToPositionObjects;

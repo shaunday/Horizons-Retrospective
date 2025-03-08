@@ -39,16 +39,7 @@ export const ElementType = Object.freeze({
 export const DATA_TITLE_STRING = 'title'
 export const DATA_RELEVANT_FOR_ORVERVIEW_STRING = 'isRelevantForOverview'
 export const DATA_RESTRICTION_STRING = 'restrictions'
-
-export const ComponentType = Object.freeze({
-  HEADER: "Header",
-  EMOTIONS: "Emotions",
-  THOUGHTS: "Thoughts",
-  TECHNICALS: "Technicals",
-  PRICERELATED: "PriceRelated",
-  RISK: "Risk",
-  RESULTS: "Results"
-});
+export const COMPONENT_TYPE ='componentType'
 
 //respones
 export const NEW_DATA_RESPONSE_TAG = 'updatedCellData'

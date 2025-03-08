@@ -1,27 +1,23 @@
 import React, { useMemo, useCallback } from "react";
+import { Group } from "@mantine/core"; 
 import * as Constants from "@constants/journalConstants";
-import DataElement from "../DataElement/DataElement";
 import ElementControls from "./ElementControls";
-
-const listItemStyle = {
-  padding: "5px",
-  width: "150px",
-};
+import GroupedEntriesList from "../DataElementGroups/GroupedEntriesList"; 
 
 function TradeElement({ tradeElement, onElementContentUpdate, onElementAction }) {
   const isOverview = tradeElement.isOverview !== undefined;
 
   const isAllowControls = useMemo(() => {
     if (isOverview) return false;
-    const elemntType = tradeElement[Constants.ELEMENT_TYPE_STING];
-    return elemntType !== Constants.ElementType.ORIGIN && elemntType !== Constants.ElementType.SUMMARY;
+    const elementType = tradeElement[Constants.ELEMENT_TYPE_STING];
+    return elementType !== Constants.ElementType.ORIGIN && elementType !== Constants.ElementType.SUMMARY;
   }, [tradeElement]);
 
   const processTimeStampUpdate = useCallback(
     (response) => {
       const updatedTimestamp = response[Constants.NEW_TIMESTAMP_RESPONSE_TAG];
       if (updatedTimestamp) {
-        tradeElement[Constants.ELEMENT_TIMESTAMP_STING] = updatedTimestamp
+        tradeElement[Constants.ELEMENT_TIMESTAMP_STING] = updatedTimestamp;
       }
     },
     [onElementContentUpdate]
@@ -29,38 +25,29 @@ function TradeElement({ tradeElement, onElementContentUpdate, onElementAction })
 
   const processCellUpdate = useCallback(
     (cellUpdateResponse) => {
-      // Handle inter-connectedness here - element might affect other elements
-
-      if (!isOverview)
-        onElementContentUpdate(cellUpdateResponse);
-
+      if (!isOverview) onElementContentUpdate(cellUpdateResponse);
       processTimeStampUpdate(cellUpdateResponse);
     },
     [onElementContentUpdate]
   );
 
-  const processElementActionSuccess  = useCallback((ElementActionResponse) =>
-  {
+  const processElementActionSuccess = useCallback((ElementActionResponse) => {
     processTimeStampUpdate(ElementActionResponse);
     onElementAction(ElementActionResponse);
   });
 
   return (
-    <>
-      <ul style={{ flexWrap: "wrap" }}>
-        {tradeElement[Constants.TRADE_ENTRIES_STRING]
-          .map((entry) => (
-            <li key={entry.id} style={listItemStyle}>
-              <DataElement
-                cellInfo={entry}
-                {...(!isOverview && { onCellUpdate: processCellUpdate })}
-              />
-            </li>
-          ))}
-        {isAllowControls && 
-        <li><ElementControls tradeElement={tradeElement} onActionSuccess={processElementActionSuccess} /></li>}
-      </ul>
-    </>
+    <Group wrap="wrap" spacing={10}>
+      <GroupedEntriesList
+        entries={tradeElement[Constants.TRADE_ENTRIES_STRING]}
+        isOverview={isOverview}
+        processCellUpdate={processCellUpdate}
+      />
+
+      {isAllowControls &&
+        <ElementControls tradeElement={tradeElement} onActionSuccess={processElementActionSuccess} />
+      }
+    </Group>
   );
 }
 

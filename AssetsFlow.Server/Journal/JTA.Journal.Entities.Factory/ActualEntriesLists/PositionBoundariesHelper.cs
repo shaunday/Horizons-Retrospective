@@ -7,9 +7,9 @@
             return new List<DataElement>
             {
                 new DataElement("SL", ComponentType.Risk),
-                new DataElement("Target", ComponentType.PriceRelated),
+                new DataElement("Target", ComponentType.ExitLogic),
                 new DataElement("Risk", ComponentType.Risk),
-                new DataElement("Projected R:R", ComponentType.PriceRelated)
+                new DataElement("Projected R:R", ComponentType.Risk)
             };
         }
     }
