@@ -18,6 +18,9 @@ namespace HsR.Web.Services.Models.Journal
 
         public DateTime? TimeStamp { get; set; }
 
+        public string? FormattedTimeStamp => TimeStamp?.ToString("yyyy-MM-dd HH:mm");
+
+
         [Required]
         public int CompositeFK { get; set; }
     }

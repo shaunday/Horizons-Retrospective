@@ -35,7 +35,7 @@ function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
   };
 
   return (
-    <>
+    <div>
       <ActionButtons
         tradeStatus={tradeComposite[Constants.TRADE_STATUS_STRING]}
         handleActionClick={handleAction}
@@ -47,7 +47,7 @@ function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleCloseTrade}
       />
-    </>
+    </div>
   );
 }
 

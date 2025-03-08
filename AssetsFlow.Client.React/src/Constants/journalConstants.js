@@ -20,7 +20,7 @@ export const TradeStatus = Object.freeze({
 //element
 export const ELEMENT_COMPOSITEFK_STING = 'compositeFK'
 export const ELEMENT_TYPE_STING = 'tradeActionType'
-export const ELEMENT_TIMESTAMP_STING = 'timeStamp'
+export const ELEMENT_TIMESTAMP_STING = 'formattedTimeStamp'
 
 export const ElementActions = Object.freeze({
   ACTIVATE: "Activate",
