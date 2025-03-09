@@ -32,7 +32,7 @@ function App() {
     <div id="vwrapper">
       <header>Header placeholder</header>
       <main>
-        <JournalView className="flexChildCenter" />
+        <JournalView/>
       </main>
       <footer>Footer placeholder</footer>
     </div>

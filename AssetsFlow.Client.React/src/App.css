@@ -22,24 +22,11 @@ main {
 }
 
 #journalMainBody {
-  display: flex;
-  flex-direction: column;
   margin: 0.5rem;
   flex: 2 1 auto;
 }
 
 #tradesMainBody {
-  display: flex;
-  flex-direction: column;
-  margin: 0.5rem;
-  flex: 1 1 auto;
-}
-
-
-.flexChildCenter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 0.5rem;
   flex: 1 1 auto;
 }
@@ -64,4 +51,9 @@ ul {
   margin: 0; /* Removes default margin */
   display: flex;
   gap: 5px; /* Adds spacing between child elements */
+}
+
+.element-to-be-centered {
+  margin-right: auto;
+  margin-left: auto;
 }

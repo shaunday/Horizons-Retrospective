@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import * as Constants from "@constants/journalConstants";
+import { Group } from "@mantine/core";
 import {ProcessingStatus} from "@constants/constants";
 import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
 import ActionButtons from "./ActionButtons";
@@ -35,7 +36,7 @@ function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
   };
 
   return (
-    <div>
+    <Group>
       <ActionButtons
         tradeStatus={tradeComposite[Constants.TRADE_STATUS_STRING]}
         handleActionClick={handleAction}
@@ -47,7 +48,7 @@ function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleCloseTrade}
       />
-    </div>
+    </Group>
   );
 }
 

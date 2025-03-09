@@ -14,11 +14,6 @@ const styles = {
     border: "1.5px solid purple",
     position: "relative",
   },
-  compositeControlsContainer: {
-    display: "flex",
-    justifyContent: "center",
-    width: "100%",
-  },
 };
 
 function TradeExpanded({ tradeId }) {
@@ -51,9 +46,7 @@ function TradeExpanded({ tradeId }) {
       </ul>
       {tradeSummary && <TradeElement tradeElement={{ ...tradeSummary, isOverview: true }} />}
       {trade[Constants.TRADE_STATUS_STRING] !== Constants.TradeStatus.CLOSED && (
-        <div style={styles.compositeControlsContainer}>
-          <CompositeControls tradeComposite={trade} onTradeActionExecuted={processTradeAction} />
-        </div>
+        <CompositeControls tradeComposite={trade} onTradeActionExecuted={processTradeAction} />
       )}
     </div>
   );
