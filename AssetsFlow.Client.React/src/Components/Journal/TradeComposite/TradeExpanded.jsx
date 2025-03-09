@@ -1,10 +1,10 @@
 import React from "react";
-import { Badge } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 import TradeElement from "@journalComponents/TradeElement/TradeElement";
 import CompositeControls from "./Controls/CompositeControls";
 import { useGetTradeById } from "@hooks/Journal/useGetTradeById";
 import { useTradeStateAndManagement } from "@hooks/Journal/Composite/useTradeStateAndManagement";
+import TradeElementBadge from "../TradeElement//TradeElementBadge"; 
 
 const styles = {
   listItem: {
@@ -14,16 +14,10 @@ const styles = {
     border: "1.5px solid purple",
     position: "relative",
   },
-  badge: {
-    position: "absolute",
-    top: "-10px",
-    left: "20px",
-    zIndex: 10,
-  },
   compositeControlsContainer: {
     display: "flex",
-    justifyContent: "center",  // Center the child component horizontally
-    width: "100%",  // Ensure the container takes full width
+    justifyContent: "center",
+    width: "100%",
   },
 };
 
@@ -46,11 +40,7 @@ function TradeExpanded({ tradeId }) {
       <ul style={{ flexDirection: "column" }}>
         {trade[Constants.TRADE_ELEMENTS_STRING].map((ele) => (
           <li key={ele.id} style={styles.listItem}>
-            {ele[Constants.ELEMENT_TIMESTAMP_STING] && (
-              <Badge size="sm" color="blue.4" style={styles.badge}>
-                {ele[Constants.ELEMENT_TIMESTAMP_STING]}
-              </Badge>
-            )}
+            <TradeElementBadge tradeElement={ele} />
             <TradeElement
               tradeElement={ele}
               onElementContentUpdate={processEntryUpdate}
@@ -62,10 +52,7 @@ function TradeExpanded({ tradeId }) {
       {tradeSummary && <TradeElement tradeElement={{ ...tradeSummary, isOverview: true }} />}
       {trade[Constants.TRADE_STATUS_STRING] !== Constants.TradeStatus.CLOSED && (
         <div style={styles.compositeControlsContainer}>
-          <CompositeControls
-            tradeComposite={trade}
-            onTradeActionExecuted={processTradeAction}
-          />
+          <CompositeControls tradeComposite={trade} onTradeActionExecuted={processTradeAction} />
         </div>
       )}
     </div>
