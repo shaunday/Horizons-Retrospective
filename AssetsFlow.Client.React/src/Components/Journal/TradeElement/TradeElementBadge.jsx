@@ -2,13 +2,11 @@ import React from "react";
 import { Badge } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 
-const styles = {
-    badge: {
-        position: "absolute",
-        top: "-10px",
-        left: "20px",
-        zIndex: 10,
-    },
+const badgeStyle = {
+    position: "absolute",
+    top: "-10px",
+    left: "20px",
+    zIndex: 10,
 };
 
 function TradeElementBadge({ tradeElement }) {
@@ -16,7 +14,7 @@ function TradeElementBadge({ tradeElement }) {
     const type = tradeElement[Constants.ELEMENT_TYPE_STING];
 
     return (
-        <Badge size="sm" color="blue.4" style={styles.badge}>
+        <Badge size="sm" color="blue.4" style={badgeStyle}>
             {type}{timestamp ? `. ${timestamp}` : ""}
         </Badge>
     );
