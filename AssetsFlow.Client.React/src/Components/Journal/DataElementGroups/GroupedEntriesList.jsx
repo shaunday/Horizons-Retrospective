@@ -23,6 +23,7 @@ function GroupedEntriesList({ entries, isOverview, processCellUpdate }) {
         return (
           <Paper
             radius="md"
+            pt={5}
             key={groupKey}
             style={{
               backgroundColor: !isOverview ? getComponentTypeStyles(groupKey).backgroundColor : "transparent",
