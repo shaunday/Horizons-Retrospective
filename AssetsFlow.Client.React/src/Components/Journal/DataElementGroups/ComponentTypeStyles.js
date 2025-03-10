@@ -1,4 +1,4 @@
-const opacity = 0.3;
+const opacity = 0.15;
 
 export const componentTypeStyles = {
   Header: {

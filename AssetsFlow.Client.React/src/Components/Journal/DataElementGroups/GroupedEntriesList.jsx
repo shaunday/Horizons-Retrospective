@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { Paper } from '@mantine/core'; 
 import DataElement from '../DataElement/DataElement'; 
 import { getComponentTypeStyles } from '../DataElementGroups/ComponentTypeStyles';
-import * as Constants from "@constants/journalConstants"; 
 import { getGroupedEntries } from './groupedEntries';
 
 const styles = {
@@ -24,6 +23,7 @@ function GroupedEntriesList({ entries, isOverview, processCellUpdate }) {
           <Paper
             radius="md"
             pt={5}
+            mr={10}
             key={groupKey}
             style={{
               backgroundColor: !isOverview ? getComponentTypeStyles(groupKey).backgroundColor : "transparent",
