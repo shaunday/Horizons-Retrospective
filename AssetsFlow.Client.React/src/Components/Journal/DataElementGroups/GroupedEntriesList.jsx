@@ -1,14 +1,23 @@
 import React, { useMemo } from 'react';
-import { Paper } from '@mantine/core'; 
-import DataElement from '../DataElement/DataElement'; 
-import { getComponentTypeStyles } from '../DataElementGroups/ComponentTypeStyles';
+import { Paper, ThemeIcon } from '@mantine/core';
 import { getGroupedEntries } from './groupedEntries';
+import DataElement from '../DataElement/DataElement';
+import { getComponentTypeIcon } from './componentTypeIcons';
 
 const styles = {
   listItem: {
-    padding: "5px",
+    padding: "3px",
     minWidth: "100px",
     maxWidth: "150px",
+  },
+  paper: {
+    position: 'relative',
+    background: 'transparent'
+  },
+  themeIcon: {
+    position: 'absolute',
+    top: 40,
+    left: -15,
   },
 };
 
@@ -19,16 +28,25 @@ function GroupedEntriesList({ entries, isOverview, processCellUpdate }) {
     <>
       {Object.keys(groupedEntries).map((groupKey) => {
         const entries = groupedEntries[groupKey];
+        const IconComponent = getComponentTypeIcon(groupKey);
+
         return (
           <Paper
             radius="md"
-            pt={5}
+            p={10}
             mr={10}
             key={groupKey}
-            style={{
-              backgroundColor: !isOverview ? getComponentTypeStyles(groupKey).backgroundColor : "transparent",
-            }}
+            withBorder
+            style={styles.paper}
           >
+            {!isOverview && <ThemeIcon
+              variant="light"
+              size="md"
+              radius="lg"
+              style={styles.themeIcon}
+            >
+              <IconComponent size={20} />
+            </ThemeIcon>}
             <ul>
               {entries.map((entry) => (
                 <li key={entry.id} style={styles.listItem}>

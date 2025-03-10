@@ -22,7 +22,7 @@
         {
             var addToPositionObjects = new List<DataElement>
             {
-                new DataElement("Emotions", ComponentType.Header),
+                new DataElement("Emotions", ComponentType.Emotions),
                 new DataElement("Time Frame", ComponentType.ExitLogic),
                 new DataElement("Price", ComponentType.PriceRelated) { UnitPriceRelevance = ValueRelevance.Positive },
                 new DataElement("Amount", ComponentType.PriceRelated),
