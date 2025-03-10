@@ -1,11 +1,9 @@
-elementControls: activate button?
-element title = date
-
-combobox styling (center/ mantine?)
+fix styling clutter
 
 style for trade status
 style for empty/missing data (border?)
-style for component type
+style for component type...
+filter by : status first, date first, show: idea, interim, closed
  
 filter... in client?
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?

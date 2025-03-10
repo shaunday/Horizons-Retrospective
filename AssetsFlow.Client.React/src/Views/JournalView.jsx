@@ -3,9 +3,7 @@ import PnLLineChart from "@components/PnLLineChart";
 import TradesGallery from "@journalComponents/TradesGallery";
 import { useFetchAndCacheTrades } from "@hooks/Journal/useFetchAndCacheTrades";
 import { useAddTrade } from "@hooks/Journal/useAddTrade";
-import { Button } from '@mantine/core';
-
-const buttonStyles = { marginTop: "5px", marginRight: "auto", marginLeft: "auto" };
+import { Button, Stack } from '@mantine/core';
 
 function JournalView() {
   const { isLoading, isError, trades } = useFetchAndCacheTrades();
@@ -18,19 +16,18 @@ function JournalView() {
   if (!trades?.length) return <div>No trades available.</div>; 
 
   return (
-    <div id="journalMainBody">
+    <Stack id="journalMainBody">
       {/* <FilterControl />
       <PnLLineChart /> */}
       <TradesGallery />
       <Button
         onClick={onAddTrade}
-        style={buttonStyles} 
+        className="element-to-be-centered"
         disabled={isAddingTrade} 
-        
       >
         {isAddingTrade ? "Adding Trade..." : "Add a Trade"}
       </Button>
-    </div>
+    </Stack>
   );
 }
 

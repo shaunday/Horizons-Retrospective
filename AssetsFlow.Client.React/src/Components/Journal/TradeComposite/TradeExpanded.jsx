@@ -4,19 +4,15 @@ import TradeElement from "@journalComponents/TradeElement/TradeElement";
 import CompositeControls from "./Controls/CompositeControls";
 import { useGetTradeById } from "@hooks/Journal/useGetTradeById";
 import { useTradeStateAndManagement } from "@hooks/Journal/Composite/useTradeStateAndManagement";
+import TradeElementBadge from "../TradeElement//TradeElementBadge"; 
 
 const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column", // Stack children vertically
-    listStyleType: "none", // Removes default list bullets
-    alignItems: "flex-start", // Align children to the left
-  },
   listItem: {
-    padding: "5px",
-    borderRadius: "4px",
-    margin: "3px",
-    border: "1.5px solid purple"
+    padding: "10px",
+    borderRadius: "6px",
+    margin: "8px 0",
+    border: "1.5px solid purple",
+    position: "relative",
   },
 };
 
@@ -32,13 +28,14 @@ function TradeExpanded({ tradeId }) {
         processSummaryUpdate(updatedSummary);
       }
     }
-  }
+  };
 
   return (
-    <div style={styles.container}>
+    <div>
       <ul style={{ flexDirection: "column" }}>
         {trade[Constants.TRADE_ELEMENTS_STRING].map((ele) => (
           <li key={ele.id} style={styles.listItem}>
+            <TradeElementBadge tradeElement={ele} />
             <TradeElement
               tradeElement={ele}
               onElementContentUpdate={processEntryUpdate}
@@ -48,10 +45,9 @@ function TradeExpanded({ tradeId }) {
         ))}
       </ul>
       {tradeSummary && <TradeElement tradeElement={{ ...tradeSummary, isOverview: true }} />}
-      {trade[Constants.TRADE_STATUS_STRING] != Constants.TradeStatus.CLOSED && <CompositeControls
-        tradeComposite={trade}
-        onTradeActionExecuted={processTradeAction}
-      />}
+      {trade[Constants.TRADE_STATUS_STRING] !== Constants.TradeStatus.CLOSED && (
+        <CompositeControls tradeComposite={trade} onTradeActionExecuted={processTradeAction} />
+      )}
     </div>
   );
 }

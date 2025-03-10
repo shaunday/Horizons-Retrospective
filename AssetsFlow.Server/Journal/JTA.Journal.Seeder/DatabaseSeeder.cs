@@ -95,6 +95,7 @@ namespace HsR.Journal.Seeder
             newElement.Entries = EntriesFactory.GetAddPositionEntries(newElement);
 
             PopulateElementWithData(newElement);
+            newElement.Activate();
             trade.TradeElements.Add(newElement);
         }
 

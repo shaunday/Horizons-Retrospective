@@ -4,7 +4,7 @@ import * as Constants from "@constants/journalConstants";
 
 function ActionButtons ({ tradeStatus, handleActionClick }) {
     return (
-        <div style={{ marginTop: "5px", marginRight: "auto", marginLeft: "auto" }}>
+        <div style={{ marginTop: "10px", marginBottom: "5px"}} className="element-to-be-centered">
             <Button mr={5} onClick={() => handleActionClick(Constants.TradeActions.ADD)}>
                 Add to position
             </Button>
