@@ -9,7 +9,7 @@
                 new DataElement("SL", ComponentType.Risk),
                 new DataElement("Target", ComponentType.ExitLogic),
                 new DataElement("Risk", ComponentType.Risk),
-                new DataElement("Projected R:R", ComponentType.Risk)
+                new DataElement("R:R", ComponentType.Risk)
             };
         }
     }

@@ -1,9 +1,9 @@
-import { IconMenu4, IconHeartQuestion, IconBrain, IconSettingsQuestion, 
+import { IconMenu4, IconClockHeart, IconBrain, IconSettingsQuestion, 
   IconCoins, IconTarget, IconReportAnalytics, IconAdjustmentsStar, IconChecklist } from '@tabler/icons-react';
 
 const componentTypeIcons = {
   Header: IconMenu4,
-  Emotions: IconHeartQuestion,
+  Emotions: IconClockHeart,
   Thoughts: IconBrain,
   Technicals: IconSettingsQuestion,
   EntryLogic: IconChecklist,
