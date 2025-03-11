@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addTradeComposite } from "@services/journalApiAccess";
+import { addTradeComposite } from "@services/ApiRequests/journalApiAccess";
 import { tradeKeysFactory } from "@services/query-key-factory";
 
 export function useAddTrade() {

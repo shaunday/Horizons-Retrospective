@@ -4,7 +4,7 @@ import {
   addReduceInterimPosition,
   closeTrade,
   addEvaluation,
-} from "@services/tradeApiAccess";
+} from "@services/ApiRequests/tradeApiAccess";
 
 export const useTradeActionMutation = (tradeComposite, onElementAddition) => {
   return useMutation({

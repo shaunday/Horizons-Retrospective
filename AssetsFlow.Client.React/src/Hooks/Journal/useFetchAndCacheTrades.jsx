@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getAllTrades } from "@services/journalApiAccess";
+import { getAllTrades } from "@services/ApiRequests/journalApiAccess";
 import { tradeKeysFactory } from "@services/query-key-factory";
 
 export function useFetchAndCacheTrades() {

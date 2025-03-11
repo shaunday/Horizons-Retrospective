@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { updateEntry } from "@services/entryApiAccess";
+import { updateEntry } from "@services/ApiRequests/entryApiAccess";
 import {ProcessingStatus} from "@constants/constants";
 import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
 
