@@ -1,10 +1,11 @@
-fix styling clutter, closetrade, trade status
+fix styling clutter, closetrade, 
+populate on add/remove/contentupdate : tradestatus, element timestamp, trade openat/closeat
 
 style for trade status/ date
 style for empty/missing data (border?)
 filter by : status first, date first, show: idea, interim, closed
  
-change history
+add : change history
 
 
 filter... in client?
