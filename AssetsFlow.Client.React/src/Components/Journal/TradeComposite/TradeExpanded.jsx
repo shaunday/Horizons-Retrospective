@@ -10,7 +10,7 @@ const styles = {
   listItem: {
     padding: "10px",
     borderRadius: "6px",
-    margin: "8px 0",
+    margin: "8px 4px",
     border: "1.5px solid purple",
     position: "relative",
   },

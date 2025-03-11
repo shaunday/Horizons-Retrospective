@@ -1,18 +1,16 @@
 import React, { useMemo } from 'react';
-import { Paper, ThemeIcon } from '@mantine/core';
+import { Box, ThemeIcon } from '@mantine/core';
 import { getGroupedEntries } from './groupedEntries';
-import DataElement from '../DataElement/DataElement';
 import { getComponentTypeIcon } from './componentTypeIcons';
+import EntriesList from './EntriesList';
 
 const styles = {
-  listItem: {
-    padding: "3px",
-    minWidth: "100px",
-    maxWidth: "150px",
-  },
-  paper: {
+  box: {
     position: 'relative',
-    background: 'transparent'
+    border: '1px solid #ccc', 
+    borderRadius: '8px', // Match Mantine's md radius
+    padding: '7px 7px 7px 13px', // top, right, bottom, left
+    margin: '5px',
   },
   themeIcon: {
     position: 'absolute',
@@ -21,8 +19,8 @@ const styles = {
   },
 };
 
-function GroupedEntriesList({ entries, isOverview, processCellUpdate }) {
-  const groupedEntries = useMemo(() => getGroupedEntries(entries, isOverview), [entries, isOverview]);
+function GroupedEntriesList({ entries, processCellUpdate }) {
+  const groupedEntries = useMemo(() => getGroupedEntries(entries), [entries]);
 
   return (
     <>
@@ -31,33 +29,20 @@ function GroupedEntriesList({ entries, isOverview, processCellUpdate }) {
         const IconComponent = getComponentTypeIcon(groupKey);
 
         return (
-          <Paper
-            radius="md"
-            p={10}
-            mr={10}
+          <Box
             key={groupKey}
-            withBorder
-            style={styles.paper}
+            style={styles.box}  // Applying the extracted styles
           >
-            {!isOverview && <ThemeIcon
+            <ThemeIcon
               variant="light"
               size="md"
               radius="lg"
               style={styles.themeIcon}
             >
               <IconComponent size={20} />
-            </ThemeIcon>}
-            <ul>
-              {entries.map((entry) => (
-                <li key={entry.id} style={styles.listItem}>
-                  <DataElement
-                    cellInfo={entry}
-                    {...(!isOverview && { onCellUpdate: processCellUpdate })}
-                  />
-                </li>
-              ))}
-            </ul>
-          </Paper>
+            </ThemeIcon>
+            <EntriesList entries={entries} processCellUpdate={processCellUpdate} />
+          </Box>
         );
       })}
     </>

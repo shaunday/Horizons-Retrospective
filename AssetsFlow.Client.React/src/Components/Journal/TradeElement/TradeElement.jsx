@@ -1,8 +1,9 @@
 import React, { useMemo, useCallback } from "react";
-import { Group } from "@mantine/core"; 
+import { Group } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 import ElementControls from "./ElementControls";
 import GroupedEntriesList from "../DataElementGroups/GroupedEntriesList"; 
+import EntriesList from "../DataElementGroups/EntriesList"; // renamed
 
 function TradeElement({ tradeElement, onElementContentUpdate, onElementAction }) {
   const isOverview = tradeElement.isOverview !== undefined;
@@ -37,14 +38,21 @@ function TradeElement({ tradeElement, onElementContentUpdate, onElementAction })
   });
 
   return (
-    <Group wrap="wrap" spacing={10}>
-      <GroupedEntriesList
-        entries={tradeElement[Constants.TRADE_ENTRIES_STRING]}
-        isOverview={isOverview}
-        processCellUpdate={processCellUpdate}
-      />
+    <Group wrap="wrap" spacing={10} pl={10}>
+      {isOverview ? (
+        <EntriesList
+          entries={tradeElement[Constants.TRADE_ENTRIES_STRING]}
+          processCellUpdate={processCellUpdate}
+        />
+      ) : (
+        <GroupedEntriesList
+          entries={tradeElement[Constants.TRADE_ENTRIES_STRING]}
+          isOverview={isOverview}
+          processCellUpdate={processCellUpdate}
+        />
+      )}
 
-      {isAllowControls &&
+      {isAllowControls && 
         <ElementControls tradeElement={tradeElement} onActionSuccess={processElementActionSuccess} />
       }
     </Group>

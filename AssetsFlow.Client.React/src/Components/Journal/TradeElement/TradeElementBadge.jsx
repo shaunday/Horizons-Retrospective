@@ -6,7 +6,6 @@ const badgeStyle = {
     position: "absolute",
     top: "-10px",
     left: "20px",
-    zIndex: 10,
 };
 
 function TradeElementBadge({ tradeElement }) {
