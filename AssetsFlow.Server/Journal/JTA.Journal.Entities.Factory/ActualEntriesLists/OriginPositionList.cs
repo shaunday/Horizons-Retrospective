@@ -15,7 +15,7 @@
                 new DataElement("Position Plans", ComponentType.EntryLogic),
                 new DataElement("Contras", ComponentType.Technicals),
                 new DataElement("Time Frame", ComponentType.ExitLogic),
-                new DataElement("Confidence Lvl", ComponentType.Emotions),
+                new DataElement("Certainty", ComponentType.Emotions),
             };
 
             // Add Position Boundaries objects to the list
