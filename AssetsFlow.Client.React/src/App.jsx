@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useFetchAndCacheTrades } from "@hooks/Journal/useFetchAndCacheTrades";
 import JournalView from "@views/JournalView";
 import { withErrorBoundary } from "react-error-boundary";
+import Header from "@views/Header";
 
 // Fallback UI component for errors
 function Fallback({ error, resetErrorBoundary }) {
@@ -30,11 +31,11 @@ function App() {
 
   return (
     <div id="vwrapper">
-      <header>Header placeholder</header>
+      <Header/>
       <main>
         <JournalView/>
       </main>
-      <footer>Footer placeholder</footer>
+      <footer>© s/D, 2025</footer>
     </div>
   );
 }

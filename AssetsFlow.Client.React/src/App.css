@@ -1,5 +1,5 @@
 #vwrapper {
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
@@ -18,7 +18,7 @@ footer {
 main {
   display: flex;
   flex-direction: row;
-  height: calc(100vh - 80px)
+  height: calc(100vh - 100px)
 }
 
 #journalMainBody {
