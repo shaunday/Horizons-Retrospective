@@ -16,10 +16,15 @@ namespace HsR.Web.Services.Models.Journal
 
         [Required]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public TradeStatus Status { get; set; } 
+        public TradeStatus Status { get; set; }
 
+        [JsonIgnore]
         public DateTime? OpenedAt { get; set; }
-
+        [JsonIgnore]
         public DateTime? ClosedAt { get; set; }
+
+        public string? FormattedOpenedAt => OpenedAt?.ToString("yyyy-MM-dd HH:mm");
+
+        public string? FormattedClosedAt => ClosedAt?.ToString("yyyy-MM-dd HH:mm");
     }
 }

@@ -1,6 +1,6 @@
-fix styling clutter, closetrade
+fix styling clutter, closetrade, trade status
 
-style for trade status
+style for trade status/ date
 style for empty/missing data (border?)
 filter by : status first, date first, show: idea, interim, closed
  

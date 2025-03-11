@@ -16,10 +16,10 @@ namespace HsR.Web.Services.Models.Journal
         [Required]
         public List<DataElementModel> Entries { get; set; } = null!;
 
+        [JsonIgnore]
         public DateTime? TimeStamp { get; set; }
 
         public string? FormattedTimeStamp => TimeStamp?.ToString("yyyy-MM-dd HH:mm");
-
 
         [Required]
         public int CompositeFK { get; set; }
