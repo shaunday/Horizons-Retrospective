@@ -1,5 +1,7 @@
 fix styling clutter
 
+fix: addtrade, hover/edit on overview, closetrade
+
 style for trade status
 style for empty/missing data (border?)
 filter by : status first, date first, show: idea, interim, closed
