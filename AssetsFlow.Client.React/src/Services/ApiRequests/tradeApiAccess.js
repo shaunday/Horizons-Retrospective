@@ -5,9 +5,8 @@ export async function addEvaluation(tradeId) {
 }
 
 export async function addReduceInterimPosition(tradeId, isAdd) {
-  return request(`${tradesBaseURL}/${tradeId}`, {
+  return request(`${tradesBaseURL}/${tradeId}?isAdd=${encodeURIComponent(isAdd)}`, {
     method: "POST",
-    body: JSON.stringify(isAdd),
   });
 }
 

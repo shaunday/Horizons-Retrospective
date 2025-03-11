@@ -17,7 +17,7 @@ namespace HsR.Web.API.Controllers.Journal
         #region Interim positions
 
         [HttpPost]
-        public async Task<ActionResult<(TradeElementModel newEntry, TradeElementModel? summary)>> AddReduceInterimPosition(string tradeId, bool isAdd)
+        public async Task<ActionResult<(TradeElementModel newEntry, TradeElementModel? summary)>> AddReduceInterimPosition(string tradeId, [FromQuery] bool isAdd)
         {
             (InterimTradeElement newEntry, TradeSummary? summary) entryAndSummary= await _journalAccess.AddInterimPositionAsync(tradeId, isAdd);
 
