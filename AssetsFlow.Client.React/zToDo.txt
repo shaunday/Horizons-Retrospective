@@ -1,6 +1,6 @@
 fix styling clutter
 
-fix: addtrade, hover/edit on overview, closetrade
+fix: addtrade, closetrade
 
 style for trade status
 style for empty/missing data (border?)

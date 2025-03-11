@@ -42,7 +42,6 @@ function TradeElement({ tradeElement, onElementContentUpdate, onElementAction })
       {isOverview ? (
         <EntriesList
           entries={tradeElement[Constants.TRADE_ENTRIES_STRING]}
-          processCellUpdate={processCellUpdate}
         />
       ) : (
         <GroupedEntriesList
