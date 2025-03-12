@@ -22,9 +22,6 @@ namespace HsR.Journal.Entities
 
         #region Flags / Restrictions
 
-        [Required]
-        public bool IsMustHave { get; set; } = false;
-
         public bool SectorRelevance { get; set; } = false;
 
         public ValueRelevance? UnitPriceRelevance { get; set; }

@@ -19,7 +19,7 @@ namespace HsR.Journal.Entities
         //trade elements
         public static bool AllowActivation(this TradeElement element)
         {
-            return !element.Entries.Any(e => e.IsMustHave && string.IsNullOrEmpty(e.Content));
+            return !element.Entries.Any(e => string.IsNullOrEmpty(e.Content));
         }
 
 

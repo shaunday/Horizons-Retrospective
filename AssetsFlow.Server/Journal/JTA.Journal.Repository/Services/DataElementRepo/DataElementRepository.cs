@@ -26,7 +26,6 @@ namespace HsR.Journal.DataContext
             cell.SetFollowupContent(newContent, changeNote);
 
             UpdatedStatesCollation updatedStates = new();
-            bool activationReq = cell.IsMustHave;
 
             if (cell.IsCostRelevant())
             {
@@ -34,9 +33,10 @@ namespace HsR.Journal.DataContext
                 updatedStates.Summary = RefreshSummary(cell.CompositeRef);
             }
 
-            if (activationReq)
+            var interimIfActive = await HandleActivationAsync(cell);
+            if (interimIfActive != null)
             {
-                updatedStates.ElementTimeStamp = await HandleActivationAsync(cell);
+                updatedStates.ElementTimeStamp = interimIfActive.TimeStamp;
                 updatedStates.CompositeOpenedAt = cell.CompositeRef.OpenedAt;
             }
 
@@ -59,7 +59,7 @@ namespace HsR.Journal.DataContext
             }
         }
 
-        private async Task<DateTime?> HandleActivationAsync(DataElement cell)
+        private async Task<InterimTradeElement?> HandleActivationAsync(DataElement cell)
         {
             await _dataContext.Entry(cell).Reference(c => c.TradeElementRef).LoadAsync();
 
@@ -68,7 +68,7 @@ namespace HsR.Journal.DataContext
                 interim.Activate();
                 await LoadCompositeRefAsync(cell);
                 cell.CompositeRef?.Activate();
-                return interim.TimeStamp;
+                return interim;
             }
 
             Log.Logger.Warning($"Activation failed or incorrect cast for Entry ID {cell.Id}.");

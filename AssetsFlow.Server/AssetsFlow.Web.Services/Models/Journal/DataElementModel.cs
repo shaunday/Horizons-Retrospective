@@ -20,9 +20,6 @@ namespace HsR.Web.Services.Models.Journal
         public ContentRecord? ContentWrapper { get; set; }
         public ICollection<ContentRecord>? History { get; set; }
 
-        [Required]
-        public bool IsMustHave { get; set; }
-
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public ValueRelevance? TotalCostRelevance { get; set; }
         [JsonConverter(typeof(JsonStringEnumConverter))]
