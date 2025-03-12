@@ -1,5 +1,7 @@
-fix styling clutter, closetrade, 
 populate on add/remove/contentupdate : tradestatus, element timestamp, trade openat/closeat
+also verify null methods/responses stop chain
+
+fix styling clutter, closetrade, remove element
 
 style for trade status/ date
 style for empty/missing data (border?)
