@@ -14,7 +14,7 @@ function TradeWrapper({ tradeId }) {
   return (
     <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
       <ActionIcon variant="subtle" onClick={toggleExpand} style={{ height: "50px", marginRight: "3px" }}>
-        {isCollapsed ? <TbChevronDownRight /> : <TbChevronUpLeft />}
+        {isCollapsed ? <TbChevronDownRight  size={20}/> : <TbChevronUpLeft  size={20}/>}
       </ActionIcon>
       {isCollapsed ? (
         <TradeCollapsed tradeId={tradeId} />

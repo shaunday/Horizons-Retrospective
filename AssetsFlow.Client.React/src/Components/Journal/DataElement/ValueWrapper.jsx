@@ -39,7 +39,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
       {!isOverview && hovered && !textRestrictionsExist && (
         <>
           <ActionIcon variant="subtle" onClick={openModal}> 
-            <TbEdit />
+            <TbEdit size={20}/>
           </ActionIcon>
           <Text className="centered-text">{contentValue}</Text>
         </>
