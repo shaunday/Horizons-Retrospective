@@ -29,7 +29,7 @@ namespace HsR.Journal.Repository.Services.Base
                 _dataContext.Entry(trade.Summary).State = EntityState.Deleted;
             }
 
-            if (!newSummary.IsInterim)
+            if (!newSummary.IsInterim) //check if summary returned closure
             {
                 trade.Close();
             }

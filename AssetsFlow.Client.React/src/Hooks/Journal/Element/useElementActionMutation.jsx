@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { ElementActions } from "@constants/journalConstants";
 import { ProcessingStatus } from "@constants/constants";
-import { activateElementAPI, deleteElementAPI } from "@services/ApiRequests/elementApiAccess";
+import { timestampElementAPI, deleteElementAPI } from "@services/ApiRequests/elementApiAccess";
 import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
 
 export function useElementActionMutation(tradeElement, onActionSuccess) {
@@ -11,8 +11,8 @@ export function useElementActionMutation(tradeElement, onActionSuccess) {
     mutationFn: async ({ action }) => {
       let response;
       switch (action) {
-        case ElementActions.ACTIVATE:
-          response = await activateElementAPI(tradeElement.id);
+        case ElementActions.TIMESTAMP:
+          response = await timestampElementAPI(tradeElement.id); //todo pass new time
           break;
         case ElementActions.DELETE:
           response = await deleteElementAPI(tradeElement.id);

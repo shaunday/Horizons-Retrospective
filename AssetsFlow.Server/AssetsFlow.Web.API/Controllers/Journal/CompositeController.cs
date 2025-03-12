@@ -1,8 +1,10 @@
 ﻿using Asp.Versioning;
+using AssetsFlowWeb.Services.Models.Journal;
 using AutoMapper;
 using HsR.Journal.DataContext;
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.TradeJournal;
+using HsR.Journal.Services;
 using HsR.Web.Services.Models.Journal;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,14 +19,14 @@ namespace HsR.Web.API.Controllers.Journal
         #region Interim positions
 
         [HttpPost]
-        public async Task<ActionResult<(TradeElementModel newEntry, TradeElementModel? summary)>> AddReduceInterimPosition(string tradeId, [FromQuery] bool isAdd)
+        public async Task<ActionResult<(TradeElementModel newEntry, UpdatedStatesModel summary)>> AddReduceInterimPosition(string tradeId, [FromQuery] bool isAdd)
         {
-            (InterimTradeElement newEntry, TradeSummary? summary) entryAndSummary= await _journalAccess.AddInterimPositionAsync(tradeId, isAdd);
+            (InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates) entryAndStates= await _journalAccess.AddInterimPositionAsync(tradeId, isAdd);
 
-            (TradeElementModel, TradeElementModel) resAsModel =
-                            (_mapper.Map<TradeElementModel>(entryAndSummary.newEntry), _mapper.Map<TradeElementModel>(entryAndSummary.summary));
+            (TradeElementModel, UpdatedStatesModel) resAsModel =
+                         (_mapper.Map<TradeElementModel>(entryAndStates.newEntry), _mapper.Map<UpdatedStatesModel>(entryAndStates.updatedStates));
 
-            return ResultHandling(resAsModel, $"Could not add interim element on : {tradeId}", [NEW_ELEMENT_DATA, NEW_SUMMARY]);
+            return ResultHandling(resAsModel, $"Could not add interim element on : {tradeId}", [NEW_ELEMENT_DATA, NEW_STATES_WRAPPER]);
         }
 
         [HttpPost("evaluate")]
@@ -42,16 +44,16 @@ namespace HsR.Web.API.Controllers.Journal
         #region Closure
 
         [HttpPost("close")]
-        public async Task<ActionResult<TradeElementModel>> CloseTrade(string tradeId, [FromQuery] string closingPrice)
+        public async Task<ActionResult<UpdatedStatesModel>> CloseTrade(string tradeId, [FromQuery] string closingPrice)
         {
-            var summary = await _journalAccess.CloseTradeAsync(tradeId, closingPrice); 
-            if (summary == null)
+            var updatedStates = await _journalAccess.CloseTradeAsync(tradeId, closingPrice); 
+            if (updatedStates == null)
             {
                 return NotFound();
             }
 
-            TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
-            return ResultHandling(resAsModel, $"Could not close trade on : {tradeId}", [NEW_SUMMARY]);
+            UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
+            return ResultHandling(resAsModel, $"Could not close trade on : {tradeId}", [NEW_STATES_WRAPPER]);
         }
 
         #endregion

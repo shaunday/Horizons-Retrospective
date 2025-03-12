@@ -1,6 +1,7 @@
 ﻿using HsR.Common;
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.TradeJournal;
+using HsR.Journal.Services;
 
 namespace HsR.Journal.DataContext
 {
@@ -42,13 +43,13 @@ namespace HsR.Journal.DataContext
             return _tradeCompositesRepository.AddTradeCompositeAsync();
         }
 
-        public Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice)
+        public Task<UpdatedStatesCollation> CloseTradeAsync(string tradeId, string closingPrice)
         {
-            return _tradeCompositesRepository.CloseTradeAsync(tradeId, closingPrice);
+            return _tradeElementRepository.CloseTradeAsync(tradeId, closingPrice);
         }
 
 
-        public Task<(InterimTradeElement newEntry, TradeSummary? summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
+        public Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             return _tradeElementRepository.AddInterimPositionAsync(tradeId, isAdd);
         }
@@ -58,17 +59,12 @@ namespace HsR.Journal.DataContext
             return _tradeElementRepository.AddInterimEvalutationAsync(tradeId);
         }
 
-        public Task<TradeSummary?> RemoveInterimPositionAsync(string tradeInputId)
+        public Task<UpdatedStatesCollation> RemoveInterimPositionAsync(string tradeInputId)
         {
             return _tradeElementRepository.RemoveInterimPositionAsync(tradeInputId);
         }
 
-        public Task<InterimTradeElement> ActivateTradeElement(string tradeEleId)
-        {
-            return _tradeElementRepository.ActivateTradeElement(tradeEleId);
-        }
-
-        public Task<(DataElement updatedCell, TradeSummary? summary, DateTime? newTimeStamp)> 
+        public Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)> 
                                                 UpdateCellContentAsync(string componentId, string newContent, string changeNote)
         {
             return _dataElementRepository.UpdateCellContentAsync(componentId, newContent, changeNote);

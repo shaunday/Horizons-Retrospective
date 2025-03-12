@@ -1,4 +1,5 @@
-﻿using HsR.Journal.Entities;
+﻿using HsR.Common.Extenders;
+using HsR.Journal.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -23,8 +24,8 @@ namespace HsR.Web.Services.Models.Journal
         [JsonIgnore]
         public DateTime? ClosedAt { get; set; }
 
-        public string? FormattedOpenedAt => OpenedAt?.ToString("yyyy-MM-dd HH:mm");
+        public string? FormattedOpenedAt => OpenedAt?.ToTimeFormattedString();
 
-        public string? FormattedClosedAt => ClosedAt?.ToString("yyyy-MM-dd HH:mm");
+        public string? FormattedClosedAt => ClosedAt?.ToTimeFormattedString();
     }
 }

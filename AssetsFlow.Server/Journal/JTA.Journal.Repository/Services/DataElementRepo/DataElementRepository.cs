@@ -2,6 +2,7 @@ using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
 using HsR.Journal.Entities.TradeJournal;
 using HsR.Journal.Repository.Services.Base;
+using HsR.Journal.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -9,7 +10,7 @@ namespace HsR.Journal.DataContext
 {
     public class DataElementRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), IDataElementRepository
     {
-        public async Task<(DataElement updatedCell, TradeSummary? summary, DateTime? newTimeStamp)>
+        public async Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)>
                                                 UpdateCellContentAsync(string componentId, string newContent, string changeNote)
         {
             if (!int.TryParse(componentId, out var parsedId))
@@ -24,23 +25,23 @@ namespace HsR.Journal.DataContext
 
             cell.SetFollowupContent(newContent, changeNote);
 
-            TradeSummary? newSummary = null;
-            DateTime? newTimeStamp = null;
+            UpdatedStatesCollation updatedStates = new();
             bool activationReq = cell.IsMustHave;
 
             if (cell.IsCostRelevant())
             {
                 await LoadCompositeRefAsync(cell);
-                newSummary = RefreshSummary(cell.CompositeRef);
+                updatedStates.Summary = RefreshSummary(cell.CompositeRef);
             }
 
             if (activationReq)
             {
-                newTimeStamp = await HandleActivationAsync(cell);
+                updatedStates.ElementTimeStamp = await HandleActivationAsync(cell);
+                updatedStates.CompositeOpenedAt = cell.CompositeRef.OpenedAt;
             }
 
             await _dataContext.SaveChangesAsync();
-            return (cell, newSummary, newTimeStamp);
+            return (cell, updatedStates);
         }
 
         private async Task LoadCompositeRefAsync(DataElement cell)

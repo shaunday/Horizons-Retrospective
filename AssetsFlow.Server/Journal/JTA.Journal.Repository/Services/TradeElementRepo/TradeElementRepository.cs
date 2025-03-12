@@ -2,6 +2,7 @@ using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
 using HsR.Journal.Entities.TradeJournal;
 using HsR.Journal.Repository.Services.Base;
+using HsR.Journal.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.DataContext
@@ -9,7 +10,7 @@ namespace HsR.Journal.DataContext
     public class TradeElementRepository(TradingJournalDataContext dataContext) 
                                             : JournalRepositoryBase(dataContext), ITradeElementRepository
     {
-        public async Task<(InterimTradeElement newEntry, TradeSummary? summary)> AddInterimPositionAsync(string tradeId, bool isAdd)
+        public async Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
 
@@ -21,14 +22,17 @@ namespace HsR.Journal.DataContext
 
             trade.TradeElements.Add(tradeInput);
 
-            TradeSummary? newSummary = null;
+            UpdatedStatesCollation? newStates = null;
             if (trade.Status == TradeStatus.Open)
             {
-                newSummary = RefreshSummary(trade);
+                newStates = new()
+                {
+                    Summary = RefreshSummary(trade)
+                };
             }
 
             await _dataContext.SaveChangesAsync();
-            return (tradeInput, newSummary);
+            return (tradeInput, newStates);
         }
 
         public async Task<InterimTradeElement> AddInterimEvalutationAsync(string tradeId)
@@ -49,8 +53,7 @@ namespace HsR.Journal.DataContext
             return tradeOverview;
         }
 
-
-        public async Task<TradeSummary?> RemoveInterimPositionAsync(string tradeInputId)
+        public async Task<UpdatedStatesCollation> RemoveInterimPositionAsync(string tradeInputId)
         {
             if (!int.TryParse(tradeInputId, out var parsedId))
             {
@@ -71,36 +74,39 @@ namespace HsR.Journal.DataContext
 
             _dataContext.TradeElements.Remove(tradeInputToRemove);
 
-            TradeSummary? summary = null;
+            UpdatedStatesCollation? updatedStates = new();
             if (trade.IsTradeActive()) 
             {
-                summary = RefreshSummary(trade);
+                updatedStates.Summary = RefreshSummary(trade);
             }
             else
             {
                 trade.Status = TradeStatus.AnIdea;
+                updatedStates.TradeStatus = trade.Status;
             }
 
             await _dataContext.SaveChangesAsync();
-            return summary;
+            return updatedStates;
         }
 
-
-        public async Task<InterimTradeElement> ActivateTradeElement(string tradeEleId)
+        public async Task<UpdatedStatesCollation> CloseTradeAsync(string tradeId, string closingPrice)
         {
-            var tradeEle = await GetTradeElementAsync(tradeEleId, loadComposite: true);
-
-            bool okForActivate = tradeEle.AllowActivation();
-            if (okForActivate)
+            var trade = await GetTradeCompositeAsync(tradeId);
+            if (trade.Summary != null)
             {
-                tradeEle.Activate();
-                tradeEle.CompositeRef.Activate();
-                await _dataContext.SaveChangesAsync();
+                _dataContext.Entry(trade.Summary).State = EntityState.Deleted;
             }
+            else
+            {
+                throw new InvalidOperationException("Trade summary is missing.");
+            }
+            TradeCompositeOperations.CloseTrade(trade, closingPrice);
 
-            return tradeEle;
+            await _dataContext.SaveChangesAsync();
+
+            UpdatedStatesCollation? newStates = new() { Summary = trade.Summary };
+            return newStates;
         }
-
     }
 
 }

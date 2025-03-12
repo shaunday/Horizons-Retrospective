@@ -9,8 +9,7 @@ namespace HsR.Web.API.Controllers.Journal
     {
         private protected readonly string NEW_CELL_DATA = "updatedCellData";
         private protected readonly string NEW_ELEMENT_DATA = "updatedElement";
-        private protected readonly string NEW_SUMMARY = "updatedSummary";
-        private protected readonly string NEW_TIMESTAMP = "updatedTimeStamp";
+        private protected readonly string NEW_STATES_WRAPPER = "updatedStates";
 
         private protected readonly IJournalRepositoryWrapper _journalAccess;
         private protected readonly ILogger<JournalControllerBase> _logger;

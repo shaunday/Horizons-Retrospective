@@ -1,6 +1,8 @@
 ﻿using HsR.Common;
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.TradeJournal;
+using HsR.Journal.Services;
+using System.Data;
 
 namespace HsR.Journal.DataContext
 {
@@ -12,16 +14,15 @@ namespace HsR.Journal.DataContext
         Task<TradeComposite> AddTradeCompositeAsync();
 
         //interim elements
-        Task<(InterimTradeElement newEntry, TradeSummary? summary)> AddInterimPositionAsync(string tradeId, bool isAdd);
+        Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimPositionAsync(string tradeId, bool isAdd);
+        Task<UpdatedStatesCollation> RemoveInterimPositionAsync(string tradeInputId);
         Task<InterimTradeElement> AddInterimEvalutationAsync(string tradeId);
-        Task<TradeSummary?> RemoveInterimPositionAsync(string tradeInputId);
-        Task<InterimTradeElement> ActivateTradeElement(string tradeEleId);
 
         //components
-        Task<(DataElement updatedCell, TradeSummary? summary, DateTime? newTimeStamp)> UpdateCellContentAsync(string componentId, string newContent, string changeNote);
+        Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)> UpdateCellContentAsync(string componentId, string newContent, string changeNote);
 
         //closure
-        Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice);
+        Task<UpdatedStatesCollation> CloseTradeAsync(string tradeId, string closingPrice);
 
         //data
         Task<List<string>?> GetAllSavedSectors();

@@ -3,6 +3,7 @@ using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
 using HsR.Journal.Repository.Services.Base;
 using HsR.Journal.Repository.Services.TradeCompositeRepo;
+using HsR.Journal.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.DataContext
@@ -35,24 +36,6 @@ namespace HsR.Journal.DataContext
             await _dataContext.SaveChangesAsync();
             return trade;
         }
-
-        public async Task<TradeElement> CloseTradeAsync(string tradeId, string closingPrice)
-        {
-            var trade = await GetTradeCompositeAsync(tradeId);
-            if (trade.Summary != null)
-            {
-                _dataContext.Entry(trade.Summary).State = EntityState.Deleted;
-            }
-            else
-            {
-                throw new InvalidOperationException("Trade summary is missing.");
-            }
-            TradeCompositeOperations.CloseTrade(trade, closingPrice);
-
-            await _dataContext.SaveChangesAsync();
-            return trade.Summary!;
-        }
-
 
         //helper
 

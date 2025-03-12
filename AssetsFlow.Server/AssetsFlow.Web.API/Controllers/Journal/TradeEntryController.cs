@@ -5,6 +5,8 @@ using HsR.Journal.Entities;
 using HsR.Web.Services.Models.Journal;
 using HsR.Journal.DataContext;
 using HsR.Journal.Entities.TradeJournal;
+using AssetsFlowWeb.Services.Models.Journal;
+using HsR.Journal.Services;
 
 namespace HsR.Web.API.Controllers.Journal
 {
@@ -15,7 +17,7 @@ namespace HsR.Web.API.Controllers.Journal
             ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
     {
         [HttpPatch("{componentId}")]
-        public async Task<ActionResult<(DataElementModel newEntry, TradeElementModel? summary, DateTime? newTimeStamp)>>
+        public async Task<ActionResult<(DataElementModel newEntry, UpdatedStatesModel updatedStates)>>
                                                   UpdateDataComponent(string componentId, [FromBody] UpdateDataComponentRequest request)
         {
             if (string.IsNullOrEmpty(request.Content))
@@ -23,12 +25,12 @@ namespace HsR.Web.API.Controllers.Journal
                 return BadRequest("Content is required.");
             }
 
-            (DataElement updatedComponent, TradeSummary? summary, DateTime? newTimeStamp) = 
+            (DataElement updatedComponent, UpdatedStatesCollation updatedStates) = 
                                                 await _journalAccess.UpdateCellContentAsync(componentId, request.Content, request.Info);
 
-            (DataElementModel, TradeElementModel?) resAsModel = (_mapper.Map<DataElementModel>(updatedComponent), _mapper.Map<TradeElementModel>(summary));
+            (DataElementModel, UpdatedStatesModel) resAsModel = (_mapper.Map<DataElementModel>(updatedComponent), _mapper.Map<UpdatedStatesModel>(updatedStates));
 
-            return ResultHandling(resAsModel, $"Could not update component: {componentId}", [NEW_CELL_DATA, NEW_SUMMARY, NEW_TIMESTAMP]);
+            return ResultHandling(resAsModel, $"Could not update component: {componentId}", [NEW_CELL_DATA, NEW_STATES_WRAPPER]);
         }
 
         public class UpdateDataComponentRequest

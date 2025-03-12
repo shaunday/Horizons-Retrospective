@@ -1,5 +1,6 @@
 ﻿
 using Asp.Versioning;
+using AssetsFlowWeb.Services.Models.Journal;
 using AutoMapper;
 using HsR.Journal.DataContext;
 using HsR.Journal.Entities;
@@ -14,31 +15,18 @@ using System.Diagnostics;
 public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
         ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
 {
-    [HttpPatch("activate")]
-    public async Task<ActionResult<DateTime>> ActivateTradeElment(string elementId)
-    {
-        var tradeElement = await _journalAccess.ActivateTradeElement(elementId);
-
-        if (tradeElement == null)
-        {
-            return NotFound();
-        }
-
-        return ResultHandling((tradeElement.TimeStamp), $"Could not activate element with Id: {elementId}", [NEW_TIMESTAMP]);
-    }
-
     [HttpDelete]
-    public async Task<ActionResult<TradeElementModel>> DeleteInterimTradeInput(string elementId)
+    public async Task<ActionResult<UpdatedStatesModel>> DeleteInterimTradeInput(string elementId)
     {
-        var summary = await _journalAccess.RemoveInterimPositionAsync(elementId);
-        if (summary == null)
+        var updatedStates = await _journalAccess.RemoveInterimPositionAsync(elementId);
+        if (updatedStates == null)
         {
             return NotFound();
         }
 
-        TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(summary);
+        UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
 
-        return ResultHandling(resAsModel, $"Could not delete element with Id: {elementId}", [NEW_SUMMARY]);
+        return ResultHandling(updatedStates, $"Could not delete element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }
 }
     

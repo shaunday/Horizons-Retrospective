@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Journal", "Journal", "{E2F1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ledger", "Ledger", "{5CAFC034-4D7B-4A72-B13C-5FF762C6EEEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.TradeAnalytics", "Journal\HsR.Journal.TradeAnalytics\HsR.Journal.TradeAnalytics.csproj", "{F5F2DC89-CB63-4EC8-AF62-E81590A92E95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Services", "Journal\HsR.Journal.Services\HsR.Journal.Services.csproj", "{F5F2DC89-CB63-4EC8-AF62-E81590A92E95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{F160C4C3-5E21-4DDF-B119-BB651086EF4B}"
 EndProject

@@ -15,6 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common.Net\HsR.Common\HsR.Common.csproj" />
+    <ProjectReference Include="..\Journal\HsR.Journal.TradeAnalytics\HsR.Journal.Services.csproj" />
     <ProjectReference Include="..\Journal\JTA.Journal.Entities\HsR.Journal.Entities.csproj" />
   </ItemGroup>
 

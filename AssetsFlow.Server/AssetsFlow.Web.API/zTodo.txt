@@ -1,5 +1,9 @@
 ﻿
 // todo
+only summary active elements
+add re-stamp
+
+
 how to obfuscate amounts/costs for anon view? 
 save sectors to userdata
 position weight/ sector weight

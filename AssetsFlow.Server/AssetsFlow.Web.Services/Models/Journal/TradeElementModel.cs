@@ -1,4 +1,5 @@
-﻿using HsR.Journal.Entities;
+﻿using HsR.Common.Extenders;
+using HsR.Journal.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -19,7 +20,7 @@ namespace HsR.Web.Services.Models.Journal
         [JsonIgnore]
         public DateTime? TimeStamp { get; set; }
 
-        public string? FormattedTimeStamp => TimeStamp?.ToString("yyyy-MM-dd HH:mm");
+        public string? FormattedTimeStamp => TimeStamp?.ToTimeFormattedString();
 
         [Required]
         public int CompositeFK { get; set; }
