@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { ActionIcon } from "@mantine/core";
-import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
+import { TbChevronDownRight, TbChevronUpLeft } from 'react-icons/tb';
 import TradeExpanded from "./TradeExpanded";
 import TradeCollapsed from "./TradeCollapsed";
 
@@ -14,7 +14,7 @@ function TradeWrapper({ tradeId }) {
   return (
     <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
       <ActionIcon variant="subtle" onClick={toggleExpand} style={{ height: "50px", marginRight: "3px" }}>
-        {isCollapsed ? <IconChevronDown /> : <IconChevronUp />}
+        {isCollapsed ? <TbChevronDownRight /> : <TbChevronUpLeft />}
       </ActionIcon>
       {isCollapsed ? (
         <TradeCollapsed tradeId={tradeId} />

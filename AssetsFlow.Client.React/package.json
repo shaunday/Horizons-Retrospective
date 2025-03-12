@@ -14,12 +14,12 @@
     "@mantine/core": "^7.17.0",
     "@mantine/form": "^7.17.1",
     "@mantine/hooks": "^7.17.0",
-    "@tabler/icons-react": "^3.31.0",
     "@tanstack/react-query": "^5.45.1",
     "immer": "^10.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-error-boundary": "^5.0.0"
+    "react-error-boundary": "^5.0.0",
+    "react-icons": "^5.5.0"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.43.1",

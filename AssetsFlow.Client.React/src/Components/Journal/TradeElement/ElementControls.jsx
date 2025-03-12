@@ -1,6 +1,6 @@
 import React from "react";
 import { Menu, ActionIcon } from '@mantine/core';
-import { IconDots, IconTrash } from '@tabler/icons-react'; 
+import { TbDots, TbTrash } from 'react-icons/tb'; 
 import * as Constants from "@constants/journalConstants";
 import { ElementActions } from "@constants/journalConstants";
 import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
@@ -29,11 +29,11 @@ function ElementControls({ tradeElement, onActionSuccess }) {
         <Menu shadow="md" width={150} position="bottom-end">
           <Menu.Target>
             <ActionIcon variant="subtle">
-              <IconDots />
+              <TbDots />
             </ActionIcon>
           </Menu.Target>
           <Menu.Dropdown>
-            <Menu.Item leftSection={<IconTrash size={16} />}
+            <Menu.Item leftSection={<TbTrash size={16} />}
               onClick={() => handleAction(ElementActions.DELETE)}
             >
               Delete Element

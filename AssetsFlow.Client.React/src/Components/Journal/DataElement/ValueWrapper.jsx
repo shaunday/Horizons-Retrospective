@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, ActionIcon } from "@mantine/core";
 import { useHover, useDisclosure } from "@mantine/hooks";
-import { IconEdit } from "@tabler/icons-react";
+import { TbEdit } from "react-icons/tb";
 import DefaultSelect from "./DefaultSelect"; 
 import DataUpdateModal from "./DataUpdateModal";
 import { dataElementContentParser } from "@services/dataElementContentParser";
@@ -39,7 +39,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
       {!isOverview && hovered && !textRestrictionsExist && (
         <>
           <ActionIcon variant="subtle" onClick={openModal}> 
-            <IconEdit />
+            <TbEdit />
           </ActionIcon>
           <Text className="centered-text">{contentValue}</Text>
         </>
