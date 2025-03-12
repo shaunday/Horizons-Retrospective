@@ -5,12 +5,10 @@ also verify null methods/responses stop chain
 fix styling clutter
 
 style for trade status/ date
-style for empty/missing data (border?)
 filter by : status first, date first, show: idea, interim, closed
  
 add context for user, save saved sectors.
 add : change-history
-
 
 filtering -... in client? / adjust data call api
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
