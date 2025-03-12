@@ -19,7 +19,6 @@ namespace AssetsFlowWeb.Services.Models.Journal
         public string? FormattedElementTimeStamp => ElementTimeStamp?.ToTimeFormattedString();
 
         public TradeElementModel? Summary { get; set; } = null;
-
         
         //composite
         [JsonConverter(typeof(JsonStringEnumConverter))]
