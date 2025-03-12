@@ -2,7 +2,7 @@ import React from "react";
 import { Text, ActionIcon } from "@mantine/core";
 import { useHover, useDisclosure } from "@mantine/hooks";
 import { TbEdit } from "react-icons/tb";
-import DefaultSelect from "./DefaultSelect"; 
+import DefaultSelect from "./DefaultSelect";
 import DataUpdateModal from "./DataUpdateModal";
 import { dataElementContentParser } from "@services/dataElementContentParser";
 
@@ -22,8 +22,16 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
       style={{ height: "40px", display: "flex", alignItems: "center" }}
     >
       {isOverview || (!hovered && !dropdownOpened) ? (
-        <Text className="centered-text">{contentValue}</Text>
+        <Text
+          className="centered-text"
+          style={{
+            borderBottom: !contentValue && !isOverview ? "1px dashed red" : "none", 
+          }}
+        >
+          {contentValue}
+        </Text>
       ) : null}
+
 
       {!isOverview && (hovered || dropdownOpened) && textRestrictionsExist && (
         <DefaultSelect
@@ -31,15 +39,15 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
           onChange={onValueChangeInitiated}
           data={textRestrictions}
           opened={dropdownOpened ? "true" : "undefined"}
-          onDropdownOpen={openDropdown} 
-          onDropdownClose={closeDropdown} 
+          onDropdownOpen={openDropdown}
+          onDropdownClose={closeDropdown}
         />
       )}
 
       {!isOverview && hovered && !textRestrictionsExist && (
         <>
-          <ActionIcon variant="subtle" onClick={openModal}> 
-            <TbEdit size={20}/>
+          <ActionIcon variant="subtle" onClick={openModal}>
+            <TbEdit size={20} />
           </ActionIcon>
           <Text className="centered-text">{contentValue}</Text>
         </>
