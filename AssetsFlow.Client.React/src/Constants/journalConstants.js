@@ -23,7 +23,7 @@ export const ELEMENT_TYPE_STING = 'tradeActionType'
 export const ELEMENT_TIMESTAMP_STING = 'formattedTimeStamp'
 
 export const ElementActions = Object.freeze({
-  ACTIVATE: "Activate",
+  TIMESTAMP: "TimeStamp",
   DELETE: "Delete",
 });
 
@@ -38,12 +38,8 @@ export const ElementType = Object.freeze({
 //entry
 export const DATA_TITLE_STRING = 'title'
 export const DATA_RELEVANT_FOR_ORVERVIEW_STRING = 'isRelevantForOverview'
-export const DATA_RESTRICTION_STRING = 'restrictions'
 export const COMPONENT_TYPE ='componentType'
 
 //respones
 export const NEW_DATA_RESPONSE_TAG = 'updatedCellData'
-export const NEW_SUMMARY_RESPONSE_TAG = 'updatedSummary'
 export const NEW_ELEMENT_RESPONSE_TAG = 'updatedElement'
-export const NEW_TIMESTAMP_RESPONSE_TAG = 'updatedTimeStamp'
-

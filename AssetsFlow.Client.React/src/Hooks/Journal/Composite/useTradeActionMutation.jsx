@@ -5,6 +5,7 @@ import {
   closeTrade,
   addEvaluation,
 } from "@services/ApiRequests/tradeApiAccess";
+import { newStatesResponseParser } from "@services/newStatesResponseParser"
 
 export const useTradeActionMutation = (tradeComposite, onElementAddition) => {
   return useMutation({
@@ -31,9 +32,9 @@ export const useTradeActionMutation = (tradeComposite, onElementAddition) => {
     },
     onSuccess: (response) => {
       const newElement = response[Constants.NEW_ELEMENT_RESPONSE_TAG];
-      const updatedSummary = response[Constants.NEW_SUMMARY_RESPONSE_TAG];
+      const { newSummary } = newStatesResponseParser(response);
 
-      onElementAddition(newElement, updatedSummary);
+      onElementAddition(newElement, newSummary);
     },
   });
 };

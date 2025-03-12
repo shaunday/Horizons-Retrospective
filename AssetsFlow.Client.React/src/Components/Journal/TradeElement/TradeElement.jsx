@@ -3,7 +3,8 @@ import { Group } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 import ElementControls from "./ElementControls";
 import GroupedEntriesList from "../DataElementGroups/GroupedEntriesList"; 
-import EntriesList from "../DataElementGroups/EntriesList"; // renamed
+import EntriesList from "../DataElementGroups/EntriesList"; 
+import { newStatesResponseParser } from "@services/newStatesResponseParser"
 
 function TradeElement({ tradeElement, onElementContentUpdate, onElementAction }) {
   const isOverview = tradeElement.isOverview !== undefined;
@@ -16,9 +17,9 @@ function TradeElement({ tradeElement, onElementContentUpdate, onElementAction })
 
   const processTimeStampUpdate = useCallback(
     (response) => {
-      const updatedTimestamp = response[Constants.NEW_TIMESTAMP_RESPONSE_TAG];
-      if (updatedTimestamp) {
-        tradeElement[Constants.ELEMENT_TIMESTAMP_STING] = updatedTimestamp;
+      const { elementsNewTimeStamp } = newStatesResponseParser(response);
+      if (elementsNewTimeStamp) {
+        tradeElement[Constants.ELEMENT_TIMESTAMP_STING] = elementsNewTimeStamp;
       }
     },
     [onElementContentUpdate]

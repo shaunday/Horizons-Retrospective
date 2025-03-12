@@ -4,13 +4,12 @@ import { useHover, useDisclosure } from "@mantine/hooks";
 import { IconEdit } from "@tabler/icons-react";
 import DefaultSelect from "./DefaultSelect"; 
 import DataUpdateModal from "./DataUpdateModal";
-import * as Constants from "@constants/journalConstants";
-import { dataParser } from "./dataParser";
+import { dataElementContentParser } from "@services/dataElementContentParser";
 
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const isOverview = onValueChangeInitiated === undefined;
-  const { contentValue } = dataParser(cellInfo);
-  const textRestrictionsExist = cellInfo[Constants.DATA_RESTRICTION_STRING]?.length > 0;
+  const { contentValue, textRestrictions } = dataElementContentParser(cellInfo);
+  const textRestrictionsExist = textRestrictions?.length > 0;
 
   const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
   const [dropdownOpened, { open: openDropdown, close: closeDropdown }] = useDisclosure(false);
@@ -30,7 +29,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
         <DefaultSelect
           value={contentValue}
           onChange={onValueChangeInitiated}
-          data={cellInfo[Constants.DATA_RESTRICTION_STRING]}
+          data={textRestrictions}
           opened={dropdownOpened ? "true" : "undefined"}
           onDropdownOpen={openDropdown} 
           onDropdownClose={closeDropdown} 

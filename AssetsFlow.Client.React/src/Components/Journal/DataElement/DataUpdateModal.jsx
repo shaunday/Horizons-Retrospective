@@ -2,10 +2,10 @@ import React from 'react';
 import { Modal, TextInput, Button } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import * as Constants from "@constants/journalConstants";
-import { dataParser } from "./dataParser";
+import { dataElementContentParser } from "@services/dataElementContentParser";
 
 function DataUpdateModal({ opened, onClose, onSubmit, data }) {
-    const { contentValue } = dataParser(data);
+    const { contentValue } = dataElementContentParser(data);
     const form = useForm({
         initialValues: {
             value: contentValue || ''

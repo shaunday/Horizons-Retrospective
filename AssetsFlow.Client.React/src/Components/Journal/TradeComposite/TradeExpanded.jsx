@@ -5,6 +5,7 @@ import CompositeControls from "./Controls/CompositeControls";
 import { useGetTradeById } from "@hooks/Journal/useGetTradeById";
 import { useTradeStateAndManagement } from "@hooks/Journal/Composite/useTradeStateAndManagement";
 import TradeElementBadge from "../TradeElement//TradeElementBadge"; 
+import { newStatesResponseParser } from "@services/newStatesResponseParser"
 
 const styles = {
   listItem: {
@@ -23,9 +24,9 @@ function TradeExpanded({ tradeId }) {
 
   const processElementAction = (action, response) => {
     if (action === Constants.ElementActions.DELETE) {
-      const updatedSummary = response[Constants.NEW_SUMMARY_RESPONSE_TAG];
-      if (updatedSummary) {
-        processSummaryUpdate(updatedSummary);
+      const { newSummary } = newStatesResponseParser(response);
+      if (newSummary) {
+        processSummaryUpdate(newSummary);
       }
     }
   };
