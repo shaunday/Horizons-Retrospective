@@ -55,7 +55,7 @@ namespace HsR.Journal.Entities.Factory
             return overview;
         }
 
-        private static List<DataElement> CreateEntries(IEnumerable<DataElement> cellConfigs, TradeElement elementRef)
+        public static List<DataElement> CreateEntries(IEnumerable<DataElement> cellConfigs, TradeElement elementRef)
         {
             return cellConfigs.Select(config => CreateEntry(config, elementRef)).ToList();
         }

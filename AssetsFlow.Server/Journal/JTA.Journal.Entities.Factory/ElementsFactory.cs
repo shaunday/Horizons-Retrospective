@@ -22,7 +22,7 @@ namespace HsR.Journal.Entities.Factory
         {
             if (FactoryMethods.TryGetValue(actionType, out var factoryMethod))
             {
-                return (factoryMethod(trade)); // Adjust additionalData if needed
+                return (factoryMethod(trade)); 
             }
             throw new ArgumentException($"Unsupported TradeActionType: {actionType}");
         }

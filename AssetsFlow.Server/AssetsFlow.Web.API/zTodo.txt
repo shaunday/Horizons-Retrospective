@@ -2,7 +2,6 @@
 // todo
 only summary active elements
 add re-stamp
-evaluate entries - change ref
 
 how to obfuscate amounts/costs for anon view? 
 save sectors to userdata

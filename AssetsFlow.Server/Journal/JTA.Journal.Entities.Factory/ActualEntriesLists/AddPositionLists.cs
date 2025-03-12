@@ -39,7 +39,7 @@
 
         internal static List<DataElement> GetEvalutationObjects()
         {
-            var addToPositionObjects = new List<DataElement>
+            var evaluationObjects = new List<DataElement>
             {
                 new DataElement("General", ComponentType.Header),
                 new DataElement("D/W/M str?", ComponentType.Technicals),
@@ -48,7 +48,7 @@
                 new DataElement("NTA", ComponentType.ExitLogic),
             };
 
-            return addToPositionObjects;
+            return evaluationObjects;
         }
     }
 }

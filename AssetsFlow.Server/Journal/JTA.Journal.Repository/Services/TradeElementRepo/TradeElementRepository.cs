@@ -1,3 +1,4 @@
+using AutoMapper;
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
 using HsR.Journal.Entities.TradeJournal;
@@ -10,6 +11,14 @@ namespace HsR.Journal.DataContext
     public class TradeElementRepository(TradingJournalDataContext dataContext) 
                                             : JournalRepositoryBase(dataContext), ITradeElementRepository
     {
+        private static readonly IMapper mapper = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<DataElement, DataElement>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore()) // Ignore ID to prevent conflicts
+                .ForMember(dest => dest.TradeElementRef, opt => opt.Ignore()) // Avoid cloning old reference
+                .ForMember(dest => dest.CompositeRef, opt => opt.Ignore());
+        }).CreateMapper();
+
         public async Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
@@ -47,7 +56,16 @@ namespace HsR.Journal.DataContext
 
             if (trade.Summary != null)
             {
-                tradeOverview.Entries.AddRange(trade.Summary.Entries);
+                var clonedEntries = trade.Summary.Entries
+                    .Select(entry =>
+                    {
+                        var clonedEntry = mapper.Map<DataElement>(entry);
+                        clonedEntry.UpdateParentRefs(tradeOverview);
+                        return clonedEntry;
+                    })
+                    .ToList();
+
+                tradeOverview.Entries.AddRange(clonedEntries);
             }
 
             return tradeOverview;
