@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, NumberInput, Button } from '@mantine/core';
 import { useForm } from '@mantine/form';
 
-function TradeClosingModal({ opened, onClose, onSubmit}) {
+function TradeClosingModal({ opened, onClose, onSubmit }) {
     const form = useForm({
         initialValues: {
             closePrice: ''
@@ -22,11 +22,14 @@ function TradeClosingModal({ opened, onClose, onSubmit}) {
         <Modal opened={opened} onClose={onClose} title="Enter closing price" centered>
             <form onSubmit={form.onSubmit(handleSubmit)}>
                 <NumberInput
-                    label="Closing Price:"
+                    placeholder="Closing price..."
+                    thousandSeparator=","
+                    hideControls
                     {...form.getInputProps('closePrice')}
                     mb={5}
+                    style={{ maxWidth: 300, display: 'block', margin: '0 auto' }}
                 />
-                <Button type="submit" style={{ display: 'block', margin: '0 auto' }}>
+                <Button type="submit" mt={20} style={{ display: 'block', margin: '0 auto' }}>
                     Apply Changes
                 </Button>
             </form>

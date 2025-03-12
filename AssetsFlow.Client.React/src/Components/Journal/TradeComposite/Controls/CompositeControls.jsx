@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as Constants from "@constants/journalConstants";
 import { Group } from "@mantine/core";
-import {ProcessingStatus} from "@constants/constants";
+import { ProcessingStatus } from "@constants/constants";
 import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
 import ActionButtons from "./ActionButtons";
 import TradeClosingModal from "./TradeClosingModal";
@@ -9,14 +9,14 @@ import { useTradeActionMutation } from "@hooks/Journal/Composite/useTradeActionM
 import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
 
 function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
-  const { processingStatus, setNewStatus } = useProcessingWrapper(ProcessingStatus.NONE); 
+  const { processingStatus, setNewStatus } = useProcessingWrapper(ProcessingStatus.NONE);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const tradeActionMutation = useTradeActionMutation(
     tradeComposite,
     (newElement, newSummary) => {
       onTradeActionExecuted(newElement, newSummary);
-      setNewStatus(ProcessingStatus.SUCCESS); 
+      setNewStatus(ProcessingStatus.SUCCESS);
     }
   );
 
@@ -30,7 +30,7 @@ function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
   };
 
   const handleCloseTrade = (closingPrice) => {
-    setNewStatus(ProcessingStatus.PROCESSING); 
+    setNewStatus(ProcessingStatus.PROCESSING);
     tradeActionMutation.mutate(Constants.TradeActions.CLOSE, closingPrice);
     setIsModalOpen(false);
   };
@@ -43,11 +43,13 @@ function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
       />
       <ProcessingAndSuccessMessage status={processingStatus} />
 
-      <TradeClosingModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleCloseTrade}
-      />
+      <div style={{ overflow: 'visible', height: '100%' }}>
+        <TradeClosingModal
+          opened={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleCloseTrade}
+        />
+      </div>
     </Group>
   );
 }
