@@ -6,9 +6,12 @@ verify null methods/responses stop chain
 fix styling clutter
 style for trade status/ date
 
+add trade status/IsPending state? while an element is not active
 
 add context for user, saved sectors.
 sectors combobox +  autofill
+
+a drawer with explanations: trade status, component type groups, red border for none
 
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 https ?
