@@ -3,10 +3,6 @@
 only summary active elements
 add re-stamp
 
-how to obfuscate amounts/costs for anon view? 
-save sectors to userdata
-position weight/ sector weight
-
 //testing= API tests (seeder?)
 
 //pies
@@ -19,6 +15,7 @@ position weight/ sector weight
 Indicator alerts, upcoming reports 
 
 //ledger - populate brokers list with actual data
+position weight/ sector weight
 
 //pre production - 2nd stage
 filtering history

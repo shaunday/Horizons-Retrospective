@@ -18,5 +18,7 @@ namespace HsR.Journal.Services
         public TradeStatus? TradeStatus { get; set; }
         public DateTime? CompositeOpenedAt { get; set; }
         public DateTime? CompositeClosedAt { get; set; }
+
+        public ICollection<string>? SavedSectors { get; set; }
     }
 }

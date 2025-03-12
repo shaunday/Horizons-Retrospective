@@ -8,7 +8,7 @@ namespace HsR.Journal.Repository.Configurations
     {
         public void Configure(EntityTypeBuilder<UserData> builder)
         {
-            builder.HasNoKey();
+            builder.HasKey(u => u.Id);
 
             builder
                .Property(e => e.SavedSectors)

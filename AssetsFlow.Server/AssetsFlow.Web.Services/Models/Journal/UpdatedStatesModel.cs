@@ -31,5 +31,7 @@ namespace AssetsFlowWeb.Services.Models.Journal
         [JsonIgnore]
         public DateTime? CompositeClosedAt { get; set; }
         public string? FormattedClosedAt => CompositeClosedAt?.ToTimeFormattedString();
+
+        public ICollection<string>? SavedSectors { get; set; }
     }
 }

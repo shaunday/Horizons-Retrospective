@@ -25,7 +25,6 @@ namespace HsR.Web.Services.Models.Journal
         public DateTime? ClosedAt { get; set; }
 
         public string? FormattedOpenedAt => OpenedAt?.ToTimeFormattedString();
-
         public string? FormattedClosedAt => ClosedAt?.ToTimeFormattedString();
     }
 }

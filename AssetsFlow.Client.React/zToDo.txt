@@ -1,3 +1,4 @@
+add newEntry,newelement to statusesModel?
 populate on add/remove/contentupdate : tradestatus, element timestamp, trade openat/closeat
 also verify null methods/responses stop chain
 
@@ -7,15 +8,16 @@ style for trade status/ date
 style for empty/missing data (border?)
 filter by : status first, date first, show: idea, interim, closed
  
-add : change history
+add context for user, save saved sectors.
+add : change-history
 
 
-filter... in client?
+filtering -... in client? / adjust data call api
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 https ?
 
-filtering - adjust data call api
 sectors combobox ? autofill?
+obfuscate amounts/costs for anon view - a method + contextwrapper
 
 Testing:
  -[] RQ: https://tanstack.com/query/latest/docs/framework/react/guides/testing

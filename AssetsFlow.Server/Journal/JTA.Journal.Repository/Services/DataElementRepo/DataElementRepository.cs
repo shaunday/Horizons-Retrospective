@@ -40,6 +40,13 @@ namespace HsR.Journal.DataContext
                 updatedStates.CompositeOpenedAt = cell.CompositeRef.OpenedAt;
             }
 
+            if (cell.SectorRelevance)
+            {
+                var userData = await _dataContext.UserData.FirstOrDefaultAsync(u => u.Id == 1);
+                userData?.SavedSectors?.Add(newContent);
+                updatedStates.SavedSectors = userData?.SavedSectors;
+            }
+
             await _dataContext.SaveChangesAsync();
             return (cell, updatedStates);
         }

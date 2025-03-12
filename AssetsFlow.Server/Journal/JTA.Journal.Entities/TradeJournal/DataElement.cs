@@ -25,6 +25,8 @@ namespace HsR.Journal.Entities
         [Required]
         public bool IsMustHave { get; set; } = false;
 
+        public bool SectorRelevance { get; set; } = false;
+
         public ValueRelevance? UnitPriceRelevance { get; set; }
 
         public ValueRelevance? TotalCostRelevance { get; set; }
