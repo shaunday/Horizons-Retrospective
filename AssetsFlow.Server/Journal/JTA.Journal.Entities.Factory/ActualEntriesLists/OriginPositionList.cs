@@ -12,7 +12,6 @@
                 new DataElement("Thesis", ComponentType.Thoughts) { IsRelevantForOverview = true },
                 new DataElement("Confluences", ComponentType.EntryLogic),
                 new DataElement("Trigger", ComponentType.EntryLogic),
-                new DataElement("Position Plans", ComponentType.EntryLogic),
                 new DataElement("Contras", ComponentType.EntryLogic),
                 new DataElement("Time Frame", ComponentType.ExitLogic)  { IsRelevantForOverview = true },
                 new DataElement("Certainty", ComponentType.Emotions),

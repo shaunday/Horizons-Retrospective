@@ -2,7 +2,6 @@ import React from "react";
 import * as Constants from "@constants/journalConstants";
 import TradeElement from "@journalComponents/TradeElement/TradeElement";
 import CompositeControls from "./Controls/CompositeControls";
-import { useGetTradeById } from "@hooks/Journal/useGetTradeById";
 import { useTradeStateAndManagement } from "@hooks/Journal/Composite/useTradeStateAndManagement";
 import TradeElementBadge from "../TradeElement//TradeElementBadge"; 
 import { newStatesResponseParser } from "@services/newStatesResponseParser"
@@ -17,8 +16,7 @@ const styles = {
   },
 };
 
-function TradeExpanded({ tradeId }) {
-  const { trade } = useGetTradeById(tradeId);
+function TradeExpanded({ trade }) {
   const { tradeSummary, processEntryUpdate, processTradeAction, processSummaryUpdate } =
     useTradeStateAndManagement(trade);
 

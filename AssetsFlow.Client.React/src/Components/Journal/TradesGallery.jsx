@@ -14,17 +14,8 @@ const styles = {
     background: "rgb(241, 243, 237)",
   },
   list: {
-    display: "flex",
-    listStyleType: "none",
     flexDirection: "column",
-    padding: 0,
-    margin: "2px",
-  },
-  listItem: {
-    border: "1.5px solid blue",
-    padding: "5px",
-    borderRadius: "4px",
-    marginBottom: "5px",
+    margin: "3px",
   },
 };
 
@@ -38,9 +29,9 @@ function TradesGallery() {
   return (
     <div style={styles.container}>
       <ul style={styles.list}>
-        {cachedTradeIds.map((tradeId, index) => (
-          <li key={tradeId} style={styles.listItem}>
-            <TradeWrapper tradeId={tradeId} style={index !== 0 ? { marginTop: "10px" } : {}} />
+        {cachedTradeIds.map((tradeId) => (
+          <li key={tradeId}>
+            <TradeWrapper tradeId={tradeId} />
           </li>
         ))}
       </ul>

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import * as Constants from "@constants/journalConstants";
 import TradeElement from "@journalComponents/TradeElement/TradeElement";
-import { useGetTradeById } from "@hooks/Journal/useGetTradeById";
 
-function TradeCollapsed({ tradeId }) {
-  const { trade } = useGetTradeById(tradeId);
+function TradeCollapsed({ trade }) {
   const [simulatedEle, setSimulatedEle] = useState(null);
 
   useEffect(() => {
@@ -20,7 +18,7 @@ function TradeCollapsed({ tradeId }) {
       );
 
     const simulatedElement = {
-      id: `Simulated-${tradeId}`, // Assign a unique ID based on tradeId
+      id: `Simulated-${trade.id}`, // Assign a unique ID based on tradeId
       isOverview: true, // Mark this as a simulated element
       entries: simulatedEntries, // Add the simulated entries array
     };
