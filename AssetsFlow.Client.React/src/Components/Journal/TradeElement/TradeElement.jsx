@@ -39,7 +39,7 @@ function TradeElement({ tradeElement, onElementContentUpdate, onElementAction })
   });
 
   return (
-    <Group wrap="wrap" spacing={10} pl={10}>
+    <Group wrap="wrap" spacing={10}>
       {isOverview ? (
         <EntriesList
           entries={tradeElement[Constants.TRADE_ENTRIES_STRING]}

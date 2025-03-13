@@ -17,7 +17,7 @@ const styles = {
   },
   actionIcon: {
     height: "50px",
-    marginRight: "3px",
+    margin: "0 7px 0 1px",
   },
 };
 
