@@ -17,6 +17,9 @@ namespace HsR.Journal.TradeAnalytics
 
             foreach (var tradeInput in interims)
             {
+                if (!tradeInput.IsActive)
+                    continue;
+
                 double cost = 0.0;
                 double price = 0.0;
 

@@ -1,7 +1,7 @@
 ﻿
 // todo
-only summary active elements
 composite pending state while adding 
+add: dont activate on content update
 
 //testing= API tests (seeder?)
 

@@ -5,8 +5,7 @@ namespace HsR.Journal.Entities
 {
     public class InterimTradeElement : TradeElement
     {
-        [Required]
-        public bool IsActive { get; private set; } = false;
+        public bool IsActive => TimeStamp != null;
 
         public InterimTradeElement() : base() { }
 
