@@ -22,7 +22,7 @@ namespace HsR.Web.API.Controllers.Journal
         {
             pageSize = ValidatePageSize(pageSize);
 
-            var (tradeEntities, paginationMetadata) = await _journalAccess.GetAllTradeCompositesAsync(pageNumber, pageSize);
+            var (tradeEntities, paginationMetadata) = await _journalAccess.Journal.GetAllTradeCompositesAsync(pageNumber, pageSize);
 
             SetPaginationHeader(paginationMetadata);
 
@@ -37,7 +37,7 @@ namespace HsR.Web.API.Controllers.Journal
         {
             pageSize = ValidatePageSize(pageSize);
 
-            var (filteredTradesEntities, paginationMetadata) = await _journalAccess.GetFilteredTradesAsync(filter, pageNumber, pageSize);
+            var (filteredTradesEntities, paginationMetadata) = await _journalAccess.Journal.GetFilteredTradesAsync(filter, pageNumber, pageSize);
 
             SetPaginationHeader(paginationMetadata);
 
@@ -49,7 +49,7 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpPost]
         public async Task<ActionResult<TradeCompositeModel>> AddTrade()
         {
-            var positionComposite = await _journalAccess.AddTradeCompositeAsync();
+            var positionComposite = await _journalAccess.Journal.AddTradeCompositeAsync();
 
             TradeCompositeModel resAsModel = _mapper.Map<TradeCompositeModel>(positionComposite);
 

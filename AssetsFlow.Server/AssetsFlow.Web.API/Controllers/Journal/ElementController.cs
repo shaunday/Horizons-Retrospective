@@ -18,7 +18,7 @@ public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
     [HttpDelete]
     public async Task<ActionResult<UpdatedStatesModel>> DeleteInterimTradeInput(string elementId)
     {
-        var updatedStates = await _journalAccess.RemoveInterimPositionAsync(elementId);
+        var updatedStates = await _journalAccess.TradeElement.RemoveInterimPositionAsync(elementId);
         if (updatedStates == null)
         {
             return NotFound();

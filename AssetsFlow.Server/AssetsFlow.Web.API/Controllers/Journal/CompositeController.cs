@@ -19,9 +19,11 @@ namespace HsR.Web.API.Controllers.Journal
         #region Interim positions
 
         [HttpPost]
-        public async Task<ActionResult<(TradeElementModel newEntry, UpdatedStatesModel summary)>> AddReduceInterimPosition(string tradeId, [FromQuery] bool isAdd)
+        public async Task<ActionResult<(TradeElementModel newEntry, UpdatedStatesModel summary)>> 
+                                                        AddReduceInterimPosition(string tradeId, [FromQuery] bool isAdd)
         {
-            (InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates) entryAndStates= await _journalAccess.AddInterimPositionAsync(tradeId, isAdd);
+            (InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates) entryAndStates = 
+                                                                    await _journalAccess.TradeElement.AddInterimPositionAsync(tradeId, isAdd);
 
             (TradeElementModel, UpdatedStatesModel) resAsModel =
                          (_mapper.Map<TradeElementModel>(entryAndStates.newEntry), _mapper.Map<UpdatedStatesModel>(entryAndStates.updatedStates));
@@ -32,7 +34,7 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpPost("evaluate")]
         public async Task<ActionResult<TradeElementModel>> AddEvaluationPosition(string tradeId)
         {
-            InterimTradeElement newEval = await _journalAccess.AddInterimEvalutationAsync(tradeId);
+            InterimTradeElement newEval = await _journalAccess.TradeElement.AddInterimEvalutationAsync(tradeId);
 
             TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(newEval);
 
@@ -46,7 +48,7 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpPost("close")]
         public async Task<ActionResult<UpdatedStatesModel>> CloseTrade(string tradeId, [FromQuery] string closingPrice)
         {
-            var updatedStates = await _journalAccess.CloseTradeAsync(tradeId, closingPrice); 
+            var updatedStates = await _journalAccess.TradeComposite.CloseTradeAsync(tradeId, closingPrice); 
             if (updatedStates == null)
             {
                 return NotFound();

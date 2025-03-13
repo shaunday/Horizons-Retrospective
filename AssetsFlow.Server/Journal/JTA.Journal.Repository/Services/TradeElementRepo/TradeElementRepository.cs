@@ -106,25 +106,6 @@ namespace HsR.Journal.DataContext
             await _dataContext.SaveChangesAsync();
             return updatedStates;
         }
-
-        public async Task<UpdatedStatesCollation> CloseTradeAsync(string tradeId, string closingPrice)
-        {
-            var trade = await GetTradeCompositeAsync(tradeId);
-            if (trade.Summary != null)
-            {
-                _dataContext.Entry(trade.Summary).State = EntityState.Deleted;
-            }
-            else
-            {
-                throw new InvalidOperationException("Trade summary is missing.");
-            }
-            TradeCompositeOperations.CloseTrade(trade, closingPrice);
-
-            await _dataContext.SaveChangesAsync();
-
-            UpdatedStatesCollation? newStates = new() { Summary = trade.Summary };
-            return newStates;
-        }
     }
 
 }

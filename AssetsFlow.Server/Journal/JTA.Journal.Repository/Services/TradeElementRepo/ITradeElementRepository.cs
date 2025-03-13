@@ -10,7 +10,6 @@ namespace HsR.Journal.DataContext
         Task<InterimTradeElement> AddInterimEvalutationAsync(string tradeId);
 
         Task<UpdatedStatesCollation> RemoveInterimPositionAsync(string tradeInputId);
-        Task<UpdatedStatesCollation> CloseTradeAsync(string tradeId, string closingPrice);
     }
 
 }

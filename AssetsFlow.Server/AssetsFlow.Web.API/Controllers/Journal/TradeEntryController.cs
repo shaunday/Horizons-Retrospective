@@ -26,7 +26,7 @@ namespace HsR.Web.API.Controllers.Journal
             }
 
             (DataElement updatedComponent, UpdatedStatesCollation updatedStates) = 
-                                                await _journalAccess.UpdateCellContentAsync(componentId, request.Content, request.Info);
+                                                await _journalAccess.DataElement.UpdateCellContentAsync(componentId, request.Content, request.Info);
 
             (DataElementModel, UpdatedStatesModel) resAsModel = (_mapper.Map<DataElementModel>(updatedComponent), _mapper.Map<UpdatedStatesModel>(updatedStates));
 

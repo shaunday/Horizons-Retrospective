@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace HsR.Journal.Seeder
 {
-    public class DatabaseSeeder(TradingJournalDataContext dbContext, ITradeCompositesRepository tradeCompositesRepository,
+    public class DatabaseSeeder(TradingJournalDataContext dbContext, IJournalRepository tradeCompositesRepository,
             ITradeElementRepository tradeElementRepository,
             IDataElementRepository dataElementRepository)
     {
@@ -17,7 +17,7 @@ namespace HsR.Journal.Seeder
         private RandomNumberGeneratorEx _randomNumbersMachine = new();
         private RandomWordGenerator _randomWordsMachine = new();
 
-        private readonly ITradeCompositesRepository _tradeCompositesRepository = tradeCompositesRepository;
+        private readonly IJournalRepository _tradeCompositesRepository = tradeCompositesRepository;
         private readonly ITradeElementRepository _tradeElementRepository = tradeElementRepository;
         private readonly IDataElementRepository _dataElementRepository = dataElementRepository;
         #endregion

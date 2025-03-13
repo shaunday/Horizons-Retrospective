@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.DataContext
 {
-    public partial class TradeCompositesRepository(TradingJournalDataContext dataContext) 
-                                                : JournalRepositoryBase(dataContext), ITradeCompositesRepository
+    public partial class JournalRepository(TradingJournalDataContext dataContext) 
+                                                : JournalRepositoryBase(dataContext), IJournalRepository
     {
         public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
         {
