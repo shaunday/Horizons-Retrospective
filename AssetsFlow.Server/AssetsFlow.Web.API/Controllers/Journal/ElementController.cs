@@ -28,5 +28,19 @@ public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
 
         return ResultHandling(updatedStates, $"Could not delete element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }
+
+    [HttpPatch]
+    public async Task<ActionResult<UpdatedStatesModel>> ReTimestampTradeInput(string elementId, [FromQuery] string newTime)
+    {
+        var updatedStates = await _journalAccess.TradeElement.UpdateActivationTimeAsync(elementId, newTime);
+        if (updatedStates == null)
+        {
+            return NotFound();
+        }
+
+        UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
+
+        return ResultHandling(updatedStates, $"Could not reactivate element with Id: {elementId}", [NEW_STATES_WRAPPER]);
+    }
 }
     

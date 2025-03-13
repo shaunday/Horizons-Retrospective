@@ -73,12 +73,7 @@ namespace HsR.Journal.DataContext
 
         public async Task<UpdatedStatesCollation> RemoveInterimPositionAsync(string tradeInputId)
         {
-            if (!int.TryParse(tradeInputId, out var parsedId))
-            {
-                throw new ArgumentException($"The element Id '{tradeInputId}' is not a valid integer.", nameof(tradeInputId));
-            }
-
-            var tradeInputToRemove = await _dataContext.TradeElements.FindAsync(parsedId);
+            var tradeInputToRemove = await GetTradeElementAsync(tradeInputId);
             if (tradeInputToRemove == null)
             {
                 throw new ArgumentException($"The trade input (Id '{tradeInputId}') to remove is null.", nameof(tradeInputId));
@@ -102,6 +97,23 @@ namespace HsR.Journal.DataContext
                 trade.Status = TradeStatus.AnIdea;
                 updatedStates.TradeStatus = trade.Status;
             }
+
+            await _dataContext.SaveChangesAsync();
+            return updatedStates;
+        }
+
+        public async Task<UpdatedStatesCollation> UpdateActivationTimeAsync(string tradeInputId, string newTimestamp)
+        {
+            var tradeInput = await GetTradeElementAsync(tradeInputId);
+            if (tradeInput == null)
+            {
+                throw new ArgumentException($"The trade input (Id '{tradeInputId}') to update is null.", nameof(tradeInputId));
+            }
+            else 
+            {
+                tradeInput.Activate();
+            }
+            UpdatedStatesCollation? updatedStates = new() { ElementTimeStamp = tradeInput.TimeStamp };
 
             await _dataContext.SaveChangesAsync();
             return updatedStates;

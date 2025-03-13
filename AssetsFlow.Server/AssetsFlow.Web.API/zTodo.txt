@@ -2,7 +2,6 @@
 // todo
 only summary active elements
 composite pending state while adding 
-add re-stamp
 
 //testing= API tests (seeder?)
 
