@@ -15,7 +15,6 @@ namespace HsR.Journal.Entities
             return trade.TradeElements.Any(ele => ele.AllowActivation() && ele.TradeActionType == TradeActionType.Add);
         }
 
-
         //trade elements
         public static bool AllowActivation(this TradeElement element)
         {

@@ -18,11 +18,11 @@ namespace AssetsFlowWeb.Services.Models.Journal
         public DateTime? ElementTimeStamp { get; set; }
         public string? FormattedElementTimeStamp => ElementTimeStamp?.ToTimeFormattedString();
 
-        public TradeElementModel? Summary { get; set; } = null;
-        
         //composite
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public TradeStatus? TradeStatus { get; set; }
+
+        public TradeElementModel? Summary { get; set; } = null;
 
         [JsonIgnore]
         public DateTime? CompositeOpenedAt { get; set; }

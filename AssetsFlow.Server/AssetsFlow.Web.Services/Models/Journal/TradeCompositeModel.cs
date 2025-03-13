@@ -13,11 +13,11 @@ namespace HsR.Web.Services.Models.Journal
 
         public TradeElementModel? Summary { get; set; }
 
-        public ICollection<string> Sectors { get; set; } = null!;
-
         [Required]
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public TradeStatus Status { get; set; }
+
+        public bool IsPending { get; set; }
 
         [JsonIgnore]
         public DateTime? OpenedAt { get; set; }

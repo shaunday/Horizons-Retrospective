@@ -1,5 +1,7 @@
 add newEntry,newelement to statusesModel?
 
+set is pending after adding interim
+
 populate on add/remove/contentupdate : tradestatus, element timestamp, trade openat/closeat
 verify null methods/responses stop chain
 

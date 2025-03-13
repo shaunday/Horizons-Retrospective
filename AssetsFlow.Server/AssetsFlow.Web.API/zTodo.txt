@@ -1,7 +1,6 @@
 ﻿
 // todo
-composite pending state while adding 
-add: dont activate on content update
+composite - dont always autoinclude, send none-ele'd composite in updated states
 
 //testing= API tests (seeder?)
 

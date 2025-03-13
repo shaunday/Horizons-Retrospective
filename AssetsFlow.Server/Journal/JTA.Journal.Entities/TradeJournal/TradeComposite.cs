@@ -9,10 +9,11 @@ public class TradeComposite
 
     public ICollection<InterimTradeElement> TradeElements { get; set; } = new List<InterimTradeElement>();
 
-    public ICollection<string> Sectors { get; set; } = new List<string>();
-
     public TradeSummary? Summary { get; set; }
 
+    #region Status Logic
+
+    public bool IsPending => TradeElements.Any(ele => !ele.AllowActivation());
     public TradeStatus Status { get; set; } = TradeStatus.AnIdea;
 
     private void UpdateStatus(TradeStatus newStatus)
@@ -40,7 +41,8 @@ public class TradeComposite
     public void Close()
     {
         UpdateStatus(TradeStatus.Closed);
-    }
+    } 
+    #endregion
 
     public DateTime? OpenedAt { get; set; }
 
