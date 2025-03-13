@@ -30,15 +30,7 @@ namespace HsR.Journal.DataContext
             }
 
             trade.TradeElements.Add(tradeInput);
-
-            UpdatedStatesCollation? newStates = null;
-            if (trade.Status == TradeStatus.Open)
-            {
-                newStates = new()
-                {
-                    Summary = RefreshSummary(trade)
-                };
-            }
+            UpdatedStatesCollation? newStates = new() { TradeInfo = trade };
 
             await _dataContext.SaveChangesAsync();
             return (tradeInput, newStates);
@@ -90,13 +82,13 @@ namespace HsR.Journal.DataContext
             UpdatedStatesCollation? updatedStates = new();
             if (trade.IsTradeActive()) 
             {
-                updatedStates.Summary = RefreshSummary(trade);
+                RefreshSummary(trade);
             }
             else
             {
                 trade.Status = TradeStatus.AnIdea;
-                updatedStates.TradeStatus = trade.Status;
             }
+            updatedStates.TradeInfo = trade;
 
             await _dataContext.SaveChangesAsync();
             return updatedStates;

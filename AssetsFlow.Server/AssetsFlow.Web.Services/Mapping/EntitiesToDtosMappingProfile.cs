@@ -12,10 +12,13 @@ namespace HsR.Web.API.Mapping
         public EntitiesToDtosMappingProfile()
         {
             CreateMap<ContentRecord, ContentRecordModel>();
-            CreateMap<UpdatedStatesCollation, UpdatedStatesModel>();
+
             CreateMap<DataElement, DataElementModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
             CreateMap<TradeElement, TradeElementModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
             CreateMap<TradeComposite, TradeCompositeModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
+
+            CreateMap<UpdatedStatesCollation, UpdatedStatesModel>();
+            CreateMap<TradeComposite, TradeCompositeInfo>();
         }
     }
 }

@@ -1,20 +1,27 @@
 const NEW_STATES_RESPONSE_TAG = 'updatedStates'
 const ELEMENT_TIMESTAMP = 'formattedElementTimeStamp';
+const COMPOSITE_INFO_TAG = 'tradeInfo';
 const SUMMARY = 'summary';
-const TRADE_STATUS = 'TradeStatus'; 
+const TRADE_STATUS = 'tradeStatus'; 
+const TRADE_ISPENDING = 'isPending'; 
 const COMPOSITE_OPENED_AT = 'compositeOpenedAt'; 
 const COMPOSITE_CLOSED_AT = 'compositeClosedAt'
 const SAVED_SECTORS = 'savedSectors'
 
 export const newStatesResponseParser = (response) => {
+    const updatedStates = response?.[NEW_STATES_RESPONSE_TAG];
+    const tradeInfo = updatedStates?.[COMPOSITE_INFO_TAG];
+
     return {
-        elementsNewTimeStamp: response?.[NEW_STATES_RESPONSE_TAG]?.[ELEMENT_TIMESTAMP],
-        newSummary: response?.[NEW_STATES_RESPONSE_TAG]?.[SUMMARY],
-        newTradeStatus: response?.[NEW_STATES_RESPONSE_TAG]?.[TRADE_STATUS],
+        elementsNewTimeStamp: updatedStates?.[ELEMENT_TIMESTAMP],
+        newSummary: tradeInfo?.[SUMMARY],
 
-        tradeClosedAt: response?.[NEW_STATES_RESPONSE_TAG]?.[COMPOSITE_OPENED_AT],
-        tradeClosedAt: response?.[NEW_STATES_RESPONSE_TAG]?.[COMPOSITE_CLOSED_AT],
+        newTradeStatus: tradeInfo?.[TRADE_STATUS],
+        tradeIsPending: tradeInfo?.[TRADE_ISPENDING],
 
-        savedSectors: response?.[NEW_STATES_RESPONSE_TAG]?.[SAVED_SECTORS],
+        tradeOpenedAt: tradeInfo?.[COMPOSITE_OPENED_AT],
+        tradeClosedAt: tradeInfo?.[COMPOSITE_CLOSED_AT],
+        
+        savedSectors: updatedStates?.[SAVED_SECTORS],
     };
 };

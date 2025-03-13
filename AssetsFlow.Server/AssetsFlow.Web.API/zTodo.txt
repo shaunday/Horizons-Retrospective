@@ -1,6 +1,4 @@
 ﻿
-// todo
-composite - dont always autoinclude, send none-ele'd composite in updated states
 
 //testing= API tests (seeder?)
 

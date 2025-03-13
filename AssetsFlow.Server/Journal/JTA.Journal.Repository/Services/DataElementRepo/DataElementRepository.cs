@@ -30,14 +30,15 @@ namespace HsR.Journal.DataContext
             if (cell.IsCostRelevant())
             {
                 await LoadCompositeRefAsync(cell);
-                updatedStates.Summary = RefreshSummary(cell.CompositeRef);
+                RefreshSummary(cell.CompositeRef);
+                updatedStates.TradeInfo = cell.CompositeRef;
             }
 
             var interimIfActive = await HandleActivationAsync(cell);
             if (interimIfActive != null)
             {
                 updatedStates.ElementTimeStamp = interimIfActive.TimeStamp;
-                updatedStates.CompositeOpenedAt = cell.CompositeRef.OpenedAt;
+                updatedStates.TradeInfo = cell.CompositeRef;
             }
 
             if (cell.SectorRelevance)

@@ -28,7 +28,7 @@ namespace HsR.Journal.Repository.Services.CompositeRepo
 
             await _dataContext.SaveChangesAsync();
 
-            UpdatedStatesCollation? newStates = new() { Summary = trade.Summary };
+            UpdatedStatesCollation newStates = new() { TradeInfo = trade };
             return newStates;
         }
     }

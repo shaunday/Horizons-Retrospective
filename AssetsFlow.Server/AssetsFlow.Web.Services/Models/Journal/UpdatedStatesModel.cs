@@ -19,19 +19,9 @@ namespace AssetsFlowWeb.Services.Models.Journal
         public string? FormattedElementTimeStamp => ElementTimeStamp?.ToTimeFormattedString();
 
         //composite
-        [JsonConverter(typeof(JsonStringEnumConverter))]
-        public TradeStatus? TradeStatus { get; set; }
+        public TradeCompositeInfo? TradeInfo { get; set; }
 
-        public TradeElementModel? Summary { get; set; } = null;
-
-        [JsonIgnore]
-        public DateTime? CompositeOpenedAt { get; set; }
-        public string? FormattedOpenedAt => CompositeOpenedAt?.ToTimeFormattedString();
-
-        [JsonIgnore]
-        public DateTime? CompositeClosedAt { get; set; }
-        public string? FormattedClosedAt => CompositeClosedAt?.ToTimeFormattedString();
-
+        //userInfo
         public ICollection<string>? SavedSectors { get; set; }
     }
 }

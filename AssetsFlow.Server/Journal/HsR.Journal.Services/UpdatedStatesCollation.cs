@@ -13,11 +13,7 @@ namespace HsR.Journal.Services
     {
         public DateTime? ElementTimeStamp { get; set; }
 
-        public TradeSummary? Summary { get; set; } = null;
-
-        public TradeStatus? TradeStatus { get; set; }
-        public DateTime? CompositeOpenedAt { get; set; }
-        public DateTime? CompositeClosedAt { get; set; }
+        public TradeComposite? TradeInfo { get; set; }
 
         public ICollection<string>? SavedSectors { get; set; }
     }
