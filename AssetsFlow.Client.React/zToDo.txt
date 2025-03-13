@@ -1,15 +1,14 @@
 add newEntry,newelement to statusesModel?
 
 set is pending after adding interim
+add trade IsPending state? while an element is not active - disable c controls while pending
 
 populate on add/remove/contentupdate : tradestatus, element timestamp, trade openat/closeat
 verify null methods/responses stop chain
 
 fix styling clutter
 style for trade status
-add opened/closed at somehow (to overview?)
-
-add trade IsPending state? while an element is not active - disable c controls while pending
+add opened/closedat somehow (to overview?)
 
 add context for user, saved sectors.
 sectors combobox +  autofill
