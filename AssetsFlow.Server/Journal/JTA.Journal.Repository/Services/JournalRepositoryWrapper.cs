@@ -25,9 +25,10 @@ namespace HsR.Journal.DataContext
             _tradeElementRepository = tradeElementRepository;
             _dataElementRepository = dataElementRepository;
             _userDataRepository = userDataRepository;
-        } 
+        }
         #endregion
 
+        #region Composite
         public Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
         {
             return _tradeCompositesRepository.GetAllTradeCompositesAsync(pageNumber, pageSize);
@@ -42,13 +43,9 @@ namespace HsR.Journal.DataContext
         {
             return _tradeCompositesRepository.AddTradeCompositeAsync();
         }
+        #endregion
 
-        public Task<UpdatedStatesCollation> CloseTradeAsync(string tradeId, string closingPrice)
-        {
-            return _tradeElementRepository.CloseTradeAsync(tradeId, closingPrice);
-        }
-
-
+        #region Element
         public Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimPositionAsync(string tradeId, bool isAdd)
         {
             return _tradeElementRepository.AddInterimPositionAsync(tradeId, isAdd);
@@ -59,10 +56,16 @@ namespace HsR.Journal.DataContext
             return _tradeElementRepository.AddInterimEvalutationAsync(tradeId);
         }
 
+        public Task<UpdatedStatesCollation> CloseTradeAsync(string tradeId, string closingPrice)
+        {
+            return _tradeElementRepository.CloseTradeAsync(tradeId, closingPrice);
+        }
+
         public Task<UpdatedStatesCollation> RemoveInterimPositionAsync(string tradeInputId)
         {
             return _tradeElementRepository.RemoveInterimPositionAsync(tradeInputId);
-        }
+        } 
+        #endregion
 
         public Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)> 
                                                 UpdateCellContentAsync(string componentId, string newContent, string changeNote)

@@ -38,7 +38,6 @@ namespace HsR.Journal.Repository.Services.Base
             return newSummary;
         }
 
-
         private protected async Task<TradeComposite> GetTradeCompositeAsync(string tradeId)
         {
             if (!int.TryParse(tradeId, out var parsedId))
