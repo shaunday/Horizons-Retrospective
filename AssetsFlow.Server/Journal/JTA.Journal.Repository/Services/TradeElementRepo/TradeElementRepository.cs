@@ -77,7 +77,7 @@ namespace HsR.Journal.DataContext
                 throw new InvalidOperationException($"TradeComposite with Id '{tradeInputToRemove.CompositeFK}' not found.");
             }
 
-            _dataContext.TradeElements.Remove(tradeInputToRemove);
+            trade.TradeElements.Remove(tradeInputToRemove);
 
             UpdatedStatesCollation? updatedStates = new();
             if (trade.IsTradeActive()) 
@@ -86,6 +86,11 @@ namespace HsR.Journal.DataContext
             }
             else
             {
+                if (trade.Summary != null)
+                {
+                    _dataContext.Entry(trade.Summary).State = EntityState.Deleted;
+                    trade.Summary = null;
+                }
                 trade.Status = TradeStatus.AnIdea;
             }
             updatedStates.TradeInfo = trade;
@@ -105,7 +110,7 @@ namespace HsR.Journal.DataContext
             {
                 tradeInput.Activate();
             }
-            UpdatedStatesCollation? updatedStates = new() { ElementTimeStamp = tradeInput.TimeStamp };
+            UpdatedStatesCollation? updatedStates = new() { ActivationTimeStamp = tradeInput.TimeStamp };
 
             await _dataContext.SaveChangesAsync();
             return updatedStates;

@@ -1,12 +1,8 @@
 const NEW_STATES_RESPONSE_TAG = 'updatedStates'
 const ELEMENT_TIMESTAMP = 'formattedElementTimeStamp';
 const COMPOSITE_INFO_TAG = 'tradeInfo';
-const SUMMARY = 'summary';
-const TRADE_STATUS = 'tradeStatus'; 
-const TRADE_ISPENDING = 'isPending'; 
-const COMPOSITE_OPENED_AT = 'compositeOpenedAt'; 
-const COMPOSITE_CLOSED_AT = 'compositeClosedAt'
 const SAVED_SECTORS = 'savedSectors'
+import * as Constants from "@constants/journalConstants";
 
 export const newStatesResponseParser = (response) => {
     const updatedStates = response?.[NEW_STATES_RESPONSE_TAG];
@@ -14,13 +10,13 @@ export const newStatesResponseParser = (response) => {
 
     return {
         elementsNewTimeStamp: updatedStates?.[ELEMENT_TIMESTAMP],
-        newSummary: tradeInfo?.[SUMMARY],
+        
+        newSummary: tradeInfo?.[Constants.SUMMARY],
+        newTradeStatus: tradeInfo?.[Constants.TRADE_STATUS],
+        tradeIsPending: tradeInfo?.[Constants.TRADE_ISPENDING],
 
-        newTradeStatus: tradeInfo?.[TRADE_STATUS],
-        tradeIsPending: tradeInfo?.[TRADE_ISPENDING],
-
-        tradeOpenedAt: tradeInfo?.[COMPOSITE_OPENED_AT],
-        tradeClosedAt: tradeInfo?.[COMPOSITE_CLOSED_AT],
+        tradeOpenedAt: tradeInfo?.[Constants.COMPOSITE_OPENED_AT],
+        tradeClosedAt: tradeInfo?.[Constants.COMPOSITE_CLOSED_AT],
         
         savedSectors: updatedStates?.[SAVED_SECTORS],
     };

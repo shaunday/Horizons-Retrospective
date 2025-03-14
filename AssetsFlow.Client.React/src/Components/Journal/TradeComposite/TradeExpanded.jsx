@@ -3,7 +3,7 @@ import * as Constants from "@constants/journalConstants";
 import TradeElement from "@journalComponents/TradeElement/TradeElement";
 import CompositeControls from "./Controls/CompositeControls";
 import { useTradeStateAndManagement } from "@hooks/Journal/Composite/useTradeStateAndManagement";
-import TradeElementBadge from "../TradeElement//TradeElementBadge"; 
+import TradeElementBadge from "../TradeElement//TradeElementBadge";
 import { newStatesResponseParser } from "@services/newStatesResponseParser"
 
 const styles = {
@@ -44,8 +44,13 @@ function TradeExpanded({ trade }) {
         ))}
       </ul>
       {tradeSummary && <TradeElement tradeElement={{ ...tradeSummary, isOverview: true }} />}
-      {trade[Constants.TRADE_STATUS_STRING] !== Constants.TradeStatus.CLOSED && (
-        <CompositeControls tradeComposite={trade} onTradeActionExecuted={processTradeAction} />
+      {trade[Constants.TRADE_STATUS] !== Constants.TradeStatus.CLOSED && (
+        <CompositeControls
+          tradeComposite={trade}
+          onTradeActionExecuted={processTradeAction}
+          disabled={trade?.[Constants.TRADE_ISPENDING]}
+        />
+
       )}
     </div>
   );

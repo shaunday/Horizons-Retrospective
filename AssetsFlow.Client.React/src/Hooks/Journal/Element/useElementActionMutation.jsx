@@ -20,7 +20,7 @@ export function useElementActionMutation(tradeElement, onActionSuccess) {
         default:
           throw new Error(`Unsupported action: ${action}`);
       }
-      return { action, response }; 
+      return { action, response };
     },
     onMutate: () => {
       setNewStatus(ProcessingStatus.PROCESSING); // Set to PROCESSING when mutation starts
@@ -29,7 +29,7 @@ export function useElementActionMutation(tradeElement, onActionSuccess) {
       setNewStatus(ProcessingStatus.NONE); // Reset to NONE on error
       console.error("Error performing action:", error);
     },
-    onSuccess: (action, response) => {
+    onSuccess: ({ response }, { action }) => {
       if (onActionSuccess) {
         onActionSuccess(action, response);
       }

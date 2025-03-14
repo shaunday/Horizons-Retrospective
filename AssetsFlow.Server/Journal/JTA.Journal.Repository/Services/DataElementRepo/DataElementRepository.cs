@@ -37,7 +37,7 @@ namespace HsR.Journal.DataContext
             var interimIfActive = await HandleActivationAsync(cell);
             if (interimIfActive != null)
             {
-                updatedStates.ElementTimeStamp = interimIfActive.TimeStamp;
+                updatedStates.ActivationTimeStamp = interimIfActive.TimeStamp;
                 updatedStates.TradeInfo = cell.CompositeRef;
             }
 

@@ -11,7 +11,7 @@ function ElementControls({ tradeElement, onActionSuccess }) {
   const tradeId = tradeElement[Constants.ELEMENT_COMPOSITEFK_STING];
   const { removeElement } = useRemoveElementFromTrade(tradeId);
 
-  const processTradeAction = ({ action, response }) => {
+  const processTradeAction = (action, response) => {
     if (action === ElementActions.DELETE) {
       removeElement(tradeElement.id);
     }

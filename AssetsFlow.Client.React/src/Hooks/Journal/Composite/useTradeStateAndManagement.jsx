@@ -6,7 +6,7 @@ import { newStatesResponseParser } from "@services/newStatesResponseParser"
 
 export function useTradeStateAndManagement(cachedTradeComposite) {
   const [tradeSummary, setTradeSummary] = useState(
-    cachedTradeComposite[Constants.TRADE_SUMMARY_STRING] ?? null
+    cachedTradeComposite?.[Constants.TRADE_SUMMARY_STRING] ?? null
   );
 
   const { cacheUpdatedEntry } = useCacheUpdatedEntry(cachedTradeComposite);

@@ -5,9 +5,9 @@ import { tradeKeysFactory } from "@services/query-key-factory";
 
 export function useElementCacheNewTimestamp(tradeElement) {
   const queryClient = useQueryClient();
+  const tradeId = tradeElement[Constants.ELEMENT_COMPOSITEFK_STING];
 
   const setNewTimeStamp = (newStamp) => {
-    const tradeId = tradeElement[Constants.ELEMENT_COMPOSITEFK_STING];
 
     queryClient.setQueryData(
       tradeKeysFactory.tradeAndIdArrayKey(tradeId),
@@ -16,7 +16,7 @@ export function useElementCacheNewTimestamp(tradeElement) {
           const tradeElements = draft[Constants.TRADE_ELEMENTS_STRING];
           for (const element of tradeElements) {
             if (element.id === tradeElement.id) {
-              element.TimeStamp = newStamp;
+              element[Constants.ELEMENT_TIMESTAMP_STING] = newStamp;
             }
           }
         })

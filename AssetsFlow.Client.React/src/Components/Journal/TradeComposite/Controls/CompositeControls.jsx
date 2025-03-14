@@ -25,20 +25,20 @@ function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
       setIsModalOpen(true);
     } else {
       setNewStatus(ProcessingStatus.PROCESSING);
-      tradeActionMutation.mutate(action, null);
+      tradeActionMutation.mutate({ action, additionalParam: null });
     }
   };
 
   const handleCloseTrade = (closingPrice) => {
     setNewStatus(ProcessingStatus.PROCESSING);
-    tradeActionMutation.mutate(Constants.TradeActions.CLOSE, closingPrice);
+    tradeActionMutation.mutate({ action: Constants.TradeActions.CLOSE, additionalParam: closingPrice });
     setIsModalOpen(false);
   };
 
   return (
     <Group>
       <ActionButtons
-        tradeStatus={tradeComposite[Constants.TRADE_STATUS_STRING]}
+        tradeStatus={tradeComposite?.[Constants.TRADE_STATUS]}
         handleActionClick={handleAction}
       />
       <ProcessingAndSuccessMessage status={processingStatus} />

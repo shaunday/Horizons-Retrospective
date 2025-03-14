@@ -11,7 +11,7 @@ namespace HsR.Journal.Services
 {
     public class UpdatedStatesCollation
     {
-        public DateTime? ElementTimeStamp { get; set; }
+        public DateTime? ActivationTimeStamp { get; set; }
 
         public TradeComposite? TradeInfo { get; set; }
 

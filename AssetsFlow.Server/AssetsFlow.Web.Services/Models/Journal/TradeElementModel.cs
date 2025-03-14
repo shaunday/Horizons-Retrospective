@@ -19,7 +19,6 @@ namespace HsR.Web.Services.Models.Journal
 
         [JsonIgnore]
         public DateTime? TimeStamp { get; set; }
-
         public string? FormattedTimeStamp => TimeStamp?.ToTimeFormattedString();
 
         [Required]

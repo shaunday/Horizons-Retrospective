@@ -1,16 +1,15 @@
-add newEntry,newelement to statusesModel?
-
-set is pending after adding interim
 add trade IsPending state? while an element is not active - disable c controls while pending
+trade status should force change on trade controls.. it doesnt
 
-populate on add/remove/contentupdate : tradestatus, element timestamp, trade openat/closeat
+updatecache on remove/contentupdate : use ... useHandleStatusUpdates + handle 
+verify timestamp is being updated on content update
 verify null methods/responses stop chain
 
 fix styling clutter
 style for trade status
 add opened/closedat somehow (to overview?)
 
-add context for user, saved sectors.
+add context/rq for user, saved sectors, parse via useHandleStatusUpdates ?
 sectors combobox +  autofill
 
 a drawer with explanations: trade status, component type groups, red border for none
