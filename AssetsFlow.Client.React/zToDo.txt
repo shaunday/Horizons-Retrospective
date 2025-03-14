@@ -1,10 +1,14 @@
-figure out trade status/pending interaction and which controls to show when
-while an element is not active - disable c controls while pending?
+origin > Idea. Add a trade and fill it > Open. 
+While a temp/pending trade is up = IsPending controls are disabled
+AI: 
+1. while an element is not active - disable c controls while pending?
+2. updatecache on remove/contentupdate : use ... useHandleStatusUpdates + handle 
+3. verify timestamp is being updated on content update
+4. verify null methods/responses stop chain
+5. Once an element is active, no more restamps, can restamp via popup (pick data/now)
 
-updatecache on remove/contentupdate : use ... useHandleStatusUpdates + handle 
-verify timestamp is being updated on content update
-verify null methods/responses stop chain
-add opened/closedat somehow (to overview?)
+add opened/closedat somehow (to overview?) 
+also opened = first activate date, close = closed date, remove props from trade make em getters
 
 fix styling clutter
 style for trade status
@@ -12,7 +16,7 @@ style for trade status
 add context/rq for user, saved sectors, parse via useHandleStatusUpdates ?
 sectors combobox +  autofill
 
-a drawer with explanations: trade status, component type groups, red border for none
+a drawer with explanations: trade status, component type groups, red line for missing, trade state/pending
 
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 https ?
