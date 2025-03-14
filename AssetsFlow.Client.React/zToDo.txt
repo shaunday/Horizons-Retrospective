@@ -1,10 +1,8 @@
-origin > Idea. Add a trade and fill it > Open. 
-While a temp/pending trade is up = IsPending controls are disabled
-AI: 
-1. while an element is not active - disable c controls while pending?
-3. verify timestamp is being updated on content update
-4. verify null methods/responses stop chain
-5. Once an element is active, can restamp via popup (pick data/now)
+fix logic when filling up a trade (timestamp, trade status)
+
+
+disable c controls while pending?
+Once an element is active, can restamp via popup (pick data/now) 
 
 add opened/closedat somehow (to overview?) 
 also opened = first activate date, close = closed date, remove props from trade make em getters
@@ -15,17 +13,18 @@ style for trade status
 add context/rq for user, saved sectors, parse via useHandleStatusUpdates ?
 sectors combobox +  autofill
 
-a drawer with explanations: trade status, component type groups, red line for missing, trade state/pending
+a drawer with explanations: 
+component type groups, red line for missing
+origin > Idea. Add a trade and fill it > Open. Pending while element is being filled up
 
-rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 https ?
 
-
-//todo2
+//todo: nice to haves
 filter by : status first, date first, show: idea, interim, closed
 filtering -... in client? / adjust data call api
 change-history modal/tooltip
 obfuscate amounts/costs for anon view - a method (in the user context)
+rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 
 Testing:
  -[] RQ: https://tanstack.com/query/latest/docs/framework/react/guides/testing

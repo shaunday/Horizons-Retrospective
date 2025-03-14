@@ -18,13 +18,8 @@ namespace HsR.Web.Services.Models.Journal
 
         public bool IsPending { get; set; }
 
-        [JsonIgnore]
         public DateTime? OpenedAt { get; set; }
-        [JsonIgnore]
         public DateTime? ClosedAt { get; set; }
-
-        public string? FormattedOpenedAt => OpenedAt?.ToTimeFormattedString();
-        public string? FormattedClosedAt => ClosedAt?.ToTimeFormattedString();
     }
 
     public class TradeCompositeModel : TradeCompositeInfo
