@@ -27,7 +27,7 @@ function TradeElement({ tradeElement, onElementContentUpdate, onElementAction })
 
   const processCellUpdate = useCallback(
     (cellUpdateResponse) => {
-      if (!isOverview) onElementContentUpdate(cellUpdateResponse);
+      onElementContentUpdate(cellUpdateResponse); //kick response data up for composite handling
       processTimeStampUpdate(cellUpdateResponse);
     },
     [onElementContentUpdate]

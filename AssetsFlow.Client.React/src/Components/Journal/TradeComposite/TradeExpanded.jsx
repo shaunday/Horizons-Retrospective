@@ -21,11 +21,9 @@ function TradeExpanded({ trade }) {
     useTradeStateAndManagement(trade);
 
   const processElementAction = (action, response) => {
-    if (action === Constants.ElementActions.DELETE) {
-      const { newSummary } = newStatesResponseParser(response);
-      if (newSummary) {
-        processSummaryUpdate(newSummary);
-      }
+    const { newSummary } = newStatesResponseParser(response);
+    if (newSummary) {
+      processSummaryUpdate(newSummary);
     }
   };
 
@@ -47,7 +45,7 @@ function TradeExpanded({ trade }) {
       {trade[Constants.TRADE_STATUS] !== Constants.TradeStatus.CLOSED && (
         <CompositeControls
           tradeComposite={trade}
-          onTradeActionExecuted={processTradeAction}
+          onTradeActionSuccess={processTradeAction}
           disabled={trade?.[Constants.TRADE_ISPENDING]}
         />
 

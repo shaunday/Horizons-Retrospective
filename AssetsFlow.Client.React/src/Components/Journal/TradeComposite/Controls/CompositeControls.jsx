@@ -8,14 +8,14 @@ import TradeClosingModal from "./TradeClosingModal";
 import { useTradeActionMutation } from "@hooks/Journal/Composite/useTradeActionMutation";
 import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
 
-function CompositeControls({ tradeComposite, onTradeActionExecuted }) {
+function CompositeControls({ tradeComposite, onTradeActionSuccess }) {
   const { processingStatus, setNewStatus } = useProcessingWrapper(ProcessingStatus.NONE);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const tradeActionMutation = useTradeActionMutation(
     tradeComposite,
-    (newElement, newSummary) => {
-      onTradeActionExecuted(newElement, newSummary);
+    (response) => {
+      onTradeActionSuccess(response);
       setNewStatus(ProcessingStatus.SUCCESS);
     }
   );

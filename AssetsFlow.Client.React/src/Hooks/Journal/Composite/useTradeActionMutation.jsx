@@ -1,17 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { TradeActions } from "@constants/journalConstants";
-import * as Constants from "@constants/journalConstants";
 import {
   addReduceInterimPosition,
   closeTrade,
   addEvaluation,
-} from "@services/ApiRequests/tradeApiAccess";
-import { newStatesResponseParser } from "@services/newStatesResponseParser";
-import { useHandleStatusUpdates } from "./useHandleStatusUpdates";  
+} from "@services/ApiRequests/tradeApiAccess"; 
 
-export const useTradeActionMutation = (tradeComposite, onElementAddition) => {
-  const handleStatusUpdate = useHandleStatusUpdates(tradeComposite); 
-
+export const useTradeActionMutation = (tradeComposite, onTradeActionSuccess) => {
   return useMutation({
     mutationFn: async ({ action, additionalParam }) => {
       let response;
@@ -37,12 +32,7 @@ export const useTradeActionMutation = (tradeComposite, onElementAddition) => {
       console.error("Error adding/reducing position:", error);
     },
     onSuccess: ({ response }, { action }) => {
-      handleStatusUpdate(response);  
-
-      const newElement = response[Constants.NEW_ELEMENT_RESPONSE_TAG];
-      const { newSummary } = newStatesResponseParser(response);
-
-      onElementAddition(newElement, newSummary);
+      onTradeActionSuccess(response);
     },
   });
 };

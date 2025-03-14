@@ -3,13 +3,16 @@ import * as Constants from "@constants/journalConstants";
 import { useCacheUpdatedEntry } from "@hooks/Journal/Entry/useCacheUpdatedEntry";
 import { useCacheNewElement } from "@hooks/Journal/Element/useCacheNewElement";
 import { newStatesResponseParser } from "@services/newStatesResponseParser"
+import { useHandleStatusUpdates } from "./useHandleStatusUpdates";
 
 export function useTradeStateAndManagement(cachedTradeComposite) {
   const [tradeSummary, setTradeSummary] = useState(
     cachedTradeComposite?.[Constants.TRADE_SUMMARY_STRING] ?? null
   );
-
+  const { onElementUpdate } = useCacheNewElement(cachedTradeComposite);
   const { cacheUpdatedEntry } = useCacheUpdatedEntry(cachedTradeComposite);
+  const processTradeStatusUpdates = useHandleStatusUpdates(cachedTradeComposite);
+
   const processEntryUpdate = useCallback(
     (cellUpdateResponse) => {
       const updatedEntry = cellUpdateResponse[Constants.NEW_DATA_RESPONSE_TAG];
@@ -19,6 +22,7 @@ export function useTradeStateAndManagement(cachedTradeComposite) {
       if (newSummary) {
         processSummaryUpdate(newSummary);
       }
+      processTradeStatusUpdates(cellUpdateResponse);
     },
     [cacheUpdatedEntry]
   );
@@ -29,9 +33,13 @@ export function useTradeStateAndManagement(cachedTradeComposite) {
     }
   );
 
-  const { onElementUpdate } = useCacheNewElement(cachedTradeComposite);
   const processTradeAction = useCallback(
-    (newElement, newSummary) => {
+    (response) => {
+      processTradeStatusUpdates(response);
+
+      const newElement = response[Constants.NEW_ELEMENT_RESPONSE_TAG];
+      const { newSummary } = newStatesResponseParser(response);
+
       if (newElement) {
         onElementUpdate(newElement);
       }
