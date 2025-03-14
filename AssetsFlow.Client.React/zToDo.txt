@@ -1,13 +1,13 @@
-add trade IsPending state? while an element is not active - disable c controls while pending
-trade status should force change on trade controls.. it doesnt
+figure out trade status/pending interaction and which controls to show when
+while an element is not active - disable c controls while pending?
 
 updatecache on remove/contentupdate : use ... useHandleStatusUpdates + handle 
 verify timestamp is being updated on content update
 verify null methods/responses stop chain
+add opened/closedat somehow (to overview?)
 
 fix styling clutter
 style for trade status
-add opened/closedat somehow (to overview?)
 
 add context/rq for user, saved sectors, parse via useHandleStatusUpdates ?
 sectors combobox +  autofill
