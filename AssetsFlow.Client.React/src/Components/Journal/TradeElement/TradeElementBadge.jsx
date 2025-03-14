@@ -9,7 +9,10 @@ const badgeStyle = {
 };
 
 function TradeElementBadge({ tradeElement }) {
-    const timestamp = new Date(tradeElement[Constants.ELEMENT_TIMESTAMP_STING]).toLocaleString();
+    let timestamp = null;
+    if (tradeElement[Constants.ELEMENT_TIMESTAMP_STING]) {
+        timestamp = new Date(tradeElement[Constants.ELEMENT_TIMESTAMP_STING]).toLocaleString();
+    }
     const type = tradeElement[Constants.ELEMENT_TYPE_STING];
     return (
         <Badge size="sm" color="blue.4" style={badgeStyle}>
