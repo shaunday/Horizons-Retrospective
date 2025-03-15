@@ -1,8 +1,8 @@
 1.
-verify logic when filling up a trade (trade status)
+trade status idea> open: element timestamp doesnt update, trade turns to closed
 remove last doesnt remove summary..
-disable c controls while pending
-max size on content + tooltip? + min text size?
+disable controls while pending
+max size on content + tooltip? + min text size?, multi line on popup tbox
 
 2.
 fix styling clutter
