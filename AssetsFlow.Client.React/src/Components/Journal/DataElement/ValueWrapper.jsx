@@ -1,10 +1,11 @@
 import React from "react";
 import { Text, ActionIcon } from "@mantine/core";
-import { useHover, useDisclosure } from "@mantine/hooks";
+import { useDisclosure } from "@mantine/hooks";
 import { TbEdit } from "react-icons/tb";
 import DefaultSelect from "./DefaultSelect";
 import DataUpdateModal from "./DataUpdateModal";
 import { dataElementContentParser } from "@services/dataElementContentParser";
+import { useDelayedHover } from "@hooks/useDelayedHover";
 
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const isOverview = onValueChangeInitiated === undefined;
@@ -14,26 +15,22 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
   const [dropdownOpened, { open: openDropdown, close: closeDropdown }] = useDisclosure(false);
 
-  const { hovered, ref: wrapperRef } = useHover();
+  const { delayedHover, ref: wrapperRef } = useDelayedHover(200); 
 
   return (
-    <div
-      ref={wrapperRef}
-      style={{ height: "40px", display: "flex", alignItems: "center" }}
-    >
-      {isOverview || (!hovered && !dropdownOpened) ? (
+    <div ref={wrapperRef} style={{ height: "40px", display: "flex", alignItems: "center" }}>
+      {isOverview || (!delayedHover && !dropdownOpened) ? (
         <Text
           className="centered-text"
           style={{
-            borderBottom: !contentValue && !isOverview ? "1px dashed red" : "none", 
+            borderBottom: !contentValue && !isOverview ? "1px dashed red" : "none",
           }}
         >
           {contentValue}
         </Text>
       ) : null}
 
-
-      {!isOverview && (hovered || dropdownOpened) && textRestrictionsExist && (
+      {!isOverview && (delayedHover || dropdownOpened) && textRestrictionsExist && (
         <DefaultSelect
           value={contentValue}
           onChange={onValueChangeInitiated}
@@ -44,7 +41,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
         />
       )}
 
-      {!isOverview && hovered && !textRestrictionsExist && (
+      {!isOverview && delayedHover && !textRestrictionsExist && (
         <>
           <ActionIcon variant="subtle" onClick={openModal}>
             <TbEdit size={20} />
