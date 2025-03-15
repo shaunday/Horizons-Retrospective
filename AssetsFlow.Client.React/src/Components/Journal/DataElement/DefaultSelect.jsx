@@ -1,7 +1,7 @@
 import React from "react";
 import { Select } from "@mantine/core";
 
-function DefaultSelect({ value, onChange, data, ...otherProps }) {
+function DefaultSelect({ value, onChange, data }) {
   return (
     <Select
       value={value}
@@ -10,7 +10,6 @@ function DefaultSelect({ value, onChange, data, ...otherProps }) {
       searchable
       nothingFoundMessage="Nothing found..."
       data={data}
-      {...otherProps} // Pass any additional props to Select
     />
   );
 }
