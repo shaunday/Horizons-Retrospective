@@ -1,6 +1,5 @@
 1.
-style for trade status
-fix logic when filling up a trade (trade status)
+verify logic when filling up a trade (trade status)
 remove last doesnt remove summary..
 disable c controls while pending
 max size on content + tooltip? + min text size?
