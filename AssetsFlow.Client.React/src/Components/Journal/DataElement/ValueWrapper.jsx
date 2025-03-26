@@ -7,33 +7,36 @@ import { dataElementContentParser } from "@services/dataElementContentParser";
 import { useDelayedHover } from "@hooks/useDelayedHover";
 
 const textStyle = {
-  whiteSpace: "nowrap",        // Prevent wrapping
-  overflow: "hidden",          // Hide overflowed content
-  textOverflow: "ellipsis",    // Show ellipsis when text is too long
-  maxWidth: "100%",           // Constrain the width to force ellipsis (you can adjust this value)
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  maxWidth: "100%",
 };
 
 const containerStyle = {
   height: "40px",
-  display: "flex",
-  alignItems: "center",
-  width: "100%",                // Ensure the container takes up full width
-  position: "relative",         // Set position relative for the reference area
+  position: "relative",
 };
 
 const hoverAreaStyle = {
-  height: "20px",               // Height of the hoverable area
-  backgroundColor: "rgba(255, 235, 238, 0.5)",  // Light pink with transparency
-  position: "absolute",         // Set position absolute
-  bottom: "-15px",              // Move hover area 20px below the container (including the edit button offset)
-  width: "100%",                // Full width of the parent container
+  height: "20px",
+  position: "absolute",
+  bottom: "-15px",
+  width: "100%",
 };
 
 const iconStyle = {
-  position: "absolute",         // Position the icon absolutely inside the hover area
-  bottom: "-5px",                // Move it 5px above the hover area bottom
-  left: "50%",                  // Center it horizontally
-  transform: "translateX(-50%)",// Centering adjustment
+  position: "absolute",
+  bottom: "-5px",
+  left: "50%",
+  transform: "translateX(-50%)",
+};
+
+const contentContainerStyle = {
+  padding: "5px 10px",
+  maxWidth: "100%",
+  borderRadius: "6px",
+  background: "#fefefe",
 };
 
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
@@ -43,31 +46,25 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const { delayedHover, ref: wrapperRef } = useDelayedHover(200);
 
   return (
-    <div style={containerStyle}>
-
-      <div className="centered-text" style={{ padding: "5px 10px", maxWidth: "100%", borderRadius: "6px", background: "#fefefe" }}>
+    <div className="container-with-centered-content" style={containerStyle}>
+      <div style={contentContainerStyle}>
         <Tooltip label={contentValue} disabled={contentValue.length < 20} withinPortal position="bottom">
           <Text style={textStyle}>{contentValue}</Text>
         </Tooltip>
       </div>
 
-
       <DataUpdateModal opened={modalOpened} onClose={closeModal} data={cellInfo} onSubmit={onValueChangeInitiated} />
 
-      {
-        !isOverview &&
+      {!isOverview && (
         <div style={hoverAreaStyle} ref={wrapperRef}>
-          {delayedHover &&
-            <ActionIcon
-              variant="outline"
-              onClick={openModal}
-              style={iconStyle}
-            >
+          {delayedHover && (
+            <ActionIcon variant="outline" onClick={openModal} style={iconStyle}>
               <TbEdit size={20} />
-            </ActionIcon>}
+            </ActionIcon>
+          )}
         </div>
-      }
-    </div >
+      )}
+    </div>
   );
 }
 

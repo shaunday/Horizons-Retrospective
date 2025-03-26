@@ -1,8 +1,8 @@
 1.
-trade status idea> open: element timestamp doesnt update, trade turns to closed
 remove last doesnt remove summary..
 disable controls while pending
 multi line on popup tbox, adjust modal b/ground
+dont allow applly on restricted if random
 
 2.
 fix styling clutter

@@ -14,9 +14,7 @@ namespace AssetsFlowWeb.Services.Models.Journal
     public class UpdatedStatesModel
     {
         //element
-        [JsonIgnore]
         public DateTime? ActivationTimeStamp { get; set; }
-        public string? FormattedElementTimeStamp => ActivationTimeStamp?.ToTimeFormattedString();
 
         //composite
         public TradeCompositeInfo? TradeInfo { get; set; }

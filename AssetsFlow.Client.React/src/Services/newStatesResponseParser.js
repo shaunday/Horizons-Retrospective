@@ -1,5 +1,5 @@
 const NEW_STATES_RESPONSE_TAG = 'updatedStates'
-const ELEMENT_TIMESTAMP = 'formattedElementTimeStamp';
+const ELEMENT_TIMESTAMP = 'activationTimeStamp';
 const COMPOSITE_INFO_TAG = 'tradeInfo';
 const SAVED_SECTORS = 'savedSectors'
 import * as Constants from "@constants/journalConstants";
@@ -11,7 +11,7 @@ export const newStatesResponseParser = (response) => {
     return {
         elementsNewTimeStamp: updatedStates?.[ELEMENT_TIMESTAMP],
         
-        newSummary: tradeInfo?.[Constants.SUMMARY],
+        newSummary: tradeInfo?.[Constants.TRADE_SUMMARY_STRING],
         newTradeStatus: tradeInfo?.[Constants.TRADE_STATUS],
         tradeIsPending: tradeInfo?.[Constants.TRADE_ISPENDING],
 

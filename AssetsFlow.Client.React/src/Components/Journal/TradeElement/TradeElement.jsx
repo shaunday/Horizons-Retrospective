@@ -5,9 +5,11 @@ import ElementControls from "./ElementControls";
 import GroupedEntriesList from "../DataElementGroups/GroupedEntriesList"; 
 import EntriesList from "../DataElementGroups/EntriesList"; 
 import { newStatesResponseParser } from "@services/newStatesResponseParser"
+import { useUpdateElementCacheData } from "@hooks/Journal/Element/useUpdateElementCacheData";
 
 function TradeElement({ tradeElement, onElementContentUpdate, onElementAction }) {
   const isOverview = tradeElement.isOverview !== undefined;
+  const { setNewData } = useUpdateElementCacheData(tradeElement[Constants.ELEMENT_COMPOSITEFK_STING], tradeElement.id);
 
   const isAllowControls = useMemo(() => {
     if (isOverview) return false;
@@ -19,7 +21,7 @@ function TradeElement({ tradeElement, onElementContentUpdate, onElementAction })
     (response) => {
       const { elementsNewTimeStamp } = newStatesResponseParser(response);
       if (elementsNewTimeStamp) {
-        tradeElement[Constants.ELEMENT_TIMESTAMP_STING] = elementsNewTimeStamp;
+        setNewData(Constants.ELEMENT_TIMESTAMP_STING, elementsNewTimeStamp);
       }
     },
     [onElementContentUpdate]

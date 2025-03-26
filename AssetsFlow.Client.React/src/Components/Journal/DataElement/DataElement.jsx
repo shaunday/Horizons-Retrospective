@@ -28,7 +28,7 @@ function DataElement({ cellInfo, onCellUpdate }) {
     <Paper shadow="sm" p="xs" radius="md" withBorder>
       <div style={containerStyle}>
         <Text
-          className="no-overflow-text-style centered-text"
+          className="no-overflow-text-style container-with-centered-content"
           mb={5}
         >
           {cellInfo[Constants.DATA_TITLE_STRING]}
