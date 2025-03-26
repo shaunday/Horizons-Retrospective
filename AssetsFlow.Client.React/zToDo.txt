@@ -1,6 +1,5 @@
 1.
 remove last doesnt remove summary..
-disable controls while pending
 multi line on popup tbox, adjust modal b/ground
 dont allow applly on restricted if random
 

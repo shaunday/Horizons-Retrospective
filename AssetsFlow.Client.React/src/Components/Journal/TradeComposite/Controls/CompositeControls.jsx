@@ -39,6 +39,7 @@ function CompositeControls({ tradeComposite, onTradeActionSuccess }) {
     <Group>
       <ActionButtons
         tradeStatus={tradeComposite?.[Constants.TRADE_STATUS]}
+        disallowInteractions={tradeComposite?.[Constants.TRADE_ISPENDING]}
         handleActionClick={handleAction}
       />
       <ProcessingAndSuccessMessage status={processingStatus} />
