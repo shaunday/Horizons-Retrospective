@@ -6,7 +6,6 @@ import DataUpdateModal from "./DataUpdateModal";
 import { dataElementContentParser } from "@services/dataElementContentParser";
 import { useDelayedHover } from "@hooks/useDelayedHover";
 
-// Styles extracted to variables
 const textStyle = {
   whiteSpace: "nowrap",        // Prevent wrapping
   overflow: "hidden",          // Hide overflowed content
@@ -24,7 +23,7 @@ const containerStyle = {
 
 const hoverAreaStyle = {
   height: "20px",               // Height of the hoverable area
-  // backgroundColor: "rgba(255, 235, 238, 0.5)",  // Light pink with transparency
+  backgroundColor: "rgba(255, 235, 238, 0.5)",  // Light pink with transparency
   position: "absolute",         // Set position absolute
   bottom: "-15px",              // Move hover area 20px below the container (including the edit button offset)
   width: "100%",                // Full width of the parent container

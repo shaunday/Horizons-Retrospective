@@ -6,7 +6,6 @@ multi line on popup tbox, adjust modal b/ground
 
 2.
 fix styling clutter
-https 
 
 add opened/closedat somehow (to overview?) 
 opened = first activate date, close = closed date, remove props from trade make em getters
@@ -16,6 +15,7 @@ component type groups, red line for missing
 origin > Idea. Add a trade and fill it > Open. Pending while element is being filled up
 
 3.
+data into ele title (what other data?)
 change-history modal/tooltip
 Once an element is active, can restamp via popup (pick data/now) 
 add context/jotai for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
@@ -24,6 +24,7 @@ filtering -... in client? / adjust data call api
 
 4.
 obfuscate amounts/costs for anon view - a method (in the user context?)
+sector thoughts
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 
 Testing:
@@ -31,3 +32,6 @@ Testing:
         https://tkdodo.eu/blog/testing-react-query
  -[] log/console writes ups
  -[] error management - sentry? 
+
+5. Remote
+https 
