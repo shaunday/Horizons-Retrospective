@@ -1,5 +1,5 @@
 1.
-remove last doesnt remove summary..
+some issues on pending/status when adding/removing 1st pos
 multi line on popup tbox, adjust modal b/ground
 dont allow applly on restricted if random
 

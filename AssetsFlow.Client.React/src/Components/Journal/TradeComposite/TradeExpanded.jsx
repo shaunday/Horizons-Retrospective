@@ -22,9 +22,7 @@ function TradeExpanded({ trade }) {
 
   const processElementAction = (action, response) => {
     const { newSummary } = newStatesResponseParser(response);
-    if (newSummary) {
-      processSummaryUpdate(newSummary);
-    }
+    processSummaryUpdate(newSummary);
   };
 
   return (
@@ -46,9 +44,7 @@ function TradeExpanded({ trade }) {
         <CompositeControls
           tradeComposite={trade}
           onTradeActionSuccess={processTradeAction}
-          disabled={trade?.[Constants.TRADE_ISPENDING]}
         />
-
       )}
     </div>
   );

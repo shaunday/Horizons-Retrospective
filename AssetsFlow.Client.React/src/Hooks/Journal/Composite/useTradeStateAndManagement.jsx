@@ -28,9 +28,7 @@ export function useTradeStateAndManagement(cachedTradeComposite) {
   );
 
   const processSummaryUpdate = useCallback(
-    (newSummary) => {
-      setTradeSummary(newSummary);
-    }
+    (newSummary) =>  setTradeSummary(newSummary)
   );
 
   const processTradeAction = useCallback(
@@ -43,9 +41,7 @@ export function useTradeStateAndManagement(cachedTradeComposite) {
       if (newElement) {
         onElementUpdate(newElement);
       }
-      if (newSummary) {
-        setTradeSummary(newSummary);
-      }
+      setTradeSummary(newSummary);
     },
     [onElementUpdate]
   );

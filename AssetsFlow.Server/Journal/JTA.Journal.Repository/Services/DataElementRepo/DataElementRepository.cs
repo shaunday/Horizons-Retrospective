@@ -27,18 +27,16 @@ namespace HsR.Journal.DataContext
 
             UpdatedStatesCollation updatedStates = new();
 
-            if (cell.IsCostRelevant())
-            {
-                await LoadCompositeRefAsync(cell);
-                RefreshSummary(cell.CompositeRef);
-                updatedStates.TradeInfo = cell.CompositeRef;
-            }
-
             var interimIfActive = await HandleActivationAsync(cell);
             if (interimIfActive != null)
             {
                 updatedStates.ActivationTimeStamp = interimIfActive.TimeStamp;
                 updatedStates.TradeInfo = cell.CompositeRef;
+
+                if (cell.IsCostRelevant())
+                {
+                    RefreshSummary(cell.CompositeRef);
+                }
             }
 
             if (cell.SectorRelevance)
