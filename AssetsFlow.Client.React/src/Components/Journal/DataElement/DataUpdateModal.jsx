@@ -1,12 +1,12 @@
 import React from "react";
-import { Modal, TextInput, Button } from "@mantine/core";
+import { Modal, Textarea, Button } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import * as Constants from "@constants/journalConstants";
 import { dataElementContentParser } from "@services/dataElementContentParser";
-import DefaultSelect from "./DefaultSelect"; 
+import DefaultSelect from "./DefaultSelect";
 
 function DataUpdateModal({ opened, onClose, onSubmit, data }) {
-  const { contentValue, textRestrictions } = dataElementContentParser(data); 
+  const { contentValue, textRestrictions } = dataElementContentParser(data);
   const textRestrictionsExist = textRestrictions?.length > 0;
 
   const form = useForm({
@@ -29,15 +29,15 @@ function DataUpdateModal({ opened, onClose, onSubmit, data }) {
       <form onSubmit={form.onSubmit(handleSubmit)}>
         {textRestrictionsExist ? (
           <DefaultSelect
-            value={form.values.value} 
-            onChange={(val) => form.setFieldValue("value", val)} 
+            value={form.values.value}
+            onChange={(val) => form.setFieldValue("value", val)}
             data={textRestrictions}
           />
         ) : (
-          <TextInput label="Value" {...form.getInputProps("value")} mb={10} />
+          <Textarea label="Value" {...form.getInputProps("value")} mb={10} autosize maxRows={2}/>
         )}
 
-        <TextInput label="Change Details" {...form.getInputProps("changeDetails")} mb={20} />
+        <Textarea label="Change Details" {...form.getInputProps("changeDetails")} mb={20} autosize maxRows={2}/>
 
         <Button type="submit" style={{ display: "block", margin: "0 auto" }}>
           Apply Changes
