@@ -11,7 +11,6 @@ const styles = {
     borderRadius: "4px",
     margin: "3px",
     padding: "5px",
-    background: "rgb(241, 243, 237)",
   },
   list: {
     flexDirection: "column",

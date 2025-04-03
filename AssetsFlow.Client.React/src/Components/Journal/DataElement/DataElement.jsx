@@ -22,6 +22,7 @@ function DataElement({ cellInfo, onCellUpdate }) {
 
   const containerStyle = {
     pointerEvents: processingStatus === ProcessingStatus.PROCESSING ? "none" : "auto",
+      flexDirection: "row"
   };
 
   return (
