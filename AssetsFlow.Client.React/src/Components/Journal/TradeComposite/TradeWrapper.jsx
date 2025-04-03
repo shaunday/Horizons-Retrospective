@@ -16,9 +16,6 @@ const styles = {
     alignItems: "center",
     height: "100%",
   },
-  actionIcon: {
-    height: "40px",
-  },
 };
 
 function TradeWrapper({ tradeId }) {
@@ -31,10 +28,11 @@ function TradeWrapper({ tradeId }) {
 
   return (
     <div style={styles.tradeItem}>
-      <Stack style={{ margin: "0 7px 0 1px", alignItems: "center"}}>
+      <Stack gap="xs" style={{ margin: "0 7px 0 1px", alignItems: "center" }}>
         <TradeCompositeBadge tradeComposite={trade} />
-        <ActionIcon variant="subtle" onClick={toggleExpand} style={styles.actionIcon}>
-          {isCollapsed ? <TbChevronDownRight size={22} /> : <TbChevronUpLeft size={22} />}
+        <ActionIcon variant="subtle" onClick={toggleExpand}
+          style={{ ...(isCollapsed ? {} : { height: 50 }) }}>
+          {isCollapsed ? <TbChevronDownRight size={22} /> : <TbChevronUpLeft size={22} style={{ height: "50px" }} />}
         </ActionIcon>
       </Stack>
       {isCollapsed ? <TradeCollapsed trade={trade} /> : <TradeExpanded trade={trade} />}
