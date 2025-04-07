@@ -6,13 +6,6 @@ import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuc
 import ValueWrapper from "./ValueWrapper";
 import { useContentUpdateMutation } from "@hooks/Journal/Entry/useContentUpdateMutation";
 
-const getContainerStyles = (isOverview, processingStatus) => ({
-  pointerEvents: processingStatus === ProcessingStatus.PROCESSING ? "none" : "auto",
-  display: "flex",
-  flexDirection: isOverview ? "row" : "column",
-  maxWidth: isOverview ? 350 : 150,
-});
-
 function DataElement({ cellInfo, onCellUpdate }) {
   const isOverview = onCellUpdate === undefined;
 
@@ -29,12 +22,22 @@ function DataElement({ cellInfo, onCellUpdate }) {
     contentUpdateMutation.mutate(newValue);
   };
 
-  const titleText = isOverview ? `${cellInfo[Constants.DATA_TITLE_STRING]}:` : cellInfo[Constants.DATA_TITLE_STRING];
+  const titleText = isOverview
+    ? `${cellInfo[Constants.DATA_TITLE_STRING]}:`
+    : cellInfo[Constants.DATA_TITLE_STRING];
+
+  const containerStyle = {
+    pointerEvents: processingStatus === ProcessingStatus.PROCESSING ? "none" : "auto",
+    display: "flex",
+    flexDirection: isOverview ? "row" : "column",
+    maxWidth: isOverview ? 350 : 150,
+  };
 
   return (
     <Paper shadow="sm" p={3} radius="md" withBorder
       className="container-with-centered-content"
-      style={getContainerStyles(isOverview, processingStatus)}>
+      style={containerStyle}
+    >
       <Text className="no-overflow-text-style">
         {titleText}
       </Text>

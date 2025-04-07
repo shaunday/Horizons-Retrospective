@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { ActionIcon, Stack } from "@mantine/core";
 import { TbChevronDownRight, TbChevronUpLeft } from "react-icons/tb";
 import TradeExpanded from "./TradeExpanded";
 import TradeCollapsed from "./TradeCollapsed";
 import { useGetTradeById } from "@hooks/Journal/useGetTradeById";
-import TradeCompositeBadge from "./Badge/TradeCompositeBadge"
+import TradeCompositeBadge from "./Badge/TradeCompositeBadge";
 
 const styles = {
   tradeItem: {
@@ -22,17 +22,20 @@ function TradeWrapper({ tradeId }) {
   const { trade } = useGetTradeById(tradeId);
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const toggleExpand = useCallback(() => {
-    setIsCollapsed((prev) => !prev);
-  }, []);
+  if (!trade) {
+    return <div>Loading...</div>; 
+  }
 
   return (
     <div style={styles.tradeItem}>
       <Stack gap="xs" style={{ margin: "0 7px 0 1px", alignItems: "center" }}>
         <TradeCompositeBadge tradeComposite={trade} />
-        <ActionIcon variant="subtle" onClick={toggleExpand}
-          style={{ ...(isCollapsed ? {} : { height: 50 }) }}>
-          {isCollapsed ? <TbChevronDownRight size={22} /> : <TbChevronUpLeft size={22} style={{ height: "50px" }} />}
+        <ActionIcon
+          variant="subtle"
+          onClick={() => setIsCollapsed((prev) => !prev)}
+          style={{ ...(isCollapsed ? {} : { height: 50 }) }}
+        >
+           {isCollapsed ? <TbChevronDownRight size={22} /> : <TbChevronUpLeft size={22} style={{ height: "50px" }} />}
         </ActionIcon>
       </Stack>
       {isCollapsed ? <TradeCollapsed trade={trade} /> : <TradeExpanded trade={trade} />}

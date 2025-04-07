@@ -7,12 +7,10 @@ import EntriesList from "../DataElementGroups/EntriesList";
 import { newStatesResponseParser } from "@services/newStatesResponseParser"
 import { useUpdateElementCacheData } from "@hooks/Journal/Element/useUpdateElementCacheData";
 
-function TradeElement({ tradeElement, onElementContentUpdate, onElementAction }) {
-  const isOverview = tradeElement.isOverview !== undefined;
+function TradeElementExpanded({ tradeElement, onElementContentUpdate, onElementAction }) {
   const { setNewData } = useUpdateElementCacheData(tradeElement[Constants.ELEMENT_COMPOSITEFK_STING], tradeElement.id);
 
   const isAllowControls = useMemo(() => {
-    if (isOverview) return false;
     const elementType = tradeElement[Constants.ELEMENT_TYPE_STING];
     return elementType !== Constants.ElementType.ORIGIN && elementType !== Constants.ElementType.SUMMARY;
   }, [tradeElement]);
@@ -42,18 +40,10 @@ function TradeElement({ tradeElement, onElementContentUpdate, onElementAction })
 
   return (
     <Group wrap="wrap" spacing={10}>
-      {isOverview ? (
-        <EntriesList
+       <GroupedEntriesList
           entries={tradeElement[Constants.TRADE_ENTRIES_STRING]}
-        />
-      ) : (
-        <GroupedEntriesList
-          entries={tradeElement[Constants.TRADE_ENTRIES_STRING]}
-          isOverview={isOverview}
           processCellUpdate={processCellUpdate}
         />
-      )}
-
       {isAllowControls && 
         <ElementControls tradeElement={tradeElement} onActionSuccess={processElementActionSuccess} />
       }
@@ -61,4 +51,4 @@ function TradeElement({ tradeElement, onElementContentUpdate, onElementAction })
   );
 }
 
-export default React.memo(TradeElement);
+export default React.memo(TradeElementExpanded);

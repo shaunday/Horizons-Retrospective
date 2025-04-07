@@ -41,8 +41,8 @@ export const ElementType = Object.freeze({
 
 //entry
 export const DATA_TITLE_STRING = 'title'
-export const DATA_RELEVANT_FOR_ORVERVIEW_STRING = 'IsRelevantForTradeOverview'
-export const DATA_RELEVANT_FOR_LOCAL_ORVERVIEW_STRING = 'IsRelevantForLocalOverview'
+export const DATA_RELEVANT_FOR_ORVERVIEW_STRING = 'isRelevantForTradeOverview'
+export const DATA_RELEVANT_FOR_LOCAL_ORVERVIEW_STRING = 'isRelevantForLocalOverview'
 export const COMPONENT_TYPE ='componentType'
 
 //respones

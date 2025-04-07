@@ -25,9 +25,9 @@
                 new DataElement("Reasoning", ComponentType.Thoughts),
                 new DataElement("Emotions", ComponentType.Emotions),
                 new DataElement("Time Frame", ComponentType.ExitLogic),
-                new DataElement("Price", ComponentType.PriceRelated) { UnitPriceRelevance = ValueRelevance.Positive },
-                new DataElement("Amount", ComponentType.PriceRelated),
-                new DataElement("Total Cost", ComponentType.PriceRelated) { TotalCostRelevance = ValueRelevance.Positive },
+                new DataElement("Price", ComponentType.PriceRelated) { IsRelevantForLocalOverview = true, UnitPriceRelevance = ValueRelevance.Positive },
+                new DataElement("Amount", ComponentType.PriceRelated) { IsRelevantForLocalOverview = true },
+                new DataElement("Total Cost", ComponentType.PriceRelated) {  IsRelevantForLocalOverview = true, TotalCostRelevance = ValueRelevance.Positive },
             };
 
             // Add Position Boundaries objects to the list
@@ -41,11 +41,11 @@
         {
             var evaluationObjects = new List<DataElement>
             {
-                new DataElement("General", ComponentType.Header),
-                new DataElement("D/W/M str?", ComponentType.Technicals),
-                new DataElement("Momentum", ComponentType.Technicals),
-                new DataElement("Fta reached?", ComponentType.Technicals) ,
-                new DataElement("NTA", ComponentType.ExitLogic),
+                new DataElement("General", ComponentType.Header) { IsRelevantForLocalOverview = true, },
+                new DataElement("D/W/M str?", ComponentType.Technicals) { IsRelevantForLocalOverview = true },
+                new DataElement("Momentum", ComponentType.Technicals) { IsRelevantForLocalOverview = true },
+                new DataElement("Fta reached?", ComponentType.Technicals) { IsRelevantForLocalOverview = true, }, 
+                new DataElement("NTA", ComponentType.ExitLogic) { IsRelevantForLocalOverview = true },
             };
 
             return evaluationObjects;

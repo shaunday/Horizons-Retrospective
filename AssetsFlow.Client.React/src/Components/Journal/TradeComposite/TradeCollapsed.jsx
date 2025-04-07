@@ -1,38 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo } from "react";
 import * as Constants from "@constants/journalConstants";
-import TradeElement from "@journalComponents/TradeElement/TradeElement";
+import { getOverViewEntries } from "@services/getOverViewEntries"
+import EntriesList from "../DataElementGroups/EntriesList";
 
 function TradeCollapsed({ trade }) {
-  const [simulatedEle, setSimulatedEle] = useState(null);
+  if (!trade) {
+    return <div>Loading...</div>; 
+  }
 
-  useEffect(() => {
-    // Generate a simulated trade element
-    const simulatedEntries = [
-      ...trade.tradeElements,
-      ...(trade[Constants.TRADE_SUMMARY_STRING] ? [trade[Constants.TRADE_SUMMARY_STRING]] : [])
-    ]
-      .flatMap((tradeElement) =>
-        tradeElement[Constants.TRADE_ENTRIES_STRING].filter(
-          (entry) => entry[Constants.DATA_RELEVANT_FOR_ORVERVIEW_STRING]
-        )
-      );
+  const EntriesForTradeOverView = useMemo(() => {
+    const elementsToFlatten = [
+      ...trade[Constants.TRADE_ELEMENTS_STRING],
+      ...(trade[Constants.TRADE_SUMMARY_STRING] ? [trade[Constants.TRADE_SUMMARY_STRING]] : []),
+    ];
 
-    const simulatedElement = {
-      id: `Simulated-${trade.id}`, // Assign a unique ID based on tradeId
-      isOverview: true, // Mark this as a simulated element
-      entries: simulatedEntries, // Add the simulated entries array
-    };
+    return getOverViewEntries(
+      elementsToFlatten,
+      Constants.DATA_RELEVANT_FOR_ORVERVIEW_STRING
+    );
+  }, [trade]);
 
-    setSimulatedEle(simulatedElement);
-  }, []);
-
-  return (
-    <>
-      {simulatedEle ? (<TradeElement tradeElement={simulatedEle} />) : (
-        <div>Loading...</div>
-      )}
-    </>
-  );
+  return <EntriesList entries={EntriesForTradeOverView} />;
 }
 
 export default React.memo(TradeCollapsed);

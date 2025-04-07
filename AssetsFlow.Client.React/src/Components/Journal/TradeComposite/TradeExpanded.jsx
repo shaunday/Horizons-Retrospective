@@ -1,10 +1,11 @@
 import React from "react";
 import * as Constants from "@constants/journalConstants";
-import TradeElement from "@journalComponents/TradeElement/TradeElement";
 import CompositeControls from "./Controls/CompositeControls";
 import { useTradeStateAndManagement } from "@hooks/Journal/Composite/useTradeStateAndManagement";
 import TradeElementBadge from "../TradeElement//TradeElementBadge";
 import { newStatesResponseParser } from "@services/newStatesResponseParser"
+import TradeCollapsed from "./TradeCollapsed";
+import TradeElementWrapper from "../TradeElement/TradeElementWrapper";
 
 const styles = {
   listItem: {
@@ -31,7 +32,7 @@ function TradeExpanded({ trade }) {
         {trade[Constants.TRADE_ELEMENTS_STRING].map((ele) => (
           <li key={ele.id} style={styles.listItem}>
             <TradeElementBadge tradeElement={ele} />
-            <TradeElement
+            <TradeElementWrapper
               tradeElement={ele}
               onElementContentUpdate={processEntryUpdate}
               onElementAction={processElementAction}
@@ -39,7 +40,7 @@ function TradeExpanded({ trade }) {
           </li>
         ))}
       </ul>
-      {tradeSummary && <TradeElement tradeElement={{ ...tradeSummary, isOverview: true }} />}
+      {tradeSummary && <TradeCollapsed tradeElement={tradeSummary}/>}
       {trade[Constants.TRADE_STATUS] !== Constants.TradeStatus.CLOSED && (
         <CompositeControls
           tradeComposite={trade}
