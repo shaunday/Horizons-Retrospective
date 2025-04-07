@@ -1,10 +1,14 @@
 1.
-some issues on pending/status when adding/removing 1st pos
+more (styling) work on the rows .. remove border when collapsed? lement tag/status to be an icon just like trade status?
+some issues on pending/status when adding/removing 1st pos/ evaluation
 dont allow appply on restricted if random
-element tag/status should be an icon just like trade status
+same line for trade status and e/c button
 
 2.
 fix styling clutter
+from limor: add trade - different color, more visible possibly upthere on the header area
+from limor: title should be styled diff than the content, text aligned to the left
+from limor - icons instead of text "+" etc - check zoom homepage?
 
 add opened/closedat somehow (to overview?) 
 opened = first activate date, close = closed date, remove props from trade make em getters
@@ -22,6 +26,7 @@ filter by : status first, date first, show: idea, interim, closed
 filtering -... in client? / adjust data call api
 
 4.
+from limor: edit > expand the object and edit in place?
 obfuscate amounts/costs for anon view - a method (in the user context?)
 sector thoughts
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
