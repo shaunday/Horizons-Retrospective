@@ -6,14 +6,14 @@
         {
             var tradeOriginObjects = new List<DataElement>
             {
-                new DataElement("Ticker", ComponentType.Header) { IsRelevantForOverview = true },
+                new DataElement("Ticker", ComponentType.Header) { IsRelevantForTradeOverview = true },
                 new DataElement("Long/Short", ComponentType.Header, "")
-                                          { IsRelevantForOverview = true, Restrictions = ["Long", "Short"]},
-                new DataElement("Thesis", ComponentType.Thoughts) { IsRelevantForOverview = true },
+                                          { IsRelevantForTradeOverview = true, Restrictions = ["Long", "Short"]},
+                new DataElement("Thesis", ComponentType.Thoughts) { IsRelevantForTradeOverview = true },
                 new DataElement("Confluences", ComponentType.EntryLogic),
                 new DataElement("Trigger", ComponentType.EntryLogic),
                 new DataElement("Contras", ComponentType.EntryLogic),
-                new DataElement("Time Frame", ComponentType.ExitLogic)  { IsRelevantForOverview = true },
+                new DataElement("Time Frame", ComponentType.ExitLogic)  { IsRelevantForTradeOverview = true },
                 new DataElement("Certainty", ComponentType.Emotions),
             };
 

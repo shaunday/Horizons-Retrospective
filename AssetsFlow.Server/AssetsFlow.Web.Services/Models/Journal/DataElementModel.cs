@@ -25,7 +25,9 @@ namespace HsR.Web.Services.Models.Journal
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public ValueRelevance? UnitPriceRelevance { get; set; }
 
-        public bool IsRelevantForOverview { get; set; }
+        public bool IsRelevantForTradeOverview { get; set; }
+        public bool IsRelevantForLocalOverview { get; set; }
+
         public bool SectorRelevance { get; set; } 
         public ICollection<string>? Restrictions { get; set; }
 

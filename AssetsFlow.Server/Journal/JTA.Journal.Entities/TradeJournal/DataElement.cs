@@ -29,7 +29,10 @@ namespace HsR.Journal.Entities
         public ValueRelevance? TotalCostRelevance { get; set; }
 
         [Required]
-        public bool IsRelevantForOverview { get; set; } = false;
+        public bool IsRelevantForTradeOverview { get; set; } = false;
+
+        [Required]
+        public bool IsRelevantForLocalOverview { get; set; } = false;
 
         public ICollection<string>? Restrictions { get; set; }
 
