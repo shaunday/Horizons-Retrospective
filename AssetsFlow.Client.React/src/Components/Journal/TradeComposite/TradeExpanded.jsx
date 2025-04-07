@@ -6,13 +6,14 @@ import TradeElementBadge from "../TradeElement//TradeElementBadge";
 import { newStatesResponseParser } from "@services/newStatesResponseParser"
 import TradeCollapsed from "./TradeCollapsed";
 import TradeElementWrapper from "../TradeElement/TradeElementWrapper";
+import TradeElementCollapsed from "../TradeElement/TradeElementCollapsed";
 
 const styles = {
   listItem: {
     padding: "10px",
+    border: "1.5px solid purple",
     borderRadius: "6px",
     margin: "8px 4px",
-    border: "1.5px solid purple",
     position: "relative",
   },
 };
@@ -40,7 +41,7 @@ function TradeExpanded({ trade }) {
           </li>
         ))}
       </ul>
-      {tradeSummary && <TradeCollapsed tradeElement={tradeSummary}/>}
+      {tradeSummary && <TradeElementCollapsed tradeElement={tradeSummary}/>}
       {trade[Constants.TRADE_STATUS] !== Constants.TradeStatus.CLOSED && (
         <CompositeControls
           tradeComposite={trade}

@@ -3,7 +3,6 @@ import { Group } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 import ElementControls from "./ElementControls";
 import GroupedEntriesList from "../DataElementGroups/GroupedEntriesList"; 
-import EntriesList from "../DataElementGroups/EntriesList"; 
 import { newStatesResponseParser } from "@services/newStatesResponseParser"
 import { useUpdateElementCacheData } from "@hooks/Journal/Element/useUpdateElementCacheData";
 

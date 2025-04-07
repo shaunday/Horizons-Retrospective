@@ -6,10 +6,6 @@ import TradeElementCollapsed from "./TradeElementCollapsed"
 
 const styles = {
     elementItem: {
-        border: "1.5px solid blue",
-        padding: "5px",
-        borderRadius: "4px",
-        marginBottom: "5px",
         display: "flex",
         alignItems: "center",
         height: "100%",

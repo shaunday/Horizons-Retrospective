@@ -1,7 +1,7 @@
 1.
 some issues on pending/status when adding/removing 1st pos
-multi line on popup tbox, adjust modal b/ground
-dont allow applly on restricted if random
+dont allow appply on restricted if random
+element tag/status should be an icon just like trade status
 
 2.
 fix styling clutter
