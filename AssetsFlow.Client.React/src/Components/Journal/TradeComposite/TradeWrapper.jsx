@@ -6,17 +6,7 @@ import TradeCollapsed from "./TradeCollapsed";
 import { useGetTradeById } from "@hooks/Journal/useGetTradeById";
 import TradeCompositeBadge from "./Badge/TradeCompositeBadge";
 
-const styles = {
-  tradeItem: {
-    padding: "5px",
-    marginBottom: "5px",
-    display: "flex",
-    alignItems: "center",
-    height: "100%",
-  },
-};
-
-function TradeWrapper({ tradeId }) {
+function TradeWrapper({ tradeId, indexType }) {
   const { trade } = useGetTradeById(tradeId);
   const [isCollapsed, setIsCollapsed] = useState(true);
 
@@ -31,8 +21,17 @@ function TradeWrapper({ tradeId }) {
     marginRight: "5px"
   };
 
+  const tradeItemStyle = {
+    padding: "5px",
+    marginBottom: "5px",
+    display: "flex",
+    alignItems: "center",
+    height: "100%",
+    background: indexType === 1 ? "rgb(234, 237, 221)" : "rgb(219, 240, 236)"
+  };
+
   return (
-    <Paper shadow="md" style={styles.tradeItem}>
+    <Paper shadow="md" style={tradeItemStyle} withBorder>
       <div style={badgeActionWrapperStyle}>
         <ActionIcon
           variant="subtle"

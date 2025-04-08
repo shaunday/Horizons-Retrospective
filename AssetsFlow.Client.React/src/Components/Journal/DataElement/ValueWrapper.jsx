@@ -33,7 +33,6 @@ const iconStyle = {
 };
 
 const contentContainerStyle = {
-  padding: "5px 10px",
   maxWidth: "100%",
   borderRadius: "6px",
   background: "#fefefe",

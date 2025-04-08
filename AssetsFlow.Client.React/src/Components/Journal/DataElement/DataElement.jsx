@@ -29,12 +29,14 @@ function DataElement({ cellInfo, onCellUpdate }) {
   const containerStyle = {
     pointerEvents: processingStatus === ProcessingStatus.PROCESSING ? "none" : "auto",
     display: "flex",
+    gap: "5px",
     flexDirection: isOverview ? "row" : "column",
     maxWidth: isOverview ? 350 : 150,
+    minWidth : 75,
   };
 
   return (
-    <Paper shadow="xs" p={3} radius="md" withBorder
+    <Paper shadow="xs" px={5} radius="md" withBorder
       className="container-with-centered-content"
       style={containerStyle}
     >
