@@ -34,7 +34,7 @@ function DataElement({ cellInfo, onCellUpdate }) {
   };
 
   return (
-    <Paper shadow="sm" p={3} radius="md" withBorder
+    <Paper shadow="xs" p={3} radius="md" withBorder
       className="container-with-centered-content"
       style={containerStyle}
     >

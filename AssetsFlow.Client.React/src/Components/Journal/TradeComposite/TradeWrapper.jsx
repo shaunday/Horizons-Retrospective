@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, Paper } from "@mantine/core";
 import { TbChevronDownRight, TbChevronUpLeft } from "react-icons/tb";
 import TradeExpanded from "./TradeExpanded";
 import TradeCollapsed from "./TradeCollapsed";
@@ -8,9 +8,7 @@ import TradeCompositeBadge from "./Badge/TradeCompositeBadge";
 
 const styles = {
   tradeItem: {
-    border: "1.5px solid #ccc",
     padding: "5px",
-    borderRadius: "4px",
     marginBottom: "5px",
     display: "flex",
     alignItems: "center",
@@ -34,7 +32,7 @@ function TradeWrapper({ tradeId }) {
   };
 
   return (
-    <div style={styles.tradeItem}>
+    <Paper shadow="md" style={styles.tradeItem}>
       <div style={badgeActionWrapperStyle}>
         <ActionIcon
           variant="subtle"
@@ -50,7 +48,7 @@ function TradeWrapper({ tradeId }) {
         {isCollapsed && <TradeCompositeBadge tradeComposite={trade} />}
       </div>
       {isCollapsed ? <TradeCollapsed trade={trade} /> : <TradeExpanded trade={trade} />}
-    </div>
+    </Paper>
   );
 }
 
