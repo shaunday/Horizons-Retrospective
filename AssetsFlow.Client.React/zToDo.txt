@@ -1,5 +1,4 @@
 1.
-element status broken
 some issues on pending/status when adding/removing 1st pos/ evaluation
 same line for trade status and e/c button
 

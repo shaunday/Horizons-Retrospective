@@ -13,7 +13,10 @@ function TradeElementBadge({ tradeElement }) {
     }
 
 
-    const statusText = elementType + timestamp ? `. ${timestamp}` : ""
+    const statusText = timestamp
+        ? `${elementType}. ${timestamp}`
+        : elementType;
+        
     return (
         <Tooltip label={statusText} withArrow>
             <Badge size="lg" color="grey.7" p={0}>
