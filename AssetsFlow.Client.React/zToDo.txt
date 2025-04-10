@@ -1,7 +1,6 @@
 1.
-more (styling) work on the rows .. remove border when collapsed? lement tag/status to be an icon just like trade status?
+element status broken
 some issues on pending/status when adding/removing 1st pos/ evaluation
-dont allow appply on restricted if random
 same line for trade status and e/c button
 
 2.

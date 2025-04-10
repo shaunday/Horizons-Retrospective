@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, Paper } from "@mantine/core";
 import { TbChevronRight, TbChevronLeft } from "react-icons/tb";
 import TradeElementExpanded from "./TradeElementExpanded";
 import TradeElementCollapsed from "./TradeElementCollapsed";
@@ -10,9 +10,8 @@ const styles = {
     display: "flex",
     alignItems: "center",
     height: "100%",
-    padding: "10px 10px 10px 30px", 
-    border: "1.5px solid purple",
-    borderRadius: "6px",
+    padding: "0px 10px 0px 23px", 
+    background:" rgba(224, 208, 221, 0.52)",
     position: "relative",
   },
 };
@@ -37,7 +36,7 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
   };
 
   return (
-    <div style={styles.elementItem}>
+    <Paper style={styles.elementItem}>
       <div style={badgeStyle}>
         <TradeElementBadge tradeElement={tradeElement} />
       </div>
@@ -46,12 +45,12 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
         <ActionIcon
           variant="subtle"
           onClick={() => setIsCollapsed((prev) => !prev)}
-          style={{ ...(isCollapsed ? {} : { height: 50 }) }}
+          style={{ ...(isCollapsed ? {} : { height: 50, marginRight: 7 }) }}
         >
           {isCollapsed ? (
             <TbChevronRight size={22} />
           ) : (
-            <TbChevronLeft size={22} style={{ height: "50px" }} />
+            <TbChevronLeft size={22} />
           )}
         </ActionIcon>
       </div>
@@ -66,7 +65,7 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
           onElementAction={onElementAction}
         />
       )}
-    </div>
+    </Paper>
   );
 }
 

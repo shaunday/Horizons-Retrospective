@@ -2,7 +2,6 @@ import React from "react";
 import * as Constants from "@constants/journalConstants";
 import CompositeControls from "./Controls/CompositeControls";
 import { useTradeStateAndManagement } from "@hooks/Journal/Composite/useTradeStateAndManagement";
-import TradeElementBadge from "../TradeElement/Badge/TradeElementBadge";
 import { newStatesResponseParser } from "@services/newStatesResponseParser"
 import TradeElementWrapper from "../TradeElement/TradeElementWrapper";
 import TradeElementCollapsed from "../TradeElement/TradeElementCollapsed";
@@ -16,11 +15,18 @@ function TradeExpanded({ trade }) {
     processSummaryUpdate(newSummary);
   };
 
+  const gapValue = 7;
+
   return (
     <div>
-      <ul style={{ flexDirection: "column" }}>
-        {trade[Constants.TRADE_ELEMENTS_STRING].map((ele) => (
-          <li key={ele.id}>
+      <ul style={{ display: "flex", flexDirection: "column" }}>
+        {trade[Constants.TRADE_ELEMENTS_STRING].map((ele, index, arr) => (
+          <li
+            key={ele.id}
+            style={{
+              marginBottom: index !== arr.length - 1 ? gapValue : 0,
+            }}
+          >
             <TradeElementWrapper
               tradeElement={ele}
               onElementContentUpdate={processEntryUpdate}
@@ -29,7 +35,13 @@ function TradeExpanded({ trade }) {
           </li>
         ))}
       </ul>
-      {tradeSummary && <TradeElementCollapsed tradeElement={tradeSummary}/>}
+
+      {tradeSummary && (
+        <div style={{marginLeft: 15, marginTop: gapValue }}>
+          <TradeElementCollapsed tradeElement={tradeSummary} />
+        </div>
+      )}
+
       {trade[Constants.TRADE_STATUS] !== Constants.TradeStatus.CLOSED && (
         <CompositeControls
           tradeComposite={trade}

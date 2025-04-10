@@ -18,7 +18,7 @@ function TradeWrapper({ tradeId, indexType }) {
     display: "flex",
     flexDirection: isCollapsed ? "row" : "column",
     gap: "4px",
-    marginRight: "10px"
+    marginRight: isCollapsed? 10 : 15,
   };
 
   const tradeItemStyle = {
@@ -27,7 +27,7 @@ function TradeWrapper({ tradeId, indexType }) {
     display: "flex",
     alignItems: "center",
     height: "100%",
-    background: indexType === 1 ? "rgb(234, 237, 221)" : "rgb(219, 240, 236)"
+    background: isCollapsed? "none" : indexType === 1 ? "rgb(241, 242, 235)" : "rgb(231, 242, 235)"
   };
 
   return (

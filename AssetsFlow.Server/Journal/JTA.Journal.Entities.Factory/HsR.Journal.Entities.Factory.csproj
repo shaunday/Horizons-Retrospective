@@ -10,7 +10,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common.Net\HsR.Common\HsR.Common.csproj" />
     <ProjectReference Include="..\HsR.Journal.Services\HsR.Journal.Services.csproj" />
-    <ProjectReference Include="..\HsR.Journal.TradeAnalytics\HsR.Journal.Services.csproj" />
     <ProjectReference Include="..\JTA.Journal.Entities\HsR.Journal.Entities.csproj" />
   </ItemGroup>
 
