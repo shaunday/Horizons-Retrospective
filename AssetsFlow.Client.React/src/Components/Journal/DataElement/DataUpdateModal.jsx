@@ -11,7 +11,7 @@ function DataUpdateModal({ opened, onClose, onSubmit, data }) {
 
   const form = useForm({
     initialValues: {
-      value: contentValue || "", // Ensure value initializes correctly
+      value: contentValue || "",
       changeDetails: "",
     },
     validate: {
@@ -24,8 +24,16 @@ function DataUpdateModal({ opened, onClose, onSubmit, data }) {
     onClose();
   };
 
+  // Check if the current value is allowed if there are restrictions
+  const isRestrictedValid =
+    !textRestrictionsExist || textRestrictions.includes(form.values.value);
+
   return (
-    <Modal size="lg" opened={opened} onClose={onClose} title={data[Constants.DATA_TITLE_STRING]} centered>
+    <Modal size="lg" centered
+      opened={opened}
+      onClose={onClose}
+      title={data[Constants.DATA_TITLE_STRING]}
+    >
       <form onSubmit={form.onSubmit(handleSubmit)}>
         {textRestrictionsExist ? (
           <DefaultSelect
@@ -34,12 +42,22 @@ function DataUpdateModal({ opened, onClose, onSubmit, data }) {
             data={textRestrictions}
           />
         ) : (
-          <Textarea label="Value" {...form.getInputProps("value")} mb={10} autosize maxRows={2}/>
+          <Textarea mb={10} autosize maxRows={2}
+            label="Value"
+            {...form.getInputProps("value")}
+          />
         )}
 
-        <Textarea label="Change Details" {...form.getInputProps("changeDetails")} mb={20} autosize maxRows={2}/>
+        <Textarea mb={20} autosize maxRows={2}
+          label="Change Details"
+          {...form.getInputProps("changeDetails")}
+        />
 
-        <Button type="submit" style={{ display: "block", margin: "0 auto" }}>
+        <Button
+          type="submit"
+          disabled={!isRestrictedValid}
+          style={{ display: "block", margin: "0 auto" }}
+        >
           Apply Changes
         </Button>
       </form>
