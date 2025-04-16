@@ -10,8 +10,8 @@ const styles = {
     display: "flex",
     alignItems: "center",
     height: "100%",
-    padding: "0px 10px 0px 23px", 
-    background:" rgba(224, 208, 221, 0.52)",
+    padding: "5px 10px 5px 23px", 
+    background:" rgba(224, 208, 221, 0.32)",
     position: "relative",
   },
 };
