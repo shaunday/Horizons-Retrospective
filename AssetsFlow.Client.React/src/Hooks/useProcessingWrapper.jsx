@@ -13,7 +13,7 @@ export function useProcessingWrapper(status) {
       }
       // Set SUCCESS status and reset after 2 seconds
       setProcessing(newStatus);
-      timeoutRef.current = setTimeout(() => setProcessing(ProcessingStatus.NONE), 2000);
+      timeoutRef.current = setTimeout(() => setProcessing(ProcessingStatus.NONE), 1500);
     } else {
       setProcessing(newStatus);
     }

@@ -36,7 +36,7 @@ namespace HsR.Journal.DataContext
             return (tradeInput, newStates);
         }
 
-        public async Task<InterimTradeElement> AddInterimEvalutationAsync(string tradeId)
+        public async Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimEvalutationAsync(string tradeId)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
 
@@ -61,9 +61,10 @@ namespace HsR.Journal.DataContext
             }
 
             trade.TradeElements.Add(tradeOverview);
+            UpdatedStatesCollation? newStates = new() { TradeInfo = trade };
             await _dataContext.SaveChangesAsync();
 
-            return tradeOverview;
+            return (tradeOverview, newStates);
         }
 
         public async Task<UpdatedStatesCollation> RemoveInterimPositionAsync(string tradeInputId)

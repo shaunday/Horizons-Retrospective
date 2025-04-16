@@ -1,4 +1,4 @@
-﻿
+﻿on remove, reset activation states or just re-check. open = at least 1 add exists
 
 //testing= API tests (seeder?)
 

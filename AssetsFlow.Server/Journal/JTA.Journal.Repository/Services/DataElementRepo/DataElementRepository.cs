@@ -65,8 +65,12 @@ namespace HsR.Journal.DataContext
             if (cell.TradeElementRef is InterimTradeElement interim && !interim.IsActive && interim.AllowActivation())
             {
                 interim.Activate();
-                await LoadCompositeRefAsync(cell);
-                cell.CompositeRef?.Activate();
+
+                if (interim.TradeActionType == TradeActionType.Add)
+                {
+                    await LoadCompositeRefAsync(cell);
+                    cell.CompositeRef?.Activate();
+                }
                 return interim;
             }
 

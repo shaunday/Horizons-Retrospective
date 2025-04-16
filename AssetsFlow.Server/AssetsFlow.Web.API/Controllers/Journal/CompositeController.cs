@@ -34,11 +34,12 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpPost("evaluate")]
         public async Task<ActionResult<TradeElementModel>> AddEvaluationPosition(string tradeId)
         {
-            InterimTradeElement newEval = await _journalAccess.TradeElement.AddInterimEvalutationAsync(tradeId);
+            (InterimTradeElement newEval, UpdatedStatesCollation? updatedStates) newEvalAndStates = await _journalAccess.TradeElement.AddInterimEvalutationAsync(tradeId);
 
-            TradeElementModel resAsModel = _mapper.Map<TradeElementModel>(newEval);
+            (TradeElementModel, UpdatedStatesModel) resAsModel =
+                         (_mapper.Map<TradeElementModel>(newEvalAndStates.newEval), _mapper.Map<UpdatedStatesModel>(newEvalAndStates.updatedStates));
 
-            return ResultHandling(resAsModel, $"Could not add new evaluation element on : {tradeId}", [NEW_ELEMENT_DATA]);
+            return ResultHandling(resAsModel, $"Could not add new evaluation element on : {tradeId}", [NEW_ELEMENT_DATA, NEW_STATES_WRAPPER]);
         }
 
         #endregion
