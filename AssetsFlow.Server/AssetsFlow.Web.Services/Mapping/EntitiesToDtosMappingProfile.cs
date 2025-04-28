@@ -18,7 +18,7 @@ namespace HsR.Web.API.Mapping
             CreateMap<TradeComposite, TradeCompositeModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
 
             CreateMap<UpdatedStatesCollation, UpdatedStatesModel>();
-            CreateMap<TradeComposite, TradeCompositeInfo>();
+            CreateMap<TradeComposite, TradeCompositeInfo>().EqualityComparison((dto, m) => dto.Id == m.Id);
         }
     }
 }
