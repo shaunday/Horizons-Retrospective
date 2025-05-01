@@ -1,0 +1,26 @@
+name: .Net checkout-restore-build
+
+on:
+  workflow_call:  # Makes it reusable by other workflows
+    inputs:
+      server-path:
+        required: true
+        type: string
+
+jobs:
+  Common-Steps:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:9.0  # Docker container with .NET SDK 9
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Restore .NET dependencies
+      run: dotnet restore
+      working-directory: ${{ inputs.server-path }}
+
+    - name: Build .NET project
+      run: dotnet build --no-restore
+      working-directory: ${{ inputs.server-path }}
