@@ -33,7 +33,3 @@ runs:
       if: ${{ inputs.run-tests == 'true' }}
       run: dotnet test ${{ inputs.server-path }} --no-build --verbosity normal
       shell: bash
-      
-    - name: ✅ Start Composite Action
-      run: echo "Starting dotnet composite steps"
-      shell: bash
