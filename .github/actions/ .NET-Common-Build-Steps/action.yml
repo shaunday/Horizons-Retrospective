@@ -2,9 +2,9 @@ name: "Common .NET Build Steps"
 description: "Restore, build, and optionally test a .NET project"
 
 inputs:
-  server-path:
+  solution-path:
     required: true
-    description: "Path to the server project"
+    description: "Path to the solution directory"
   run-tests:
     required: false
     default: "false"
@@ -22,18 +22,17 @@ runs:
         dotnet-version: "9.0.x"
 
     - name: Restore
-      run: dotnet restore ${{ inputs.server-path }}
+      run: dotnet restore
       shell: bash
+      working-directory: ${{ inputs.solution-path }}
 
     - name: Build
-      run: dotnet build ${{ inputs.server-path }} --no-restore
+      run: dotnet build --no-restore
       shell: bash
+      working-directory: ${{ inputs.solution-path }}
 
     - name: Test
       if: ${{ inputs.run-tests == 'true' }}
-      run: dotnet test ${{ inputs.server-path }} --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal
       shell: bash
-      
-    - name: ✅ Start Composite Action
-      run: echo "Starting dotnet composite steps"
-      shell: bash
+      working-directory: ${{ inputs.solution-path }}
