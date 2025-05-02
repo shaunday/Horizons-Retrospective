@@ -25,4 +25,4 @@ jobs:
       - name: .NET Build Composite
         uses: ./.github/actions/123
         with:
-          solution-path: ${{ matrix.server-path }}
+          server-path: ${{ matrix.server-path }}
