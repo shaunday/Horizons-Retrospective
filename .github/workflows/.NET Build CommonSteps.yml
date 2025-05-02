@@ -1,35 +1,35 @@
-name: .Net-build-commonSteps
+name: "Common .NET Build Step"
+description: "Restore, build, and optionally test a .NET project"
 
-on:
-  workflow_call:
-    inputs:
-      server-path:
-        required: true
-        type: string
-      run-tests:
-        required: false
-        type: boolean
-        default: false
+inputs:
+  server-path:
+    required: true
+    description: "Path to the server project"
+  run-tests:
+    required: false
+    default: "false"
+    description: "Run tests if true"
 
-jobs:
-  Common-Steps:
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/dotnet/sdk:9.0
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: "9.0.x"
 
-      - name: Restore .NET dependencies
-        run: dotnet restore
-        working-directory: ./${{ inputs.server-path }}
+    - name: Restore
+      run: dotnet restore ${{ inputs.server-path }}
+      shell: bash
 
-      - name: Build .NET project
-        run: dotnet build --no-restore
-        working-directory: ./${{ inputs.server-path }}
+    - name: Build
+      run: dotnet build ${{ inputs.server-path }} --no-restore
+      shell: bash
 
-      - name: Run Tests
-        if: ${{ inputs.run-tests == true }}
-        run: dotnet test --no-build --verbosity normal
-        working-directory: ./${{ inputs.server-path }}
+    - name: Test
+      if: ${{ inputs.run-tests == 'true' }}
+      run: dotnet test ${{ inputs.server-path }} --no-build --verbosity normal
+      shell: bash
