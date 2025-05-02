@@ -7,15 +7,19 @@ on:
     paths:
       - "./Server.AssetsFlow/**"
       - "./Server.PriceAlerts/**"
-  workflow_dispatch:  
+  workflow_dispatch:
 
 jobs:
-  Test-AssetsFlow:
-    uses: ./.github/actions/.NET Common Build Steps.yml
-    with:
-      server-path: ./Server.AssetsFlow
+  Build-Test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        server-path:
+          - ./Server.AssetsFlow
+          - ./Server.PriceAlerts
 
-  Test-PriceAlerts:
-    uses: ./.github/actions/.NET Common Build Steps.yml
-    with:
-      server-path: ./Server.PriceAlerts
+    steps:
+      - name: .Net Build Composite
+        uses: ./.github/actions/.NET-Common-Build-Steps
+        with:
+          server-path: ${{ matrix.server-path }}
