@@ -13,9 +13,9 @@ jobs:
   Test-AssetsFlow:
     uses: ./.github/workflows/.NET Build CommonSteps.yml
     with:
-      server-path: ./Server.AssetsFlow
+      server-path: Server.AssetsFlow
 
   Test-PriceAlerts:
     uses: ./.github/workflows/.NET Build CommonSteps.yml
     with:
-      server-path: ./Server.PriceAlerts
+      server-path: Server.PriceAlerts
