@@ -15,21 +15,21 @@ jobs:
   Common-Steps:
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/dotnet/sdk:9.0  # Docker container with .NET SDK 9
+      image: mcr.microsoft.com/dotnet/sdk:9.0
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Restore .NET dependencies
-      run: dotnet restore
-      working-directory: ${{ github.workspace }}/${{ inputs.server-path }}
+      - name: Restore .NET dependencies
+        run: dotnet restore
+        working-directory: ./${{ inputs.server-path }}
 
-    - name: Build .NET project
-      run: dotnet build --no-restore
-      working-directory: ${{ github.workspace }}/${{ inputs.server-path }}
-      
-    - name: Run Tests
-      if: ${{ inputs.run-tests == true }}   # Only run this step if input is true
-      run: dotnet test ${{ inputs.server-path }} --no-build --verbosity normal
-      working-directory: ${{ github.workspace }}/${{ inputs.server-path }}
+      - name: Build .NET project
+        run: dotnet build --no-restore
+        working-directory: ./${{ inputs.server-path }}
+
+      - name: Run Tests
+        if: ${{ inputs.run-tests == true }}
+        run: dotnet test --no-build --verbosity normal
+        working-directory: ./${{ inputs.server-path }}
