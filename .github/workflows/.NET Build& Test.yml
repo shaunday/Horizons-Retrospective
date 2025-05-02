@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - "./Server.AssetsFlow/**"
-      - "./Server.PriceAlerts/**"
+      - "./AssetsFlow.Server/**"
+      - "./PriceAlerts.Server/**"
   workflow_dispatch:
 
 jobs:
@@ -15,8 +15,8 @@ jobs:
     strategy:
       matrix:
         solution-path:
-          - ./Server.AssetsFlow
-          - ./Server.PriceAlerts
+          - ./AssetsFlow.Server
+          - ./PriceAlerts.Server
 
     steps:
       - name: Checkout repository
