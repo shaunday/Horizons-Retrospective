@@ -1,4 +1,4 @@
-name: "Common .NET Build Step"
+name: "zCommon .NET Build Step"
 description: "Restore, build, and optionally test a .NET project"
 
 inputs:
