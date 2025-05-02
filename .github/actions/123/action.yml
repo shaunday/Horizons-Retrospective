@@ -21,28 +21,18 @@ runs:
       with:
         dotnet-version: "9.0.x"
 
-    - name: Detect .sln file
-      id: detect
-      run: |
-        cd "${{ inputs.solution-path }}"
-        file=$(find . -maxdepth 1 -name "*.sln" | head -n 1)
-        if [ -z "$file" ]; then
-          echo "❌ No .sln file found in ${{ inputs.solution-path }}"
-          exit 1
-        fi
-        echo "✅ Found solution: $file"
-        echo "path=$file" >> $GITHUB_OUTPUT
-      shell: bash
-
     - name: Restore
-      run: dotnet restore "${{ inputs.solution-path }}/${{ steps.detect.outputs.path }}"
+      run: dotnet restore
       shell: bash
+      working-directory: ${{ inputs.solution-path }}
 
     - name: Build
-      run: dotnet build "${{ inputs.solution-path }}/${{ steps.detect.outputs.path }}" --no-restore
+      run: dotnet build --no-restore
       shell: bash
+      working-directory: ${{ inputs.solution-path }}
 
     - name: Test
       if: ${{ inputs.run-tests == 'true' }}
-      run: dotnet test "${{ inputs.solution-path }}/${{ steps.detect.outputs.path }}" --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal
       shell: bash
+      working-directory: ${{ inputs.solution-path }}
