@@ -1,0 +1,21 @@
+name: Test .NET Projects
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "./Server.AssetsFlow/**"
+      - "./Server.PriceAlerts/**"
+  workflow_dispatch:  
+
+jobs:
+  Test-AssetsFlow:
+    uses: ./.github/workflows/.Net Build.yml
+    with:
+      server-path: ./Server.AssetsFlow
+
+  Test-PriceAlerts:
+    uses: ./.github/workflows/.Net Build.yml
+    with:
+      server-path: ./Server.PriceAlerts
