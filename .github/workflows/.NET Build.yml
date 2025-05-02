@@ -1,11 +1,15 @@
 name: .Net checkout-restore-build
 
 on:
-  workflow_call:  # Makes it reusable by other workflows
+  workflow_call:
     inputs:
       server-path:
         required: true
         type: string
+      run-tests:
+        required: false
+        type: boolean
+        default: true
 
 jobs:
   Common-Steps:
@@ -24,3 +28,7 @@ jobs:
     - name: Build .NET project
       run: dotnet build --no-restore
       working-directory: ${{ inputs.server-path }}
+      
+    - name: Run Tests
+      if: ${{ inputs.run-tests == true }}   # Only run this step if input is true
+      run: dotnet test ${{ inputs.server-path }} --no-build --verbosity normal
