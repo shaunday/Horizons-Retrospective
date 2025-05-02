@@ -1,4 +1,4 @@
-name: .Net checkout-restore-build
+name: .Net-build-commonSteps
 
 on:
   workflow_call:
