@@ -23,6 +23,6 @@ jobs:
         uses: actions/checkout@v4
         
       - name: .Net Build Composite
-        uses: ./.github/actions/.NET-Common-Build-Steps
+        uses: ./.github/actions/123
         with:
           server-path: ${{ matrix.server-path }}
