@@ -23,12 +23,13 @@ jobs:
 
     - name: Restore .NET dependencies
       run: dotnet restore
-      working-directory: ${{ inputs.server-path }}
+      working-directory: ${{ github.workspace }}/${{ inputs.server-path }}
 
     - name: Build .NET project
       run: dotnet build --no-restore
-      working-directory: ${{ inputs.server-path }}
+      working-directory: ${{ github.workspace }}/${{ inputs.server-path }}
       
     - name: Run Tests
       if: ${{ inputs.run-tests == true }}   # Only run this step if input is true
       run: dotnet test ${{ inputs.server-path }} --no-build --verbosity normal
+      working-directory: ${{ github.workspace }}/${{ inputs.server-path }}
