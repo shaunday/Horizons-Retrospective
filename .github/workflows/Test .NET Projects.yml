@@ -11,11 +11,11 @@ on:
 
 jobs:
   Test-AssetsFlow:
-    uses: ./.github/workflows/.Net Build.yml
+    uses: ./.github/workflows/.NET Build CommonSteps.yml
     with:
       server-path: ./Server.AssetsFlow
 
   Test-PriceAlerts:
-    uses: ./.github/workflows/.Net Build.yml
+    uses: ./.github/workflows/.NET Build CommonSteps.yml
     with:
       server-path: ./Server.PriceAlerts
