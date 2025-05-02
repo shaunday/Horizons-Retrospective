@@ -14,15 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        server-path:
-          - ./Server.AssetsFlow
-          - ./Server.PriceAlerts
+        solution-path:
+          - ./Server.AssetsFlow/AssetsFlow.Server.sln
+          - ./Server.PriceAlerts/PriceAlerts.Server.sln
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         
-      - name: .Net Build Composite
-        uses: ./.github/actions/123
+      - name: .NET Build Composite
+        uses: ./.github/actions/.NET-Common-Build-Steps
         with:
-          server-path: ${{ matrix.server-path }}
+          solution-path: ${{ matrix.solution-path }}
