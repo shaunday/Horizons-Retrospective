@@ -21,11 +21,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: List contents of .github/actions folder
-        run: ls -R .github/actions
         
       - name: .Net Build Composite
-        uses: ./.github/actions/123
+        uses: ./.github/actions/.NET-Common-Build-Steps
         with:
           server-path: ${{ matrix.server-path }}
