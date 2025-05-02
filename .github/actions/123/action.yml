@@ -2,9 +2,9 @@ name: "Common .NET Build Steps"
 description: "Restore, build, and optionally test a .NET project"
 
 inputs:
-  solution-path:
+  server-path:
     required: true
-    description: "Path to the .sln file"
+    description: "Path to the server project"
   run-tests:
     required: false
     default: "false"
@@ -22,14 +22,17 @@ runs:
         dotnet-version: "9.0.x"
 
     - name: Restore
-      run: dotnet restore "${{ inputs.solution-path }}"
+      run: dotnet restore
       shell: bash
+      working-directory: ${{ inputs.server-path }}
 
     - name: Build
-      run: dotnet build "${{ inputs.solution-path }}" --no-restore
+      run: dotnet build --no-restore
       shell: bash
+      working-directory: ${{ inputs.server-path }}
 
     - name: Test
       if: ${{ inputs.run-tests == 'true' }}
-      run: dotnet test "${{ inputs.solution-path }}" --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal
       shell: bash
+      working-directory: ${{ inputs.server-path }}
