@@ -1,0 +1,38 @@
+name: "Common .NET Build Steps"
+description: "Restore, build, and optionally test a .NET project"
+
+inputs:
+  solution-path:
+    required: true
+    description: "Path to the solution directory"
+  run-tests:
+    required: false
+    default: "false"
+    description: "Run tests if true"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: "9.0.x"
+
+    - name: Restore
+      run: dotnet restore
+      shell: bash
+      working-directory: ${{ inputs.solution-path }}
+
+    - name: Build
+      run: dotnet build --no-restore
+      shell: bash
+      working-directory: ${{ inputs.solution-path }}
+
+    - name: Test
+      if: ${{ inputs.run-tests == 'true' }}
+      run: dotnet test --no-build --verbosity normal
+      shell: bash
+      working-directory: ${{ inputs.solution-path }}
