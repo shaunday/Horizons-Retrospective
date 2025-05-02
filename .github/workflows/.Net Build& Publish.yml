@@ -5,17 +5,27 @@ on:
     branches:
       - main
     paths:
-      - "./Server.AssetsFlow/**"
-      - "./Server.PriceAlerts/**"
+      - "./AssetsFlow.Server/**"
+      - "./PriceAlerts.Server/**"
   workflow_dispatch:
 
 jobs:
-  Publish-AssetsFlow:
-    needs: Test-AssetsFlow
-    uses: ./.github/workflows/.NET Build CommonSteps.yml
-    with:
-      server-path: ./Server.AssetsFlow
+  Build-Test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        solution-path:
+          - ./AssetsFlow.Server
+          - ./PriceAlerts.Server
 
     steps:
-    - name: Publish
-      run: dotnet publish -c Release -r linux-x64 -o ./publish ${{ inputs.server-path }}
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: .NET Build Composite
+        uses: ./.github/actions/common-build-steps-dotnet
+        with:
+          solution-path: ${{ matrix.solution-path }}
+          
+      - name: Publish
+        run: dotnet publish -c Release -r linux-x64 -o ./publish ${{ matrix.solution-path }}
