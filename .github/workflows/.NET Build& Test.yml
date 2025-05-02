@@ -19,6 +19,12 @@ jobs:
           - ./Server.PriceAlerts
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: List contents of .github/actions folder
+        run: ls -R .github/actions
+        
       - name: .Net Build Composite
         uses: ./.github/actions/.NET-Common-Build-Steps
         with:
