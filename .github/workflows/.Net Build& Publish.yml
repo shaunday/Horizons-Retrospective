@@ -18,9 +18,6 @@ jobs:
        - solution-path: ./AssetsFlow.Server
          project-filepath: ./AssetsFlow.Server/AssetsFlow.Web.API/AssetsFlowWeb.API.csproj
          build-docker: true
-       - solution-path: ./PriceAlerts.Server
-         project-filepath: ./PriceAlerts.Server/PriceAlerts.Web.API/PriceAlertsWeb.API.csproj
-         build-docker: false
 
     steps:
       - name: Checkout repository
@@ -52,7 +49,6 @@ jobs:
 
 
       - name: Build and Push Docker image
-        if: matrix.build-docker == true
         uses: docker/build-push-action@v5
         with:
           context: ${{ matrix.solution-path }}
