@@ -45,8 +45,9 @@ jobs:
       - name: Get project name
         id: project-name
         run: |
-          name=$(basename "${{ matrix.solution-path }}")
-          echo "name=$name" >> $GITHUB_OUTPUT
+           name=$(basename "${{ matrix.project-path }}" .csproj | tr '[:upper:]' '[:lower:]')
+           echo "name=$name" >> $GITHUB_OUTPUT
+
 
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
@@ -54,4 +55,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}/${{ steps.project-name.outputs.name }}:latest
+          tags: ghcr.io/shaunday/horizons-retrospective/${{ steps.project-name.outputs.name }}:latest
