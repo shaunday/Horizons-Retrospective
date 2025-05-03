@@ -52,7 +52,7 @@ jobs:
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ${{ matrix.solution-path }}
           file: ${{matrix.solution-path}}/Dockerfile
           push: true
           tags: ghcr.io/shaunday/horizons-retrospective/${{ steps.project-name.outputs.name }}:latest
