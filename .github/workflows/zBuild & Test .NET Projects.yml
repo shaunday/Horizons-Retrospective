@@ -1,4 +1,4 @@
-name: Build & Test .NET (Server) Projects
+name: zBuild & Test .NET (verbose)
 
 on:
   push:
