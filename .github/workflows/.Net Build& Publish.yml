@@ -17,6 +17,8 @@ jobs:
         solution-path:
           - ./AssetsFlow.Server
           - ./PriceAlerts.Server
+        project-path:
+         - ./AssetsFlow.Server/AssetsFlow.Web.API/AssetsFlowWeb.API.csproj
 
     steps:
       - name: Checkout repository
@@ -28,7 +30,7 @@ jobs:
           solution-path: ${{ matrix.solution-path }}
           
       - name: Publish
-        run: dotnet publish -c Release -r linux-x64 -o ./publish ${{ matrix.solution-path }}
+        run: dotnet publish -c Release -r linux-x64 -o ./publish ${{ matrix.project-path }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
