@@ -1,0 +1,37 @@
+1. a Dockerfile to containerize the ASP.NET app 
+ - publish using github actions  
+ - a minimal Ubuntu-based image to keep the container lightweight
+
+2. configured the server to listen on:
+ - localhost in dev
+ - :80 in the container
+
+3. docker-compose.yml file to run the container locally
+
+4. deploy.sh file to be ran on the compute instance:
+  - docker install
+  - docker compose install
+  - image pull (using static address for now, + its public)
+  - run using docker compose
+
+5. Secrets_
+ - .env file in a safe spot
+ - mklink "...\AssetsFlow.Server\AssetsFlow.Web.API\.env" "G:\My Drive\...\AssetsFlow\.env"
+ - create a ".gitignore" file in the AssetsFlow.Web.API folder and add .env
+
+
+ TODO:
+ a. dotnet add package DotNetEnv - and swap my current env variables
+ b. Supabase 
+  - create account/ install
+  - add connection strings to env files
+c. tail -f logs/*.log ??
+
+and last: ! Spin up an EC2 (or similar)
+
+-  Set up a domain name with DNS pointing to your EC2 public IP.
+- Make sure port 80 (or 443 if using HTTPS) is open in your EC2’s security group.
+- Optional: Open port 22 for SSH if you need to connect manually.
+
+- Attach deployment files (docker-compose.yml, deploy.sh, .env): 
+  You'll need a way to push or pull these from GitHub (SSH, git clone, or artifact download).
