@@ -24,6 +24,11 @@ namespace HsR.Web.API.Configurations
 
                 builder.Services.AddScoped<DatabaseSeeder>();
             }
+            
+            builder.WebHost.UseUrls(
+                Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true"
+                ? "http://0.0.0.0:80"
+                : "https://localhost:5000");
         }
     }
 
