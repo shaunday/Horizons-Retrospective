@@ -14,11 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        solution-path:
-          - ./AssetsFlow.Server
-          - ./PriceAlerts.Server
-        project-filepath:
-         - ./AssetsFlow.Server/AssetsFlow.Web.API/AssetsFlowWeb.API.csproj
+       include:
+       - solution-path: ./AssetsFlow.Server
+         project-filepath: ./AssetsFlow.Server/AssetsFlow.Web.API/AssetsFlowWeb.API.csproj
+         build-docker: true
 
     steps:
       - name: Checkout repository
