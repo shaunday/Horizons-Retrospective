@@ -54,4 +54,4 @@ jobs:
           context: .
           file: ${{matrix.solution-path}}/Dockerfile
           push: true
-          tags: ghcr.io/shaunday/horizons-retrospective/${{ steps.project-name.outputs.name }}:latest
+          tags: ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:1:0:0
