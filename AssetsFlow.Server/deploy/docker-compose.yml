@@ -1,0 +1,18 @@
+version: '3.9'  # Docker Compose file version
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+
+  web:
+    image: ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:1.0.0  
+    expose:
+      - "80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    volumes:
+      - ./logs:/app/logs

@@ -4,10 +4,11 @@ internal static class LoggingConfiguration
 {
     internal static void ConfigureLogging()
     {
+        var logPath = Path.Combine(AppContext.BaseDirectory, "hsr_journal_server.txt");
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.Console()
-            .WriteTo.File("/logs/hsr_journal_server.txt", rollingInterval: RollingInterval.Day)
+            .WriteTo.File(logPath, rollingInterval: RollingInterval.Day)
             .CreateLogger();
     }
 }

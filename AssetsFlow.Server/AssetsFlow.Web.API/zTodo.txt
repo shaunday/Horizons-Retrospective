@@ -16,9 +16,15 @@ position weight/ sector weight
 
 //pre production - 2nd stage
 filtering history
-users + authentication 
+users + authentication
+
+//deployment / production
+- health check in docker-compose (nginx will await proper readiness)
+- container image version management
+- env variables
+- stream Docker logs to AWS CloudWatch 
 
 // later on/ playing around
 Suspence? RQ Suspence
-Get a Node.Js server
-Get an GraphQL instead of REST
+Node.Js server
+GraphQL instead of REST
