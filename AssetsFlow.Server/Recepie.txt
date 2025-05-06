@@ -1,4 +1,4 @@
-1. a Dockerfile to containerize the ASP.NET app 
+﻿1. a dockerfile to containerize the ASP.NET app 
  - publish using github actions  
  - a minimal Ubuntu-based image to keep the container lightweight
 
@@ -20,27 +20,39 @@
  - create a ".gitignore" file in the AssetsFlow.Web.API folder and add .env
  - DotNetEnv to read env files
 
+6. Supabase / DB connect
+ - create supabase account + Database "HsR_Journal_Prod"
+ - add connection/auth strings to env files
+ - wrap up connection string getter, base on dev/prod
+ - VERIFY MIGRATIONS FOLDER IS EMPTY
+ - EntityFrameworkCore\Add-Migration InitialCreate -p HsR.Journal.Infrastructure -s HsR.Journal.Infrastructure
+ - EntityFrameworkCore\Update-Database -p HsR.Journal.Infrastructure -s HsR.Journal.Infrastructure
+ - (Connection string is set in the getter, used by the DesignTime ContextFactory)
 
- 6. Supabase / DB connect
-  - create supabase account + Database "HsR_Journal_Prod"
-  - add connection/auth strings to env files
-  - wrap up connection string getter, base on dev/prod
-
-  - VERIFY MIGRATIONS FOLDER IS EMPTY
-  - EntityFrameworkCore\Add-Migration InitialCreate -p HsR.Journal.Infrastructure -s HsR.Journal.Infrastructure
-  - EntityFrameworkCore\Update-Database -p HsR.Journal.Infrastructure -s HsR.Journal.Infrastructure
+7. Spin up an EC2 Free Tier
+  - Make sure port 80 (or 443 if using HTTPS) is open in your EC2’s security group, ditto port 22 for SSH
+  - Attach deployment files (docker-compose.yml, deploy.sh, .env): 
+    scp -i /path/to/your-key.pem /path/to/docker-compose.yml /path/to/deploy.sh /path/to/.env ec2-user@your-ec2-public-ip:/home/ubuntu/
 
 
-TODO:
-! Spin up an EC2 (or similar)
+Nice To Have:
+  - Even for MVP, consider adding HTTPS via Nginx + Let’s Encrypt using Certbot /  use a managed solution like Cloudflare.
+  - Expanding Compute to 2 services: set up subdomains /2 ports
 
-- Set up a domain name with DNS pointing to your EC2 public IP.
-- Make sure port 80 (or 443 if using HTTPS) is open in your EC2�s security group.
 
-- Attach deployment files (docker-compose.yml, deploy.sh, .env): 
-  You'll need a way to push or pull these from GitHub (SSH, git clone, or artifact download).
-  (Open port 22 for SSH if you need to connect manually?)
+🚀 AWS Strategy:
+Start with EC2 Free Tier (t3.micro):
+Install Docker, run your container.
+Zero cost if you stay within limits.
+After 12 months, you can switch to t4g.nano (ARM) or Lightsail to keep it cheap.
 
-Eventually:
-  Even for MVP, consider adding HTTPS via Nginx + Let�s Encrypt using Certbot.
-  Or later use a managed solution like Cloudflare.
+🔧 EC2: t4g.nano
+EBS: 8GB gp3 (root volume only)
+OS: Amazon Linux 2 ARM64
+Software: Docker, your container
+Total cost: ~$3.50/month (instance + EBS), possibly less with savings plans or spot
+
+🔧 Lightsail = same price ($3.50) as EC2 t4g.nano + EBS combo — but:
+You get x86 architecture (more image compatibility).
+SSD + networking included.
+You don’t pay for EBS separately.
