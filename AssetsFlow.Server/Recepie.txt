@@ -18,10 +18,10 @@
  - .env file in a safe spot
  - mklink "...\AssetsFlow.Server\AssetsFlow.Web.API\.env" "G:\My Drive\...\AssetsFlow\.env"
  - create a ".gitignore" file in the AssetsFlow.Web.API folder and add .env
+ - DotNetEnv to read env files
 
 
  TODO:
- a. dotnet add package DotNetEnv - and swap my current env variables
  b. Supabase 
   - create account/ install
   - add connection strings to env files

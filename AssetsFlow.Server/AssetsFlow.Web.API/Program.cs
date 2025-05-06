@@ -12,8 +12,9 @@ builder.Host.UseSerilog();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
+DotNetEnv.Env.Load();
 #pragma warning disable CS8604 // Disable warning for possible null reference argument
-string? connectionString = Environment.GetEnvironmentVariable(TradingJournalContextFactory.AdminConnectionString); //todo change to user
+string? connectionString = Environment.GetEnvironmentVariable(TradingJournalContextFactory.DbConnectionString);
 builder.Services.ConfigureTradingJournalDbContext(connectionString, isProduction:  !builder.Environment.IsDevelopment());
 
 builder.ConfigureForEnvironment();

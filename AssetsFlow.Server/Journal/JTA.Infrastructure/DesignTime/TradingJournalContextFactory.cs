@@ -6,15 +6,16 @@ namespace HsR.Infrastructure;
 
 public class TradingJournalContextFactory : IDesignTimeDbContextFactory<TradingJournalDataContext>
 {
-    public static string AdminConnectionString = "HsR_Journal_ADMIN_CONNECTION";
+    public static string DbConnectionString = "HsR_AssetsFlow_Connection_String";
 
     public TradingJournalDataContext CreateDbContext(string[] args)
     {
-        var connectionString = Environment.GetEnvironmentVariable(AdminConnectionString);
+        DotNetEnv.Env.Load();
+        var connectionString = Environment.GetEnvironmentVariable(DbConnectionString);
         if (string.IsNullOrEmpty(connectionString))
         {
             throw new ApplicationException(
-                $"Please set the environment variable {AdminConnectionString}");
+                $"Please set the environment variable {DbConnectionString}");
         }
 
         var optionsBuilder = new DbContextOptionsBuilder<TradingJournalDataContext>();
