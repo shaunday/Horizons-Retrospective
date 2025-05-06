@@ -21,12 +21,14 @@
  - DotNetEnv to read env files
 
 
- TODO:
- a. Supabase 
-  - create account/ install
-  - add connection strings to env files
+ 6. Supabase / DB connect
+  - create supabase account + Database "HsR_Journal_Prod"
+  - add connection/auth strings to env files
+  - wrap up connection string getter, base on dev/prod
 
- b. ! Spin up an EC2 (or similar)
+
+TODO:
+! Spin up an EC2 (or similar)
 
 - Set up a domain name with DNS pointing to your EC2 public IP.
 - Make sure port 80 (or 443 if using HTTPS) is open in your EC2’s security group.

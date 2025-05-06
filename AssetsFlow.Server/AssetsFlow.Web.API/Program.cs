@@ -14,7 +14,7 @@ builder.Host.UseSerilog();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-bool isDev = builder.Environment.IsDevelopment();
+bool isDev = builder.Environment.IsDevelopment() /*&& false*/;
 
 #pragma warning disable CS8604 // Disable warning for possible null reference argument
 string? connectionString = DbConnectionInfo.GetConnectionStringByEnv(isDev);
@@ -30,7 +30,8 @@ builder.Services.AddCustomApiVersioning();
 
 var app = builder.Build();
 
-await app.Services.SeedDatabaseAsync();
+if (isDev)
+    await app.Services.SeedDatabaseAsync();
 
 Middleware.ConfigureMiddleware(app);
 

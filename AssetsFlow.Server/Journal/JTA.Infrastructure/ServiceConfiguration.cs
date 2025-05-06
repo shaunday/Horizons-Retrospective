@@ -33,5 +33,4 @@ namespace HsR.Infrastructure
             return services;
         }
     }
-
 }

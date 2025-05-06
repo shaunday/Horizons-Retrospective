@@ -1,35 +1,35 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HsR.Journal.Infrastructure
 {
     public static class DbConnectionInfo
     {
-        private static string Db_User_String = "DB_USER";
-        private static string Db_Pass_String = "DB_PASS";
+        private const string DbUserVar = "DB_USER";
+        private const string DbPassVar = "DB_PASS";
+        private const string SupabasePassVar = "SUPABASE_DB_PASS";
 
         public static string GetConnectionStringByEnv(bool isDev = true)
         {
             DotNetEnv.Env.Load();
 
-            var dbUser = Environment.GetEnvironmentVariable(Db_User_String);
-            var dbPass = Environment.GetEnvironmentVariable(Db_Pass_String);
-
-            string connectionString;
             if (isDev)
             {
-                connectionString = $"Host=localhost;Port=5432;Database=HsR_Journal_Database;Username={dbUser};Password={dbPass};Include Error Detail=true";
+                var dbUser = Environment.GetEnvironmentVariable(DbUserVar);
+                var dbPass = Environment.GetEnvironmentVariable(DbPassVar);
+
+                return $"Host=localhost;Port=5432;Database=HsR_Journal_Database;Username={dbUser};Password={dbPass};Include Error Detail=true";
             }
             else // Production
             {
-                connectionString = $"Host=db.supabase.co;Port=5432;Database=HsR_Journal_Prod;Username={dbUser};Password={dbPass};Include Error Detail=false;SSL Mode=Require";
+                var supabasePassword = Environment.GetEnvironmentVariable(SupabasePassVar);
+                //ipv4 version
+                return $"User Id=postgres.cavtnmvmhxbttxtgvyyt;Password={supabasePassword};Server=aws-0-eu-central-1.pooler.supabase.com;Port=5432;Database=postgres";
+                
+                //ipv6 doesnt work here on local todo check on container
+                //return $"Host=db.cavtnmvmhxbttxtgvyyt.supabase.co;Database=postgres;Username=postgres;Password={supabasePassword};SSL Mode=Require;Trust Server Certificate=true";
             }
-
-            return connectionString;
         }
     }
 }
