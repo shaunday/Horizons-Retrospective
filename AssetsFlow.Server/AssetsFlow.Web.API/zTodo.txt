@@ -1,30 +1,30 @@
-﻿on remove, reset activation states or just re-check. open = at least 1 add exists
+﻿TODO_
+- on remove, reset activation states or just re-check. open = at least 1 add exists
+
+
+
+
 
 //testing= API tests (seeder?)
 
-//pies
-
-//add trend watch
-
-//conluences check list = trends per tf, bb/ma distances
-
 // dashboard + price alerts
-Indicator alerts, upcoming reports 
+Indicator alerts, upcoming reports, trend watch
 
 //ledger - populate brokers list with actual data
 position weight/ sector weight
+pies
 
-//pre production - 2nd stage
+//nice to have
+conluences check list = trends per tf, bb/ma distances
 filtering history
 users + authentication
 
 //deployment / production
 - health check in docker-compose (nginx will await proper readiness)
 - container image version management
-- env variables
-- stream Docker logs to AWS CloudWatch 
 
-// later on/ playing around
+//Expansion:
 Suspence? RQ Suspence
 Node.Js server
 GraphQL instead of REST
+MongoDB

@@ -1,8 +1,10 @@
 using HsR.Infrastructure;
 using HsR.Journal.DataContext;
 using HsR.Journal.DataSeeder;
+using HsR.Journal.Infrastructure;
 using HsR.Web.API.Configurations;
 using HsR.Web.API.Repositories;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Serilog;
 
 LoggingConfiguration.ConfigureLogging();
@@ -12,10 +14,11 @@ builder.Host.UseSerilog();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-DotNetEnv.Env.Load();
+bool isDev = builder.Environment.IsDevelopment();
+
 #pragma warning disable CS8604 // Disable warning for possible null reference argument
-string? connectionString = Environment.GetEnvironmentVariable(TradingJournalContextFactory.DbConnectionString);
-builder.Services.ConfigureTradingJournalDbContext(connectionString, isProduction:  !builder.Environment.IsDevelopment());
+string? connectionString = DbConnectionInfo.GetConnectionStringByEnv(isDev);
+builder.Services.ConfigureTradingJournalDbContext(connectionString, isDev);
 
 builder.ConfigureForEnvironment();
 

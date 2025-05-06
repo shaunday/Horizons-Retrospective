@@ -12,7 +12,7 @@ namespace HsR.Infrastructure
 {
     public static class ServiceConfiguration
     {
-        public static IServiceCollection ConfigureTradingJournalDbContext(this IServiceCollection services, string connectionString, bool isProduction)
+        public static IServiceCollection ConfigureTradingJournalDbContext(this IServiceCollection services, string connectionString, bool isDev)
         {
             services.AddDbContextPool<TradingJournalDataContext>(options =>
             {
@@ -21,7 +21,7 @@ namespace HsR.Infrastructure
                     npgsqlOptions.EnableRetryOnFailure();
                 });
 
-                if (!isProduction)
+                if (isDev)
                 {
                     options.LogTo(Console.WriteLine, LogLevel.Information).EnableSensitiveDataLogging();
                 }

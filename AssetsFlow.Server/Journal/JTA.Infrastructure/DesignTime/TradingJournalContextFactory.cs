@@ -1,4 +1,5 @@
 using HsR.Journal.DataContext;
+using HsR.Journal.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
@@ -6,16 +7,12 @@ namespace HsR.Infrastructure;
 
 public class TradingJournalContextFactory : IDesignTimeDbContextFactory<TradingJournalDataContext>
 {
-    public static string DbConnectionString = "HsR_AssetsFlow_Connection_String";
-
     public TradingJournalDataContext CreateDbContext(string[] args)
     {
-        DotNetEnv.Env.Load();
-        var connectionString = Environment.GetEnvironmentVariable(DbConnectionString);
+        var connectionString = DbConnectionInfo.GetConnectionStringByEnv();
         if (string.IsNullOrEmpty(connectionString))
         {
-            throw new ApplicationException(
-                $"Please set the environment variable {DbConnectionString}");
+            throw new ApplicationException($"Please set  environment variables");
         }
 
         var optionsBuilder = new DbContextOptionsBuilder<TradingJournalDataContext>();
