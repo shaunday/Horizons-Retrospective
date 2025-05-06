@@ -4,7 +4,7 @@ using System;
 
 namespace HsR.Journal.Infrastructure
 {
-    public static class DbConnectionInfo
+    public static class DbConnectionsWrapper
     {
         private const string DbUserVar = "DB_USER";
         private const string DbPassVar = "DB_PASS";
@@ -19,11 +19,25 @@ namespace HsR.Journal.Infrastructure
                 var dbUser = Environment.GetEnvironmentVariable(DbUserVar);
                 var dbPass = Environment.GetEnvironmentVariable(DbPassVar);
 
+                if (string.IsNullOrWhiteSpace(dbUser) || string.IsNullOrWhiteSpace(dbPass))
+                {
+                    throw new ApplicationException("Missing local DB credentials. Make sure DB_USER and DB_PASS are set.");
+                }
+
                 return $"Host=localhost;Port=5432;Database=HsR_Journal_Database;Username={dbUser};Password={dbPass};Include Error Detail=true";
             }
             else // Production
             {
                 var supabasePassword = Environment.GetEnvironmentVariable(SupabasePassVar);
+
+                if (string.IsNullOrWhiteSpace(supabasePassword))
+                {
+                    throw new ApplicationException("Missing Supabase DB password. Set SUPABASE_DB_PASS environment variable.");
+                }
+
+                //from packagemanager : $env:SUPABASE_DB_PASS="YourPasswordHere"
+
+
                 //ipv4 version
                 return $"User Id=postgres.cavtnmvmhxbttxtgvyyt;Password={supabasePassword};Server=aws-0-eu-central-1.pooler.supabase.com;Port=5432;Database=postgres";
                 

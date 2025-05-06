@@ -17,7 +17,7 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
 bool isDev = builder.Environment.IsDevelopment() /*&& false*/;
 
 #pragma warning disable CS8604 // Disable warning for possible null reference argument
-string? connectionString = DbConnectionInfo.GetConnectionStringByEnv(isDev);
+string? connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(isDev);
 builder.Services.ConfigureTradingJournalDbContext(connectionString, isDev);
 
 builder.ConfigureForEnvironment();

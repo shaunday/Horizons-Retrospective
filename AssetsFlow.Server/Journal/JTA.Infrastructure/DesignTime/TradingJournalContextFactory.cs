@@ -9,7 +9,7 @@ public class TradingJournalContextFactory : IDesignTimeDbContextFactory<TradingJ
 {
     public TradingJournalDataContext CreateDbContext(string[] args)
     {
-        var connectionString = DbConnectionInfo.GetConnectionStringByEnv();
+        var connectionString = DbConnectionsWrapper.GetConnectionStringByEnv();
         if (string.IsNullOrEmpty(connectionString))
         {
             throw new ApplicationException($"Please set  environment variables");

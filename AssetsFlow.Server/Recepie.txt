@@ -26,6 +26,11 @@
   - add connection/auth strings to env files
   - wrap up connection string getter, base on dev/prod
 
+  dotnet tool install --global dotnet-ef
+
+dotnet ef migrations add InitialCreate -p HsR.Journal.Infrastructure -s HsR.Journal.Infrastructure
+dotnet ef database update -p HsR.Journal.Infrastructure -s HsR.Journal.Infrastructure --connection "User Id=postgres.cavtnmvmhxbttxtgvyyt;Password=Delacuidad123;Server=aws-0-eu-central-1.pooler.supabase.com;Port=5432;Database=postgres"
+
 
 TODO:
 ! Spin up an EC2 (or similar)
