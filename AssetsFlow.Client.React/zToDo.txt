@@ -3,6 +3,7 @@ fix styling clutter
 from limor: add trade - different color, more visible possibly upthere on the header area
 from limor: title should be styled diff than the content, text aligned to the left
 from limor - icons instead of text "+" etc - check zoom homepage?
+defect: add trade doesnt refresh the added trade.
 
 add opened/closedat somehow (to overview?) 
 opened = first activate date, close = closed date, remove props from trade make em getters

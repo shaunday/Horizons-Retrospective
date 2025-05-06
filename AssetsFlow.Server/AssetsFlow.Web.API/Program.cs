@@ -14,7 +14,7 @@ builder.Host.UseSerilog();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-bool isDev = builder.Environment.IsDevelopment() /*&& false*/;
+bool isDev = builder.Environment.IsDevelopment() && false;
 
 #pragma warning disable CS8604 // Disable warning for possible null reference argument
 string? connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(isDev);

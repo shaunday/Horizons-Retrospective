@@ -1,15 +1,14 @@
 using HsR.Journal.DataContext;
-using HsR.Journal.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace HsR.Infrastructure;
+namespace HsR.Journal.Infrastructure;
 
 public class TradingJournalContextFactory : IDesignTimeDbContextFactory<TradingJournalDataContext>
 {
     public TradingJournalDataContext CreateDbContext(string[] args)
     {
-        var connectionString = DbConnectionsWrapper.GetConnectionStringByEnv();
+        var connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(false); //used for migration scripts, so set to production for now
         if (string.IsNullOrEmpty(connectionString))
         {
             throw new ApplicationException($"Please set  environment variables");

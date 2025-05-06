@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FilterControl from "@journalComponents/Filtering/FilterControl";
 import TradesGallery from "@journalComponents/TradesGallery";
 import { useFetchAndCacheTrades } from "@hooks/Journal/useFetchAndCacheTrades";
@@ -13,22 +13,24 @@ function JournalView() {
 
   if (isLoading) return <div>Loading trades...</div>;
   if (isError) return <div>Error fetching trades. Please try again later.</div>;
-  if (!trades?.length) return <div>No trades available.</div>;
 
   return (
-    <Stack id="journalMainBody" >
+    <Stack id="journalMainBody">
       {/* <FilterControl /> */}
-      
-      <TradesGallery />
-      
+
+      {trades?.length ? (
+        <TradesGallery />
+      ) : (
+        <div>No trades available.</div>
+      )}
+
       <Button
         className="element-to-be-centered"
-          onClick={onAddTrade}
-          disabled={isAddingTrade}
-        >
-          {isAddingTrade ? "Adding Trade..." : "Add a Trade"}
-        </Button>
-
+        onClick={onAddTrade}
+        disabled={isAddingTrade}
+      >
+        {isAddingTrade ? "Adding Trade..." : "Add a Trade"}
+      </Button>
     </Stack>
   );
 }
