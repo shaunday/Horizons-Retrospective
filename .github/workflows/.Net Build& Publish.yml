@@ -29,7 +29,7 @@ jobs:
           solution-path: ${{ matrix.solution-path }}
           
       - name: Publish
-        run: dotnet publish -c Release -r linux-x64 -o ./publish ${{ matrix.project-filepath }}
+        run: dotnet publish -c Release -r linux-arm64 -o ./publish ${{ matrix.project-filepath }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
