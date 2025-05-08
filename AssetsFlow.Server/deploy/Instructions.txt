@@ -1,0 +1,21 @@
+1. copy and fix permissions for the pem file
+mkdir -p ~/.ssh
+cp /mnt/c/Users/YourUsername/Downloads/your-key.pem ~/.ssh/
+chmod 400 ~/.ssh/your-key.pem
+
+2. scp required files
+scp -i ~/.ssh/HsR_aws.pem /mnt/d/tmp/* ubuntu@51.21.182.158:/home/ubuntu/
+
+3. establish ssh, check files (-a show hidden, which .env should be)
+ssh -i ~/.ssh/HsR_aws.pem ubuntu@51.21.182.158
+ls -a /home/ubuntu/
+
+
+4. fix windows line endings, and execute
+sed -i 's/\r//' deploy.sh
+./deploy.sh
+
+
+
+To cancel SSH session:
+exit
