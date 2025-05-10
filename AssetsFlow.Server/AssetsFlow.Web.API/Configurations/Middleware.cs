@@ -8,11 +8,11 @@ namespace HsR.Web.API.Configurations
     {
         internal static void ConfigureMiddleware(WebApplication app)
         {
+            app.UseCors("AllowReactApp");
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseCors("AllowReactApp");
-
                 //app.UseSwagger();
                 //app.UseSwaggerUI();
 
