@@ -52,6 +52,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ${{matrix.solution-path}}/Dockerfile
+          file: ${{matrix.solution-path}}/app/Dockerfile
           push: true
           tags: ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:1.0.0
