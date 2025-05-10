@@ -31,8 +31,10 @@
 
 7. Spin up an EC2 Free Tier
   - Make sure port 80 (or 443 if using HTTPS) is open in your EC2’s security group, ditto port 22 for SSH
+  - Turn off credit spec: unlimited > standard
   - Attach deployment files (docker-compose.yml, deploy.sh, .env): 
-    scp -i /path/to/your-key.pem /path/to/docker-compose.yml /path/to/deploy.sh /path/to/.env ec2-user@your-ec2-public-ip:/home/ubuntu/
+    .. more/detailed info here: AssetsFlow.Server/deploy/Instructions.txt
+
 
 
 Nice To Have:
