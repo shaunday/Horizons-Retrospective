@@ -8,8 +8,6 @@ namespace HsR.Web.API.Configurations
     {
         internal static void ConfigureMiddleware(WebApplication app)
         {
-            app.UseCors("AllowReactApp");
-
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -41,12 +39,14 @@ namespace HsR.Web.API.Configurations
             // Enable routing for the application.
             app.UseRouting();
 
+            // ✅ Apply CORS after routing, before endpoints
+            app.UseCors("AllowReactApp");
+
             // Apply authorization middleware.
             app.UseAuthorization();
 
             // Map controllers for request handling.
             app.MapControllers();
-
         }
     }
 }

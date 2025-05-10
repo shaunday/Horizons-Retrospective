@@ -12,6 +12,7 @@ services:
       - "80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - FRONTEND_URL=${FRONTEND_URL}
     volumes:
       - ./logs:/app/logs
+    env_file:
+      - .env # Load environment variables from .env file

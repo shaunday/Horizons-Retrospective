@@ -16,21 +16,12 @@ sed -i 's/\r//' deploy.sh
 ./deploy.sh
 
 
+5. for re-dploy.sh
+sed -i 's/\r//' re-deploy.sh
+
 
 To cancel SSH session:
 exit
 
 
-replacing container
-
-# Stop and remove the running containers
-sudo docker-compose down
-
-# Pull the latest image (optional if you rebuilt locally)
-sudo docker-compose pull
-
-# Recreate and start containers with the updated image
-sudo docker-compose up -d
-
-#cleanup
-sudo docker image prune -f
+sudo docker-compose logs
