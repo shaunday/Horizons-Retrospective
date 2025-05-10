@@ -50,7 +50,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
 		deploy\_Backend Deployment Recepie.txt = deploy\_Backend Deployment Recepie.txt
-		deploy\_Compute deployment instructions.txt = deploy\_Compute deployment instructions.txt
+		deploy\_AWS deploy recepie.txt = deploy\_AWS deploy recepie.txt
 	EndProjectSection
 EndProject
 Global

@@ -1,7 +1,9 @@
 ﻿TODO_
 - on remove, reset activation states or just re-check. open = at least 1 add exists
-- demo / 2 branches for demo package.. adjust github trigger?
 
+DEVOPS_
+- incoming traffic config on aws - everyone? port 80
+- demo / 2 branches for demo package.. adjust github trigger?
 
 
 

@@ -11,25 +11,43 @@ namespace HsR.Web.API.Configurations
             {
                 IdentityModelEventSource.ShowPII = true;
 
-                // Add CORS services
+                // Add CORS for local development
                 builder.Services.AddCors(options =>
                 {
                     options.AddPolicy("AllowReactApp", policy =>
                     {
-                        policy.WithOrigins("http://localhost:5173") // Allow requests from your React app
-                              .AllowAnyMethod()                   // Allow all HTTP methods (GET, POST, etc.)
-                              .AllowAnyHeader();                  // Allow all headers
+                        policy.WithOrigins("http://localhost:5173")
+                              .AllowAnyMethod()
+                              .AllowAnyHeader();
                     });
                 });
 
                 builder.Services.AddScoped<DatabaseSeeder>();
             }
-            
-            builder.WebHost.UseUrls(
-                Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true"
-                ? "http://0.0.0.0:80"
-                : "https://localhost:5000");
+            else
+            {
+                var frontendUrl = Environment.GetEnvironmentVariable("FRONTEND_URL");
+
+                if (!string.IsNullOrEmpty(frontendUrl))
+                {
+                    builder.Services.AddCors(options =>
+                    {
+                        options.AddPolicy("AllowReactApp", policy =>
+                        {
+                            policy.WithOrigins(frontendUrl)
+                                  .AllowAnyMethod()
+                                  .AllowAnyHeader();
+                        });
+                    });
+                }
+
+                builder.Services.AddScoped<DatabaseSeeder>();
+
+                builder.WebHost.UseUrls(
+                    Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true"
+                        ? "http://0.0.0.0:80"
+                        : "https://localhost:5000");
+            }
         }
     }
-
 }

@@ -9,17 +9,26 @@ sudo apt install -y docker.io
 # Verify Docker installation
 docker --version
 
-sudo curl -L "https://github.com/docker/compose/releases/download/latest/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+# Download the Docker Compose binary for Linux x86_64
+curl -LO https://github.com/docker/compose/releases/download/v2.36.0/docker-compose-linux-x86_64
 
-# Verify Docker Compose installation
+# Make it executable
+chmod +x docker-compose-linux-x86_64
+
+# Move it to /usr/local/bin for system-wide access
+sudo mv docker-compose-linux-x86_64 /usr/local/bin/docker-compose
+
+# Verify installation
 docker-compose --version
 
-# Pull the required images using docker-compose (without installing it)
-docker-compose pull
+# Optional: Navigate to the directory with docker-compose.yml
+# cd /path/to/your/project
 
-# Start the containers defined in docker-compose.yml
-docker-compose up -d
+# Pull the required images
+sudo docker-compose pull
 
-# (Optional) Check the status of the containers
-docker-compose ps
+# Start the containers
+sudo docker-compose up -d
+
+# Check container status
+sudo docker-compose ps
