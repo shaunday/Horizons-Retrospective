@@ -33,8 +33,7 @@
   - Make sure port 80 (or 443 if using HTTPS) is open in your EC2’s security group, ditto port 22 for SSH
   - Turn off credit spec: unlimited > standard
   - Attach deployment files (docker-compose.yml, deploy.sh, .env): 
-    .. more/detailed info here: AssetsFlow.Server/deploy/Instructions.txt
-
+    .. more/detailed info at: _Compute deployment instructions.txt
 
 
 Nice To Have:
