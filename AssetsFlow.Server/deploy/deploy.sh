@@ -6,6 +6,9 @@ sudo apt update
 # Install Docker if it's not already installed
 sudo apt install -y docker.io
 
+# Install Certbot and Nginx plugin
+sudo apt install -y certbot python3-certbot-nginx
+
 # Verify Docker installation
 docker --version
 
@@ -32,3 +35,11 @@ sudo docker-compose up -d
 
 # Check container status
 sudo docker-compose ps
+
+# Request SSL certificate for your domain using Certbot
+sudo certbot --nginx -d api.mywebthings.xyz
+
+# Renew the certificate periodically (add this cron job to renew)
+# You can add a cron job to renew SSL certificates automatically.
+# To test renewal, you can run:
+# sudo certbot renew --dry-run
