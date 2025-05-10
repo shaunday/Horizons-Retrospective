@@ -4,6 +4,10 @@
 echo "Stopping and removing existing containers..."
 sudo docker-compose down
 
+# Check if any container is using port 80 and stop it
+echo "Stopping any container using port 80..."
+sudo lsof -t -i:80 | xargs sudo kill -9
+
 # Pull the latest image (optional if you rebuilt locally)
 echo "Pulling the latest images..."
 sudo docker-compose pull

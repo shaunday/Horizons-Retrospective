@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://mywebthings.xyz",
+  "homepage": "http://mywebthings.xyz",
   "scripts": {
     "dev": "vite",
     "start": "vite",
