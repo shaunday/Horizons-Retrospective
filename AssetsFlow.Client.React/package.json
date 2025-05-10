@@ -3,12 +3,15 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://mywebthings.xyz/Hsr",  
   "scripts": {
     "dev": "vite",
     "start": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",  
+    "deploy": "gh-pages -d dist"  
   },
   "dependencies": {
     "@mantine/core": "^7.17.0",
@@ -34,6 +37,7 @@
     "postcss": "^8.5.3",
     "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",
-    "vite": "^6.0.7"
+    "vite": "^6.0.7",
+    "gh-pages": "^4.0.0"   
   }
 }
