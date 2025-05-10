@@ -1,6 +1,0 @@
-1. Create CNAME under public, with the domain name
-2. add homepage, gh pages deploy shizzle in package.json
-3. config DNS in the provider (add CNAME and A names)
-4. GitHub Pages > Settings > Pages - enable
-5. npm install --save-dev gh-pages
-6. npm run deploy (which is connected via package.json)
