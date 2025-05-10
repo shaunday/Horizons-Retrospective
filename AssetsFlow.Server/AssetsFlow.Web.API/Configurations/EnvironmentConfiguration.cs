@@ -47,7 +47,8 @@ namespace HsR.Web.API.Configurations
                     {
                         policy.WithOrigins(corsOrigin)
                               .AllowAnyMethod()
-                              .AllowAnyHeader();
+                              .AllowAnyHeader()
+                              .AllowCredentials();
                     });
                 });
             }
