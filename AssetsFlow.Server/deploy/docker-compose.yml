@@ -2,17 +2,16 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "80:80"      # HTTP traffic
-      - "443:443"    # HTTPS traffic
+      - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx_logs:/var/log/nginx  # Mount host directory for Nginx logs
-      - ./certs:/etc/ssl/certs   # Mount SSL certificates (certificate and private key)
     depends_on:
       - web
 
+
   web:
-    image: ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:1.0.0
+    image: ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:1.0.0  
     expose:
       - "80"
     environment:
