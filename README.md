@@ -1,4 +1,4 @@
-Demo at: http://mywebthings.xyz/
+Demo at: http://mywebthings.xyz/ (if it's down then I'm tinkering. Downtime won't be long.)
 
 ## Overview: 
 Stage1: A Trading Journal, allows the user to add and manage trade ideas and ongoing trade positions.
