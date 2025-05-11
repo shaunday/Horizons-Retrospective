@@ -1,0 +1,18 @@
+1. Configure in GH pages
+
+2. Docker- compose:  
+ports:
+      - "80:80"      # HTTP traffic
+      - "443:443"    # HTTPS traffic
+volumes:
+- ./certs:/etc/ssl/certs   # Mount SSL certificates (certificate and private key)
+
+3. deploy.sh
+# Install Certbot and Nginx plugin
+sudo apt install -y certbot python3-certbot-nginx
+
+# Request SSL certificate for your domain using Certbot
+sudo certbot --nginx -d api.mywebthings.xyz
+
+4. .env for asp.net
+5. .env.production and package.json for FE
