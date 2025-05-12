@@ -18,17 +18,24 @@ chmod +x docker-compose-linux-x86_64
 # Move it to /usr/local/bin for system-wide access
 sudo mv docker-compose-linux-x86_64 /usr/local/bin/docker-compose
 
-# Verify installation
+# Verify Docker Compose installation
 docker-compose --version
 
-# Optional: Navigate to the directory with docker-compose.yml
-# cd /path/to/your/project
+# Install Certbot and Nginx plugin
+sudo apt install -y certbot python3-certbot-nginx
 
 # Pull the required images
 sudo docker-compose pull
 
-# Start the containers
+# Start the containers (assumes Nginx is one of them)
 sudo docker-compose up -d
 
-# Check container status
+# Wait for Nginx to fully start before Certbot runs
+echo "Waiting for Nginx to start..."
+sleep 10
+
+# Request SSL certificate (replace with your actual domain)
+sudo certbot --nginx -d api.mywebthings.xyz
+
+# Optional: Display container status
 sudo docker-compose ps

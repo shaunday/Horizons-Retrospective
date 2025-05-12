@@ -4,6 +4,7 @@
 DEVOPS_
 - incoming traffic config on aws - everyone? port 80
 - demo / 2 branches for demo package.. adjust github trigger?
+- certbot renew
 
 
 
