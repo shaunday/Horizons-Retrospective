@@ -1,6 +1,7 @@
 ﻿TODO_
 - on remove, reset activation states or just re-check. open = at least 1 add exists
 - add demo DB
+- cron supabase?
 
 DEVOPS_
 - incoming traffic config on aws - everyone? port 80

@@ -3,3 +3,6 @@ Get containers_
 
 Execute in a container_
  sudo docker exec -it ID /bin/bash
+
+ apt-get update && apt-get install -y net-tools curl
+ netstat -tuln | grep -E '80|443'
