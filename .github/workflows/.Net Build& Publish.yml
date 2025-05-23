@@ -42,7 +42,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set timestamp version
-        run: echo "VERSION=$(date +v%Y-%m-%d_%H-%M)" >> $GITHUB_ENV
+        run: echo "VERSION=$(TZ='Asia/Jerusalem' date +v%Y-%m-%d_%H-%M)" >> $GITHUB_ENV
         
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
