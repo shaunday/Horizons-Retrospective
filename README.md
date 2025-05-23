@@ -1,4 +1,4 @@
-Demo at: http://mywebthings.xyz/ 
+Demo at: [http://mywebthings.xy`11z/ ](https://hsr.mywebthings.xyz/)
 
 (If it's down then I'm tinkering for a sec. Still need to setup HTTPS, and a few other things devops wise.)
 
