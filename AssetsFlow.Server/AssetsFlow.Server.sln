@@ -47,12 +47,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Entities.Factor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common.Asp.NET", "..\Common.Net\HsR.Common.Asp.NET\HsR.Common.Asp.NET.csproj", "{DF3880CD-316D-40F7-823E-0890EA3B7D0A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DeploymentInformation", "DeploymentInformation", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
-		deploy\z AWS deploy recepie.txt = deploy\z AWS deploy recepie.txt
-		deploy\z Backend Deployment Recepie.txt = deploy\z Backend Deployment Recepie.txt
-		z Docker devops.txt = z Docker devops.txt
+		deploy\b AWS deploy recepie.txt = deploy\b AWS deploy recepie.txt
+		deploy\a Backend Deployment Recepie.txt = deploy\a Backend Deployment Recepie.txt
 		z HTTPS Recepie.txt = z HTTPS Recepie.txt
+		z Docker devops.txt = z Docker devops.txt
 	EndProjectSection
 EndProject
 Global

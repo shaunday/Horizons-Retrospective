@@ -15,7 +15,7 @@ services:
     entrypoint: /bin/bash /start-nginx.sh
 
   web:
-    image: ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:1.0.0
+    image: ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:latest
     expose:
       - "80"
     environment:

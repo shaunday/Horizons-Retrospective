@@ -1,3 +1,8 @@
+a drawer with explanations: 
+component type groups, red line for missing
+origin > Idea. Add a trade and fill it > Open. Pending while element is being filled up
+
+add versions/about note
 
 fix styling clutter
 from limor: mark currently expanded element..
@@ -8,10 +13,6 @@ defect: add trade doesnt refresh the added trade.
 
 add opened/closedat somehow (to overview?) 
 opened = first activate date, close = closed date, remove props from trade make em getters
-
-a drawer with explanations: 
-component type groups, red line for missing
-origin > Idea. Add a trade and fill it > Open. Pending while element is being filled up
 
 2.
 change-history modal/tooltip
