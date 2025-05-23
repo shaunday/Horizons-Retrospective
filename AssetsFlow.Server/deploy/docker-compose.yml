@@ -5,11 +5,14 @@ services:
       - "80:80"      # HTTP traffic
       - "443:443"    # HTTPS traffic
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx_logs:/var/log/nginx  # Mount host directory for Nginx logs
-      - ./certs:/etc/ssl/certs   # Mount SSL certificates (certificate and private key)
-    depends_on:
-      - web
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/https-server.conf:/etc/nginx/conf.d/https-server.conf:ro
+      - ./certbot-webroot:/var/www/certbot          # HTTP-01 challenge files
+      - /etc/letsencrypt:/etc/letsencrypt
+      - ./nginx_logs:/var/log/nginx                   # Nginx logs
+      - ./nginx/start-nginx.sh:/start-nginx.sh
+    entrypoint: /bin/bash /start-nginx.sh
 
   web:
     image: ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:1.0.0
@@ -20,4 +23,4 @@ services:
     volumes:
       - ./logs:/app/logs
     env_file:
-      - .env # Load environment variables from .env file
+      - .env

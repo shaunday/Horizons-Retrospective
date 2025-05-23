@@ -1,11 +1,11 @@
 ﻿TODO_
 - on remove, reset activation states or just re-check. open = at least 1 add exists
+- add demo DB
 
 DEVOPS_
 - incoming traffic config on aws - everyone? port 80
 - demo / 2 branches for demo package.. adjust github trigger?
-- certbot renew
-
+- certbot renew - cron job?
 
 
 //testing= API tests (seeder?)

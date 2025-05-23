@@ -1,0 +1,5 @@
+Get containers_
+  sudo docker ps
+
+Execute in a container_
+ sudo docker exec -it ID /bin/bash
