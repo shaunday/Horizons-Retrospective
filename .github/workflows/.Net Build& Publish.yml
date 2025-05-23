@@ -50,6 +50,8 @@ jobs:
           context: .
           file: ${{matrix.solution-path}}/app/Dockerfile
           push: true
+          build-args: |
+              VERSION=${{ env.VERSION }}
           tags: |
             ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:${{ env.VERSION }}
             ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:latest
