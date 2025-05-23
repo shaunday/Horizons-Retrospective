@@ -1,6 +1,4 @@
-Demo at: http://mywebthings.xyz/ 
-
-(If it's down then I'm tinkering for a sec. Still need to setup HTTPS, and a few other things devops wise.)
+Demo at: [Trading Journal Demo ](https://hsr.mywebthings.xyz/)
 
 ## Overview: 
 Stage1: A Trading Journal, allows the user to add and manage trade ideas and ongoing trade positions.
