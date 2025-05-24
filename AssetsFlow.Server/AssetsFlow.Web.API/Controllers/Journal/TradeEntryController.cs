@@ -10,7 +10,7 @@ using HsR.Journal.Services;
 
 namespace HsR.Web.API.Controllers.Journal
 {
-    [Route("api/v{version:apiVersion}/journal/components")]
+    [Route("hsr-api/v{version:apiVersion}/journal/components")]
     [ApiVersion("1.0")]
     [ApiController]
     public class ContentUpdateController(IJournalRepositoryWrapper journalAccess, 

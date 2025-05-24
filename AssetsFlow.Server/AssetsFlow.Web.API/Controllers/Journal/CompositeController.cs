@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HsR.Web.API.Controllers.Journal
 {
-    [Route("api/v{version:apiVersion}/journal/trades/{tradeId}")]
+    [Route("hsr-api/v{version:apiVersion}/journal/trades/{tradeId}")]
     [ApiVersion("1.0")]
     [ApiController]
     public class CompositeController(IJournalRepositoryWrapper journalAccess, 

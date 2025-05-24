@@ -9,7 +9,7 @@ using HsR.Web.Services.Models.Journal;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-[Route("api/v{version:apiVersion}/journal/elements/{elementId}")]
+[Route("hsr-api/v{version:apiVersion}/journal/elements/{elementId}")]
 [ApiVersion("1.0")]
 [ApiController]
 public class TradeElementsController(IJournalRepositoryWrapper journalAccess,

@@ -1,11 +1,10 @@
-﻿TODO_
-- on remove, reset activation states or just re-check. open = at least 1 add exists
-- add demo DB
-
+﻿
 DEVOPS_
+- add demo DB
 - incoming traffic config on aws - everyone? port 80
-- demo / 2 branches for demo package.. adjust github trigger?
 - certbot renew - cron job?
+
+- on remove, reset activation states or just re-check. open = at least 1 add exists
 
 
 //testing= API tests (seeder?)
@@ -22,9 +21,8 @@ conluences check list = trends per tf, bb/ma distances
 filtering history
 users + authentication
 
-//deployment / production
+//deployment, devops
 - health check in docker-compose (nginx will await proper readiness)
-- container image version management
 
 //Expansion:
 Suspence? RQ Suspence

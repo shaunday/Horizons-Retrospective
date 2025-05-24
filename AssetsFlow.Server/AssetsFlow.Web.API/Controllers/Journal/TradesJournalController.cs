@@ -9,7 +9,7 @@ using System.Text.Json;
 
 namespace HsR.Web.API.Controllers.Journal
 {
-    [Route("api/v{version:apiVersion}/journal/trades")]
+    [Route("hsr-api/v{version:apiVersion}/journal/trades")]
     [ApiVersion("1.0")]
     [ApiController]
     public class TradesJournalController(IJournalRepositoryWrapper journalAccess, 

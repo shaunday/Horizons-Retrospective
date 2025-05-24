@@ -35,10 +35,6 @@
   - Deploy... _AWS deploy recepie.txt
 
 
-Nice To Have:
-  - Even for MVP, consider adding HTTPS via Nginx + Let’s Encrypt using Certbot /  use a managed solution like Cloudflare.
-  - Expanding Compute to 2 services: set up subdomains /2 ports
-
 
 🚀 AWS Strategy:
 Start with EC2 Free Tier (t3.micro):
