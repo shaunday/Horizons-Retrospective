@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Ping /health/ping endpoint
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://api.mywebthings.xyz/api/v1/health/ping)
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://api.mywebthings.xyz/hsr-api/v1/health/ping)
           echo "Response status: $STATUS"
           if [ "$STATUS" -ne 200 ]; then
             echo "Health check failed with status $STATUS"
