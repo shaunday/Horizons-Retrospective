@@ -32,6 +32,3 @@ Testing:
         https://tkdodo.eu/blog/testing-react-query
  -[] log/console writes ups
  -[] error management - sentry? 
-
-5. Remote
-https 

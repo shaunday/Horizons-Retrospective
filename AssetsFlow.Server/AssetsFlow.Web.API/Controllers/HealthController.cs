@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace AssetsFlowWeb.API.Controllers
 {
     [ApiController]
-    [Route("api/v{version:apiVersion}/health")]
+    [Route("hsr-api/v{version:apiVersion}/health")]
     public class HealthController(TradingJournalDataContext context, ILogger<HealthController> logger) : ControllerBase
     {
         private readonly TradingJournalDataContext _context = context;
