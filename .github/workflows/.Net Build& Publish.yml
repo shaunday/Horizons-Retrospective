@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "./AssetsFlow.Server/**"
+      - "AssetsFlow.Server/**"
       - ".1/PriceAlerts.Server/**"
   workflow_dispatch:
 
