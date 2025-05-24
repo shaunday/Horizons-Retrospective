@@ -3,11 +3,8 @@ using Asp.Versioning;
 using AssetsFlowWeb.Services.Models.Journal;
 using AutoMapper;
 using HsR.Journal.DataContext;
-using HsR.Journal.Entities;
 using HsR.Web.API.Controllers.Journal;
-using HsR.Web.Services.Models.Journal;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 [Route("hsr-api/v{version:apiVersion}/journal/elements/{elementId}")]
 [ApiVersion("1.0")]
