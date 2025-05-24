@@ -31,9 +31,6 @@ namespace HsR.Web.API.Configurations
                         await context.Response.WriteAsync("A database error occurred.");
                     }
                 });
-
-                // Enforce HTTPS redirection.
-                app.UseHttpsRedirection();
             }
 
             // Enable routing for the application.

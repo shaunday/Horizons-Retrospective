@@ -1,11 +1,6 @@
 ﻿
-DEVOPS_
 - add demo DB
-- incoming traffic config on aws - everyone? port 80
-- certbot renew - cron job?
-
 - on remove, reset activation states or just re-check. open = at least 1 add exists
-
 
 //testing= API tests (seeder?)
 

@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JTA.Journal.Entities\HsR.Journal.Entities.csproj" />
+    <ProjectReference Include="..\HsR.Journal.Entities\HsR.Journal.Entities.csproj" />
   </ItemGroup>
 
 </Project>
