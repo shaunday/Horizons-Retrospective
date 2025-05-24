@@ -27,11 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JTA.Journal.Repository\HsR.Journal.Repository.csproj" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\HsR.Journal.Repository\HsR.Journal.Repository.csproj" />
   </ItemGroup>
 
 </Project>

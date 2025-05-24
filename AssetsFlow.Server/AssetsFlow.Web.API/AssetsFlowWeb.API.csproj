@@ -37,10 +37,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common.Net\HsR.Common.Asp.NET\HsR.Common.Asp.NET.csproj" />
-    <ProjectReference Include="..\Journal\HsR.Journal.Services\HsR.Journal.Services.csproj" />
-    <ProjectReference Include="..\Journal\JTA.Infrastructure\HsR.Journal.Infrastructure.csproj" />
-    <ProjectReference Include="..\Journal\JTA.Journal.Repository\HsR.Journal.Repository.csproj" />
-    <ProjectReference Include="..\Journal\JTA.Journal.Seeder\HsR.Journal.Seeder.csproj" />
+    <ProjectReference Include="..\AssetsFlow.Journal\HsR.Infrastructure\HsR.Journal.Infrastructure.csproj" />
+    <ProjectReference Include="..\AssetsFlow.Journal\HsR.Journal.Repository\HsR.Journal.Repository.csproj" />
+    <ProjectReference Include="..\AssetsFlow.Journal\HsR.Journal.Seeder\HsR.Journal.Seeder.csproj" />
+    <ProjectReference Include="..\AssetsFlow.Journal\HsR.Journal.Services\HsR.Journal.Services.csproj" />
     <ProjectReference Include="..\AssetsFlow.Web.Services\AssetsFlowWeb.Services.csproj" />
   </ItemGroup>
 
