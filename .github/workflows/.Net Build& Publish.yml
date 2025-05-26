@@ -16,20 +16,20 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-       include:
-       - solution-path: ./AssetsFlow.Server
-         project-filepath: ./AssetsFlow.Server/AssetsFlow.Web.API/AssetsFlowWeb.API.csproj
-         build-docker: true
+        include:
+          - solution-path: ./AssetsFlow.Server
+            project-filepath: ./AssetsFlow.Server/AssetsFlow.Web.API/AssetsFlowWeb.API.csproj
+            build-docker: true
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        
+
       - name: .NET Build Composite
         uses: ./.github/actions/common-build-steps-dotnet
         with:
           solution-path: ${{ matrix.solution-path }}
-          
+
       - name: Publish
         run: dotnet publish -c Release -r linux-x64 -o ./publish ${{ matrix.project-filepath }}
 
@@ -43,18 +43,27 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set timestamp version
-        run: echo "VERSION=$(TZ='Asia/Jerusalem' date +v%Y-%m-%d_%H-%M)" >> $GITHUB_ENV
-        
+      - name: Set combined version (tag + timestamp)
+        id: set_version
+        run: |
+          TIMESTAMP=$(date -u +%Y-%m-%d_%H-%M-%S)
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            TAG_VERSION="${GITHUB_REF#refs/tags/}"
+            VERSION="${TAG_VERSION}-${TIMESTAMP}"
+          else
+            VERSION="v${TIMESTAMP}"
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Version set to $VERSION"
+
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ${{matrix.solution-path}}/app/Dockerfile
+          file: ${{ matrix.solution-path }}/app/Dockerfile
           push: true
           build-args: |
-              VERSION=${{ env.VERSION }}
+            VERSION=${{ env.VERSION }}
           tags: |
             ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:${{ env.VERSION }}
             ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:latest
-             
