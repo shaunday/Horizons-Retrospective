@@ -4,6 +4,9 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  __APP_VERSION__: JSON.stringify(pkg.version),
+  __APP_BUILD_DATE__: JSON.stringify(new Date().toISOString()),
+   __GIT_COMMIT__: JSON.stringify(execSync('git rev-parse --short HEAD').toString().trim()),
   server: {
     https: false,  
     host: 'localhost',
