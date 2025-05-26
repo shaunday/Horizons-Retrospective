@@ -2,6 +2,8 @@ name: Build & Publish .NET Projects
 
 on:
   push:
+    tags:
+      - 'v*'               # Trigger on any tag starting with 'v'
     branches:
       - main
     paths:
