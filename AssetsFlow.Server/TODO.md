@@ -1,8 +1,8 @@
 ﻿
 # TODO
 
-- remove risk from origin
 - add demo DB
+- certainty > list (low, med, high) ?
 - on remove, reset activation states or just re-check. open = at least 1 add exists
 
 ## testing

@@ -28,11 +28,12 @@
                 new DataElement("Price", ComponentType.PriceRelated) { IsRelevantForLocalOverview = true, UnitPriceRelevance = ValueRelevance.Positive },
                 new DataElement("Amount", ComponentType.PriceRelated) { IsRelevantForLocalOverview = true },
                 new DataElement("Total Cost", ComponentType.PriceRelated) {  IsRelevantForLocalOverview = true, TotalCostRelevance = ValueRelevance.Positive },
-            };
 
-            // Add Position Boundaries objects to the list
-            var positionBoundariesObjects = PositionBoundariesHelper.GetPositionBoundariesObjects();
-            addToPositionObjects.AddRange(positionBoundariesObjects);
+                new DataElement("SL", ComponentType.Risk) { IsRelevantForLocalOverview = true },
+                new DataElement("Target", ComponentType.ExitLogic) { IsRelevantForLocalOverview = true, },
+                new DataElement("Risk", ComponentType.Risk),
+                new DataElement("R:R", ComponentType.Risk)
+            };
 
             return addToPositionObjects;
         }
