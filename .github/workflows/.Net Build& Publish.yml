@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - 'v*'               # Trigger on any tag starting with 'v'
-    branches:
-      - main
     paths:
       - "AssetsFlow.Server/**"
       - ".1/PriceAlerts.Server/**"
@@ -24,6 +22,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Fetch Git tags
+        run: git fetch --tags
 
       - name: .NET Build Composite
         uses: ./.github/actions/common-build-steps-dotnet
@@ -64,6 +65,7 @@ jobs:
           push: true
           build-args: |
             VERSION=${{ env.VERSION }}
+            COMMIT_SHA=${{ github.sha }}
           tags: |
             ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:${{ env.VERSION }}
             ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:latest
