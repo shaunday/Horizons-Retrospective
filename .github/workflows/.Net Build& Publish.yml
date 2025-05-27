@@ -47,7 +47,7 @@ jobs:
       - name: Set version and timestamp separately
         id: set_version
         run: |
-          TIMESTAMP=$(TZ="Asia/Jerusalem" date +%Y-%m-%d_%H-%M-%S)
+          TIMESTAMP=$(TZ="Asia/Jerusalem" date --iso-8601=seconds)
       
           if [[ "${{ github.ref_type }}" == "tag" ]]; then
             VERSION="${{ github.ref_name }}"
