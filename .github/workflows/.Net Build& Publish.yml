@@ -22,8 +22,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-         fetch-depth: 0  # Fetches full history + tags
+
+      - name: Fetch Git tags
+        run: git fetch --tags
 
       - name: .NET Build Composite
         uses: ./.github/actions/common-build-steps-dotnet
