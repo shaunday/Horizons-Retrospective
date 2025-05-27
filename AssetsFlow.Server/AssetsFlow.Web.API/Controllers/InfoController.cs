@@ -16,8 +16,19 @@ namespace AssetsFlowWeb.API.Controllers
         public IActionResult GetInfo()
         {
             string? appVersion = Environment.GetEnvironmentVariable("APP_VERSION");
-            string? commitHash = Environment.GetEnvironmentVariable("COMMIT_SHA");
             string? buildTimeStamp = Environment.GetEnvironmentVariable("BUILD_TIMESTAMP");
+            string? commitHash = Environment.GetEnvironmentVariable("COMMIT_SHA");
+
+            if (!string.IsNullOrWhiteSpace(commitHash) && commitHash.Length > 7)
+            {
+                commitHash = commitHash[..7];
+            }
+
+            if (!string.IsNullOrWhiteSpace(buildTimeStamp))
+                buildTimeStamp = buildTimeStamp.Replace("_", "T");
+            else
+                buildTimeStamp = DateTime.Now.ToString("o");
+
 
             if (_env.IsDevelopment())
             {
@@ -47,7 +58,7 @@ namespace AssetsFlowWeb.API.Controllers
             return Ok(new
             {
                 beVersion = appVersion ?? "unknown",
-                buildTimeStamp = buildTimeStamp ?? DateTime.Now.ToString(),
+                buildTimeStamp = buildTimeStamp ?? "unknown",
                 gitCommit = commitHash ?? "unknown"
             });
         }

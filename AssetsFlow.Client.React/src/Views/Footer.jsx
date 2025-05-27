@@ -45,7 +45,7 @@ export default function Footer() {
         <Text size="xs"><b>FE:</b></Text>
         <Text size="xs">Version: <b>{__APP_VERSION__}</b></Text>
         <Text size="xs">|</Text>
-        <Text size="xs">Build: <b>{new Date(__APP_BUILD_DATE__).toLocaleDateString()}</b></Text>
+        <Text size="xs">Deployed: <b>{new Date(__APP_BUILD_DATE__).toLocaleDateString()}</b></Text>
         {showCommits && (
           <>
             <Text size="xs">|</Text>
@@ -62,7 +62,7 @@ export default function Footer() {
         <Text size="xs"><b>BE:</b></Text>
         <Text size="xs">Version: <b>{backendVersion}</b></Text>
         <Text size="xs">|</Text>
-        <Text size="xs">Build: <b>{new Date(backendBuildTimestamp).toLocaleDateString()}</b></Text>
+        <Text size="xs">Deployed: <b>{new Date(backendBuildTimestamp).toLocaleDateString()}</b></Text>
         {showCommits && (
           <>
             <Text size="xs">|</Text>

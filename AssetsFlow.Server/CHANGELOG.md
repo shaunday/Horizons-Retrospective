@@ -1,6 +1,6 @@
 
-## [0.9.3-0.9.7] - 2025-05-27
-Versioning attempts with : GH Actions/ Docker compose/file
+## [0.9.3-0.9.8] - 2025-05-27
+Versioning/ Date of release work:  env variables pass through dockerfile > GH Actions> Docker compose> BE > FE
 
 ## [0.9.2] - 2025-05-27
 ### Fixed
