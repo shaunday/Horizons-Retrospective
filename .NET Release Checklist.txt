@@ -1,0 +1,7 @@
+
+1. Fill in the version and the real date in the Changelog
+2. Merge to Main
+3. Tag in Git 
+
+> GH Actions : Publish Action will run on v commit on main
+  will extract version from the tag, combine with current date

@@ -1,31 +1,48 @@
 ﻿using Asp.Versioning;
+using HsR.Common;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 
 namespace AssetsFlowWeb.API.Controllers
 {
+    [Route("hsr-api/v{version:apiVersion}/info")]
+    [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/info")]
     public class InfoController : ControllerBase
     {
-        private readonly ApiVersioningOptions _apiVersioningOptions;
-
-        public InfoController(IOptions<ApiVersioningOptions> apiVersioningOptions)
-        {
-            _apiVersioningOptions = apiVersioningOptions.Value;
-        }
-
         [HttpGet]
         public IActionResult GetInfo()
         {
-            var appVersion = Environment.GetEnvironmentVariable("APP_VERSION") ?? "unknown";
+            string? appVersion = Environment.GetEnvironmentVariable("APP_VERSION");
+            string? commitHash = "unknown";
 
-            var defaultApiVersion = _apiVersioningOptions.DefaultApiVersion?.ToString() ?? "none";
+            // Always try to get commit hash
+            try
+            {
+                commitHash = GitWrappers.RunGitCommand("rev-parse --short HEAD");
+            }
+            catch
+            {
+                commitHash = "unknown";
+            }
+
+            // If in development and APP_VERSION not set, fall back to last Git tag
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            if (string.IsNullOrWhiteSpace(appVersion) && env == "Development")
+            {
+                try
+                {
+                    appVersion = GitWrappers.RunGitCommand("describe --tags --abbrev=0");
+                }
+                catch
+                {
+                    appVersion = "dev-unknown";
+                }
+            }
 
             return Ok(new
             {
-                image_tag = appVersion,
-                apiVersion = defaultApiVersion
+                beVersion = appVersion ?? "unknown",
+                gitCommit = commitHash
             });
         }
     }

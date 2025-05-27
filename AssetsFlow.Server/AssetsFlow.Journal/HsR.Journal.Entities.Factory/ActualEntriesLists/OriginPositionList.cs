@@ -15,11 +15,11 @@
                 new DataElement("Contras", ComponentType.EntryLogic),
                 new DataElement("Time Frame", ComponentType.ExitLogic)  { IsRelevantForTradeOverview = true },
                 new DataElement("Certainty", ComponentType.Emotions),
-            };
 
-            // Add Position Boundaries objects to the list
-            var positionBoundariesObjects = PositionBoundariesHelper.GetPositionBoundariesObjects();
-            tradeOriginObjects.AddRange(positionBoundariesObjects);
+                new DataElement("SL", ComponentType.Risk) { IsRelevantForLocalOverview = true },
+                new DataElement("Target", ComponentType.ExitLogic) { IsRelevantForLocalOverview = true, },
+                new DataElement("R:R", ComponentType.Risk)
+            };
 
             return tradeOriginObjects;
         }
