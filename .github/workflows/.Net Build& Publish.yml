@@ -44,17 +44,22 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set combined version (tag + timestamp)
+      - name: Set version and timestamp separately
         id: set_version
         run: |
           TIMESTAMP=$(TZ="Asia/Jerusalem" date +%Y-%m-%d_%H-%M-%S)
+      
           if [[ "${{ github.ref_type }}" == "tag" ]]; then
-            VERSION="${{ github.ref_name }}-${TIMESTAMP}"
+            VERSION="${{ github.ref_name }}"
           else
             VERSION="v${TIMESTAMP}"
           fi
+      
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "Version set to $VERSION"
+          echo "TIMESTAMP=$TIMESTAMP" >> $GITHUB_ENV
+      
+          echo "Version: $VERSION"
+          echo "Timestamp: $TIMESTAMP"
 
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
@@ -65,6 +70,7 @@ jobs:
           build-args: |
             VERSION=${{ env.VERSION }}
             COMMIT_SHA=${{ github.sha }}
+            BUILD_TIMESTAMP=${{ env.TIMESTAMP }}
           tags: |
             ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:${{ env.VERSION }}
             ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:latest
