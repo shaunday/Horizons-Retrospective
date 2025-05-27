@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - 'v*'               # Trigger on any tag starting with 'v'
-    branches:
-      - main
     paths:
       - "AssetsFlow.Server/**"
       - ".1/PriceAlerts.Server/**"
