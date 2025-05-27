@@ -2,8 +2,6 @@ a drawer with explanations:
 component type groups, red line for missing
 origin > Idea. Add a trade and fill it > Open. Pending while element is being filled up
 
-add BE versions/about note
-
 fix styling clutter
 from limor: mark currently expanded element..
 from limor: add trade - different color, more visible possibly upthere on the header area

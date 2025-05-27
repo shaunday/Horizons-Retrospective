@@ -6,10 +6,13 @@ const AboutDrawer = ({ opened, onClose }) => {
   const [loading, setLoading] = useState(true);
 
   return (
-    <Drawer
+    <Drawer 
       opened={opened}
       onClose={onClose}
       title="About this App"
+      offset={8} 
+      position='bottom'
+      radius="md" 
       padding="md"
       size="md"
     >

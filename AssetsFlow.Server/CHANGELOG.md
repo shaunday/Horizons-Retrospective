@@ -4,6 +4,7 @@
 
 ### Added
 - This changelog
+- Get app versions, commit hash
 
 ### Changed
 - todo.txt > md format
