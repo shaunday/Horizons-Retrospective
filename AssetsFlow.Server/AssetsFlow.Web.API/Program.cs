@@ -7,14 +7,14 @@ using HsR.Web.API.Repositories;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Serilog;
 
-LoggingConfiguration.ConfigureLogging();
-
 var builder = WebApplication.CreateBuilder(args);
+
+bool isDev = builder.Environment.IsDevelopment();
+
+LoggingConfiguration.ConfigureLogging(isDev);
 builder.Host.UseSerilog();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-
-bool isDev = builder.Environment.IsDevelopment();
 
 #pragma warning disable CS8604 // Disable warning for possible null reference argument
 string? connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(isDev);
