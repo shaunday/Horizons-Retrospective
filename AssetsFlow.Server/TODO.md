@@ -20,9 +20,6 @@
 - filtering history
 - users + authentication
 
-## deployment, devops
-- health check in docker-compose (nginx will await proper readiness)
-
 ## Expansion:
 Suspence? RQ Suspence
 Node.Js server
