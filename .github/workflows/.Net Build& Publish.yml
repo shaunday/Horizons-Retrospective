@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+         fetch-depth: 0  # Fetches full history + tags
 
       - name: .NET Build Composite
         uses: ./.github/actions/common-build-steps-dotnet
@@ -62,6 +64,7 @@ jobs:
           push: true
           build-args: |
             VERSION=${{ env.VERSION }}
+            COMMIT_SHA=${{ github.sha }}
           tags: |
             ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:${{ env.VERSION }}
             ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:latest
