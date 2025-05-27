@@ -17,6 +17,7 @@ namespace AssetsFlowWeb.API.Controllers
         {
             string? appVersion = Environment.GetEnvironmentVariable("APP_VERSION");
             string? commitHash = Environment.GetEnvironmentVariable("COMMIT_SHA");
+            string? buildTimeStamp = Environment.GetEnvironmentVariable("BUILD_TIMESTAMP");
 
             if (_env.IsDevelopment())
             {
@@ -46,6 +47,7 @@ namespace AssetsFlowWeb.API.Controllers
             return Ok(new
             {
                 beVersion = appVersion ?? "unknown",
+                buildTimeStamp = buildTimeStamp ?? DateTime.Now.ToString(),
                 gitCommit = commitHash ?? "unknown"
             });
         }

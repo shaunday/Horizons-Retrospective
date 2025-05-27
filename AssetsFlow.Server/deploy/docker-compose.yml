@@ -21,6 +21,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - COMMIT_SHA=${COMMIT_SHA}
+      - BUILD_TIMESTAMP=${BUILD_TIMESTAMP}
     volumes:
       - ./logs:/app/logs
     env_file:
