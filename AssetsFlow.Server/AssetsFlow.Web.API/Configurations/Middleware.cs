@@ -32,6 +32,10 @@ namespace HsR.Web.API.Configurations
                     }
                 });
             }
+            else
+            {
+                app.UseExceptionHandler("/error");  // Or your custom error handling endpoint
+            }
 
             // Enable routing for the application.
             app.UseRouting();
