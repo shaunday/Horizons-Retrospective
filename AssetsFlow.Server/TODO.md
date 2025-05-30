@@ -1,8 +1,5 @@
 ﻿
-# TODO
-
-- add demo DB
-- certainty > list (low, med, high) ?
+# TO__DO_BHAM_
 - on remove, reset activation states or just re-check. open = at least 1 add exists
 
 ## testing
@@ -22,6 +19,6 @@
 
 ## Expansion:
 Suspence? RQ Suspence
-Node.Js server
 GraphQL instead of REST
+Node.Js server
 MongoDB

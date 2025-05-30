@@ -1,21 +1,25 @@
 services:
   nginx:
     image: nginx:latest
+    container_name: nginx
     ports:
-      - "80:80"      # HTTP traffic
-      - "443:443"    # HTTPS traffic
+      - "80:80"
+      - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
       - ./nginx/https-server.conf:/etc/nginx/conf.d/https-server.conf:ro
-      - ./certbot-webroot:/var/www/certbot          # HTTP-01 challenge files
+      - ./certbot-webroot:/var/www/certbot
       - /etc/letsencrypt:/etc/letsencrypt
-      - ./nginx_logs:/var/log/nginx                   # Nginx logs
+      - ./nginx_logs:/var/log/nginx
       - ./nginx/start-nginx.sh:/start-nginx.sh
     entrypoint: /bin/bash /start-nginx.sh
+    networks:
+      - app-net
 
-  web:
+  web-api:
     image: ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:latest
+    container_name: aspapp
     expose:
       - "80"
     environment:
@@ -24,3 +28,8 @@ services:
       - ./logs:/app/logs
     env_file:
       - .env
+    networks:
+      - app-net
+
+networks:
+  app-net:

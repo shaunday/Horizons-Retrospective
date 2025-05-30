@@ -14,7 +14,7 @@
                 new DataElement("Trigger", ComponentType.EntryLogic),
                 new DataElement("Contras", ComponentType.EntryLogic),
                 new DataElement("Time Frame", ComponentType.ExitLogic)  { IsRelevantForTradeOverview = true },
-                new DataElement("Certainty", ComponentType.Emotions),
+                new DataElement("Certainty", ComponentType.Emotions) {Restrictions = ["Low", "Mid", "High"]} ,
 
                 new DataElement("SL", ComponentType.Risk) { IsRelevantForLocalOverview = true },
                 new DataElement("Target", ComponentType.ExitLogic) { IsRelevantForLocalOverview = true, },

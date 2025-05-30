@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 using System;
 
 namespace HsR.Infrastructure
@@ -19,15 +20,12 @@ namespace HsR.Infrastructure
                 options.UseNpgsql(connectionString, npgsqlOptions =>
                 {
                     npgsqlOptions.EnableRetryOnFailure();
+                    npgsqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                 });
 
                 if (isDev)
                 {
                     options.LogTo(Console.WriteLine, LogLevel.Information).EnableSensitiveDataLogging();
-                }
-                else
-                {
-                    //options.UseModel(TradingJournalDataContextModel.Instance);   //todo production
                 }
             });
             return services;
