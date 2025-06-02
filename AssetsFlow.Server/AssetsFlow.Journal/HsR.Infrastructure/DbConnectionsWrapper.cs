@@ -6,8 +6,8 @@ namespace HsR.Journal.Infrastructure
 {
     public static class DbConnectionsWrapper
     {
-        private const string DbUserVar = "DB_USER";
-        private const string DbPassVar = "DB_PASS";
+        private const string DbUserVar = "postgres";
+        private const string DbPassVar = "meefi_"; //dev
         private const string SupabasePassVar = "SUPABASE_DB_PASS";
 
         public static string GetConnectionStringByEnv(bool isDev = true)
