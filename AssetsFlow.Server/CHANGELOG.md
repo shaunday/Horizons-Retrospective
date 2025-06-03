@@ -1,4 +1,7 @@
 
+## [0.9.12] - 2025-06-03
+load supabase id correctly from the .env
+
 ## [0.9.11] - 2025-06-03
 typo fix
 
