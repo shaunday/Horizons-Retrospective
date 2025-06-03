@@ -1,4 +1,7 @@
 
+## [0.9.09] - 2025-05-27
+supabase connection string variable - added 1 for the id
+
 ## [0.9.3-0.9.8] - 2025-05-27
 Versioning/ Date of release work:  env variables pass through dockerfile > GH Actions> Docker compose> BE > FE
 
