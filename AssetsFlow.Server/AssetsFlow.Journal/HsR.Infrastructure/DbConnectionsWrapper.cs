@@ -9,6 +9,7 @@ namespace HsR.Journal.Infrastructure
         private const string DbUserVar = "DB_USER";
         private const string DbPassVar = "DB_PASS";
         private const string SupabasePassVar = "SUPABASE_DB_PASS";
+        private const string SupabaseIdVar = "SUPABASE_DB_ID";
 
         public static string GetConnectionStringByEnv(bool isDev = true)
         {
@@ -39,7 +40,7 @@ namespace HsR.Journal.Infrastructure
 
 
                 //ipv4 version
-                return $"User Id=postgres.cavtnmvmhxbttxtgvyyt;Password={supabasePassword};Server=aws-0-eu-central-1.pooler.supabase.com;Port=5432;Database=postgres";
+                return $"User Id=postgres.{SupabaseIdVar}};Password={supabasePassword};Server=aws-0-eu-central-1.pooler.supabase.com;Port=5432;Database=postgres";
                 
                 //ipv6 doesnt work here on local todo check on container
                 //return $"Host=db.cavtnmvmhxbttxtgvyyt.supabase.co;Database=postgres;Username=postgres;Password={supabasePassword};SSL Mode=Require;Trust Server Certificate=true";
