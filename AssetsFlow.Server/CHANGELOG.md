@@ -1,4 +1,7 @@
 
+## [0.9.11] - 2025-06-03
+typo fix
+
 ## [0.9.09] - 2025-06-03
 supabase connection string variable - added 1 for the id
 
