@@ -1,5 +1,5 @@
 
-## [0.9.09] - 2025-05-27
+## [0.9.09] - 2025-06-03
 supabase connection string variable - added 1 for the id
 
 ## [0.9.3-0.9.8] - 2025-05-27
