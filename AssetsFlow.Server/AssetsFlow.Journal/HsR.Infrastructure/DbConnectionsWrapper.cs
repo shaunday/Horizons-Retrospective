@@ -13,10 +13,12 @@ namespace HsR.Journal.Infrastructure
 
         public static string GetConnectionStringByEnv(bool isDev = true)
         {
-            DotNetEnv.Env.Load();
+            Console.WriteLine("Current working dir: " + Environment.CurrentDirectory);
 
             if (isDev)
             {
+                DotNetEnv.Env.Load();
+
                 var dbUser = Environment.GetEnvironmentVariable(DbUserVar);
                 var dbPass = Environment.GetEnvironmentVariable(DbPassVar);
 
@@ -29,6 +31,8 @@ namespace HsR.Journal.Infrastructure
             }
             else // Production
             {
+                DotNetEnv.Env.Load(@"..\..\AssetsFlow.Web.API\.env");
+
                 var supabasePassword = Environment.GetEnvironmentVariable(SupabasePassVar);
                 var supabaseConnectionId = Environment.GetEnvironmentVariable(SupabaseIdVar);
 
@@ -38,8 +42,10 @@ namespace HsR.Journal.Infrastructure
                     throw new ApplicationException("Missing Supabase DB password. Set SUPABASE_DB_PASS environment variable.");
                 }
 
-                //from packagemanager : $env:SUPABASE_DB_PASS="YourPasswordHere"
-
+                if (string.IsNullOrWhiteSpace(supabaseConnectionId))
+                {
+                    throw new ApplicationException("Missing Supabase DB User ID. Set SUPABASE_DB_ID environment variable.");
+                }
 
                 //ipv4 version
                 return $"User Id=postgres.{supabaseConnectionId};Password={supabasePassword};Server=aws-0-eu-central-1.pooler.supabase.com;Port=5432;Database=postgres";
