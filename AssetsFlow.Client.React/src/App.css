@@ -42,6 +42,7 @@ main {
   width: 100%;
   height: 100%;
   flex-Grow: 1;
+  flex-Shrink: 1;
 }
 
 ul {

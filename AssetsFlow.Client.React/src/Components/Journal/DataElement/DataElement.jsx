@@ -31,7 +31,7 @@ function DataElement({ cellInfo, onCellUpdate }) {
     display: "flex",
     gap: "5px",
     flexDirection: isOverview ? "row" : "column",
-    maxWidth: isOverview ? 350 : 150,
+    maxWidth: isOverview ? 250 : 150,
     minWidth : 75,
   };
 

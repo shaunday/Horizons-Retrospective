@@ -16,7 +16,9 @@ const textStyle = {
 const containerStyle = {
   height: "40px",
   position: "relative",
+  minWidth: 0,  
 };
+
 
 const hoverAreaStyle = {
   height: "20px",
@@ -34,6 +36,8 @@ const iconStyle = {
 
 const contentContainerStyle = {
   maxWidth: "100%",
+  flexShrink: 1,       // Allow it to shrink in row layout
+  overflow: "hidden",  // Important to clip children
   borderRadius: "6px",
   background: "#fefefe",
 };
