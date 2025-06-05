@@ -1,7 +1,7 @@
 
 # Changelog
 
-## [0.9.2] - 2025-06-05
+## [0.9.11] - 2025-06-05
 ### Fixed
 no restriction on width for collapsed element
 
