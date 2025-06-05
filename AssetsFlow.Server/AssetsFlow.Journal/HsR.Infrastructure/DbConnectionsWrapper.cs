@@ -6,8 +6,9 @@ namespace HsR.Journal.Infrastructure
 {
     public static class DbConnectionsWrapper
     {
-        private const string DbUserVar = "postgres";
-        private const string DbPassVar = "meefi_"; //dev
+        private const string DevDbUser = "postgres";
+        private const string DevDbPass= "meefi_"; //dev
+
         private const string SupabasePassVar = "SUPABASE_DB_PASS";
         private const string SupabaseIdVar = "SUPABASE_DB_ID";
 
@@ -17,17 +18,7 @@ namespace HsR.Journal.Infrastructure
 
             if (isDev)
             {
-                DotNetEnv.Env.Load();
-
-                var dbUser = Environment.GetEnvironmentVariable(DbUserVar);
-                var dbPass = Environment.GetEnvironmentVariable(DbPassVar);
-
-                if (string.IsNullOrWhiteSpace(dbUser) || string.IsNullOrWhiteSpace(dbPass))
-                {
-                    throw new ApplicationException("Missing local DB credentials. Make sure DB_USER and DB_PASS are set.");
-                }
-
-                return $"Host=localhost;Port=5432;Database=HsR_Journal_Database;Username={dbUser};Password={dbPass};Include Error Detail=true";
+                return $"Host=localhost;Port=5432;Database=HsR_Journal_Database;Username={DevDbUser};Password={DevDbPass};Include Error Detail=true";
             }
             else // Production
             {
