@@ -9,8 +9,5 @@ done
 # Once the certificate exists, add HTTPS config
 echo "Certificate found, applying HTTPS configuration..."
 
-# Copy the HTTPS config from the mounted nginx-confs directory
-cp /etc/nginx/conf.d/https-server.conf /etc/nginx/conf.d/active-https.conf
-
 # Start Nginx in foreground mode (Docker best practice)
 nginx -g 'daemon off;'
