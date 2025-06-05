@@ -1,6 +1,7 @@
 
 
-
+## [0.9.16] - 2025-06-05
+reworked position lists templates
 
 ## [0.9.15] - 2025-06-05
 track string collection changes using a value comparer - fixing ef core error

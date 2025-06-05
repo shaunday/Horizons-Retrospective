@@ -1,8 +1,5 @@
 ﻿
 # TODO
-Timeframe, target should be after entry logic
-Orin should have "invalidation" not sl
-Risk should maybe be a % ?
 
 - add demo DB
 - on remove, reset activation states or just re-check. open = at least 1 add exists
