@@ -9,13 +9,16 @@ namespace HsR.Journal.Infrastructure
         private const string DbUserVar = "postgres";
         private const string DbPassVar = "meefi_"; //dev
         private const string SupabasePassVar = "SUPABASE_DB_PASS";
+        private const string SupabaseIdVar = "SUPABASE_DB_ID";
 
         public static string GetConnectionStringByEnv(bool isDev = true)
         {
-            DotNetEnv.Env.Load();
+            Console.WriteLine("Current working dir: " + Environment.CurrentDirectory);
 
             if (isDev)
             {
+                DotNetEnv.Env.Load();
+
                 var dbUser = Environment.GetEnvironmentVariable(DbUserVar);
                 var dbPass = Environment.GetEnvironmentVariable(DbPassVar);
 
@@ -28,18 +31,24 @@ namespace HsR.Journal.Infrastructure
             }
             else // Production
             {
+                DotNetEnv.Env.Load(@"..\..\AssetsFlow.Web.API\.env");
+
                 var supabasePassword = Environment.GetEnvironmentVariable(SupabasePassVar);
+                var supabaseConnectionId = Environment.GetEnvironmentVariable(SupabaseIdVar);
+
 
                 if (string.IsNullOrWhiteSpace(supabasePassword))
                 {
                     throw new ApplicationException("Missing Supabase DB password. Set SUPABASE_DB_PASS environment variable.");
                 }
 
-                //from packagemanager : $env:SUPABASE_DB_PASS="YourPasswordHere"
-
+                if (string.IsNullOrWhiteSpace(supabaseConnectionId))
+                {
+                    throw new ApplicationException("Missing Supabase DB User ID. Set SUPABASE_DB_ID environment variable.");
+                }
 
                 //ipv4 version
-                return $"User Id=postgres.cavtnmvmhxbttxtgvyyt;Password={supabasePassword};Server=aws-0-eu-central-1.pooler.supabase.com;Port=5432;Database=postgres";
+                return $"User Id=postgres.{supabaseConnectionId};Password={supabasePassword};Server=aws-0-eu-central-1.pooler.supabase.com;Port=5432;Database=postgres";
                 
                 //ipv6 doesnt work here on local todo check on container
                 //return $"Host=db.cavtnmvmhxbttxtgvyyt.supabase.co;Database=postgres;Username=postgres;Password={supabasePassword};SSL Mode=Require;Trust Server Certificate=true";

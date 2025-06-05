@@ -1,4 +1,6 @@
 ## 1
+no restriction on width for collapsed element
+no refresh on add trade
 component type groups, red line for missing
 fix styling clutter
 

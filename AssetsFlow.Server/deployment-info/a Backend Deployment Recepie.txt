@@ -25,6 +25,7 @@
  - add connection/auth strings to env files
  - wrap up connection string getter, base on dev/prod
  - VERIFY MIGRATIONS FOLDER IS EMPTY
+ - Package Manager Console commands to create migrations and update database:
  - EntityFrameworkCore\Add-Migration InitialCreate -p HsR.Journal.Infrastructure -s HsR.Journal.Infrastructure
  - EntityFrameworkCore\Update-Database -p HsR.Journal.Infrastructure -s HsR.Journal.Infrastructure
  - (Connection string is set in the getter, used by the DesignTime ContextFactory)

@@ -1,13 +1,13 @@
 1. copy and fix permissions for the pem file
 mkdir -p ~/.ssh
-cp /mnt/d/tmp2/HsR_AF.pem ~/.ssh/
-chmod 400 ~/.ssh/HsR_AF.pem
+cp /mnt/d/tmp2/HsR_AF2.pem ~/.ssh/
+chmod 400 ~/.ssh/HsR_AF2.pem
 
 2. scp required files
-scp -i ~/.ssh/HsR_AF.pem -r /mnt/d/tmp/* ubuntu@13.61.16.230:/home/ubuntu/
+scp -i ~/.ssh/HsR_AF2.pem -r /mnt/d/tmp/* ubuntu@13.61.16.230:/home/ubuntu/
 
 3. establish ssh, check files (-a show hidden, which .env should be)
-ssh -i ~/.ssh/HsR_AF.pem ubuntu@13.61.16.230
+ssh -i ~/.ssh/HsR_AF2.pem ubuntu@13.61.16.230
 ls -a /home/ubuntu/
 
 4. fix windows line endings, and execute

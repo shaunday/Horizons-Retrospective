@@ -1,7 +1,17 @@
 
-## [0.9.09] - 2025-05-29
+
+## [0.9.13] - 2025-05-29
 - Error middleware and controller for production
 - Certainty > list (low, mid, high) 
+
+## [0.9.12] - 2025-06-03
+load supabase id correctly from the .env
+
+## [0.9.11] - 2025-06-03
+typo fix
+
+## [0.9.09] - 2025-06-03
+supabase connection string variable - added 1 for the id
 
 ## [0.9.3-0.9.8] - 2025-05-27
 Versioning/ Date of release work:  env variables pass through dockerfile > GH Actions> Docker compose> BE > FE
