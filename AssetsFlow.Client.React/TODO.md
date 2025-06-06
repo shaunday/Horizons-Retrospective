@@ -1,7 +1,7 @@
 ## 1
-no refresh on add trade
-component type groups, red line for missing
 fix styling clutter
+
+trade controls -   <TbDots /> - animation? red when inner data is missing, delete trade (with confirmation)
 
 from limor: mark currently expanded element..
 from limor: add trade - different color, more visible possibly upthere on the header area
