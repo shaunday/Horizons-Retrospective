@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { Group } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 import { getOverViewEntries } from "@services/getOverViewEntries"
 import EntriesList from "../DataElementGroups/EntriesList";
@@ -20,7 +21,12 @@ function TradeCollapsed({ trade }) {
     );
   }, [trade]);
 
-  return <EntriesList entries={EntriesForTradeOverView} overviewType={Constants.OverviewType.TRADE_OVERVIEW}/>;
+   return (
+     <Group wrap="wrap" spacing={10}>
+      <EntriesList entries={EntriesForTradeOverView} overviewType={Constants.OverviewType.TRADE_OVERVIEW} />
+      {/* Notifications here */}
+    </Group>
+  );
 }
 
 export default React.memo(TradeCollapsed);
