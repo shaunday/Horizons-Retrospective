@@ -19,7 +19,6 @@ const containerStyle = {
   minWidth: 0,  
 };
 
-
 const hoverAreaStyle = {
   height: "20px",
   position: "absolute",

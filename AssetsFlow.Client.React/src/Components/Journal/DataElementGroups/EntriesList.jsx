@@ -1,7 +1,7 @@
 import React from 'react';
 import DataElement from '../DataElement/DataElement';
 
-function EntriesList({ entries, processCellUpdate }) {
+function EntriesList({ entries, processCellUpdate, overviewType }) {
   return (
     <ul>
       {entries.map((entry) => (
@@ -9,6 +9,7 @@ function EntriesList({ entries, processCellUpdate }) {
           <DataElement
             cellInfo={entry}
             onCellUpdate={processCellUpdate}
+            overviewType={overviewType}
           />
         </li>
       ))}
@@ -16,4 +17,4 @@ function EntriesList({ entries, processCellUpdate }) {
   );
 }
 
-export default EntriesList;
+export default React.memo(EntriesList);

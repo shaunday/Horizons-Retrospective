@@ -20,7 +20,7 @@ function TradeCollapsed({ trade }) {
     );
   }, [trade]);
 
-  return <EntriesList entries={EntriesForTradeOverView} />;
+  return <EntriesList entries={EntriesForTradeOverView} overviewType={Constants.OverviewType.TRADE_OVERVIEW}/>;
 }
 
 export default React.memo(TradeCollapsed);

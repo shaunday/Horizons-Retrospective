@@ -45,6 +45,12 @@ export const DATA_RELEVANT_FOR_ORVERVIEW_STRING = 'isRelevantForTradeOverview'
 export const DATA_RELEVANT_FOR_LOCAL_ORVERVIEW_STRING = 'isRelevantForLocalOverview'
 export const COMPONENT_TYPE ='componentType'
 
+export const OverviewType = Object.freeze({
+  NONE: "None",
+  TRADE_OVERVIEW: "TradeOverview",
+  ELEMENT_OVERVIEW: "ElementOverview",
+});
+
 //respones
 export const NEW_DATA_RESPONSE_TAG = 'updatedCellData'
 export const NEW_ELEMENT_RESPONSE_TAG = 'updatedElement'
