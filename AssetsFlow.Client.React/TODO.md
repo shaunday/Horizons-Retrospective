@@ -1,7 +1,7 @@
 ## 1
 fix styling clutter
 
-trade controls -   <TbDots /> - animation? red when inner data is missing, delete trade (with confirmation)
+trade notifications - for when inner content is missing
 
 from limor: mark currently expanded element..
 from limor: add trade - different color, more visible possibly upthere on the header area
@@ -13,6 +13,7 @@ add opened/closedat somehow (to overview?)
 opened = first activate date, close = closed date, remove props from trade make em getters
 
 ## 2.
+delete trade action (when trade is expanded)
 change-history modal/tooltip
 Once an element is active, can restamp via popup (pick data/now) 
 add context/jotai for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
