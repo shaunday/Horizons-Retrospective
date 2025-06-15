@@ -9,9 +9,6 @@ from limor: title should be styled diff than the content, text aligned to the le
 from limor - icons instead of text "+" etc - check zoom homepage?
 defect: add trade doesnt refresh the added trade.
 
-add opened/closedat somehow (to overview?) 
-opened = first activate date, close = closed date, remove props from trade make em getters
-
 ## 2.
 delete trade action (when trade is expanded)
 change-history modal/tooltip
