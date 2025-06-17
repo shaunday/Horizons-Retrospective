@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HsR.Journal.DataContext;
 using HsR.Web.API.Controllers;
+using HsR.Web.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HsR.Web.API.Controllers.Journal
@@ -14,12 +15,18 @@ namespace HsR.Web.API.Controllers.Journal
         private protected readonly IJournalRepositoryWrapper _journalAccess;
         private protected readonly ILogger<JournalControllerBase> _logger;
         private protected readonly IMapper _mapper;
+        private protected readonly ITradesCacheService _cacheService;
 
-        public JournalControllerBase(IJournalRepositoryWrapper journalAccess, ILogger<JournalControllerBase> logger, IMapper mapper)
+        public JournalControllerBase(
+            IJournalRepositoryWrapper journalAccess, 
+            ILogger<JournalControllerBase> logger, 
+            IMapper mapper,
+            ITradesCacheService cacheService)
         {
             _journalAccess = journalAccess ?? throw new ArgumentNullException(nameof(journalAccess));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
         }
 
         protected ActionResult ResultHandling(object? result, string logEntry, params string[] propertyNames)

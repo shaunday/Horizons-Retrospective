@@ -7,15 +7,23 @@ using HsR.Journal.DataContext;
 using HsR.Journal.Entities.TradeJournal;
 using AssetsFlowWeb.Services.Models.Journal;
 using HsR.Journal.Services;
+using HsR.Web.API.Services;
 
 namespace HsR.Web.API.Controllers.Journal
 {
     [Route("hsr-api/v{version:apiVersion}/journal/components")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class ContentUpdateController(IJournalRepositoryWrapper journalAccess, 
-            ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
+    public class ContentUpdateController : JournalControllerBase
     {
+        public ContentUpdateController(
+            IJournalRepositoryWrapper journalAccess,
+            ILogger<JournalControllerBase> logger,
+            IMapper mapper,
+            ITradesCacheService cacheService) : base(journalAccess, logger, mapper, cacheService)
+        {
+        }
+
         [HttpPatch("{componentId}")]
         public async Task<ActionResult<(DataElementModel newEntry, UpdatedStatesModel updatedStates)>>
                                                   UpdateDataComponent(string componentId, [FromBody] UpdateDataComponentRequest request)
@@ -30,6 +38,9 @@ namespace HsR.Web.API.Controllers.Journal
 
             (DataElementModel, UpdatedStatesModel) resAsModel = (_mapper.Map<DataElementModel>(updatedComponent), _mapper.Map<UpdatedStatesModel>(updatedStates));
 
+            // Invalidate cache when component content is updated and start reload
+           _cacheService.InvalidateCache();
+
             return ResultHandling(resAsModel, $"Could not update component: {componentId}", [NEW_CELL_DATA, NEW_STATES_WRAPPER]);
         }
 
@@ -38,6 +49,5 @@ namespace HsR.Web.API.Controllers.Journal
             public string Content { get; set; } = "";
             public string Info { get; set; } = "";
         }
-
     }    
 }

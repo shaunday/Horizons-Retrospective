@@ -1,16 +1,19 @@
-﻿
-using Asp.Versioning;
+﻿using Asp.Versioning;
 using AssetsFlowWeb.Services.Models.Journal;
 using AutoMapper;
 using HsR.Journal.DataContext;
 using HsR.Web.API.Controllers.Journal;
+using HsR.Web.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("hsr-api/v{version:apiVersion}/journal/elements/{elementId}")]
 [ApiVersion("1.0")]
 [ApiController]
-public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
-        ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
+public class TradeElementsController(
+    IJournalRepositoryWrapper journalAccess,
+    ILogger<JournalControllerBase> logger,
+    IMapper mapper,
+    ITradesCacheService cacheService) : JournalControllerBase(journalAccess, logger, mapper, cacheService)
 {
     [HttpDelete]
     public async Task<ActionResult<UpdatedStatesModel>> DeleteInterimTradeInput(string elementId)
@@ -22,6 +25,9 @@ public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
         }
 
         UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
+
+        // Invalidate cache when an element is deleted and start reload
+        _cacheService.InvalidateCache();
 
         return ResultHandling(updatedStates, $"Could not delete element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }
@@ -36,6 +42,9 @@ public class TradeElementsController(IJournalRepositoryWrapper journalAccess,
         }
 
         UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
+
+        // Invalidate cache when an element's timestamp is updated and start reload
+        _cacheService.InvalidateCache();
 
         return ResultHandling(updatedStates, $"Could not reactivate element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }

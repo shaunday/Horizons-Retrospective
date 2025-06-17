@@ -1,4 +1,7 @@
 
+## [0.9.501-b] - 2025-06-17
+- Caching
+- Pagination data into config
 
 ## [0.9.13] - 2025-05-29
 - Error middleware and controller for production

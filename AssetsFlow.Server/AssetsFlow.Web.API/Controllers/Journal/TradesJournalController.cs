@@ -6,36 +6,52 @@ using HsR.Journal.Entities;
 using HsR.Web.Services.Models.Journal;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using HsR.Web.API.Services;
 
 namespace HsR.Web.API.Controllers.Journal
 {
     [Route("hsr-api/v{version:apiVersion}/journal/trades")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class TradesJournalController(IJournalRepositoryWrapper journalAccess, 
-            ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
+    public class TradesJournalController : JournalControllerBase
     {
-        const int maxTradesPageSize = 20;
+        private readonly IConfigurationService _config;
+
+        public TradesJournalController(
+            IJournalRepositoryWrapper journalAccess,
+            ILogger<JournalControllerBase> logger,
+            IMapper mapper,
+            ITradesCacheService cacheService,
+            IConfigurationService config) : base(journalAccess, logger, mapper, cacheService)
+        {
+            _config = config;
+        }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(int pageNumber = 1, int pageSize = 10)
+        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(int pageNumber = 1, int pageSize = 0)
         {
-            pageSize = ValidatePageSize(pageSize);
+            pageSize = pageSize == 0 ? _config.Pagination.DefaultPageSize : ValidatePageSize(pageSize);
+            
+            // Try to get from cache first
+            var cachedTrades = await _cacheService.GetCachedTrades(pageNumber, pageSize);
+            if (cachedTrades != null)
+            {
+                return Ok(cachedTrades);
+            }
 
+            // If not in cache, get from database
             var (tradeEntities, paginationMetadata) = await _journalAccess.Journal.GetAllTradeCompositesAsync(pageNumber, pageSize);
-
+            var models = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradeEntities);
             SetPaginationHeader(paginationMetadata);
 
-            IEnumerable<TradeCompositeModel> resAsModels = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradeEntities);
-
-            return Ok(resAsModels);
+            return Ok(models);
         }
 
         [HttpGet("byFilter")]
         public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> 
-                                                    GetFilteredTrades(TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
+                                                    GetFilteredTrades(TradesFilterModel filter, int pageNumber = 1, int pageSize = 0)
         {
-            pageSize = ValidatePageSize(pageSize);
+            pageSize = pageSize == 0 ? _config.Pagination.DefaultPageSize : ValidatePageSize(pageSize);
 
             var (filteredTradesEntities, paginationMetadata) = await _journalAccess.Journal.GetFilteredTradesAsync(filter, pageNumber, pageSize);
 
@@ -50,26 +66,26 @@ namespace HsR.Web.API.Controllers.Journal
         public async Task<ActionResult<TradeCompositeModel>> AddTrade()
         {
             var positionComposite = await _journalAccess.Journal.AddTradeCompositeAsync();
-
             TradeCompositeModel resAsModel = _mapper.Map<TradeCompositeModel>(positionComposite);
+
+            // Invalidate cache when a new trade is added and start reload
+            _cacheService.InvalidateCache();
 
             return Ok(resAsModel);
         }
-
 
         #region Helper methods
 
         private int ValidatePageSize(int pageSize)
         {
-            return pageSize > maxTradesPageSize ? maxTradesPageSize : pageSize;
+            return pageSize > _config.Pagination.MaxPageSize ? _config.Pagination.MaxPageSize : pageSize;
         }
 
         private void SetPaginationHeader(PaginationMetadata paginationMetadata)
         {
             Response.Headers["X-Pagination"] = JsonSerializer.Serialize(paginationMetadata);
-        }        
+        }
 
         #endregion
-
     }
 }

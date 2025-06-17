@@ -5,6 +5,7 @@ using HsR.Journal.DataContext;
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.TradeJournal;
 using HsR.Journal.Services;
+using HsR.Web.API.Services;
 using HsR.Web.Services.Models.Journal;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +14,16 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("hsr-api/v{version:apiVersion}/journal/trades/{tradeId}")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class CompositeController(IJournalRepositoryWrapper journalAccess, 
-            ILogger<JournalControllerBase> logger, IMapper mapper) : JournalControllerBase(journalAccess, logger, mapper)
+    public class CompositeController : JournalControllerBase
     {
+        public CompositeController(
+            IJournalRepositoryWrapper journalAccess,
+            ILogger<JournalControllerBase> logger,
+            IMapper mapper,
+            ITradesCacheService cacheService) : base(journalAccess, logger, mapper, cacheService)
+        {
+        }
+
         #region Interim positions
 
         [HttpPost]
@@ -26,7 +34,10 @@ namespace HsR.Web.API.Controllers.Journal
                                                                     await _journalAccess.TradeElement.AddInterimPositionAsync(tradeId, isAdd);
 
             (TradeElementModel, UpdatedStatesModel) resAsModel =
-                         (_mapper.Map<TradeElementModel>(entryAndStates.newEntry), _mapper.Map<UpdatedStatesModel>(entryAndStates.updatedStates));
+                             (_mapper.Map<TradeElementModel>(entryAndStates.newEntry), _mapper.Map<UpdatedStatesModel>(entryAndStates.updatedStates));
+
+            // Invalidate cache when a position is modified and start reload
+            _cacheService.InvalidateCache();
 
             return ResultHandling(resAsModel, $"Could not add interim element on : {tradeId}", [NEW_ELEMENT_DATA, NEW_STATES_WRAPPER]);
         }
@@ -37,7 +48,10 @@ namespace HsR.Web.API.Controllers.Journal
             (InterimTradeElement newEval, UpdatedStatesCollation? updatedStates) newEvalAndStates = await _journalAccess.TradeElement.AddInterimEvalutationAsync(tradeId);
 
             (TradeElementModel, UpdatedStatesModel) resAsModel =
-                         (_mapper.Map<TradeElementModel>(newEvalAndStates.newEval), _mapper.Map<UpdatedStatesModel>(newEvalAndStates.updatedStates));
+                             (_mapper.Map<TradeElementModel>(newEvalAndStates.newEval), _mapper.Map<UpdatedStatesModel>(newEvalAndStates.updatedStates));
+
+            // Invalidate cache when an evaluation is added and start reload
+            _cacheService.InvalidateCache();
 
             return ResultHandling(resAsModel, $"Could not add new evaluation element on : {tradeId}", [NEW_ELEMENT_DATA, NEW_STATES_WRAPPER]);
         }
@@ -56,6 +70,10 @@ namespace HsR.Web.API.Controllers.Journal
             }
 
             UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
+
+            // Invalidate cache when a trade is closed and start reload
+            _cacheService.InvalidateCache();
+
             return ResultHandling(resAsModel, $"Could not close trade on : {tradeId}", [NEW_STATES_WRAPPER]);
         }
 

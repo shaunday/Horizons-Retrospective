@@ -56,6 +56,5 @@ namespace HsR.Journal.DataContext
 
             return (trades, paginationMetadata);
         }
-
     }
 }

@@ -21,6 +21,7 @@ filter by : status first, date first, show: idea, interim, closed
 filtering -... in client? / adjust data call api
 
 ## 3.
+free flow string with AI to turn it into a trade object
 from limor: edit > expand the object and edit in place?
 obfuscate amounts/costs for anon view - a method (in the user context?)
 sector thoughts
