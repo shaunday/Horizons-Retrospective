@@ -1,8 +1,8 @@
+using AssetsFlowWeb.API.Configurations;
 using HsR.Infrastructure;
 using HsR.Journal.DataContext;
 using HsR.Journal.DataSeeder;
 using HsR.Journal.Infrastructure;
-using HsR.Web.API.Configuration;
 using HsR.Web.API.Configurations;
 using HsR.Web.API.Repositories;
 using HsR.Web.API.Services;
@@ -17,9 +17,7 @@ LoggingConfiguration.ConfigureLogging(isDev);
 builder.Host.UseSerilog();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-// Add configuration
-builder.Services.Configure<PaginationSettings>(builder.Configuration.GetSection("PaginationSettings"));
-builder.Services.Configure<CacheSettings>(builder.Configuration.GetSection("CacheSettings"));
+builder.Services.AddConfigurationServices(builder.Configuration);
 
 #pragma warning disable CS8604 // Disable warning for possible null reference argument
 string? connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(isDev);
@@ -32,13 +30,7 @@ builder.Services.AddConfiguredControllers();
 builder.Services.AddCustomAutoMapper();
 builder.Services.AddRepositories();
 builder.Services.AddCustomApiVersioning();
-builder.Services.AddMemoryCache();
-builder.Services.AddScoped<ITradesCacheService, TradesCacheService>();
-
-
-
-// Add services
-builder.Services.AddScoped<IConfigurationService, ConfigurationService>();
+builder.Services.AddCacheServices();
 
 var app = builder.Build();
 

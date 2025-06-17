@@ -4,7 +4,7 @@ using HsR.Web.API.Mapping;
 
 namespace HsR.Web.API.Configurations
 {
-    internal static class AutoMapperExtensions
+    internal static class AutoMapperConfigurations
     {
         internal static IServiceCollection AddCustomAutoMapper(this IServiceCollection services)
         {

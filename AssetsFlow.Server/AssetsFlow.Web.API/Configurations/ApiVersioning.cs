@@ -4,7 +4,7 @@ using HsR.Web.API.Mapping;
 
 namespace HsR.Web.API.Configurations
 {
-    internal static class ApiVersioningExtensions
+    internal static class ApiVersioning
     {
         internal static IServiceCollection AddCustomApiVersioning(this IServiceCollection services)
         {

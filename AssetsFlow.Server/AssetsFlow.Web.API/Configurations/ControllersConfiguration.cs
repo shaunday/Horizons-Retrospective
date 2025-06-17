@@ -6,7 +6,7 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace HsR.Web.API.Configurations
 {
-    internal static class ControllerExtensions
+    internal static class ControllersConfiguration
     {
         internal static IMvcBuilder AddConfiguredControllers(this IServiceCollection services)
         {
