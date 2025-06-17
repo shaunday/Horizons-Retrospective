@@ -24,13 +24,15 @@
             {
                 new DataElement("Reasoning", ComponentType.Thoughts),
                 new DataElement("Emotions", ComponentType.Emotions),
-                new DataElement("Time Frame", ComponentType.ExitLogic),
+
                 new DataElement("Price", ComponentType.PriceRelated) { IsRelevantForLocalOverview = true, UnitPriceRelevance = ValueRelevance.Positive },
                 new DataElement("Amount", ComponentType.PriceRelated) { IsRelevantForLocalOverview = true },
                 new DataElement("Total Cost", ComponentType.PriceRelated) {  IsRelevantForLocalOverview = true, TotalCostRelevance = ValueRelevance.Positive },
 
-                new DataElement("SL", ComponentType.Risk) { IsRelevantForLocalOverview = true },
+                new DataElement("Time Frame", ComponentType.ExitLogic)  {  IsRelevantForLocalOverview = true },
                 new DataElement("Target", ComponentType.ExitLogic) { IsRelevantForLocalOverview = true, },
+                new DataElement("SL", ComponentType.Risk) { IsRelevantForLocalOverview = true },
+
                 new DataElement("Risk", ComponentType.Risk),
                 new DataElement("R:R", ComponentType.Risk)
             };

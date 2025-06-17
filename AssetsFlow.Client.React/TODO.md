@@ -1,8 +1,7 @@
 ## 1
-no restriction on width for collapsed element
-no refresh on add trade
-component type groups, red line for missing
 fix styling clutter
+
+trade notifications - for when inner content is missing
 
 from limor: mark currently expanded element..
 from limor: add trade - different color, more visible possibly upthere on the header area
@@ -10,10 +9,8 @@ from limor: title should be styled diff than the content, text aligned to the le
 from limor - icons instead of text "+" etc - check zoom homepage?
 defect: add trade doesnt refresh the added trade.
 
-add opened/closedat somehow (to overview?) 
-opened = first activate date, close = closed date, remove props from trade make em getters
-
 ## 2.
+delete trade action (when trade is expanded)
 change-history modal/tooltip
 Once an element is active, can restamp via popup (pick data/now) 
 add context/jotai for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill

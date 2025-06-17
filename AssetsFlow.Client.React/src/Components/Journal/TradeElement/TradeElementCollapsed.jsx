@@ -14,7 +14,7 @@ function TradeElementCollapsed({ tradeElement }) {
 
     return (
         <>
-          <EntriesList entries={entriesForLocalOverview} />
+          <EntriesList entries={entriesForLocalOverview} overviewType={Constants.OverviewType.ElementOverview}/>
         </>
     );
 }

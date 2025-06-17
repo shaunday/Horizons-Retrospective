@@ -1,8 +1,9 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Box, ThemeIcon } from '@mantine/core';
 import { getGroupedEntries } from './groupedEntries';
 import { getComponentTypeIcon } from './componentTypeIcons';
 import EntriesList from './EntriesList';
+import * as Constants from "@constants/journalConstants";
 
 const styles = {
   box: {
@@ -41,7 +42,7 @@ function GroupedEntriesList({ entries, processCellUpdate }) {
             >
               <IconComponent size={20} />
             </ThemeIcon>
-            <EntriesList entries={entries} processCellUpdate={processCellUpdate} />
+            <EntriesList entries={entries} processCellUpdate={processCellUpdate} overviewType={Constants.OverviewType.NONE}/>
           </Box>
         );
       })}

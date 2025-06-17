@@ -7,18 +7,19 @@
             var tradeOriginObjects = new List<DataElement>
             {
                 new DataElement("Ticker", ComponentType.Header) { IsRelevantForLocalOverview = true, IsRelevantForTradeOverview = true },
-                new DataElement("Long/Short", ComponentType.Header, "")
+                new DataElement("Direction", ComponentType.Header, "")
                                           {  IsRelevantForLocalOverview = true, IsRelevantForTradeOverview = true, Restrictions = ["Long", "Short"]},
-                new DataElement("Thesis", ComponentType.Thoughts) {  IsRelevantForLocalOverview = true, IsRelevantForTradeOverview = true },
-                new DataElement("Confluences", ComponentType.EntryLogic),
-                new DataElement("Trigger", ComponentType.EntryLogic),
-                new DataElement("Contras", ComponentType.EntryLogic),
-                new DataElement("Time Frame", ComponentType.ExitLogic)  { IsRelevantForTradeOverview = true },
-                new DataElement("Certainty", ComponentType.Emotions) {Restrictions = ["Low", "Mid", "High"]} ,
 
-                new DataElement("SL", ComponentType.Risk) { IsRelevantForLocalOverview = true },
+                new DataElement("Thesis", ComponentType.Thoughts) {  IsRelevantForLocalOverview = true, IsRelevantForTradeOverview = true },
+                new DataElement("Aligned TA", ComponentType.EntryLogic),
+                new DataElement("Sector/FA", ComponentType.EntryLogic),
+
+                new DataElement("Certainty", ComponentType.Emotions) {Restrictions = ["Low", "Mid", "High"]} ,
+                new DataElement("Contras", ComponentType.EntryLogic),
+
+                new DataElement("Invalidation", ComponentType.Risk) { IsRelevantForLocalOverview = true },
                 new DataElement("Target", ComponentType.ExitLogic) { IsRelevantForLocalOverview = true, },
-                new DataElement("R:R", ComponentType.Risk)
+                new DataElement("Time Frame", ComponentType.ExitLogic)  { IsRelevantForTradeOverview = true },
             };
 
             return tradeOriginObjects;

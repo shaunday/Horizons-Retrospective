@@ -57,7 +57,7 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
 
       {/* Render content */}
       {isCollapsed ? (
-        <TradeElementCollapsed tradeElement={tradeElement} isTradeOverview={false} />
+        <TradeElementCollapsed tradeElement={tradeElement}/>
       ) : (
         <TradeElementExpanded
           tradeElement={tradeElement}

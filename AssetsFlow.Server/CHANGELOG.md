@@ -3,7 +3,16 @@
 - Caching
 - Pagination data into config
 
-## [0.9.13] - 2025-05-29
+## [0.9.16] - 2025-06-05
+reworked position lists templates
+
+## [0.9.15] - 2025-06-05
+track string collection changes using a value comparer - fixing ef core error
+
+## [0.9.14] - 2025-06-05
+Fix nginx start script - dont copy/dup https-server, preventing double listenere on port 80
+
+## [0.9.13] - 2025-06-05
 - Error middleware and controller for production
 - Certainty > list (low, mid, high) 
 

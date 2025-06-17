@@ -1,13 +1,11 @@
 ﻿
 # TODO
-Timeframe, target should be after entry logic
-Orin should have "invalidation" not sl
-Risk should maybe be a % ?
-The property 'DataElement.Restrictions' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
-The property 'UserData.SavedSectors' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
 
 - add demo DB
 - on remove, reset activation states or just re-check. open = at least 1 add exists
+- add opened/closedat somehow (to overview?) 
+- opened = first activate date, close = closed date, remove props from trade make em getters? gotta be readonly anyhow
+- imemorycache? what can i cache?
 
 ## testing
 - API tests (seeder?)

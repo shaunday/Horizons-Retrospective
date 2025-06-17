@@ -13,7 +13,8 @@ namespace HsR.Journal.Repository.Configurations
             builder
                .Property(e => e.SavedSectors)
                .HasConversion(new JsonCollectionConverter())
-               .HasColumnType("jsonb");  // Make sure it's stored as json in PostgreSQL
+               .HasColumnType("jsonb")  // store as json in PostgreSQL
+               .Metadata.SetValueComparer(ValueComparers.StringCollectionComparer);
         }
     }
 }
