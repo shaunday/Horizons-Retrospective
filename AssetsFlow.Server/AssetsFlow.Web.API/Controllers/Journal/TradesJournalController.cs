@@ -49,7 +49,7 @@ namespace HsR.Web.API.Controllers.Journal
                 totalTradesCount = totalCount;
             }
 
-            SetPaginationHeader(totalTradesCount, pageSize, pageNumber);
+            SetPaginationHeaders(totalTradesCount, pageSize, pageNumber);
 
             return Ok(paginatedTradeDTOs);
         }
@@ -77,10 +77,11 @@ namespace HsR.Web.API.Controllers.Journal
             return pageSize;
         }
 
-        private void SetPaginationHeader(int totalCount, int pageSize, int pageNumber)
+        private void SetPaginationHeaders(int totalCount, int pageSize, int pageNumber)
         {
-            var paginationMetadata = new PaginationMetadata(totalCount, pageSize, pageNumber);
-            Response.Headers["X-Pagination"] = JsonSerializer.Serialize(paginationMetadata);
+            Response.Headers["X-Total-Count"] = totalCount.ToString();
+            Response.Headers["X-Page-Number"] = pageNumber.ToString();
+            Response.Headers["X-Page-Size"] = pageSize.ToString();
         }
 
         #endregion
