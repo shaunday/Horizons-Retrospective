@@ -61,7 +61,7 @@ namespace HsR.Web.API.Controllers.Journal
             TradeCompositeModel resAsModel = _mapper.Map<TradeCompositeModel>(positionComposite);
 
             // Invalidate cache when a new trade is added and start reload
-            _cacheService.InvalidateCache();
+            _cacheService.InvalidateAndReload();
 
             return Ok(resAsModel);
         }

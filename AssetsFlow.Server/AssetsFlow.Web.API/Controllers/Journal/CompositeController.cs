@@ -37,7 +37,7 @@ namespace HsR.Web.API.Controllers.Journal
                              (_mapper.Map<TradeElementModel>(entryAndStates.newEntry), _mapper.Map<UpdatedStatesModel>(entryAndStates.updatedStates));
 
             // Invalidate cache when a position is modified and start reload
-            _cacheService.InvalidateCache();
+            _cacheService.InvalidateAndReload();
 
             return ResultHandling(resAsModel, $"Could not add interim element on : {tradeId}", [NEW_ELEMENT_DATA, NEW_STATES_WRAPPER]);
         }
@@ -51,7 +51,7 @@ namespace HsR.Web.API.Controllers.Journal
                              (_mapper.Map<TradeElementModel>(newEvalAndStates.newEval), _mapper.Map<UpdatedStatesModel>(newEvalAndStates.updatedStates));
 
             // Invalidate cache when an evaluation is added and start reload
-            _cacheService.InvalidateCache();
+            _cacheService.InvalidateAndReload();
 
             return ResultHandling(resAsModel, $"Could not add new evaluation element on : {tradeId}", [NEW_ELEMENT_DATA, NEW_STATES_WRAPPER]);
         }
@@ -72,7 +72,7 @@ namespace HsR.Web.API.Controllers.Journal
             UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
 
             // Invalidate cache when a trade is closed and start reload
-            _cacheService.InvalidateCache();
+            _cacheService.InvalidateAndReload();
 
             return ResultHandling(resAsModel, $"Could not close trade on : {tradeId}", [NEW_STATES_WRAPPER]);
         }

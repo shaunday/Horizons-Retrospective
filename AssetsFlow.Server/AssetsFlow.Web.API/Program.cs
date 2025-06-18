@@ -38,11 +38,9 @@ if (isDev)
     await app.Services.SeedDatabaseAsync();
 
 // Preload trades cache
-using (var scope = app.Services.CreateScope())
-{
-    var cacheService = scope.ServiceProvider.GetRequiredService<ITradesCacheService>();
-    cacheService.LoadCache(); //launch and forget
-}
+var cacheService = app.Services.GetRequiredService<ITradesCacheService>();
+cacheService.InvalidateAndReload(); //launch and forget
+
 
 Middleware.ConfigureMiddleware(app);
 

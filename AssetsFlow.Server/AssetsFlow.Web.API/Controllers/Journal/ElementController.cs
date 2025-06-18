@@ -27,7 +27,7 @@ public class TradeElementsController(
         UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
 
         // Invalidate cache when an element is deleted and start reload
-        _cacheService.InvalidateCache();
+        _cacheService.InvalidateAndReload();
 
         return ResultHandling(updatedStates, $"Could not delete element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }
@@ -44,7 +44,7 @@ public class TradeElementsController(
         UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
 
         // Invalidate cache when an element's timestamp is updated and start reload
-        _cacheService.InvalidateCache();
+        _cacheService.InvalidateAndReload();
 
         return ResultHandling(updatedStates, $"Could not reactivate element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }

@@ -1,7 +1,7 @@
+using HsR.Web.API.Configuration;
+using HsR.Web.API.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using HsR.Web.API.Services;
-using HsR.Web.API.Configuration;
 
 namespace AssetsFlowWeb.API.Configurations
 {
@@ -14,7 +14,7 @@ namespace AssetsFlowWeb.API.Configurations
             services.Configure<CacheSettings>(configuration.GetSection("CacheSettings"));
 
             // Register services
-            services.AddScoped<IConfigurationService, ConfigurationService>();
+            services.AddSingleton<IConfigurationService, ConfigurationService>();
             
             return services;
         }
@@ -22,8 +22,8 @@ namespace AssetsFlowWeb.API.Configurations
         public static IServiceCollection AddCacheServices(this IServiceCollection services)
         {
             services.AddMemoryCache();
-            services.AddScoped<ITradesCacheService, TradesCacheService>();
-            
+            services.AddSingleton<ITradesCacheService, TradesCacheService>();
+
             return services;
         }
     }

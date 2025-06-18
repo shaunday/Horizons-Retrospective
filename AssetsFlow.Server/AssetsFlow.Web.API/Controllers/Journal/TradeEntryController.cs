@@ -39,7 +39,7 @@ namespace HsR.Web.API.Controllers.Journal
             (DataElementModel, UpdatedStatesModel) resAsModel = (_mapper.Map<DataElementModel>(updatedComponent), _mapper.Map<UpdatedStatesModel>(updatedStates));
 
             // Invalidate cache when component content is updated and start reload
-           _cacheService.InvalidateCache();
+           _cacheService.InvalidateAndReload();
 
             return ResultHandling(resAsModel, $"Could not update component: {componentId}", [NEW_CELL_DATA, NEW_STATES_WRAPPER]);
         }
