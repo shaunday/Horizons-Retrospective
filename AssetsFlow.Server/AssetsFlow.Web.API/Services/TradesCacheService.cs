@@ -13,6 +13,7 @@ namespace HsR.Web.API.Services
         Task<IEnumerable<TradeCompositeModel>?> GetCachedTrades(int pageNumber, int pageSize);
         Task LoadCache();
         void InvalidateCache();
+        int GetCachedTotalCount();
     }
 
     public class TradesCacheService : ITradesCacheService
@@ -23,6 +24,7 @@ namespace HsR.Web.API.Services
         private readonly ILogger<TradesCacheService> _logger;
         private readonly IConfigurationService _config;
         private const string CacheKeyPrefix = "trades_page_";
+        private const string TotalCountKey = "trades_total_count";
         private Task? _loadTask;
         private static readonly TimeSpan LoadWaitTimeout = TimeSpan.FromSeconds(2);
         private static readonly object _invalidationLock = new();
@@ -114,7 +116,7 @@ namespace HsR.Web.API.Services
         {
             string cacheKey = $"{CacheKeyPrefix}{pageNumber}_{pageSize}";
             
-            var (tradeEntities, _) = await _journalAccess.Journal.GetAllTradeCompositesAsync(pageNumber, pageSize);
+            var (tradeEntities, totalCount) = await _journalAccess.Journal.GetAllTradeCompositesAsync(pageNumber, pageSize);
             var models = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradeEntities);
 
             var cacheOptions = new MemoryCacheEntryOptions()
@@ -123,6 +125,7 @@ namespace HsR.Web.API.Services
                 .AddExpirationToken(new CancellationChangeToken(_cacheTokenSource!.Token));
 
             _cache.Set(cacheKey, models, cacheOptions);
+            _cache.Set(TotalCountKey, totalCount, cacheOptions);
             _logger.LogDebug("Loaded page {PageNumber} into cache", pageNumber);
         }
 
@@ -156,6 +159,11 @@ namespace HsR.Web.API.Services
                     _logger.LogError(ex, "Error during cache invalidation");
                 }
             }
+        }
+
+        public int GetCachedTotalCount()
+        {
+            return _cache.TryGetValue(TotalCountKey, out int totalCount) ? totalCount : 0;
         }
     }
 } 

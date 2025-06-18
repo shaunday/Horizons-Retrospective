@@ -8,23 +8,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.DataContext
 {
-    public partial class JournalRepository(TradingJournalDataContext dataContext) 
-                                                : JournalRepositoryBase(dataContext), IJournalRepository
+    public partial class JournalRepository(TradingJournalDataContext dataContext)
+                                                    : JournalRepositoryBase(dataContext), IJournalRepository
     {
-        public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
+        public async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
         {
             var query = _dataContext.TradeComposites.AsNoTracking().AsQueryable();
             return await GetPaginatedTradesAsync(query, pageNumber, pageSize);
         }
 
-        public async Task<(IEnumerable<TradeComposite>, PaginationMetadata)> GetFilteredTradesAsync(
-            TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
-        {
-            var query = _dataContext.TradeComposites.AsNoTracking().AsQueryable().ApplyFiltering(filter);
-            return await GetPaginatedTradesAsync(query, pageNumber, pageSize);
-        }
+        //public async Task<(IEnumerable<TradeComposite>, int TotalTradesCount)> GetFilteredTradesAsync(
+        //    TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
+        //{
+        //    var query = _dataContext.TradeComposites.AsNoTracking().AsQueryable().ApplyFiltering(filter);
+        //    return await GetPaginatedTradesAsync(query, pageNumber, pageSize);
+        //}
 
-      
         public async Task<TradeComposite> AddTradeCompositeAsync()
         {
             TradeComposite trade = new();
@@ -39,7 +38,7 @@ namespace HsR.Journal.DataContext
 
         //helper
 
-        private static async Task<(IEnumerable<TradeComposite>, PaginationMetadata)>
+        private static async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)>
                                                   GetPaginatedTradesAsync(IQueryable<TradeComposite> query, int pageNumber, int pageSize)
         {
             var totalCount = await query.CountAsync();
@@ -49,12 +48,7 @@ namespace HsR.Journal.DataContext
                         .Take(pageSize)
                         .ToListAsync();
 
-            var paginationMetadata = new PaginationMetadata(totalCount, pageSize, pageNumber)
-            {
-                TotalPageCount = (int)Math.Ceiling(totalCount / (double)pageSize)
-            };
-
-            return (trades, paginationMetadata);
+            return (trades, totalCount);
         }
     }
 }

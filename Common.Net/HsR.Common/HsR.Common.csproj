@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BaseClasses\" />
+    <Compile Remove="BaseClasses\**" />
+    <EmbeddedResource Remove="BaseClasses\**" />
+    <None Remove="BaseClasses\**" />
   </ItemGroup>
 
 </Project>
