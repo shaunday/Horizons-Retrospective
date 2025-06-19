@@ -5,6 +5,8 @@ import TradeExpanded from "./TradeExpanded";
 import TradeCollapsed from "./TradeCollapsed";
 import { useGetTradeById } from "@hooks/Journal/useGetTradeById";
 import TradeCompositeBadge from "./Badge/TradeCompositeBadge";
+import TradeNotifications from "./Controls/TradeNotifications";
+import TradeAdminControls from "./Controls/TradeAdminControls";
 
 function TradeWrapper({ tradeId, indexType }) {
   const { trade } = useGetTradeById(tradeId);
@@ -27,6 +29,7 @@ function TradeWrapper({ tradeId, indexType }) {
     display: "flex",
     alignItems: "center",
     height: "100%",
+    justifyContent: "space-between",
     background: isCollapsed? "none" : indexType === 1 ? "rgb(241, 242, 235)" : "rgb(231, 242, 235)"
   };
 
@@ -47,6 +50,11 @@ function TradeWrapper({ tradeId, indexType }) {
         {isCollapsed && <TradeCompositeBadge tradeComposite={trade} />}
       </div>
       {isCollapsed ? <TradeCollapsed trade={trade} /> : <TradeExpanded trade={trade} />}
+      <div style={{display: "flex", justifyContent: "flex-end"}}>
+        {isCollapsed && <TradeNotifications tradeComposite={trade} />}
+        {/* <TradeAdminControls trade={trade} /> */}
+      </div>
+
     </Paper>
   );
 }

@@ -2,6 +2,7 @@
 # TODO
 
 - add demo DB
+- rethink activation/ summary (maybe summary all activated elements only?) HasMissingContent on element?
 - on remove, reset activation states or just re-check. open = at least 1 add exists
 - add opened/closedat somehow (to overview?) 
 - opened = first activate date, close = closed date, remove props from trade make em getters? gotta be readonly anyhow

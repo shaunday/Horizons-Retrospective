@@ -1,13 +1,13 @@
 ## 1
-fix styling clutter
-
-trade notifications - for when inner content is missing
+make elementwrapper stretch horizontally
 
 from limor: mark currently expanded element..
 from limor: add trade - different color, more visible possibly upthere on the header area
 from limor: title should be styled diff than the content, text aligned to the left
 from limor - icons instead of text "+" etc - check zoom homepage?
 defect: add trade doesnt refresh the added trade.
+
+fix styling clutter
 
 ## 2.
 delete trade action (when trade is expanded)
@@ -18,6 +18,7 @@ filter by : status first, date first, show: idea, interim, closed
 filtering -... in client? / adjust data call api
 
 ## 3.
+1 main notifications bar? for progress
 pagination ui (parse X data)
 free flow string with AI to turn it into a trade object
 from limor: edit > expand the object and edit in place?

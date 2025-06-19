@@ -4,7 +4,7 @@ export const TRADE_ELEMENTS_STRING = 'tradeElements'
 export const TRADE_ENTRIES_STRING = 'entries'
 
 export const TRADE_STATUS = 'status'; 
-export const TRADE_ISPENDING = 'isPending'; 
+export const TRADE_ISPENDING = 'isAnyContentMissing'; 
 export const COMPOSITE_OPENED_AT = 'compositeOpenedAt'; 
 export const COMPOSITE_CLOSED_AT = 'compositeClosedAt'
 
@@ -44,6 +44,7 @@ export const DATA_TITLE_STRING = 'title'
 export const DATA_RELEVANT_FOR_ORVERVIEW_STRING = 'isRelevantForTradeOverview'
 export const DATA_RELEVANT_FOR_LOCAL_ORVERVIEW_STRING = 'isRelevantForLocalOverview'
 export const COMPONENT_TYPE ='componentType'
+export const DATA_COMPOSITEFK_STRING = 'tradeCompositeFK'
 
 export const OverviewType = Object.freeze({
   NONE: "None",

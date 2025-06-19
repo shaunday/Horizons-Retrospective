@@ -13,7 +13,6 @@ public class TradeComposite
 
     #region Status Logic
 
-    public bool IsPending => TradeElements.Any(ele => !ele.AllowActivation());
     public TradeStatus Status { get; set; } = TradeStatus.AnIdea;
 
     private void UpdateStatus(TradeStatus newStatus)

@@ -55,7 +55,6 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
         </ActionIcon>
       </div>
 
-      {/* Render content */}
       {isCollapsed ? (
         <TradeElementCollapsed tradeElement={tradeElement}/>
       ) : (

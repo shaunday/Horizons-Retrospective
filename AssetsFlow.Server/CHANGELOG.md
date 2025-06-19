@@ -1,5 +1,8 @@
 
 ## [0.9.501-b] - 2025-06-17
+### Changed
+- IsPending : Removed prop from the entity, renamed to IsAnyContentMissing in the DTO + set in the mapper 
+### Added
 - Caching
 - Pagination data into config
 
