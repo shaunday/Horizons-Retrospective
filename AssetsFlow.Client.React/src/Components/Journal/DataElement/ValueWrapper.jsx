@@ -13,14 +13,10 @@ const textStyle = {
 };
 
 const hoverAreaStyle = {
-  position: "absolute",
-  bottom: "-15px",
+  // position and bottom moved to className
 };
 
 const iconStyle = {
-  position: "absolute",
-  bottom: "-5px",
-  left: "50%",
   transform: "translateX(-50%)",
 };
 
@@ -48,9 +44,9 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
       <DataUpdateModal opened={modalOpened} onClose={closeModal} data={cellInfo} onSubmit={onValueChangeInitiated} />
 
       {!isOverview && (
-        <div className="h-5 w-full" style={hoverAreaStyle} ref={wrapperRef}>
+        <div className="h-5 w-full absolute -bottom-4" style={hoverAreaStyle} ref={wrapperRef}>
           {delayedHover && (
-            <ActionIcon variant="outline" onClick={openModal} style={iconStyle}>
+            <ActionIcon variant="outline" onClick={openModal} className="absolute -bottom-1 left-1/2" style={iconStyle}>
               <TbEdit size={20} />
             </ActionIcon>
           )}

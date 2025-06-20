@@ -30,11 +30,11 @@ export default function Footer() {
     <Group
       className="w-full px-10 py-2 flex items-center mt-3 border-t border-gray-300 text-xs"
     >
-      <Text size="xs" style={{ marginRight: 'auto', flexShrink: 0, fontSize: '0.85rem' }}>
+      <Text size="xs" className="mr-auto flex-shrink-0 text-sm">
         &copy; Shaun Day 2025
       </Text>
 
-      <Group spacing="xs" style={{ flexShrink: 0 }}>
+      <Group spacing="xs" className="flex-shrink-0">
         <Text size="xs"><b>FE:</b></Text>
         <Text size="xs">Version: <b>{__APP_VERSION__}</b></Text>
         <Text size="xs">|</Text>
@@ -47,11 +47,11 @@ export default function Footer() {
         )}
       </Group>
 
-      <Text size="xs" mx="xs" style={{ flexShrink: 0 }}>
+      <Text size="xs" mx="xs" className="flex-shrink-0">
         ___
       </Text>
 
-      <Group spacing="xs" style={{ flexShrink: 0 }}>
+      <Group spacing="xs" className="flex-shrink-0">
         <Text size="xs"><b>BE:</b></Text>
         <Text size="xs">Version: <b>{backendVersion}</b></Text>
         <Text size="xs">|</Text>
@@ -68,7 +68,7 @@ export default function Footer() {
         variant="subtle"
         size="xs"
         p="0"
-        style={{ marginLeft: 'auto' }}
+        className="ml-auto"
         onClick={() => setShowCommits((v) => !v)}
       >
         {showCommits ? '>>' : '<<'}

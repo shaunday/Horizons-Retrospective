@@ -7,14 +7,11 @@ import * as Constants from "@constants/journalConstants";
 
 const styles = {
   box: {
-    position: 'relative',
     border: '1px solid #ccc', 
     borderRadius: '8px', // Match Mantine's md radius
   },
   themeIcon: {
-    position: 'absolute',
-    top: 40,
-    left: -15,
+    // position, top, and left moved to className
   },
 };
 
@@ -31,12 +28,13 @@ function GroupedEntriesList({ entries, processCellUpdate }) {
           <Box
             key={groupKey}
             style={styles.box}  // Applying the extracted styles
-            className="py-2 px-2 pl-3 m-1"
+            className="py-2 px-2 pl-3 m-1 relative"
           >
             <ThemeIcon
               variant="light"
               size="md"
               radius="lg"
+              className="absolute top-10 -left-4"
               style={styles.themeIcon}
             >
               <IconComponent size={20} />

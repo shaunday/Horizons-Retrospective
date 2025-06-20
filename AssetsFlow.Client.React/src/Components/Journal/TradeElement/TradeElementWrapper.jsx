@@ -10,7 +10,6 @@ const styles = {
     display: "flex",
     alignItems: "center",
     background:" rgba(224, 208, 221, 0.32)",
-    position: "relative",
   },
 };
 
@@ -18,9 +17,6 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const badgeStyle = {
-    position: "absolute",
-    left: "-12px",
-    top: "50%",
     transform: "translateY(-50%)",
     borderRadius: "0 6px 6px 0",
     zIndex: 1,
@@ -33,8 +29,8 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
   };
 
   return (
-    <Paper style={styles.elementItem} className="py-1 px-2.5 pl-6 h-full">
-      <div style={badgeStyle}>
+    <Paper style={styles.elementItem} className="py-1 px-2.5 pl-6 h-full relative">
+      <div className="absolute -left-3 top-1/2" style={badgeStyle}>
         <TradeElementBadge tradeElement={tradeElement} />
       </div>
 
