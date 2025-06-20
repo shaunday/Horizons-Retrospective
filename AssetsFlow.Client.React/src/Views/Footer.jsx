@@ -28,14 +28,7 @@ export default function Footer() {
 
   return (
     <Group
-      style={{
-        width: '100%',
-        padding: '8px 40px',
-        display: 'flex',
-        alignItems: 'center',
-        borderTop: "1px solid #ccc",
-        fontSize: '0.75rem',
-      }}
+      className="w-full px-10 py-2 flex items-center mt-3 border-t border-gray-300 text-xs"
     >
       <Text size="xs" style={{ marginRight: 'auto', flexShrink: 0, fontSize: '0.85rem' }}>
         &copy; Shaun Day 2025
@@ -55,7 +48,7 @@ export default function Footer() {
       </Group>
 
       <Text size="xs" mx="xs" style={{ flexShrink: 0 }}>
-        |
+        ___
       </Text>
 
       <Group spacing="xs" style={{ flexShrink: 0 }}>

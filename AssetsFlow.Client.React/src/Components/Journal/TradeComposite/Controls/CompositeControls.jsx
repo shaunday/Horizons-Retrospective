@@ -44,7 +44,7 @@ function CompositeControls({ tradeComposite, onTradeActionSuccess }) {
       />
       <ProcessingAndSuccessMessage status={processingStatus} />
 
-      <div style={{ overflow: 'visible', height: '100%' }}>
+      <div className="overflow-visible h-full">
         <TradeClosingModal
           opened={isModalOpen}
           onClose={() => setIsModalOpen(false)}

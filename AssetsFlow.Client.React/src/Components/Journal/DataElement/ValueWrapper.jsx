@@ -10,20 +10,11 @@ const textStyle = {
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  maxWidth: "100%",
-};
-
-const containerStyle = {
-  height: "40px",
-  position: "relative",
-  minWidth: 0,  
 };
 
 const hoverAreaStyle = {
-  height: "20px",
   position: "absolute",
   bottom: "-15px",
-  width: "100%",
 };
 
 const iconStyle = {
@@ -34,7 +25,6 @@ const iconStyle = {
 };
 
 const contentContainerStyle = {
-  maxWidth: "100%",
   flexShrink: 1,       // Allow it to shrink in row layout
   overflow: "hidden",  // Important to clip children
   borderRadius: "6px",
@@ -48,17 +38,17 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const { delayedHover, ref: wrapperRef } = useDelayedHover(200);
 
   return (
-    <div className="container-with-centered-content" style={containerStyle}>
-      <div style={contentContainerStyle}>
+    <div className="container-with-centered-content h-10 relative min-w-0">
+      <div className="max-w-full" style={contentContainerStyle}>
         <Tooltip label={contentValue} disabled={contentValue.length < 20} withinPortal position="bottom">
-          <Text style={textStyle}>{contentValue}</Text>
+          <Text className="max-w-full" style={textStyle}>{contentValue}</Text>
         </Tooltip>
       </div>
 
       <DataUpdateModal opened={modalOpened} onClose={closeModal} data={cellInfo} onSubmit={onValueChangeInitiated} />
 
       {!isOverview && (
-        <div style={hoverAreaStyle} ref={wrapperRef}>
+        <div className="h-5 w-full" style={hoverAreaStyle} ref={wrapperRef}>
           {delayedHover && (
             <ActionIcon variant="outline" onClick={openModal} style={iconStyle}>
               <TbEdit size={20} />

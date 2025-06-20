@@ -30,8 +30,6 @@ function DataElement({ cellInfo, onCellUpdate, overviewType }) {
     display: "flex",
     gap: "5px",
     flexDirection: isOverview ? "row" : "column",
-    maxWidth: isOverview ? 250 : 150,
-    minWidth: 75,
     border: !contentValue && overviewType != Constants.OverviewType.TRADE_OVERVIEW ? "1px solid red" : "none",
   };
 
@@ -40,7 +38,7 @@ function DataElement({ cellInfo, onCellUpdate, overviewType }) {
       shadow="xs"
       radius="md"
       withBorder
-      className="container-with-centered-content px-1"
+      className={`container-with-centered-content px-1 ${isOverview ? 'max-w-60' : 'max-w-36'} min-w-18`}
       style={containerStyle}
     >
       <Text className="no-overflow-text-style">

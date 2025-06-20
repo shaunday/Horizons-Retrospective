@@ -9,7 +9,6 @@ const styles = {
   elementItem: {
     display: "flex",
     alignItems: "center",
-    height: "100%",
     background:" rgba(224, 208, 221, 0.32)",
     position: "relative",
   },
@@ -34,7 +33,7 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
   };
 
   return (
-    <Paper style={styles.elementItem} className="py-1 px-2.5 pl-6">
+    <Paper style={styles.elementItem} className="py-1 px-2.5 pl-6 h-full">
       <div style={badgeStyle}>
         <TradeElementBadge tradeElement={tradeElement} />
       </div>
@@ -43,8 +42,7 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
         <ActionIcon
           variant="subtle"
           onClick={() => setIsCollapsed((prev) => !prev)}
-          style={{ ...(isCollapsed ? {} : { height: 50 }) }}
-          className={!isCollapsed ? "mr-2" : ""}
+          className={isCollapsed ? "" : "mr-2 h-12"}
         >
           {isCollapsed ? (
             <TbChevronRight size={22} />

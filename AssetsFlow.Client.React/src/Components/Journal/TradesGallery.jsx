@@ -7,7 +7,6 @@ const styles = {
   container: {
     flex: 1,
     overflowY: "auto",
-    maxHeight: "100vh",
   },
   list: {
     flexDirection: "column",
@@ -22,7 +21,7 @@ function TradesGallery() {
   });
 
   return (
-    <div style={styles.container} className="m-1 p-1">
+    <div style={styles.container} className="m-1 p-1 max-h-screen">
       <ul style={styles.list} className="m-1">
         {cachedTradeIds.map((tradeId, index) => {
           const indexType = index % 2 === 0 ? 0 : 1;

@@ -28,23 +28,22 @@ function TradeWrapper({ tradeId, indexType }) {
     marginBottom: "5px",
     display: "flex",
     alignItems: "center",
-    height: "100%",
     justifyContent: "space-between",
     background: isCollapsed? "none" : indexType === 1 ? "rgb(241, 242, 235)" : "rgb(231, 242, 235)"
   };
 
   return (
-    <Paper shadow="md" style={tradeItemStyle} withBorder>
+    <Paper shadow="md" style={tradeItemStyle} withBorder className="h-full">
       <div style={badgeActionWrapperStyle}>
         <ActionIcon
           variant="subtle"
           onClick={() => setIsCollapsed((prev) => !prev)}
-          style={{ ...(isCollapsed ? {} : { height: 50 }) }}
+          className={isCollapsed ? "" : "h-12"}
         >
           {isCollapsed ? (
             <TbChevronDownRight size={22} />
           ) : (
-            <TbChevronUpLeft size={22} style={{ height: "50px" }} />
+            <TbChevronUpLeft size={22} className="h-12" />
           )}
         </ActionIcon>
         {isCollapsed && <TradeCompositeBadge tradeComposite={trade} />}
