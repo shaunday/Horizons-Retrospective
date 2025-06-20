@@ -4,9 +4,9 @@ import * as Constants from "@constants/journalConstants";
 
 function ActionButtons({ tradeStatus, handleActionClick, disallowInteractions }) {
     return (
-        <div style={{ marginTop: "10px", marginBottom: "5px" }} className="element-to-be-centered">
+        <div className="mt-2.5 mb-1.5 element-to-be-centered">
             <Button
-                mr={5}
+                className="mr-1"
                 onClick={() => handleActionClick(Constants.TradeActions.ADD)}
                 disabled={disallowInteractions}
             >
@@ -15,21 +15,21 @@ function ActionButtons({ tradeStatus, handleActionClick, disallowInteractions })
             {tradeStatus === Constants.TradeStatus.OPEN && (
                 <>
                     <Button
-                        mr={5}
+                        className="mr-1"
                         onClick={() => handleActionClick(Constants.TradeActions.REDUCE)}
                         disabled={disallowInteractions}
                     >
                         Reduce position
                     </Button>
                     <Button
-                        mr={5}
+                        className="mr-1"
                         onClick={() => handleActionClick(Constants.TradeActions.EVALUATE)}
                         disabled={disallowInteractions}
                     >
                         Add Evaluation
                     </Button>
                     <Button
-                        mr={5}
+                        className="mr-1"
                         onClick={() => handleActionClick(Constants.TradeActions.CLOSE)}
                         disabled={disallowInteractions}
                     >

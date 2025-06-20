@@ -8,12 +8,9 @@ const styles = {
     flex: 1,
     overflowY: "auto",
     maxHeight: "100vh",
-    margin: "3px",
-    padding: "5px",
   },
   list: {
     flexDirection: "column",
-    margin: "3px",
   },
 };
 
@@ -25,8 +22,8 @@ function TradesGallery() {
   });
 
   return (
-    <div style={styles.container}>
-      <ul style={styles.list}>
+    <div style={styles.container} className="m-1 p-1">
+      <ul style={styles.list} className="m-1">
         {cachedTradeIds.map((tradeId, index) => {
           const indexType = index % 2 === 0 ? 0 : 1;
           return (

@@ -42,21 +42,23 @@ function DataUpdateModal({ opened, onClose, onSubmit, data }) {
             data={textRestrictions}
           />
         ) : (
-          <Textarea mb={10} autosize maxRows={2}
+          <Textarea autosize maxRows={2}
             label="Value"
+            className="mb-2.5"
             {...form.getInputProps("value")}
           />
         )}
 
-        <Textarea mb={20} autosize maxRows={2}
+        <Textarea autosize maxRows={2}
           label="Change Details"
+          className="mb-5"
           {...form.getInputProps("changeDetails")}
         />
 
         <Button
           type="submit"
           disabled={!isRestrictedValid}
-          style={{ display: "block", margin: "0 auto" }}
+          className="block mx-auto"
         >
           Apply Changes
         </Button>

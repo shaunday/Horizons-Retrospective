@@ -25,10 +25,9 @@ function TradeClosingModal({ opened, onClose, onSubmit }) {
                     thousandSeparator=","
                     hideControls
                     {...form.getInputProps('closePrice')}
-                    mb={5}
-                    style={{ maxWidth: 300, display: 'block', margin: '0 auto' }}
+                    className="mb-1 max-w-xs block mx-auto"
                 />
-                <Button type="submit" mt={20} style={{ display: 'block', margin: '0 auto' }}>
+                <Button type="submit" className="mt-5 block mx-auto">
                     Apply Changes
                 </Button>
             </form>

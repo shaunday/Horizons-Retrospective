@@ -10,7 +10,6 @@ const styles = {
     display: "flex",
     alignItems: "center",
     height: "100%",
-    padding: "5px 10px 5px 23px", 
     background:" rgba(224, 208, 221, 0.32)",
     position: "relative",
   },
@@ -32,20 +31,20 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
     display: "flex",
     flexDirection: isCollapsed ? "row" : "column",
     gap: "4px",
-    marginRight: "5px",
   };
 
   return (
-    <Paper style={styles.elementItem}>
+    <Paper style={styles.elementItem} className="py-1 px-2.5 pl-6">
       <div style={badgeStyle}>
         <TradeElementBadge tradeElement={tradeElement} />
       </div>
 
-      <div style={chevronAndContentStyle}>
+      <div style={chevronAndContentStyle} className="mr-1">
         <ActionIcon
           variant="subtle"
           onClick={() => setIsCollapsed((prev) => !prev)}
-          style={{ ...(isCollapsed ? {} : { height: 50, marginRight: 7 }) }}
+          style={{ ...(isCollapsed ? {} : { height: 50 }) }}
+          className={!isCollapsed ? "mr-2" : ""}
         >
           {isCollapsed ? (
             <TbChevronRight size={22} />

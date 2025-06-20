@@ -28,7 +28,7 @@ const AboutDrawer = ({ opened, onClose }) => {
                     After an initial position is created, you can add <b>evaluations</b> (your thoughts on the market or trade), <b>reduce</b> or <b>add to</b> the position, and ultimately <b>terminate</b> it when closing the trade.
                 </Text>
 
-                <Divider my="sm" />
+                <Divider className="my-2" />
 
                 <Text>
                     A Trade Component/Element becomes <b>active</b> once all essential information is entered.
@@ -38,7 +38,7 @@ const AboutDrawer = ({ opened, onClose }) => {
                     Currently only allowing trade actions (expanding the trade) once all elements are active.
                 </Text>
 
-                <Divider my="sm" />
+                <Divider className="my-2" />
 
                 <Text>
                     Components are collapsed by default. Click on the component name to expand it and view its details.
@@ -49,9 +49,9 @@ const AboutDrawer = ({ opened, onClose }) => {
                 </Text>
 
 
-                <Divider my="sm" />
+                <Divider className="my-2" />
 
-                <Text size="sm" color="dimmed" mt="md">
+                <Text size="sm" color="dimmed" className="mt-4">
                     &copy; 2025 Shaun Day
                 </Text>
             </Stack>

@@ -38,10 +38,9 @@ function DataElement({ cellInfo, onCellUpdate, overviewType }) {
   return (
     <Paper
       shadow="xs"
-      px={5}
       radius="md"
       withBorder
-      className="container-with-centered-content"
+      className="container-with-centered-content px-1"
       style={containerStyle}
     >
       <Text className="no-overflow-text-style">

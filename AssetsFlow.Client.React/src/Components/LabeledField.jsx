@@ -1,4 +1,3 @@
-
 import React from "react";
 
 export const createLabeledFieldInfoStruct = (id, type, name, value = "") => {
@@ -7,7 +6,7 @@ export const createLabeledFieldInfoStruct = (id, type, name, value = "") => {
 
 function LabeledField({ info, onChange }) {
   return (
-    <div style={{ marginBottom: 10 }}>
+    <div className="mb-2.5">
       <label>{info.title}</label>
       <input
         type={info.type}
@@ -15,7 +14,7 @@ function LabeledField({ info, onChange }) {
         value={info.value}
         onChange={onChange}
         aria-label={info.title}
-        style={{ marginLeft: 5 }}
+        className="ml-1"
       />
     </div>
   );

@@ -10,8 +10,6 @@ const styles = {
     position: 'relative',
     border: '1px solid #ccc', 
     borderRadius: '8px', // Match Mantine's md radius
-    padding: '7px 7px 7px 13px', // top, right, bottom, left
-    margin: '5px',
   },
   themeIcon: {
     position: 'absolute',
@@ -33,6 +31,7 @@ function GroupedEntriesList({ entries, processCellUpdate }) {
           <Box
             key={groupKey}
             style={styles.box}  // Applying the extracted styles
+            className="py-2 px-2 pl-3 m-1"
           >
             <ThemeIcon
               variant="light"

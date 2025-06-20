@@ -5,11 +5,10 @@ import { ProcessingStatus } from "@constants/Constants";
 const successMessageStyle = {
   color: "green",
   fontWeight: "bold",
-  marginTop: "5px",
 };
 
 function SuccessMessage() {
-  return <div style={successMessageStyle}>✔️ Success!</div>;
+  return <div style={successMessageStyle} className="mt-1">✔️ Success!</div>;
 }
 
 const MemoizedSuccessMessage = React.memo(SuccessMessage);

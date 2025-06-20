@@ -1,5 +1,4 @@
 #vwrapper {
-  padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
@@ -22,12 +21,10 @@ main {
 }
 
 #journalMainBody {
-  margin: 0.5rem;
   flex: 2 1 auto;
 }
 
 #tradesMainBody {
-  margin: 0.5rem;
   flex: 1 1 auto;
 }
 
@@ -47,8 +44,6 @@ main {
 
 ul {
   list-style-type: none; /* Removes default list bullets */
-  padding: 0; /* Removes default padding */
-  margin: 0; /* Removes default margin */
   display: flex;
   gap: 5px; /* Adds spacing between child elements */
 }

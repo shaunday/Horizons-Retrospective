@@ -15,18 +15,11 @@ function TradeExpanded({ trade }) {
     processSummaryUpdate(newSummary);
   };
 
-  const gapValue = 7;
-
   return (
-    <div>
-      <ul style={{ display: "flex", flexDirection: "column" }}>
-        {trade[Constants.TRADE_ELEMENTS_STRING].map((ele, index, arr) => (
-          <li
-            key={ele.id}
-            style={{
-              marginBottom: index !== arr.length - 1 ? gapValue : 0,
-            }}
-          >
+    <div className="my-2">
+      <ul className="flex flex-col gap-3">
+        {trade[Constants.TRADE_ELEMENTS_STRING].map((ele) => (
+          <li key={ele.id}>
             <TradeElementWrapper
               tradeElement={ele}
               onElementContentUpdate={processEntryUpdate}
@@ -37,7 +30,7 @@ function TradeExpanded({ trade }) {
       </ul>
 
       {tradeSummary && (
-        <div style={{marginLeft: 15, marginTop: gapValue }}>
+        <div className="mt-3">
           <TradeElementCollapsed tradeElement={tradeSummary} />
         </div>
       )}
