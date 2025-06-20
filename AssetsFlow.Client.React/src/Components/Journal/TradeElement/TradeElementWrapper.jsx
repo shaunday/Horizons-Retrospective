@@ -18,7 +18,6 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
 
   const badgeStyle = {
     transform: "translateY(-50%)",
-    borderRadius: "0 6px 6px 0",
     zIndex: 1,
   };
 
@@ -30,7 +29,7 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
 
   return (
     <Paper style={styles.elementItem} className="py-1 px-2.5 pl-6 h-full relative">
-      <div className="absolute -left-3 top-1/2" style={badgeStyle}>
+      <div className="absolute -left-3 top-1/2 rounded-md" style={badgeStyle}>
         <TradeElementBadge tradeElement={tradeElement} />
       </div>
 

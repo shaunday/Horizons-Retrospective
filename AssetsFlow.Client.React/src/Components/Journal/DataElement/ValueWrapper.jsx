@@ -23,7 +23,6 @@ const iconStyle = {
 const contentContainerStyle = {
   flexShrink: 1,       // Allow it to shrink in row layout
   overflow: "hidden",  // Important to clip children
-  borderRadius: "6px",
   background: "#fefefe",
 };
 
@@ -35,7 +34,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
 
   return (
     <div className="container-with-centered-content h-10 relative min-w-0">
-      <div className="max-w-full" style={contentContainerStyle}>
+      <div className="max-w-full rounded-md" style={contentContainerStyle}>
         <Tooltip label={contentValue} disabled={contentValue.length < 20} withinPortal position="bottom">
           <Text className="max-w-full" style={textStyle}>{contentValue}</Text>
         </Tooltip>

@@ -8,7 +8,7 @@ function Header() {
 
   return (
     <>
-      <Flex p="sm" justify="space-between" align="center" style={{ borderBottom: "1px solid #ccc" }}>
+      <Flex p="sm" justify="space-between" align="center" className="border-b border-gray-300">
         <Box>
           <Title order={2}>Horizons / Retrospective</Title>
           <Text mt={5} size="lg" c="dimmed">Assets Flow: Overview & Journal</Text>

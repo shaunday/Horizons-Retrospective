@@ -1,5 +1,6 @@
 ## 1
 make elementwrapper stretch horizontally
+make "missing" more subtle (lighter color?)
 
 from limor: mark currently expanded element..
 from limor: add trade - different color, more visible possibly upthere on the header area
