@@ -5,15 +5,6 @@ import { getComponentTypeIcon } from './componentTypeIcons';
 import EntriesList from './EntriesList';
 import * as Constants from "@constants/journalConstants";
 
-const styles = {
-  box: {
-    // border and borderRadius moved to className
-  },
-  themeIcon: {
-    // position, top, and left moved to className
-  },
-};
-
 function GroupedEntriesList({ entries, processCellUpdate }) {
   const groupedEntries = useMemo(() => getGroupedEntries(entries), [entries]);
 

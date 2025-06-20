@@ -12,16 +12,7 @@ const textStyle = {
   textOverflow: "ellipsis",
 };
 
-const hoverAreaStyle = {
-  // position and bottom moved to className
-};
-
-const iconStyle = {
-  transform: "translateX(-50%)",
-};
-
 const contentContainerStyle = {
-  flexShrink: 1,       // Allow it to shrink in row layout
   overflow: "hidden",  // Important to clip children
   background: "#fefefe",
 };
@@ -34,7 +25,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
 
   return (
     <div className="container-with-centered-content h-10 relative min-w-0">
-      <div className="max-w-full rounded-md" style={contentContainerStyle}>
+      <div className="max-w-full rounded-md flex-shrink" style={contentContainerStyle}>
         <Tooltip label={contentValue} disabled={contentValue.length < 20} withinPortal position="bottom">
           <Text className="max-w-full" style={textStyle}>{contentValue}</Text>
         </Tooltip>
@@ -45,7 +36,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
       {!isOverview && (
         <div className="h-5 w-full absolute -bottom-4" style={hoverAreaStyle} ref={wrapperRef}>
           {delayedHover && (
-            <ActionIcon variant="outline" onClick={openModal} className="absolute -bottom-1 left-1/2" style={iconStyle}>
+            <ActionIcon variant="outline" onClick={openModal} className="absolute -bottom-1 left-1/2 -translate-x-1/2" style={iconStyle}>
               <TbEdit size={20} />
             </ActionIcon>
           )}

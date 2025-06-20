@@ -16,11 +16,6 @@ const styles = {
 function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAction }) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const badgeStyle = {
-    transform: "translateY(-50%)",
-    zIndex: 1,
-  };
-
   const chevronAndContentStyle = {
     display: "flex",
     flexDirection: isCollapsed ? "row" : "column",
@@ -29,7 +24,7 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
 
   return (
     <Paper style={styles.elementItem} className="py-1 px-2.5 pl-6 h-full relative">
-      <div className="absolute -left-3 top-1/2 rounded-md" style={badgeStyle}>
+      <div className="absolute -left-3 top-1/2 rounded-md -translate-y-1/2">
         <TradeElementBadge tradeElement={tradeElement} />
       </div>
 
