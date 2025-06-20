@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import '@mantine/core/styles.css';
 import { MantineProvider } from '@mantine/core';
+import "./index.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {

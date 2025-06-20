@@ -5,7 +5,7 @@ function EntriesList({ entries, processCellUpdate, overviewType }) {
   return (
     <ul>
       {entries.map((entry) => (
-        <li key={entry.id} style={{padding:"3px"}}>
+        <li key={entry.id} className='p-1'>
           <DataElement
             cellInfo={entry}
             onCellUpdate={processCellUpdate}
