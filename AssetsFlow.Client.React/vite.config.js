@@ -3,8 +3,6 @@ import react from '@vitejs/plugin-react-swc'
 import path from 'path'
 import { execSync } from 'child_process'
 import pkg from './package.json'
-import autoprefixer from 'autoprefixer'
-import cssnano from 'cssnano'
 
 let gitCommit = 'unknown'
 try {
@@ -38,31 +36,5 @@ export default defineConfig({
   },
   build: {
     chunkSizeWarningLimit: 1000,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
-  },
-  css: {
-    postcss: {
-      plugins: [
-        autoprefixer,
-        cssnano({
-          preset: ['default', {
-            discardComments: { removeAll: true },
-            normalizeWhitespace: true,
-            discardUnused: true,
-            mergeRules: true,
-            mergeIdents: true,
-          }]
-        })
-      ]
-    }
-  },
-  optimizeDeps: {
-    include: ['@mantine/core', '@mantine/hooks', '@mantine/form'],
   },
 })
