@@ -6,13 +6,14 @@ import * as Constants from "@constants/journalConstants";
 function TradeNotifications({ tradeComposite }) {
   if (tradeComposite[Constants.TRADE_ISPENDING]) {
     return (
-      <Tooltip label="Some content is missing..." withArrow>
+      <Tooltip label="Some required fields are empty or invalid." withArrow>
         <Badge
           size="sm"
-          color="red"
+          color="red.3"
           variant="light"
           radius="md"
           leftSection={<TbProgressAlert size={14} />}
+          className="hover:bg-red-400 hover:text-white transition-colors"
         >
           Missing
         </Badge>

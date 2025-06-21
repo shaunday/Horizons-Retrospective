@@ -21,7 +21,7 @@ function TradeWrapper({ tradeId, indexType }) {
     <Paper 
       shadow="md" 
       withBorder 
-      className={clsx("h-full p-1 mb-1 flex items-center justify-between", {
+      className={clsx("h-full p-1 mb-1 flex items-center justify-start", {
         "bg-[rgb(241,242,235)]": !isCollapsed && indexType === 1,
         "bg-[rgb(231,242,235)]": !isCollapsed && indexType !== 1
       })}
@@ -48,7 +48,7 @@ function TradeWrapper({ tradeId, indexType }) {
         {isCollapsed && <TradeCompositeBadge tradeComposite={trade} />}
       </div>
       {isCollapsed ? <TradeCollapsed trade={trade} /> : <TradeExpanded trade={trade} />}
-      <div className="flex justify-end">
+      <div className="ml-auto">
         {isCollapsed && <TradeNotifications tradeComposite={trade} />}
         {/* <TradeAdminControls trade={trade} /> */}
       </div>
