@@ -27,9 +27,9 @@ function TradeWrapper({ tradeId, indexType }) {
   }
 
   return (
-    <Paper 
-      shadow="md" 
-      withBorder 
+    <Paper
+      shadow="md"
+      withBorder
       className={clsx("h-full p-1 mb-1 flex items-center justify-start cursor-pointer", {
         "bg-slate-100 border-slate-400": !isCollapsed,
         "bg-slate-50": isCollapsed
@@ -59,16 +59,15 @@ function TradeWrapper({ tradeId, indexType }) {
         </ActionIcon>
         {isCollapsed && <TradeCompositeBadge tradeComposite={trade} />}
       </div>
-      
+
       {/* Trade content that blocks background clicks */}
       <div data-no-toggle>
         {isCollapsed ? <TradeCollapsed trade={trade} /> : <TradeExpanded trade={trade} />}
       </div>
-      
+
       {/* Notifications that block background clicks */}
       <div className="ml-auto" data-no-toggle>
         {isCollapsed && <TradeNotifications tradeComposite={trade} />}
-        {/* <TradeAdminControls trade={trade} /> */}
       </div>
 
     </Paper>

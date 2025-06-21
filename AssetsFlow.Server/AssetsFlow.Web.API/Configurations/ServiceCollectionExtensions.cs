@@ -15,7 +15,7 @@ namespace AssetsFlowWeb.API.Configurations
 
             // Register services
             services.AddSingleton<IConfigurationService, ConfigurationService>();
-            
+
             return services;
         }
 

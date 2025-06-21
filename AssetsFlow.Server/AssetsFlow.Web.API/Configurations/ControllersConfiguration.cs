@@ -13,7 +13,6 @@ namespace HsR.Web.API.Configurations
             // Register services in the DI container
             services.AddTransient<CustomExceptionFilterAttribute>();
 
-
             return services
                 .AddControllers(options =>
                 {

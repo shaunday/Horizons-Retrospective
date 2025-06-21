@@ -24,7 +24,7 @@ namespace HsR.Journal.Entities
             CompositeRef = trade;
             CompositeFK = trade.Id;
             TradeActionType = actionType;
-        } 
+        }
         #endregion
 
         [Required]
@@ -33,6 +33,6 @@ namespace HsR.Journal.Entities
         [Required]
         public required TradeComposite CompositeRef { get; set; } = null!;
 
-        public override string ToString() => $"Id={Id}, Typr={TradeActionType}, Entries Count={Entries.Count}";
+        public override string ToString() => $"Id={Id}, Type={TradeActionType}, Entries Count={Entries.Count}";
     }
 }

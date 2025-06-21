@@ -42,8 +42,8 @@ namespace HsR.Web.API.Controllers.Journal
             {
                 totalTradesCount = _cacheService.GetCachedTotalCount();
             }
-            else  // If not in cache, get from database
-            {              
+            else // If not in cache, get from database
+            {
                 var (tradeEntities, totalCount) = await _journalAccess.Journal.GetAllTradeCompositesAsync(pageNumber, pageSize);
                 paginatedTradeDTOs = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradeEntities);
                 totalTradesCount = totalCount;
@@ -67,7 +67,6 @@ namespace HsR.Web.API.Controllers.Journal
         }
 
         #region Helper methods
-
         private int ValidatePageSize(int pageSize)
         {
             if (pageSize <= 0)
@@ -83,7 +82,6 @@ namespace HsR.Web.API.Controllers.Journal
             Response.Headers["X-Page-Number"] = pageNumber.ToString();
             Response.Headers["X-Page-Size"] = pageSize.ToString();
         }
-
         #endregion
     }
 }

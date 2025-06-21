@@ -15,7 +15,7 @@ export function useFetchAndCacheTrades() {
     fetchedTrades.forEach((trade) => {
       const tradeId = trade.id;
       queryClient.setQueryData(tradeKeysFactory.tradeAndIdArrayKey(tradeId), trade);
-  });
+    });
      
     return fetchedTrades;
   };

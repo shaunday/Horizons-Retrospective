@@ -9,20 +9,13 @@ using Microsoft.EntityFrameworkCore;
 namespace HsR.Journal.DataContext
 {
     public partial class JournalRepository(TradingJournalDataContext dataContext)
-                                                    : JournalRepositoryBase(dataContext), IJournalRepository
+        : JournalRepositoryBase(dataContext), IJournalRepository
     {
         public async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
         {
             var query = _dataContext.TradeComposites.AsNoTracking().AsQueryable();
             return await GetPaginatedTradesAsync(query, pageNumber, pageSize);
         }
-
-        //public async Task<(IEnumerable<TradeComposite>, int TotalTradesCount)> GetFilteredTradesAsync(
-        //    TradesFilterModel filter, int pageNumber = 1, int pageSize = 10)
-        //{
-        //    var query = _dataContext.TradeComposites.AsNoTracking().AsQueryable().ApplyFiltering(filter);
-        //    return await GetPaginatedTradesAsync(query, pageNumber, pageSize);
-        //}
 
         public async Task<TradeComposite> AddTradeCompositeAsync()
         {
@@ -36,17 +29,15 @@ namespace HsR.Journal.DataContext
             return trade;
         }
 
-        //helper
-
         private static async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)>
-                                                  GetPaginatedTradesAsync(IQueryable<TradeComposite> query, int pageNumber, int pageSize)
+            GetPaginatedTradesAsync(IQueryable<TradeComposite> query, int pageNumber, int pageSize)
         {
             var totalCount = await query.CountAsync();
 
             var trades = await query.OrderBy(t => t.Id)
-                        .Skip((pageNumber - 1) * pageSize)
-                        .Take(pageSize)
-                        .ToListAsync();
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
 
             return (trades, totalCount);
         }

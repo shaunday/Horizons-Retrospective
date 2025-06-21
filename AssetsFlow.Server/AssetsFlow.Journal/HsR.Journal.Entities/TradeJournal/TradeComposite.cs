@@ -40,7 +40,7 @@ public class TradeComposite
     public void Close()
     {
         UpdateStatus(TradeStatus.Closed);
-    } 
+    }
     #endregion
 
     public DateTime? OpenedAt { get; set; }

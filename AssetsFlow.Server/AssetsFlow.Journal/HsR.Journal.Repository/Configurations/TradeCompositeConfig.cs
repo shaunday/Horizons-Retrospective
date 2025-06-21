@@ -12,10 +12,6 @@ namespace HsR.Journal.Repository.Configurations
                  .WithOne()
                  .HasForeignKey<TradeComposite>("SummaryId"); //shadow prop
 
-            //builder
-            //    .HasOne(t => t.Summary)
-            //    .WithOne() 
-            //    .HasForeignKey<TradeSummary>(t => t.CompositeFK);
             builder.Navigation(tc => tc.Summary).AutoInclude();
 
             builder.HasMany(tc => tc.TradeElements)
