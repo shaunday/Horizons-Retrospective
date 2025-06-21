@@ -6,6 +6,7 @@ import { newStatesResponseParser } from "@services/newStatesResponseParser"
 import TradeElementWrapper from "../TradeElement/TradeElementWrapper";
 import TradeElementCollapsed from "../TradeElement/TradeElementCollapsed";
 import { TbChartBar } from "react-icons/tb";
+import clsx from "clsx";
 
 function TradeExpanded({ trade }) {
   const { tradeSummary, processEntryUpdate, processTradeAction, processSummaryUpdate } =
@@ -41,10 +42,12 @@ function TradeExpanded({ trade }) {
         </div>
         
         {trade[Constants.TRADE_STATUS] !== Constants.TradeStatus.CLOSED && (
-          <CompositeControls
-            tradeComposite={trade}
-            onTradeActionSuccess={processTradeAction}
-          />
+          <div className="mr-7">
+            <CompositeControls
+              tradeComposite={trade}
+              onTradeActionSuccess={processTradeAction}
+            />
+          </div>
         )}
       </div>
     </div>
