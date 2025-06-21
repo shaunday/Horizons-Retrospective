@@ -24,17 +24,24 @@ function DataUpdateModal({ opened, onClose, onSubmit, data }) {
     onClose();
   };
 
+  const handleModalClick = (e) => {
+    e.stopPropagation();
+  };
+
   // Check if the current value is allowed if there are restrictions
   const isRestrictedValid =
     !textRestrictionsExist || textRestrictions.includes(form.values.value);
 
   return (
-    <Modal size="lg" centered
+    <Modal 
+      size="lg" 
+      centered
       opened={opened}
       onClose={onClose}
       title={data[Constants.DATA_TITLE_STRING]}
+      onClick={handleModalClick}
     >
-      <form onSubmit={form.onSubmit(handleSubmit)}>
+      <form onSubmit={form.onSubmit(handleSubmit)} onClick={handleModalClick}>
         {textRestrictionsExist ? (
           <DefaultSelect
             value={form.values.value}
@@ -59,6 +66,7 @@ function DataUpdateModal({ opened, onClose, onSubmit, data }) {
           type="submit"
           disabled={!isRestrictedValid}
           className="block mx-auto"
+          onClick={handleModalClick}
         >
           Apply Changes
         </Button>

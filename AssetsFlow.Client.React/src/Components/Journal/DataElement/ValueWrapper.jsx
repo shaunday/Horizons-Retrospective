@@ -12,6 +12,11 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
   const { delayedHover, ref: wrapperRef } = useDelayedHover(200);
 
+  const handleEditClick = (e) => {
+    e.stopPropagation();
+    openModal();
+  };
+
   return (
     <div className="container-with-centered-content h-10 relative min-w-0">
       <div className="max-w-full rounded-md flex-shrink overflow-hidden bg-[#fefefe]">
@@ -25,7 +30,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
       {!isOverview && (
         <div className="h-5 w-full absolute -bottom-4" ref={wrapperRef}>
           {delayedHover && (
-            <ActionIcon variant="outline" onClick={openModal} className="absolute -bottom-1 left-1/2 -translate-x-1/2">
+            <ActionIcon variant="outline" onClick={handleEditClick} className="absolute -bottom-1 left-1/2 -translate-x-1/2">
               <TbEdit size={20} />
             </ActionIcon>
           )}
