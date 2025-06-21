@@ -1,7 +1,8 @@
 ## 1
-from limor: add trade - different color, more visible possibly upthere on the header area
 from limor: title should be styled diff than the content, text aligned to the left
 defect: add trade doesnt refresh the added trade.
+defect: missing doesnt update on add trade
+defect: buttons state screwed after trade remove (not visible)
 
 ## 2.
 delete trade action (when trade is expanded)

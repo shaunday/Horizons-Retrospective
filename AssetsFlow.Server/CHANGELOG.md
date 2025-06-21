@@ -1,5 +1,5 @@
 
-## [0.9.502-s] - 2025-06-17
+## [0.9.502-s] - 2025-06-...
 - Total lines of backend code: 3762, client 1800 = ~5500 tots
 
 
