@@ -52,7 +52,11 @@ function ActionButtons({ tradeStatus, handleActionClick, disallowInteractions })
         };
         
         const { icon: Icon, label, hoverClass } = getActionConfig(tradeAction);
-        const fullClassName = `${className} ${hoverClass}`;
+        const baseClassName = "shadow-md hover:shadow-lg transition-all duration-200 hover:scale-110 bg-gray-100";
+        const disabledClassName = "border border-red-200 opacity-75 relative";
+        const fullClassName = disallowInteractions 
+            ? `${baseClassName} ${disabledClassName}` 
+            : `${baseClassName} ${hoverClass}`;
         
         return (
             <div style={{ pointerEvents: disallowInteractions ? 'none' : 'auto' }}>
@@ -66,6 +70,14 @@ function ActionButtons({ tradeStatus, handleActionClick, disallowInteractions })
                         className={fullClassName}
                     >
                         <Icon size={20} />
+                        {disallowInteractions && (
+                            <div 
+                                className="absolute inset-0 bg-red-200 opacity-30"
+                                style={{
+                                    background: 'linear-gradient(45deg, transparent 45%, rgba(239, 68, 68, 0.3) 45%, rgba(239, 68, 68, 0.3) 55%, transparent 55%)'
+                                }}
+                            />
+                        )}
                     </ActionIcon>
                 </Tooltip>
             </div>
