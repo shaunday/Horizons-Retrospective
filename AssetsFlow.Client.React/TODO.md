@@ -2,15 +2,17 @@
 from limor: title should be styled diff than the content, text aligned to the left
 defect: add trade doesnt refresh the added trade.
 defect: missing doesnt update on add trade
-defect: buttons state screwed after trade remove (not visible)
+defect: buttons state screwed after trade element remove 
+defect: edit button skips when clicked
+add: click on trade element to expand/collapse
 
 ## 2.
-delete trade action (when trade is expanded)
-change-history modal/tooltip
-Once an element is active, can restamp via popup (pick data/now) 
-add context/jotai for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
-filter by : status first, date first, show: idea, interim, closed
-filtering -... in client? / adjust data call api
+add: delete trade action (when trade is expanded)
+add: change-history modal/tooltip
+add: Once an element is active, can restamp via popup (pick data/now) 
+add: context/jotai for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
+add: filter by : status first, date first, show: idea, interim, closed
+add: filtering -... in client? / adjust data call api
 
 ## 3.
 1 main notifications bar? for progress

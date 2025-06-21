@@ -5,6 +5,7 @@
 - Gallery styling
 - Click to expand/collapse: Trade
 - Missing Data : use background tint instead of border
+- Trade buttons rework
 
 ## [0.9.014-c] - 2025-06-21
 ### Changed
