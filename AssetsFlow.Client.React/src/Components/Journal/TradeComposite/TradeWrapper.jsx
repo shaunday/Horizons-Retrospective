@@ -6,7 +6,6 @@ import TradeExpanded from "./TradeExpanded";
 import TradeCollapsed from "./TradeCollapsed";
 import { useGetTradeById } from "@hooks/Journal/useGetTradeById";
 import TradeCompositeBadge from "./Badge/TradeCompositeBadge";
-import TradeNotifications from "./Controls/TradeNotifications";
 import TradeAdminControls from "./Controls/TradeAdminControls";
 
 function TradeWrapper({ tradeId, indexType }) {
@@ -61,13 +60,8 @@ function TradeWrapper({ tradeId, indexType }) {
       </div>
 
       {/* Trade content that blocks background clicks */}
-      <div data-no-toggle>
+      <div data-no-toggle className="flex-1">
         {isCollapsed ? <TradeCollapsed trade={trade} /> : <TradeExpanded trade={trade} />}
-      </div>
-
-      {/* Notifications that block background clicks */}
-      <div className="ml-auto" data-no-toggle>
-        {isCollapsed && <TradeNotifications tradeComposite={trade} />}
       </div>
 
     </Paper>

@@ -3,6 +3,7 @@ import { Group } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 import { getOverViewEntries } from "@services/getOverViewEntries"
 import EntriesList from "../DataElementGroups/EntriesList";
+import TradeNotifications from "./Controls/TradeNotifications";
 
 function TradeCollapsed({ trade }) {
   if (!trade) {
@@ -22,11 +23,11 @@ function TradeCollapsed({ trade }) {
   }, [trade]);
 
    return (
-     <Group wrap="wrap" spacing={10}>
-      <EntriesList entries={EntriesForTradeOverView} overviewType={Constants.OverviewType.TRADE_OVERVIEW} />
-      {/* Notifications here */}
-    </Group>
-  );
+     <div className="flex items-center justify-between w-full">
+       <EntriesList entries={EntriesForTradeOverView} overviewType={Constants.OverviewType.TRADE_OVERVIEW} />
+       <TradeNotifications tradeComposite={trade} />
+     </div>
+   );
 }
 
 export default React.memo(TradeCollapsed);

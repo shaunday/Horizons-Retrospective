@@ -3,7 +3,7 @@ import DataElement from '../DataElement/DataElement';
 
 function EntriesList({ entries, processCellUpdate, overviewType }) {
   return (
-    <ul>
+    <ul className="flex flex-wrap gap-1">
       {entries.map((entry) => (
         <li key={entry.id} className='p-1'>
           <DataElement
