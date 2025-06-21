@@ -40,7 +40,7 @@ function DataElement({ cellInfo, onCellUpdate, overviewType }) {
         "pointer-events-auto": processingStatus !== ProcessingStatus.PROCESSING
       })}
     >
-      <Text className="no-overflow-text-style">
+      <Text className="whitespace-nowrap">
         {cellInfo[Constants.DATA_TITLE_STRING]} {isOverview ? ":" : ""}
       </Text>
 

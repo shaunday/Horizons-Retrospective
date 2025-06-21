@@ -28,10 +28,6 @@ main {
   flex: 1 1 auto;
 }
 
-.no-overflow-text-style {
-  white-space: nowrap;
-}
-
 .container-with-centered-content {
   display: flex;
   justify-content: center;
@@ -46,9 +42,4 @@ ul {
   list-style-type: none; /* Removes default list bullets */
   display: flex;
   gap: 5px; /* Adds spacing between child elements */
-}
-
-.element-to-be-centered {
-  margin-right: auto;
-  margin-left: auto;
 }

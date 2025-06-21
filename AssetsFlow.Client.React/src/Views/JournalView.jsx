@@ -25,7 +25,7 @@ function JournalView() {
       )}
 
       <Button
-        className="element-to-be-centered"
+        className="mx-auto"
         onClick={onAddTrade}
         disabled={isAddingTrade}
       >

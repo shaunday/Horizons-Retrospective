@@ -4,7 +4,7 @@ import * as Constants from "@constants/journalConstants";
 
 function ActionButtons({ tradeStatus, handleActionClick, disallowInteractions }) {
     return (
-        <div className="mt-2.5 mb-1.5 element-to-be-centered">
+        <div className="mt-2.5 mb-1.5 mx-auto">
             <Button
                 className="mr-1"
                 onClick={() => handleActionClick(Constants.TradeActions.ADD)}
