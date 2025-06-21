@@ -45,16 +45,6 @@ export default defineConfig({
         drop_debugger: true,
       },
     },
-    rollupOptions: {
-      external: [],
-      output: {
-        manualChunks: {
-          'mantine-core': ['@mantine/core'],
-          'mantine-hooks': ['@mantine/hooks'],
-          'mantine-form': ['@mantine/form'],
-        },
-      },
-    },
   },
   css: {
     postcss: {
