@@ -1,38 +1,30 @@
 import React, { useState } from "react";
 import { ActionIcon, Paper } from "@mantine/core";
 import { TbChevronRight, TbChevronLeft } from "react-icons/tb";
+import clsx from "clsx";
 import TradeElementExpanded from "./TradeElementExpanded";
 import TradeElementCollapsed from "./TradeElementCollapsed";
 import TradeElementBadge from "./Badge/TradeElementBadge";
 
-const styles = {
-  elementItem: {
-    display: "flex",
-    alignItems: "center",
-    background:" rgba(224, 208, 221, 0.32)",
-  },
-};
-
 function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAction }) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const chevronAndContentStyle = {
-    display: "flex",
-    flexDirection: isCollapsed ? "row" : "column",
-    gap: "4px",
-  };
-
   return (
-    <Paper style={styles.elementItem} className="py-1 px-2.5 pl-6 h-full relative">
+    <Paper className="py-1 px-2.5 pl-6 h-full relative flex items-center bg-[rgba(224,208,221,0.32)]">
       <div className="absolute -left-3 top-1/2 rounded-md -translate-y-1/2">
         <TradeElementBadge tradeElement={tradeElement} />
       </div>
 
-      <div style={chevronAndContentStyle} className="mr-1">
+      <div className={clsx("mr-1 flex gap-1", {
+        "flex-row": isCollapsed,
+        "flex-col": !isCollapsed
+      })}>
         <ActionIcon
           variant="subtle"
           onClick={() => setIsCollapsed((prev) => !prev)}
-          className={isCollapsed ? "" : "mr-2 h-12"}
+          className={clsx({
+            "mr-2 h-12": !isCollapsed
+          })}
         >
           {isCollapsed ? (
             <TbChevronRight size={22} />

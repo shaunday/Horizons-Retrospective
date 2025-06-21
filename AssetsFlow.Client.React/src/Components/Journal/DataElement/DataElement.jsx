@@ -1,5 +1,6 @@
 import React from "react";
 import { Paper, Text } from "@mantine/core";
+import clsx from "clsx";
 import * as Constants from "@constants/journalConstants";
 import { ProcessingStatus } from "@constants/Constants";
 import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
@@ -24,22 +25,20 @@ function DataElement({ cellInfo, onCellUpdate, overviewType }) {
     contentUpdateMutation.mutate(newValue);
   };
 
-  const containerStyle = {
-    pointerEvents:
-      processingStatus === ProcessingStatus.PROCESSING ? "none" : "auto",
-    display: "flex",
-    gap: "5px",
-    flexDirection: isOverview ? "row" : "column",
-    border: !contentValue && overviewType != Constants.OverviewType.TRADE_OVERVIEW ? "1px solid red" : "none",
-  };
-
   return (
     <Paper
       shadow="xs"
       radius="md"
       withBorder
-      className={`container-with-centered-content px-1 ${isOverview ? 'max-w-60' : 'max-w-36'} min-w-18`}
-      style={containerStyle}
+      className={clsx("container-with-centered-content px-1 min-w-18 flex gap-1", {
+        "max-w-60": isOverview,
+        "max-w-36": !isOverview,
+        "flex-row": isOverview,
+        "flex-col": !isOverview,
+        "border border-red-500": !contentValue && overviewType != Constants.OverviewType.TRADE_OVERVIEW,
+        "pointer-events-none": processingStatus === ProcessingStatus.PROCESSING,
+        "pointer-events-auto": processingStatus !== ProcessingStatus.PROCESSING
+      })}
     >
       <Text className="no-overflow-text-style">
         {cellInfo[Constants.DATA_TITLE_STRING]} {isOverview ? ":" : ""}

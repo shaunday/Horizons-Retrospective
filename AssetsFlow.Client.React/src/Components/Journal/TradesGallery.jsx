@@ -3,16 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { tradeKeysFactory } from "@services/query-key-factory";
 import TradeWrapper from "./TradeComposite/TradeWrapper";
 
-const styles = {
-  container: {
-    flex: 1,
-    overflowY: "auto",
-  },
-  list: {
-    flexDirection: "column",
-  },
-};
-
 function TradesGallery() {
   // 🔥 Subscribe to trade IDs query
   const { data: cachedTradeIds = [] } = useQuery({
@@ -21,8 +11,8 @@ function TradesGallery() {
   });
 
   return (
-    <div style={styles.container} className="m-1 p-1 max-h-screen">
-      <ul style={styles.list} className="m-1">
+    <div className="m-1 p-1 max-h-screen flex-1 overflow-y-auto">
+      <ul className="m-1 flex flex-col">
         {cachedTradeIds.map((tradeId, index) => {
           const indexType = index % 2 === 0 ? 0 : 1;
           return (

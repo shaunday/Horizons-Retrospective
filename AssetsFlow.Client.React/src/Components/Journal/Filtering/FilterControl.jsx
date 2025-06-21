@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LabeledField from "@components/LabeledField"; 
 import { createFilterHash } from "./createFilterHash"; 
+import clsx from "clsx";
 
 function FilterControl() {
   // Initialize the filters hashtable
@@ -29,10 +30,12 @@ function FilterControl() {
               key={key}
               info={info}
               onChange={handleChange}
-              style={index !== 0 ? { marginLeft: "10px" } : {}}
+              className={clsx({
+                "ml-2.5": index !== 0
+              })}
             />
           ))}
-          <button type="submit" style={{ marginTop: 10 }}>Submit</button>
+          <button type="submit" className="mt-2.5">Submit</button>
         </form>
       </div>
   );

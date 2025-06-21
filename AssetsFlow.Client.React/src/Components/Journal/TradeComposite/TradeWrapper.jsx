@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ActionIcon, Paper } from "@mantine/core";
 import { TbChevronDownRight, TbChevronUpLeft } from "react-icons/tb";
+import clsx from "clsx";
 import TradeExpanded from "./TradeExpanded";
 import TradeCollapsed from "./TradeCollapsed";
 import { useGetTradeById } from "@hooks/Journal/useGetTradeById";
@@ -16,29 +17,27 @@ function TradeWrapper({ tradeId, indexType }) {
     return <div>Loading...</div>;
   }
 
-  const badgeActionWrapperStyle = {
-    display: "flex",
-    flexDirection: isCollapsed ? "row" : "column",
-    gap: "4px",
-    marginRight: isCollapsed? 10 : 15,
-  };
-
-  const tradeItemStyle = {
-    padding: "5px",
-    marginBottom: "5px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    background: isCollapsed? "none" : indexType === 1 ? "rgb(241, 242, 235)" : "rgb(231, 242, 235)"
-  };
-
   return (
-    <Paper shadow="md" style={tradeItemStyle} withBorder className="h-full">
-      <div style={badgeActionWrapperStyle}>
+    <Paper 
+      shadow="md" 
+      withBorder 
+      className={clsx("h-full p-1 mb-1 flex items-center justify-between", {
+        "bg-[rgb(241,242,235)]": !isCollapsed && indexType === 1,
+        "bg-[rgb(231,242,235)]": !isCollapsed && indexType !== 1
+      })}
+    >
+      <div className={clsx("flex gap-1", {
+        "flex-row": isCollapsed,
+        "flex-col": !isCollapsed,
+        "mr-2.5": isCollapsed,
+        "mr-4": !isCollapsed
+      })}>
         <ActionIcon
           variant="subtle"
           onClick={() => setIsCollapsed((prev) => !prev)}
-          className={isCollapsed ? "" : "h-12"}
+          className={clsx({
+            "h-12": !isCollapsed
+          })}
         >
           {isCollapsed ? (
             <TbChevronDownRight size={22} />
@@ -49,7 +48,7 @@ function TradeWrapper({ tradeId, indexType }) {
         {isCollapsed && <TradeCompositeBadge tradeComposite={trade} />}
       </div>
       {isCollapsed ? <TradeCollapsed trade={trade} /> : <TradeExpanded trade={trade} />}
-      <div style={{display: "flex", justifyContent: "flex-end"}}>
+      <div className="flex justify-end">
         {isCollapsed && <TradeNotifications tradeComposite={trade} />}
         {/* <TradeAdminControls trade={trade} /> */}
       </div>

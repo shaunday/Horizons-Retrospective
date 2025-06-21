@@ -2,13 +2,8 @@ import React from "react";
 import { ProcessingStatus } from "@constants/Constants"; 
 
 // SuccessMessage component
-const successMessageStyle = {
-  color: "green",
-  fontWeight: "bold",
-};
-
 function SuccessMessage() {
-  return <div style={successMessageStyle} className="mt-1">✔️ Success!</div>;
+  return <div className="mt-1 text-green-600 font-bold">✔️ Success!</div>;
 }
 
 const MemoizedSuccessMessage = React.memo(SuccessMessage);
