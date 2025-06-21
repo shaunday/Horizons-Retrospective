@@ -21,7 +21,7 @@ function TradeWrapper({ tradeId, indexType }) {
     <Paper 
       shadow="md" 
       withBorder 
-      className={clsx("h-full p-1 mb-1 flex items-center justify-start border-slate-200 hover:bg-slate-75 hover:border-slate-300 hover:shadow-md", {
+      className={clsx("h-full p-1 mb-1 flex items-center justify-start", {
         "bg-slate-100 border-slate-400": !isCollapsed,
         "bg-slate-50": isCollapsed
       })}

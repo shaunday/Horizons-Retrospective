@@ -5,6 +5,7 @@ import { useTradeStateAndManagement } from "@hooks/Journal/Composite/useTradeSta
 import { newStatesResponseParser } from "@services/newStatesResponseParser"
 import TradeElementWrapper from "../TradeElement/TradeElementWrapper";
 import TradeElementCollapsed from "../TradeElement/TradeElementCollapsed";
+import { TbChartBar } from "react-icons/tb";
 
 function TradeExpanded({ trade }) {
   const { tradeSummary, processEntryUpdate, processTradeAction, processSummaryUpdate } =
@@ -30,7 +31,8 @@ function TradeExpanded({ trade }) {
       </ul>
 
       {tradeSummary && (
-        <div className="mt-3">
+        <div className="mt-3 flex items-center gap-2">
+          <TbChartBar size={16} className="text-slate-500" />
           <TradeElementCollapsed tradeElement={tradeSummary} />
         </div>
       )}
