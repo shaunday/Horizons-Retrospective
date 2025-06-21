@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Text, Group, Button } from '@mantine/core';
+import { Text, Group, Button, Box, Divider } from '@mantine/core';
+import { TbGitBranch, TbCalendar, TbCode } from 'react-icons/tb';
 import { getVersions } from "@services/ApiRequests/versionsApiAccess";
 
 export default function Footer() {
@@ -27,52 +28,70 @@ export default function Footer() {
   }, []);
 
   return (
-    <Group
-      className="w-full px-10 py-2 flex items-center mt-3 border-t border-gray-300 text-xs"
+    <Box 
+      className="bg-gradient-to-r from-slate-50 to-slate-100 border-t border-slate-200 shadow-sm"
+      py="xs"
+      px="lg"
     >
-      <Text size="xs" className="mr-auto flex-shrink-0 text-sm">
-        &copy; Shaun Day 2025
-      </Text>
+      <Group justify="space-between" align="center" className="text-xs">
+        {/* Copyright */}
+        <Text size="xs" className="text-slate-600 font-medium">
+          &copy; Shaun Day 2025
+        </Text>
 
-      <Group spacing="xs" className="flex-shrink-0">
-        <Text size="xs"><b>FE:</b></Text>
-        <Text size="xs">Version: <b>{__APP_VERSION__}</b></Text>
-        <Text size="xs">|</Text>
-        <Text size="xs">Deployed: <b>{new Date(__APP_BUILD_DATE__).toLocaleDateString()}</b></Text>
-        {showCommits && (
-          <>
-            <Text size="xs">|</Text>
-            <Text size="xs">Commit: <b>{__GIT_COMMIT__}</b></Text>
-          </>
-        )}
+        {/* Version Information */}
+        <Group gap="md" align="center">
+          {/* Frontend Info */}
+          <Group gap="xs" align="center">
+            <TbCode size={12} className="text-slate-500" />
+            <Text size="xs" className="text-slate-600 font-medium">FE:</Text>
+            <Text size="xs" className="text-slate-700">v{__APP_VERSION__}</Text>
+            <TbCalendar size={12} className="text-slate-500" />
+            <Text size="xs" className="text-slate-700">
+              {new Date(__APP_BUILD_DATE__).toLocaleDateString()}
+            </Text>
+            {showCommits && (
+              <>
+                <TbGitBranch size={12} className="text-slate-500" />
+                <Text size="xs" className="text-slate-700 font-mono">
+                  {__GIT_COMMIT__?.substring(0, 7)}
+                </Text>
+              </>
+            )}
+          </Group>
+
+          <Divider orientation="vertical" className="h-4" />
+
+          {/* Backend Info */}
+          <Group gap="xs" align="center">
+            <TbCode size={12} className="text-slate-500" />
+            <Text size="xs" className="text-slate-600 font-medium">BE:</Text>
+            <Text size="xs" className="text-slate-700">v{backendVersion}</Text>
+            <TbCalendar size={12} className="text-slate-500" />
+            <Text size="xs" className="text-slate-700">
+              {new Date(backendBuildTimestamp).toLocaleDateString()}
+            </Text>
+            {showCommits && (
+              <>
+                <TbGitBranch size={12} className="text-slate-500" />
+                <Text size="xs" className="text-slate-700 font-mono">
+                  {backendCommit?.substring(0, 7)}
+                </Text>
+              </>
+            )}
+          </Group>
+        </Group>
+
+        {/* Toggle Button */}
+        <Button
+          variant="subtle"
+          size="xs"
+          onClick={() => setShowCommits((v) => !v)}
+          className="text-slate-500 hover:text-slate-700 hover:bg-slate-200 transition-colors"
+        >
+          {showCommits ? 'Hide Details' : 'Show Details'}
+        </Button>
       </Group>
-
-      <Text size="xs" mx="xs" className="flex-shrink-0">
-        ___
-      </Text>
-
-      <Group spacing="xs" className="flex-shrink-0">
-        <Text size="xs"><b>BE:</b></Text>
-        <Text size="xs">Version: <b>{backendVersion}</b></Text>
-        <Text size="xs">|</Text>
-        <Text size="xs">Deployed: <b>{new Date(backendBuildTimestamp).toLocaleDateString()}</b></Text>
-        {showCommits && (
-          <>
-            <Text size="xs">|</Text>
-            <Text size="xs">Commit: <b>{backendCommit}</b></Text>
-          </>
-        )}
-      </Group>
-
-      <Button
-        variant="subtle"
-        size="xs"
-        p="0"
-        className="ml-auto"
-        onClick={() => setShowCommits((v) => !v)}
-      >
-        {showCommits ? '>>' : '<<'}
-      </Button>
-    </Group>
+    </Box>
   );
 }
