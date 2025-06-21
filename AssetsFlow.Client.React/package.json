@@ -1,7 +1,7 @@
 {
   "name": "dayjtrading.web",
   "private": true,
-  "version": "0.9.015-c",
+  "version": "0.9.016-c",
   "type": "module",
   "homepage": "https://mywebthings.xyz",
   "scripts": {
@@ -31,8 +31,6 @@
     "@types/react": "^19.0.4",
     "@types/react-dom": "^19.0.2",
     "@vitejs/plugin-react-swc": "^3.0.0",
-    "autoprefixer": "^10.4.21",
-    "cssnano": "^7.0.7",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.25.3",
     "eslint-plugin-react-hooks": "^5.1.0",

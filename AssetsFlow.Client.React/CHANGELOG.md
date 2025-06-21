@@ -1,5 +1,13 @@
 
 # Changelog
+
+## [0.9.016-c] - 2025-06-...
+### Changed
+- Terser minification for production builds
+- Console/debugger removal in production only
+- Mantine dependency pre-bundling via optimizeDeps
+- Chunk size warning limit (1000kb) 
+
 ## [0.9.015-c] - 2025-06-21
 ### Changed
 - Gallery styling
