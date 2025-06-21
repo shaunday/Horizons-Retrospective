@@ -17,7 +17,7 @@ function TradeExpanded({ trade }) {
 
   return (
     <div className="my-2">
-      <ul className="flex flex-col gap-3">
+      <ul className="flex flex-col gap-2">
         {trade[Constants.TRADE_ELEMENTS_STRING].map((ele) => (
           <li key={ele.id}>
             <TradeElementWrapper
