@@ -17,7 +17,7 @@ function GroupedEntriesList({ entries, processCellUpdate }) {
         return (
           <Box
             key={groupKey}
-            className="py-2 pr-2 pl-3 m-1 relative border-gray-300 rounded-lg"
+            className="py-2 pr-2 pl-3 m-1 relative border border-gray-300 rounded-lg"
           >
             <ThemeIcon
               variant="light"
