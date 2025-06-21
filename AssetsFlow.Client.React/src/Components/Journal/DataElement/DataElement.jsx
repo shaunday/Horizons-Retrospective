@@ -35,7 +35,7 @@ function DataElement({ cellInfo, onCellUpdate, overviewType }) {
         "max-w-36": !isOverview,
         "flex-row": isOverview,
         "flex-col": !isOverview,
-        "border border-red-500": !contentValue && overviewType != Constants.OverviewType.TRADE_OVERVIEW,
+        "bg-red-50 border-red-200": !contentValue && overviewType != Constants.OverviewType.TRADE_OVERVIEW,
         "pointer-events-none": processingStatus === ProcessingStatus.PROCESSING,
         "pointer-events-auto": processingStatus !== ProcessingStatus.PROCESSING
       })}
