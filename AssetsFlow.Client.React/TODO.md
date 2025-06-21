@@ -5,6 +5,7 @@ defect: missing doesnt update on add trade
 defect: buttons state screwed after trade element remove 
 defect: edit button skips when clicked
 add: click on trade element to expand/collapse
+issue: not all dataelements appear on overview, if they've got missing content it wont be visible
 
 ## 2.
 add: delete trade action (when trade is expanded)
