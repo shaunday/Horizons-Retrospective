@@ -17,13 +17,13 @@ function GroupedEntriesList({ entries, processCellUpdate }) {
         return (
           <Box
             key={groupKey}
-            className="py-2 pr-2 pl-3 m-1 relative border border-gray-300 rounded-lg"
+            className="py-1 pr-1 pl-3 m-1 relative border border-gray-300 rounded-lg"
           >
             <ThemeIcon
               variant="light"
               size="md"
               radius="lg"
-              className="absolute top-10 -left-4 rounded-lg"
+              className="absolute top-7 -left-4 rounded-lg"
             >
               <IconComponent size={20} />
             </ThemeIcon>

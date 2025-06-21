@@ -38,7 +38,7 @@ function TradeElementExpanded({ tradeElement, onElementContentUpdate, onElementA
   });
 
   return (
-    <Group wrap="wrap" spacing={10}>
+    <Group wrap="wrap" gap="lg">
        <GroupedEntriesList
           entries={tradeElement[Constants.TRADE_ENTRIES_STRING]}
           processCellUpdate={processCellUpdate}
