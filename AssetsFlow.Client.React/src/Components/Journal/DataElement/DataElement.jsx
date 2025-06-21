@@ -30,7 +30,7 @@ function DataElement({ cellInfo, onCellUpdate, overviewType }) {
       shadow="xs"
       radius="md"
       withBorder
-      className={clsx("container-with-centered-content px-1 min-w-18 flex gap-1", {
+      className={clsx("container-with-centered-content px-1 min-w-18 flex gap-1 cursor-default", {
         "max-w-60": isOverview,
         "max-w-36": !isOverview,
         "flex-row": isOverview,

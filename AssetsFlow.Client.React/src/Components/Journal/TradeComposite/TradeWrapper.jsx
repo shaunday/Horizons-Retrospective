@@ -13,6 +13,15 @@ function TradeWrapper({ tradeId, indexType }) {
   const { trade } = useGetTradeById(tradeId);
   const [isCollapsed, setIsCollapsed] = useState(true);
 
+  const handleClick = (e) => {
+    // Check if the clicked element or its parent has data-no-toggle
+    const hasNoToggle = e.target.closest('[data-no-toggle]');
+    if (hasNoToggle) {
+      return; // Don't toggle if clicking on an element with data-no-toggle
+    }
+    setIsCollapsed((prev) => !prev);
+  };
+
   if (!trade) {
     return <div>Loading...</div>;
   }
@@ -21,12 +30,14 @@ function TradeWrapper({ tradeId, indexType }) {
     <Paper 
       shadow="md" 
       withBorder 
-      className={clsx("h-full p-1 mb-1 flex items-center justify-start", {
+      className={clsx("h-full p-1 mb-1 flex items-center justify-start cursor-pointer", {
         "bg-slate-100 border-slate-400": !isCollapsed,
         "bg-slate-50": isCollapsed
       })}
+      onClick={handleClick}
     >
-      <div className={clsx("flex gap-1", {
+      {/* Interactive elements that block background clicks */}
+      <div className={clsx("flex gap-1 pointer-events-auto", {
         "flex-row": isCollapsed,
         "flex-col": !isCollapsed,
         "mr-2.5": isCollapsed,
@@ -34,6 +45,7 @@ function TradeWrapper({ tradeId, indexType }) {
       })}>
         <ActionIcon
           variant="subtle"
+          data-no-toggle
           onClick={() => setIsCollapsed((prev) => !prev)}
           className={clsx({
             "h-12": !isCollapsed
@@ -47,8 +59,14 @@ function TradeWrapper({ tradeId, indexType }) {
         </ActionIcon>
         {isCollapsed && <TradeCompositeBadge tradeComposite={trade} />}
       </div>
-      {isCollapsed ? <TradeCollapsed trade={trade} /> : <TradeExpanded trade={trade} />}
-      <div className="ml-auto">
+      
+      {/* Trade content that blocks background clicks */}
+      <div data-no-toggle>
+        {isCollapsed ? <TradeCollapsed trade={trade} /> : <TradeExpanded trade={trade} />}
+      </div>
+      
+      {/* Notifications that block background clicks */}
+      <div className="ml-auto" data-no-toggle>
         {isCollapsed && <TradeNotifications tradeComposite={trade} />}
         {/* <TradeAdminControls trade={trade} /> */}
       </div>

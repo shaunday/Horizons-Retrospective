@@ -15,7 +15,7 @@ function JournalView() {
   if (isError) return <div>Error fetching trades. Please try again later.</div>;
 
   return (
-    <Stack id="journalMainBody" className="bg-slate-50 p-4">
+    <Stack id="journalMainBody" className="bg-stone-50 p-4 border-t border-slate-200">
       {/* <FilterControl /> */}
 
       {trades?.length ? (
