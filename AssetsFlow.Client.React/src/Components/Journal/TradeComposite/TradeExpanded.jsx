@@ -30,19 +30,23 @@ function TradeExpanded({ trade }) {
         ))}
       </ul>
 
-      {tradeSummary && (
-        <div className="mt-3 flex items-center gap-2">
-          <TbChartBar size={16} className="text-slate-500" />
-          <TradeElementCollapsed tradeElement={tradeSummary} />
+      <div className="mt-3 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          {tradeSummary && (
+            <>
+              <TbChartBar size={16} className="text-slate-500" />
+              <TradeElementCollapsed tradeElement={tradeSummary} />
+            </>
+          )}
         </div>
-      )}
-
-      {trade[Constants.TRADE_STATUS] !== Constants.TradeStatus.CLOSED && (
-        <CompositeControls
-          tradeComposite={trade}
-          onTradeActionSuccess={processTradeAction}
-        />
-      )}
+        
+        {trade[Constants.TRADE_STATUS] !== Constants.TradeStatus.CLOSED && (
+          <CompositeControls
+            tradeComposite={trade}
+            onTradeActionSuccess={processTradeAction}
+          />
+        )}
+      </div>
     </div>
   );
 }
