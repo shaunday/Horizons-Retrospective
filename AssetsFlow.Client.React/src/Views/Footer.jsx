@@ -66,7 +66,7 @@ export default function Footer() {
           <Group gap="xs" align="center">
             <TbCode size={12} className="text-slate-500" />
             <Text size="xs" className="text-slate-600 font-medium">BE:</Text>
-            <Text size="xs" className="text-slate-700">v{backendVersion}</Text>
+            <Text size="xs" className="text-slate-700">{backendVersion}</Text>
             <TbCalendar size={12} className="text-slate-500" />
             <Text size="xs" className="text-slate-700">
               {new Date(backendBuildTimestamp).toLocaleDateString()}

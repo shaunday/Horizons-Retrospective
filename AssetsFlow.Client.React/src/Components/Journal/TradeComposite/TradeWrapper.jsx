@@ -21,9 +21,7 @@ function TradeWrapper({ tradeId, indexType }) {
     <Paper 
       shadow="md" 
       withBorder 
-      className={clsx("h-full p-1 mb-1 flex items-center justify-start", {
-        "bg-[rgb(241,242,235)]": !isCollapsed && indexType === 1,
-        "bg-[rgb(231,242,235)]": !isCollapsed && indexType !== 1
+      className={clsx("h-full p-1 mb-1 flex items-center justify-start bg-slate-50 border-slate-200 hover:bg-slate-75 hover:border-slate-300 hover:shadow-md", {
       })}
     >
       <div className={clsx("flex gap-1", {
