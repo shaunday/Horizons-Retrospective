@@ -7,6 +7,7 @@
 - Console/debugger removal in production only
 - Mantine dependency pre-bundling via optimizeDeps
 - Chunk size warning limit (1000kb) 
+- styling: allow overflow on all objects, fix controls pos.
 
 ## [0.9.015-c] - 2025-06-21
 ### Changed
