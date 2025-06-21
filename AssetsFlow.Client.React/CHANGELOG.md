@@ -1,5 +1,9 @@
 
 # Changelog
+## [0.9.014-c] - 2025-06-21
+### Changed
+- Reworked all styles to tailwind utility classes
+
 
 ## [0.9.013-f] - 2025-06-20
 ### Changed

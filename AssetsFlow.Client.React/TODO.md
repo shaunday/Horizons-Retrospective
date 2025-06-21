@@ -8,8 +8,6 @@ from limor: title should be styled diff than the content, text aligned to the le
 from limor - icons instead of text "+" etc - check zoom homepage?
 defect: add trade doesnt refresh the added trade.
 
-fix styling clutter
-
 ## 2.
 delete trade action (when trade is expanded)
 change-history modal/tooltip

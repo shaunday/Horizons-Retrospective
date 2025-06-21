@@ -10,7 +10,7 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   return (
-    <Paper className="py-1 px-2.5 pl-6 h-full relative flex items-center bg-[rgba(224,208,221,0.32)]">
+    <Paper className="py-1 pr-2.5 pl-6 h-full relative flex items-center bg-[rgba(224,208,221,0.32)]">
       <div className="absolute -left-3 top-1/2 rounded-md -translate-y-1/2">
         <TradeElementBadge tradeElement={tradeElement} />
       </div>
