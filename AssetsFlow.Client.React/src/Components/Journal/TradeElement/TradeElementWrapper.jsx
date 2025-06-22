@@ -15,16 +15,10 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
         <TradeElementBadge tradeElement={tradeElement} />
       </div>
 
-      <div className={clsx("mr-1 flex gap-1", {
-        "flex-row": isCollapsed,
-        "flex-col": !isCollapsed
-      })}>
+      <div className="mr-2">
         <ActionIcon
           variant="subtle"
           onClick={() => setIsCollapsed((prev) => !prev)}
-          className={clsx({
-            "mr-2 h-12": !isCollapsed
-          })}
         >
           {isCollapsed ? (
             <TbChevronRight size={22} />
@@ -37,11 +31,13 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
       {isCollapsed ? (
         <TradeElementCollapsed tradeElement={tradeElement}/>
       ) : (
-        <TradeElementExpanded
-          tradeElement={tradeElement}
-          onElementContentUpdate={onElementContentUpdate}
-          onElementAction={onElementAction}
-        />
+        <div className="pl-3">
+          <TradeElementExpanded
+            tradeElement={tradeElement}
+            onElementContentUpdate={onElementContentUpdate}
+            onElementAction={onElementAction}
+          />
+        </div>
       )}
     </Paper>
   );
