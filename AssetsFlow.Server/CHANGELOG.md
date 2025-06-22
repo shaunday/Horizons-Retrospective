@@ -1,7 +1,8 @@
 
 ## [0.9.502-s] - 2025-06-...
-- Total lines of backend code: 3762, client 1800 = ~5500 tots
+- Readjusted overview items, summary/closure lists
 
+- Total lines of backend code: 3762, client 1800 = ~5500 tots
 
 ## [0.9.501-b] - 2025-06-17
 ### Changed

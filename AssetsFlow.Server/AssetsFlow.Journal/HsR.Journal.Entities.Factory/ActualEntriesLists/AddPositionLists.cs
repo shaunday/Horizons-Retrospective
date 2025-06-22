@@ -7,8 +7,8 @@
             var firstPositionObjects = new List<DataElement>
             {
                 new DataElement("Broker", ComponentType.Header) 
-                                { IsRelevantForTradeOverview = true, Restrictions = ["Temp1", "Temp2"]}, //todo
-                new DataElement("Sector", ComponentType.Header) { IsRelevantForTradeOverview = true },
+                                { Restrictions = ["Temp1", "Temp2"]}, //todo
+                new DataElement("Sector", ComponentType.Header),
             };
 
             // Add AddToPositionObjects to the list
@@ -32,8 +32,6 @@
                 new DataElement("Time Frame", ComponentType.ExitLogic)  {  IsRelevantForLocalOverview = true },
                 new DataElement("Target", ComponentType.ExitLogic) { IsRelevantForLocalOverview = true, },
                 new DataElement("SL", ComponentType.Risk) { IsRelevantForLocalOverview = true },
-
-                new DataElement("Risk", ComponentType.Risk),
                 new DataElement("R:R", ComponentType.Risk)
             };
 

@@ -14,6 +14,7 @@
         public double NetCost => AddTrades.TotalCost - ReduceTrades.TotalCost;
 
         public bool IsNetExists => NetAmount > 0;
+        public bool IsWin => Profit > 0;
 
         public TradeAnalyticsSummary((TradeAnalyticsInfo addTrades, TradeAnalyticsInfo reduceTrades) trades)
         {

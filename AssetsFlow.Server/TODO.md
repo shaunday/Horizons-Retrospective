@@ -18,6 +18,7 @@
 - pies
 
 ## nice to have
+- Actual R:R in closure
 - conluences check list = trends per tf, bb/ma distances
 - filtering history
 - users + authentication

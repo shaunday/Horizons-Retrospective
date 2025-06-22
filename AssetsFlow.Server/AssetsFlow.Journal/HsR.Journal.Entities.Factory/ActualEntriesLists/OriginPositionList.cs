@@ -18,8 +18,8 @@
                 new DataElement("Contras", ComponentType.EntryLogic),
 
                 new DataElement("Invalidation", ComponentType.Risk) { IsRelevantForLocalOverview = true },
-                new DataElement("Target", ComponentType.ExitLogic) { IsRelevantForLocalOverview = true, },
-                new DataElement("Time Frame", ComponentType.ExitLogic)  { IsRelevantForTradeOverview = true },
+                new DataElement("Target", ComponentType.ExitLogic) { IsRelevantForLocalOverview = true },
+                new DataElement("Time Frame", ComponentType.ExitLogic),
             };
 
             return tradeOriginObjects;
