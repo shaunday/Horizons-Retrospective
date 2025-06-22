@@ -4,11 +4,14 @@
 - when passing an ew element tag it as new, is any missing prop too
 - add demo DB
 - redo seeder
-- rethink activation/ summary (maybe summary all activated elements only?) HasMissingContent on element?
-- on remove, reset activation states or just re-check. open = at least 1 add exists
+
+- rethink activation/ summary (maybe summary all activated elements only?) 
 - add opened/closedat somehow (to overview?) 
-- opened = first activate date, close = closed date, remove props from trade make em getters? gotta be readonly anyhow
+- parsed in response missing in the info sent: ActivationTimeStamp, SavedSectors
+- opened = first activate date, close = closed date (remove props from trade make em getters / readonly ?)
+
 - re-open trade to allow edit?
+- on remove, reset activation states or just re-check. open = at least 1 add exists
 
 ## testing
 - API tests (seeder?)
