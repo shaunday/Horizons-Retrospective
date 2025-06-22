@@ -41,7 +41,7 @@ function JournalView() {
           disabled={isAddingTrade}
           className="min-w-[280px]"
         >
-          {isAddingTrade ? "Adding Trade..." : "+ Add a Trade"}
+          {isAddingTrade ? "Adding Trade..." : "Add a Trade"}
         </StyledActionButton>
       </div>
     </Stack>
