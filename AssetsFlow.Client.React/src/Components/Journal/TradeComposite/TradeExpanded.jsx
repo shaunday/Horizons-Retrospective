@@ -36,7 +36,7 @@ function TradeExpanded({ trade }) {
           {tradeSummary && (
             <>
               <TbChartBar size={16} className="text-slate-500" />
-              <TradeElementCollapsed tradeElement={tradeSummary} />
+              <TradeElementCollapsed tradeElement={tradeSummary} isUseAllEntries={true} />
             </>
           )}
         </div>

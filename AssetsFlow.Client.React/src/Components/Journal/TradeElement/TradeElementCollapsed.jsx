@@ -4,13 +4,16 @@ import EntriesList from "../DataElementGroups/EntriesList";
 import { getOverViewEntries } from "@services/getOverViewEntries";
 import Notifications from "@components/Notifications";
 
-function TradeElementCollapsed({ tradeElement }) {
+function TradeElementCollapsed({ tradeElement, isUseAllEntries = false }) {
     const entriesForLocalOverview = useMemo(() => {
+        if (isUseAllEntries) {
+          return tradeElement[Constants.TRADE_ENTRIES_STRING];
+        }
         return getOverViewEntries(
           [tradeElement],
           Constants.DATA_RELEVANT_FOR_LOCAL_ORVERVIEW_STRING
         );
-      }, [tradeElement]);
+      }, [tradeElement, isUseAllEntries]);
       
 
     return (
