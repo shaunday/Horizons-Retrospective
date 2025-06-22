@@ -11,7 +11,7 @@ import TradesEmptyState from "@journalComponents/JournalLoadingStates/TradesEmpt
 
 function JournalView() {
   const { isLoading, isError, trades } = useFetchAndCacheTrades();
-  const { addTrade, isAddingTrade } = useAddTrade();
+  const { addTrade, isAddingTrade, newlyAddedTradeId } = useAddTrade();
 
   const onAddTrade = () => addTrade();
 
@@ -28,7 +28,7 @@ function JournalView() {
       {/* <FilterControl /> */}
 
       {trades?.length ? (
-        <TradesGallery />
+        <TradesGallery newlyAddedTradeId={newlyAddedTradeId} />
       ) : (
         <TradesEmptyState />
       )}

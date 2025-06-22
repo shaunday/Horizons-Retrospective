@@ -5,6 +5,8 @@
 ### Changed
 - Journal loading states
 - Dev indicators (browser and page headers)
+- when adding a trade, both it and the origin trade element should be expanded
+- when adding a trade element - auto expand it
 
 ## [0.9.016-c] - 2025-06-22
 ### Changed

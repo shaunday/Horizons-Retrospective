@@ -6,11 +6,10 @@ import TradeExpanded from "./TradeExpanded";
 import TradeCollapsed from "./TradeCollapsed";
 import { useGetTradeById } from "@hooks/Journal/useGetTradeById";
 import TradeCompositeBadge from "./Badge/TradeCompositeBadge";
-import TradeAdminControls from "./Controls/TradeAdminControls";
 
-function TradeWrapper({ tradeId, indexType }) {
+function TradeWrapper({ tradeId, isNewTrade = false }) {
   const { trade } = useGetTradeById(tradeId);
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(!isNewTrade);
 
   if (!trade) {
     return <div>Loading...</div>;

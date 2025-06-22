@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { tradeKeysFactory } from "@services/query-key-factory";
 import TradeWrapper from "./TradeComposite/TradeWrapper";
 
-function TradesGallery() {
+function TradesGallery({ newlyAddedTradeId }) {
   // 🔥 Subscribe to trade IDs query
   const { data: cachedTradeIds = [] } = useQuery({
     queryKey: tradeKeysFactory.tradeIdsKey,
@@ -13,11 +13,13 @@ function TradesGallery() {
   return (
     <div className="m-1 p-1 max-h-screen flex-1 overflow-y-auto">
       <ul className="m-1 flex flex-col">
-        {cachedTradeIds.map((tradeId, index) => {
-          const indexType = index % 2 === 0 ? 0 : 1;
+        {cachedTradeIds.map((tradeId) => {
           return (
             <li key={tradeId}>
-              <TradeWrapper tradeId={tradeId} indexType={indexType} />
+              <TradeWrapper 
+                tradeId={tradeId} 
+                isNewTrade={newlyAddedTradeId === tradeId}
+              />
             </li>
           );
         })}
