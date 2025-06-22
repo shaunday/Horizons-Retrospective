@@ -2,11 +2,15 @@
 # Changelog
 
 ## [0.9.017-c] - 2025-06-22
-### Changed
-- Journal loading states
+### Added
 - Dev indicators (browser and page headers)
-- when adding a trade, both it and the origin trade element should be expanded
-- when adding a trade element - auto expand it
+- when adding a trade, expand it on reponse
+### Changed
+- reverted expand/collapse on background clicks
+- Journal loading states : style rework
+### Fixed
+- Edit button "dancing" (caused by translation in class name instead of in the style)
+
 
 ## [0.9.016-c] - 2025-06-22
 ### Changed

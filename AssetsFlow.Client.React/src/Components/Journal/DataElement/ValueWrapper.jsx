@@ -28,9 +28,14 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
       <DataUpdateModal opened={modalOpened} onClose={closeModal} data={cellInfo} onSubmit={onValueChangeInitiated} />
 
       {!isOverview && (
-        <div className="h-5 w-full absolute -bottom-4" ref={wrapperRef}>
+        <div className="h-8 w-full absolute -bottom-4" ref={wrapperRef}>
           {delayedHover && (
-            <ActionIcon variant="outline" onClick={handleEditClick} className="absolute -bottom-1 left-1/2 -translate-x-1/2">
+            <ActionIcon 
+              variant="outline" 
+              onClick={handleEditClick} 
+              className="absolute -bottom-1 left-1/2 -translate-x-1/2"
+              style={{ transform: 'translateX(-50%)' }}
+            >
               <TbEdit size={20} />
             </ActionIcon>
           )}

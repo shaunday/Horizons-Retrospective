@@ -1,6 +1,4 @@
 ## 1
-defect: edit button skips when clicked
-
 defect: buttons state screwed after trade element remove 
 issue: not all dataelements appear on overview, if they've got missing content it wont be visible - notifications on element
 from limor: title should be styled diff than the content, text aligned to the left
@@ -10,7 +8,7 @@ defect : summary is  missing (on adding trade)
 ## 2.
 add: filter by : status first, date first, show: idea, interim, closed
 add: filtering -... in client? / adjust data call api
-add: delete trade action 
+add: trade command bar - delete trade action, collapse all trades 
 
 add: expand/collapse by clicking on the background
 issue: how to edit lessons in trade closure?
