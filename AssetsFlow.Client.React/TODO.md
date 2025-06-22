@@ -1,8 +1,8 @@
 ## 1
 defect: buttons state screwed after trade element remove 
-issue: not all dataelements appear on overview, if they've got missing content it wont be visible - notifications on element
-from limor: title should be styled diff than the content, text aligned to the left
+add: IsAnyContentMissing to element on collapsed
 defect : summary is  missing (on adding trade)
+from limor: title should be styled diff than the content, text aligned to the left
 
 
 ## 2.

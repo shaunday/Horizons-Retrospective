@@ -1,6 +1,6 @@
 
 ## [0.9.503-s] - 2025-06-..
-- 
+- IsAnyContentMissing prop on elementDTO
 
 
 ## [0.9.502-s] - 2025-06-22

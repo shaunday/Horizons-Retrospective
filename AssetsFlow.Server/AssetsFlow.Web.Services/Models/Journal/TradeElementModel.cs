@@ -15,6 +15,9 @@ namespace HsR.Web.Services.Models.Journal
         public TradeActionType TradeActionType { get; set; }
 
         [Required]
+        public bool IsAnyContentMissing { get; set; }
+
+        [Required]
         public List<DataElementModel> Entries { get; set; } = null!;
 
         public DateTime? TimeStamp { get; set; }

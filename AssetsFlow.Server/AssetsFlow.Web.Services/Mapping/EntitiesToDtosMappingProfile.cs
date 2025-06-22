@@ -14,12 +14,15 @@ namespace HsR.Web.API.Mapping
             CreateMap<ContentRecord, ContentRecordModel>();
 
             CreateMap<DataElement, DataElementModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
-            CreateMap<TradeElement, TradeElementModel>().EqualityComparison((dto, m) => dto.Id == m.Id);
+            CreateMap<TradeElement, TradeElementModel>()
+                .EqualityComparison((dto, m) => dto.Id == m.Id)
+                .ForMember(dest => dest.IsAnyContentMissing,
+                opt => opt.MapFrom(src => !src.IsAllRequiredFields()));
 
             CreateMap<TradeComposite, TradeCompositeModel>()
                 .EqualityComparison((dto, m) => dto.Id == m.Id)
                 .ForMember(dest => dest.IsAnyContentMissing,
-                opt => opt.MapFrom(src => src.TradeElements.Any(ele => !ele.AllowActivation())
+                opt => opt.MapFrom(src => src.TradeElements.Any(ele => !ele.IsAllRequiredFields())
                 ));
 
             CreateMap<UpdatedStatesCollation, UpdatedStatesModel>();

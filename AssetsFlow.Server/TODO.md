@@ -1,7 +1,6 @@
 ﻿
 # TODO
 
-- when passing an ew element tag it as new, is any missing prop too
 - add demo DB
 - redo seeder
 
