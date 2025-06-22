@@ -1,9 +1,9 @@
 ## 1
 from limor: title should be styled diff than the content, text aligned to the left
-defect: add trade doesnt refresh the added trade.
 defect: missing doesnt update on add trade
 defect: buttons state screwed after trade element remove 
 defect: edit button skips when clicked
+defect: del element causes collapse
 add: click on trade element to expand/collapse
 issue: not all dataelements appear on overview, if they've got missing content it wont be visible
 

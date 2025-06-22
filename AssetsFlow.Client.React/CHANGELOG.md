@@ -8,6 +8,9 @@
 - Mantine dependency pre-bundling via optimizeDeps
 - Chunk size warning limit (1000kb) 
 - styling: allow overflow on all objects, fix controls pos.
+- header/icon
+- min width for dataelements
+
 
 ## [0.9.015-c] - 2025-06-21
 ### Changed

@@ -33,7 +33,7 @@ function Header() {
                   className="text-slate-600 font-medium"
                   style={{ letterSpacing: '0.025em' }}
                 >
-                  Analyze your trades, identify patterns, and evolve your trading mindset.
+                  Analyze your trades, identify patterns, evolve your trading mindset.
                 </Text>
               </Box>
             </Box>

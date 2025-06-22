@@ -62,7 +62,7 @@ namespace HsR.Journal.DataContext
         {
             await _dataContext.Entry(cell).Reference(c => c.TradeElementRef).LoadAsync();
 
-            if (cell.TradeElementRef is InterimTradeElement interim && !interim.IsActive && interim.AllowActivation())
+            if (cell.TradeElementRef is InterimTradeElement interim && interim.AllowActivation())
             {
                 interim.Activate();
 
