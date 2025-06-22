@@ -53,8 +53,8 @@ namespace HsR.Journal.Entities.Factory
             TradeSummary newSummary = new(trade, TradeActionType.Summary);
             newSummary.IsInterim = analyticsSummary.IsNetExists;
             newSummary.Entries = analyticsSummary.IsNetExists
-                ? EntriesFactory.GetTradeClosureComponents(newSummary, analyticsSummary)
-                : EntriesFactory.GetSummaryComponents(newSummary, analyticsSummary);
+                ? EntriesFactory.GetSummaryComponents(newSummary, analyticsSummary)
+                : EntriesFactory.GetTradeClosureComponents(newSummary, analyticsSummary);
 
             return newSummary;
         }

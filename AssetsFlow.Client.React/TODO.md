@@ -6,6 +6,8 @@ defect: edit button skips when clicked
 defect: del element causes collapse
 add: click on trade element to expand/collapse
 issue: not all dataelements appear on overview, if they've got missing content it wont be visible
+issue: how to edit lessons in trade closure?
+add: make loading trading prettier
 
 ## 2.
 add: delete trade action (when trade is expanded)
