@@ -1,7 +1,10 @@
 
 # Changelog
 
-## [0.9.016-c] - 2025-06-...
+## [0.9.017-c] - 2025-06-22
+### Changed
+
+## [0.9.016-c] - 2025-06-22
 ### Changed
 - Terser minification for production builds
 - Console/debugger removal in production only

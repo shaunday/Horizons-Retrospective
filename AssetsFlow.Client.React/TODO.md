@@ -7,6 +7,8 @@ add: click on trade element to expand/collapse... tradecomposite stopped working
 issue: not all dataelements appear on overview, if they've got missing content it wont be visible - notifications on element
 fix: make loading trades prettier
 from limor: title should be styled diff than the content, text aligned to the left
+when adding a trade, should be expanded
+defect : summary is  missing (on adding trade)
 
 
 ## 2.
