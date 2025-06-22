@@ -1,6 +1,7 @@
 ﻿
 # TODO
 
+- when passing an ew element tag it as new, is any missing prop too
 - add demo DB
 - redo seeder
 - rethink activation/ summary (maybe summary all activated elements only?) HasMissingContent on element?
