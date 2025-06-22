@@ -5,6 +5,9 @@ import { useFetchAndCacheTrades } from "@hooks/Journal/useFetchAndCacheTrades";
 import { useAddTrade } from "@hooks/Journal/useAddTrade";
 import { Button, Stack } from '@mantine/core';
 import { TbPlus } from "react-icons/tb";
+import TradesLoadingState from "@journalComponents/JournalLoadingStates/TradesLoadingState";
+import TradesErrorState from "@journalComponents/JournalLoadingStates/TradesErrorState";
+import TradesEmptyState from "@journalComponents/JournalLoadingStates/TradesEmptyState";
 
 function JournalView() {
   const { isLoading, isError, trades } = useFetchAndCacheTrades();
@@ -12,8 +15,13 @@ function JournalView() {
 
   const onAddTrade = () => addTrade();
 
-  if (isLoading) return <div>Loading trades...</div>;
-  if (isError) return <div>Error fetching trades. Please try again later.</div>;
+  if (isLoading) {
+    return <TradesLoadingState />;
+  }
+
+  if (isError) {
+    return <TradesErrorState />;
+  }
 
   return (
     <Stack id="journalMainBody" className="bg-stone-50 p-4 border-t border-slate-200">
@@ -22,7 +30,7 @@ function JournalView() {
       {trades?.length ? (
         <TradesGallery />
       ) : (
-        <div>No trades available.</div>
+        <TradesEmptyState />
       )}
 
       <div className="flex justify-center">
