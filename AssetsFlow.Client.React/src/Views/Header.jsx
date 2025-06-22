@@ -1,10 +1,16 @@
 import { Title, Text, Button, Flex, Box, Group, Divider } from "@mantine/core";
 import { TbHelp, TbChartLine, TbBook } from "react-icons/tb";
 import { useDisclosure } from '@mantine/hooks';
+import { useEffect } from 'react';
 import AboutDrawer from "@components/About/AboutDrawer";
 
 function Header() {
   const [opened, { open, close }] = useDisclosure(false);
+  const isDev = import.meta.env.DEV;
+
+  useEffect(() => {
+    document.title = "HsR" + (isDev ? " [DEV]" : "");
+  }, [isDev]);
 
   return (
     <>
@@ -26,7 +32,7 @@ function Header() {
                   className="text-slate-800 font-bold tracking-tight"
                   mb={2}
                 >
-                  Horizons Retrospective
+                  Horizons Retrospective{isDev && " [DEV]"}
                 </Title>
                 <Text 
                   size="sm" 
