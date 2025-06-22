@@ -1,9 +1,11 @@
 import React from "react";
 import { Modal, Textarea, Button } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { TbCheck } from "react-icons/tb";
 import * as Constants from "@constants/journalConstants";
 import { dataElementContentParser } from "@services/dataElementContentParser";
 import DefaultSelect from "./DefaultSelect";
+import StyledActionButton from "@components/Common/StyledActionButton";
 
 function DataUpdateModal({ opened, onClose, onSubmit, data }) {
   const { contentValue, textRestrictions } = dataElementContentParser(data);
@@ -40,6 +42,14 @@ function DataUpdateModal({ opened, onClose, onSubmit, data }) {
       onClose={onClose}
       title={data[Constants.DATA_TITLE_STRING]}
       onClick={handleModalClick}
+      styles={{
+        title: {
+          fontSize: '18px',
+          fontWeight: '600',
+          color: '#374151',
+          textAlign: 'center',
+        }
+      }}
     >
       <form onSubmit={form.onSubmit(handleSubmit)} onClick={handleModalClick}>
         {textRestrictionsExist ? (
@@ -51,25 +61,26 @@ function DataUpdateModal({ opened, onClose, onSubmit, data }) {
         ) : (
           <Textarea autosize maxRows={2}
             label="Value"
-            className="mb-2.5"
+            className="mb-5"
             {...form.getInputProps("value")}
           />
         )}
 
         <Textarea autosize maxRows={2}
           label="Change Details"
-          className="mb-5"
+          className="mb-5 mt-4"
           {...form.getInputProps("changeDetails")}
         />
 
-        <Button
+        <StyledActionButton
           type="submit"
+          icon={<TbCheck size={20} />}
           disabled={!isRestrictedValid}
           className="block mx-auto"
           onClick={handleModalClick}
         >
           Apply Changes
-        </Button>
+        </StyledActionButton>
       </form>
     </Modal>
   );

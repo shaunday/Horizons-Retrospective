@@ -8,6 +8,7 @@ import { TbPlus } from "react-icons/tb";
 import TradesLoadingState from "@journalComponents/JournalLoadingStates/TradesLoadingState";
 import TradesErrorState from "@journalComponents/JournalLoadingStates/TradesErrorState";
 import TradesEmptyState from "@journalComponents/JournalLoadingStates/TradesEmptyState";
+import StyledActionButton from "@components/Common/StyledActionButton";
 
 function JournalView() {
   const { isLoading, isError, trades } = useFetchAndCacheTrades();
@@ -34,17 +35,14 @@ function JournalView() {
       )}
 
       <div className="flex justify-center">
-        <Button
-          leftIcon={<TbPlus size={20} />}
-          variant="subtle"
-          color="blue"
-          size="sm"
+        <StyledActionButton
+          icon={<TbPlus size={20} />}
           onClick={onAddTrade}
           disabled={isAddingTrade}
-          className="shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 min-w-[280px]"
+          className="min-w-[280px]"
         >
           {isAddingTrade ? "Adding Trade..." : "+ Add a Trade"}
-        </Button>
+        </StyledActionButton>
       </div>
     </Stack>
   );

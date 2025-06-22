@@ -3,11 +3,13 @@
 
 ## [0.9.017-c] - 2025-06-22
 ### Added
-- Dev indicators (browser and page headers)
+- Dev. indicators (browser and page headers)
 - when adding a trade, expand it on reponse
 ### Changed
 - reverted expand/collapse on background clicks
-- Journal loading states : style rework
+- Journal loading/error states : styles rework
+- Action buttons unification - addtrade/change data/set closing price
+- Some modals styling (close price, edit data)
 ### Fixed
 - Edit button "dancing" (caused by translation in class name instead of in the style)
 

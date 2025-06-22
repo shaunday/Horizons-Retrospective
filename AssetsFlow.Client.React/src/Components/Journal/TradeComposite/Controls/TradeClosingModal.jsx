@@ -1,5 +1,7 @@
 import { Modal, NumberInput, Button } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { TbCheck } from "react-icons/tb";
+import StyledActionButton from "@components/Common/StyledActionButton";
 
 function TradeClosingModal({ opened, onClose, onSubmit }) {
     const form = useForm({
@@ -18,7 +20,20 @@ function TradeClosingModal({ opened, onClose, onSubmit }) {
     };
 
     return (
-        <Modal opened={opened} onClose={onClose} title="Enter closing price" centered>
+        <Modal 
+            opened={opened} 
+            onClose={onClose} 
+            title="Closing Price" 
+            centered
+            styles={{
+                title: {
+                    fontSize: '18px',
+                    fontWeight: '600',
+                    color: '#374151',
+                    textAlign: 'center',
+                }
+            }}
+        >
             <form onSubmit={form.onSubmit(handleSubmit)}>
                 <NumberInput
                     placeholder="Closing price..."
@@ -27,9 +42,13 @@ function TradeClosingModal({ opened, onClose, onSubmit }) {
                     {...form.getInputProps('closePrice')}
                     className="mb-1 max-w-xs block mx-auto"
                 />
-                <Button type="submit" className="mt-5 block mx-auto">
-                    Apply Changes
-                </Button>
+                <StyledActionButton 
+                    type="submit" 
+                    icon={<TbCheck size={20} />}
+                    className="mt-5 block mx-auto"
+                >
+                    Submit
+                </StyledActionButton>
             </form>
         </Modal>
     );
