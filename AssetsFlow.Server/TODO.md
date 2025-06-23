@@ -1,15 +1,14 @@
 ﻿
 # TODO
 
-- add demo DB
-- redo seeder
+- redo seed + on demand with 3 good scenarios - controller + password
 
-- opened = first activate date, close = closed date (remove props from trade make em getters / readonly ?)
-- on remove, reset activation states or just re-check. open = at least 1 add exists
+- add ignoreActivation flag to content edit
+- add idea/origin date (not same as trade open)
+- on remove, set condition where net is positive post, otherwise error
 
-- rethink isContentMissing - either way dont need to reload all trade to get it, you always got the old one (in the fe at least)
+- rethink isContentMissing - either way dont need to reload all tradeComposite to get it, you always got the old one (in the fe at least)
 - closed trade logic : deny edits/ re-open trade to allow edit?
-- rethink activation/ summary (maybe summary all activated elements only?) 
 
 
 ## testing

@@ -1,26 +1,28 @@
 ## 1
-add: filter by : status first, date first, show: idea, interim, closed
-add: filtering -... in client? / adjust data call api
-revert order? last added first?
-
-## 2.
 from limor: edit > expand the object and edit in place?
 from limor: title should be styled diff than the content, text aligned to the left
-<ThemeIcon variant="light" color="indigo.4"> + move the icon into the paper - on elementbadge 
+add: opened/closedat (just to overview?)
+add: seeder connection once done in BE
 
+## 2.
+add: filter (status first, date first, BY STATUS), in client? / adjust data call api
+revert trades order? last added first?
+
+ThemeIcon variant="light" color="indigo.4"> + move the icon into the paper - on elementbadge  ?
+
+add: ignoreActivation flag to content edit
+add: Once an element is active, can edit date via popup (pick date/now) 
 add: trade command bar - delete trade action, collapse all trades 
 add: expand/collapse by clicking on the background
 issue: how to edit lessons in trade closure?
-add: edit history via modal/tooltip
-add: Once an element is active, can restamp via popup (pick data/now) 
+add: content-history
 add: context/jotai for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
-add: opened/closedat somehow (to overview? change overview to just a text string?) 
 
 ## 3.
+obfuscate amounts/costs for anon view - a method (in the user context?)
 1 main notifications bar? for progress
 pagination ui (parse X data)
 free flow string with AI to turn it into a trade object
-obfuscate amounts/costs for anon view - a method (in the user context?)
 sector thoughts
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?
 

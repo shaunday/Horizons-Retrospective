@@ -25,7 +25,7 @@ namespace HsR.Journal.DataContext
 
             cell.SetFollowupContent(newContent, changeNote);
 
-            UpdatedStatesCollation updatedStates =  await HandleStatusUpdates(cell);
+            UpdatedStatesCollation updatedStates =  await HandleTradeStatusUpdates(cell);
 
             if (cell.SectorRelevance)
             {
@@ -46,7 +46,7 @@ namespace HsR.Journal.DataContext
             }
         }
 
-        private async Task<UpdatedStatesCollation> HandleStatusUpdates(DataElement cell)
+        private async Task<UpdatedStatesCollation> HandleTradeStatusUpdates(DataElement cell)
         {
             UpdatedStatesCollation updatedStates = new();
             await _dataContext.Entry(cell).Reference(c => c.TradeElementRef).LoadAsync();
