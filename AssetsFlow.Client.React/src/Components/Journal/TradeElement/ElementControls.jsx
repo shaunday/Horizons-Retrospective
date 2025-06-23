@@ -7,7 +7,7 @@ import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuc
 import { useElementActionMutation } from "@hooks/Journal/Element/useElementActionMutation"
 import { useRemoveElementFromTrade } from "@hooks/Journal/Element/useRemoveElementFromTrade"
 
-function ElementControls({ tradeElement, onActionSuccess }) {
+function ElementControls({ tradeElement, onActionSuccess, className = "" }) {
   const tradeId = tradeElement[Constants.ELEMENT_COMPOSITEFK_STING];
   const { removeElement } = useRemoveElementFromTrade(tradeId);
 
@@ -24,7 +24,7 @@ function ElementControls({ tradeElement, onActionSuccess }) {
   };
 
   return (
-    <>
+    <div className={className}>
       <div>
         <Menu shadow="md" width={120} position="bottom-end">
           <Menu.Target>
@@ -42,7 +42,7 @@ function ElementControls({ tradeElement, onActionSuccess }) {
         </Menu>
       </div>
       <ProcessingAndSuccessMessage status={processingStatus} />
-    </>
+    </div>
   );
 }
 

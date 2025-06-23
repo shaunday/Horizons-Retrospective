@@ -9,7 +9,7 @@ function GroupedEntriesList({ entries, processCellUpdate }) {
   const groupedEntries = useMemo(() => getGroupedEntries(entries), [entries]);
 
   return (
-    <>
+    <div className="flex flex-wrap items-center gap-6">
       {Object.keys(groupedEntries).map((groupKey) => {
         const entries = groupedEntries[groupKey];
         const IconComponent = getComponentTypeIcon(groupKey);
@@ -31,7 +31,7 @@ function GroupedEntriesList({ entries, processCellUpdate }) {
           </Box>
         );
       })}
-    </>
+    </div>
   );
 }
 

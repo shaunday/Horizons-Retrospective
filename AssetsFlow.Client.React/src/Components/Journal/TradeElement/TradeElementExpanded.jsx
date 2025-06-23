@@ -1,5 +1,4 @@
 import React, { useMemo, useCallback } from "react";
-import { Group } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 import ElementControls from "./ElementControls";
 import GroupedEntriesList from "../DataElementGroups/GroupedEntriesList"; 
@@ -38,15 +37,15 @@ function TradeElementExpanded({ tradeElement, onElementContentUpdate, onElementA
   });
 
   return (
-    <Group wrap="wrap" gap="lg">
+    <div className="flex flex-wrap items-center">
        <GroupedEntriesList
           entries={tradeElement[Constants.TRADE_ENTRIES_STRING]}
           processCellUpdate={processCellUpdate}
         />
       {isAllowControls && 
-        <ElementControls tradeElement={tradeElement} onActionSuccess={processElementActionSuccess} />
+        <ElementControls className="m-3" tradeElement={tradeElement} onActionSuccess={processElementActionSuccess} />
       }
-    </Group>
+    </div>
   );
 }
 
