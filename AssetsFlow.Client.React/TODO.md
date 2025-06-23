@@ -1,7 +1,6 @@
 ## 1
-defect: delete element doesnt update ismissing state, reduce position - doesnt work
+defect: reduce position - doesnt work
 from limor: title should be styled diff than the content, text aligned to the left
-
 
 ## 2.
 add: filter by : status first, date first, show: idea, interim, closed

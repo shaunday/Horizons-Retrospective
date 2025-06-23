@@ -4,6 +4,7 @@
 - Reworked contentEdit logic - always load trade for now, for uptodate ismissing data (to rethink)
 - Fix CompositeFK name mismatch (entity and dto)
 - Fix AutoMapping for TradeCompositeInfo
+- Fix Mishmash on delete's return values
 
 
 ## [0.9.502-s] - 2025-06-22

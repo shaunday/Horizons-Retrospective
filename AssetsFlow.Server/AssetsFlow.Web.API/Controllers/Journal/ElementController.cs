@@ -29,7 +29,7 @@ public class TradeElementsController(
         // Invalidate cache when an element is deleted and start reload
         _cacheService.InvalidateAndReload();
 
-        return ResultHandling(updatedStates, $"Could not delete element with Id: {elementId}", [NEW_STATES_WRAPPER]);
+        return ResultHandling(resAsModel, $"Could not delete element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }
 
     [HttpPatch]
@@ -46,7 +46,7 @@ public class TradeElementsController(
         // Invalidate cache when an element's timestamp is updated and start reload
         _cacheService.InvalidateAndReload();
 
-        return ResultHandling(updatedStates, $"Could not reactivate element with Id: {elementId}", [NEW_STATES_WRAPPER]);
+        return ResultHandling(resAsModel, $"Could not reactivate element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }
 }
     
