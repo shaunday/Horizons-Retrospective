@@ -1,5 +1,4 @@
 ## 1
-defect: reduce position - doesnt work
 from limor: title should be styled diff than the content, text aligned to the left
 
 ## 2.

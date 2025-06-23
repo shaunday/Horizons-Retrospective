@@ -8,6 +8,7 @@
 ### Fixed
 - All sorta of logic not working /refreshing - trade action buttons' state, summary state
 - CompositeFK name mismatch (server issue tbf)
+- Reducing position
 
 ## [0.9.018-c] - 2025-06-23
 ### Fixed
