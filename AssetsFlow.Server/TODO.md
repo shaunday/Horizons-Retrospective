@@ -4,7 +4,6 @@
 - add demo DB
 - redo seeder
 
-- add opened/closedat somehow (to overview?) 
 - opened = first activate date, close = closed date (remove props from trade make em getters / readonly ?)
 - on remove, reset activation states or just re-check. open = at least 1 add exists
 

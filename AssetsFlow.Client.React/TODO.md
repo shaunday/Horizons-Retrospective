@@ -1,6 +1,7 @@
 ## 1
 add: filter by : status first, date first, show: idea, interim, closed
 add: filtering -... in client? / adjust data call api
+revert order? last added first?
 
 ## 2.
 from limor: edit > expand the object and edit in place?
@@ -10,9 +11,10 @@ from limor: title should be styled diff than the content, text aligned to the le
 add: trade command bar - delete trade action, collapse all trades 
 add: expand/collapse by clicking on the background
 issue: how to edit lessons in trade closure?
-add: change-history modal/tooltip
+add: edit history via modal/tooltip
 add: Once an element is active, can restamp via popup (pick data/now) 
 add: context/jotai for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
+add: opened/closedat somehow (to overview? change overview to just a text string?) 
 
 ## 3.
 1 main notifications bar? for progress
