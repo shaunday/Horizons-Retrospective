@@ -5,6 +5,7 @@ add: filtering -... in client? / adjust data call api
 ## 2.
 from limor: edit > expand the object and edit in place?
 from limor: title should be styled diff than the content, text aligned to the left
+<ThemeIcon variant="light" color="indigo.4"> + move the icon into the paper - on elementbadge 
 
 add: trade command bar - delete trade action, collapse all trades 
 add: expand/collapse by clicking on the background
