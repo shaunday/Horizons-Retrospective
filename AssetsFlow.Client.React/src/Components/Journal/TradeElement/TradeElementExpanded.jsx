@@ -37,7 +37,7 @@ function TradeElementExpanded({ tradeElement, onElementContentUpdate, onElementA
   });
 
   return (
-    <div className="flex flex-wrap items-center">
+    <div className="flex items-center">
        <GroupedEntriesList
           entries={tradeElement[Constants.TRADE_ENTRIES_STRING]}
           processCellUpdate={processCellUpdate}

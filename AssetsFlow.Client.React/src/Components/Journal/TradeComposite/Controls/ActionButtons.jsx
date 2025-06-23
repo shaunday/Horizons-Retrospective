@@ -8,7 +8,6 @@ function ActionButtons({ tradeStatus, handleActionClick, disallowInteractions })
     const ActionButton = ({ tradeAction }) => {
         const variant = "subtle";
         const color = "gray";
-        const className = "shadow-md hover:shadow-lg transition-all duration-200 hover:scale-110 bg-gray-100";
         
         const onButtonClick = () => {
             if (!disallowInteractions) {
