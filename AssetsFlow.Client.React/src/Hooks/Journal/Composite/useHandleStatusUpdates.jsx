@@ -7,10 +7,10 @@ export const useHandleStatusUpdates = (tradeComposite) => {
   const { setNewData } = useUpdateTradeCacheData(tradeComposite.id);
 
   const processTradeStatusUpdates = useCallback((response) => {
-    const { newTradeStatus, tradeIsPending } = newStatesResponseParser(response);
+    const { newTradeStatus, hasMissingContent } = newStatesResponseParser(response);
 
     setNewData(Constants.TRADE_STATUS, newTradeStatus);
-    setNewData(Constants.HasMissingContent, tradeIsPending);
+    setNewData(Constants.HasMissingContent, hasMissingContent);
   }, [setNewData]);
 
   return processTradeStatusUpdates;
