@@ -21,10 +21,14 @@ namespace HsR.Web.Services.Models.Journal
 
         public DateTime? OpenedAt { get; set; }
         public DateTime? ClosedAt { get; set; }
+
+        public override string ToString() => $"Id={Id}, IsAnyContentMissing={IsAnyContentMissing}, Status={Status}";
     }
 
     public class TradeCompositeModel : TradeCompositeInfo
     {
         public ICollection<TradeElementModel> TradeElements { get; set; } = null!;
+
+        public override string ToString() => $"Id={Id}, Status={Status}, Trade Eles Count={TradeElements.Count}";
     }
 }

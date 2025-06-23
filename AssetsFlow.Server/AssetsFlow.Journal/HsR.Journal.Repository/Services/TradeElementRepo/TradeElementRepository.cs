@@ -52,6 +52,15 @@ namespace HsR.Journal.DataContext
                     .Select(entry =>
                     {
                         var clonedEntry = mapper.Map<DataElement>(entry);
+
+                        clonedEntry.Id = 0;
+                        clonedEntry.History = null;
+                        clonedEntry.ContentWrapper = null;
+                        clonedEntry.IsRelevantForTradeOverview = false;
+
+                        string content = entry.Content ?? "";
+                        clonedEntry.SetFollowupContent(content, "");
+
                         clonedEntry.UpdateParentRefs(tradeOverview);
                         return clonedEntry;
                     })

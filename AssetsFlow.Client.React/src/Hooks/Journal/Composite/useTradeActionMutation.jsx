@@ -45,7 +45,7 @@ export const useTradeActionMutation = (tradeComposite) => {
     },
     onSuccess: ({ response }, { action }) => {
       updateTradeStatuses(response);
-      if (action === TradeActions.ADD || action === TradeActions.REDUCE) {
+      if (action === TradeActions.ADD || action === TradeActions.REDUCE || action === TradeActions.EVALUATE) {
         const newElement = response[Constants.NEW_ELEMENT_RESPONSE_TAG];
         if (newElement) {
           onElementUpdate(newElement);

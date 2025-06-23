@@ -1,11 +1,12 @@
 ## 1
-from limor: title should be styled diff than the content, text aligned to the left
-
-## 2.
 add: filter by : status first, date first, show: idea, interim, closed
 add: filtering -... in client? / adjust data call api
-add: trade command bar - delete trade action, collapse all trades 
 
+## 2.
+from limor: edit > expand the object and edit in place?
+from limor: title should be styled diff than the content, text aligned to the left
+
+add: trade command bar - delete trade action, collapse all trades 
 add: expand/collapse by clicking on the background
 issue: how to edit lessons in trade closure?
 add: change-history modal/tooltip
@@ -16,7 +17,6 @@ add: context/jotai for user, saved sectors, parse via useHandleStatusUpdates, se
 1 main notifications bar? for progress
 pagination ui (parse X data)
 free flow string with AI to turn it into a trade object
-from limor: edit > expand the object and edit in place?
 obfuscate amounts/costs for anon view - a method (in the user context?)
 sector thoughts
 rq: refetch inverval, cache time, background fetching notificaion, pagination ?

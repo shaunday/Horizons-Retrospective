@@ -24,5 +24,7 @@ namespace HsR.Web.Services.Models.Journal
 
         [Required]
         public int CompositeFK { get; set; }
+
+        public override string ToString() => $"Id={Id}, Type={TradeActionType}, Entries Count={Entries.Count}";
     }
 }

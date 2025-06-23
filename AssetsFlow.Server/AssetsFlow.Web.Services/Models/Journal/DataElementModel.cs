@@ -35,5 +35,7 @@ namespace HsR.Web.Services.Models.Journal
         public int TradeElementFK { get; set; }
         [Required]
         public int CompositeFK { get; set; }
+
+        public override string ToString() => $"Id={Id}, Title={Title}, Content={ContentWrapper?.ContentValue}";
     }
 }

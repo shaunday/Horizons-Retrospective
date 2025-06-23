@@ -1,7 +1,6 @@
 ﻿
 # TODO
 
-- evaluate broken
 - add demo DB
 - redo seeder
 

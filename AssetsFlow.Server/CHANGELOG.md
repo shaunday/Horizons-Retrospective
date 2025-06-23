@@ -5,6 +5,7 @@
 - Fix CompositeFK name mismatch (entity and dto)
 - Fix AutoMapping for TradeCompositeInfo
 - Fix Mishmash on delete's return values
+- Fix evaluate (need to properly clone entities - new ids and all)
 
 
 ## [0.9.502-s] - 2025-06-22

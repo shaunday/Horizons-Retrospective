@@ -8,7 +8,7 @@ namespace HsR.Journal.Entities
         #region Base Props 
 
         [Key]
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         [Required]
         public required string Title { get; set; } = string.Empty;
