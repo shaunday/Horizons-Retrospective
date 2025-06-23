@@ -19,14 +19,15 @@ namespace HsR.Web.API.Mapping
                 .ForMember(dest => dest.IsAnyContentMissing,
                 opt => opt.MapFrom(src => !src.IsAllRequiredFields()));
 
-            CreateMap<TradeComposite, TradeCompositeModel>()
+            CreateMap<TradeComposite, TradeCompositeInfo>()
                 .EqualityComparison((dto, m) => dto.Id == m.Id)
                 .ForMember(dest => dest.IsAnyContentMissing,
-                opt => opt.MapFrom(src => src.TradeElements.Any(ele => !ele.IsAllRequiredFields())
-                ));
+                    opt => opt.MapFrom(src => src.TradeElements.Any(ele => !ele.IsAllRequiredFields())));
+
+            CreateMap<TradeComposite, TradeCompositeModel>()
+                .IncludeBase<TradeComposite, TradeCompositeInfo>();
 
             CreateMap<UpdatedStatesCollation, UpdatedStatesModel>();
-            CreateMap<TradeComposite, TradeCompositeInfo>().EqualityComparison((dto, m) => dto.Id == m.Id);
         }
     }
 }

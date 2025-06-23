@@ -1,8 +1,9 @@
 
 ## [0.9.503-s] - 2025-06-..
-- IsAnyContentMissing prop on elementDTO
+- Add IsAnyContentMissing prop on elementDTO
 - Reworked contentEdit logic - always load trade for now, for uptodate ismissing data (to rethink)
-- CompositeFK name mismatch (entity and dto)
+- Fix CompositeFK name mismatch (entity and dto)
+- Fix AutoMapping for TradeCompositeInfo
 
 
 ## [0.9.502-s] - 2025-06-22
