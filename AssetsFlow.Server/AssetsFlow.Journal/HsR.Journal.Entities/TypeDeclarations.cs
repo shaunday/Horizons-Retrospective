@@ -21,12 +21,4 @@
         Open,
         Closed
     }
-
-    public static class TradeActionTypeExtensions
-    {
-        public static bool IsSummaryRelevant(this TradeActionType actionType)
-        {
-            return actionType == TradeActionType.Add || actionType == TradeActionType.Reduce;
-        }
-    }
 }

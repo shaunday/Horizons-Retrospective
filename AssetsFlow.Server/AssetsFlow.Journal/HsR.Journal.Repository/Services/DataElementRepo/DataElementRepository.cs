@@ -25,19 +25,7 @@ namespace HsR.Journal.DataContext
 
             cell.SetFollowupContent(newContent, changeNote);
 
-            UpdatedStatesCollation updatedStates = new();
-
-            var interimIfActive = await HandleActivationAsync(cell);
-            if (interimIfActive != null)
-            {
-                updatedStates.ActivationTimeStamp = interimIfActive.TimeStamp;
-                updatedStates.TradeInfo = cell.CompositeRef;
-
-                if (cell.IsCostRelevant())
-                {
-                    RefreshSummary(cell.CompositeRef);
-                }
-            }
+            UpdatedStatesCollation updatedStates =  await HandleStatusUpdates(cell);
 
             if (cell.SectorRelevance)
             {
@@ -58,24 +46,32 @@ namespace HsR.Journal.DataContext
             }
         }
 
-        private async Task<InterimTradeElement?> HandleActivationAsync(DataElement cell)
+        private async Task<UpdatedStatesCollation> HandleStatusUpdates(DataElement cell)
         {
+            UpdatedStatesCollation updatedStates = new();
             await _dataContext.Entry(cell).Reference(c => c.TradeElementRef).LoadAsync();
 
             if (cell.TradeElementRef is InterimTradeElement interim && interim.IsAllRequiredFields())
             {
                 interim.Activate();
 
+                await LoadCompositeRefAsync(cell);
+
                 if (interim.TradeActionType == TradeActionType.Add)
                 {
-                    await LoadCompositeRefAsync(cell);
                     cell.CompositeRef?.Activate();
                 }
-                return interim;
+
+                if (cell.CompositeRef != null && cell.IsCostRelevant())
+                {
+                    RefreshSummary(cell.CompositeRef);
+                }
+
+                updatedStates.TradeInfo = cell.CompositeRef;
+                updatedStates.ActivationTimeStamp = interim.TimeStamp;
             }
 
-            Log.Logger.Warning($"Activation failed or incorrect cast for Entry ID {cell.Id}.");
-            return null;
+            return updatedStates;
         }
     }
 }

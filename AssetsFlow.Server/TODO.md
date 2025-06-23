@@ -4,13 +4,15 @@
 - add demo DB
 - redo seeder
 
-- rethink activation/ summary (maybe summary all activated elements only?) 
 - add opened/closedat somehow (to overview?) 
-- parsed in response missing in the info sent: ActivationTimeStamp, SavedSectors
 - opened = first activate date, close = closed date (remove props from trade make em getters / readonly ?)
-
-- re-open trade to allow edit?
 - on remove, reset activation states or just re-check. open = at least 1 add exists
+
+- rethink isContentMissing - either way dont need to reload all trade to get it, you always got the old one (in the fe at least)
+
+- closed trade logic : deny edits/ re-open trade to allow edit?
+- rethink activation/ summary (maybe summary all activated elements only?) 
+
 
 ## testing
 - API tests (seeder?)
