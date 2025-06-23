@@ -1,23 +1,13 @@
 import React from "react";
 import { Menu, ActionIcon } from '@mantine/core';
 import { TbDots, TbTrash } from 'react-icons/tb'; 
-import * as Constants from "@constants/journalConstants";
 import { ElementActions } from "@constants/journalConstants";
 import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
 import { useElementActionMutation } from "@hooks/Journal/Element/useElementActionMutation"
-import { useRemoveElementFromTrade } from "@hooks/Journal/Element/useRemoveElementFromTrade"
 
-function ElementControls({ tradeElement, onActionSuccess, className = "" }) {
-  const tradeId = tradeElement[Constants.ELEMENT_COMPOSITEFK_STING];
-  const { removeElement } = useRemoveElementFromTrade(tradeId);
 
-  const processTradeAction = (action, response) => {
-    if (action === ElementActions.DELETE) {
-      removeElement(tradeElement.id);
-    }
-    onActionSuccess(response);
-  }
-  const { elementActionMutation, processingStatus } = useElementActionMutation(tradeElement, processTradeAction);
+function ElementControls({ tradeElement, className = "" }) {
+  const { elementActionMutation, processingStatus } = useElementActionMutation(tradeElement);
 
   const handleAction = (action) => {
     elementActionMutation.mutate({ action });

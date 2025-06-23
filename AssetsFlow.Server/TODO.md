@@ -1,6 +1,7 @@
 ﻿
 # TODO
 
+- evaluate broken
 - add demo DB
 - redo seeder
 
@@ -9,7 +10,6 @@
 - on remove, reset activation states or just re-check. open = at least 1 add exists
 
 - rethink isContentMissing - either way dont need to reload all trade to get it, you always got the old one (in the fe at least)
-
 - closed trade logic : deny edits/ re-open trade to allow edit?
 - rethink activation/ summary (maybe summary all activated elements only?) 
 

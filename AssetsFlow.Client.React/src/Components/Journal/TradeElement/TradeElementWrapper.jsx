@@ -6,7 +6,7 @@ import TradeElementExpanded from "./TradeElementExpanded";
 import TradeElementCollapsed from "./TradeElementCollapsed";
 import TradeElementBadge from "./Badge/TradeElementBadge";
 
-function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAction }) {
+function TradeElementWrapper({ tradeElement }) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   return (
@@ -32,11 +32,7 @@ function TradeElementWrapper({ tradeElement, onElementContentUpdate, onElementAc
         <TradeElementCollapsed tradeElement={tradeElement}/>
       ) : (
         <div className="pl-3">
-          <TradeElementExpanded
-            tradeElement={tradeElement}
-            onElementContentUpdate={onElementContentUpdate}
-            onElementAction={onElementAction}
-          />
+          <TradeElementExpanded tradeElement={tradeElement} />
         </div>
       )}
     </Paper>

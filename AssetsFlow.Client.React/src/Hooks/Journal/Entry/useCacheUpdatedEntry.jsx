@@ -3,12 +3,12 @@ import { produce } from "immer";
 import { tradeKeysFactory } from "@services/query-key-factory";
 import * as Constants from "@constants/journalConstants";
 
-export function useCacheUpdatedEntry(tradeComposite) {
+export function useCacheUpdatedEntry(tradeId) {
   const queryClient = useQueryClient();
 
   const cacheUpdatedEntry = (updatedEntry) => {
     queryClient.setQueryData(
-      tradeKeysFactory.tradeAndIdArrayKey(tradeComposite.id),
+      tradeKeysFactory.tradeAndIdArrayKey(tradeId),
       (oldTradeComposite) =>
         produce(oldTradeComposite, (draft) => {
           const tradeElements = draft[Constants.TRADE_ELEMENTS_STRING];
@@ -25,5 +25,5 @@ export function useCacheUpdatedEntry(tradeComposite) {
     );
   };
 
-  return { cacheUpdatedEntry };
+  return cacheUpdatedEntry;
 }

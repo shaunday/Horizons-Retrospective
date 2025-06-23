@@ -34,6 +34,6 @@ namespace HsR.Web.Services.Models.Journal
         [Required]
         public int TradeElementFK { get; set; }
         [Required]
-        public int TradeCompositeFK { get; set; }
+        public int CompositeFK { get; set; }
     }
 }

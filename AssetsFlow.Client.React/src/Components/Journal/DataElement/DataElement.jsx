@@ -8,18 +8,12 @@ import ValueWrapper from "./ValueWrapper";
 import { useContentUpdateMutation } from "@hooks/Journal/Entry/useContentUpdateMutation";
 import { dataElementContentParser } from "@services/dataElementContentParser";
 
-function DataElement({ cellInfo, onCellUpdate, overviewType }) {
-  const isOverview = overviewType != Constants.OverviewType.NONE
+function DataElement({ cellInfo, overviewType }) {
+  const isOverview = overviewType != Constants.OverviewType.NONE;
   const { contentValue } = dataElementContentParser(cellInfo);
 
-  const { contentUpdateMutation, processingStatus } = useContentUpdateMutation(
-    cellInfo,
-    (cellUpdateResponse) => {
-      if (onCellUpdate) {
-        onCellUpdate(cellUpdateResponse);
-      }
-    }
-  );
+  const { contentUpdateMutation, processingStatus } =
+    useContentUpdateMutation(cellInfo);
 
   const initiateMutation = (newValue) => {
     contentUpdateMutation.mutate(newValue);
@@ -30,15 +24,22 @@ function DataElement({ cellInfo, onCellUpdate, overviewType }) {
       shadow="xs"
       radius="md"
       withBorder
-      className={clsx("container-with-centered-content px-1 min-w-20 flex gap-1 cursor-default", {
-        "max-w-60": isOverview,
-        "max-w-36": !isOverview,
-        "flex-row": isOverview,
-        "flex-col": !isOverview,
-        "bg-red-50 border-red-200": !contentValue && overviewType != Constants.OverviewType.TRADE_OVERVIEW,
-        "pointer-events-none": processingStatus === ProcessingStatus.PROCESSING,
-        "pointer-events-auto": processingStatus !== ProcessingStatus.PROCESSING
-      })}
+      className={clsx(
+        "container-with-centered-content px-1 min-w-20 flex gap-1 cursor-default",
+        {
+          "max-w-60": isOverview,
+          "max-w-36": !isOverview,
+          "flex-row": isOverview,
+          "flex-col": !isOverview,
+          "bg-red-50 border-red-200":
+            !contentValue &&
+            overviewType != Constants.OverviewType.TRADE_OVERVIEW,
+          "pointer-events-none":
+            processingStatus === ProcessingStatus.PROCESSING,
+          "pointer-events-auto":
+            processingStatus !== ProcessingStatus.PROCESSING,
+        }
+      )}
     >
       <Text className="whitespace-nowrap">
         {cellInfo[Constants.DATA_TITLE_STRING]} {isOverview ? ":" : ""}

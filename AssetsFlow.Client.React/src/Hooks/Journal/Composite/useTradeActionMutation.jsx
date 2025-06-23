@@ -4,10 +4,19 @@ import {
   addReduceInterimPosition,
   closeTrade,
   addEvaluation,
-} from "@services/ApiRequests/tradeApiAccess"; 
+} from "@services/ApiRequests/tradeApiAccess";
+import { ProcessingStatus } from "@constants/constants";
+import { useUpdateTradeStatusFromResponse } from "./useUpdateTradeStatusFromResponse";
+import { useCacheNewElement } from "@hooks/Journal/Element/useCacheNewElement";
+import * as Constants from "@constants/journalConstants";
+import { useProcessingWrapper } from "@hooks/useProcessingWrapper";
 
-export const useTradeActionMutation = (tradeComposite, onTradeActionSuccess) => {
-  return useMutation({
+export const useTradeActionMutation = (tradeComposite) => {
+  const updateTradeStatuses = useUpdateTradeStatusFromResponse(tradeComposite.id);
+  const onElementUpdate = useCacheNewElement(tradeComposite);
+  const { processingStatus, setNewStatus } = useProcessingWrapper(ProcessingStatus.NONE);
+
+  const tradeActionMutation  =  useMutation({
     mutationFn: async ({ action, additionalParam }) => {
       let response;
       switch (action) {
@@ -28,11 +37,23 @@ export const useTradeActionMutation = (tradeComposite, onTradeActionSuccess) => 
       }
       return { action, response };
     },
+    onMutate: () => {
+      setNewStatus(ProcessingStatus.PROCESSING); // Set to PROCESSING when mutation starts
+    },
     onError: (error) => {
       console.error("Error adding/reducing position:", error);
     },
     onSuccess: ({ response }, { action }) => {
-      onTradeActionSuccess(response);
+      updateTradeStatuses(response);
+      if (action === TradeActions.ADD) {
+        const newElement = response[Constants.NEW_ELEMENT_RESPONSE_TAG];
+        if (newElement) {
+          onElementUpdate(newElement);
+        }
+      }
+      setNewStatus(ProcessingStatus.SUCCESS);
     },
   });
-};
+
+  return { tradeActionMutation, processingStatus };
+}

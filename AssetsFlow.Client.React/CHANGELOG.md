@@ -1,9 +1,13 @@
 
 # Changelog
 
-## [0.9.019-c] - 2025-06-23
+## [0.9.019-c] - 2025-06-...
 ### Added
 - Missing notification for collapsed trade elements
+- HUGE work removing callbacks/ unifying status update logic with hooks instead
+### Fixed
+- All sorta of logic not working /refreshing - trade action buttons' state, summary state
+- CompositeFK name mismatch (server issue tbf)
 
 ## [0.9.018-c] - 2025-06-23
 ### Fixed

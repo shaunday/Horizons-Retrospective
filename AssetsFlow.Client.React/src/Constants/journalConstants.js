@@ -46,7 +46,8 @@ export const DATA_TITLE_STRING = 'title'
 export const DATA_RELEVANT_FOR_ORVERVIEW_STRING = 'isRelevantForTradeOverview'
 export const DATA_RELEVANT_FOR_LOCAL_ORVERVIEW_STRING = 'isRelevantForLocalOverview'
 export const COMPONENT_TYPE ='componentType'
-export const DATA_COMPOSITEFK_STRING = 'tradeCompositeFK'
+export const DATA_COMPOSITEFK_STRING = 'compositeFK'
+export const DATA_TRADE_ELEMENTFK_STRING = 'tradeElementFK'
 
 export const OverviewType = Object.freeze({
   NONE: "None",

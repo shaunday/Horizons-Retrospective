@@ -6,7 +6,7 @@ import * as Constants from "@constants/journalConstants";
 export function useUpdateElementCacheData(tradeId, tradeElementId) {
   const queryClient = useQueryClient();
 
-  const setNewData = (dataIdentifier, newData) => {
+  const updateElementProp = (dataIdentifier, newData) => {
     queryClient.setQueryData(
       tradeKeysFactory.tradeAndIdArrayKey(tradeId),
       produce((oldTradeComposite) => {
@@ -21,5 +21,5 @@ export function useUpdateElementCacheData(tradeId, tradeElementId) {
     );
   };
 
-  return { setNewData };
+  return updateElementProp;
 }

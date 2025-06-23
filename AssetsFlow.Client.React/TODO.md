@@ -1,6 +1,5 @@
 ## 1
-defect: buttons state screwed after trade element remove 
-defect : summary is  missing (on adding trade)
+defect: delete/add element doesnt update ismissing state, add reduce - doesnt work
 from limor: title should be styled diff than the content, text aligned to the left
 
 

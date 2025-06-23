@@ -5,7 +5,7 @@ import { getComponentTypeIcon } from './componentTypeIcons';
 import EntriesList from './EntriesList';
 import * as Constants from "@constants/journalConstants";
 
-function GroupedEntriesList({ entries, processCellUpdate }) {
+function GroupedEntriesList({ entries }) {
   const groupedEntries = useMemo(() => getGroupedEntries(entries), [entries]);
 
   return (
@@ -27,7 +27,7 @@ function GroupedEntriesList({ entries, processCellUpdate }) {
             >
               <IconComponent size={20} />
             </ThemeIcon>
-            <EntriesList entries={entries} processCellUpdate={processCellUpdate} overviewType={Constants.OverviewType.NONE}/>
+            <EntriesList entries={entries} overviewType={Constants.OverviewType.NONE}/>
           </Box>
         );
       })}

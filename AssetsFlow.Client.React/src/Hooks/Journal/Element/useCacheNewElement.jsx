@@ -15,5 +15,5 @@ export function useCacheNewElement(tradeComposite) {
     );
   };
 
-  return { onElementUpdate };
+  return onElementUpdate;
 }
