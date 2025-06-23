@@ -1,8 +1,13 @@
 
 # Changelog
+
+## [0.9.019-c] - 2025-06-23
+### Added
+- Missing notification for collapsed trade elements
+
 ## [0.9.018-c] - 2025-06-23
 ### Fixed
-- Add a trade button typo
+- "Add a trade" button typo
 
 ## [0.9.017-c] - 2025-06-22
 ### Added

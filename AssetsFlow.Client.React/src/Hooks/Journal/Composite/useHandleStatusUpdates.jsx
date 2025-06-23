@@ -10,7 +10,7 @@ export const useHandleStatusUpdates = (tradeComposite) => {
     const { newTradeStatus, tradeIsPending } = newStatesResponseParser(response);
 
     setNewData(Constants.TRADE_STATUS, newTradeStatus);
-    setNewData(Constants.TRADE_ISPENDING, tradeIsPending);
+    setNewData(Constants.HasMissingContent, tradeIsPending);
   }, [setNewData]);
 
   return processTradeStatusUpdates;

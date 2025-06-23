@@ -14,14 +14,15 @@ function TradeElementCollapsed({ tradeElement, isUseAllEntries = false }) {
           Constants.DATA_RELEVANT_FOR_LOCAL_ORVERVIEW_STRING
         );
       }, [tradeElement, isUseAllEntries]);
+      const hasMissingContent = tradeElement[Constants.HasMissingContent];
       
 
     return (
-        <div className="flex items-center justify-between w-full">
+        <div className="flex items-center justify-between w-full gap-1">
           <EntriesList entries={entriesForLocalOverview} overviewType={Constants.OverviewType.ElementOverview}/>
-          {false && (
+          {hasMissingContent && (
             <Notifications 
-              shortText="Missing" 
+              shortText="" 
               expandedText="This element has missing required fields." 
             />
           )}

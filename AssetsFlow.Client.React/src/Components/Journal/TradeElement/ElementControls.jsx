@@ -26,7 +26,7 @@ function ElementControls({ tradeElement, onActionSuccess }) {
   return (
     <>
       <div>
-        <Menu shadow="md" width={150} position="bottom-end">
+        <Menu shadow="md" width={120} position="bottom-end">
           <Menu.Target>
             <ActionIcon variant="subtle">
               <TbDots />

@@ -38,7 +38,7 @@ function CompositeControls({ tradeComposite, onTradeActionSuccess }) {
     <div className="flex flex-col items-end gap-2">
       <ActionButtons
         tradeStatus={tradeComposite?.[Constants.TRADE_STATUS]}
-        disallowInteractions={tradeComposite?.[Constants.TRADE_ISPENDING]}
+        disallowInteractions={tradeComposite?.[Constants.HasMissingContent]}
         handleActionClick={handleAction}
       />
       

@@ -13,7 +13,7 @@ export const newStatesResponseParser = (response) => {
         
         newSummary: tradeInfo?.[Constants.TRADE_SUMMARY_STRING],
         newTradeStatus: tradeInfo?.[Constants.TRADE_STATUS],
-        tradeIsPending: tradeInfo?.[Constants.TRADE_ISPENDING],
+        hasMissingContent: tradeInfo?.[Constants.HasMissingContent],
 
         tradeOpenedAt: tradeInfo?.[Constants.COMPOSITE_OPENED_AT],
         tradeClosedAt: tradeInfo?.[Constants.COMPOSITE_CLOSED_AT],

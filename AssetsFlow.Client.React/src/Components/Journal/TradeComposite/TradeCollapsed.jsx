@@ -3,7 +3,7 @@ import { Group } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 import { getOverViewEntries } from "@services/getOverViewEntries"
 import EntriesList from "../DataElementGroups/EntriesList";
-import TradeNotifications from "./Controls/TradeNotifications";
+import Notifications from "@components/Notifications";
 
 function TradeCollapsed({ trade }) {
   if (!trade) {
@@ -22,10 +22,17 @@ function TradeCollapsed({ trade }) {
     );
   }, [trade]);
 
+  const hasMissingContent = trade[Constants.HasMissingContent];
+
    return (
      <div className="flex items-center justify-between w-full">
        <EntriesList entries={EntriesForTradeOverView} overviewType={Constants.OverviewType.TRADE_OVERVIEW} />
-       <TradeNotifications tradeComposite={trade} />
+       {hasMissingContent && (
+         <Notifications 
+           shortText="Missing" 
+           expandedText="Some required fields are empty or invalid." 
+         />
+       )}
      </div>
    );
 }

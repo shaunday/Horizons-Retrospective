@@ -1,10 +1,12 @@
+//general
+export const HasMissingContent = 'isAnyContentMissing'; 
+
 //trade
 export const TRADE_SUMMARY_STRING = 'summary';
 export const TRADE_ELEMENTS_STRING = 'tradeElements'
 export const TRADE_ENTRIES_STRING = 'entries'
-
 export const TRADE_STATUS = 'status'; 
-export const TRADE_ISPENDING = 'isAnyContentMissing'; 
+
 export const COMPOSITE_OPENED_AT = 'compositeOpenedAt'; 
 export const COMPOSITE_CLOSED_AT = 'compositeClosedAt'
 
