@@ -1,5 +1,5 @@
 
-## [0.9.503-s] - 2025-06-..
+## [0.9.503-s] - 2025-06-24
 - Add IsAnyContentMissing prop on elementDTO
 - Reworked contentEdit logic - always load trade for now, for uptodate ismissing data (to rethink)
 - Fix CompositeFK name mismatch (entity and dto)

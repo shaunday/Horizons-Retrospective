@@ -8,6 +8,7 @@ add: seeder connection once done in BE
 add: filter (status first, date first, BY STATUS), in client? / adjust data call api
 revert trades order? last added first?
 
+ <p>Something went wrong:</p> > unify with error nott.
 ThemeIcon variant="light" color="indigo.4"> + move the icon into the paper - on elementbadge  ?
 
 add: ignoreActivation flag to content edit

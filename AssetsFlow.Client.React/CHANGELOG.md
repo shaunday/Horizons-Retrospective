@@ -1,7 +1,7 @@
 
 # Changelog
 
-## [0.9.019-c] - 2025-06-...
+## [0.9.019-c] - 2025-06-24
 ### Added
 - Missing notification for collapsed trade elements
 - HUGE work removing callbacks/ unifying status update logic with hooks instead
