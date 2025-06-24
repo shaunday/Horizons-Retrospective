@@ -2,6 +2,7 @@
 # TODO
 
 - redo seed + on demand with 3 good scenarios - controller + password
+- adjust grouping - less groups...
 
 - add ignoreActivation flag to content edit
 - add idea/origin date (not same as trade open)

@@ -9,7 +9,7 @@ function GroupedEntriesList({ entries }) {
   const groupedEntries = useMemo(() => getGroupedEntries(entries), [entries]);
 
   return (
-    <div className="flex flex-wrap items-center gap-6">
+    <div className="flex flex-wrap items-center gap-4">
       {Object.keys(groupedEntries).map((groupKey) => {
         const entries = groupedEntries[groupKey];
         const IconComponent = getComponentTypeIcon(groupKey);
@@ -21,11 +21,11 @@ function GroupedEntriesList({ entries }) {
           >
             <ThemeIcon
               variant="light"
-              size="md"
+              size="sm"
               radius="lg"
-              className="absolute top-7 -left-4 rounded-lg"
+              className="absolute top-8 -left-3 rounded-lg"
             >
-              <IconComponent size={20} />
+              <IconComponent size={18} />
             </ThemeIcon>
             <EntriesList entries={entries} overviewType={Constants.OverviewType.NONE}/>
           </Box>
