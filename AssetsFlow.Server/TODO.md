@@ -1,8 +1,9 @@
 ﻿
 # TODO
 
-- redo seed + on demand with 3 good scenarios - controller + password
+- redo seed + on demand with 3 good scenarios - controller + password (or straight up users)
 - adjust grouping - less groups...
+- split out analytics into a microservice
 
 - add ignoreActivation flag to content edit
 - add idea/origin date (not same as trade open)
@@ -30,4 +31,3 @@
 
 ## Expansion:
 Suspence? RQ Suspence
-GraphQL instead of REST

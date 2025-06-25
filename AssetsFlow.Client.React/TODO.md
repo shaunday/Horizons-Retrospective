@@ -17,7 +17,7 @@ add: trade command bar - delete trade action, collapse all trades
 add: expand/collapse by clicking on the background
 issue: how to edit lessons in trade closure?
 add: content-history
-add: context/jotai for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
+add: context/jotai/redux for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
 
 ## 3.
 obfuscate amounts/costs for anon view - a method (in the user context?)
