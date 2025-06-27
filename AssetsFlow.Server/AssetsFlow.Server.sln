@@ -1,5 +1,4 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -49,6 +48,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Entities.Factory", "AssetsFlow.Journal\HsR.Journal.Entities.Factory\HsR.Journal.Entities.Factory.csproj", "{07987639-CCDB-4836-9133-750BC843775C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common.Asp.NET", "..\Common.Net\HsR.Common.Asp.NET\HsR.Common.Asp.NET.csproj", "{DF3880CD-316D-40F7-823E-0890EA3B7D0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService", "..\Common.Net\HsR.UserService\HsR.UserService\HsR.UserService.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.Host", "..\Common.Net\HsR.UserService\HsR.UserService.Host\HsR.UserService.Host.csproj", "{B2C3D4E5-F6G7-8901-BCDE-F23456789012}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployment-info", "deployment-info", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
@@ -112,6 +115,14 @@ Global
 		{DF3880CD-316D-40F7-823E-0890EA3B7D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF3880CD-316D-40F7-823E-0890EA3B7D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF3880CD-316D-40F7-823E-0890EA3B7D0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C3D4E5-F6G7-8901-BCDE-F23456789012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C3D4E5-F6G7-8901-BCDE-F23456789012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C3D4E5-F6G7-8901-BCDE-F23456789012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C3D4E5-F6G7-8901-BCDE-F23456789012}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -127,6 +138,8 @@ Global
 		{5B0F30C3-5ECA-4964-BA70-EB4D6F7695B3} = {F160C4C3-5E21-4DDF-B119-BB651086EF4B}
 		{07987639-CCDB-4836-9133-750BC843775C} = {E2F11EF4-F624-492C-83BE-36B75D46AA56}
 		{DF3880CD-316D-40F7-823E-0890EA3B7D0A} = {F160C4C3-5E21-4DDF-B119-BB651086EF4B}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890} = {F160C4C3-5E21-4DDF-B119-BB651086EF4B}
+		{B2C3D4E5-F6G7-8901-BCDE-F23456789012} = {F160C4C3-5E21-4DDF-B119-BB651086EF4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6CD0AE80-6A63-459E-884D-64F6D12582F5}
