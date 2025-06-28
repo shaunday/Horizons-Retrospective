@@ -1,4 +1,4 @@
-name: Ping Health Check
+name: AWS Health Check (Ping)
 
 on:
   schedule:
