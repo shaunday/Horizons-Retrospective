@@ -1,4 +1,4 @@
-name: Build & Test .NET On Commit
+name: Dotnet Build & Test on Commit
 
 on:
   push:
