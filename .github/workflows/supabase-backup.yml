@@ -1,4 +1,4 @@
-name: Backup Supabase Database
+name: Supabase Database Backup
 
 on:
   schedule:
