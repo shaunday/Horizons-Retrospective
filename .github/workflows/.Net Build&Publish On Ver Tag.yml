@@ -1,4 +1,4 @@
-name: Build & Publish .NET On Ver Tag
+name: Build&Publish .NET On Ver Tag
 
 on:
   push:
