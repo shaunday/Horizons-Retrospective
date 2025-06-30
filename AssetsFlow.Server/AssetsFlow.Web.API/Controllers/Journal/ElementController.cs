@@ -16,9 +16,9 @@ public class TradeElementsController(
     ITradesCacheService cacheService) : JournalControllerBase(journalAccess, logger, mapper, cacheService)
 {
     [HttpDelete]
-    public async Task<ActionResult<UpdatedStatesModel>> DeleteInterimTradeInput(string elementId)
+    public async Task<ActionResult<UpdatedStatesModel>> DeleteInterimTradeInput(Guid userId, string elementId)
     {
-        var updatedStates = await _journalAccess.TradeElement.RemoveInterimPositionAsync(elementId);
+        var updatedStates = await _journalAccess.TradeElement.RemoveInterimPositionAsync(userId, elementId);
         if (updatedStates == null)
         {
             return NotFound();
@@ -26,16 +26,15 @@ public class TradeElementsController(
 
         UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
 
-        // Invalidate cache when an element is deleted and start reload
-        _cacheService.InvalidateAndReload();
+        _cacheService.InvalidateAndReload(userId);
 
         return ResultHandling(resAsModel, $"Could not delete element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }
 
     [HttpPatch]
-    public async Task<ActionResult<UpdatedStatesModel>> ReTimestampTradeInput(string elementId, [FromQuery] string newTime)
+    public async Task<ActionResult<UpdatedStatesModel>> ReTimestampTradeInput(Guid userId, string elementId, string newTime)
     {
-        var updatedStates = await _journalAccess.TradeElement.UpdateActivationTimeAsync(elementId, newTime);
+        var updatedStates = await _journalAccess.TradeElement.UpdateActivationTimeAsync(userId, elementId, newTime);
         if (updatedStates == null)
         {
             return NotFound();
@@ -43,8 +42,7 @@ public class TradeElementsController(
 
         UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
 
-        // Invalidate cache when an element's timestamp is updated and start reload
-        _cacheService.InvalidateAndReload();
+        _cacheService.InvalidateAndReload(userId);
 
         return ResultHandling(resAsModel, $"Could not reactivate element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }

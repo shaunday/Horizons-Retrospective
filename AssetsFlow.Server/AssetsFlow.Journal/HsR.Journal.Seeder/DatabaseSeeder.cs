@@ -5,125 +5,97 @@ using Microsoft.EntityFrameworkCore;
 using HsR.Common.ContentGenerators;
 using HsR.Common;
 using System.Xml.Linq;
+using HsR.UserService.Services;
+using HsR.UserService.Models;
+using HsR.Journal.Entities.Factory.Assists;
+using HsR.Journal.Seeder;
+using Microsoft.Extensions.Configuration;
+using HsR.UserService.Contracts;
 
 namespace HsR.Journal.Seeder
 {
-    public class DatabaseSeeder(TradingJournalDataContext dbContext, IJournalRepository tradeCompositesRepository,
-            ITradeElementRepository tradeElementRepository,
-            IDataElementRepository dataElementRepository)
+    public class DatabaseSeeder
     {
+        private readonly TradingJournalDataContext dbContext;
+        private readonly IJournalRepository _tradeCompositesRepository;
+        private readonly ITradeElementRepository _tradeElementRepository;
+        private readonly IDataElementRepository _dataElementRepository;
+        private readonly IUserService _userService;
+        private readonly Guid _demoUserId = Guid.Parse(DemoUserData.Id);
 
-        #region Members
-        private RandomNumberGeneratorEx _randomNumbersMachine = new();
-        private RandomWordGenerator _randomWordsMachine = new();
-
-        private readonly IJournalRepository _tradeCompositesRepository = tradeCompositesRepository;
-        private readonly ITradeElementRepository _tradeElementRepository = tradeElementRepository;
-        private readonly IDataElementRepository _dataElementRepository = dataElementRepository;
-        #endregion
-
-        public async Task SeedAsync()
+        public DatabaseSeeder(
+            TradingJournalDataContext dbContext,
+            IJournalRepository tradeCompositesRepository,
+            ITradeElementRepository tradeElementRepository,
+            IDataElementRepository dataElementRepository,
+            IUserService userService,
+            IConfiguration configuration)
         {
-            // Check if any data exists in a specific table to avoid reseeding
-            // if (!await _dbContext.TradeComposites.AnyAsync())
-            {
-                // Drop the database if it exists
-                dbContext.Database.EnsureDeleted();
-
-                // Recreate the database
-                dbContext.Database.EnsureCreated();
-
-                //idea
-                TradeComposite trade = await CreateAndSaveTradeInstance();
-
-                //ongoing
-                trade = await CreateAndSaveTradeInstance();
-                await AddManagePositions(trade);
-
-                //closed
-                trade = await CreateAndSaveTradeInstance();
-                await AddManagePositions(trade, close: true);
-            }
+            this.dbContext = dbContext;
+            _tradeCompositesRepository = tradeCompositesRepository;
+            _tradeElementRepository = tradeElementRepository;
+            _dataElementRepository = dataElementRepository;
+            _userService = userService;
         }
 
-        private async Task<TradeComposite> CreateAndSaveTradeInstance()
+        public async Task FlushDbAndSeedDemoAsync()
         {
-            TradeComposite trade = new();
-            dbContext.TradeComposites.Add(trade);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Database.EnsureCreated();
+
+            await SeedDemoUserTradesAsync();
+        }
+
+        public async Task SeedDemoUserTradesAsync()
+        {
+            var trade1 = await _tradeCompositesRepository.AddTradeCompositeAsync(_demoUserId);
+            await PopulateStageContent(_demoUserId, trade1, ManualDemoTrades.Trade1_Idea);
+
+            var trade2 = await _tradeCompositesRepository.AddTradeCompositeAsync(_demoUserId);
+            await PopulateStageContent(_demoUserId, trade2, ManualDemoTrades.Trade2_Idea);
+            var add2_1 = (await _tradeElementRepository.AddInterimPositionAsync(_demoUserId, trade2.Id.ToString(), true)).newEntry;
+            await PopulateStageContent(_demoUserId, add2_1, ManualDemoTrades.Trade2_Add1);
+            var add2_2 = (await _tradeElementRepository.AddInterimPositionAsync(_demoUserId, trade2.Id.ToString(), true)).newEntry;
+            await PopulateStageContent(_demoUserId, add2_2, ManualDemoTrades.Trade2_Add2);
+            var eval2 = (await _tradeElementRepository.AddInterimEvalutationAsync(_demoUserId, trade2.Id.ToString())).newEntry;
+            await PopulateStageContent(_demoUserId, eval2, ManualDemoTrades.Trade2_Evaluate);
+
+            var trade3 = await _tradeCompositesRepository.AddTradeCompositeAsync(_demoUserId);
+            await PopulateStageContent(_demoUserId, trade3, ManualDemoTrades.Trade3_Idea);
+            var add3 = (await _tradeElementRepository.AddInterimPositionAsync(_demoUserId, trade3.Id.ToString(), true)).newEntry;
+            await PopulateStageContent(_demoUserId, add3, ManualDemoTrades.Trade3_Add);
+            var eval3 = (await _tradeElementRepository.AddInterimEvalutationAsync(_demoUserId, trade3.Id.ToString())).newEntry;
+            await PopulateStageContent(_demoUserId, eval3, ManualDemoTrades.Trade3_Evaluate);
+            trade3.Close();
+            dbContext.TradeComposites.Update(trade3);
             await dbContext.SaveChangesAsync();
-
-            AddTradeIdea(trade);
-            trade.Status = TradeStatus.AnIdea;
-            await dbContext.SaveChangesAsync();
-            return trade;
+            var closeElement = trade3.TradeElements.LastOrDefault(e => e.TradeActionType.ToString() == "Summary");
+            if (closeElement != null)
+                await PopulateStageContent(_demoUserId, closeElement, ManualDemoTrades.Trade3_Close);
         }
 
-        private async Task AddManagePositions(TradeComposite trade, bool close = false)
+        private async Task PopulateStageContent(Guid userId, TradeComposite trade, Dictionary<string, string> content)
         {
-            AddElementToTrade(trade, TradeActionType.Add);
-            AddElementToTrade(trade, TradeActionType.Add);
-            AddElementToTrade(trade, TradeActionType.Reduce);
+            foreach (var element in trade.TradeElements)
+                await PopulateStageContent(userId, element, content);
+        }
 
-
-            if (close)
+        private async Task PopulateStageContent(Guid userId, TradeElement element, Dictionary<string, string> content)
+        {
+            foreach (var entry in element.Entries)
             {
-                TradeCompositeOperations.CloseTrade(trade, "1000");
-                trade.Status = TradeStatus.Closed;
-            }
-            else
-            {
-                var newSummary = TradeElementsFactory.GetNewSummary(trade);
-                trade.Summary = newSummary;
-                trade.Status = TradeStatus.Open;
-            }
-
-            dbContext.TradeComposites.Update(trade);
-            await dbContext.SaveChangesAsync();
-        }
-
-        private void AddTradeIdea(TradeComposite trade)
-        {
-            InterimTradeElement originElement = new(trade, TradeActionType.Origin);
-            originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
-            PopulateElementWithData(originElement);
-            trade.TradeElements.Add(originElement);
-        }
-
-        private void AddElementToTrade(TradeComposite trade, TradeActionType type)
-        {
-            InterimTradeElement newElement = new(trade, type);
-            newElement.Entries = EntriesFactory.GetAddPositionEntries(newElement);
-
-            PopulateElementWithData(newElement);
-            newElement.Activate();
-            trade.TradeElements.Add(newElement);
-        }
-
-        //populate related
-        private readonly Random _lengthRandom = new();
-        private InterimTradeElement PopulateElementWithData(InterimTradeElement element)
-        {
-            int length;
-            for (int i = 0; i < element.Entries.Count; i++)
-            {
-                if (element.Entries[i].Restrictions != null)
+                if (content.TryGetValue(entry.Title, out var value))
                 {
-                    continue;
-                }
-                length = _lengthRandom.Next(3, 8);
-                if (element.Entries[i].IsCostRelevant())
-                {
-                    element.Entries[i].ContentWrapper = new ContentRecord(_randomNumbersMachine.GenerateRandomNumber(length));
-                }
-                else
-                {
-                    {
-                        element.Entries[i].ContentWrapper = new ContentRecord(_randomWordsMachine.GenerateRandomWord(length));
-                    }
+                    await _dataElementRepository.UpdateCellContentAsync(userId, entry.Id.ToString(), value, "manual seed");
                 }
             }
+        }
 
-            return element;
+        public async Task DeleteAllDemoUserTradesAsync()
+        {
+            var demoTrades = dbContext.TradeComposites.Where(t => t.UserId == _demoUserId);
+            dbContext.TradeComposites.RemoveRange(demoTrades);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

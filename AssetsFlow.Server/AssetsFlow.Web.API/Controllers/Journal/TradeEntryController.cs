@@ -26,7 +26,7 @@ namespace HsR.Web.API.Controllers.Journal
 
         [HttpPatch("{componentId}")]
         public async Task<ActionResult<(DataElementModel newEntry, UpdatedStatesModel updatedStates)>>
-                                                  UpdateDataComponent(string componentId, [FromBody] UpdateDataComponentRequest request)
+                                                  UpdateDataComponent(Guid userId, string componentId, [FromBody] UpdateDataComponentRequest request)
         {
             if (string.IsNullOrEmpty(request.Content))
             {
@@ -34,12 +34,11 @@ namespace HsR.Web.API.Controllers.Journal
             }
 
             (DataElement updatedComponent, UpdatedStatesCollation updatedStates) = 
-                                                await _journalAccess.DataElement.UpdateCellContentAsync(componentId, request.Content, request.Info);
+                                                await _journalAccess.DataElement.UpdateCellContentAsync(userId, componentId, request.Content, request.Info);
 
             (DataElementModel, UpdatedStatesModel) resAsModel = (_mapper.Map<DataElementModel>(updatedComponent), _mapper.Map<UpdatedStatesModel>(updatedStates));
 
-            // Invalidate cache when component content is updated and start reload
-           _cacheService.InvalidateAndReload();
+            _cacheService.InvalidateAndReload(userId);
 
             return ResultHandling(resAsModel, $"Could not update component: {componentId}", [NEW_CELL_DATA, NEW_STATES_WRAPPER]);
         }

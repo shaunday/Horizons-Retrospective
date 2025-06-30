@@ -7,6 +7,9 @@ namespace HsR.Web.Services.Models.Journal
     public class DataElementModel
     {
         [Required]
+        public Guid UserId { get; set; }
+
+        [Required]
         public int Id { get; set; }
 
         [Required]

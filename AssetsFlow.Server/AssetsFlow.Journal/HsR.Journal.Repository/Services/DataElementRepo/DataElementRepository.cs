@@ -8,10 +8,12 @@ using Serilog;
 
 namespace HsR.Journal.DataContext
 {
-    public class DataElementRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), IDataElementRepository
+    public class DataElementRepository(TradingJournalDataContext dataContext, IUserDataRepository userDataRepository) : JournalRepositoryBase(dataContext), IDataElementRepository
     {
+        private readonly IUserDataRepository _userDataRepository = userDataRepository;
+
         public async Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)>
-                                                UpdateCellContentAsync(string componentId, string newContent, string changeNote)
+                                                UpdateCellContentAsync(Guid userId, string componentId, string newContent, string changeNote)
         {
             if (!int.TryParse(componentId, out var parsedId))
             {
@@ -20,8 +22,8 @@ namespace HsR.Journal.DataContext
 
             var cell = await _dataContext.Entries
                 .Include(e => e.History)
-                .FirstOrDefaultAsync(e => e.Id == parsedId)
-                ?? throw new InvalidOperationException($"Entry with ID {componentId} not found.");
+                .FirstOrDefaultAsync(e => e.Id == parsedId && e.UserId == userId)
+                ?? throw new InvalidOperationException($"Entry with ID {componentId} not found for user {userId}.");
 
             cell.SetFollowupContent(newContent, changeNote);
 
@@ -29,9 +31,9 @@ namespace HsR.Journal.DataContext
 
             if (cell.SectorRelevance)
             {
-                var userData = await _dataContext.UserData.FirstOrDefaultAsync(u => u.Id == 1);
-                userData?.SavedSectors?.Add(newContent);
-                updatedStates.SavedSectors = userData?.SavedSectors;
+                await _userDataRepository.SaveSectorAsync(userId, newContent);
+                var userData = await _userDataRepository.GetOrCreateUserDataAsync(userId);
+                updatedStates.SavedSectors = userData.SavedSectors;
             }
 
             await _dataContext.SaveChangesAsync();

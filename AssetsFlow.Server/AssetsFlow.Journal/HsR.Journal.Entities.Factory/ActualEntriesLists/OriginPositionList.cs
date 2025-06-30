@@ -10,11 +10,11 @@
                 new DataElement("Direction", ComponentType.Header, "")
                                           {  IsRelevantForLocalOverview = true, IsRelevantForTradeOverview = true, Restrictions = ["Long", "Short"]},
 
-                new DataElement("Thesis", ComponentType.Thoughts) {  IsRelevantForLocalOverview = true, IsRelevantForTradeOverview = true },
+                new DataElement("Thesis", ComponentType.Context) {  IsRelevantForLocalOverview = true, IsRelevantForTradeOverview = true },
                 new DataElement("Aligned TA", ComponentType.EntryLogic),
                 new DataElement("Sector/FA", ComponentType.EntryLogic),
 
-                new DataElement("Certainty", ComponentType.Emotions) {Restrictions = ["Low", "Mid", "High"]} ,
+                new DataElement("Certainty", ComponentType.Context) {Restrictions = ["Low", "Mid", "High"]} ,
                 new DataElement("Contras", ComponentType.EntryLogic),
 
                 new DataElement("Invalidation", ComponentType.Risk) { IsRelevantForLocalOverview = true },

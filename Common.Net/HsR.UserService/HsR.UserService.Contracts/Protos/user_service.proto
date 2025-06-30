@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+option csharp_namespace = "HsR.UserService.Protos";
+
+package user_service;
+
+// User Service definition
+service UserService {
+  // Authentication operations
+  rpc Login (LoginRequest) returns (AuthResponse);
+  rpc Register (RegisterRequest) returns (AuthResponse);
+  
+  // User management operations
+  rpc GetUserById (GetUserRequest) returns (UserResponse);
+  rpc GetUserByEmail (GetUserByEmailRequest) returns (UserResponse);
+  
+  // Health check
+  rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse);
+
+  // Password operations
+  rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse);
+}
+
+// Request/Response messages for authentication
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+  string first_name = 3;
+  string last_name = 4;
+}
+
+message AuthResponse {
+  bool success = 1;
+  string message = 2;
+  UserDto user = 3;
+}
+
+// User data transfer object
+message UserDto {
+  string id = 1;
+  string email = 2;
+  string full_name = 3;
+  string created_at = 4;
+  string first_name = 5;
+  string last_name = 6;
+}
+
+// User management requests
+message GetUserRequest {
+  string user_id = 1;
+}
+
+message GetUserByEmailRequest {
+  string email = 1;
+}
+
+message UserResponse {
+  bool success = 1;
+  string message = 2;
+  UserDto user = 3;
+}
+
+// Health check
+message HealthCheckRequest {
+  string service = 1;
+}
+
+message HealthCheckResponse {
+  string status = 1;
+  string message = 2;
+  string timestamp = 3;
+}
+
+// Password operations
+message ChangePasswordRequest {
+  string user_id = 1;
+  string current_password = 2;
+  string new_password = 3;
+}
+
+message ChangePasswordResponse {
+  bool success = 1;
+  string message = 2;
+} 

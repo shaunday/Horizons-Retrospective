@@ -1,8 +1,10 @@
 ## 1
+fix APIs/cache to use UserIDs
+
 from limor: edit > expand the object and edit in place?
 from limor: title should be styled diff than the content, text aligned to the left
 add: opened/closedat (just to overview?)
-add: seeder connection once done in BE
+add: seeder/admin panel
 
 ## 2.
 add: filter (status first, date first, BY STATUS), in client? / adjust data call api
@@ -17,7 +19,7 @@ add: trade command bar - delete trade action, collapse all trades
 add: expand/collapse by clicking on the background
 issue: how to edit lessons in trade closure?
 add: content-history
-add: context/jotai/redux for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
+add: jotai/redux for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
 
 ## 3.
 obfuscate amounts/costs for anon view - a method (in the user context?)

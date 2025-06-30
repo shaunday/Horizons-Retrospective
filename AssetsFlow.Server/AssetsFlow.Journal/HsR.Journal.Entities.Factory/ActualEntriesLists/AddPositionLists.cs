@@ -22,8 +22,8 @@
         {
             var addToPositionObjects = new List<DataElement>
             {
-                new DataElement("Reasoning", ComponentType.Thoughts),
-                new DataElement("Emotions", ComponentType.Emotions),
+                new DataElement("Reasoning", ComponentType.Context),
+                new DataElement("Emotions", ComponentType.Context),
 
                 new DataElement("Price", ComponentType.PriceRelated) { IsRelevantForLocalOverview = true, UnitPriceRelevance = ValueRelevance.Positive },
                 new DataElement("Amount", ComponentType.PriceRelated) { IsRelevantForLocalOverview = true },
@@ -43,9 +43,9 @@
             var evaluationObjects = new List<DataElement>
             {
                 new DataElement("General", ComponentType.Header) { IsRelevantForLocalOverview = true, },
-                new DataElement("D/W/M str?", ComponentType.Technicals) { IsRelevantForLocalOverview = true },
-                new DataElement("Momentum", ComponentType.Technicals) { IsRelevantForLocalOverview = true },
-                new DataElement("Fta reached?", ComponentType.Technicals) { IsRelevantForLocalOverview = true, }, 
+                new DataElement("D/W/M str?", ComponentType.EntryLogic) { IsRelevantForLocalOverview = true },
+                new DataElement("Momentum", ComponentType.EntryLogic) { IsRelevantForLocalOverview = true },
+                new DataElement("Fta reached?", ComponentType.EntryLogic) { IsRelevantForLocalOverview = true, }, 
                 new DataElement("NTA", ComponentType.ExitLogic) { IsRelevantForLocalOverview = true },
             };
 

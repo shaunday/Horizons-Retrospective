@@ -6,11 +6,10 @@ namespace HsR.Journal.DataContext
 {
     public interface ITradeElementRepository
     {
-        Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimPositionAsync(string tradeId, bool isAdd);
-        Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimEvalutationAsync(string tradeId);
+        Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimPositionAsync(Guid userId, string tradeId, bool isAdd);
+        Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimEvalutationAsync(Guid userId, string tradeId);
 
-        Task<UpdatedStatesCollation> RemoveInterimPositionAsync(string tradeInputId);
-        Task<UpdatedStatesCollation> UpdateActivationTimeAsync(string tradeInputId, string newTimestamp);
+        Task<UpdatedStatesCollation> RemoveInterimPositionAsync(Guid userId, string tradeInputId);
+        Task<UpdatedStatesCollation> UpdateActivationTimeAsync(Guid userId, string tradeInputId, string newTimestamp);
     }
-
 }

@@ -29,22 +29,21 @@ namespace HsR.Web.API.Controllers.Journal
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(int pageNumber = 1, int pageSize = 0)
+        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(Guid userId, int pageNumber = 1, int pageSize = 0)
         {
             pageSize = ValidatePageSize(pageSize);
 
             IEnumerable<TradeCompositeModel>? paginatedTradeDTOs;
             int totalTradesCount;
 
-            // Try to get from cache first
-            paginatedTradeDTOs = await _cacheService.GetCachedTrades(pageNumber, pageSize);
+            paginatedTradeDTOs = await _cacheService.GetCachedTrades(userId, pageNumber, pageSize);
             if (paginatedTradeDTOs != null)
             {
-                totalTradesCount = _cacheService.GetCachedTotalCount();
+                totalTradesCount = _cacheService.GetCachedTotalCount(userId);
             }
-            else // If not in cache, get from database
+            else  // If not in cache, get from database
             {
-                var (tradeEntities, totalCount) = await _journalAccess.Journal.GetAllTradeCompositesAsync(pageNumber, pageSize);
+                var (tradeEntities, totalCount) = await _journalAccess.Journal.GetAllTradeCompositesAsync(userId, pageNumber, pageSize);
                 paginatedTradeDTOs = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradeEntities);
                 totalTradesCount = totalCount;
             }
@@ -55,13 +54,12 @@ namespace HsR.Web.API.Controllers.Journal
         }
 
         [HttpPost]
-        public async Task<ActionResult<TradeCompositeModel>> AddTrade()
+        public async Task<ActionResult<TradeCompositeModel>> AddTrade(Guid userId)
         {
-            var positionComposite = await _journalAccess.Journal.AddTradeCompositeAsync();
+            var positionComposite = await _journalAccess.Journal.AddTradeCompositeAsync(userId);
             TradeCompositeModel resAsModel = _mapper.Map<TradeCompositeModel>(positionComposite);
 
-            // Invalidate cache when a new trade is added and start reload
-            _cacheService.InvalidateAndReload();
+            _cacheService.InvalidateAndReload(userId);
 
             return Ok(resAsModel);
         }

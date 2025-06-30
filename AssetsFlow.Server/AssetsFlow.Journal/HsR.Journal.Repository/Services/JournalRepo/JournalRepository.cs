@@ -11,17 +11,27 @@ namespace HsR.Journal.DataContext
     public partial class JournalRepository(TradingJournalDataContext dataContext)
         : JournalRepositoryBase(dataContext), IJournalRepository
     {
-        public async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
+        public async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)> GetAllTradeCompositesAsync(Guid userId, int pageNumber = 1, int pageSize = 10)
         {
-            var query = _dataContext.TradeComposites.AsNoTracking().AsQueryable();
+            var query = _dataContext.TradeComposites
+                .AsNoTracking()
+                .Where(tc => tc.UserId == userId)
+                .AsQueryable();
             return await GetPaginatedTradesAsync(query, pageNumber, pageSize);
         }
 
-        public async Task<TradeComposite> AddTradeCompositeAsync()
+        public async Task<TradeComposite> AddTradeCompositeAsync(Guid userId)
         {
-            TradeComposite trade = new();
-            InterimTradeElement originElement = new(trade, TradeActionType.Origin);
+            TradeComposite trade = new() { UserId = userId };
+            InterimTradeElement originElement = new(trade, TradeActionType.Origin) { UserId = userId };
             originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
+            
+            // Set UserId for all entries
+            foreach (var entry in originElement.Entries)
+            {
+                entry.UserId = userId;
+            }
+            
             trade.TradeElements.Add(originElement);
 
             _dataContext.TradeComposites.Add(trade);

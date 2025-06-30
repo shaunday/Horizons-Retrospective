@@ -6,6 +6,8 @@ namespace HsR.Journal.DataContext
 {
     public interface IUserDataRepository
     {
-        Task<List<string>?> GetAllSavedSectors();
+        Task<UserData> GetOrCreateUserDataAsync(Guid userId);
+        Task SaveSectorAsync(Guid userId, string sector);
+        Task<List<string>> GetSavedSectorsAsync(Guid userId);
     } 
 }

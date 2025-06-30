@@ -19,14 +19,28 @@ namespace HsR.Journal.DataContext
                 .ForMember(dest => dest.CompositeRef, opt => opt.Ignore());
         }).CreateMapper();
 
-        public async Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimPositionAsync(string tradeId, bool isAdd)
+        public async Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimPositionAsync(Guid userId, string tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
+            
+            // Verify the trade belongs to the user
+            if (trade.UserId != userId)
+            {
+                throw new UnauthorizedAccessException($"Trade {tradeId} does not belong to user {userId}");
+            }
 
             if (TradeElementsFactory.GetNewElement(trade, isAdd ? TradeActionType.Add : TradeActionType.Reduce)
                 is not InterimTradeElement tradeInput)
             {
                 throw new InvalidOperationException("TradeElementsFactory returned an invalid type for InterimTradeElement.");
+            }
+
+            tradeInput.UserId = userId;
+            
+            // Set UserId for all entries
+            foreach (var entry in tradeInput.Entries)
+            {
+                entry.UserId = userId;
             }
 
             trade.TradeElements.Add(tradeInput);
@@ -36,15 +50,23 @@ namespace HsR.Journal.DataContext
             return (tradeInput, newStates);
         }
 
-        public async Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimEvalutationAsync(string tradeId)
+        public async Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimEvalutationAsync(Guid userId, string tradeId)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
+            
+            // Verify the trade belongs to the user
+            if (trade.UserId != userId)
+            {
+                throw new UnauthorizedAccessException($"Trade {tradeId} does not belong to user {userId}");
+            }
 
             if (TradeElementsFactory.GetNewElement(trade, TradeActionType.Evaluation)
                 is not InterimTradeElement tradeOverview)
             {
                 throw new InvalidOperationException("TradeElementsFactory returned an invalid type for Evaluation.");
             }
+
+            tradeOverview.UserId = userId;
 
             if (trade.Summary != null)
             {
@@ -57,6 +79,7 @@ namespace HsR.Journal.DataContext
                         clonedEntry.History = null;
                         clonedEntry.ContentWrapper = null;
                         clonedEntry.IsRelevantForTradeOverview = false;
+                        clonedEntry.UserId = userId;
 
                         string content = entry.Content ?? "";
                         clonedEntry.SetFollowupContent(content, "");
@@ -76,12 +99,18 @@ namespace HsR.Journal.DataContext
             return (tradeOverview, newStates);
         }
 
-        public async Task<UpdatedStatesCollation> RemoveInterimPositionAsync(string tradeInputId)
+        public async Task<UpdatedStatesCollation> RemoveInterimPositionAsync(Guid userId, string tradeInputId)
         {
             var tradeInputToRemove = await GetTradeElementAsync(tradeInputId);
             if (tradeInputToRemove == null)
             {
                 throw new ArgumentException($"The trade input (Id '{tradeInputId}') to remove is null.", nameof(tradeInputId));
+            }
+
+            // Verify the element belongs to the user
+            if (tradeInputToRemove.UserId != userId)
+            {
+                throw new UnauthorizedAccessException($"Trade element {tradeInputId} does not belong to user {userId}");
             }
 
             var trade = await GetTradeCompositeAsync(tradeInputToRemove.CompositeFK);
@@ -112,22 +141,25 @@ namespace HsR.Journal.DataContext
             return updatedStates;
         }
 
-        public async Task<UpdatedStatesCollation> UpdateActivationTimeAsync(string tradeInputId, string newTimestamp)
+        public async Task<UpdatedStatesCollation> UpdateActivationTimeAsync(Guid userId, string tradeInputId, string newTimestamp)
         {
             var tradeInput = await GetTradeElementAsync(tradeInputId);
             if (tradeInput == null)
             {
                 throw new ArgumentException($"The trade input (Id '{tradeInputId}') to update is null.", nameof(tradeInputId));
             }
-            else 
+            
+            // Verify the element belongs to the user
+            if (tradeInput.UserId != userId)
             {
-                tradeInput.Activate();
+                throw new UnauthorizedAccessException($"Trade element {tradeInputId} does not belong to user {userId}");
             }
+            
+            tradeInput.Activate();
             UpdatedStatesCollation? updatedStates = new() { ActivationTimeStamp = tradeInput.TimeStamp };
 
             await _dataContext.SaveChangesAsync();
             return updatedStates;
         }
     }
-
 }

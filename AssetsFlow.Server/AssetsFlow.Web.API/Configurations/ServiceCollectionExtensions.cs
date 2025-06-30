@@ -19,11 +19,21 @@ namespace AssetsFlowWeb.API.Configurations
             return services;
         }
 
-        public static IServiceCollection AddCacheServices(this IServiceCollection services)
+        public static IServiceCollection AddCacheServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddMemoryCache();
+            var cacheSettings = configuration.GetSection("CacheSettings").Get<CacheSettings>() ?? new CacheSettings();
+            services.AddMemoryCache(options =>
+            {
+                options.SizeLimit = cacheSettings.SizeLimit;
+            });
             services.AddSingleton<ITradesCacheService, TradesCacheService>();
-
+            services.AddHostedService<CacheCleanupService>(provider =>
+                new CacheCleanupService(
+                    provider.GetRequiredService<ITradesCacheService>(),
+                    provider.GetRequiredService<Microsoft.Extensions.Logging.ILogger<CacheCleanupService>>(),
+                    provider.GetRequiredService<IConfigurationService>()
+                )
+            );
             return services;
         }
     }

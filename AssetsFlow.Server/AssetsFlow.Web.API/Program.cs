@@ -8,6 +8,7 @@ using HsR.Web.API.Repositories;
 using HsR.Web.API.Services;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Serilog;
+using HsR.Common.AspNet;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,17 +31,18 @@ builder.Services.AddConfiguredControllers();
 builder.Services.AddCustomAutoMapper();
 builder.Services.AddRepositories();
 builder.Services.AddCustomApiVersioning();
-builder.Services.AddCacheServices();
+builder.Services.AddCacheServices(builder.Configuration);
 
 var app = builder.Build();
 
-if (isDev)
-    await app.Services.SeedDatabaseAsync();
+// Ensure database is created using the generic method
+await app.EnsureDatabaseCreatedAsync<TradingJournalDataContext>();
 
-// Preload trades cache
-var cacheService = app.Services.GetRequiredService<ITradesCacheService>();
-cacheService.InvalidateAndReload(); //launch and forget
-
+// Seed database only in development
+if (app.Environment.IsDevelopment())
+{
+    await app.Services.FlushDbAndSeedDemoAsync();
+}
 
 Middleware.ConfigureMiddleware(app);
 

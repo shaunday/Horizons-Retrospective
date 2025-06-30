@@ -8,6 +8,8 @@ namespace HsR.Journal.Repository.Configurations
     {
         public void Configure(EntityTypeBuilder<TradeComposite> builder)
         {
+            builder.HasIndex(tc => tc.UserId);
+
             builder.HasOne(tc => tc.Summary)
                  .WithOne()
                  .HasForeignKey<TradeComposite>("SummaryId"); //shadow prop

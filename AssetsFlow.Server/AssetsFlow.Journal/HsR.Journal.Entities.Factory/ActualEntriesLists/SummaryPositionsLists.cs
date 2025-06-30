@@ -26,7 +26,7 @@ namespace HsR.Journal.Entities.Factory
                     new("Net Result", ComponentType.Results, analytics.Profit.ToF2String()) {  IsRelevantForTradeOverview = true },
                     new("W/L", ComponentType.Results, analytics.IsWin ? "W" : "L") {  IsRelevantForTradeOverview = true, },
                     //new("Actual R:R", ComponentType.Results, "") {  IsRelevantForTradeOverview = true },
-                    new("Lessons", ComponentType.Thoughts, "")
+                    new("Lessons", ComponentType.Context, "")
                 };
 
             return closureCells;

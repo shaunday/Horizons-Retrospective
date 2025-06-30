@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common.Net\HsR.Common.Asp.NET\HsR.Common.Asp.NET.csproj" />
+    <ProjectReference Include="..\..\Common.Net\HsR.Common.AspNet\HsR.Common.AspNet.csproj" />
     <ProjectReference Include="..\AssetsFlow.Journal\HsR.Infrastructure\HsR.Journal.Infrastructure.csproj" />
     <ProjectReference Include="..\AssetsFlow.Journal\HsR.Journal.Repository\HsR.Journal.Repository.csproj" />
     <ProjectReference Include="..\AssetsFlow.Journal\HsR.Journal.Seeder\HsR.Journal.Seeder.csproj" />

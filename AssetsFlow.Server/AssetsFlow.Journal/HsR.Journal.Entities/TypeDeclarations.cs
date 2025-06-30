@@ -2,7 +2,7 @@
 {
     public enum ComponentType
     {
-        Header, Emotions, Thoughts, Technicals, EntryLogic, ExitLogic, PriceRelated, Risk, Results
+        Header, Context, EntryLogic, ExitLogic, PriceRelated, Risk, Results
     }
 
     public enum TradeActionType

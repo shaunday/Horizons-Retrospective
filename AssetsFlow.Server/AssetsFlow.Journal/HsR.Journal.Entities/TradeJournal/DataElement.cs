@@ -16,6 +16,9 @@ namespace HsR.Journal.Entities
         [Required]
         public required ComponentType ComponentType { get; set; }
 
+        [Required]
+        public Guid UserId { get; set; }
+
         public ICollection<ContentRecord>? History { get; set; }
 
         #endregion
