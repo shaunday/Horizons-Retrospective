@@ -5,10 +5,9 @@ import * as Constants from "@constants/journalConstants";
 
 export function useCacheUpdatedEntry(tradeId) {
   const queryClient = useQueryClient();
-
   const cacheUpdatedEntry = (updatedEntry) => {
     queryClient.setQueryData(
-      tradeKeysFactory.tradeAndIdArrayKey(tradeId),
+      tradeKeysFactory.getTradeAndIdArrayKey(tradeId),
       (oldTradeComposite) =>
         produce(oldTradeComposite, (draft) => {
           const tradeElements = draft[Constants.TRADE_ELEMENTS_STRING];
@@ -24,6 +23,5 @@ export function useCacheUpdatedEntry(tradeId) {
         })
     );
   };
-
   return cacheUpdatedEntry;
 }

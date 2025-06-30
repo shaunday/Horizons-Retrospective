@@ -4,16 +4,14 @@ import { tradeKeysFactory } from "@services/query-key-factory";
 
 export function useCacheNewElement(tradeComposite) {
   const queryClient = useQueryClient();
-
   const onElementUpdate = (newElement) => {
     queryClient.setQueryData(
-      tradeKeysFactory.tradeAndIdArrayKey(tradeComposite.id),
+      tradeKeysFactory.getTradeAndIdArrayKey(tradeComposite.id),
       (oldTradeComposite) =>
         produce(oldTradeComposite, (draft) => {
           draft.tradeElements.push(newElement);
         })
     );
   };
-
   return onElementUpdate;
 }

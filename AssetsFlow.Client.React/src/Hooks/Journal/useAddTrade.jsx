@@ -13,20 +13,16 @@ export function useAddTrade() {
     isError: isAddTradeError,
   } = useMutation({
     mutationFn: () => {
-      const newTrade = addTradeComposite();
-      return newTrade;
+      return addTradeComposite();
     },
     onSuccess: (newTrade) => {
-      const tradeAndIdArray = tradeKeysFactory.tradeAndIdArrayKey(newTrade.id)
+      const tradeAndIdArray = tradeKeysFactory.getTradeAndIdArrayKey(newTrade.id)
       queryClient.setQueryData(tradeAndIdArray, newTrade);
-
-      const currentTradeIds = queryClient.getQueryData(tradeKeysFactory.tradeIdsKey) || [];
-      queryClient.setQueryData(tradeKeysFactory.tradeIdsKey, [
+      const currentTradeIds = queryClient.getQueryData(tradeKeysFactory.getTradeIdsKey()) || [];
+      queryClient.setQueryData(tradeKeysFactory.getTradeIdsKey(), [
         ...currentTradeIds,
         newTrade.id,
       ]);
-
-      // Track the newly added trade ID
       setNewlyAddedTradeId(newTrade.id);
     },
   });
