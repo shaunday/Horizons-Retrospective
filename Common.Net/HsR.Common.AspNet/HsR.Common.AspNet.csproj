@@ -6,6 +6,9 @@
     <Nullable>enable</Nullable>
     <BaseOutputPath>..\bin\</BaseOutputPath>
     <OutputPath>..\bin\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <AppendConfigurationToOutputPath>false</AppendConfigurationToOutputPath>
     <OutputType>Library</OutputType>
   </PropertyGroup>
 

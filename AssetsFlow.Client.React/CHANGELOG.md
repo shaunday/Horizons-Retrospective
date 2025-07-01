@@ -1,6 +1,10 @@
 
 # Changelog
 
+## [0.9.020-c] - 2025-07-...
+### Added
+- Users Service, Demo user
+
 ## [0.9.019-c] - 2025-06-24
 ### Added
 - Missing notification for collapsed trade elements

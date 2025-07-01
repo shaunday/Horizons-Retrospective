@@ -1,11 +1,11 @@
 ## 1
-fix APIs/cache to use UserIDs
+add: seeder/admin panel
 
 from limor: edit > expand the object and edit in place?
 from limor: title should be styled diff than the content, text aligned to the left
 add: opened/closedat (just to overview?)
-add: user login
-add: seeder/admin panel
+add: user login, user or top panel
+
 add: jotai/redux for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
 
 ## 2.

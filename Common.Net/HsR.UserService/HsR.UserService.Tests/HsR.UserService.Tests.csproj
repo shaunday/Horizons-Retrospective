@@ -7,6 +7,9 @@
     <IsPackable>false</IsPackable>
     <BaseOutputPath>..\..\bin\HsR.UserService\</BaseOutputPath>
     <OutputPath>..\..\bin\HsR.UserService\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <AppendConfigurationToOutputPath>false</AppendConfigurationToOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
