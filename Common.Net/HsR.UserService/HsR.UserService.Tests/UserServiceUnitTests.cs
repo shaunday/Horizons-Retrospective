@@ -15,12 +15,14 @@ namespace HsR.UserService.Tests
     {
         private readonly Mock<UserManager<User>> _mockUserManager;
         private readonly HsR.UserService.Services.UserService _userService;
+        private readonly Mock<IServiceProvider> _mockServiceProvider;
 
         public UserServiceUnitTests()
         {
             var userStore = new Mock<IUserStore<User>>();
             _mockUserManager = new Mock<UserManager<User>>(userStore.Object, null, null, null, null, null, null, null, null);
-            _userService = new HsR.UserService.Services.UserService(_mockUserManager.Object);
+            _mockServiceProvider = new Mock<IServiceProvider>();
+            _userService = new HsR.UserService.Services.UserService(_mockUserManager.Object, _mockServiceProvider.Object);
         }
 
         [Fact]

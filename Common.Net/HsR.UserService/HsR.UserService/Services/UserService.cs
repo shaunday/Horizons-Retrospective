@@ -4,7 +4,9 @@ using HsR.UserService.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using HsR.UserService.Contracts;
+using Microsoft.Extensions.DependencyInjection;
 using DotNetEnv;
+
 
 namespace HsR.UserService.Services
 {
@@ -17,6 +19,8 @@ namespace HsR.UserService.Services
         {
             _userManager = userManager;
             _serviceProvider = serviceProvider;
+            var envPath = Path.Combine(AppContext.BaseDirectory, ".env");
+            Env.Load(envPath);
         }
 
         public async Task<AuthResponse> LoginAsync(LoginRequest request)

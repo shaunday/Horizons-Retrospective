@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using System;
+using System.IO;
 
 namespace HsR.Journal.Infrastructure
 {
@@ -22,7 +23,8 @@ namespace HsR.Journal.Infrastructure
             }
             else // Production
             {
-                DotNetEnv.Env.Load(@"..\..\AssetsFlow.Web.API\.env");
+                var envPath = Path.Combine(AppContext.BaseDirectory, ".env");
+                DotNetEnv.Env.Load(envPath);
 
                 var supabasePassword = Environment.GetEnvironmentVariable(SupabasePassVar);
                 var supabaseConnectionId = Environment.GetEnvironmentVariable(SupabaseIdVar);

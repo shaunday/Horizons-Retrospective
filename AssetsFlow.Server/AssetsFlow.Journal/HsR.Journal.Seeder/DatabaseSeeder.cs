@@ -5,8 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using HsR.Common.ContentGenerators;
 using HsR.Common;
 using System.Xml.Linq;
-using HsR.UserService.Services;
-using HsR.UserService.Models;
 using HsR.Journal.Entities.Factory.Assists;
 using HsR.Journal.Seeder;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +18,6 @@ namespace HsR.Journal.Seeder
         private readonly IJournalRepository _tradeCompositesRepository;
         private readonly ITradeElementRepository _tradeElementRepository;
         private readonly IDataElementRepository _dataElementRepository;
-        private readonly IUserService _userService;
         private readonly Guid _demoUserId = Guid.Parse(DemoUserData.Id);
 
         public DatabaseSeeder(
@@ -28,14 +25,12 @@ namespace HsR.Journal.Seeder
             IJournalRepository tradeCompositesRepository,
             ITradeElementRepository tradeElementRepository,
             IDataElementRepository dataElementRepository,
-            IUserService userService,
             IConfiguration configuration)
         {
             this.dbContext = dbContext;
             _tradeCompositesRepository = tradeCompositesRepository;
             _tradeElementRepository = tradeElementRepository;
             _dataElementRepository = dataElementRepository;
-            _userService = userService;
         }
 
         public async Task FlushDbAndSeedDemoAsync()

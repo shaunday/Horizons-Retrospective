@@ -4,11 +4,6 @@ using HsR.UserService.Data;
 using HsR.UserService.Infrastructure;
 using HsR.Common.AspNet;
 using Serilog;
-using HsR.UserService.Contracts;
-using HsR.UserService.Models;
-using DotNetEnv;
-
-DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 

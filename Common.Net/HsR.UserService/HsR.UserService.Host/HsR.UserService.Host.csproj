@@ -6,10 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>HsR.UserService.Host</RootNamespace>
     <AssemblyName>HsR.UserService.Host</AssemblyName>
-    <OutputPath>HsR.UserService\bin</OutputPath>
+    <BaseOutputPath>..\..\bin\HsR.UserService\</BaseOutputPath>
+    <OutputPath>..\..\bin\HsR.UserService\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetEnv" Version="3.1.1" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.60.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="5.0.0" />
@@ -19,6 +21,12 @@
   <ItemGroup>
     <ProjectReference Include="../HsR.UserService/HsR.UserService.csproj" />
     <ProjectReference Include="../../../Common.Net/HsR.Common.AspNet/HsR.Common.AspNet.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update=".env">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project> 
