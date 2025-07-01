@@ -1,12 +1,13 @@
 ## 1
-add: seeder/admin panel
+add: seedernpm /admin panel
+add: user login, user or top panel
+adjust : risk group's icon, context's icon
+add: jotai/redux for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
 
 from limor: edit > expand the object and edit in place?
 from limor: title should be styled diff than the content, text aligned to the left
 add: opened/closedat (just to overview?)
-add: user login, user or top panel
 
-add: jotai/redux for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
 
 ## 2.
 add: filter (status first, date first, BY STATUS), in client? / adjust data call api
