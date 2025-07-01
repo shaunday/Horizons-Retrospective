@@ -35,6 +35,8 @@ namespace HsR.Journal.Seeder
         };
         public static readonly Dictionary<string, string> Trade2_Add1 = new()
         {
+            { "Broker", "Interactive Brokers" },
+            { "Sector", "Technology" },
             { "Reasoning", "Strong earnings beat, added to position." },
             { "Emotions", "Confident" },
             { "Price", "330" },
@@ -82,6 +84,8 @@ namespace HsR.Journal.Seeder
         };
         public static readonly Dictionary<string, string> Trade3_Add = new()
         {
+            { "Broker", "Robinhood" },
+            { "Sector", "Automotive" },
             { "Reasoning", "Breakdown confirmed, entered short." },
             { "Emotions", "Cautious" },
             { "Price", "850" },
