@@ -49,7 +49,7 @@ namespace HsR.Web.API.Caching.Tests
         }
 
         [Fact]
-        public async Task User_Isolation_Works()
+        public void User_Isolation_Works()
         {
             var (service, cache, _, _, _, _) = CreateService();
             var userId1 = Guid.NewGuid();
@@ -109,10 +109,11 @@ namespace HsR.Web.API.Caching.Tests
             var userId = Guid.NewGuid();
             // Simulate a completed task
             var field = typeof(TradesCacheService).GetField("_loadTasks", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var dict = (Dictionary<Guid, Task?>)field.GetValue(service);
-            dict[userId] = Task.CompletedTask;
+            var dict = (Dictionary<Guid, Task?>?)field?.GetValue(service);
+            Assert.NotNull(dict);
+            dict![userId] = Task.CompletedTask;
             service.CleanupInactiveUsers(TimeSpan.Zero);
-            Assert.False(dict.ContainsKey(userId));
+            Assert.False(dict!.ContainsKey(userId));
         }
 
         [Fact]
@@ -130,11 +131,12 @@ namespace HsR.Web.API.Caching.Tests
             var (service, cache, _, _, _, config) = CreateService();
             int maxUsers = config.Object.Cache.MaxConcurrentUsers;
             var field = typeof(TradesCacheService).GetField("_loadTasks", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var dict = (Dictionary<Guid, Task?>)field.GetValue(service);
+            var dict = (Dictionary<Guid, Task?>?)field?.GetValue(service);
+            Assert.NotNull(dict);
             for (int i = 0; i < maxUsers + 5; i++)
-                dict[Guid.NewGuid()] = Task.CompletedTask;
+                dict![Guid.NewGuid()] = Task.CompletedTask;
             service.InvalidateAndReload(Guid.NewGuid()); // Should trigger cleanup
-            Assert.True(dict.Count <= maxUsers);
+            Assert.True(dict!.Count <= maxUsers);
         }
 
         [Fact]
@@ -146,6 +148,7 @@ namespace HsR.Web.API.Caching.Tests
             var expected = new List<TradeCompositeModel> { new TradeCompositeModel() };
             cache.Set(key, (object)expected);
             var result = await service.GetCachedTrades(userId, 1, 10);
+            Assert.NotNull(result);
             Assert.Equal(expected, result);
         }
 
@@ -156,8 +159,9 @@ namespace HsR.Web.API.Caching.Tests
             var userId = Guid.NewGuid();
             service.InvalidateAndReload(userId);
             var field = typeof(TradesCacheService).GetField("_loadTasks", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var dict = (Dictionary<Guid, Task?>)field.GetValue(service);
-            Assert.True(dict.ContainsKey(userId));
+            var dict = (Dictionary<Guid, Task?>?)field?.GetValue(service);
+            Assert.NotNull(dict);
+            Assert.True(dict!.ContainsKey(userId));
         }
 
         [Fact]
@@ -169,16 +173,19 @@ namespace HsR.Web.API.Caching.Tests
             var fieldTasks = typeof(TradesCacheService).GetField("_loadTasks", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             var fieldCts = typeof(TradesCacheService).GetField("_loadCts", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             var fieldTokens = typeof(TradesCacheService).GetField("_cacheTokenSources", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var dictTasks = (Dictionary<Guid, Task?>)fieldTasks.GetValue(service);
-            var dictCts = (Dictionary<Guid, CancellationTokenSource>)fieldCts.GetValue(service);
-            var dictTokens = (Dictionary<Guid, CancellationTokenSource>)fieldTokens.GetValue(service);
-            dictTasks[userId] = Task.CompletedTask;
-            dictCts[userId] = tcs;
-            dictTokens[userId] = tcs;
+            var dictTasks = (Dictionary<Guid, Task?>?)fieldTasks?.GetValue(service);
+            var dictCts = (Dictionary<Guid, CancellationTokenSource>?)fieldCts?.GetValue(service);
+            var dictTokens = (Dictionary<Guid, CancellationTokenSource>?)fieldTokens?.GetValue(service);
+            Assert.NotNull(dictTasks);
+            Assert.NotNull(dictCts);
+            Assert.NotNull(dictTokens);
+            dictTasks![userId] = Task.CompletedTask;
+            dictCts![userId] = tcs;
+            dictTokens![userId] = tcs;
             service.CleanupInactiveUsers(TimeSpan.Zero);
-            Assert.False(dictTasks.ContainsKey(userId));
-            Assert.False(dictCts.ContainsKey(userId));
-            Assert.False(dictTokens.ContainsKey(userId));
+            Assert.False(dictTasks!.ContainsKey(userId));
+            Assert.False(dictCts!.ContainsKey(userId));
+            Assert.False(dictTokens!.ContainsKey(userId));
         }
 
         [Fact]
@@ -215,9 +222,10 @@ namespace HsR.Web.API.Caching.Tests
             service.InvalidateAndReload(userId1);
             service.InvalidateAndReload(userId2);
             var field = typeof(TradesCacheService).GetField("_loadTasks", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var dict = (Dictionary<Guid, Task?>)field.GetValue(service);
-            Assert.True(dict.ContainsKey(userId1));
-            Assert.True(dict.ContainsKey(userId2));
+            var dict = (Dictionary<Guid, Task?>?)field?.GetValue(service);
+            Assert.NotNull(dict);
+            Assert.True(dict!.ContainsKey(userId1));
+            Assert.True(dict!.ContainsKey(userId2));
         }
 
         [Fact]
@@ -239,8 +247,9 @@ namespace HsR.Web.API.Caching.Tests
             sp.Setup(x => x.GetService(typeof(IServiceScopeFactory))).Returns(scopeFactoryMock.Object);
             // Add entry to _cacheTokenSources for userId
             var fieldTokens = typeof(TradesCacheService).GetField("_cacheTokenSources", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var dictTokens = (Dictionary<Guid, CancellationTokenSource>)fieldTokens.GetValue(service);
-            dictTokens[userId] = new CancellationTokenSource();
+            var dictTokens = (Dictionary<Guid, CancellationTokenSource>?)fieldTokens?.GetValue(service);
+            Assert.NotNull(dictTokens);
+            dictTokens![userId] = new CancellationTokenSource();
             // Call private method via reflection
             var method = typeof(TradesCacheService).GetMethod("LoadCacheAsync", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             var task = (Task)method.Invoke(service, new object[] { userId, CancellationToken.None });

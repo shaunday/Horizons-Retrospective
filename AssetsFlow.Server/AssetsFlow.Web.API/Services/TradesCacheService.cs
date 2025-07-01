@@ -33,8 +33,8 @@ namespace HsR.Web.API.Services
         private readonly Dictionary<Guid, Task?> _loadTasks = new();
         private readonly Dictionary<Guid, CancellationTokenSource> _loadCts = new();
         private readonly Dictionary<Guid, CancellationTokenSource> _cacheTokenSources = new();
-        private static SemaphoreSlim _loadSemaphore;
-        private static TimeSpan LoadWaitTimeout;
+        private static SemaphoreSlim _loadSemaphore = new(1, 1);
+        private static TimeSpan LoadWaitTimeout = TimeSpan.FromSeconds(10); // Default, will be overwritten in ctor
 
         public TradesCacheService(
             IMemoryCache cache,

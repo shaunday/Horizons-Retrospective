@@ -20,7 +20,7 @@ namespace HsR.UserService.Tests
         public UserServiceUnitTests()
         {
             var userStore = new Mock<IUserStore<User>>();
-            _mockUserManager = new Mock<UserManager<User>>(userStore.Object, null, null, null, null, null, null, null, null);
+            _mockUserManager = new Mock<UserManager<User>>(userStore.Object, default!, default!, default!, default!, default!, default!, default!, default!);
             _mockServiceProvider = new Mock<IServiceProvider>();
             _userService = new HsR.UserService.Services.UserService(_mockUserManager.Object, _mockServiceProvider.Object);
         }
@@ -336,7 +336,7 @@ namespace HsR.UserService.Tests
         {
             var userStore = new Mock<IUserStore<User>>();
             _mockUserService = new Mock<IUserService>();
-            _mockUserManager = new Mock<UserManager<User>>(userStore.Object, null, null, null, null, null, null, null, null);
+            _mockUserManager = new Mock<UserManager<User>>(userStore.Object, default!, default!, default!, default!, default!, default!, default!, default!);
             _mockLogger = new Mock<ILogger<UserGrpcService>>();
             _grpcService = new UserGrpcService(_mockUserService.Object, _mockUserManager.Object, _mockLogger.Object);
         }
