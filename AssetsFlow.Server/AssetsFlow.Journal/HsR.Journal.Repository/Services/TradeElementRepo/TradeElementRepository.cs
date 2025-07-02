@@ -99,7 +99,7 @@ namespace HsR.Journal.DataContext
             return (tradeOverview, newStates);
         }
 
-        public async Task<UpdatedStatesCollation> RemoveInterimPositionAsync(Guid userId, string tradeInputId)
+        public async Task<UpdatedStatesCollation> RemoveInterimPositionAsync(string tradeInputId)
         {
             var tradeInputToRemove = await GetTradeElementAsync(tradeInputId);
             if (tradeInputToRemove == null)
@@ -107,11 +107,8 @@ namespace HsR.Journal.DataContext
                 throw new ArgumentException($"The trade input (Id '{tradeInputId}') to remove is null.", nameof(tradeInputId));
             }
 
-            // Verify the element belongs to the user
-            if (tradeInputToRemove.UserId != userId)
-            {
-                throw new UnauthorizedAccessException($"Trade element {tradeInputId} does not belong to user {userId}");
-            }
+            // Use userId from the entity
+            var userId = tradeInputToRemove.UserId;
 
             var trade = await GetTradeCompositeAsync(tradeInputToRemove.CompositeFK);
             if (trade == null)
@@ -141,7 +138,7 @@ namespace HsR.Journal.DataContext
             return updatedStates;
         }
 
-        public async Task<UpdatedStatesCollation> UpdateActivationTimeAsync(Guid userId, string tradeInputId, string newTimestamp)
+        public async Task<UpdatedStatesCollation> UpdateActivationTimeAsync(string tradeInputId, string newTimestamp)
         {
             var tradeInput = await GetTradeElementAsync(tradeInputId);
             if (tradeInput == null)
@@ -149,11 +146,8 @@ namespace HsR.Journal.DataContext
                 throw new ArgumentException($"The trade input (Id '{tradeInputId}') to update is null.", nameof(tradeInputId));
             }
             
-            // Verify the element belongs to the user
-            if (tradeInput.UserId != userId)
-            {
-                throw new UnauthorizedAccessException($"Trade element {tradeInputId} does not belong to user {userId}");
-            }
+            // Use userId from the entity
+            var userId = tradeInput.UserId;
             
             tradeInput.Activate();
             UpdatedStatesCollation? updatedStates = new() { ActivationTimeStamp = tradeInput.TimeStamp };

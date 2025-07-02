@@ -12,8 +12,7 @@ namespace HsR.Journal.DataContext
     {
         private readonly IUserDataRepository _userDataRepository = userDataRepository;
 
-        public async Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)>
-                                                UpdateCellContentAsync(Guid userId, string componentId, string newContent, string changeNote)
+        public async Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)> UpdateCellContentAsync(string componentId, string newContent, string changeNote)
         {
             if (!int.TryParse(componentId, out var parsedId))
             {
@@ -22,8 +21,10 @@ namespace HsR.Journal.DataContext
 
             var cell = await _dataContext.Entries
                 .Include(e => e.History)
-                .FirstOrDefaultAsync(e => e.Id == parsedId && e.UserId == userId)
-                ?? throw new InvalidOperationException($"Entry with ID {componentId} not found for user {userId}.");
+                .FirstOrDefaultAsync(e => e.Id == parsedId)
+                ?? throw new InvalidOperationException($"Entry with ID {componentId} not found.");
+
+            var userId = cell.UserId;
 
             cell.SetFollowupContent(newContent, changeNote);
 

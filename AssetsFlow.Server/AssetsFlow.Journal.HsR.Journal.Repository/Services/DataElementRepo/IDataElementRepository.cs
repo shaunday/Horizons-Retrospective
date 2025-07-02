@@ -1,12 +1,10 @@
-using HsR.Journal.Entities;
-using HsR.Journal.Entities.TradeJournal;
-using HsR.Journal.Services;
+using System;
+using System.Threading.Tasks;
 
-namespace HsR.Journal.DataContext
+namespace AssetsFlow.Server.AssetsFlow.Journal.HsR.Journal.Repository.Services.DataElementRepo
 {
     public interface IDataElementRepository
     {
         Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)> UpdateCellContentAsync(string componentId, string newContent, string changeNote);
     }
-
-}
+} 

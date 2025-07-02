@@ -11,8 +11,7 @@ export async function getAllTrades() {
 }
 
 export async function getTradeById(tradeId) {
-  const userId = getUserId();
-  return request(`${tradesBaseURL}/${tradeId}?userId=${userId}`, { method: "POST" });
+  return request(`${tradesBaseURL}/${tradeId}`, { method: "POST" });
 }
 
 export async function addTradeComposite() {

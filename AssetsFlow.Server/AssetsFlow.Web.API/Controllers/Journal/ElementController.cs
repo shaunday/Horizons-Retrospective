@@ -16,9 +16,9 @@ public class TradeElementsController(
     ITradesCacheService cacheService) : JournalControllerBase(journalAccess, logger, mapper, cacheService)
 {
     [HttpDelete]
-    public async Task<ActionResult<UpdatedStatesModel>> DeleteInterimTradeInput(Guid userId, string elementId)
+    public async Task<ActionResult<UpdatedStatesModel>> DeleteInterimTradeInput(string elementId)
     {
-        var updatedStates = await _journalAccess.TradeElement.RemoveInterimPositionAsync(userId, elementId);
+        var updatedStates = await _journalAccess.TradeElement.RemoveInterimPositionAsync(elementId);
         if (updatedStates == null)
         {
             return NotFound();
@@ -26,15 +26,18 @@ public class TradeElementsController(
 
         UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
 
-        _cacheService.InvalidateAndReload(userId);
+        // Invalidate cache for the user who owns the element
+        var userId = updatedStates.TradeInfo?.UserId ?? Guid.Empty;
+        if (userId != Guid.Empty)
+            _cacheService.InvalidateAndReload(userId);
 
         return ResultHandling(resAsModel, $"Could not delete element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }
 
     [HttpPatch]
-    public async Task<ActionResult<UpdatedStatesModel>> ReTimestampTradeInput(Guid userId, string elementId, string newTime)
+    public async Task<ActionResult<UpdatedStatesModel>> ReTimestampTradeInput(string elementId, string newTime)
     {
-        var updatedStates = await _journalAccess.TradeElement.UpdateActivationTimeAsync(userId, elementId, newTime);
+        var updatedStates = await _journalAccess.TradeElement.UpdateActivationTimeAsync(elementId, newTime);
         if (updatedStates == null)
         {
             return NotFound();
@@ -42,7 +45,10 @@ public class TradeElementsController(
 
         UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
 
-        _cacheService.InvalidateAndReload(userId);
+        // Invalidate cache for the user who owns the element
+        var userId = updatedStates.TradeInfo?.UserId ?? Guid.Empty;
+        if (userId != Guid.Empty)
+            _cacheService.InvalidateAndReload(userId);
 
         return ResultHandling(resAsModel, $"Could not reactivate element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }

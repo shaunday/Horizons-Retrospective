@@ -9,7 +9,7 @@ namespace HsR.Journal.DataContext
         Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimPositionAsync(Guid userId, string tradeId, bool isAdd);
         Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimEvalutationAsync(Guid userId, string tradeId);
 
-        Task<UpdatedStatesCollation> RemoveInterimPositionAsync(Guid userId, string tradeInputId);
-        Task<UpdatedStatesCollation> UpdateActivationTimeAsync(Guid userId, string tradeInputId, string newTimestamp);
+        Task<UpdatedStatesCollation> RemoveInterimPositionAsync(string tradeInputId);
+        Task<UpdatedStatesCollation> UpdateActivationTimeAsync(string tradeInputId, string newTimestamp);
     }
 }
