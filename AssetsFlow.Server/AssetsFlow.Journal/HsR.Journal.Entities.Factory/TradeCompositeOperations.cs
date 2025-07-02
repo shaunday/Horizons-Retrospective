@@ -14,8 +14,12 @@ namespace HsR.Journal.Entities.Factory
         public static TradeComposite CloseTrade(TradeComposite trade, string closingPrice)
         {
             // Create a TradeElement for ReducePosition
-            var reductionEle = new InterimTradeElement(trade, TradeActionType.Reduce);
-            reductionEle.Entries = EntriesFactory.GetReducePositionEntries(reductionEle);
+            InterimTradeElement? reductionEle = TradeElementsFactory.GetNewElement(trade, TradeActionType.Reduce) as InterimTradeElement;
+
+            if (reductionEle == null)
+            {
+                throw new InvalidOperationException("Failed to create a reduction element.");
+            }
 
             // Find price entry
             var priceEntry = reductionEle.Entries.SingleOrDefault(ti => ti.UnitPriceRelevance == ValueRelevance.Negative);
@@ -40,15 +44,8 @@ namespace HsR.Journal.Entities.Factory
                 costEntry.ContentWrapper = new ContentRecord(costToClose.ToF2String());
                 trade.TradeElements.Add(reductionEle);
 
-                // Create TradeElement for Closure
-                analytics.reducePositions.TotalCost += costToClose;
-                analytics.reducePositions.TotalAmount += netAmountInPosition;
-
-                var tradeClosure = new TradeSummary(trade, TradeActionType.Summary);
-                TradeAnalyticsSummary analyticsSummary = new(analytics);
-                tradeClosure.Entries = EntriesFactory.GetTradeClosureComponents(tradeClosure, analyticsSummary);
-
-                trade.Summary = tradeClosure;
+                trade.Summary = TradeElementsFactory.GetNewElement(trade, TradeActionType.Summary) as TradeSummary;
+                trade.Close();
             }
             else
             {

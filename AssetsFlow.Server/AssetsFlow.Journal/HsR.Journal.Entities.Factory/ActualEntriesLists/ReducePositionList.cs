@@ -1,8 +1,8 @@
-﻿namespace HsR.Journal.Entities.Factory.Assists
+﻿namespace HsR.Journal.Entities.Factory
 {
-    internal static class ReducePositionList
+    public static partial class TradeElementsFactory
     {
-        internal static List<DataElement> GetReducePositionObjects()
+        private static List<DataElement> GetReducePositionObjects()
         {
             return new List<DataElement>
             {

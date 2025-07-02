@@ -1,14 +1,14 @@
-﻿using HsR.Journal.DataContext;
+﻿using HsR.Common;
+using HsR.Common.ContentGenerators;
+using HsR.Journal.DataContext;
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
-using Microsoft.EntityFrameworkCore;
-using HsR.Common.ContentGenerators;
-using HsR.Common;
-using System.Xml.Linq;
-using HsR.Journal.Entities.Factory.Assists;
 using HsR.Journal.Seeder;
-using Microsoft.Extensions.Configuration;
 using HsR.UserService.Contracts;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace HsR.Journal.Seeder
 {
@@ -69,8 +69,9 @@ namespace HsR.Journal.Seeder
             var eval3 = (await _tradeElementRepository.AddInterimEvalutationAsync(_demoUserId, trade3.Id.ToString())).newEntry;
             await dbContext.SaveChangesAsync();
             await PopulateStageContent(_demoUserId, eval3, ManualDemoTrades.Trade3_Evaluate);
+            TradeCompositeOperations.CloseTrade(trade3, "1250");
             trade3.Close();
-            dbContext.TradeComposites.Update(trade3);
+
             await dbContext.SaveChangesAsync();
             var closeElement = trade3.TradeElements.LastOrDefault(e => e.TradeActionType.ToString() == "Summary");
             if (closeElement != null)

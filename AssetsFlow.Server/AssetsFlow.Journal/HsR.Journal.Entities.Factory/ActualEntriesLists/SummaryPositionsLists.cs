@@ -3,9 +3,9 @@ using HsR.Journal.TradeAnalytics;
 
 namespace HsR.Journal.Entities.Factory
 {
-    internal static class SummaryPositionsLists
+    public static partial class TradeElementsFactory
     {
-        internal static List<DataElement> GetSummaryComponents(TradeAnalyticsSummary analytics)
+        private static List<DataElement> GetSummaryComponents(TradeAnalyticsSummary analytics)
         {
             var summaryCells = new List<DataElement>
                 {
@@ -19,7 +19,7 @@ namespace HsR.Journal.Entities.Factory
             return summaryCells;
         }
 
-        internal static List<DataElement> GetTradeClosureComponents(TradeAnalyticsSummary analytics)
+        private static List<DataElement> GetTradeClosureComponents(TradeAnalyticsSummary analytics)
         {
             var closureCells = new List<DataElement>
                 {

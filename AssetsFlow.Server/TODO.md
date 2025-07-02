@@ -1,7 +1,8 @@
 ﻿
 # TODO
 - production seed should be able to flush table
-- fix missing content, add summary/closure.
+- fix userid on element/entry creation
+- add summary/closure.
 
 - Add JWT issuing to your gRPC login method.
 - Add JWT validation middleware to your journal service (and user service if needed).

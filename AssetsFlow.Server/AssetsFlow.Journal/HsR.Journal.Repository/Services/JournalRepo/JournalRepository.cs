@@ -23,15 +23,11 @@ namespace HsR.Journal.DataContext
         public async Task<TradeComposite> AddTradeCompositeAsync(Guid userId)
         {
             TradeComposite trade = new() { UserId = userId };
-            InterimTradeElement originElement = new(trade, TradeActionType.Origin) { UserId = userId };
-            originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
-            
-            // Set UserId for all entries
-            foreach (var entry in originElement.Entries)
+            if (TradeElementsFactory.GetNewElement(trade, TradeActionType.Origin) is not InterimTradeElement originElement)
             {
-                entry.UserId = userId;
+                throw new InvalidOperationException("TradeElementsFactory returned an invalid type for InterimTradeElement.");
             }
-            
+
             trade.TradeElements.Add(originElement);
 
             _dataContext.TradeComposites.Add(trade);

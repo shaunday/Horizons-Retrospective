@@ -1,8 +1,8 @@
-﻿namespace HsR.Journal.Entities.Factory.Assists
+﻿namespace HsR.Journal.Entities.Factory
 {
-    internal static class AddPositionLists
+    public static partial class TradeElementsFactory
     {
-        internal static List<DataElement> GetFirstPositionObjects()
+        private static List<DataElement> GetFirstPositionObjects()
         {
             var firstPositionObjects = new List<DataElement>
             {
@@ -18,7 +18,7 @@
             return firstPositionObjects;
         }
 
-        internal static List<DataElement> GetAddToPositionObjects()
+        private static List<DataElement> GetAddToPositionObjects()
         {
             var addToPositionObjects = new List<DataElement>
             {
@@ -38,7 +38,7 @@
             return addToPositionObjects;
         }
 
-        internal static List<DataElement> GetEvalutationObjects()
+        private static List<DataElement> GetEvalutationObjects()
         {
             var evaluationObjects = new List<DataElement>
             {

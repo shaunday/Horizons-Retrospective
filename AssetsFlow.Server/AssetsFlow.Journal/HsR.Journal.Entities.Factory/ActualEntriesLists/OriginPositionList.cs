@@ -1,8 +1,8 @@
-﻿namespace HsR.Journal.Entities.Factory.Assists
+﻿namespace HsR.Journal.Entities.Factory
 {
-    internal static class OriginPositionList
+    public static partial class TradeElementsFactory
     {
-        internal static List<DataElement> GetTradeOriginObjects()
+        private static List<DataElement> GetTradeOriginObjects()
         {
             var tradeOriginObjects = new List<DataElement>
             {
