@@ -13,31 +13,23 @@ namespace HsR.Journal.Repository.Services.CompositeRepo
 {
     public class TradeCompositeRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), ITradeCompositeRepository
     {
-        public async Task<UpdatedStatesCollation> CloseTradeAsync(Guid userId, string tradeId, string closingPrice)
+        public async Task<TradeComposite> CloseTradeAsync(int tradeId, string closingPrice)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
-            
-            // Verify the trade belongs to the user
-            if (trade.UserId != userId)
-            {
-                throw new UnauthorizedAccessException($"Trade {tradeId} does not belong to user {userId}");
-            }
-            
-            if (trade.Summary != null)
+
+            if (trade?.Summary != null)
             {
                 _dataContext.Entry(trade.Summary).State = EntityState.Deleted;
             }
             else
             {
-                throw new InvalidOperationException("Trade summary is missing.");
+                throw new InvalidOperationException("Trade / summary is missing.");
             }
             
             TradeCompositeOperations.CloseTrade(trade, closingPrice);
 
             await _dataContext.SaveChangesAsync();
-
-            UpdatedStatesCollation newStates = new() { TradeInfo = trade };
-            return newStates;
+            return trade;
         }
     }
 }

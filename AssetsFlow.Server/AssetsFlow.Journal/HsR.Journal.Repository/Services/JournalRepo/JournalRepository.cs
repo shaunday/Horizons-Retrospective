@@ -37,7 +37,11 @@ namespace HsR.Journal.DataContext
 
         public async Task<TradeComposite?> GetTradeCompositeByIdAsync(int tradeId)
         {
-            return await GetTradeCompositeAsync(tradeId);
+            return await _dataContext.TradeComposites
+                .Include(tc => tc.TradeElements)
+                    .ThenInclude(te => te.Entries)
+                .Include(tc => tc.Summary)
+                .FirstOrDefaultAsync(tc => tc.Id == tradeId);
         }
 
         private static async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)>

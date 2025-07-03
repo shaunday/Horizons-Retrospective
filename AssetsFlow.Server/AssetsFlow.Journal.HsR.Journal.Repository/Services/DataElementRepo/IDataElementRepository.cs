@@ -5,6 +5,6 @@ namespace AssetsFlow.Server.AssetsFlow.Journal.HsR.Journal.Repository.Services.D
 {
     public interface IDataElementRepository
     {
-        Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)> UpdateCellContentAsync(string componentId, string newContent, string changeNote);
+        Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)> UpdateCellContentAsync(int componentId, string newContent, string changeNote);
     }
 } 

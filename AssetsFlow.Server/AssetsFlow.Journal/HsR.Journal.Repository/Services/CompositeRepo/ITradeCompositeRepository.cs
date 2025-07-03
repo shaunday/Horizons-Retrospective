@@ -9,6 +9,6 @@ namespace HsR.Journal.Repository.Services.CompositeRepo
 {
     public interface ITradeCompositeRepository
     {
-        Task<UpdatedStatesCollation> CloseTradeAsync(Guid userId, string tradeId, string closingPrice);
+        Task<TradeComposite> CloseTradeAsync(int tradeId, string closingPrice);
     }
 }

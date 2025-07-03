@@ -50,23 +50,23 @@ namespace HsR.Journal.Seeder
             var trade2 = await _tradeCompositesRepository.AddTradeCompositeAsync(_demoUserId);
             await dbContext.SaveChangesAsync();
             await PopulateStageContent(trade2, ManualDemoTrades.Trade2_Idea);
-            var add2_1 = (await _tradeElementRepository.AddInterimPositionAsync(_demoUserId, trade2.Id.ToString(), true)).newEntry;
+            var add2_1 = (await _tradeElementRepository.AddInterimPositionAsync(trade2.Id, true)).newEntry;
             await dbContext.SaveChangesAsync();
             await PopulateStageContent(add2_1, ManualDemoTrades.Trade2_Add1);
-            var add2_2 = (await _tradeElementRepository.AddInterimPositionAsync(_demoUserId, trade2.Id.ToString(), true)).newEntry;
+            var add2_2 = (await _tradeElementRepository.AddInterimPositionAsync(trade2.Id, true)).newEntry;
             await dbContext.SaveChangesAsync();
             await PopulateStageContent(add2_2, ManualDemoTrades.Trade2_Add2);
-            var eval2 = (await _tradeElementRepository.AddInterimEvalutationAsync(_demoUserId, trade2.Id.ToString())).newEntry;
+            var eval2 = (await _tradeElementRepository.AddInterimEvalutationAsync(trade2.Id)).newEntry;
             await dbContext.SaveChangesAsync();
             await PopulateStageContent(eval2, ManualDemoTrades.Trade2_Evaluate);
 
             var trade3 = await _tradeCompositesRepository.AddTradeCompositeAsync(_demoUserId);
             await dbContext.SaveChangesAsync();
             await PopulateStageContent(trade3, ManualDemoTrades.Trade3_Idea);
-            var add3 = (await _tradeElementRepository.AddInterimPositionAsync(_demoUserId, trade3.Id.ToString(), true)).newEntry;
+            var add3 = (await _tradeElementRepository.AddInterimPositionAsync(trade3.Id, true)).newEntry;
             await dbContext.SaveChangesAsync();
             await PopulateStageContent(add3, ManualDemoTrades.Trade3_Add);
-            var eval3 = (await _tradeElementRepository.AddInterimEvalutationAsync(_demoUserId, trade3.Id.ToString())).newEntry;
+            var eval3 = (await _tradeElementRepository.AddInterimEvalutationAsync(trade3.Id)).newEntry;
             await dbContext.SaveChangesAsync();
             await PopulateStageContent(eval3, ManualDemoTrades.Trade3_Evaluate);
             TradeCompositeOperations.CloseTrade(trade3, "1250");
@@ -104,7 +104,7 @@ namespace HsR.Journal.Seeder
                 {
                     try
                     {
-                        await _dataElementRepository.UpdateCellContentAsync(entry.Id.ToString(), value, "manual seed");
+                        await _dataElementRepository.UpdateCellContentAsync(entry.Id, value, "manual seed");
                     }
                     catch (Exception ex)
                     {

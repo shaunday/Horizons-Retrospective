@@ -26,7 +26,7 @@ namespace HsR.Web.API.Controllers.Journal
 
         [HttpPatch("{componentId}")]
         public async Task<ActionResult<(DataElementModel newEntry, UpdatedStatesModel updatedStates)>>
-                                                  UpdateDataComponent(string componentId, [FromBody] UpdateDataComponentRequest request)
+                                                  UpdateDataComponent(int componentId, [FromBody] UpdateDataComponentRequest request)
         {
             if (string.IsNullOrEmpty(request.Content))
             {
