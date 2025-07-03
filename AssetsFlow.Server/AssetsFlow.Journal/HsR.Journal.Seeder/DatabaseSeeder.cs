@@ -122,6 +122,10 @@ namespace HsR.Journal.Seeder
         {
             var demoTrades = dbContext.TradeComposites.Where(t => t.UserId == _demoUserId);
             dbContext.TradeComposites.RemoveRange(demoTrades);
+            var demoElements = dbContext.TradeElements.Where(e => e.UserId == _demoUserId);
+            dbContext.TradeElements.RemoveRange(demoElements);
+            var demoEntries = dbContext.Entries.Where(e => e.UserId == _demoUserId);
+            dbContext.Entries.RemoveRange(demoEntries);
             await dbContext.SaveChangesAsync();
         }
     }
