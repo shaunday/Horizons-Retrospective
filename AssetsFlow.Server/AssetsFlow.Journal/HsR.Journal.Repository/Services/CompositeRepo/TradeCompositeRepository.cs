@@ -31,5 +31,11 @@ namespace HsR.Journal.Repository.Services.CompositeRepo
             await _dataContext.SaveChangesAsync();
             return trade;
         }
+
+        public async Task RefreshSaveSummaryAsync(TradeComposite trade)
+        {
+            _ = RefreshSummary(trade);
+            await _dataContext.SaveChangesAsync();
+        }
     }
 }

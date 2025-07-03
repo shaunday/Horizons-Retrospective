@@ -64,6 +64,7 @@ namespace HsR.Journal.DataContext
 
                 tradeOverview.Entries.AddRange(clonedEntries);
             }
+            trade.TradeElements.Add(tradeOverview);
             await _dataContext.SaveChangesAsync();
 
             return tradeOverview;

@@ -3,6 +3,8 @@ using HsR.Common.ContentGenerators;
 using HsR.Journal.DataContext;
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
+using HsR.Journal.Entities.TradeJournal;
+using HsR.Journal.Repository.Services.CompositeRepo;
 using HsR.Journal.Seeder;
 using HsR.UserService.Contracts;
 using Microsoft.EntityFrameworkCore;
@@ -15,20 +17,23 @@ namespace HsR.Journal.Seeder
     public class DatabaseSeeder
     {
         private readonly TradingJournalDataContext dbContext;
-        private readonly IJournalRepository _tradeCompositesRepository;
+        private readonly IJournalRepository _journalRepository;
+        private readonly ITradeCompositeRepository _tradeCompositeRepository;
         private readonly ITradeElementRepository _tradeElementRepository;
         private readonly IDataElementRepository _dataElementRepository;
         private readonly Guid _demoUserId = Guid.Parse(DemoUserData.Id);
 
         public DatabaseSeeder(
             TradingJournalDataContext dbContext,
-            IJournalRepository tradeCompositesRepository,
+            IJournalRepository journalRepository,
+            ITradeCompositeRepository tradeCompositeRepository,
             ITradeElementRepository tradeElementRepository,
             IDataElementRepository dataElementRepository,
             IConfiguration configuration)
         {
             this.dbContext = dbContext;
-            _tradeCompositesRepository = tradeCompositesRepository;
+            _journalRepository = journalRepository;
+            _tradeCompositeRepository = tradeCompositeRepository;
             _tradeElementRepository = tradeElementRepository;
             _dataElementRepository = dataElementRepository;
         }
@@ -43,39 +48,34 @@ namespace HsR.Journal.Seeder
 
         public async Task SeedDemoUserTradesAsync()
         {
-            var trade1 = await _tradeCompositesRepository.AddTradeCompositeAsync(_demoUserId);
-            await dbContext.SaveChangesAsync();
+            var trade1 = await _journalRepository.AddTradeCompositeAsync(_demoUserId);
             await PopulateStageContent(trade1, ManualDemoTrades.Trade1_Idea);
 
-            var trade2 = await _tradeCompositesRepository.AddTradeCompositeAsync(_demoUserId);
-            await dbContext.SaveChangesAsync();
+            var trade2 = await _journalRepository.AddTradeCompositeAsync(_demoUserId);
             await PopulateStageContent(trade2, ManualDemoTrades.Trade2_Idea);
             var add2_1 = (await _tradeElementRepository.AddInterimPositionAsync(trade2.Id, true));
-            await dbContext.SaveChangesAsync();
             await PopulateStageContent(add2_1, ManualDemoTrades.Trade2_Add1);
             var add2_2 = (await _tradeElementRepository.AddInterimPositionAsync(trade2.Id, true));
-            await dbContext.SaveChangesAsync();
             await PopulateStageContent(add2_2, ManualDemoTrades.Trade2_Add2);
+            await _tradeCompositeRepository.RefreshSaveSummaryAsync(trade2);
+
             var eval2 = (await _tradeElementRepository.AddInterimEvalutationAsync(trade2.Id));
-            await dbContext.SaveChangesAsync();
             await PopulateStageContent(eval2, ManualDemoTrades.Trade2_Evaluate);
 
-            var trade3 = await _tradeCompositesRepository.AddTradeCompositeAsync(_demoUserId);
-            await dbContext.SaveChangesAsync();
+            var trade3 = await _journalRepository.AddTradeCompositeAsync(_demoUserId);
             await PopulateStageContent(trade3, ManualDemoTrades.Trade3_Idea);
             var add3 = (await _tradeElementRepository.AddInterimPositionAsync(trade3.Id, true));
-            await dbContext.SaveChangesAsync();
             await PopulateStageContent(add3, ManualDemoTrades.Trade3_Add);
+            await _tradeCompositeRepository.RefreshSaveSummaryAsync(trade3);
+
             var eval3 = (await _tradeElementRepository.AddInterimEvalutationAsync(trade3.Id));
-            await dbContext.SaveChangesAsync();
             await PopulateStageContent(eval3, ManualDemoTrades.Trade3_Evaluate);
             TradeCompositeOperations.CloseTrade(trade3, "1250");
             trade3.Close();
+            await PopulateStageContent(trade3.Summary!, ManualDemoTrades.Trade3_Close);
+
 
             await dbContext.SaveChangesAsync();
-            var closeElement = trade3.TradeElements.LastOrDefault(e => e.TradeActionType.ToString() == "Summary");
-            if (closeElement != null)
-                await PopulateStageContent(closeElement, ManualDemoTrades.Trade3_Close);
         }
 
         private async Task PopulateStageContent(TradeComposite trade, Dictionary<string, string> content)
