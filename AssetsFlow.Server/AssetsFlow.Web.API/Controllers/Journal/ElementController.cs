@@ -2,9 +2,11 @@
 using AssetsFlowWeb.Services.Models.Journal;
 using AutoMapper;
 using HsR.Journal.DataContext;
+using HsR.Journal.Services;
 using HsR.Web.API.Controllers.Journal;
 using HsR.Web.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 [Route("hsr-api/v{version:apiVersion}/journal/elements/{elementId}")]
 [ApiVersion("1.0")]
@@ -18,35 +20,35 @@ public class TradeElementsController(
     [HttpDelete]
     public async Task<ActionResult<UpdatedStatesModel>> DeleteInterimTradeInput(int elementId)
     {
-        var updatedStates = await _journalAccess.TradeElement.RemoveInterimPositionAsync(elementId);
-        if (updatedStates == null)
+        try
         {
+            TradeComposite updatedTrade = await _journalAccess.TradeElement.RemoveInterimPositionAsync(elementId);
+            _cacheService.InvalidateAndReload(updatedTrade.UserId);
+            UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(new UpdatedStatesCollation() { TradeInfo = updatedTrade });
+            return ResultHandling(resAsModel, $"Could not delete element with Id: {elementId}", [NEW_STATES_WRAPPER]);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Error deleting interim trade input with Id: {ElementId}", elementId);
             return NotFound();
         }
-        _cacheService.InvalidateAndReload(updatedStates.TradeInfo!.UserId);
-
-        UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
-
-        return ResultHandling(resAsModel, $"Could not delete element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }
 
     [HttpPatch]
     public async Task<ActionResult<UpdatedStatesModel>> ReTimestampTradeInput(int elementId, string newTime)
     {
-        var updatedStates = await _journalAccess.TradeElement.UpdateActivationTimeAsync(elementId, newTime);
-        if (updatedStates == null)
+        try
         {
+            var updatedStates = await _journalAccess.TradeElement.UpdateActivationTimeAsync(elementId, newTime);
+            UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
+            _cacheService.InvalidateAndReload(updatedStates.TradeInfo?.UserId ?? Guid.Empty);
+            return ResultHandling(resAsModel, $"Could not re-timestamp element with Id: {elementId}", [NEW_STATES_WRAPPER]);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Error re-timestamping trade input with Id: {ElementId}", elementId);
             return NotFound();
         }
-
-        UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
-
-        // Invalidate cache for the user who owns the element
-        var userId = updatedStates.TradeInfo?.UserId ?? Guid.Empty;
-        if (userId != Guid.Empty)
-            _cacheService.InvalidateAndReload(userId);
-
-        return ResultHandling(resAsModel, $"Could not reactivate element with Id: {elementId}", [NEW_STATES_WRAPPER]);
     }
 }
     

@@ -1,5 +1,6 @@
 ## 1
 add: seedernpm /admin panel
+fix: close trade not working
 add: user login, user or top panel
 adjust : risk group's icon, context's icon
 add: jotai/redux for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill

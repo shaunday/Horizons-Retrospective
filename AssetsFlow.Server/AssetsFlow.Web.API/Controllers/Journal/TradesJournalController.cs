@@ -8,6 +8,7 @@ using HsR.Web.Services.Models.Journal;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing.Printing;
 using System.Text.Json;
+using Serilog;
 
 namespace HsR.Web.API.Controllers.Journal
 {
@@ -67,11 +68,19 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpGet("{tradeId}")]
         public async Task<ActionResult<TradeCompositeModel>> GetTradeById(int tradeId)
         {
-            var trade = await _journalAccess.Journal.GetTradeCompositeByIdAsync(tradeId);
-            if (trade == null)
+            try
+            {
+                var trade = await _journalAccess.Journal.GetTradeCompositeByIdAsync(tradeId);
+                if (trade == null)
+                    return NotFound();
+                var tradeModel = _mapper.Map<TradeCompositeModel>(trade);
+                return Ok(tradeModel);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error getting trade by Id: {TradeId}", tradeId);
                 return NotFound();
-            var tradeModel = _mapper.Map<TradeCompositeModel>(trade);
-            return Ok(tradeModel);
+            }
         }
 
         #region Helper methods

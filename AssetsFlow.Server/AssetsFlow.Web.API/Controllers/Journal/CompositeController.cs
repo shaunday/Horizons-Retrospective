@@ -10,6 +10,7 @@ using HsR.Web.Services.Models.Journal;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Diagnostics;
+using Serilog;
 
 namespace HsR.Web.API.Controllers.Journal
 {
@@ -31,26 +32,39 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpPost]
         public async Task<ActionResult<(TradeElementModel newEntry, UpdatedStatesModel summary)>> AddReduceInterimPosition(int tradeId, bool isAdd)
         {
-            (InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates) entryAndStates = 
-                                                                    await _journalAccess.TradeElement.AddInterimPositionAsync(tradeId, isAdd);
-            _cacheService.InvalidateAndReload(entryAndStates.newEntry.UserId);
-
-            (TradeElementModel, UpdatedStatesModel) resAsModel =
-                             (_mapper.Map<TradeElementModel>(entryAndStates.newEntry), _mapper.Map<UpdatedStatesModel>(entryAndStates.updatedStates));
-
-            return ResultHandling(resAsModel, $"Could not add interim element on : {tradeId}", [NEW_ELEMENT_DATA, NEW_STATES_WRAPPER]);
+            try
+            {
+                InterimTradeElement newEntry = await _journalAccess.TradeElement.AddInterimPositionAsync(tradeId, isAdd);
+                _cacheService.InvalidateAndReload(newEntry.UserId);
+                UpdatedStatesCollation updatedStates = new UpdatedStatesCollation() { TradeInfo = newEntry.CompositeRef };
+                (TradeElementModel, UpdatedStatesModel) resAsModel =
+                                 (_mapper.Map<TradeElementModel>(newEntry), _mapper.Map<UpdatedStatesModel>(updatedStates));
+                return ResultHandling(resAsModel, $"Could not add interim element on : {tradeId}", [NEW_ELEMENT_DATA, NEW_STATES_WRAPPER]);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error adding interim position for tradeId: {TradeId}", tradeId);
+                return NotFound();
+            }
         }
 
         [HttpPost("evaluate")]
         public async Task<ActionResult<TradeElementModel>> AddEvaluationPosition(int tradeId)
         {
-            (InterimTradeElement newEval, UpdatedStatesCollation? updatedStates) newEvalAndStates = await _journalAccess.TradeElement.AddInterimEvalutationAsync(tradeId);
-            _cacheService.InvalidateAndReload(newEvalAndStates.newEval.UserId);
-
-            (TradeElementModel, UpdatedStatesModel) resAsModel =
-                             (_mapper.Map<TradeElementModel>(newEvalAndStates.newEval), _mapper.Map<UpdatedStatesModel>(newEvalAndStates.updatedStates));
-
-            return ResultHandling(resAsModel, $"Could not add new evaluation element on : {tradeId}", [NEW_ELEMENT_DATA, NEW_STATES_WRAPPER]);
+            try
+            {
+                InterimTradeElement newEval = await _journalAccess.TradeElement.AddInterimEvalutationAsync(tradeId);
+                _cacheService.InvalidateAndReload(newEval.UserId);
+                UpdatedStatesCollation updatedStates = new UpdatedStatesCollation() { TradeInfo = newEval.CompositeRef };
+                (TradeElementModel, UpdatedStatesModel) resAsModel =
+                                 (_mapper.Map<TradeElementModel>(newEval), _mapper.Map<UpdatedStatesModel>(updatedStates));
+                return ResultHandling(resAsModel, $"Could not add new evaluation element on : {tradeId}", [NEW_ELEMENT_DATA, NEW_STATES_WRAPPER]);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error adding evaluation position for tradeId: {TradeId}", tradeId);
+                return NotFound();
+            }
         }
 
         #endregion
@@ -60,13 +74,19 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpPost("close")]
         public async Task<ActionResult<UpdatedStatesModel>> CloseTrade(int tradeId, string closingPrice)
         {
-            var updatedTrade = await _journalAccess.TradeComposite.CloseTradeAsync(tradeId, closingPrice);
-            _cacheService.InvalidateAndReload(updatedTrade.UserId);
-
-            UpdatedStatesCollation updatedStates = new() { TradeInfo = updatedTrade };
-            UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
-
-            return ResultHandling(resAsModel, $"Could not close trade on : {tradeId}", [NEW_STATES_WRAPPER]);
+            try
+            {
+                var updatedTrade = await _journalAccess.TradeComposite.CloseTradeAsync(tradeId, closingPrice);
+                _cacheService.InvalidateAndReload(updatedTrade.UserId);
+                UpdatedStatesCollation updatedStates = new() { TradeInfo = updatedTrade };
+                UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
+                return ResultHandling(resAsModel, $"Could not close trade on : {tradeId}", [NEW_STATES_WRAPPER]);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error closing trade for tradeId: {TradeId}", tradeId);
+                return NotFound();
+            }
         }
 
         #endregion

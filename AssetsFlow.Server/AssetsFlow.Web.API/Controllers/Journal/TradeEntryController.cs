@@ -8,6 +8,7 @@ using HsR.Journal.Entities.TradeJournal;
 using AssetsFlowWeb.Services.Models.Journal;
 using HsR.Journal.Services;
 using HsR.Web.API.Services;
+using Serilog;
 
 namespace HsR.Web.API.Controllers.Journal
 {
@@ -32,18 +33,20 @@ namespace HsR.Web.API.Controllers.Journal
             {
                 return BadRequest("Content is required.");
             }
-
-            (DataElement updatedComponent, UpdatedStatesCollation updatedStates) = 
-                                                await _journalAccess.DataElement.UpdateCellContentAsync(componentId, request.Content, request.Info);
-
-            (DataElementModel, UpdatedStatesModel) resAsModel = (_mapper.Map<DataElementModel>(updatedComponent), _mapper.Map<UpdatedStatesModel>(updatedStates));
-
-            // Invalidate cache for the user who owns the entry
-            var userId = updatedComponent.UserId;
-            if (userId != Guid.Empty)
-                _cacheService.InvalidateAndReload(userId);
-
-            return ResultHandling(resAsModel, $"Could not update component: {componentId}", [NEW_CELL_DATA, NEW_STATES_WRAPPER]);
+            try
+            {
+                (DataElement updatedComponent, UpdatedStatesCollation updatedStates) =
+                    await _journalAccess.DataElement.UpdateCellContentAsync(componentId, request.Content, request.Info);
+                DataElementModel newEntry = _mapper.Map<DataElementModel>(updatedComponent);
+                UpdatedStatesModel updatedStatesModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
+                _cacheService.InvalidateAndReload(updatedComponent.UserId);
+                return Ok((newEntry, updatedStatesModel));
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error updating data component with Id: {ComponentId}", componentId);
+                return NotFound();
+            }
         }
 
         public class UpdateDataComponentRequest

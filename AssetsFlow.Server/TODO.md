@@ -1,7 +1,7 @@
 ﻿
 # TODO
 - production based seed should be able to flush table
-- fix: addTradeById
+- fix: no summary on seed...
 
 - Add JWT issuing to your gRPC login method.
 - Add JWT validation middleware to your journal service (and user service if needed).
