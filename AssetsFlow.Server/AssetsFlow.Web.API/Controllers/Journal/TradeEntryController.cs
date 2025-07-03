@@ -40,7 +40,9 @@ namespace HsR.Web.API.Controllers.Journal
                 DataElementModel newEntry = _mapper.Map<DataElementModel>(updatedComponent);
                 UpdatedStatesModel updatedStatesModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
                 _cacheService.InvalidateAndReload(updatedComponent.UserId);
-                return Ok((newEntry, updatedStatesModel));
+
+                (DataElementModel, UpdatedStatesModel) resAsModel = (newEntry, updatedStatesModel);
+                return ResultHandling(resAsModel, $"Could not update component: {componentId}", [NEW_CELL_DATA, NEW_STATES_WRAPPER]);
             }
             catch (Exception ex)
             {
