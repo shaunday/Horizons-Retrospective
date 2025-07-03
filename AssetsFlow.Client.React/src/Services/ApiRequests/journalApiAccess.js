@@ -11,7 +11,7 @@ export async function getAllTrades() {
 }
 
 export async function getTradeById(tradeId) {
-  return request(`${tradesBaseURL}/${tradeId}`, { method: "POST" });
+  return request(`${tradesBaseURL}/${tradeId}`, { method: "GET" });
 }
 
 export async function addTradeComposite() {

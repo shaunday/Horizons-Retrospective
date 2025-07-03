@@ -35,6 +35,11 @@ namespace HsR.Journal.DataContext
             return trade;
         }
 
+        public async Task<TradeComposite?> GetTradeCompositeByIdAsync(int tradeId)
+        {
+            return await GetTradeCompositeAsync(tradeId);
+        }
+
         private static async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)>
             GetPaginatedTradesAsync(IQueryable<TradeComposite> query, int pageNumber, int pageSize)
         {

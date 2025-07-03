@@ -64,6 +64,16 @@ namespace HsR.Web.API.Controllers.Journal
             return Ok(resAsModel);
         }
 
+        [HttpGet("{tradeId}")]
+        public async Task<ActionResult<TradeCompositeModel>> GetTradeById(int tradeId)
+        {
+            var trade = await _journalAccess.Journal.GetTradeCompositeByIdAsync(tradeId);
+            if (trade == null)
+                return NotFound();
+            var tradeModel = _mapper.Map<TradeCompositeModel>(trade);
+            return Ok(tradeModel);
+        }
+
         #region Helper methods
         private int ValidatePageSize(int pageSize)
         {
