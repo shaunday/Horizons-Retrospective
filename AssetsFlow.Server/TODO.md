@@ -1,6 +1,10 @@
 ﻿
 # TODO
 
+- users client
+- version.txt
+- replace supa's password, reset db
+
 - Add JWT issuing to your gRPC login method.
 - Add JWT validation middleware to your journal service (and user service if needed).
 - Ensure JWTs include necessary claims (e.g., user ID, email, roles if used).
@@ -33,6 +37,7 @@
 - conluences check list = trends per tf, bb/ma distances
 - filtering history
 - Add rate limiting, monitoring, and alerting.
+- set full deployment (deploy on aws post version tag .. deploy all??)
 
 ## Expansion:
 Suspence? RQ Suspence

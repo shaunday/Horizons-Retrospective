@@ -61,6 +61,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployment-info", "deployme
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserService", "UserService", "{46B455BF-9472-4F21-B4B0-63627CF80A7E}"
+	ProjectSection(SolutionItems) = preProject
+		..\Common.Net\HsR.UserService\CHANGELOG.md = ..\Common.Net\HsR.UserService\CHANGELOG.md
+		..\Common.Net\HsR.UserService\TODO.md = ..\Common.Net\HsR.UserService\TODO.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.IntegrationTests", "..\Common.Net\HsR.UserService\HsR.UserService.IntegrationTests\HsR.UserService.IntegrationTests.csproj", "{9C6B9736-DA03-2DA3-ADC8-01246097C3D4}"
 EndProject
