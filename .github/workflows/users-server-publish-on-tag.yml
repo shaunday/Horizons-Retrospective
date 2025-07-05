@@ -1,0 +1,21 @@
+name: UserService - Build & Publish on Version Tag
+
+on:
+  push:
+    tags:
+      - 'v*'
+    paths:
+      - "Common.Net/HsR.UserService/**"
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Dotnet Build & Publish Action
+        uses: ./.github/actions/dotnet-build-publish
+        with:
+          solution-path: ./Common.Net/HsR.UserService
+          project-filepath: ./Common.Net/HsR.UserService/HsR.UserService/HsR.UserService.csproj
+          image-name: userservice-backend
+          github-token: ${{ secrets.GITHUB_TOKEN }}
