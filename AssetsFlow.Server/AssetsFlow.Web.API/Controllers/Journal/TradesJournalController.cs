@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Drawing.Printing;
 using System.Text.Json;
 using Serilog;
+using AssetsFlowWeb.API.Services;
 
 namespace HsR.Web.API.Controllers.Journal
 {
@@ -79,7 +80,8 @@ namespace HsR.Web.API.Controllers.Journal
             catch (Exception ex)
             {
                 Log.Error(ex, "Error getting trade by Id: {TradeId}", tradeId);
-                return NotFound();
+                var (status, msg) = ExceptionMappingService.MapToStatusCode(ex);
+                return StatusCode(status, msg);
             }
         }
 

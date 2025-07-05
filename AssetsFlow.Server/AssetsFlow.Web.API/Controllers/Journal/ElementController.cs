@@ -7,6 +7,7 @@ using HsR.Web.API.Controllers.Journal;
 using HsR.Web.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using AssetsFlowWeb.API.Services;
 
 [Route("hsr-api/v{version:apiVersion}/journal/elements/{elementId}")]
 [ApiVersion("1.0")]
@@ -30,7 +31,8 @@ public class TradeElementsController(
         catch (Exception ex)
         {
             Log.Error(ex, "Error deleting interim trade input with Id: {ElementId}", elementId);
-            return NotFound();
+            var (status, msg) = ExceptionMappingService.MapToStatusCode(ex);
+            return StatusCode(status, msg);
         }
     }
 
@@ -47,7 +49,8 @@ public class TradeElementsController(
         catch (Exception ex)
         {
             Log.Error(ex, "Error re-timestamping trade input with Id: {ElementId}", elementId);
-            return NotFound();
+            var (status, msg) = ExceptionMappingService.MapToStatusCode(ex);
+            return StatusCode(status, msg);
         }
     }
 }

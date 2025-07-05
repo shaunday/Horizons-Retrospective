@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Diagnostics;
 using Serilog;
+using AssetsFlowWeb.API.Services;
 
 namespace HsR.Web.API.Controllers.Journal
 {
@@ -44,7 +45,8 @@ namespace HsR.Web.API.Controllers.Journal
             catch (Exception ex)
             {
                 Log.Error(ex, "Error adding interim position for tradeId: {TradeId}", tradeId);
-                return NotFound();
+                var (status, msg) = ExceptionMappingService.MapToStatusCode(ex);
+                return StatusCode(status, msg);
             }
         }
 
@@ -63,7 +65,8 @@ namespace HsR.Web.API.Controllers.Journal
             catch (Exception ex)
             {
                 Log.Error(ex, "Error adding evaluation position for tradeId: {TradeId}", tradeId);
-                return NotFound();
+                var (status, msg) = ExceptionMappingService.MapToStatusCode(ex);
+                return StatusCode(status, msg);
             }
         }
 
@@ -85,7 +88,8 @@ namespace HsR.Web.API.Controllers.Journal
             catch (Exception ex)
             {
                 Log.Error(ex, "Error closing trade for tradeId: {TradeId}", tradeId);
-                return NotFound();
+                var (status, msg) = ExceptionMappingService.MapToStatusCode(ex);
+                return StatusCode(status, msg);
             }
         }
 
