@@ -6,7 +6,6 @@ on:
       - 'v*'               # Trigger on any tag starting with 'v'
     paths:
       - "AssetsFlow.Server/**"
-      - "/Common.Net/HsR.UserService/**"
   workflow_dispatch:
 
 jobs:
