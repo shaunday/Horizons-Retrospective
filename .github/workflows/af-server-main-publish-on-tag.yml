@@ -1,0 +1,21 @@
+name: AF Server - Build & Publish on Version Tag
+
+on:
+  push:
+    tags:
+      - 'v-b-*' # Use a custom prefix to version this service only
+    paths:
+      - "AssetsFlow.Server/**"
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Dotnet Build & Publish Action
+        uses: ./.github/actions/dotnet-build-publish
+        with:
+          solution-path: ./AssetsFlow.Server
+          project-filepath: ./AssetsFlow.Server/AssetsFlow.Web.API/AssetsFlowWeb.API.csproj
+          image-name: assetsflow-backend
+          github-token: ${{ secrets.GITHUB_TOKEN }}
