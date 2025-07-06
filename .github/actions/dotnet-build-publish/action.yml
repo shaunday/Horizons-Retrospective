@@ -1,13 +1,12 @@
 name: 'Dotnet Build & Publish'
-
 description: 'Builds .NET project and publishes Docker image with version.txt version check'
 
 inputs:
   solution-path:
-    description: 'Path to the solution folder'
+    description: 'Path to the solution folder (for dotnet build)'
     required: true
-  project-filepath:
-    description: 'Path to the .csproj file to publish'
+  project-path:
+    description: 'Path to the folder containing the .csproj file to publish'
     required: true
   image-name:
     description: 'Docker image name to build and push'
@@ -22,11 +21,11 @@ runs:
     - name: Checkout repo
       uses: actions/checkout@v4
 
-    - name: Check if files changed
+    - name: Check if project folder changed
       id: check_changes
       shell: bash
       run: |
-        if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q "${{ inputs.solution-path }}"; then
+        if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q "${{ inputs.project-path }}"; then
           echo "should_build=true" >> $GITHUB_OUTPUT
         else
           echo "should_build=false" >> $GITHUB_OUTPUT
@@ -36,16 +35,28 @@ runs:
       if: steps.check_changes.outputs.should_build == 'true'
       run: git fetch --tags --force
 
-    - name: Build .NET projects
+    - name: Build .NET solution
       if: steps.check_changes.outputs.should_build == 'true'
       uses: ./.github/actions/common-build-steps-dotnet
       with:
         solution-path: ${{ inputs.solution-path }}
 
+    - name: Detect .csproj file in project folder
+      if: steps.check_changes.outputs.should_build == 'true'
+      id: detect_project
+      shell: bash
+      run: |
+        PROJECT_FILE=$(find "${{ inputs.project-path }}" -maxdepth 1 -name '*.csproj' | head -n 1)
+        if [ -z "$PROJECT_FILE" ]; then
+          echo "❌ No .csproj file found in project path '${{ inputs.project-path }}'"
+          exit 1
+        fi
+        echo "project-file=$PROJECT_FILE" >> $GITHUB_OUTPUT
+
     - name: Publish .NET project
       if: steps.check_changes.outputs.should_build == 'true'
       shell: bash
-      run: dotnet publish -c Release -r linux-x64 -o ./publish ${{ inputs.project-filepath }}
+      run: dotnet publish -c Release -r linux-x64 -o ./publish ${{ steps.detect_project.outputs.project-file }}
 
     - name: Set up Docker Buildx
       if: steps.check_changes.outputs.should_build == 'true'
@@ -66,7 +77,7 @@ runs:
       run: |
         TIMESTAMP=$(TZ="Asia/Jerusalem" date --iso-8601=seconds)
 
-        VERSION_FILE="${{ inputs.solution-path }}/version.txt"
+        VERSION_FILE="${{ inputs.project-path }}/version.txt"
 
         if [ -f "$VERSION_FILE" ]; then
           VERSION_RAW=$(cat "$VERSION_FILE" | tr -d ' \t\n\r')
@@ -92,7 +103,7 @@ runs:
       uses: docker/build-push-action@v5
       with:
         context: .
-        file: ${{ inputs.solution-path }}/app/Dockerfile
+        file: ${{ inputs.project-path }}/Dockerfile
         push: true
         build-args: |
           VERSION=${{ env.VERSION }}
