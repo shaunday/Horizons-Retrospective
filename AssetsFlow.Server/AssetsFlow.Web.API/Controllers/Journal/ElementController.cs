@@ -1,13 +1,12 @@
 ﻿using Asp.Versioning;
-using AssetsFlowWeb.Services.Models.Journal;
+using HsR.Web.Services.Models.Journal;
 using AutoMapper;
 using HsR.Journal.DataContext;
 using HsR.Journal.Services;
-using HsR.Web.API.Controllers.Journal;
 using HsR.Web.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using AssetsFlowWeb.API.Services;
+using HsR.Web.API.Controllers.Journal;
 
 [Route("hsr-api/v{version:apiVersion}/journal/elements/{elementId}")]
 [ApiVersion("1.0")]

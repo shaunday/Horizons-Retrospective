@@ -1,9 +1,9 @@
-﻿using AssetsFlowWeb.Services.Models.Journal;
+﻿using HsR.Web.Services.Models.Journal;
 using AutoMapper;
 using AutoMapper.EquivalencyExpression;
 using HsR.Journal.Entities;
 using HsR.Journal.Services;
-using HsR.Web.Services.Models.Journal;
+using HsR.Journal.Entities.TradeJournal;
 
 namespace HsR.Web.API.Mapping
 {

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.EquivalencyExpression;
+using HsR.Web.API.Services;
 using HsR.Web.API.Mapping;
 
 namespace HsR.Web.API.Configurations

@@ -1,4 +1,4 @@
-namespace HsR.Web.API.Configuration
+namespace HsR.Web.API.Settings
 {
     public class PaginationSettings
     {

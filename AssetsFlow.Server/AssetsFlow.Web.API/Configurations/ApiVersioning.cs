@@ -1,6 +1,4 @@
 ﻿using Asp.Versioning;
-using AutoMapper;
-using HsR.Web.API.Mapping;
 
 namespace HsR.Web.API.Configurations
 {

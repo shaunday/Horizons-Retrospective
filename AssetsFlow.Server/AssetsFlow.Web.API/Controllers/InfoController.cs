@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Hosting; // Needed for IWebHostEnvironment
 
 namespace AssetsFlowWeb.API.Controllers
 {
-    [Route("hsr-api/v{version:apiVersion}/info")]
+    [Route("hsr-api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
     [ApiController]
     public class InfoController(IWebHostEnvironment env) : ControllerBase

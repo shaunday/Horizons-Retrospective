@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using HsR.Journal.DataContext;
+using Microsoft.AspNetCore.Mvc;
 using HsR.Web.API.Controllers;
 using HsR.Web.API.Services;
-using Microsoft.AspNetCore.Mvc;
+using HsR.Web.Services.Models.Journal;
 
 namespace HsR.Web.API.Controllers.Journal
 {

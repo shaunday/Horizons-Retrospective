@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HsR.Journal.Entities.TradeJournal;
+using System.ComponentModel.DataAnnotations;
 
 namespace HsR.Web.Services.Models.Journal
 {

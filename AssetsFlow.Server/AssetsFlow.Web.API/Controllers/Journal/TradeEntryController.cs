@@ -1,14 +1,13 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Asp.Versioning;
-using HsR.Journal.Entities;
+﻿using Asp.Versioning;
 using HsR.Web.Services.Models.Journal;
+using AutoMapper;
 using HsR.Journal.DataContext;
-using HsR.Journal.Entities.TradeJournal;
-using AssetsFlowWeb.Services.Models.Journal;
+using HsR.Journal.Repository;
 using HsR.Journal.Services;
 using HsR.Web.API.Services;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using HsR.Journal.Entities;
 
 namespace HsR.Web.API.Controllers.Journal
 {
