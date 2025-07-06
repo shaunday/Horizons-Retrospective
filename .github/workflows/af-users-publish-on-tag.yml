@@ -16,6 +16,6 @@ jobs:
         uses: ./.github/actions/dotnet-build-publish
         with:
           solution-path: ./AssetsFlow.Server
-          project-filepath: ./Common.Net/HsR.UserService/HsR.UserService/HsR.UserService.csproj
+          project-path: ./Common.Net/HsR.UserService/HsR.UserService
           image-name: userservice-backend
           github-token: ${{ secrets.GITHUB_TOKEN }}
