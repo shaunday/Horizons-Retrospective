@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.NET Release Checklist.txt = ..\.NET Release Checklist.txt
 		CHANGELOG.md = CHANGELOG.md
 		TODO.md = TODO.md
+		AssetsFlow.Web.API\version.txt = AssetsFlow.Web.API\version.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Journal", "Journal", "{E2F11EF4-F624-492C-83BE-36B75D46AA56}"
@@ -64,6 +65,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserService", "UserService"
 	ProjectSection(SolutionItems) = preProject
 		..\Common.Net\HsR.UserService\CHANGELOG.md = ..\Common.Net\HsR.UserService\CHANGELOG.md
 		..\Common.Net\HsR.UserService\TODO.md = ..\Common.Net\HsR.UserService\TODO.md
+		..\Common.Net\HsR.UserService\HsR.UserService.Host\version.txt = ..\Common.Net\HsR.UserService\HsR.UserService.Host\version.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.IntegrationTests", "..\Common.Net\HsR.UserService\HsR.UserService.IntegrationTests\HsR.UserService.IntegrationTests.csproj", "{9C6B9736-DA03-2DA3-ADC8-01246097C3D4}"
