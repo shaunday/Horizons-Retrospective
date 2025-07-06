@@ -5,29 +5,21 @@ using HsR.UserService.Infrastructure;
 using HsR.Common.AspNet;
 using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+// Load shared environment variables
+DotNetEnv.Env.Load(".env.AssetsFlow");
 
-// Configure Serilog
-LoggingConfiguration.ConfigureLogging(builder.Environment.IsDevelopment());
-builder.Host.UseSerilog();
+var builder = WebApplication.CreateBuilder(args)
+    .ConfigureUserServiceHost();
 
-// Get database connection string based on environment
-bool isDev = builder.Environment.IsDevelopment();
-string? connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(isDev);
-
-// Add all services
+string connectionString = builder.GetUserServiceConnectionString();
 builder.Services.AddGrpc();
 builder.Services.AddUserServiceAllServices(builder.Configuration, connectionString);
 
 var app = builder.Build();
 
-// Configure the application
 app.ConfigureUserServicePipeline();
 app.MapGrpcService<UserGrpcService>();
-
-await app.EnsureDatabaseCreatedAsync<UserDbContext>();
-await EnsureDemoUserCreatedAsync(app);
-await EnsureAdminUserCreatedAsync(app);
+await app.EnsureUserServiceDatabaseAndUsersAsync();
 
 try
 {
@@ -42,24 +34,3 @@ finally
 {
     Log.CloseAndFlush();
 }
-
-// Helper method for demo user creation
-static async Task EnsureDemoUserCreatedAsync(WebApplication app)
-{
-    using var scope = app.Services.CreateScope();
-    var userService = scope.ServiceProvider.GetRequiredService<IUserService>() as UserService;
-    if (userService != null)
-    {
-        await userService.EnsureDemoUserExistsAsync();
-    }
-}
-
-static async Task EnsureAdminUserCreatedAsync(WebApplication app)
-{
-    using var scope = app.Services.CreateScope();
-    var userService = scope.ServiceProvider.GetRequiredService<IUserService>() as UserService;
-    if (userService != null)
-    {
-        await userService.EnsureAdminUserExistsAsync();
-    }
-} 

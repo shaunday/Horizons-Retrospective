@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
-    <BaseOutputPath>..\..\bin\HsR.UserService\</BaseOutputPath>
-    <OutputPath>..\..\bin\HsR.UserService\</OutputPath>
+    <BaseOutputPath>..\..\bin\HsR.UserService\UserTests\</BaseOutputPath>
+    <OutputPath>..\..\bin\HsR.UserService\UserTests\</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <AppendConfigurationToOutputPath>false</AppendConfigurationToOutputPath>

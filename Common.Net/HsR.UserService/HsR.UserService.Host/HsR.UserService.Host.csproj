@@ -32,4 +32,14 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="CopySharedEnvFile" AfterTargets="Build">
+    <Copy SourceFiles="..\..\..\..\.env.AssetsFlow" DestinationFolder="$(OutputPath)" />
+  </Target>
+
 </Project> 
