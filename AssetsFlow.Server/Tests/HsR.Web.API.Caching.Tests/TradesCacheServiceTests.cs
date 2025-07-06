@@ -4,7 +4,6 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
 using HsR.Web.API.Services;
-using HsR.Web.API.Configuration;
 using HsR.Journal.DataContext;
 using HsR.Web.Services.Models.Journal;
 using HsR.Journal.Entities.TradeJournal;
@@ -13,6 +12,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
+using HsR.Web.API.Settings;
 
 namespace HsR.Web.API.Caching.Tests
 {

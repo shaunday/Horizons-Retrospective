@@ -52,7 +52,7 @@
   </ItemGroup>
 
   <Target Name="CopySharedEnvFile" AfterTargets="Build">
-    <Copy SourceFiles="..\..\..\.env.AssetsFlow" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="..\..\.env.AssetsFlow" DestinationFolder="$(OutputPath)" />
   </Target>
 
 </Project>
