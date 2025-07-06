@@ -2,7 +2,6 @@
 # TODO
 
 - users client
-- version.txt
 - replace supa's password, reset db
 
 - Add JWT issuing to your gRPC login method.
