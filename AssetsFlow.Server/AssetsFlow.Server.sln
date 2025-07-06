@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{431FEC36-857D-4990-A331-54C7FCDA5E92}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		..\.env.AssetsFlow = ..\.env.AssetsFlow
 		..\.NET Release Checklist.txt = ..\.NET Release Checklist.txt
 		CHANGELOG.md = CHANGELOG.md
 		TODO.md = TODO.md
@@ -77,6 +78,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.Contracts", "..\Common.Net\HsR.UserService\HsR.UserService.Contracts\HsR.UserService.Contracts.csproj", "{ABC623D6-EDD3-4CBE-9D6E-904E00F1B282}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common.AspNet", "..\Common.Net\HsR.Common.AspNet\HsR.Common.AspNet.csproj", "{5CD3D614-88C8-FEAA-E28E-66756038CBED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.Client", "HsR.UserService.Client\HsR.UserService.Client.csproj", "{C4833897-9B39-4190-BA96-E054F13E4941}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{0AB3BF05-4346-4AA6-1389-037BE0695223}"
 EndProject
@@ -308,6 +311,18 @@ Global
 		{5CD3D614-88C8-FEAA-E28E-66756038CBED}.Release|x64.Build.0 = Release|Any CPU
 		{5CD3D614-88C8-FEAA-E28E-66756038CBED}.Release|x86.ActiveCfg = Release|Any CPU
 		{5CD3D614-88C8-FEAA-E28E-66756038CBED}.Release|x86.Build.0 = Release|Any CPU
+		{C4833897-9B39-4190-BA96-E054F13E4941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4833897-9B39-4190-BA96-E054F13E4941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4833897-9B39-4190-BA96-E054F13E4941}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C4833897-9B39-4190-BA96-E054F13E4941}.Debug|x64.Build.0 = Debug|Any CPU
+		{C4833897-9B39-4190-BA96-E054F13E4941}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C4833897-9B39-4190-BA96-E054F13E4941}.Debug|x86.Build.0 = Debug|Any CPU
+		{C4833897-9B39-4190-BA96-E054F13E4941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4833897-9B39-4190-BA96-E054F13E4941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4833897-9B39-4190-BA96-E054F13E4941}.Release|x64.ActiveCfg = Release|Any CPU
+		{C4833897-9B39-4190-BA96-E054F13E4941}.Release|x64.Build.0 = Release|Any CPU
+		{C4833897-9B39-4190-BA96-E054F13E4941}.Release|x86.ActiveCfg = Release|Any CPU
+		{C4833897-9B39-4190-BA96-E054F13E4941}.Release|x86.Build.0 = Release|Any CPU
 		{F9C60128-9FEA-4874-B31D-3EF483FC3E01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9C60128-9FEA-4874-B31D-3EF483FC3E01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9C60128-9FEA-4874-B31D-3EF483FC3E01}.Debug|x64.ActiveCfg = Debug|Any CPU

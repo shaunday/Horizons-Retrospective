@@ -1,15 +1,15 @@
 ﻿using Asp.Versioning;
+using HsR.Web.Services.Models.Journal;
 using AutoMapper;
-using HsR.Common;
 using HsR.Journal.DataContext;
 using HsR.Journal.Entities;
 using HsR.Web.API.Services;
-using HsR.Web.Services.Models.Journal;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing.Printing;
 using System.Text.Json;
 using Serilog;
-using AssetsFlowWeb.API.Services;
+using HsR.UserService.Client.Interfaces;
+using HsR.UserService.Protos;
 
 namespace HsR.Web.API.Controllers.Journal
 {
@@ -19,20 +19,34 @@ namespace HsR.Web.API.Controllers.Journal
     public class TradesJournalController : JournalControllerBase
     {
         private readonly IConfigurationService _config;
+        private readonly IUserServiceClient _userServiceClient;
 
         public TradesJournalController(
             IJournalRepositoryWrapper journalAccess,
             ILogger<JournalControllerBase> logger,
             IMapper mapper,
             ITradesCacheService cacheService,
-            IConfigurationService config) : base(journalAccess, logger, mapper, cacheService)
+            IConfigurationService config,
+            IUserServiceClient userServiceClient) : base(journalAccess, logger, mapper, cacheService)
         {
             _config = config;
+            _userServiceClient = userServiceClient;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(Guid userId, int pageNumber = 1, int pageSize = 0)
         {
+            // TODO: Replace with JWT token validation when implemented
+            // var user = await ValidateUserFromToken();
+            // userId = user.Id;
+            
+            // For now, validate user exists
+            var userValidation = await ValidateUserExists(userId);
+            if (!userValidation.IsValid)
+            {
+                return Unauthorized(new { message = userValidation.ErrorMessage });
+            }
+
             pageSize = ValidatePageSize(pageSize);
 
             IEnumerable<TradeCompositeModel>? paginatedTradeDTOs;
@@ -58,6 +72,13 @@ namespace HsR.Web.API.Controllers.Journal
         [HttpPost]
         public async Task<ActionResult<TradeCompositeModel>> AddTrade(Guid userId)
         {
+            // TODO: Replace with JWT token validation when implemented
+            var userValidation = await ValidateUserExists(userId);
+            if (!userValidation.IsValid)
+            {
+                return Unauthorized(new { message = userValidation.ErrorMessage });
+            }
+
             var positionComposite = await _journalAccess.Journal.AddTradeCompositeAsync(userId);
             TradeCompositeModel resAsModel = _mapper.Map<TradeCompositeModel>(positionComposite);
 
@@ -67,10 +88,17 @@ namespace HsR.Web.API.Controllers.Journal
         }
 
         [HttpGet("{tradeId}")]
-        public async Task<ActionResult<TradeCompositeModel>> GetTradeById(int tradeId)
+        public async Task<ActionResult<TradeCompositeModel>> GetTradeById(int tradeId, Guid userId)
         {
             try
             {
+                // TODO: Replace with JWT token validation when implemented
+                var userValidation = await ValidateUserExists(userId);
+                if (!userValidation.IsValid)
+                {
+                    return Unauthorized(new { message = userValidation.ErrorMessage });
+                }
+
                 var trade = await _journalAccess.Journal.GetTradeCompositeByIdAsync(tradeId);
                 if (trade == null)
                     return NotFound();
@@ -101,6 +129,41 @@ namespace HsR.Web.API.Controllers.Journal
             Response.Headers["X-Page-Number"] = pageNumber.ToString();
             Response.Headers["X-Page-Size"] = pageSize.ToString();
         }
+
+        private async Task<(bool IsValid, string? ErrorMessage)> ValidateUserExists(Guid userId)
+        {
+            try
+            {
+                var request = new GetUserRequest { UserId = userId.ToString() };
+                var response = await _userServiceClient.GetUserByIdAsync(request);
+                
+                if (response.Success)
+                {
+                    return (true, null);
+                }
+                
+                return (false, response.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error validating user: {UserId}", userId);
+                return (false, "Error validating user");
+            }
+        }
+
+        // TODO: Implement when JWT is added
+        // private async Task<UserDto> ValidateUserFromToken()
+        // {
+        //     var token = Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+        //     if (string.IsNullOrEmpty(token))
+        //     {
+        //         throw new UnauthorizedAccessException("No token provided");
+        //     }
+        //     
+        //     // Validate JWT token and extract user info
+        //     // This will be implemented when JWT is added
+        //     throw new NotImplementedException("JWT validation not yet implemented");
+        // }
         #endregion
     }
 }

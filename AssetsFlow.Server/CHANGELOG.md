@@ -1,9 +1,10 @@
 
 ## [0.9.510-s] - 2025-07-...
-- User Service
+- User Service with gRPC + host + unittests
 - DemoUser Seeder
 - Factory work, only 1 method open to public now 
 - More precise exceptions handling in Controllers
+- UserService Client to be used by the Web.API
 
 ## [0.9.503-s] - 2025-06-24
 - Add IsAnyContentMissing prop on elementDTO

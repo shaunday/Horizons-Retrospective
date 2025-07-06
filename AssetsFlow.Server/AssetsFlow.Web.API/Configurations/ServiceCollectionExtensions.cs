@@ -1,20 +1,33 @@
-using HsR.Web.API.Configuration;
+using HsR.Web.API.Settings;
 using HsR.Web.API.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using HsR.UserService.Client.Extensions;
+using HsR.Infrastructure;
 
-namespace AssetsFlowWeb.API.Configurations
+namespace HsR.Web.API.Configurations
 {
     public static class ServiceCollectionExtensions
     {
+        public static IServiceCollection AddAssetsFlowServices(this IServiceCollection services, IConfiguration configuration, string connectionString, bool isDev, IHostEnvironment environment)
+        {
+            return services
+                .AddConfigurationServices(configuration)
+                .AddCacheServices(configuration)
+                .AddUserServiceClient(configuration, environment);
+        }
+
         public static IServiceCollection AddConfigurationServices(this IServiceCollection services, IConfiguration configuration)
         {
             // Configure settings
             services.Configure<PaginationSettings>(configuration.GetSection("PaginationSettings"));
             services.Configure<CacheSettings>(configuration.GetSection("CacheSettings"));
+            services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
 
             // Register services
             services.AddSingleton<IConfigurationService, ConfigurationService>();
+            services.AddScoped<IJwtService, JwtService>();
 
             return services;
         }

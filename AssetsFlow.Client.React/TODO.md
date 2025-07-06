@@ -1,4 +1,9 @@
 ## 1
+Update clients to use JWTs for authenticated requests
+Update frontend to store and send JWT tokens
+Add Authorization header to API requests
+Handle token expiration and refresh
+
 add: seedernpm /admin panel
 fix: close trade not working
 add: user login, user or top panel

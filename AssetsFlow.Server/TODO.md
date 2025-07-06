@@ -1,13 +1,47 @@
 ﻿
 # TODO
-
-- users client
 - replace supa's password, reset db
+- "userservice" 
 
-- Add JWT issuing to your gRPC login method.
-- Add JWT validation middleware to your journal service (and user service if needed).
-- Ensure JWTs include necessary claims (e.g., user ID, email, roles if used).
-- Update clients to use JWTs for authenticated requests.
+Update User Service (gRPC) to Issue JWTs
+[ ] Add JWT issuing to your gRPC login method
+Update UserService.LoginAsync() to generate and return JWT token
+Update UserGrpcService.Login() to include JWT in response
+Update AuthResponse proto to include token field
+Add JWT service to user service project
+
+2. Add JWT Middleware to Main API
+[ ] Add JWT validation middleware to your journal service
+Add JWT Bearer authentication to Program.cs
+Configure JWT validation parameters
+Add [Authorize] attributes to protected endpoints
+
+3. Update AuthController to Use JWT Service
+[ ] Update AuthController to use IJwtService
+Inject IJwtService into AuthController
+Generate JWT tokens on successful login/register
+Return tokens in API responses
+Remove TODO comments
+
+4. Update Controllers for JWT Validation
+[ ] Update controllers to use JWT validation instead of user ID validation
+Replace ValidateUserExists() calls with JWT token validation
+Extract user ID from JWT claims instead of parameters
+Add [Authorize] attributes to journal endpoints
+Remove userId parameters from endpoints (get from JWT)
+
+5. Update Proto Definitions
+[ ] Update gRPC proto to include JWT tokens
+Add token field to AuthResponse message
+Regenerate proto files
+Update client interfaces
+
+6. Security & Configuration
+[ ] Ensure JWTs include necessary claims
+Add user roles to JWT claims (when roles are implemented)
+Configure proper JWT expiration and refresh logic
+Add JWT secret key to environment variables (not in appsettings)
+
 
 - AI textbox for tradeElement creation
 - add ignoreActivation flag to content edit
