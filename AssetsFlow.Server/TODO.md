@@ -1,7 +1,10 @@
 ﻿
 # TODO
 - replace supa's password, reset db
-- "userservice" 
+- verify auth controller
+- do i need to validate users on every request ? I think so
+- verify jwt service
+- clean up readmes../todos
 
 Update User Service (gRPC) to Issue JWTs
 [ ] Add JWT issuing to your gRPC login method
