@@ -16,6 +16,6 @@ jobs:
         uses: ./.github/actions/dotnet-build-publish
         with:
           solution-path: ./AssetsFlow.Server
-          project-filepath: ./AssetsFlow.Server/AssetsFlow.Web.API/AssetsFlowWeb.API.csproj
+          project-path: ./AssetsFlow.Server/AssetsFlow.Web.API
           image-name: assetsflow-backend
           github-token: ${{ secrets.GITHUB_TOKEN }}
