@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-namespace HsR.Web.API.Configurations
+namespace AssetsFlowWeb.API.Configurations
 {
     internal static class Middleware
     {

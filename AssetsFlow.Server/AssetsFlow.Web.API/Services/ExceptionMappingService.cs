@@ -1,6 +1,6 @@
 using System;
 
-namespace AssetsFlowWeb.API.Services
+namespace HsR.Web.API.Services
 {
     public static class ExceptionMappingService
     {

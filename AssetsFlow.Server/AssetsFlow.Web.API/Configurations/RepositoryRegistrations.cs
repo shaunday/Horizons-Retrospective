@@ -1,7 +1,8 @@
 using HsR.Journal.DataContext;
 using HsR.Journal.Repository.Services.CompositeRepo;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace HsR.Web.API.Repositories
+namespace AssetsFlowWeb.API.Configurations
 {
     internal static class RepositoryRegistrations
     {

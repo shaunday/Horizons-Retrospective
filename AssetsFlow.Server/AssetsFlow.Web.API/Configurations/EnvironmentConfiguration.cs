@@ -1,12 +1,15 @@
 ﻿using HsR.Journal.Seeder;
 using Microsoft.IdentityModel.Logging;
 using Serilog;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
-namespace HsR.Web.API.Configurations
+namespace AssetsFlowWeb.API.Configurations
 {
     internal static class EnvironmentConfiguration
     {
-        internal static void ConfigureForEnvironment(this WebApplicationBuilder builder)
+        internal static void ConfigureCorsAndEnvironment(this WebApplicationBuilder builder)
         {
             // Log the environment (Dev or Prod)
             Log.Information("Configuring for environment: {Environment}", builder.Environment.EnvironmentName);
