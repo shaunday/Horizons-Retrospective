@@ -3,7 +3,6 @@
 - replace supa's password, reset db, update db name for user's service
 - verify auth controller
 - do i need to validate users on every request ? I think so
-- var envPath = Path.Combine(AppContext.BaseDirectory, ".env"); < verify for global env
 
 Update User Service (gRPC) to Issue JWTs
 [ ] Add JWT issuing to your gRPC login method

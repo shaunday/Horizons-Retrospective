@@ -1,9 +1,10 @@
-using HsR.Web.API.Configurations;
 using AssetsFlowWeb.API.Configurations;
-using HsR.Journal.Infrastructure;
-using HsR.UserService.Client.Extensions;
-using Serilog;
+using DotNetEnv;
 using HsR.Infrastructure;
+using HsR.Web.API.Configurations;
+
+Env.Load(Path.Combine(AppContext.BaseDirectory, ".env"));
+Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow"));
 
 var builder = WebApplication.CreateBuilder(args)
     .ConfigureAssetsFlowHost();

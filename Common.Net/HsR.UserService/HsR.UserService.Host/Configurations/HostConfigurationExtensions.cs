@@ -9,9 +9,6 @@ namespace HsR.UserService.Host.Configurations
     {
         public static WebApplicationBuilder ConfigureUserServiceHost(this WebApplicationBuilder builder)
         {
-            // Load shared environment variables
-            DotNetEnv.Env.Load(".env.AssetsFlow");
-
             // Configure Serilog
             LoggingConfiguration.ConfigureLogging(builder.Environment.IsDevelopment());
             builder.Host.UseSerilog();

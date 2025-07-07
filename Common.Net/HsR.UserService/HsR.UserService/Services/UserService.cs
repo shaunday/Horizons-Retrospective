@@ -21,8 +21,6 @@ namespace HsR.UserService.Services
         {
             _userManager = userManager;
             _serviceProvider = serviceProvider;
-            var envPath = Path.Combine(AppContext.BaseDirectory, ".env");
-            Env.Load(envPath);
         }
 
         public async Task<AuthResponse> LoginAsync(LoginRequest request)

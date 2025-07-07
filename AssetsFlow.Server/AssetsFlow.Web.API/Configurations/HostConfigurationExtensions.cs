@@ -10,9 +10,6 @@ namespace AssetsFlowWeb.API.Configurations
     {
         public static WebApplicationBuilder ConfigureAssetsFlowHost(this WebApplicationBuilder builder)
         {
-            // Load shared environment variables
-            DotNetEnv.Env.Load(".env.AssetsFlow");
-
             bool isDev = builder.Environment.IsDevelopment();
             LoggingConfiguration.ConfigureLogging(isDev);
             builder.Host.UseSerilog();

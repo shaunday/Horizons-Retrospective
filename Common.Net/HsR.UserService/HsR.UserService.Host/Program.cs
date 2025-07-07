@@ -1,12 +1,14 @@
-using HsR.UserService.Host.Configurations;
-using HsR.UserService.Services;
-using HsR.UserService.Data;
-using HsR.UserService.Infrastructure;
+using DotNetEnv;
 using HsR.Common.AspNet;
+using HsR.UserService.Data;
+using HsR.UserService.Host.Configurations;
+using HsR.UserService.Infrastructure;
+using HsR.UserService.Services;
 using Serilog;
 
-// Load shared environment variables
-DotNetEnv.Env.Load(".env.AssetsFlow");
+// Load  environment variables
+Env.Load(Path.Combine(AppContext.BaseDirectory, ".env"));
+Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow"));
 
 var builder = WebApplication.CreateBuilder(args)
     .ConfigureUserServiceHost();

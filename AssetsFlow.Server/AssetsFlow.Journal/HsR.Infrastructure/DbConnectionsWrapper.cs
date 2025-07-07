@@ -23,9 +23,6 @@ namespace HsR.Journal.Infrastructure
             }
             else // Production
             {
-                var envPath = Path.Combine(AppContext.BaseDirectory, ".env");
-                DotNetEnv.Env.Load(envPath);
-
                 var supabasePassword = Environment.GetEnvironmentVariable(SupabasePassVar);
                 var supabaseConnectionId = Environment.GetEnvironmentVariable(SupabaseIdVar);
 
