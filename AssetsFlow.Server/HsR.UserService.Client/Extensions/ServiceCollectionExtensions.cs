@@ -18,14 +18,14 @@ public static class ServiceCollectionExtensions
     {
         // Determine the base URL based on environment
         string baseUrl;
-        if (environment.IsDevelopment())
+        if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
         {
             var userServicePort = Environment.GetEnvironmentVariable("USER_SERVICE_PORT") ?? "7001";
             baseUrl = $"https://localhost:{userServicePort}";
         }
         else
         {
-            baseUrl = "http://user-service:80";
+            baseUrl = "http://0.0.0.0:80";
         }
 
         // Register gRPC channel

@@ -41,7 +41,7 @@ public class AuthController : ControllerBase
                     success = true,
                     message = response.Message,
                     user = response.User,
-                    token = token
+                    token
                 });
             }
             
@@ -84,7 +84,7 @@ public class AuthController : ControllerBase
                     success = true,
                     message = response.Message,
                     user = response.User,
-                    token = token
+                    token
                 });
             }
             
