@@ -20,12 +20,12 @@ public static class ServiceCollectionExtensions
         string baseUrl;
         if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
         {
-            var userServicePort = Environment.GetEnvironmentVariable("USER_SERVICE_PORT") ?? "7001";
-            baseUrl = $"https://localhost:{userServicePort}";
+            baseUrl = "http://0.0.0.0:80";
         }
         else
         {
-            baseUrl = "http://0.0.0.0:80";
+            var userServicePort = Environment.GetEnvironmentVariable("USER_SERVICE_PORT") ?? "7001";
+            baseUrl = $"https://localhost:{userServicePort}";
         }
 
         // Register gRPC channel
