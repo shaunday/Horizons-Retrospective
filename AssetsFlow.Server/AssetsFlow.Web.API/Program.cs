@@ -1,27 +1,34 @@
 using AssetsFlowWeb.API.Configurations;
 using DotNetEnv;
 using HsR.Infrastructure;
+using HsR.Journal.Infrastructure;
 using HsR.Web.API.Configurations;
+using Serilog;
+using HsR.UserService.Client.Extensions;
 
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env"));
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow"));
 
-var builder = WebApplication.CreateBuilder(args)
-    .ConfigureAssetsFlowHost();
+var builder = WebApplication.CreateBuilder(args).ConfigureAssetsFlowLogging();
 
-string connectionString = builder.GetAssetsFlowConnectionString();
+Log.Information("Configuring for environment: {Environment}", builder.Environment.EnvironmentName);
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
 bool isDev = builder.Environment.IsDevelopment();
 
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+builder.Services
+    .AddConfiguredControllers()
+    .AddCustomAutoMapper()
+    .AddRepositories()
+    .AddCustomApiVersioning()
+    .AddConfigurationServices(builder.Configuration)
+    .AddCacheServices(builder.Configuration)
+    .AddUserServiceClient(builder.Configuration, builder.Environment)
+    .AddJwtAuthentication(builder.Configuration);
+
+string connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(isDev);
 builder.Services.ConfigureTradingJournalDbContext(connectionString, isDev);
 builder.ConfigureCorsAndEnvironment();
-
-builder.Services.AddConfiguredControllers();
-//builder.Services.AddCustomSwagger();
-builder.Services.AddCustomAutoMapper();
-builder.Services.AddRepositories();
-builder.Services.AddCustomApiVersioning();
-builder.Services.AddAssetsFlowServices(builder.Configuration, connectionString, isDev, builder.Environment);
 
 var app = builder.Build();
 

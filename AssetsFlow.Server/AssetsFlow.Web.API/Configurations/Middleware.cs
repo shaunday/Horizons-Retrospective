@@ -49,7 +49,8 @@ namespace AssetsFlowWeb.API.Configurations
             // ✅ Apply CORS after routing, before endpoints
             app.UseCors("AllowReactApp");
 
-            // Apply authorization middleware.
+            // Apply authentication and authorization middleware.
+            app.UseAuthentication();
             app.UseAuthorization();
 
             // Map controllers for request handling.

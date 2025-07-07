@@ -6,7 +6,7 @@ namespace AssetsFlowWeb.API.Configurations
 {
     internal static class RepositoryRegistrations
     {
-        internal static void AddRepositories(this IServiceCollection services)
+        internal static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IUserDataRepository, UserDataRepository>();
             services.AddScoped<IJournalRepository, JournalRepository>();
@@ -14,6 +14,7 @@ namespace AssetsFlowWeb.API.Configurations
             services.AddScoped<ITradeElementRepository, TradeElementRepository>();
             services.AddScoped<IDataElementRepository, DataElementRepository>();
             services.AddScoped<IJournalRepositoryWrapper, JournalRepositoryWrapper>();
+            return services;
         }
     }
 }

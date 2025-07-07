@@ -3,17 +3,7 @@
 - replace supa's password, reset db, update db name for user's service
 - dup code under " // Determine the base URL based on environment"
 
-Update User Service (gRPC) to Issue JWTs
-[ ] Add JWT issuing to your gRPC login method
-Update UserService.LoginAsync() to generate and return JWT token
-Update UserGrpcService.Login() to include JWT in response
-Update AuthResponse proto to include token field
-Add JWT service to user service project
 
-2. Add JWT Middleware to Main API
-[ ] Add JWT validation middleware to your journal service
-Add JWT Bearer authentication to Program.cs
-Configure JWT validation parameters
 Add [Authorize] attributes to protected endpoints
 
 3. Update AuthController to Use JWT Service

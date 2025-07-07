@@ -7,13 +7,10 @@ using Microsoft.Extensions.Hosting;
 
 namespace AssetsFlowWeb.API.Configurations
 {
-    internal static class CorsAndEnvironmentConfiguration
+    internal static class CorsAndUrlConfiguration
     {
         internal static void ConfigureCorsAndEnvironment(this WebApplicationBuilder builder)
         {
-            // Log the environment (Dev or Prod)
-            Log.Information("Configuring for environment: {Environment}", builder.Environment.EnvironmentName);
-
             string? corsOrigin = null;
 
             if (builder.Environment.IsDevelopment())
