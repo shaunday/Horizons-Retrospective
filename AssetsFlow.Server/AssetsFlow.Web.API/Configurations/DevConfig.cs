@@ -6,12 +6,10 @@ namespace AssetsFlowWeb.API.Configurations
 {
     internal static class DevConfig
     {
-        internal static IServiceCollection ApplyDevConfig(this IServiceCollection services)
+        internal static void ApplyDevConfig(this IServiceCollection services)
         {
             IdentityModelEventSource.ShowPII = true;
             services.AddScoped<DatabaseSeeder>();
-
-            return services;
         }
     }
 } 
