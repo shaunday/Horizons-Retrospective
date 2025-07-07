@@ -37,8 +37,9 @@ namespace AssetsFlowWeb.API.Controllers
                 {
                     commitHash = GitWrappers.RunGitCommand("rev-parse --short HEAD");
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Console.WriteLine($"Error getting git commit hash: {ex}");
                     commitHash = "unknown";
                 }
 
@@ -48,8 +49,9 @@ namespace AssetsFlowWeb.API.Controllers
                     {
                         appVersion = GitWrappers.RunGitCommand("describe --tags --abbrev=0");
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        Console.WriteLine($"Error getting git tag: {ex}");
                         appVersion = "dev-unknown";
                     }
                 }
