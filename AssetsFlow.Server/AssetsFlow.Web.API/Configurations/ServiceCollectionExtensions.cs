@@ -27,7 +27,7 @@ namespace HsR.Web.API.Configurations
 
             // Register services
             services.AddSingleton<IConfigurationService, ConfigurationService>();
-            services.AddScoped<IJwtService, JwtService>();
+            services.AddSingleton<IJwtService, JwtService>();
 
             return services;
         }

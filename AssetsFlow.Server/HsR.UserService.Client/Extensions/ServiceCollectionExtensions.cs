@@ -48,7 +48,7 @@ public static class ServiceCollectionExtensions
         });
 
         // Register the client
-        services.AddScoped<IUserServiceClient, UserServiceClient>();
+        services.AddSingleton<IUserServiceClient, UserServiceClient>();
 
         return services;
     }
