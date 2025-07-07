@@ -11,12 +11,13 @@ using HsR.Common.AspNet;
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env"));
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow"));
 
-var builder = WebApplication.CreateBuilder(args).ConfigureAssetsFlowLogging();
+var builder = WebApplication.CreateBuilder(args).ConfigureLogging();
 
 Log.Information("Configuring for environment: {Environment}", builder.Environment.EnvironmentName);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 bool isDev = builder.Environment.IsDevelopment();
+string connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(isDev);
 
 builder.Services
     .AddConfiguredControllers()
@@ -25,12 +26,17 @@ builder.Services
     .AddCustomApiVersioning()
     .AddConfigurationServices(builder.Configuration)
     .AddCacheServices(builder.Configuration)
-    .AddUserServiceClient(builder.Configuration, builder.Environment)
-    .AddJwtAuthentication(builder.Configuration);
+    .AddUserServiceClient(builder.Configuration)
+    .AddJwtAuthentication(builder.Configuration)
+    .ConfigureTradingJournalDbContext(connectionString, isDev)
+    .ConfigureCors(isDev);
 
-string connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(isDev);
-builder.Services.ConfigureTradingJournalDbContext(connectionString, isDev);
-builder.ConfigureCorsAndUrls();
+WebHostConfig.ConfigureUrls(builder.WebHost);
+
+if (isDev)
+{
+    builder.Services.ApplyDevConfig();
+}
 
 var app = builder.Build();
 

@@ -6,7 +6,7 @@ namespace AssetsFlowWeb.API.Configurations
 {
     public static class LoggingConfig
     {
-        public static WebApplicationBuilder ConfigureAssetsFlowLogging(this WebApplicationBuilder builder)
+        public static WebApplicationBuilder ConfigureLogging(this WebApplicationBuilder builder)
         {
             var logPath = Path.Combine(AppContext.BaseDirectory, "hsr_journal_server.txt");
 

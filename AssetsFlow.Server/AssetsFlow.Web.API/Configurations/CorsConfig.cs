@@ -1,5 +1,5 @@
-﻿using HsR.Journal.Seeder;
-using Microsoft.IdentityModel.Logging;
+﻿using Microsoft.IdentityModel.Logging;
+using HsR.Journal.Seeder;
 using Serilog;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -7,23 +7,20 @@ using Microsoft.Extensions.Hosting;
 
 namespace AssetsFlowWeb.API.Configurations
 {
-    internal static class CorsAndUrlsConfig
+    internal static class CorsConfig
     {
-        internal static void ConfigureCorsAndUrls(this WebApplicationBuilder builder)
+        public const string AllowReactAppPolicyName = "AllowReactApp";
+
+        internal static IServiceCollection ConfigureCors(this IServiceCollection services, bool isDev)
         {
             string? corsOrigin = null;
-
-            if (builder.Environment.IsDevelopment())
+            if (isDev)
             {
-                IdentityModelEventSource.ShowPII = true;
                 corsOrigin = "http://localhost:5173";
-
-                builder.Services.AddScoped<DatabaseSeeder>();
             }
             else
             {
                 corsOrigin = Environment.GetEnvironmentVariable("FRONTEND_URL");
-
                 if (!string.IsNullOrEmpty(corsOrigin))
                 {
                     Log.Information("CORS policy set for frontend URL: {FrontendUrl}", corsOrigin);
@@ -32,18 +29,12 @@ namespace AssetsFlowWeb.API.Configurations
                 {
                     Log.Warning("FRONTEND_URL environment variable is not set. CORS policy will not be applied for production.");
                 }
-
-                builder.WebHost.UseUrls(
-                    Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true"
-                        ? "http://0.0.0.0:80"
-                        : "https://localhost:5000");
             }
-
             if (!string.IsNullOrEmpty(corsOrigin))
             {
-                builder.Services.AddCors(options =>
+                services.AddCors(options =>
                 {
-                    options.AddPolicy("AllowReactApp", policy =>
+                    options.AddPolicy(AllowReactAppPolicyName, policy =>
                     {
                         policy.WithOrigins(corsOrigin)
                               .AllowAnyMethod()
@@ -52,6 +43,7 @@ namespace AssetsFlowWeb.API.Configurations
                     });
                 });
             }
+            return services;
         }
     }
 }

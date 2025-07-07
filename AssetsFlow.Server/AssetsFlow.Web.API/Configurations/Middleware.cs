@@ -47,7 +47,7 @@ namespace AssetsFlowWeb.API.Configurations
             app.UseRouting();
 
             // ✅ Apply CORS after routing, before endpoints
-            app.UseCors("AllowReactApp");
+            app.UseCors(CorsConfig.AllowReactAppPolicyName);
 
             // Apply authentication and authorization middleware.
             app.UseAuthentication();
