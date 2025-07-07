@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace AssetsFlowWeb.API.Configurations
 {
-    internal static class EnvironmentConfiguration
+    internal static class CorsAndEnvironmentConfiguration
     {
         internal static void ConfigureCorsAndEnvironment(this WebApplicationBuilder builder)
         {

@@ -43,8 +43,6 @@ namespace HsR.Journal.Infrastructure
                 //ipv4 version
                 return $"User Id=postgres.{supabaseConnectionId};Password={supabasePassword};Server=aws-0-eu-central-1.pooler.supabase.com;Port=5432;Database=postgres";
                 
-                //ipv6 doesnt work here on local todo check on container
-                //return $"Host=db.cavtnmvmhxbttxtgvyyt.supabase.co;Database=postgres;Username=postgres;Password={supabasePassword};SSL Mode=Require;Trust Server Certificate=true";
             }
         }
     }

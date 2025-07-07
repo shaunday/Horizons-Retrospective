@@ -4,12 +4,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using HsR.Web.API.Settings;
+using Microsoft.Extensions.Logging;
 
 namespace HsR.Web.API.Services;
 
 public interface IJwtService
 {
-    string GenerateToken(Guid userId);
+    string GenerateToken(Guid userId, IEnumerable<string>? roles = null);
     ClaimsPrincipal? ValidateToken(string token);
     string? GetUserIdFromToken(string token);
 }
@@ -17,23 +18,28 @@ public interface IJwtService
 public class JwtService : IJwtService
 {
     private readonly JwtSettings _jwtSettings;
+    private readonly ILogger<JwtService> _logger;
 
-    public JwtService(IOptions<JwtSettings> jwtSettings)
+    public JwtService(IOptions<JwtSettings> jwtSettings, ILogger<JwtService> logger)
     {
         _jwtSettings = jwtSettings.Value;
+        _logger = logger;
     }
 
-    public string GenerateToken(Guid userId)
+    public string GenerateToken(Guid userId, IEnumerable<string>? roles = null)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
 
         var claims = new List<Claim>
         {
-            new(ClaimTypes.NameIdentifier, userId.ToString()),
-            // TODO: Add roles when implemented
-            // new(ClaimTypes.Role, "User"),
+            new(ClaimTypes.NameIdentifier, userId.ToString())
         };
+
+        if (roles != null)
+        {
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+        }
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -47,8 +53,7 @@ public class JwtService : IJwtService
             )
         };
 
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);
+        return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
     }
 
     public ClaimsPrincipal? ValidateToken(string token)
@@ -70,11 +75,11 @@ public class JwtService : IJwtService
                 ClockSkew = TimeSpan.Zero
             };
 
-            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out _);
-            return principal;
+            return tokenHandler.ValidateToken(token, tokenValidationParameters, out _);
         }
-        catch
+        catch (Exception ex)
         {
+            _logger.LogWarning(ex, "JWT validation failed.");
             return null;
         }
     }

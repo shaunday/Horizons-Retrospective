@@ -14,6 +14,8 @@ namespace HsR.UserService.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IServiceProvider _serviceProvider;
+        private const string USER_ROLE_STRING_IDENTIFIER = "User";
+        private const string ADMIN_ROLE_STRING_IDENTIFIER = "Admin";
 
         public UserService(UserManager<User> userManager, IServiceProvider serviceProvider)
         {
@@ -110,6 +112,19 @@ namespace HsR.UserService.Services
                 };
                 await _userManager.CreateAsync(user, DemoUserData.Password);
             }
+
+            // Ensure the 'User' role exists
+            var roleManager = _serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+            if (!await roleManager.RoleExistsAsync(USER_ROLE_STRING_IDENTIFIER))
+            {
+                await roleManager.CreateAsync(new IdentityRole<Guid>(USER_ROLE_STRING_IDENTIFIER));
+            }
+
+            // Add demo user to 'User' role if not already
+            if (!await _userManager.IsInRoleAsync(user, USER_ROLE_STRING_IDENTIFIER))
+            {
+                await _userManager.AddToRoleAsync(user, USER_ROLE_STRING_IDENTIFIER);
+            }
         }
 
         public async Task EnsureAdminUserExistsAsync()
@@ -137,15 +152,15 @@ namespace HsR.UserService.Services
 
             // Ensure the Admin role exists
             var roleManager = _serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
-            if (!await roleManager.RoleExistsAsync("Admin"))
+            if (!await roleManager.RoleExistsAsync(ADMIN_ROLE_STRING_IDENTIFIER))
             {
-                await roleManager.CreateAsync(new IdentityRole<Guid>("Admin"));
+                await roleManager.CreateAsync(new IdentityRole<Guid>(ADMIN_ROLE_STRING_IDENTIFIER));
             }
 
             // Add user to Admin role if not already
-            if (!await _userManager.IsInRoleAsync(user, "Admin"))
+            if (!await _userManager.IsInRoleAsync(user, ADMIN_ROLE_STRING_IDENTIFIER))
             {
-                await _userManager.AddToRoleAsync(user, "Admin");
+                await _userManager.AddToRoleAsync(user, ADMIN_ROLE_STRING_IDENTIFIER);
             }
         }
 

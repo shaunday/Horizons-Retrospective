@@ -1,10 +1,9 @@
 ﻿
 # TODO
-- replace supa's password, reset db
+- replace supa's password, reset db, update db name for user's service
 - verify auth controller
 - do i need to validate users on every request ? I think so
-- verify jwt service
-- clean up readmes../todos
+- var envPath = Path.Combine(AppContext.BaseDirectory, ".env"); < verify for global env
 
 Update User Service (gRPC) to Issue JWTs
 [ ] Add JWT issuing to your gRPC login method
@@ -45,7 +44,7 @@ Add user roles to JWT claims (when roles are implemented)
 Configure proper JWT expiration and refresh logic
 Add JWT secret key to environment variables (not in appsettings)
 
-
+- user/admin roles
 - AI textbox for tradeElement creation
 - add ignoreActivation flag to content edit
 - add idea/origin date (not same as trade open)
