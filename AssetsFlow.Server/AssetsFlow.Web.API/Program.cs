@@ -1,10 +1,12 @@
 using AssetsFlowWeb.API.Configurations;
 using DotNetEnv;
 using HsR.Infrastructure;
+using HsR.Journal.DataContext;
+using HsR.Journal.DataSeeder;
 using HsR.Journal.Infrastructure;
-using HsR.Web.API.Configurations;
-using Serilog;
 using HsR.UserService.Client.Extensions;
+using Serilog;
+using HsR.Common.AspNet;
 
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env"));
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow"));
@@ -28,11 +30,16 @@ builder.Services
 
 string connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(isDev);
 builder.Services.ConfigureTradingJournalDbContext(connectionString, isDev);
-builder.ConfigureCorsAndEnvironment();
+builder.ConfigureCorsAndUrls();
 
 var app = builder.Build();
 
-await app.EnsureAssetsFlowDatabaseAndSeedAsync();
+await app.EnsureDatabaseCreatedAsync<TradingJournalDataContext>();
+if (app.Environment.IsDevelopment())
+{
+    await app.Services.FlushDbAndSeedDemoAsync();
+}
+
 Middleware.ConfigureMiddleware(app);
 
 app.Run();

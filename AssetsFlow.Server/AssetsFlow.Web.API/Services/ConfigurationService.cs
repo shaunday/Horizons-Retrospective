@@ -1,5 +1,4 @@
 using HsR.Web.API.Settings;
-using Microsoft.Extensions.Configuration;
 
 namespace HsR.Web.API.Services
 {

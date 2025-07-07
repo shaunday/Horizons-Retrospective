@@ -7,9 +7,9 @@ using Microsoft.Extensions.Hosting;
 
 namespace AssetsFlowWeb.API.Configurations
 {
-    internal static class CorsAndUrlConfiguration
+    internal static class CorsAndUrlsConfig
     {
-        internal static void ConfigureCorsAndEnvironment(this WebApplicationBuilder builder)
+        internal static void ConfigureCorsAndUrls(this WebApplicationBuilder builder)
         {
             string? corsOrigin = null;
 

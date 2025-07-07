@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AssetsFlowWeb.API.Configurations
 {
-    internal static class RepositoryRegistrations
+    internal static class RepositoryRegistration
     {
         internal static IServiceCollection AddRepositories(this IServiceCollection services)
         {

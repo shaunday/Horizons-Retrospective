@@ -3,9 +3,9 @@ using AutoMapper.EquivalencyExpression;
 using HsR.Web.API.Services;
 using HsR.Web.API.Mapping;
 
-namespace HsR.Web.API.Configurations
+namespace AssetsFlowWeb.API.Configurations
 {
-    internal static class AutoMapperConfigurations
+    internal static class AutoMapperConfig
     {
         internal static IServiceCollection AddCustomAutoMapper(this IServiceCollection services)
         {

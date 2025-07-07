@@ -4,9 +4,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 
-namespace HsR.Web.API.Configurations
+namespace AssetsFlowWeb.API.Configurations
 {
-    internal static class ControllersConfiguration
+    internal static class ControllersConfig
     {
         internal static IServiceCollection AddConfiguredControllers(this IServiceCollection services)
         {
