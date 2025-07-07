@@ -17,7 +17,6 @@ Log.Information("Configuring for environment: {Environment}", builder.Environmen
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 bool isDev = builder.Environment.IsDevelopment();
-string connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(isDev);
 
 builder.Services
     .AddConfiguredControllers()
@@ -28,14 +27,16 @@ builder.Services
     .AddCacheServices(builder.Configuration)
     .AddUserServiceClient(builder.Configuration)
     .AddJwtAuthentication(builder.Configuration)
-    .ConfigureTradingJournalDbContext(connectionString, isDev)
+    .ConfigureTradingJournalDbContext(isDev)
     .ConfigureCors(isDev);
-
-WebHostConfig.ConfigureUrls(builder.WebHost);
 
 if (isDev)
 {
     builder.Services.ApplyDevConfig();
+}
+else
+{
+    WebHostConfig.ConfigureUrls(builder.WebHost);
 }
 
 var app = builder.Build();

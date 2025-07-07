@@ -1,4 +1,5 @@
 ﻿using HsR.Journal.DataContext;
+using HsR.Journal.Infrastructure;
 using HsR.Journal.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +14,10 @@ namespace HsR.Infrastructure
 {
     public static class ServiceConfiguration
     {
-        public static IServiceCollection ConfigureTradingJournalDbContext(this IServiceCollection services, string connectionString, bool isDev)
+        public static IServiceCollection ConfigureTradingJournalDbContext(this IServiceCollection services, bool isDev)
         {
+            string connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(isDev);
+
             services.AddDbContextPool<TradingJournalDataContext>(options =>
             {
                 options.UseNpgsql(connectionString, npgsqlOptions =>

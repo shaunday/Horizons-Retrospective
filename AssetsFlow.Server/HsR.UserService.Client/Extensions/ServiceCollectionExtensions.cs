@@ -13,7 +13,6 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddUserServiceClient(this IServiceCollection services, IConfiguration configuration)
     {
-        // Determine the base URL based on environment
         string baseUrl;
         if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
         {

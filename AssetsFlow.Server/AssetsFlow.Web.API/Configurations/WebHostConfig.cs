@@ -9,7 +9,7 @@ namespace AssetsFlowWeb.API.Configurations
             webHostBuilder.UseUrls(
                 Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true"
                     ? "http://0.0.0.0:80"
-                    : "https://localhost:5000");
+                    : "http://localhost:5000");
         }
     }
 } 
