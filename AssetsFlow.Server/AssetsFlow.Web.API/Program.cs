@@ -1,21 +1,23 @@
 using AssetsFlowWeb.API.Configurations;
 using DotNetEnv;
+using HsR.Common.AspNet;
 using HsR.Infrastructure;
 using HsR.Journal.DataContext;
 using HsR.Journal.DataSeeder;
 using HsR.Journal.Infrastructure;
+using HsR.Journal.Seeder;
 using HsR.UserService.Client.Extensions;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.IdentityModel.Logging;
 using Serilog;
-using HsR.Common.AspNet;
 
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env"));
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow"));
 
 var builder = WebApplication.CreateBuilder(args).ConfigureLogging();
-
-Log.Information("Configuring for environment: {Environment}", builder.Environment.EnvironmentName);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
+Log.Information("Configuring for environment: {Environment}", builder.Environment.EnvironmentName);
 bool isDev = builder.Environment.IsDevelopment();
 
 builder.Services
@@ -32,11 +34,12 @@ builder.Services
 
 if (isDev)
 {
-    builder.Services.ApplyDevConfig();
+    IdentityModelEventSource.ShowPII = true;
+    builder.Services.AddScoped<DatabaseSeeder>();
 }
-else
+else if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
 {
-    WebHostConfig.ConfigureUrls(builder.WebHost);
+    builder.WebHost.UseUrls("http://0.0.0.0:80");
 }
 
 var app = builder.Build();
