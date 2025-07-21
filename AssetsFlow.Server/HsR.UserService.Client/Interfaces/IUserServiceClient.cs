@@ -10,4 +10,5 @@ public interface IUserServiceClient
     Task<UserResponse> GetUserByEmailAsync(GetUserByEmailRequest request, CancellationToken cancellationToken = default);
     Task<HealthCheckResponse> HealthCheckAsync(HealthCheckRequest request, CancellationToken cancellationToken = default);
     Task<ChangePasswordResponse> ChangePasswordAsync(ChangePasswordRequest request, CancellationToken cancellationToken = default);
+    Task<IList<string>> GetUserRolesAsync(string userId, CancellationToken cancellationToken = default);
 } 

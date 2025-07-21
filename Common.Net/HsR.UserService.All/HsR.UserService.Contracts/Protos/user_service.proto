@@ -13,6 +13,7 @@ service UserService {
   // User management operations
   rpc GetUserById (GetUserRequest) returns (UserResponse);
   rpc GetUserByEmail (GetUserByEmailRequest) returns (UserResponse);
+  rpc GetUserRoles (GetUserRolesRequest) returns (GetUserRolesResponse);
   
   // Health check
   rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse);
@@ -86,4 +87,12 @@ message ChangePasswordRequest {
 message ChangePasswordResponse {
   bool success = 1;
   string message = 2;
+} 
+
+message GetUserRolesRequest {
+  string user_id = 1;
+}
+
+message GetUserRolesResponse {
+  repeated string roles = 1;
 } 

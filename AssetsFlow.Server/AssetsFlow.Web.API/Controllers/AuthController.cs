@@ -32,10 +32,8 @@ public class AuthController : ControllerBase
             if (response.Success)
             {
                 _logger.LogInformation("Login successful for user: {Email}", request.Email);
-                
-                // Generate JWT token with just the user ID
-                var token = _jwtService.GenerateToken(Guid.Parse(response.User.Id));
-                
+                var roles = await _userServiceClient.GetUserRolesAsync(response.User.Id);
+                var token = _jwtService.GenerateToken(Guid.Parse(response.User.Id), roles);
                 return Ok(new
                 {
                     success = true,
@@ -75,10 +73,8 @@ public class AuthController : ControllerBase
             if (response.Success)
             {
                 _logger.LogInformation("Registration successful for user: {Email}", request.Email);
-                
-                // Generate JWT token with just the user ID
-                var token = _jwtService.GenerateToken(Guid.Parse(response.User.Id));
-                
+                var roles = await _userServiceClient.GetUserRolesAsync(response.User.Id);
+                var token = _jwtService.GenerateToken(Guid.Parse(response.User.Id), roles);
                 return Ok(new
                 {
                     success = true,

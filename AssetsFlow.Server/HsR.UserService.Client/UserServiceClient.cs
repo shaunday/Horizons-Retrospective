@@ -142,4 +142,11 @@ public class UserServiceClient : IUserServiceClient
             throw;
         }
     }
+
+    public async Task<IList<string>> GetUserRolesAsync(string userId, CancellationToken cancellationToken = default)
+    {
+        var request = new GetUserRolesRequest { UserId = userId };
+        var response = await _grpcClient.GetUserRolesAsync(request, cancellationToken: cancellationToken);
+        return response.Roles;
+    }
 } 

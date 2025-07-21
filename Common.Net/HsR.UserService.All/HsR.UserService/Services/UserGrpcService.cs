@@ -143,6 +143,19 @@ namespace HsR.UserService.Services
             }
         }
 
+        public override async Task<GetUserRolesResponse> GetUserRoles(GetUserRolesRequest request, ServerCallContext context)
+        {
+            var response = new GetUserRolesResponse();
+            if (!Guid.TryParse(request.UserId, out var userId))
+                return response;
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+                return response;
+            var roles = await _userManager.GetRolesAsync(user);
+            response.Roles.AddRange(roles);
+            return response;
+        }
+
         public override Task<Protos.HealthCheckResponse> HealthCheck(Protos.HealthCheckRequest request, ServerCallContext context)
         {
             return Task.FromResult(new Protos.HealthCheckResponse

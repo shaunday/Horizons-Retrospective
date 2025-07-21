@@ -3,26 +3,9 @@
 - replace supa's password, reset db, update db name for user's service
 
 
-2. Update AuthController to Use JWT Service
-[ ] Update AuthController to use IJwtService
-Inject IJwtService into AuthController
-Generate JWT tokens on successful login/register
-Return tokens in API responses
-Remove TODO comments
-
-3. Update Controllers for JWT Validation
-[ ] Update controllers to use JWT validation instead of user ID validation
-Replace ValidateUserExists() calls with JWT token validation
-Extract user ID from JWT claims instead of parameters
-Add [Authorize] attributes to journal endpoints
-Remove userId parameters from endpoints (get from JWT)
-
-4. Security & Configuration
-[ ] Ensure JWTs include necessary claims
 Add user roles to JWT claims (when roles are implemented)
 Configure proper JWT expiration and refresh logic
 
-- AI textbox for tradeElement creation
 - add ignoreActivation flag to content edit
 - add idea/origin date (not same as trade open)
 - on remove, set condition where net is positive post, otherwise error
