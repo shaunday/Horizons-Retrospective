@@ -1,10 +1,11 @@
 ﻿using HsR.Journal.Repository.Configurations;
 using HsR.Journal.Entities;
 using Microsoft.EntityFrameworkCore;
+using HsR.Common.Db;
 
 namespace HsR.Journal.DataContext
 {
-    public class TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : DbContext(options)
+    public class TradingJournalDataContext(DbContextOptions<TradingJournalDataContext> options) : BaseDbContext(options)
     {
         public DbSet<TradeComposite> TradeComposites { get; set; } = null!;
         public DbSet<InterimTradeElement> TradeElements { get; set; } = null!; 

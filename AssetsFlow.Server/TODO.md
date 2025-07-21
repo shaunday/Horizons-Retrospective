@@ -3,9 +3,6 @@
 - replace supa's password, reset db, update db name for user's service
 
 
-Use async EF methods with ConfigureAwait(false) for scalability
-  await dbContext.SaveChangesAsync().ConfigureAwait(false);
-
 2. Update AuthController to Use JWT Service
 [ ] Update AuthController to use IJwtService
 Inject IJwtService into AuthController
