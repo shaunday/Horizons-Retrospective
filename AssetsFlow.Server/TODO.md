@@ -2,9 +2,7 @@
 # TODO
 - replace supa's password, reset db, update db name for user's service
 
-
-Add user roles to JWT claims (when roles are implemented)
-Configure proper JWT expiration and refresh logic
+- Configure JWT refresh logic
 
 - add ignoreActivation flag to content edit
 - add idea/origin date (not same as trade open)
