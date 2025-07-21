@@ -14,8 +14,6 @@ namespace HsR.UserService.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IServiceProvider _serviceProvider;
-        private const string USER_ROLE_STRING_IDENTIFIER = "User";
-        private const string ADMIN_ROLE_STRING_IDENTIFIER = "Admin";
 
         public UserService(UserManager<User> userManager, IServiceProvider serviceProvider)
         {
@@ -113,15 +111,15 @@ namespace HsR.UserService.Services
 
             // Ensure the 'User' role exists
             var roleManager = _serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
-            if (!await roleManager.RoleExistsAsync(USER_ROLE_STRING_IDENTIFIER))
+            if (!await roleManager.RoleExistsAsync(RoleNames.User))
             {
-                await roleManager.CreateAsync(new IdentityRole<Guid>(USER_ROLE_STRING_IDENTIFIER));
+                await roleManager.CreateAsync(new IdentityRole<Guid>(RoleNames.User));
             }
 
             // Add demo user to 'User' role if not already
-            if (!await _userManager.IsInRoleAsync(user, USER_ROLE_STRING_IDENTIFIER))
+            if (!await _userManager.IsInRoleAsync(user, RoleNames.User))
             {
-                await _userManager.AddToRoleAsync(user, USER_ROLE_STRING_IDENTIFIER);
+                await _userManager.AddToRoleAsync(user, RoleNames.User);
             }
         }
 
@@ -150,15 +148,15 @@ namespace HsR.UserService.Services
 
             // Ensure the Admin role exists
             var roleManager = _serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
-            if (!await roleManager.RoleExistsAsync(ADMIN_ROLE_STRING_IDENTIFIER))
+            if (!await roleManager.RoleExistsAsync(RoleNames.Admin))
             {
-                await roleManager.CreateAsync(new IdentityRole<Guid>(ADMIN_ROLE_STRING_IDENTIFIER));
+                await roleManager.CreateAsync(new IdentityRole<Guid>(RoleNames.Admin));
             }
 
             // Add user to Admin role if not already
-            if (!await _userManager.IsInRoleAsync(user, ADMIN_ROLE_STRING_IDENTIFIER))
+            if (!await _userManager.IsInRoleAsync(user, RoleNames.Admin))
             {
-                await _userManager.AddToRoleAsync(user, ADMIN_ROLE_STRING_IDENTIFIER);
+                await _userManager.AddToRoleAsync(user, RoleNames.Admin);
             }
         }
 

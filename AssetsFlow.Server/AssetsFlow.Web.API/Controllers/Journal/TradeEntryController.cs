@@ -8,12 +8,14 @@ using HsR.Web.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using HsR.Journal.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HsR.Web.API.Controllers.Journal
 {
     [Route("hsr-api/v{version:apiVersion}/journal/components")]
     [ApiVersion("1.0")]
     [ApiController]
+    [Authorize]
     public class ContentUpdateController : JournalControllerBase
     {
         public ContentUpdateController(

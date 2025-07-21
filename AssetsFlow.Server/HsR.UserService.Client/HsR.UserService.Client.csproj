@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common.Net\HsR.UserService\HsR.UserService.Contracts\HsR.UserService.Contracts.csproj" />
+    <ProjectReference Include="..\..\Common.Net\HsR.UserService.All\HsR.UserService.Contracts\HsR.UserService.Contracts.csproj" />
   </ItemGroup>
 
 

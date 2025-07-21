@@ -2,7 +2,6 @@
 # TODO
 - replace supa's password, reset db, update db name for user's service
 
-1. Add [Authorize] attributes to protected endpoints
 
 Use async EF methods with ConfigureAwait(false) for scalability
   await dbContext.SaveChangesAsync().ConfigureAwait(false);

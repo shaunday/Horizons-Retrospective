@@ -7,10 +7,12 @@ using HsR.Web.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using HsR.Web.API.Controllers.Journal;
+using Microsoft.AspNetCore.Authorization;
 
 [Route("hsr-api/v{version:apiVersion}/journal/elements/{elementId}")]
 [ApiVersion("1.0")]
 [ApiController]
+[Authorize]
 public class TradeElementsController(
     IJournalRepositoryWrapper journalAccess,
     ILogger<JournalControllerBase> logger,

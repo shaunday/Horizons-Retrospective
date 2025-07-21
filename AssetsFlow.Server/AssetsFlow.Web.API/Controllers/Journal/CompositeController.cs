@@ -10,12 +10,14 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Diagnostics;
 using Serilog;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HsR.Web.API.Controllers.Journal
 {
     [Route("hsr-api/v{version:apiVersion}/journal/trades/{tradeId}")]
     [ApiVersion("1.0")]
     [ApiController]
+    [Authorize]
     public class CompositeController : JournalControllerBase
     {
         public CompositeController(
