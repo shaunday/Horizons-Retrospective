@@ -36,19 +36,9 @@ namespace HsR.Web.API.Controllers.Journal
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(Guid userId, int pageNumber = 1, int pageSize = 0)
+        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(int pageNumber = 1, int pageSize = 0)
         {
-            // TODO: Replace with JWT token validation when implemented
-            // var user = await ValidateUserFromToken();
-            // userId = user.Id;
-            
-            // For now, validate user exists
-            var userValidation = await ValidateUserExists(userId);
-            if (!userValidation.IsValid)
-            {
-                return Unauthorized(new { message = userValidation.ErrorMessage });
-            }
-
+            var userId = GetUserIdFromClaims();
             pageSize = ValidatePageSize(pageSize);
 
             IEnumerable<TradeCompositeModel>? paginatedTradeDTOs;
@@ -72,15 +62,9 @@ namespace HsR.Web.API.Controllers.Journal
         }
 
         [HttpPost]
-        public async Task<ActionResult<TradeCompositeModel>> AddTrade(Guid userId)
+        public async Task<ActionResult<TradeCompositeModel>> AddTrade()
         {
-            // TODO: Replace with JWT token validation when implemented
-            var userValidation = await ValidateUserExists(userId);
-            if (!userValidation.IsValid)
-            {
-                return Unauthorized(new { message = userValidation.ErrorMessage });
-            }
-
+            var userId = GetUserIdFromClaims();
             var positionComposite = await _journalAccess.Journal.AddTradeCompositeAsync(userId);
             TradeCompositeModel resAsModel = _mapper.Map<TradeCompositeModel>(positionComposite);
 
@@ -90,17 +74,11 @@ namespace HsR.Web.API.Controllers.Journal
         }
 
         [HttpGet("{tradeId}")]
-        public async Task<ActionResult<TradeCompositeModel>> GetTradeById(int tradeId, Guid userId)
+        public async Task<ActionResult<TradeCompositeModel>> GetTradeById(int tradeId)
         {
+            var userId = GetUserIdFromClaims();
             try
             {
-                // TODO: Replace with JWT token validation when implemented
-                var userValidation = await ValidateUserExists(userId);
-                if (!userValidation.IsValid)
-                {
-                    return Unauthorized(new { message = userValidation.ErrorMessage });
-                }
-
                 var trade = await _journalAccess.Journal.GetTradeCompositeByIdAsync(tradeId);
                 if (trade == null)
                     return NotFound();
@@ -131,41 +109,6 @@ namespace HsR.Web.API.Controllers.Journal
             Response.Headers["X-Page-Number"] = pageNumber.ToString();
             Response.Headers["X-Page-Size"] = pageSize.ToString();
         }
-
-        private async Task<(bool IsValid, string? ErrorMessage)> ValidateUserExists(Guid userId)
-        {
-            try
-            {
-                var request = new GetUserRequest { UserId = userId.ToString() };
-                var response = await _userServiceClient.GetUserByIdAsync(request);
-                
-                if (response.Success)
-                {
-                    return (true, null);
-                }
-                
-                return (false, response.Message);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error validating user: {UserId}", userId);
-                return (false, "Error validating user");
-            }
-        }
-
-        // TODO: Implement when JWT is added
-        // private async Task<UserDto> ValidateUserFromToken()
-        // {
-        //     var token = Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-        //     if (string.IsNullOrEmpty(token))
-        //     {
-        //         throw new UnauthorizedAccessException("No token provided");
-        //     }
-        //     
-        //     // Validate JWT token and extract user info
-        //     // This will be implemented when JWT is added
-        //     throw new NotImplementedException("JWT validation not yet implemented");
-        // }
         #endregion
     }
 }

@@ -6,7 +6,7 @@
 - More precise exceptions handling in Controllers
 - UserService Client to be used by the Web.API
 - Added [Authorize] attributes to protected endpoints
-- 
+- All async EF Core saves in both DbContexts now use .ConfigureAwait(false) via a base class and direct overrides.
 
 ## [0.9.503-s] - 2025-06-24
 - Add IsAnyContentMissing prop on elementDTO

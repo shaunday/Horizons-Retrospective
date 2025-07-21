@@ -59,5 +59,13 @@ namespace HsR.Web.API.Controllers.Journal
             // Return dictionary if propertyNames were provided, otherwise return the object
             return responseObject.Count > 0 ? Ok(responseObject) : Ok(result);
         }
+
+        protected Guid GetUserIdFromClaims()
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "sub" || c.Type == "userId" || c.Type.EndsWith("nameidentifier"));
+            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
+                throw new UnauthorizedAccessException("User ID not found in JWT claims.");
+            return userId;
+        }
     }
 }
