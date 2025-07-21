@@ -1,14 +1,13 @@
 ## 1
 Update clients to use JWTs for authenticated requests
-Update frontend to store and send JWT tokens
 Add Authorization header to API requests
-Handle token expiration and refresh
+Handle token expiration and refresh (If the JWT expires, detect 401 responses and auto-logout or prompt re-login.)
 
-add: seedernpm /admin panel
+add: seedernpm /admin panel - Use the user’s roles (from the JWT or user object) to show/hide 
 fix: close trade not working
 add: user login, user or top panel
 adjust : risk group's icon, context's icon
-add: jotai/redux for user, saved sectors, parse via useHandleStatusUpdates, sectors combobox +  autofill
+add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox +  autofill
 
 from limor: edit > expand the object and edit in place?
 from limor: title should be styled diff than the content, text aligned to the left
