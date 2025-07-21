@@ -16,6 +16,7 @@ add: opened/closedat (just to overview?)
 
 
 ## 2.
+RQ isloading/error vs statusnots
 add: filter (status first, date first, BY STATUS), in client? / adjust data call api
 revert trades order? last added first?
 
