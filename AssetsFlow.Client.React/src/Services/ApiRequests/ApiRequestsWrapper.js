@@ -26,7 +26,9 @@ export async function request(url, options = {}, retry = true) {
         return request(url, options, false);
       }
     } catch (e) {
-      // Refresh failed — fall through to demo or logout
+      // Refresh failed — log out the user
+      authStorage.clearAuth(); // or logout()
+      // todo redirect to login
     }
   }
 

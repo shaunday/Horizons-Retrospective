@@ -1,5 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { login, register, logout } from "@services/ApiRequests/authApiAccess";
+import {
+  login,
+  loginAsDemo,
+  register,
+  logout as logoutApi,
+} from "@services/ApiRequests/authApiAccess";
 import { authStorage, USER_QUERY_KEY } from "@services/ApiRequests/authStorage";
 
 export function useAuth() {
@@ -10,14 +15,19 @@ export function useAuth() {
     onSuccess: (data) => authStorage.setAuth(data.token, data.user),
   });
 
+  const loginAsDemoMutation = useMutation({
+    mutationFn: loginAsDemo,
+    onSuccess: (data) => authStorage.setAuth(data.token, data.user),
+  });
+
   const registerMutation = useMutation({
     mutationFn: register,
     onSuccess: (data) => authStorage.setAuth(data.token, data.user),
   });
 
-  const handleLogout = () => {
-    logout();
+  const logout = () => {
     authStorage.clearAll();
+    logoutApi();
   };
 
   const getToken = () => authStorage.getToken();
@@ -26,11 +36,14 @@ export function useAuth() {
     user,
     getToken,
     login: loginMutation.mutateAsync,
+    loginAsDemo: loginAsDemoMutation.mutateAsync,
     register: registerMutation.mutateAsync,
-    logout: handleLogout,
+    logout,
     isLoggingIn: loginMutation.isLoading,
+    isLoggingInAsDemo: loginAsDemoMutation.isLoading,
     isRegistering: registerMutation.isLoading,
     loginError: loginMutation.error,
+    loginAsDemoError: loginAsDemoMutation.error,
     registerError: registerMutation.error,
   };
 }

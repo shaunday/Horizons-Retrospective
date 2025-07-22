@@ -5,6 +5,8 @@ import JournalView from "@views/JournalView";
 import { withErrorBoundary } from "react-error-boundary";
 import Header from "@views/Header";
 import Footer from "@views/Footer";
+import { useAutoLoginAsDemo } from "@hooks/Auth/useAutoLoginAsDemo"; 
+
 
 // Fallback UI component for errors
 function Fallback({ error, resetErrorBoundary }) {
@@ -18,6 +20,7 @@ function Fallback({ error, resetErrorBoundary }) {
 }
 
 function App() {
+   useAutoLoginAsDemo(); 
   // const { prefetchTrades } = useFetchAndCacheTrades();
 
   // useEffect(() => {
