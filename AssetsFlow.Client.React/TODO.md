@@ -1,7 +1,7 @@
 ## 1
-Update clients to use JWTs for authenticated requests
-Add Authorization header to API requests
+autologin as demo user
 Handle token expiration and refresh (If the JWT expires, detect 401 responses and auto-logout or prompt re-login.)
+remove userid from tradeapi
 
 add: seedernpm /admin panel - Use the user’s roles (from the JWT or user object) to show/hide 
 fix: close trade not working

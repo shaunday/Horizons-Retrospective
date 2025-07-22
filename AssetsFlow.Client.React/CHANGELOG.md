@@ -4,6 +4,7 @@
 ## [0.9.020-c] - 2025-07-...
 ### Added
 - Users Service, Demo user
+- Update frontend to store and send JWT tokens + auth api
 
 ## [0.9.019-c] - 2025-06-24
 ### Added

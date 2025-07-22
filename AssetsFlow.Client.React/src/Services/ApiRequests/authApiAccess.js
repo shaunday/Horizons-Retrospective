@@ -16,6 +16,13 @@ export async function register({ email, password, firstName, lastName }) {
   return response;
 }
 
+export async function loginAsDemo() {
+  const response = await request(`${baseURL}auth/demo`, {
+    method: "POST",
+  });
+  return response;
+}
+
 export function logout() {
   // No side effects here; handled in useAuth
 } 

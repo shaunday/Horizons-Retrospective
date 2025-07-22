@@ -2,7 +2,8 @@
 # TODO
 - replace supa's password, reset db, update db name for user's service
 
-- Configure JWT refresh logic
+- auth/demo endpoint
+- Configure JWT refresh logic - auth/refresh
 
 - add ignoreActivation flag to content edit
 - add idea/origin date (not same as trade open)

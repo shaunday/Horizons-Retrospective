@@ -8,7 +8,7 @@ import '@mantine/core/styles.css';
 import { MantineProvider } from '@mantine/core';
 import "./index.css";
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: { staleTime: 1000 * 20 },
     onError: (error) => {
