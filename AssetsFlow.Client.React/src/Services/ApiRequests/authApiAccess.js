@@ -17,7 +17,7 @@ export async function register({ email, password, firstName, lastName }) {
 }
 
 export async function loginAsDemo() {
-  const response = await request(`${baseURL}auth/demo`, {
+  const response = await request(`${baseURL}auth/login-demo`, {
     method: "POST",
   });
   return response;

@@ -1,7 +1,8 @@
 using HsR.UserService.Client.Interfaces;
+using HsR.UserService.Contracts;
 using HsR.UserService.Protos;
-using Microsoft.AspNetCore.Mvc;
 using HsR.Web.API.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AssetsFlowWeb.API.Controllers;
 
@@ -60,6 +61,56 @@ public class AuthController : ControllerBase
             });
         }
     }
+
+    [HttpPost("login-demo")]
+    public async Task<IActionResult> LoginAsDemo()
+    {
+        try
+        {
+            _logger.LogInformation("Demo login attempt");
+
+            var request = new LoginRequest
+            {
+                Email = DemoUserData.Email,
+                Password = DemoUserData.Password
+            };
+
+            var response = await _userServiceClient.LoginAsync(request);
+
+            if (response.Success)
+            {
+                _logger.LogInformation("Demo login successful");
+
+                var roles = await _userServiceClient.GetUserRolesAsync(response.User.Id);
+                var token = _jwtService.GenerateToken(Guid.Parse(response.User.Id), roles);
+
+                return Ok(new
+                {
+                    success = true,
+                    message = response.Message,
+                    user = response.User,
+                    token
+                });
+            }
+
+            _logger.LogWarning("Demo login failed: {Message}", response.Message);
+            return BadRequest(new
+            {
+                success = false,
+                message = response.Message
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error during demo login");
+            return StatusCode(500, new
+            {
+                success = false,
+                message = "An error occurred during demo login"
+            });
+        }
+    }
+
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)

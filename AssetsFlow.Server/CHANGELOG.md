@@ -8,6 +8,7 @@
 - Added [Authorize] attributes to protected endpoints
 - All async EF Core saves in both DbContexts now use .ConfigureAwait(false) via a base class and direct overrides.
 - Journal endpoints now extract the user ID from JWT claims (not parameters), using a helper, with [Authorize] enforced throughout.
+- added demo-user-login endpoint
 
 ## [0.9.503-s] - 2025-06-24
 - Add IsAnyContentMissing prop on elementDTO
