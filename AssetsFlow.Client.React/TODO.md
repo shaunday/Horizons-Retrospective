@@ -1,6 +1,4 @@
 ## 1
-remove userid from tradeapi
-
 add: seedernpm /admin panel - Use the user’s roles (from the JWT or user object) to show/hide 
 fix: close trade not working
 add: user login, user or top panel

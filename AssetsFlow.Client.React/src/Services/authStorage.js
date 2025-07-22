@@ -9,6 +9,21 @@ export const authStorage = {
     return localStorage.getItem(JWT_KEY);
   },
 
+  getUser() {
+    return (
+      queryClient.getQueryData(USER_QUERY_KEY) ??
+      JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || "null")
+    );
+  },
+
+  getUserId() {
+    const user = this.getUser();
+    if (!user || !user.id) {
+      throw new Error("No authenticated user found");
+    }
+    return user.id;
+  },
+
   setAuth(token, user) {
     if (!token || !user) {
       throw new Error("setAuth requires both token and user");
@@ -22,13 +37,6 @@ export const authStorage = {
     localStorage.removeItem(JWT_KEY);
     localStorage.removeItem(USER_STORAGE_KEY);
     queryClient.removeQueries(USER_QUERY_KEY);
-  },
-
-  getUser() {
-    return (
-      queryClient.getQueryData(USER_QUERY_KEY) ??
-      JSON.parse(localStorage.getItem(USER_STORAGE_KEY) || "null")
-    );
   },
 
   clearAll() {

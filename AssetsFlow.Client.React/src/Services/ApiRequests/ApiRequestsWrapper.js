@@ -1,4 +1,4 @@
-import { authStorage } from "./authStorage"; // Import your wrapper
+import { authStorage } from "@services/authStorage"; 
 
 export const baseURL = import.meta.env.VITE_API_URL;
 export const tradesBaseURL = `${baseURL}${import.meta.env.VITE_JOURNAL_TRADES_SUFFIX}`;

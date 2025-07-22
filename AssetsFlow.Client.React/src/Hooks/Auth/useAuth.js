@@ -5,7 +5,7 @@ import {
   register,
   logout as logoutApi,
 } from "@services/ApiRequests/authApiAccess";
-import { authStorage, USER_QUERY_KEY } from "@services/ApiRequests/authStorage";
+import { authStorage, USER_QUERY_KEY } from "@services/authStorage";
 
 export function useAuth() {
   const { data: user } = useQuery(USER_QUERY_KEY, authStorage.getUser);
