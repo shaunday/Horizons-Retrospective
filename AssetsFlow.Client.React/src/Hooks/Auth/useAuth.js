@@ -8,7 +8,10 @@ import {
 import { authStorage, USER_QUERY_KEY } from "@services/authStorage";
 
 export function useAuth() {
-  const { data: user } = useQuery(USER_QUERY_KEY, authStorage.getUser);
+  const { data: user } = useQuery({
+    queryKey: USER_QUERY_KEY,
+    queryFn: authStorage.getUser,
+  });
 
   const loginMutation = useMutation({
     mutationFn: login,
