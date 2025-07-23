@@ -1,4 +1,4 @@
-import { tradesBaseURL, request } from "@services/Auth/ApiRequestsWrapper";
+import { tradesBaseURL, request } from "./ApiRequestsWrapper";
 import { authStorage } from "@services/authStorage"; 
 
 export async function getAllTrades() {
