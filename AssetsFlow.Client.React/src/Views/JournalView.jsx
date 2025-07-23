@@ -19,7 +19,6 @@ function JournalView() {
   if (isLoading) {
     return (
       <LoadingState
-        icon={<TbChartLine size={32} className="text-slate-600" />}
         mainText="Loading your trading journal..."
         subText="Fetching trades and preparing your analysis"
       />
@@ -29,7 +28,6 @@ function JournalView() {
   if (isError) {
     return (
       <ErrorState
-        icon={<TbChartLine size={32} className="text-red-600" />}
         mainText="Error loading trades"
         subText="Please try again later or check your connection"
       />
@@ -39,7 +37,6 @@ function JournalView() {
   if (!trades?.length) {
     return (
       <EmptyState
-        icon={<TbChartLine size={32} className="text-slate-600" />}
         mainText="No trades available"
         subText="Start by adding your first trade to begin tracking your performance"
       />

@@ -6,10 +6,9 @@ function EmptyState({
   mainText = "No items available",
   subText = "Please add some data to get started.",
   icon: Icon = TbChartLine,
-  minHeight = "40vh",
 }) {
   return (
-    <Center className={`min-h-[${minHeight}]`}>
+    <Center className="min-h-[40vh] w-full">
       <Paper 
         shadow="sm" 
         p="xl" 
