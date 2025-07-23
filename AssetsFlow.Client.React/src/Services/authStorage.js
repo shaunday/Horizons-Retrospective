@@ -1,4 +1,4 @@
-import { queryClient } from "../../main";
+import { queryClient } from "@src/main.jsx";
 
 export const USER_QUERY_KEY = ["user"];
 const JWT_KEY = "jwtToken";
