@@ -1,12 +1,14 @@
-import { Title, Text, Button, Flex, Box, Group, Divider } from "@mantine/core";
-import { TbHelp, TbChartLine, TbBook } from "react-icons/tb";
+import { Title, Text, Button, Flex, Box, Group } from "@mantine/core";
+import { TbHelp, TbChartLine, TbUser } from "react-icons/tb";
 import { useDisclosure } from '@mantine/hooks';
 import { useEffect } from 'react';
 import AboutDrawer from "@components/About/AboutDrawer";
+import { useAuth } from "@hooks/Auth/useAuth";  // import your auth hook
 
 function Header() {
   const [opened, { open, close }] = useDisclosure(false);
   const isDev = import.meta.env.DEV;
+  const { user } = useAuth();
 
   useEffect(() => {
     document.title = "HsR" + (isDev ? " [DEV]" : "");
@@ -46,7 +48,16 @@ function Header() {
           </Group>
 
           {/* Right side - Actions */}
-          <Group gap="sm">
+          <Group gap="sm" align="center">
+            {user ? (
+              <Flex align="center" gap={8} className="text-slate-700 font-medium">
+                <TbUser size={18} />
+                <Text size="sm" fw={500} c="dark">
+                  {user.firstName || user.name || "User"}
+                </Text>
+              </Flex>
+            ) : null}
+
             <Button
               variant="subtle"
               size="sm"

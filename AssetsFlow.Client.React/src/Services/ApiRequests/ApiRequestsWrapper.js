@@ -12,12 +12,19 @@ export async function request(url, options = {}, retry = true) {
     ...options.headers,
   };
 
-  const response = await fetch(url, {
-    ...options,
-    headers,
-  });
+  let response;
 
-  // If token expired, try refreshing it
+  try {
+    response = await fetch(url, {
+      ...options,
+      headers,
+    });
+  } catch (networkError) {
+    // This catches DNS errors, connection refused, etc.
+    throw new Error(`Network error: ${networkError.message}`);
+  }
+
+  // Handle 401 and retry with refresh
   if (response.status === 401 && retry) {
     try {
       const refreshed = await refreshToken(); // Call refresh endpoint
@@ -25,18 +32,27 @@ export async function request(url, options = {}, retry = true) {
         authStorage.setAuth(refreshed.token, refreshed.user);
         return request(url, options, false);
       }
-    } catch (e) {
-      // Refresh failed — log out the user
-      authStorage.clearAuth(); // or logout()
-      // todo redirect to login
+    } catch (refreshError) {
+      authStorage.clearAuth();
+      // TODO: redirect to login if needed
+      throw new Error("Session expired. Please log in again.");
     }
   }
 
   if (!response.ok) {
-    throw new Error(`Request failed: ${response.statusText}`);
+    // Try to read text for better error info
+    const errorText = await response.text().catch(() => "");
+    throw new Error(`Request failed: ${response.status} ${response.statusText}\n${errorText}`);
   }
 
-  return response.json();
+  // If response body is empty (204 No Content), return null
+  if (response.status === 204) return null;
+
+  try {
+    return await response.json();
+  } catch (jsonError) {
+    throw new Error("Failed to parse response as JSON.");
+  }
 }
 
 export async function refreshToken() {

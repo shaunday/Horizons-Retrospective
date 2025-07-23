@@ -1,4 +1,3 @@
-// GlobalAppGate.jsx
 import React, { useEffect, useState } from "react";
 import { Stepper, Center, Paper, Stack, Text } from "@mantine/core";
 import { useAuth } from "@hooks/Auth/useAuth";
@@ -9,32 +8,39 @@ import Header from "@views/Header";
 import Footer from "@views/Footer";
 
 export default function GlobalAppGate() {
-  const { user, loginAsDemo } = useAuth();
+  const { loginAsDemo } = useAuth();
   const [authStep, setAuthStep] = useState("pending"); // pending, success, error
 
-  const {
-    isLoading: isTradeLoading,
-    isError: isTradeError,
-    trades,
-  } = useFetchAndCacheTrades();
+  const { isLoading: isTradeLoading, isError: isTradeError } =
+    useFetchAndCacheTrades();
 
   useEffect(() => {
+    let cancelled = false;
+
     async function initialize() {
-      if (!user) {
-        try {
-          setAuthStep("pending");
-          await loginAsDemo();
+      setAuthStep("pending");
+      try {
+        const data = await loginAsDemo();
+        if (!data?.user || !data?.token) {
+          throw new Error("Invalid login response");
+        }
+        if (!cancelled) {
           setAuthStep("success");
-        } catch (e) {
-          console.error("Demo login failed", e);
+        }
+      } catch (e) {
+        console.error("Demo login failed", e);
+        if (!cancelled) {
           setAuthStep("error");
         }
-      } else {
-        setAuthStep("success");
       }
     }
+
     initialize();
-  }, [user, loginAsDemo]);
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const tradeStep = isTradeError
     ? "error"
@@ -46,7 +52,7 @@ export default function GlobalAppGate() {
   return (
     <div id="vwrapper">
       <Header />
-      <main className="min-h-screen bg-stone-50 px-4 py-12">
+      <main className="bg-stone-50 px-4 py-12">
         {authStep === "error" && <ErrorState mainText="Demo login failed" />}
         {tradeStep === "error" && (
           <ErrorState mainText="Failed to load trades" />
@@ -58,7 +64,7 @@ export default function GlobalAppGate() {
               shadow="md"
               p="xl"
               radius="md"
-              className="bg-white border border-slate-200 max-w-md w-full"
+              className="bg-white border border-slate-200 w-full max-w-4xl"
             >
               <Stack gap="md">
                 <Text fw={600} size="lg">
@@ -68,7 +74,7 @@ export default function GlobalAppGate() {
                   active={
                     authStep !== "success" ? 0 : tradeStep !== "success" ? 1 : 2
                   }
-                  orientation="vertical"
+                  orientation="horizontal"
                 >
                   <Stepper.Step
                     label="Authentication"
@@ -76,7 +82,7 @@ export default function GlobalAppGate() {
                       authStep === "success" ? "Logged in" : "Logging in"
                     }
                     loading={authStep === "pending"}
-                    completed={authStep === "success"}
+                    completed={authStep === "success" ? true : undefined}
                   />
                   <Stepper.Step
                     label="Fetching trades"
@@ -86,7 +92,7 @@ export default function GlobalAppGate() {
                         : "Loading trades"
                     }
                     loading={tradeStep === "pending"}
-                    completed={tradeStep === "success"}
+                    completed={tradeStep === "success" ? true : undefined}
                   />
                   <Stepper.Step label="Ready" description="App is ready" />
                 </Stepper>

@@ -4,6 +4,8 @@
 
 - Configure JWT refresh logic - auth/refresh
 
+- fix user entity (remove stuff?), adjust login request to user/pass?
+
 - add ignoreActivation flag to content edit
 - add idea/origin date (not same as trade open)
 - on remove, set condition where net is positive post, otherwise error

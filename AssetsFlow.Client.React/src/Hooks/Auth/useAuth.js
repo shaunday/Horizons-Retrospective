@@ -14,12 +14,8 @@ export function useAuth() {
   });
 
   const loginMutation = useMutation({
-    mutationFn: login,
-    onSuccess: (data) => authStorage.setAuth(data.token, data.user),
-  });
-
-  const loginAsDemoMutation = useMutation({
-    mutationFn: loginAsDemo,
+    mutationFn: ({ isDemo, credentials }) => 
+      isDemo ? loginAsDemo() : login(credentials),
     onSuccess: (data) => authStorage.setAuth(data.token, data.user),
   });
 
@@ -38,15 +34,13 @@ export function useAuth() {
   return {
     user,
     getToken,
-    login: loginMutation.mutateAsync,
-    loginAsDemo: loginAsDemoMutation.mutateAsync,
+    login: (credentials) => loginMutation.mutateAsync({ isDemo: false, credentials }),
+    loginAsDemo: () => loginMutation.mutateAsync({ isDemo: true }),
     register: registerMutation.mutateAsync,
     logout,
     isLoggingIn: loginMutation.isLoading,
-    isLoggingInAsDemo: loginAsDemoMutation.isLoading,
     isRegistering: registerMutation.isLoading,
     loginError: loginMutation.error,
-    loginAsDemoError: loginAsDemoMutation.error,
     registerError: registerMutation.error,
   };
 }

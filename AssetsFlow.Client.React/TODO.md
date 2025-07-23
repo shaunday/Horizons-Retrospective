@@ -1,13 +1,15 @@
 ## 1
 add: seedernpm /admin panel - Use the user’s roles (from the JWT or user object) to show/hide 
 fix: close trade not working
-add: user login, user or top panel
+add: user login
 adjust : risk group's icon, context's icon
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox +  autofill
+add: userinfo on toppanel, tooltip + constants
 
 from limor: edit > expand the object and edit in place?
 from limor: title should be styled diff than the content, text aligned to the left
 add: opened/closedat (just to overview?)
+add: verify auth is checked on gateway+ add min time on ea
 
 
 ## 2.
