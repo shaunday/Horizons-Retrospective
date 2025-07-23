@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import FilterControl from "@journalComponents/Filtering/FilterControl";
 import TradesGallery from "@journalComponents/TradesGallery";
 import { useFetchAndCacheTrades } from "@hooks/Journal/useFetchAndCacheTrades";
 import { useAddTrade } from "@hooks/Journal/useAddTrade";
-import { Button, Stack } from '@mantine/core';
-import { TbPlus } from "react-icons/tb";
-import TradesLoadingState from "@journalComponents/JournalLoadingStates/TradesLoadingState";
-import TradesErrorState from "@journalComponents/JournalLoadingStates/TradesErrorState";
-import TradesEmptyState from "@journalComponents/JournalLoadingStates/TradesEmptyState";
+import { Stack } from "@mantine/core";
+import { TbChartLine, TbPlus } from "react-icons/tb";
+import LoadingState from "@components/Common/LoadingStates/LoadingState";
+import ErrorState from "@components/Common/LoadingStates/ErrorState";
+import EmptyState from "@components/Common/LoadingStates/EmptyState";
 import StyledActionButton from "@components/Common/StyledActionButton";
 
 function JournalView() {
@@ -17,22 +17,43 @@ function JournalView() {
   const onAddTrade = () => addTrade();
 
   if (isLoading) {
-    return <TradesLoadingState />;
+    return (
+      <LoadingState
+        icon={<TbChartLine size={32} className="text-slate-600" />}
+        mainText="Loading your trading journal..."
+        subText="Fetching trades and preparing your analysis"
+      />
+    );
   }
 
   if (isError) {
-    return <TradesErrorState />;
+    return (
+      <ErrorState
+        icon={<TbChartLine size={32} className="text-red-600" />}
+        mainText="Error loading trades"
+        subText="Please try again later or check your connection"
+      />
+    );
+  }
+
+  if (!trades?.length) {
+    return (
+      <EmptyState
+        icon={<TbChartLine size={32} className="text-slate-600" />}
+        mainText="No trades available"
+        subText="Start by adding your first trade to begin tracking your performance"
+      />
+    );
   }
 
   return (
-    <Stack id="journalMainBody" className="bg-stone-50 p-4 border-t border-slate-200">
+    <Stack
+      id="journalMainBody"
+      className="bg-stone-50 p-4 border-t border-slate-200"
+    >
       {/* <FilterControl /> */}
 
-      {trades?.length ? (
-        <TradesGallery newlyAddedTradeId={newlyAddedTradeId} />
-      ) : (
-        <TradesEmptyState />
-      )}
+      <TradesGallery newlyAddedTradeId={newlyAddedTradeId} />
 
       <div className="flex justify-center">
         <StyledActionButton

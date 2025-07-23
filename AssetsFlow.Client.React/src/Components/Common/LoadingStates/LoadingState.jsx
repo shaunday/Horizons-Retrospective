@@ -2,7 +2,11 @@ import React from 'react';
 import { Loader, Text, Center, Paper, Stack } from '@mantine/core';
 import { TbChartLine } from "react-icons/tb";
 
-function TradesLoadingState() {
+function LoadingState({ 
+  mainText = "Loading...", 
+  subText = "Please wait while we process your request.", 
+  icon: Icon = TbChartLine 
+}) {
   return (
     <Center className="min-h-[60vh] bg-stone-50 w-full pb-50">
       <Paper 
@@ -13,14 +17,14 @@ function TradesLoadingState() {
       >
         <Stack align="center" gap="md">
           <div className="bg-slate-100 p-3 rounded-full">
-            <TbChartLine size={32} className="text-slate-600" />
+            <Icon size={32} className="text-slate-600" />
           </div>
           <Loader size="md" color="blue" />
           <Text size="lg" fw={500} c="dimmed">
-            Loading your trading journal...
+            {mainText}
           </Text>
           <Text size="sm" c="dimmed" ta="center">
-            Fetching trades and preparing your analysis
+            {subText}
           </Text>
         </Stack>
       </Paper>
@@ -28,4 +32,4 @@ function TradesLoadingState() {
   );
 }
 
-export default TradesLoadingState; 
+export default LoadingState;

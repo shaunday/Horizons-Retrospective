@@ -2,9 +2,14 @@ import React from 'react';
 import { Text, Center, Paper, Stack } from '@mantine/core';
 import { TbChartLine } from "react-icons/tb";
 
-function TradesEmptyState() {
+function EmptyState({
+  mainText = "No items available",
+  subText = "Please add some data to get started.",
+  icon: Icon = TbChartLine,
+  minHeight = "40vh",
+}) {
   return (
-    <Center className="min-h-[40vh]">
+    <Center className={`min-h-[${minHeight}]`}>
       <Paper 
         shadow="sm" 
         p="xl" 
@@ -13,13 +18,13 @@ function TradesEmptyState() {
       >
         <Stack align="center" gap="md">
           <div className="bg-slate-100 p-3 rounded-full">
-            <TbChartLine size={32} className="text-slate-600" />
+            <Icon size={32} className="text-slate-600" />
           </div>
           <Text size="lg" fw={500} c="dimmed">
-            No trades available
+            {mainText}
           </Text>
           <Text size="sm" c="dimmed" ta="center">
-            Start by adding your first trade to begin tracking your performance
+            {subText}
           </Text>
         </Stack>
       </Paper>
@@ -27,4 +32,4 @@ function TradesEmptyState() {
   );
 }
 
-export default TradesEmptyState; 
+export default EmptyState;

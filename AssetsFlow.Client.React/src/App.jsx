@@ -1,27 +1,28 @@
 import "./App.css";
-import { useState, useEffect } from "react";
-import { useFetchAndCacheTrades } from "@hooks/Journal/useFetchAndCacheTrades";
 import JournalView from "@views/JournalView";
 import { withErrorBoundary } from "react-error-boundary";
 import Header from "@views/Header";
 import Footer from "@views/Footer";
-import { useAutoLoginAsDemo } from "@hooks/Auth/useAutoLoginAsDemo"; 
-
+import DemoLoginGate from "@components/DemoLoginGate";
 
 // Fallback UI component for errors
 function Fallback({ error, resetErrorBoundary }) {
   return (
-    <div role="alert">
+    <div role="alert" className="p-4">
       <p>Something went wrong:</p>
       <pre className="text-red-600">{error.message}</pre>
-      <button onClick={resetErrorBoundary}>Try again</button>
+      <button
+        onClick={resetErrorBoundary}
+        className="mt-2 px-4 py-2 border rounded bg-gray-100 hover:bg-gray-200"
+      >
+        Try again
+      </button>
     </div>
   );
 }
 
 function App() {
-   useAutoLoginAsDemo(); 
-  // const { prefetchTrades } = useFetchAndCacheTrades();
+    // const { prefetchTrades } = useFetchAndCacheTrades();
 
   // useEffect(() => {
   //   prefetchTrades()
@@ -32,21 +33,22 @@ function App() {
   //       console.error("Error prefetching trades:", error);
   //     });
   // }, []); //todo
-
   return (
-    <div id="vwrapper">
-      <Header />
-      <main>
-        <JournalView />
-      </main>
-      <Footer />
-    </div>
+    <DemoLoginGate>
+      <div id="vwrapper">
+        <Header />
+        <main>
+          <JournalView />
+        </main>
+        <Footer />
+      </div>
+    </DemoLoginGate>
   );
 }
 
 export default withErrorBoundary(App, {
   FallbackComponent: Fallback,
   onError(error, info) {
-    console.error("Error occurred:", error);
+    console.error("Error occurred:", error, info);
   },
 });

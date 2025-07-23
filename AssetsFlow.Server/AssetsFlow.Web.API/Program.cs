@@ -4,10 +4,8 @@ using HsR.Common.AspNet;
 using HsR.Infrastructure;
 using HsR.Journal.DataContext;
 using HsR.Journal.DataSeeder;
-using HsR.Journal.Infrastructure;
 using HsR.Journal.Seeder;
 using HsR.UserService.Client.Extensions;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.IdentityModel.Logging;
 using Serilog;
 
@@ -15,7 +13,9 @@ Env.Load(Path.Combine(AppContext.BaseDirectory, ".env"));
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow"));
 
 var builder = WebApplication.CreateBuilder(args).ConfigureLogging();
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddEnvironmentVariables();
 
 Log.Information("Configuring for environment: {Environment}", builder.Environment.EnvironmentName);
 bool isDev = builder.Environment.IsDevelopment();

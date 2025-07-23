@@ -15,7 +15,12 @@ namespace AssetsFlowWeb.API.Configurations
             services.AddSingleton<IJwtService, JwtService>();
 
             var jwtSettings = configuration.GetSection(JwtSettings.SectionName).Get<JwtSettings>() ?? new JwtSettings();
-            var key = Encoding.UTF8.GetBytes(jwtSettings.SecretKey ?? "default_secret");
+
+            if (string.IsNullOrWhiteSpace(jwtSettings.SecretKey))
+                throw new InvalidOperationException("JWT SecretKey must be provided in configuration.");
+
+            var key = Encoding.UTF8.GetBytes(jwtSettings.SecretKey);
+
 
             services.AddAuthentication(options =>
             {
