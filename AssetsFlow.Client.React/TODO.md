@@ -9,8 +9,6 @@ add: userinfo on toppanel, tooltip + constants
 from limor: edit > expand the object and edit in place?
 from limor: title should be styled diff than the content, text aligned to the left
 add: opened/closedat (just to overview?)
-add: verify auth is checked on gateway+ add min time on ea
-
 
 ## 2.
 RQ isloading/error vs statusnots

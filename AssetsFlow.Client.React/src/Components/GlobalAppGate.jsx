@@ -6,59 +6,109 @@ import ErrorState from "@components/Common/LoadingStates/ErrorState";
 import JournalView from "@views/JournalView";
 import Header from "@views/Header";
 import Footer from "@views/Footer";
+import { UserName } from "@constants/constants";
+
+const DELAY_MS = 1000;
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Helper: wait for process and delay concurrently, resolves when both done
+async function waitWithMinDelay(promise, delayMs) {
+  const delayPromise = delay(delayMs);
+  const result = await promise;
+  await delayPromise;
+  return result;
+}
 
 export default function GlobalAppGate() {
-  const { loginAsDemo } = useAuth();
-  const [authStep, setAuthStep] = useState("pending"); // pending, success, error
-
+  const { user, loginAsDemo } = useAuth();
   const { isLoading: isTradeLoading, isError: isTradeError } =
     useFetchAndCacheTrades();
 
-  useEffect(() => {
-    let cancelled = false;
+  const [authStep, setAuthStep] = useState("pending"); // pending, success, error
+  const [tradeStep, setTradeStep] = useState("pending"); // pending, success, error
+  const [allDone, setAllDone] = useState(false);
 
-    async function initialize() {
+  useEffect(() => {
+    async function runSteps() {
       setAuthStep("pending");
+      setTradeStep("pending");
+      setAllDone(false);
+
       try {
-        const data = await loginAsDemo();
+        // Auth step: wait for login + minimum delay
+        const data = await waitWithMinDelay(loginAsDemo(), DELAY_MS);
         if (!data?.user || !data?.token) {
           throw new Error("Invalid login response");
         }
-        if (!cancelled) {
-          setAuthStep("success");
-        }
+        setAuthStep("success");
       } catch (e) {
-        console.error("Demo login failed", e);
-        if (!cancelled) {
-          setAuthStep("error");
-        }
+        setAuthStep("error");
+        return;
       }
+
+      if (isTradeError) {
+        setTradeStep("error");
+        return;
+      }
+
+      // Trades step: wait for trades loading to finish, then minimum delay
+      if (isTradeLoading) {
+        // Poll until loading done
+        await new Promise((resolve) => {
+          const interval = setInterval(() => {
+            if (!isTradeLoading) {
+              clearInterval(interval);
+              resolve();
+            }
+          }, 100);
+        });
+      }
+
+      // Wait at least delay after trades load finished
+      await delay(DELAY_MS);
+
+      setTradeStep("success");
+
+      // Final delay before showing main view
+      await delay(DELAY_MS);
+      setAllDone(true);
     }
 
-    initialize();
+    runSteps();
+  }, [isTradeLoading, isTradeError]);
 
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  if (authStep === "error") {
+    return (
+      <div id="vwrapper">
+        <Header />
+        <main className="bg-stone-50 px-4 py-12">
+          <ErrorState mainText="Demo login failed" />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
-  const tradeStep = isTradeError
-    ? "error"
-    : isTradeLoading
-    ? "pending"
-    : "success";
-  const allDone = authStep === "success" && tradeStep === "success";
-
-  return (
-    <div id="vwrapper">
-      <Header />
-      <main className="bg-stone-50 px-4 py-12">
-        {authStep === "error" && <ErrorState mainText="Demo login failed" />}
-        {tradeStep === "error" && (
+  if (tradeStep === "error") {
+    return (
+      <div id="vwrapper">
+        <Header />
+        <main className="bg-stone-50 px-4 py-12">
           <ErrorState mainText="Failed to load trades" />
-        )}
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
-        {!allDone && authStep !== "error" && tradeStep !== "error" ? (
+  if (!allDone) {
+    return (
+      <div id="vwrapper">
+        <Header />
+        <main className="bg-stone-50 px-4 py-12">
           <Center className="w-full h-full">
             <Paper
               shadow="md"
@@ -79,13 +129,15 @@ export default function GlobalAppGate() {
                   <Stepper.Step
                     label="Authentication"
                     description={
-                      authStep === "success" ? "Logged in" : "Logging in"
+                      authStep === "success"
+                        ? `Logged in as: [${user?.[UserName] ?? "user"}]`
+                        : "Logging in..."
                     }
                     loading={authStep === "pending"}
                     completed={authStep === "success" ? true : undefined}
                   />
                   <Stepper.Step
-                    label="Fetching trades"
+                    label="Fetching trades..."
                     description={
                       tradeStep === "success"
                         ? "Trades loaded"
@@ -99,11 +151,18 @@ export default function GlobalAppGate() {
               </Stack>
             </Paper>
           </Center>
-        ) : null}
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
-        {allDone && <JournalView />}
+  return (
+    <div id="vwrapper">
+      <Header />
+      <main className="bg-stone-50 px-4 py-12">
+        <JournalView />
       </main>
-
       <Footer />
     </div>
   );
