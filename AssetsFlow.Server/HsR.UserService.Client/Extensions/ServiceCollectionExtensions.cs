@@ -1,10 +1,11 @@
 using Grpc.Net.Client;
 using HsR.UserService.Client.Interfaces;
 using HsR.UserService.Client.Models;
+using HsR.UserService.Contracts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System.Net.Http;
 
 namespace HsR.UserService.Client.Extensions;
@@ -13,16 +14,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddUserServiceClient(this IServiceCollection services, IConfiguration configuration)
     {
-        string baseUrl;
-        if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
-        {
-            baseUrl = "http://userservice:80";
-        }
-        else
-        {
-            var userServicePort = Environment.GetEnvironmentVariable("USER_SERVICE_PORT") ?? "7001";
-            baseUrl = $"https://localhost:{userServicePort}";
-        }
+        string baseUrl = UserServiceEx.GetUserServiceUrl();
 
         // Register gRPC channel
         services.AddSingleton(serviceProvider =>

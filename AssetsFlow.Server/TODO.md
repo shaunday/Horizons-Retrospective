@@ -1,6 +1,7 @@
 ﻿
 # TODO
-- replace supa's password, reset db, update db name for user's service
+- replace supa's password, reset db, update db -> name for user's service
+- add version to user.s api
 
 - Configure JWT refresh logic - auth/refresh
 
@@ -11,8 +12,6 @@
 - on remove, set condition where net is positive post, otherwise error
 - rethink isContentMissing - either way dont need to reload all tradeComposite to get it, you always got the old one (in the fe at least)
 - closed trade logic : deny edits/ re-open trade to allow edit?
-
-- dup code under " // Determine the base URL based on environment"
 
 ## security
  - bcrypt (encrypt passwords), firebase (more auth)

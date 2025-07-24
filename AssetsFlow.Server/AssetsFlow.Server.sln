@@ -65,7 +65,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserService", "UserService", "{46B455BF-9472-4F21-B4B0-63627CF80A7E}"
 	ProjectSection(SolutionItems) = preProject
 		..\Common.Net\HsR.UserService.All\CHANGELOG.md = ..\Common.Net\HsR.UserService.All\CHANGELOG.md
-		..\Common.Net\HsR.UserService.All\TODO.md = ..\Common.Net\HsR.UserService.All\TODO.md
 		..\Common.Net\HsR.UserService.All\HsR.UserService.Host\version.txt = ..\Common.Net\HsR.UserService.All\HsR.UserService.Host\version.txt
 	EndProjectSection
 EndProject

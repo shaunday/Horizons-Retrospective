@@ -2,6 +2,7 @@ using HsR.UserService.Host.Configurations;
 using HsR.UserService.Infrastructure;
 using DotNetEnv;
 using Serilog;
+using HsR.UserService.Contracts;
 
 namespace HsR.UserService.Host.Configurations
 {
@@ -14,18 +15,9 @@ namespace HsR.UserService.Host.Configurations
             builder.Host.UseSerilog();
 
             // Determine the base URL based on environment
-            string baseUrl;
-            if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
-            {
-                baseUrl = "http://userservice:80";
-            }
-            else
-            {
-                var userServicePort = Environment.GetEnvironmentVariable("USER_SERVICE_PORT") ?? "7001";
-                baseUrl = $"https://localhost:{userServicePort}";
-            }
-            builder.WebHost.UseUrls(baseUrl);
+            string baseUrl = UserServiceEx.GetUserServiceUrl();
 
+            builder.WebHost.UseUrls(baseUrl);
             return builder;
         }
 

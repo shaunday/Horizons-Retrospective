@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="../HsR.UserService/HsR.UserService.csproj" />
     <ProjectReference Include="../../../Common.Net/HsR.Common.AspNet/HsR.Common.AspNet.csproj" />
+    <ProjectReference Include="..\HsR.UserService.Contracts\HsR.UserService.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
