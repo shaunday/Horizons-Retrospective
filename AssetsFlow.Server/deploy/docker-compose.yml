@@ -15,11 +15,11 @@ services:
       - ./nginx/start-nginx.sh:/start-nginx.sh
     entrypoint: /bin/bash /start-nginx.sh
     networks:
-      - app-net
+      - af-net
 
-  web-api:
+  assetsflow-api:
     image: ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:latest
-    container_name: aspapp
+    container_name: journalmain
     expose:
       - "80"
     environment:
@@ -29,7 +29,21 @@ services:
     env_file:
       - .env
     networks:
-      - app-net
+      - af-net
+      
+  userservice:
+    image: ghcr.io/shaunday/horizons-retrospective/userservice-backend:latest
+    container_name: userservice
+    expose:
+      - "80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    volumes:
+      - ./logs:/app/logs
+    env_file:
+      - .env
+    networks:
+      - af-net
 
 networks:
-  app-net:
+  af-net:
