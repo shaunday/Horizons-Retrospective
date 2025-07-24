@@ -8,6 +8,7 @@ namespace AssetsFlowWeb.API.Controllers
     [Route("hsr-api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
     [ApiController]
+    [ResponseCache(Duration = 1800, Location = ResponseCacheLocation.Client)]
     public class InfoController(IWebHostEnvironment env) : ControllerBase
     {
         private readonly IWebHostEnvironment _env = env;

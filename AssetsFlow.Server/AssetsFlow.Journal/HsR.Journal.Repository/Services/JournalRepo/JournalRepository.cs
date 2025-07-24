@@ -14,7 +14,6 @@ namespace HsR.Journal.DataContext
         public async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)> GetAllTradeCompositesAsync(Guid userId, int pageNumber = 1, int pageSize = 10)
         {
             var query = _dataContext.TradeComposites
-                .AsNoTracking()
                 .Where(tc => tc.UserId == userId)
                 .AsQueryable();
             return await GetPaginatedTradesAsync(query, pageNumber, pageSize);
@@ -52,6 +51,7 @@ namespace HsR.Journal.DataContext
             var trades = await query.OrderBy(t => t.Id)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
+                .AsNoTracking()
                 .ToListAsync();
 
             return (trades, totalCount);

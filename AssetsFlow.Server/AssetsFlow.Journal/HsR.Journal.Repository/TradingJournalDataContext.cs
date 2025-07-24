@@ -17,11 +17,7 @@ namespace HsR.Journal.DataContext
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new UserDataConfig());
-
-            modelBuilder.ApplyConfiguration(new TradeCompositeConfig());
-            modelBuilder.ApplyConfiguration(new TradeElementsConfig());
-            modelBuilder.ApplyConfiguration(new DataElementConfig());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(TradingJournalDataContext).Assembly);
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

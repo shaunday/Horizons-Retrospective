@@ -12,6 +12,7 @@
 - on remove, set condition where net is positive post, otherwise error
 - rethink isContentMissing - either way dont need to reload all tradeComposite to get it, you always got the old one (in the fe at least)
 - closed trade logic : deny edits/ re-open trade to allow edit?
+- filtering/sortby/search by
 
 ## security
  - bcrypt (encrypt passwords), firebase (more auth)

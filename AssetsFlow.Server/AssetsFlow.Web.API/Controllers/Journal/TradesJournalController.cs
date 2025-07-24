@@ -40,6 +40,7 @@ namespace HsR.Web.API.Controllers.Journal
         {
             var userId = GetUserIdFromClaims();
             pageSize = ValidatePageSize(pageSize);
+            if (pageNumber <= 0) pageNumber = 1;
 
             IEnumerable<TradeCompositeModel>? paginatedTradeDTOs;
             int totalTradesCount;

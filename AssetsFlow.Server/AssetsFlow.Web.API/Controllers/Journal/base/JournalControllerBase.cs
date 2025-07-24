@@ -7,6 +7,7 @@ using HsR.Web.Services.Models.Journal;
 
 namespace HsR.Web.API.Controllers.Journal
 {
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class JournalControllerBase : HsRControllerBase
     {
         private protected readonly string NEW_CELL_DATA = "updatedCellData";
