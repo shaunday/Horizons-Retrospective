@@ -17,7 +17,7 @@ namespace HsR.UserService.Host.Configurations
             string baseUrl;
             if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
             {
-                baseUrl = "http://0.0.0.0:80";
+                baseUrl = "http://userservice:80";
             }
             else
             {
