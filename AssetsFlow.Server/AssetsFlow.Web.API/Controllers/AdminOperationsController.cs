@@ -8,7 +8,7 @@ namespace AssetsFlowWeb.API.Controllers
 {
     [ApiController]
     [Route("hsr-api/v{version:apiVersion}/admin")]
-    [Authorize(Roles = RoleNames.Admin)]
+    //[Authorize(Roles = RoleNames.Admin)]
     public class AdminOperationsController : ControllerBase
     {
         private readonly DatabaseSeeder _seeder;

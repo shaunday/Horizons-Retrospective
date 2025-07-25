@@ -12,7 +12,8 @@ namespace HsR.Journal.Repository.Configurations
 
             builder.HasOne(tc => tc.Summary)
                  .WithOne()
-                 .HasForeignKey<TradeComposite>("SummaryId"); //shadow prop
+                 .HasForeignKey<TradeComposite>("SummaryId") //shadow prop
+                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Navigation(tc => tc.Summary).AutoInclude();
 

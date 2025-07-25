@@ -35,7 +35,7 @@ export default function Footer() {
     >
       <Group justify="space-between" align="center" className="text-xs">
         {/* Copyright */}
-        <Text size="xs" className="text-slate-600 font-medium">
+        <Text fz="xs" className="text-slate-600 font-medium">
           &copy; Shaun Day 2025
         </Text>
 
@@ -44,16 +44,16 @@ export default function Footer() {
           {/* Frontend Info */}
           <Group gap="xs" align="center">
             <TbCode size={12} className="text-slate-500" />
-            <Text size="xs" className="text-slate-600 font-medium">FE:</Text>
-            <Text size="xs" className="text-slate-700">v{__APP_VERSION__}</Text>
+            <Text fz="xs" className="text-slate-600 font-medium">FE:</Text>
+            <Text fz="xs" className="text-slate-700">v{__APP_VERSION__}</Text>
             <TbCalendar size={12} className="text-slate-500" />
-            <Text size="xs" className="text-slate-700">
+            <Text fz="xs" className="text-slate-700">
               {new Date(__APP_BUILD_DATE__).toLocaleDateString()}
             </Text>
             {showCommits && (
               <>
                 <TbGitBranch size={12} className="text-slate-500" />
-                <Text size="xs" className="text-slate-700 font-mono">
+                <Text fz="xs" className="text-slate-700 font-mono">
                   {__GIT_COMMIT__?.substring(0, 7)}
                 </Text>
               </>
@@ -65,16 +65,16 @@ export default function Footer() {
           {/* Backend Info */}
           <Group gap="xs" align="center">
             <TbCode size={12} className="text-slate-500" />
-            <Text size="xs" className="text-slate-600 font-medium">BE:</Text>
-            <Text size="xs" className="text-slate-700">{backendVersion}</Text>
+            <Text fz="xs" className="text-slate-600 font-medium">BE:</Text>
+            <Text fz="xs" className="text-slate-700">{backendVersion}</Text>
             <TbCalendar size={12} className="text-slate-500" />
-            <Text size="xs" className="text-slate-700">
+            <Text fz="xs" className="text-slate-700">
               {new Date(backendBuildTimestamp).toLocaleDateString()}
             </Text>
             {showCommits && (
               <>
                 <TbGitBranch size={12} className="text-slate-500" />
-                <Text size="xs" className="text-slate-700 font-mono">
+                <Text fz="xs" className="text-slate-700 font-mono">
                   {backendCommit?.substring(0, 7)}
                 </Text>
               </>

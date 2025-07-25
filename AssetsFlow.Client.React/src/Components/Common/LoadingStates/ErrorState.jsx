@@ -24,10 +24,10 @@ function ErrorState({
               <Icon size={32} className={`text-${color}-600`} />
             </div>
           )}
-          <Text size="lg" fw={500} c={color}>
+          <Text fz="lg" fw={500} c={color}>
             {mainText}
           </Text>
-          <Text size="sm" c="dimmed" ta="center">
+          <Text fz="sm" c="dimmed" ta="center">
             {subText}
           </Text>
           <Button variant="outline" color={color} size="sm" onClick={onRetry}>

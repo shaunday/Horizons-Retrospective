@@ -107,7 +107,7 @@ export default function GlobalAppGate() {
   if (!allDone) {
     return (
       <div id="vwrapper">
-        <Header />
+        <Header showUserActions={false}/>
         <main className="bg-stone-50 px-4 py-12">
           <Center className="w-full h-full">
             <Paper
@@ -117,7 +117,7 @@ export default function GlobalAppGate() {
               className="bg-white border border-slate-200 w-full max-w-4xl"
             >
               <Stack gap="md">
-                <Text fw={600} size="lg">
+                <Text fw={600} fz="lg">
                   Initializing Application
                 </Text>
                 <Stepper
@@ -134,7 +134,7 @@ export default function GlobalAppGate() {
                         : "Logging in..."
                     }
                     loading={authStep === "pending"}
-                    completed={authStep === "success" ? true : undefined}
+                    {...(authStep === "success" ? { completed: true } : {})}
                   />
                   <Stepper.Step
                     label="Fetching trades..."
@@ -144,7 +144,7 @@ export default function GlobalAppGate() {
                         : "Loading trades"
                     }
                     loading={tradeStep === "pending"}
-                    completed={tradeStep === "success" ? true : undefined}
+                    {...(tradeStep === "success" ? { completed: true } : {})}
                   />
                   <Stepper.Step label="Ready" description="App is ready" />
                 </Stepper>

@@ -19,10 +19,10 @@ function EmptyState({
           <div className="bg-slate-100 p-3 rounded-full">
             <Icon size={32} className="text-slate-600" />
           </div>
-          <Text size="lg" fw={500} c="dimmed">
+          <Text fz="lg" fw={500} c="dimmed">
             {mainText}
           </Text>
-          <Text size="sm" c="dimmed" ta="center">
+          <Text fz="sm" c="dimmed" ta="center">
             {subText}
           </Text>
         </Stack>

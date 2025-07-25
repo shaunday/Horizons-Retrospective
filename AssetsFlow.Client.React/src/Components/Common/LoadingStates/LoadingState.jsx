@@ -20,10 +20,10 @@ function LoadingState({
             <Icon size={32} className="text-slate-600" />
           </div>
           <Loader size="md" color="blue" />
-          <Text size="lg" fw={500} c="dimmed">
+          <Text fz="lg" fw={500} c="dimmed">
             {mainText}
           </Text>
-          <Text size="sm" c="dimmed" ta="center">
+          <Text fz="sm" c="dimmed" ta="center">
             {subText}
           </Text>
         </Stack>

@@ -30,28 +30,27 @@ function DataUpdateModal({ opened, onClose, onSubmit, data }) {
     e.stopPropagation();
   };
 
-  // Check if the current value is allowed if there are restrictions
   const isRestrictedValid =
     !textRestrictionsExist || textRestrictions.includes(form.values.value);
 
   return (
-    <Modal 
-      size="lg" 
+    <Modal
+      size="lg"
       centered
       opened={opened}
       onClose={onClose}
-      title={data[Constants.DATA_TITLE_STRING]}
+      title={
+        <div className="text-lg font-semibold text-gray-700 text-center">
+          {data[Constants.DATA_TITLE_STRING]}
+        </div>
+      }
       onClick={handleModalClick}
-      styles={{
-        title: {
-          fontSize: '18px',
-          fontWeight: '600',
-          color: '#374151',
-          textAlign: 'center',
-        }
-      }}
     >
-      <form onSubmit={form.onSubmit(handleSubmit)} onClick={handleModalClick}>
+      <form
+        onSubmit={form.onSubmit(handleSubmit)}
+        onClick={handleModalClick}
+        className="space-y-4"
+      >
         {textRestrictionsExist ? (
           <DefaultSelect
             value={form.values.value}
@@ -59,28 +58,31 @@ function DataUpdateModal({ opened, onClose, onSubmit, data }) {
             data={textRestrictions}
           />
         ) : (
-          <Textarea autosize maxRows={2}
+          <Textarea
+            autosize
+            maxRows={2}
             label="Value"
-            className="mb-5"
             {...form.getInputProps("value")}
           />
         )}
 
-        <Textarea autosize maxRows={2}
+        <Textarea
+          autosize
+          maxRows={2}
           label="Change Details"
-          className="mb-5 mt-4"
           {...form.getInputProps("changeDetails")}
         />
 
-        <StyledActionButton
-          type="submit"
-          icon={<TbCheck size={20} />}
-          disabled={!isRestrictedValid}
-          className="block mx-auto"
-          onClick={handleModalClick}
-        >
-          Apply Changes
-        </StyledActionButton>
+        <div className="flex justify-center">
+          <StyledActionButton
+            type="submit"
+            icon={<TbCheck size={20} />}
+            disabled={!isRestrictedValid}
+            onClick={handleModalClick}
+          >
+            Apply Changes
+          </StyledActionButton>
+        </div>
       </form>
     </Modal>
   );
