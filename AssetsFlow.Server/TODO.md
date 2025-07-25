@@ -2,6 +2,7 @@
 # TODO
 - replace supa's password, reset db, update db -> name for user's service
 - add version to user.s api
+-  builder.HasIndex(de => de.UserId); for all?
 
 - Configure JWT refresh logic - auth/refresh
 

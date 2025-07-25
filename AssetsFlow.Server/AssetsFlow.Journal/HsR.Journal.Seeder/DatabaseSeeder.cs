@@ -120,13 +120,39 @@ namespace HsR.Journal.Seeder
 
         public async Task DeleteAllDemoUserTradesAsync()
         {
-            var demoTrades = dbContext.TradeComposites.Where(t => t.UserId == _demoUserId);
-            dbContext.TradeComposites.RemoveRange(demoTrades);
-            var demoElements = dbContext.TradeElements.Where(e => e.UserId == _demoUserId);
-            dbContext.TradeElements.RemoveRange(demoElements);
-            var demoEntries = dbContext.Entries.Where(e => e.UserId == _demoUserId);
-            dbContext.Entries.RemoveRange(demoEntries);
+            // 1. Null out circular references
+            var summaries = await dbContext.TradeElements
+                .OfType<TradeSummary>()
+                .Where(s => s.UserId == _demoUserId)
+                .ToListAsync();
+
+            foreach (var summary in summaries)
+            {
+                summary.CompositeRef = null!;
+            }
+
+            var composites = await dbContext.TradeComposites
+                .Where(c => c.UserId == _demoUserId)
+                .ToListAsync();
+
+            foreach (var composite in composites)
+            {
+                composite.Summary = null!;
+            }
+
+            await dbContext.SaveChangesAsync(); // Apply nulls to break cycles
+
+            // 2. Delete in FK-safe order: Entries → Elements → Composites
+            var entries = dbContext.Entries.Where(e => e.UserId == _demoUserId);
+            dbContext.Entries.RemoveRange(entries);
+
+            var elements = dbContext.TradeElements.Where(e => e.UserId == _demoUserId);
+            dbContext.TradeElements.RemoveRange(elements);
+
+            dbContext.TradeComposites.RemoveRange(composites); // already queried above
+
             await dbContext.SaveChangesAsync();
         }
+
     }
 }

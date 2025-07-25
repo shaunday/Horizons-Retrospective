@@ -47,7 +47,7 @@ namespace HsR.Journal.Repository.Services.Base
 
         protected async Task<InterimTradeElement> GetTradeElementAsync(int tradeEleId, bool loadComposite = false)
         {
-            var query = _dataContext.TradeElements.AsQueryable();
+            var query = _dataContext.TradeElements.OfType<InterimTradeElement>().AsQueryable();
             if (loadComposite)
             {
                 query = query.Include(te => te.CompositeRef);
