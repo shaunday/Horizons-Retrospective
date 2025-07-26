@@ -1,5 +1,5 @@
 
-## [0.9.510-s] - 2025-07-...
+## [0.9.510-s] - 2025-07-26
 - User Service with gRPC + host + unittests
 - DemoUser Seeder
 - Factory work, only 1 method open to public now 
