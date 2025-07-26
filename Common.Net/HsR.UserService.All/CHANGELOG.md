@@ -1,5 +1,10 @@
 
-## [0.9.100-s.u] - 2025-07-...
+
+## [0.9.321-b.us] - 2025-07-26
+- Supabase connention/auth support
+
+
+## [0.9.320-b.us] - 2025-07-26
 - User Service
 
 

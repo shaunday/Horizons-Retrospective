@@ -24,7 +24,7 @@ namespace HsR.UserService.Host.Configurations
         public static string GetUserServiceConnectionString(this WebApplicationBuilder builder)
         {
             bool isDev = builder.Environment.IsDevelopment();
-            return DbConnectionsWrapper.GetConnectionStringByEnv(isDev);
+            return UsersDbConnectionsWrapper.GetConnectionStringByEnv(isDev);
         }
     }
 } 
