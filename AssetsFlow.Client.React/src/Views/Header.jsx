@@ -1,4 +1,4 @@
-import { Title, Text, Button, Flex, Box, Group } from "@mantine/core";
+import { Title, Loader, Text, Button, Flex, Box, Group } from "@mantine/core";
 import { TbHelp, TbChartLine, TbUser } from "react-icons/tb";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
@@ -90,9 +90,15 @@ function Header({ showUserActions = true }) {
                 variant="subtle"
                 size="sm"
                 onClick={handleReseed}
-                loading={isReseeding}
-                loaderPosition="left"
+                leftSection={
+                  isReseeding ? (
+                    <Loader size={16} />
+                  ) : (
+                    <span style={{ width: 16, display: "inline-block" }} />
+                  )
+                }
                 className="text-slate-600 hover:text-slate-800 hover:bg-slate-200 transition-colors"
+                disabled={isReseeding}
               >
                 {isReseeding ? "Reseeding..." : "Reseed Demo Data"}
               </Button>
