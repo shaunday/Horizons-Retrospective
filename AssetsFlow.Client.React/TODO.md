@@ -1,7 +1,6 @@
 ## 1
 fix: close trade not working
 
-adjust : risk group's icon, context's icon
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox +  autofill
 from limor: edit > expand the object and edit in place?
 from limor: title should be styled diff than the content, text aligned to the left
