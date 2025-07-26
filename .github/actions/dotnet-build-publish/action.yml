@@ -34,6 +34,7 @@ runs:
     - name: Fetch Git tags
       if: steps.check_changes.outputs.should_build == 'true'
       run: git fetch --tags --force
+      shell: bash
 
     - name: Build .NET solution
       if: steps.check_changes.outputs.should_build == 'true'
