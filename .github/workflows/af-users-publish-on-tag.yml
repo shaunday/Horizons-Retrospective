@@ -5,7 +5,7 @@ on:
     tags:
       - 'v*'
     paths:
-      - "Common.Net/HsR.UserService/**"
+      - "Common.Net/HsR.UserService.All/**"
   workflow_dispatch:
 
 jobs:
