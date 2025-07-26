@@ -5,17 +5,19 @@ on:
     tags:
       - 'v*'
     paths:
-      - "Common.Net/HsR.UserService/**"
+      - "Common.Net/HsR.UserService.All/**"
   workflow_dispatch:
 
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        
       - name: Run Dotnet Build & Publish Action
         uses: ./.github/actions/dotnet-build-publish
         with:
-          solution-path: ./AssetsFlow.Server
-          project-path: ./Common.Net/HsR.UserService/HsR.UserService
+          project-path: ./Common.Net/HsR.UserService.All/HsR.UserService.Host
           image-name: userservice-backend
           github-token: ${{ secrets.GITHUB_TOKEN }}
