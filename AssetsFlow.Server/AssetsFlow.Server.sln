@@ -16,7 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{431FEC36-857D-4990-A331-54C7FCDA5E92}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		..\.env.AssetsFlow = ..\.env.AssetsFlow
+		..\.env.Global = ..\.env.Global
 		..\.NET Release Checklist.txt = ..\.NET Release Checklist.txt
 		CHANGELOG.md = CHANGELOG.md
 		TODO.md = TODO.md

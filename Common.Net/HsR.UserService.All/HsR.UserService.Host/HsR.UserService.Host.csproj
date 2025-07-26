@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -28,19 +28,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update=".env">
+    <None Update=".env.UserService">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <Target Name="CopySharedEnvFile" AfterTargets="Build">
-    <Copy SourceFiles="..\..\..\.env.AssetsFlow" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="..\..\..\.env.Global" DestinationFolder="$(OutputPath)" />
   </Target>
 
 </Project> 

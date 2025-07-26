@@ -7,8 +7,8 @@ using HsR.UserService.Services;
 using Serilog;
 
 // Load  environment variables
-Env.Load(Path.Combine(AppContext.BaseDirectory, ".env"));
-Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow"));
+Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.UserService"));
+Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.Global"));
 
 var builder = WebApplication.CreateBuilder(args)
     .ConfigureUserServiceHost();

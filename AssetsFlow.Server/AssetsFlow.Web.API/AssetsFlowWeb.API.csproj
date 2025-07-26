@@ -46,13 +46,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update=".env">
+    <None Update=".env.AssetsFlow.Server">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <Target Name="CopySharedEnvFile" AfterTargets="Build">
-    <Copy SourceFiles="..\..\.env.AssetsFlow" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="..\..\.env.Global" DestinationFolder="$(OutputPath)" />
   </Target>
 
 </Project>

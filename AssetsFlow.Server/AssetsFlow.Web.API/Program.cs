@@ -9,8 +9,8 @@ using HsR.UserService.Client.Extensions;
 using Microsoft.IdentityModel.Logging;
 using Serilog;
 
-Env.Load(Path.Combine(AppContext.BaseDirectory, ".env"));
-Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow"));
+Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.Global"));
+Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow.Server"));
 
 var builder = WebApplication.CreateBuilder(args).ConfigureLogging();
 builder.Configuration
