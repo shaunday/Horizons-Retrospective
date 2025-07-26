@@ -3,12 +3,12 @@ description: "Restore, build, and optionally test a .NET project"
 
 inputs:
   solution-path:
-    required: true
     description: "Path to the solution directory"
+    required: true
   run-tests:
+    description: "Run tests if true"
     required: false
     default: "false"
-    description: "Run tests if true"
 
 runs:
   using: "composite"
@@ -22,17 +22,17 @@ runs:
         dotnet-version: "9.0.x"
 
     - name: Restore
-      run: dotnet restore
       shell: bash
+      run: dotnet restore
       working-directory: ${{ inputs.solution-path }}
 
     - name: Build
-      run: dotnet build --no-restore
       shell: bash
+      run: dotnet build --no-restore
       working-directory: ${{ inputs.solution-path }}
 
     - name: Test
       if: ${{ inputs.run-tests == 'true' }}
-      run: dotnet test --no-build --verbosity normal
       shell: bash
+      run: dotnet test --no-build --verbosity normal
       working-directory: ${{ inputs.solution-path }}
