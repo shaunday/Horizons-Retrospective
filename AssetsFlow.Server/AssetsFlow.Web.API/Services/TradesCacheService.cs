@@ -115,6 +115,9 @@ namespace HsR.Web.API.Services
         // Public invalidate and reload, the only way to trigger cache reload
         public void InvalidateAndReload(Guid userId)
         {
+            if (userId == Guid.Empty)
+                return;
+
             lock (_loadSemaphore)
             {
                 // Enforce dictionary size limit

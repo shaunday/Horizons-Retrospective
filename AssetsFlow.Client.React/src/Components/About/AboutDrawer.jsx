@@ -17,7 +17,7 @@ const AboutDrawer = ({ opened, onClose }) => {
         },
       }}
     >
-      <Stack gao="sm">
+      <Stack gap="sm">
         <Text>
           This is an online trading journal that allows you to record trades
           from an <b>idea stage</b> through building or reducing a position,

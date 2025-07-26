@@ -1,4 +1,4 @@
-import { authStorage } from "@services/authStorage"; 
+import { authStorage } from "@services/authStorage";
 
 export const baseURL = import.meta.env.VITE_API_URL;
 export const tradesBaseURL = `${baseURL}${import.meta.env.VITE_JOURNAL_TRADES_SUFFIX}`;
@@ -33,7 +33,7 @@ export async function request(url, options = {}, retry = true) {
         return request(url, options, false);
       }
     } catch (refreshError) {
-      authStorage.clearAuth();
+      authStorage.clearAll();
       // TODO: redirect to login if needed
       throw new Error("Session expired. Please log in again.");
     }
@@ -59,6 +59,8 @@ export async function refreshToken() {
   const response = await request(`${baseURL}auth/refresh`, {
     method: "POST",
     credentials: "include", // Only if your refresh token is in a cookie
-  });
+  },
+    +    false
+  );
   return response;
 }
