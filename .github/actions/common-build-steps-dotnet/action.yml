@@ -2,8 +2,8 @@ name: "Common .NET Build Steps"
 description: "Restore, build, and optionally test a .NET project"
 
 inputs:
-  solution-path:
-    description: "Path to the solution directory"
+  project-path:
+    description: "Path to the .csproj file to build"
     required: true
   run-tests:
     description: "Run tests if true"
@@ -23,16 +23,13 @@ runs:
 
     - name: Restore
       shell: bash
-      run: dotnet restore
-      working-directory: ${{ inputs.solution-path }}
+      run: dotnet restore ${{ inputs.project-path }}
 
     - name: Build
       shell: bash
-      run: dotnet build --no-restore
-      working-directory: ${{ inputs.solution-path }}
+      run: dotnet build --no-restore ${{ inputs.project-path }}
 
     - name: Test
       if: ${{ inputs.run-tests == 'true' }}
       shell: bash
-      run: dotnet test --no-build --verbosity normal
-      working-directory: ${{ inputs.solution-path }}
+      run: dotnet test --no-build --verbosity normal ${{ inputs.project-path }}
