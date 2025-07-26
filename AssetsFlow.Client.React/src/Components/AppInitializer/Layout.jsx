@@ -4,7 +4,7 @@ import Footer from "@views/Footer";
 
 export default function Layout({ children, showUserActions = true }) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="h-full flex flex-col">
       <Header showUserActions={showUserActions} />
       <main className="flex-1 overflow-y-auto">{children}</main>
       <Footer />

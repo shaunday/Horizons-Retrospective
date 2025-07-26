@@ -9,14 +9,6 @@ import { UserName } from "@constants/constants";
 export default function GlobalAppGate() {
   const { authStep, tradeStep, allDone, user } = useAppGate();
 
-return (
-    <Layout>
-      <div style={{ height: 2000, background: "linear-gradient(#eee, #ccc)" }}>
-        Scroll me
-      </div>
-    </Layout>
-  );
-
   if (authStep === "error") {
     return (
       <Layout>
