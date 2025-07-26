@@ -1,6 +1,6 @@
 import "./App.css";
 import { withErrorBoundary } from "react-error-boundary";
-import GlobalAppGate from "@components/GlobalAppGate";
+import GlobalAppGate from "@components/AppInitializer/GlobalAppGate";
 
 // Fallback UI component for unhandled errors
 function Fallback({ error, resetErrorBoundary }) {
