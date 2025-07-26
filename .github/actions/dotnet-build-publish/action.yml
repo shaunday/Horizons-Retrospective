@@ -2,9 +2,6 @@ name: 'Dotnet Build & Publish'
 description: 'Builds .NET project and publishes Docker image with version.txt version check'
 
 inputs:
-  solution-path:
-    description: 'Path to the solution folder (for dotnet build)'
-    required: true
   project-path:
     description: 'Path to the folder containing the .csproj file to publish'
     required: true
@@ -25,11 +22,6 @@ runs:
       shell: bash
       run: git fetch --tags --force
 
-    - name: Build .NET solution
-      uses: ./.github/actions/common-build-steps-dotnet
-      with:
-        solution-path: ${{ inputs.solution-path }}
-
     - name: Detect .csproj file in project folder
       id: detect_project
       shell: bash
@@ -40,6 +32,11 @@ runs:
           exit 1
         fi
         echo "project-file=$PROJECT_FILE" >> $GITHUB_OUTPUT
+
+    - name: Build .NET project
+      uses: ./.github/actions/common-build-steps-dotnet
+      with:
+        project-path: ${{ steps.detect_project.outputs.project-file }}
 
     - name: Publish .NET project
       shell: bash
