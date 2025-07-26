@@ -1,5 +1,4 @@
 ## 1
-reseed : refresh trades, no text, no notification
 fix: close trade not working
 
 adjust : risk group's icon, context's icon

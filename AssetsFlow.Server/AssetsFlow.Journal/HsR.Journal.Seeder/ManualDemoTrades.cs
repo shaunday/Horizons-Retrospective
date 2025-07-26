@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace HsR.Journal.Seeder
 {
     public static class ManualDemoTrades
@@ -109,5 +107,139 @@ namespace HsR.Journal.Seeder
             { "W/L", "W" },
             { "Lessons", "Patience paid off, but risk was high." }
         };
+
+        // Trade 4: Idea, add, evaluate, close
+        public static readonly Dictionary<string, string> Trade4_Idea = new()
+    {
+        { "Ticker", "AMZN" },
+        { "Direction", "Long" },
+        { "Thesis", "Strong growth in e-commerce and AWS driving revenues." },
+        { "Aligned TA", "Bullish breakout above resistance at 3300." },
+        { "Sector/FA", "Consumer discretionary, strong cash flow." },
+        { "Certainty", "Mid" },
+        { "Contras", "High valuation, competition risks." },
+        { "Invalidation", "Break below 3200 support." },
+        { "Target", "3600" },
+        { "Time Frame", "2-3 months" }
+    };
+        public static readonly Dictionary<string, string> Trade4_Add1 = new()
+    {
+        { "Broker", "Schwab" },
+        { "Sector", "Consumer Discretionary" },
+        { "Reasoning", "Entered on breakout confirmation." },
+        { "Emotions", "Optimistic" },
+        { "Price", "3320" },
+        { "Amount", "10" },
+        { "Total Cost", "33200" },
+        { "Time Frame", "1 month" },
+        { "Target", "3500" },
+        { "SL", "3200" },
+        { "R:R", "3:1" }
+    };
+        public static readonly Dictionary<string, string> Trade4_Evaluate = new()
+    {
+        { "General", "Price consolidating near target." },
+        { "D/W/M str?", "Daily uptrend intact." },
+        { "Momentum", "Moderate" },
+        { "Fta reached?", "No" },
+        { "NTA", "Hold, watch volume." }
+    };
+        public static readonly Dictionary<string, string> Trade4_Close = new()
+    {
+        { "W/L", "W" },
+        { "Lessons", "Patience and position sizing paid off." }
+    };
+
+        // Trade 5: Idea, adds, evaluate
+        public static readonly Dictionary<string, string> Trade5_Idea = new()
+    {
+        { "Ticker", "NFLX" },
+        { "Direction", "Short" },
+        { "Thesis", "Subscriber growth slowing, increasing competition." },
+        { "Aligned TA", "Bearish head and shoulders on weekly chart." },
+        { "Sector/FA", "Communication services, volatile earnings." },
+        { "Certainty", "Low" },
+        { "Contras", "Content investments may spur growth." },
+        { "Invalidation", "Breaks above 650." },
+        { "Target", "520" },
+        { "Time Frame", "1-2 months" }
+    };
+        public static readonly Dictionary<string, string> Trade5_Add1 = new()
+    {
+        { "Broker", "E-Trade" },
+        { "Sector", "Communication Services" },
+        { "Reasoning", "Entered after neckline break." },
+        { "Emotions", "Cautious" },
+        { "Price", "600" },
+        { "Amount", "8" },
+        { "Total Cost", "4800" },
+        { "Time Frame", "1 month" },
+        { "Target", "540" },
+        { "SL", "650" },
+        { "R:R", "2.5:1" }
+    };
+        public static readonly Dictionary<string, string> Trade5_Add2 = new()
+    {
+        { "Reasoning", "Added after retest of breakdown." },
+        { "Emotions", "Confident" },
+        { "Price", "580" },
+        { "Amount", "5" },
+        { "Total Cost", "2900" },
+        { "Time Frame", "3 weeks" },
+        { "Target", "510" },
+        { "SL", "630" },
+        { "R:R", "3:1" }
+    };
+        public static readonly Dictionary<string, string> Trade5_Evaluate = new()
+    {
+        { "General", "Price trending lower, but volatile." },
+        { "D/W/M str?", "Weekly downtrend confirmed." },
+        { "Momentum", "Strong" },
+        { "Fta reached?", "No" },
+        { "NTA", "Hold with tight stops." }
+    };
+
+        // Trade 6: Idea, add, evaluate, close
+        public static readonly Dictionary<string, string> Trade6_Idea = new()
+    {
+        { "Ticker", "GOOGL" },
+        { "Direction", "Long" },
+        { "Thesis", "Strong ad revenue and AI initiatives." },
+        { "Aligned TA", "Ascending channel, strong support." },
+        { "Sector/FA", "Tech sector leader." },
+        { "Certainty", "High" },
+        { "Contras", "Regulatory risk." },
+        { "Invalidation", "Breaks below 2700." },
+        { "Target", "3000" },
+        { "Time Frame", "2-4 months" }
+    };
+        public static readonly Dictionary<string, string> Trade6_Add = new()
+    {
+        { "Broker", "TD Ameritrade" },
+        { "Sector", "Technology" },
+        { "Reasoning", "Entered on pullback to support." },
+        { "Emotions", "Confident" },
+        { "Price", "2750" },
+        { "Amount", "12" },
+        { "Total Cost", "33000" },
+        { "Time Frame", "1 month" },
+        { "Target", "2900" },
+        { "SL", "2700" },
+        { "R:R", "3:1" }
+    };
+        public static readonly Dictionary<string, string> Trade6_Evaluate = new()
+    {
+        { "General", "Strong fundamentals maintained." },
+        { "D/W/M str?", "Daily and weekly uptrend intact." },
+        { "Momentum", "Strong" },
+        { "Fta reached?", "No" },
+        { "NTA", "Hold and add on dips." }
+    };
+        public static readonly Dictionary<string, string> Trade6_Close = new()
+    {
+        { "W/L", "W" },
+        { "Lessons", "Sticking to fundamentals and stops is key." }
+    };
     }
-} 
+
+}
