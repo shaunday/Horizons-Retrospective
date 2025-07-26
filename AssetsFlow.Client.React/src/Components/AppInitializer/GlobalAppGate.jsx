@@ -26,7 +26,8 @@ export default function GlobalAppGate() {
   }
 
   if (!allDone) {
-    const activeStep = authStep !== "success" ? 0 : tradeStep !== "success" ? 1 : 2;
+    const activeStep =
+      authStep !== "success" ? 0 : tradeStep !== "success" ? 1 : 2;
 
     return (
       <Layout showUserActions={false}>
@@ -41,7 +42,11 @@ export default function GlobalAppGate() {
               <Text fw={600} fz="lg">
                 Initializing Application
               </Text>
-              <Stepper active={activeStep} orientation="horizontal" breakpoint="sm">
+              <Stepper
+                active={activeStep}
+                orientation="horizontal"
+                breakpoint="sm"
+              >
                 <Stepper.Step
                   label="Authentication"
                   description={
@@ -50,23 +55,29 @@ export default function GlobalAppGate() {
                       : "Logging in..."
                   }
                   loading={authStep === "pending"}
-                  completed={authStep === "success"}
+                  completed={authStep === "success" ? "true" : "false"}
                 />
                 <Stepper.Step
                   label="Fetching trades..."
-                  description={tradeStep === "success" ? "Trades loaded" : "Loading trades"}
+                  description={
+                    tradeStep === "success" ? "Trades loaded" : "Loading trades"
+                  }
                   loading={tradeStep === "pending"}
-                  completed={tradeStep === "success"}
+                  completed={tradeStep === "success"? "true" : "false"}
                 />
-                <Stepper.Step label="Ready" description="App is ready" completed={false} />
+                <Stepper.Step
+                  label="Ready"
+                  description="App is ready"
+                  completed="false"
+                />
               </Stepper>
-              
+
               <Progress
                 value={activeStep === 0 ? 0 : activeStep === 1 ? 50 : 100}
                 size="md"
                 radius="xl"
                 mt="md"
-                animate
+                animate="true"
                 color="blue"
               />
             </Stack>
