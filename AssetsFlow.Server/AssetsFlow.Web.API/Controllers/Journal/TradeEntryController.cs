@@ -1,19 +1,21 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Asp.Versioning;
-using HsR.Journal.Entities;
+﻿using Asp.Versioning;
 using HsR.Web.Services.Models.Journal;
+using AutoMapper;
 using HsR.Journal.DataContext;
-using HsR.Journal.Entities.TradeJournal;
-using AssetsFlowWeb.Services.Models.Journal;
+using HsR.Journal.Repository;
 using HsR.Journal.Services;
 using HsR.Web.API.Services;
+using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using HsR.Journal.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HsR.Web.API.Controllers.Journal
 {
     [Route("hsr-api/v{version:apiVersion}/journal/components")]
     [ApiVersion("1.0")]
     [ApiController]
+    [Authorize]
     public class ContentUpdateController : JournalControllerBase
     {
         public ContentUpdateController(
@@ -26,22 +28,28 @@ namespace HsR.Web.API.Controllers.Journal
 
         [HttpPatch("{componentId}")]
         public async Task<ActionResult<(DataElementModel newEntry, UpdatedStatesModel updatedStates)>>
-                                                  UpdateDataComponent(string componentId, [FromBody] UpdateDataComponentRequest request)
+                                                  UpdateDataComponent(int componentId, [FromBody] UpdateDataComponentRequest request)
         {
             if (string.IsNullOrEmpty(request.Content))
             {
                 return BadRequest("Content is required.");
             }
+            try
+            {
+                (DataElement updatedComponent, UpdatedStatesCollation updatedStates) =
+                    await _journalAccess.DataElement.UpdateCellContentAsync(componentId, request.Content, request.Info);
+                DataElementModel newEntry = _mapper.Map<DataElementModel>(updatedComponent);
+                UpdatedStatesModel updatedStatesModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
+                _cacheService.InvalidateAndReload(updatedComponent.UserId);
 
-            (DataElement updatedComponent, UpdatedStatesCollation updatedStates) = 
-                                                await _journalAccess.DataElement.UpdateCellContentAsync(componentId, request.Content, request.Info);
-
-            (DataElementModel, UpdatedStatesModel) resAsModel = (_mapper.Map<DataElementModel>(updatedComponent), _mapper.Map<UpdatedStatesModel>(updatedStates));
-
-            // Invalidate cache when component content is updated and start reload
-           _cacheService.InvalidateAndReload();
-
-            return ResultHandling(resAsModel, $"Could not update component: {componentId}", [NEW_CELL_DATA, NEW_STATES_WRAPPER]);
+                (DataElementModel, UpdatedStatesModel) resAsModel = (newEntry, updatedStatesModel);
+                return ResultHandling(resAsModel, $"Could not update component: {componentId}", [NEW_CELL_DATA, NEW_STATES_WRAPPER]);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error updating data component with Id: {ComponentId}", componentId);
+                return NotFound();
+            }
         }
 
         public class UpdateDataComponentRequest

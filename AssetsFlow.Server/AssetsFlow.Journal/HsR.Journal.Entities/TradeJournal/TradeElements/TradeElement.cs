@@ -11,6 +11,9 @@ namespace HsR.Journal.Entities
         [Required]
         public required TradeActionType TradeActionType { get; set; }
 
+        [Required]
+        public Guid UserId { get; set; }
+
         public List<DataElement> Entries { get; set; } = new List<DataElement>();
 
         public DateTime? TimeStamp { get; set; }

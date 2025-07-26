@@ -11,22 +11,36 @@ namespace HsR.Journal.DataContext
     public partial class JournalRepository(TradingJournalDataContext dataContext)
         : JournalRepositoryBase(dataContext), IJournalRepository
     {
-        public async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)> GetAllTradeCompositesAsync(int pageNumber = 1, int pageSize = 10)
+        public async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)> GetAllTradeCompositesAsync(Guid userId, int pageNumber = 1, int pageSize = 10)
         {
-            var query = _dataContext.TradeComposites.AsNoTracking().AsQueryable();
+            var query = _dataContext.TradeComposites
+                .Where(tc => tc.UserId == userId)
+                .AsQueryable();
             return await GetPaginatedTradesAsync(query, pageNumber, pageSize);
         }
 
-        public async Task<TradeComposite> AddTradeCompositeAsync()
+        public async Task<TradeComposite> AddTradeCompositeAsync(Guid userId)
         {
-            TradeComposite trade = new();
-            InterimTradeElement originElement = new(trade, TradeActionType.Origin);
-            originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
+            TradeComposite trade = new() { UserId = userId };
+            if (TradeElementsFactory.GetNewElement(trade, TradeActionType.Origin) is not InterimTradeElement originElement)
+            {
+                throw new InvalidOperationException("TradeElementsFactory returned an invalid type for InterimTradeElement.");
+            }
+
             trade.TradeElements.Add(originElement);
 
             _dataContext.TradeComposites.Add(trade);
             await _dataContext.SaveChangesAsync();
             return trade;
+        }
+
+        public async Task<TradeComposite?> GetTradeCompositeByIdAsync(int tradeId)
+        {
+            return await _dataContext.TradeComposites
+                .Include(tc => tc.TradeElements)
+                    .ThenInclude(te => te.Entries)
+                .Include(tc => tc.Summary)
+                .FirstOrDefaultAsync(tc => tc.Id == tradeId);
         }
 
         private static async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)>
@@ -37,6 +51,7 @@ namespace HsR.Journal.DataContext
             var trades = await query.OrderBy(t => t.Id)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
+                .AsNoTracking()
                 .ToListAsync();
 
             return (trades, totalCount);

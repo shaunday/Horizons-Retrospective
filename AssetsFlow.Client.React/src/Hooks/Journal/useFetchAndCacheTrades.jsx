@@ -2,33 +2,29 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAllTrades } from "@services/ApiRequests/journalApiAccess";
 import { tradeKeysFactory } from "@services/query-key-factory";
 
-export function useFetchAndCacheTrades() {
+export function useFetchAndCacheTrades({ enabled = true } = {}) {
   const queryClient = useQueryClient();
 
   const getAndCacheTrades = async () => {
     const fetchedTrades = await getAllTrades();
-    
-    // Cache the trades here
     const tradeIds = fetchedTrades.map((trade) => trade.id);
-    queryClient.setQueryData(tradeKeysFactory.tradeIdsKey, tradeIds);
-  
+    queryClient.setQueryData(tradeKeysFactory.getTradeIdsKey(), tradeIds);
     fetchedTrades.forEach((trade) => {
-      const tradeId = trade.id;
-      queryClient.setQueryData(tradeKeysFactory.tradeAndIdArrayKey(tradeId), trade);
+      queryClient.setQueryData(tradeKeysFactory.getTradeAndIdArrayKey(trade.id), trade);
     });
-     
     return fetchedTrades;
   };
 
   const tradesQuery = useQuery({
-    queryKey: tradeKeysFactory.tradesKey,
+    queryKey: tradeKeysFactory.getTradesKey(),
     queryFn: getAndCacheTrades,
     throwOnError: true,
+    enabled,
   });
 
   const prefetchTrades = async () => {
     queryClient.prefetchQuery({
-      queryKey: tradeKeysFactory.tradesKey,
+      queryKey: tradeKeysFactory.getTradesKey(),
       queryFn: getAndCacheTrades,
     });
   };

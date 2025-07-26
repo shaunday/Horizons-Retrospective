@@ -9,6 +9,8 @@ namespace HsR.Journal.Repository.Configurations
     {
         public void Configure(EntityTypeBuilder<DataElement> builder)
         {
+            builder.HasIndex(de => de.UserId);
+
             builder.OwnsOne(c => c.ContentWrapper)
                 .WithOwner();
             builder.Navigation(c => c.ContentWrapper).AutoInclude();

@@ -5,9 +5,10 @@ using Microsoft.AspNetCore.Hosting; // Needed for IWebHostEnvironment
 
 namespace AssetsFlowWeb.API.Controllers
 {
-    [Route("hsr-api/v{version:apiVersion}/info")]
+    [Route("hsr-api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
     [ApiController]
+    [ResponseCache(Duration = 1800, Location = ResponseCacheLocation.Client)]
     public class InfoController(IWebHostEnvironment env) : ControllerBase
     {
         private readonly IWebHostEnvironment _env = env;
@@ -37,8 +38,9 @@ namespace AssetsFlowWeb.API.Controllers
                 {
                     commitHash = GitWrappers.RunGitCommand("rev-parse --short HEAD");
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Console.WriteLine($"Error getting git commit hash: {ex}");
                     commitHash = "unknown";
                 }
 
@@ -48,8 +50,9 @@ namespace AssetsFlowWeb.API.Controllers
                     {
                         appVersion = GitWrappers.RunGitCommand("describe --tags --abbrev=0");
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        Console.WriteLine($"Error getting git tag: {ex}");
                         appVersion = "dev-unknown";
                     }
                 }

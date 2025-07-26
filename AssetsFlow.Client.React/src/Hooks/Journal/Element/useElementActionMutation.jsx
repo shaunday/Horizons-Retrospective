@@ -13,7 +13,7 @@ export function useElementActionMutation(tradeElement) {
   const { processingStatus, setNewStatus } = useProcessingWrapper(ProcessingStatus.NONE);
   const updateTradeStatuses = useUpdateTradeStatusFromResponse(tradeElement[Constants.ELEMENT_COMPOSITEFK_STING]);
   const updateElementProp = useUpdateElementCacheData(tradeElement[Constants.ELEMENT_COMPOSITEFK_STING], tradeElement.id);
-    const removeElement = useRemoveElementFromTrade(tradeElement[Constants.ELEMENT_COMPOSITEFK_STING]);
+  const removeElement = useRemoveElementFromTrade(tradeElement[Constants.ELEMENT_COMPOSITEFK_STING]);
 
   const elementActionMutation = useMutation({
     mutationFn: async ({ action }) => {

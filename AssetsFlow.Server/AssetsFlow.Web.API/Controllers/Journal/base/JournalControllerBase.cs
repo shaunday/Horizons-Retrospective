@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using HsR.Journal.DataContext;
+using Microsoft.AspNetCore.Mvc;
 using HsR.Web.API.Controllers;
 using HsR.Web.API.Services;
-using Microsoft.AspNetCore.Mvc;
+using HsR.Web.Services.Models.Journal;
 
 namespace HsR.Web.API.Controllers.Journal
 {
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class JournalControllerBase : HsRControllerBase
     {
         private protected readonly string NEW_CELL_DATA = "updatedCellData";
@@ -57,6 +59,14 @@ namespace HsR.Web.API.Controllers.Journal
 
             // Return dictionary if propertyNames were provided, otherwise return the object
             return responseObject.Count > 0 ? Ok(responseObject) : Ok(result);
+        }
+
+        protected Guid GetUserIdFromClaims()
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "sub" || c.Type == "userId" || c.Type.EndsWith("nameidentifier"));
+            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
+                throw new UnauthorizedAccessException("User ID not found in JWT claims.");
+            return userId;
         }
     }
 }

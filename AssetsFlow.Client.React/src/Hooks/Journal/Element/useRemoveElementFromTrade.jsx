@@ -5,8 +5,7 @@ import { tradeKeysFactory } from "@services/query-key-factory";
 
 export function useRemoveElementFromTrade(tradeId) {
   const queryClient = useQueryClient();
-  const tradeAndIdArray = tradeKeysFactory.tradeAndIdArrayKey(tradeId);
-
+  const tradeAndIdArray = tradeKeysFactory.getTradeAndIdArrayKey(tradeId);
   const removeElement = (elementId) => {
     queryClient.setQueryData(tradeAndIdArray, (oldTrade) => {
       if (!oldTrade) return oldTrade;
@@ -17,6 +16,5 @@ export function useRemoveElementFromTrade(tradeId) {
       });
     });
   };
-
   return removeElement;
 }

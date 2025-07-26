@@ -8,8 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HsR.Journal.DataContext
 {
-    public class TradeElementRepository(TradingJournalDataContext dataContext) 
-                                            : JournalRepositoryBase(dataContext), ITradeElementRepository
+    public class TradeElementRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), ITradeElementRepository
     {
         private static readonly IMapper mapper = new MapperConfiguration(cfg =>
         {
@@ -19,29 +18,25 @@ namespace HsR.Journal.DataContext
                 .ForMember(dest => dest.CompositeRef, opt => opt.Ignore());
         }).CreateMapper();
 
-        public async Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimPositionAsync(string tradeId, bool isAdd)
+        public async Task<InterimTradeElement> AddInterimPositionAsync(int tradeId, bool isAdd)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
-
-            if (TradeElementsFactory.GetNewElement(trade, isAdd ? TradeActionType.Add : TradeActionType.Reduce)
-                is not InterimTradeElement tradeInput)
+            
+            if (TradeElementsFactory.GetNewElement(trade, isAdd ? TradeActionType.Add : TradeActionType.Reduce) is not InterimTradeElement tradeInput)
             {
                 throw new InvalidOperationException("TradeElementsFactory returned an invalid type for InterimTradeElement.");
             }
 
             trade.TradeElements.Add(tradeInput);
-            UpdatedStatesCollation? newStates = new() { TradeInfo = trade };
-
             await _dataContext.SaveChangesAsync();
-            return (tradeInput, newStates);
+            return tradeInput;
         }
 
-        public async Task<(InterimTradeElement newEntry, UpdatedStatesCollation? updatedStates)> AddInterimEvalutationAsync(string tradeId)
+        public async Task<InterimTradeElement> AddInterimEvalutationAsync(int tradeId)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
 
-            if (TradeElementsFactory.GetNewElement(trade, TradeActionType.Evaluation)
-                is not InterimTradeElement tradeOverview)
+            if (TradeElementsFactory.GetNewElement(trade, TradeActionType.Evaluation) is not InterimTradeElement tradeOverview)
             {
                 throw new InvalidOperationException("TradeElementsFactory returned an invalid type for Evaluation.");
             }
@@ -57,6 +52,7 @@ namespace HsR.Journal.DataContext
                         clonedEntry.History = null;
                         clonedEntry.ContentWrapper = null;
                         clonedEntry.IsRelevantForTradeOverview = false;
+                        clonedEntry.UserId = trade.UserId;
 
                         string content = entry.Content ?? "";
                         clonedEntry.SetFollowupContent(content, "");
@@ -68,15 +64,13 @@ namespace HsR.Journal.DataContext
 
                 tradeOverview.Entries.AddRange(clonedEntries);
             }
-
             trade.TradeElements.Add(tradeOverview);
-            UpdatedStatesCollation? newStates = new() { TradeInfo = trade };
             await _dataContext.SaveChangesAsync();
 
-            return (tradeOverview, newStates);
+            return tradeOverview;
         }
 
-        public async Task<UpdatedStatesCollation> RemoveInterimPositionAsync(string tradeInputId)
+        public async Task<TradeComposite> RemoveInterimPositionAsync(int tradeInputId)
         {
             var tradeInputToRemove = await GetTradeElementAsync(tradeInputId);
             if (tradeInputToRemove == null)
@@ -92,7 +86,6 @@ namespace HsR.Journal.DataContext
 
             trade.TradeElements.Remove(tradeInputToRemove);
 
-            UpdatedStatesCollation? updatedStates = new();
             if (trade.IsTradeActive()) 
             {
                 RefreshSummary(trade);
@@ -106,28 +99,23 @@ namespace HsR.Journal.DataContext
                 }
                 trade.Status = TradeStatus.AnIdea;
             }
-            updatedStates.TradeInfo = trade;
-
             await _dataContext.SaveChangesAsync();
-            return updatedStates;
+            return trade;
         }
 
-        public async Task<UpdatedStatesCollation> UpdateActivationTimeAsync(string tradeInputId, string newTimestamp)
+        public async Task<UpdatedStatesCollation> UpdateActivationTimeAsync(int tradeInputId, string newTimestamp)
         {
             var tradeInput = await GetTradeElementAsync(tradeInputId);
             if (tradeInput == null)
             {
                 throw new ArgumentException($"The trade input (Id '{tradeInputId}') to update is null.", nameof(tradeInputId));
             }
-            else 
-            {
-                tradeInput.Activate();
-            }
+            
+            tradeInput.Activate();
             UpdatedStatesCollation? updatedStates = new() { ActivationTimeStamp = tradeInput.TimeStamp };
 
             await _dataContext.SaveChangesAsync();
             return updatedStates;
         }
     }
-
 }

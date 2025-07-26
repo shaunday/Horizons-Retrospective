@@ -1,43 +1,35 @@
-import React from 'react';
-import FilterControl from "@journalComponents/Filtering/FilterControl";
+import React from "react";
+import { Stack } from "@mantine/core";
+import { TbPlus } from "react-icons/tb";
+
 import TradesGallery from "@journalComponents/TradesGallery";
+import StyledActionButton from "@components/Common/StyledActionButton";
+import EmptyState from "@components/Common/LoadingStates/EmptyState";
 import { useFetchAndCacheTrades } from "@hooks/Journal/useFetchAndCacheTrades";
 import { useAddTrade } from "@hooks/Journal/useAddTrade";
-import { Button, Stack } from '@mantine/core';
-import { TbPlus } from "react-icons/tb";
-import TradesLoadingState from "@journalComponents/JournalLoadingStates/TradesLoadingState";
-import TradesErrorState from "@journalComponents/JournalLoadingStates/TradesErrorState";
-import TradesEmptyState from "@journalComponents/JournalLoadingStates/TradesEmptyState";
-import StyledActionButton from "@components/Common/StyledActionButton";
 
 function JournalView() {
-  const { isLoading, isError, trades } = useFetchAndCacheTrades();
+  const { trades } = useFetchAndCacheTrades(); // Already loaded via GlobalAppGate
   const { addTrade, isAddingTrade, newlyAddedTradeId } = useAddTrade();
 
-  const onAddTrade = () => addTrade();
-
-  if (isLoading) {
-    return <TradesLoadingState />;
-  }
-
-  if (isError) {
-    return <TradesErrorState />;
-  }
-
   return (
-    <Stack id="journalMainBody" className="bg-stone-50 p-4 border-t border-slate-200">
-      {/* <FilterControl /> */}
-
-      {trades?.length ? (
+    <Stack
+      id="journalMainBody"
+      className="bg-stone-50 p-4 border-t border-slate-200"
+    >
+      {trades?.length > 0 ? (
         <TradesGallery newlyAddedTradeId={newlyAddedTradeId} />
       ) : (
-        <TradesEmptyState />
+        <EmptyState
+          mainText="No trades available"
+          subText="Start by adding your first trade to begin tracking your performance"
+        />
       )}
 
       <div className="flex justify-center">
         <StyledActionButton
           icon={<TbPlus size={20} />}
-          onClick={onAddTrade}
+          onClick={addTrade}
           disabled={isAddingTrade}
           className="min-w-[280px]"
         >

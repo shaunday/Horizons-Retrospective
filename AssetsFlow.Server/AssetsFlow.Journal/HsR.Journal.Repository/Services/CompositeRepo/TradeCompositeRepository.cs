@@ -13,23 +13,29 @@ namespace HsR.Journal.Repository.Services.CompositeRepo
 {
     public class TradeCompositeRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), ITradeCompositeRepository
     {
-        public async Task<UpdatedStatesCollation> CloseTradeAsync(string tradeId, string closingPrice)
+        public async Task<TradeComposite> CloseTradeAsync(int tradeId, string closingPrice)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
-            if (trade.Summary != null)
+
+            if (trade?.Summary != null)
             {
                 _dataContext.Entry(trade.Summary).State = EntityState.Deleted;
             }
             else
             {
-                throw new InvalidOperationException("Trade summary is missing.");
+                throw new InvalidOperationException("Trade / summary is missing.");
             }
+            
             TradeCompositeOperations.CloseTrade(trade, closingPrice);
 
             await _dataContext.SaveChangesAsync();
+            return trade;
+        }
 
-            UpdatedStatesCollation newStates = new() { TradeInfo = trade };
-            return newStates;
+        public async Task RefreshSaveSummaryAsync(TradeComposite trade)
+        {
+            _ = RefreshSummary(trade);
+            await _dataContext.SaveChangesAsync();
         }
     }
 }

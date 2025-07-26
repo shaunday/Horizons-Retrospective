@@ -1,10 +1,8 @@
 ﻿using Asp.Versioning;
-using AutoMapper;
-using HsR.Web.API.Mapping;
 
-namespace HsR.Web.API.Configurations
+namespace AssetsFlowWeb.API.Configurations
 {
-    internal static class ApiVersioning
+    internal static class ApiVersioningConfig
     {
         internal static IServiceCollection AddCustomApiVersioning(this IServiceCollection services)
         {

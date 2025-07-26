@@ -10,6 +10,8 @@ namespace HsR.Journal.Repository.Configurations
     {
         public void Configure(EntityTypeBuilder<TradeElement> builder)
         {
+            builder.HasIndex(te => te.UserId);
+
             // Configuring the inheritance hierarchy
             builder
                 .HasDiscriminator<string>("TradeElementType")
@@ -29,8 +31,4 @@ namespace HsR.Journal.Repository.Configurations
                 .HasConversion<string>();
         }
     }
-
-
-
-
 }

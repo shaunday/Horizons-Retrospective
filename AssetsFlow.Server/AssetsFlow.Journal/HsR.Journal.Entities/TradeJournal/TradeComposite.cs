@@ -7,6 +7,9 @@ public class TradeComposite
     [Key]
     public int Id { get; private set; }
 
+    [Required]
+    public Guid UserId { get; set; }
+
     public ICollection<InterimTradeElement> TradeElements { get; set; } = new List<InterimTradeElement>();
 
     public TradeSummary? Summary { get; set; }

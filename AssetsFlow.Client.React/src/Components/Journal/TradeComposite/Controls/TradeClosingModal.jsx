@@ -1,57 +1,56 @@
-import { Modal, NumberInput, Button } from '@mantine/core';
+import { Modal, NumberInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { TbCheck } from "react-icons/tb";
 import StyledActionButton from "@components/Common/StyledActionButton";
 
 function TradeClosingModal({ opened, onClose, onSubmit }) {
-    const form = useForm({
-        initialValues: {
-            closePrice: ''
-        },
-        validate: {
-            closePrice: (val) => (val.trim() === '' ? 'Closing Price cannot be empty' : null),
-        },
-    });
+  const form = useForm({
+    initialValues: {
+      closePrice: '',
+    },
+    validate: {
+      closePrice: (val) =>
+        val.trim() === '' ? 'Closing Price cannot be empty' : null,
+    },
+  });
 
-    const handleSubmit = (values) => {
-        const { closePrice } = values;
-        onSubmit(closePrice);
-        onClose();
-    };
+  const handleSubmit = (values) => {
+    const { closePrice } = values;
+    onSubmit(closePrice);
+    onClose();
+  };
 
-    return (
-        <Modal 
-            opened={opened} 
-            onClose={onClose} 
-            title="Closing Price" 
-            centered
-            styles={{
-                title: {
-                    fontSize: '18px',
-                    fontWeight: '600',
-                    color: '#374151',
-                    textAlign: 'center',
-                }
-            }}
-        >
-            <form onSubmit={form.onSubmit(handleSubmit)}>
-                <NumberInput
-                    placeholder="Closing price..."
-                    thousandSeparator=","
-                    hideControls
-                    {...form.getInputProps('closePrice')}
-                    className="mb-1 max-w-xs block mx-auto"
-                />
-                <StyledActionButton 
-                    type="submit" 
-                    icon={<TbCheck size={20} />}
-                    className="mt-5 block mx-auto"
-                >
-                    Submit
-                </StyledActionButton>
-            </form>
-        </Modal>
-    );
+  return (
+    <Modal
+      opened={opened}
+      onClose={onClose}
+      centered
+      title={
+        <div className="text-lg font-semibold text-gray-700 text-center">
+          Closing Price
+        </div>
+      }
+    >
+      <form onSubmit={form.onSubmit(handleSubmit)} className="mt-4 space-y-4">
+        <NumberInput
+          placeholder="Closing price..."
+          thousandSeparator=","
+          hideControls
+          {...form.getInputProps('closePrice')}
+          className="max-w-xs mx-auto"
+        />
+
+        <div className="flex justify-center">
+          <StyledActionButton
+            type="submit"
+            icon={<TbCheck size={20} />}
+          >
+            Submit
+          </StyledActionButton>
+        </div>
+      </form>
+    </Modal>
+  );
 }
 
 export default TradeClosingModal;

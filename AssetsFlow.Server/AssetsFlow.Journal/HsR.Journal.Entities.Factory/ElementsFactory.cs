@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace HsR.Journal.Entities.Factory
 {
-    public static class TradeElementsFactory
+    public static partial class TradeElementsFactory
     {
         private static readonly Dictionary<TradeActionType, Func<TradeComposite, TradeElement>> FactoryMethods =
             new()
@@ -22,7 +22,16 @@ namespace HsR.Journal.Entities.Factory
         {
             if (FactoryMethods.TryGetValue(actionType, out var factoryMethod))
             {
-                return (factoryMethod(trade)); 
+                var newTradeElement = factoryMethod(trade);
+                newTradeElement.UserId = trade.UserId;
+
+                // Set UserId for all entries
+                foreach (var entry in newTradeElement.Entries)
+                {
+                    entry.UserId = trade.UserId;
+                }
+
+                return newTradeElement;
             }
             throw new ArgumentException($"Unsupported TradeActionType: {actionType}");
         }
@@ -30,7 +39,7 @@ namespace HsR.Journal.Entities.Factory
         private static InterimTradeElement GetNewOrigin(TradeComposite trade)
         {
             InterimTradeElement originElement = new(trade, TradeActionType.Origin);
-            originElement.Entries = EntriesFactory.GetOriginEntries(originElement);
+            originElement.Entries = GetOriginEntries(originElement);
             return originElement;
         }
 
@@ -39,13 +48,13 @@ namespace HsR.Journal.Entities.Factory
             InterimTradeElement tradeInput = new(trade, isAdd ? TradeActionType.Add : TradeActionType.Reduce);
             tradeInput.Entries = isAdd
                 ? (trade.Status == TradeStatus.AnIdea
-                    ? EntriesFactory.GetFirstPositionEntries(tradeInput)
-                    : EntriesFactory.GetAddPositionEntries(tradeInput))
-                : EntriesFactory.GetReducePositionEntries(tradeInput);
+                    ? GetFirstPositionEntries(tradeInput)
+                    : GetAddPositionEntries(tradeInput))
+                : GetReducePositionEntries(tradeInput);
             return tradeInput;
         }
 
-        public static TradeSummary GetNewSummary(TradeComposite trade)
+        private static TradeSummary GetNewSummary(TradeComposite trade)
         {
             var analytics = Analytics.GetTradingCosts(trade);
             TradeAnalyticsSummary analyticsSummary = new(analytics);
@@ -53,8 +62,8 @@ namespace HsR.Journal.Entities.Factory
             TradeSummary newSummary = new(trade, TradeActionType.Summary);
             newSummary.IsInterim = analyticsSummary.IsNetExists;
             newSummary.Entries = analyticsSummary.IsNetExists
-                ? EntriesFactory.GetSummaryComponents(newSummary, analyticsSummary)
-                : EntriesFactory.GetTradeClosureComponents(newSummary, analyticsSummary);
+                ? GetSummaryComponents(newSummary, analyticsSummary)
+                : GetTradeClosureComponents(newSummary, analyticsSummary);
 
             return newSummary;
         }
@@ -62,8 +71,9 @@ namespace HsR.Journal.Entities.Factory
         private static InterimTradeElement GetNewEvalutationElement(TradeComposite trade)
         {
             InterimTradeElement tradeOverview = new(trade, TradeActionType.Evaluation);
-            tradeOverview.Entries = EntriesFactory.GetEvalutationEntries(tradeOverview);
+            tradeOverview.Entries = GetEvalutationEntries(tradeOverview);
             return tradeOverview;
         }
+
     }
 }

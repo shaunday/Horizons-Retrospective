@@ -1,18 +1,18 @@
-﻿namespace HsR.Journal.Entities.Factory.Assists
+﻿namespace HsR.Journal.Entities.Factory
 {
-    internal static class ReducePositionList
+    public static partial class TradeElementsFactory
     {
-        internal static List<DataElement> GetReducePositionObjects()
+        private static List<DataElement> GetReducePositionObjects()
         {
             return new List<DataElement>
             {
-                new("Emotions", ComponentType.Emotions),
+                new("Emotions", ComponentType.Context),
 
                 new("Exit Price", ComponentType.PriceRelated) {  IsRelevantForLocalOverview = true, UnitPriceRelevance = ValueRelevance.Negative },
                 new("Amount", ComponentType.PriceRelated) { IsRelevantForLocalOverview = true, },
                 new("Cost", ComponentType.PriceRelated) {  IsRelevantForLocalOverview = true, TotalCostRelevance = ValueRelevance.Negative },
 
-                new("Rationale", ComponentType.Thoughts),
+                new("Rationale", ComponentType.Context),
                 new("R:R", ComponentType.Risk)
             };
         }

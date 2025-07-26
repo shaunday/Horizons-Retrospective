@@ -15,6 +15,9 @@ namespace HsR.Web.Services.Models.Journal
         public TradeActionType TradeActionType { get; set; }
 
         [Required]
+        public Guid UserId { get; set; }
+
+        [Required]
         public bool IsAnyContentMissing { get; set; }
 
         [Required]

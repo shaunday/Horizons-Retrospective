@@ -38,41 +38,22 @@ namespace HsR.Journal.Repository.Services.Base
             return newSummary;
         }
 
-        private protected async Task<TradeComposite> GetTradeCompositeAsync(string tradeId)
+        private protected async Task<TradeComposite> GetTradeCompositeAsync(int tradeId)
         {
-            if (!int.TryParse(tradeId, out var parsedId))
-            {
-                throw new ArgumentException($"The tradeId '{tradeId}' is not a valid integer.", nameof(tradeId));
-            }
-
-            return await GetTradeCompositeAsync(parsedId);
-        }
-
-        private protected async Task<TradeComposite> GetTradeCompositeAsync(int parsedId)
-        {
-            var trade = await _dataContext.TradeComposites.FindAsync(parsedId)
-                ?? throw new InvalidOperationException($"Trade with ID {parsedId} not found.");
-
+            var trade = await _dataContext.TradeComposites.FindAsync(tradeId)
+                ?? throw new InvalidOperationException($"Trade with ID {tradeId} not found.");
             return trade!;
         }
 
-        protected async Task<InterimTradeElement> GetTradeElementAsync(string tradeEleId, bool loadComposite = false)
+        protected async Task<InterimTradeElement> GetTradeElementAsync(int tradeEleId, bool loadComposite = false)
         {
-            if (!int.TryParse(tradeEleId, out var parsedId))
-            {
-                throw new ArgumentException($"The tradeElementId '{tradeEleId}' is not a valid integer.", nameof(tradeEleId));
-            }
-
-            var query = _dataContext.TradeElements.AsQueryable();
-
+            var query = _dataContext.TradeElements.OfType<InterimTradeElement>().AsQueryable();
             if (loadComposite)
             {
                 query = query.Include(te => te.CompositeRef);
             }
-
-            var tradeElement = await query.FirstOrDefaultAsync(te => te.Id == parsedId)
+            var tradeElement = await query.FirstOrDefaultAsync(te => te.Id == tradeEleId)
                 ?? throw new InvalidOperationException($"TradeElement with ID {tradeEleId} not found.");
-
             return tradeElement;
         }
     }

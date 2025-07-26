@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
+using Microsoft.OpenApi.Models;
 
-namespace HsR.Web.API.Configurations
+namespace AssetsFlowWeb.API.Configurations
 {
     internal static class SwaggerExtensions
     {

@@ -8,32 +8,25 @@ using Serilog;
 
 namespace HsR.Journal.DataContext
 {
-    public class DataElementRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), IDataElementRepository
+    public class DataElementRepository(TradingJournalDataContext dataContext, IUserDataRepository userDataRepository) : JournalRepositoryBase(dataContext), IDataElementRepository
     {
-        public async Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)>
-                                                UpdateCellContentAsync(string componentId, string newContent, string changeNote)
-        {
-            if (!int.TryParse(componentId, out var parsedId))
-            {
-                throw new ArgumentException($"The EntryId '{componentId}' is not a valid integer.", nameof(componentId));
-            }
+        private readonly IUserDataRepository _userDataRepository = userDataRepository;
 
+        public async Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)> UpdateCellContentAsync(int componentId, string newContent, string changeNote)
+        {
             var cell = await _dataContext.Entries
                 .Include(e => e.History)
-                .FirstOrDefaultAsync(e => e.Id == parsedId)
+                .FirstOrDefaultAsync(e => e.Id == componentId)
                 ?? throw new InvalidOperationException($"Entry with ID {componentId} not found.");
-
+            var userId = cell.UserId;
             cell.SetFollowupContent(newContent, changeNote);
-
             UpdatedStatesCollation updatedStates =  await HandleTradeStatusUpdates(cell);
-
             if (cell.SectorRelevance)
             {
-                var userData = await _dataContext.UserData.FirstOrDefaultAsync(u => u.Id == 1);
-                userData?.SavedSectors?.Add(newContent);
-                updatedStates.SavedSectors = userData?.SavedSectors;
+                await _userDataRepository.SaveSectorAsync(userId, newContent);
+                var userData = await _userDataRepository.GetOrCreateUserDataAsync(userId);
+                updatedStates.SavedSectors = userData.SavedSectors;
             }
-
             await _dataContext.SaveChangesAsync();
             return (cell, updatedStates);
         }

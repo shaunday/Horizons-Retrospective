@@ -1,8 +1,8 @@
-﻿namespace HsR.Journal.Entities.Factory.Assists
+﻿namespace HsR.Journal.Entities.Factory
 {
-    internal static class OriginPositionList
+    public static partial class TradeElementsFactory
     {
-        internal static List<DataElement> GetTradeOriginObjects()
+        private static List<DataElement> GetTradeOriginObjects()
         {
             var tradeOriginObjects = new List<DataElement>
             {
@@ -10,11 +10,11 @@
                 new DataElement("Direction", ComponentType.Header, "")
                                           {  IsRelevantForLocalOverview = true, IsRelevantForTradeOverview = true, Restrictions = ["Long", "Short"]},
 
-                new DataElement("Thesis", ComponentType.Thoughts) {  IsRelevantForLocalOverview = true, IsRelevantForTradeOverview = true },
+                new DataElement("Thesis", ComponentType.Context) {  IsRelevantForLocalOverview = true, IsRelevantForTradeOverview = true },
                 new DataElement("Aligned TA", ComponentType.EntryLogic),
                 new DataElement("Sector/FA", ComponentType.EntryLogic),
 
-                new DataElement("Certainty", ComponentType.Emotions) {Restrictions = ["Low", "Mid", "High"]} ,
+                new DataElement("Certainty", ComponentType.Context) {Restrictions = ["Low", "Mid", "High"]} ,
                 new DataElement("Contras", ComponentType.EntryLogic),
 
                 new DataElement("Invalidation", ComponentType.Risk) { IsRelevantForLocalOverview = true },

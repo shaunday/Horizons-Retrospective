@@ -1,15 +1,15 @@
 ﻿using HsR.Common.Extenders;
 using HsR.Journal.Entities;
 using HsR.Journal.Entities.TradeJournal;
-using HsR.Web.Services.Models.Journal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace AssetsFlowWeb.Services.Models.Journal
+namespace HsR.Web.Services.Models.Journal
 {
     public class UpdatedStatesModel
     {

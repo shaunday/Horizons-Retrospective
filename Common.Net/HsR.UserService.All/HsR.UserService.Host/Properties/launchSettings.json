@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HsR.UserService.Host": {
+      "commandName": "Project",
+      "launchBrowser": false
+    }
+  }
+}

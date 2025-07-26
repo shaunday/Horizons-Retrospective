@@ -3,3 +3,5 @@ export const ProcessingStatus = Object.freeze({
   PROCESSING: "PROCESSING",
   SUCCESS: "SUCCESS",
 });
+
+export const UserName = "firstName"

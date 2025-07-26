@@ -1,13 +1,16 @@
 import { tradesBaseURL, request } from "./ApiRequestsWrapper";
+import { authStorage } from "@services/authStorage"; 
 
 export async function getAllTrades() {
-  return request(`${tradesBaseURL}`, { method: "GET" });
+  const userId = authStorage.getUserId();
+  return request(`${tradesBaseURL}?userId=${userId}`, { method: "GET" });
 }
 
 export async function getTradeById(tradeId) {
-  return request(`${tradesBaseURL}/${tradeId}`, { method: "POST" });
+  return request(`${tradesBaseURL}/${tradeId}`, { method: "GET" });
 }
 
 export async function addTradeComposite() {
-  return request(`${tradesBaseURL}`, { method: "POST" });
+  const userId = authStorage.getUserId();
+  return request(`${tradesBaseURL}?userId=${userId}`, { method: "POST" });
 }

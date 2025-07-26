@@ -6,11 +6,10 @@ import { newStatesResponseParser } from "@services/newStatesResponseParser";
 
 export function useUpdateTradeStatusFromResponse(tradeId) {
   const queryClient = useQueryClient();
-
   const updateTradeStatuses = (response) => {
     const { newTradeStatus, hasMissingContent, newSummary } = newStatesResponseParser(response);
     queryClient.setQueryData(
-      tradeKeysFactory.tradeAndIdArrayKey(tradeId),
+      tradeKeysFactory.getTradeAndIdArrayKey(tradeId),
       (oldTrade) =>
         produce(oldTrade, (draft) => {
           if (newTradeStatus !== undefined) draft[Constants.TRADE_STATUS] = newTradeStatus;
@@ -19,6 +18,5 @@ export function useUpdateTradeStatusFromResponse(tradeId) {
         })
     );
   };
-
   return updateTradeStatuses;
 } 

@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-namespace HsR.Web.API.Configurations
+namespace AssetsFlowWeb.API.Configurations
 {
     internal static class Middleware
     {
@@ -47,9 +47,10 @@ namespace HsR.Web.API.Configurations
             app.UseRouting();
 
             // ✅ Apply CORS after routing, before endpoints
-            app.UseCors("AllowReactApp");
+            app.UseCors(CorsConfig.AllowReactAppPolicyName);
 
-            // Apply authorization middleware.
+            // Apply authentication and authorization middleware.
+            app.UseAuthentication();
             app.UseAuthorization();
 
             // Map controllers for request handling.

@@ -1,17 +1,23 @@
 using Serilog;
 using Serilog.Events;
+using Microsoft.AspNetCore.Builder;
 
-internal static class LoggingConfiguration
+namespace AssetsFlowWeb.API.Configurations
 {
-    internal static void ConfigureLogging(bool isDev)
+    public static class LoggingConfig
     {
-        var logPath = Path.Combine(AppContext.BaseDirectory, "hsr_journal_server.txt");
+        public static WebApplicationBuilder ConfigureLogging(this WebApplicationBuilder builder)
+        {
+            var logPath = Path.Combine(AppContext.BaseDirectory, "hsr_journal_server.txt");
 
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Is(isDev ? LogEventLevel.Debug : LogEventLevel.Warning)
-            .WriteTo.Console()
-            .WriteTo.File(logPath, rollingInterval: RollingInterval.Day)
-            .CreateLogger();
-
+            bool isDev = builder.Environment.IsDevelopment();
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Is(isDev ? LogEventLevel.Debug : LogEventLevel.Warning)
+                .WriteTo.Console()
+                .WriteTo.File(logPath, rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+            builder.Host.UseSerilog();
+            return builder;
+        }
     }
 }

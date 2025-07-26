@@ -1,16 +1,14 @@
-import { TbMenu4, TbClockHeart, TbBrain, TbSettingsQuestion, 
-        TbCoins, TbTarget, TbReportAnalytics, TbAdjustmentsStar, TbChecklist } 
+import { TbMenu4, TbBoxAlignTopRightFilled, 
+        TbCoins, TbTarget, TbReportAnalytics, TbAdjustmentsExclamation, TbChecklist } 
   from 'react-icons/tb';
 
 const componentTypeIcons = {
   Header: TbMenu4,
-  Emotions: TbClockHeart,
-  Thoughts: TbBrain,
-  Technicals: TbSettingsQuestion,
+  Context: TbBoxAlignTopRightFilled,
   EntryLogic: TbChecklist,
   ExitLogic: TbTarget,
   PriceRelated: TbCoins,
-  Risk: TbAdjustmentsStar,
+  Risk: TbAdjustmentsExclamation,
   Results: TbReportAnalytics,
 };
 

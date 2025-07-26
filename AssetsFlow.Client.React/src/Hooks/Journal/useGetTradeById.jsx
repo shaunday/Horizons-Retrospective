@@ -4,9 +4,7 @@ import { getTradeById } from "@services/ApiRequests/journalApiAccess";
 
 export function useGetTradeById(tradeId) {
   const queryClient = useQueryClient();
-
-  const queryKey = tradeKeysFactory.tradeAndIdArrayKey(tradeId);
-
+  const queryKey = tradeKeysFactory.getTradeAndIdArrayKey(tradeId);
   const { data: trade, ...queryState } = useQuery({
     queryKey,
     queryFn: () => getTradeById(tradeId),
@@ -16,7 +14,6 @@ export function useGetTradeById(tradeId) {
     refetchOnWindowFocus: false,
     throwOnError: true,
   });
-
   return { trade, ...queryState };
 }
 

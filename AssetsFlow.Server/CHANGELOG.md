@@ -1,4 +1,15 @@
 
+## [0.9.510-s] - 2025-07-...
+- User Service with gRPC + host + unittests
+- DemoUser Seeder
+- Factory work, only 1 method open to public now 
+- More precise exceptions handling in Controllers
+- UserService Client to be used by the Web.API
+- Added [Authorize] attributes to protected endpoints
+- All async EF Core saves in both DbContexts now use .ConfigureAwait(false) via a base class and direct overrides.
+- Journal endpoints now extract the user ID from JWT claims (not parameters), using a helper, with [Authorize] enforced throughout.
+- added demo-user-login endpoint
+
 ## [0.9.503-s] - 2025-06-24
 - Add IsAnyContentMissing prop on elementDTO
 - Reworked contentEdit logic - always load trade for now, for uptodate ismissing data (to rethink)

@@ -1,50 +1,49 @@
-﻿using HsR.Journal.Entities.Factory.Assists;
-using HsR.Journal.Entities.TradeJournal;
+﻿using HsR.Journal.Entities.TradeJournal;
 using HsR.Journal.TradeAnalytics;
 
 namespace HsR.Journal.Entities.Factory
 {
-    public static class EntriesFactory
+    public static partial class TradeElementsFactory
     {
         #region Origin
-        public static List<DataElement> GetOriginEntries(InterimTradeElement elementRef)
+        private static List<DataElement> GetOriginEntries(InterimTradeElement elementRef)
         {
-            return CreateEntries(OriginPositionList.GetTradeOriginObjects(), elementRef);
+            return CreateEntries(GetTradeOriginObjects(), elementRef);
         }
         #endregion
 
         #region Interim elements
-        public static List<DataElement> GetAddPositionEntries(InterimTradeElement elementRef)
+        private static List<DataElement> GetAddPositionEntries(InterimTradeElement elementRef)
         {
-            return CreateEntries(AddPositionLists.GetAddToPositionObjects(), elementRef);
+            return CreateEntries(GetAddToPositionObjects(), elementRef);
         }
 
-        public static List<DataElement> GetEvalutationEntries(InterimTradeElement elementRef)
+        private static List<DataElement> GetEvalutationEntries(InterimTradeElement elementRef)
         {
-            return CreateEntries(AddPositionLists.GetEvalutationObjects(), elementRef);
+            return CreateEntries(GetEvalutationObjects(), elementRef);
         }
 
-        public static List<DataElement> GetFirstPositionEntries(InterimTradeElement elementRef)
+        private static List<DataElement> GetFirstPositionEntries(InterimTradeElement elementRef)
         {
-            return CreateEntries(AddPositionLists.GetFirstPositionObjects(), elementRef);
+            return CreateEntries(GetFirstPositionObjects(), elementRef);
         }
 
-        public static List<DataElement> GetReducePositionEntries(InterimTradeElement elementRef)
+        private static List<DataElement> GetReducePositionEntries(InterimTradeElement elementRef)
         {
-            return CreateEntries(ReducePositionList.GetReducePositionObjects(), elementRef);
+            return CreateEntries(GetReducePositionObjects(), elementRef);
         }
         #endregion
 
         #region Summary and Closure
-        public static List<DataElement> GetSummaryComponents(TradeSummary elementRef, TradeAnalyticsSummary analytics)
+        private static List<DataElement> GetSummaryComponents(TradeSummary elementRef, TradeAnalyticsSummary analytics)
         {
-            var summaryCells = SummaryPositionsLists.GetSummaryComponents(analytics);
+            var summaryCells = GetSummaryComponents(analytics);
             return CreateEntries(summaryCells, elementRef);
         }
 
-        public static List<DataElement> GetTradeClosureComponents(TradeSummary elementRef, TradeAnalyticsSummary analytics)
+        private static List<DataElement> GetTradeClosureComponents(TradeSummary elementRef, TradeAnalyticsSummary analytics)
         {
-            var closureCells = SummaryPositionsLists.GetTradeClosureComponents(analytics);
+            var closureCells = GetTradeClosureComponents(analytics);
             return CreateEntries(closureCells, elementRef);
         } 
         #endregion
@@ -55,7 +54,7 @@ namespace HsR.Journal.Entities.Factory
             return overview;
         }
 
-        public static List<DataElement> CreateEntries(IEnumerable<DataElement> cellConfigs, TradeElement elementRef)
+        private static List<DataElement> CreateEntries(IEnumerable<DataElement> cellConfigs, TradeElement elementRef)
         {
             return cellConfigs.Select(config => CreateEntry(config, elementRef)).ToList();
         }
