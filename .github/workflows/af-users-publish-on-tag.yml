@@ -12,6 +12,9 @@ jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        
       - name: Run Dotnet Build & Publish Action
         uses: ./.github/actions/dotnet-build-publish
         with:
