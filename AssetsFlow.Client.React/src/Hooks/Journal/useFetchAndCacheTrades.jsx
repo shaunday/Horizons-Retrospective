@@ -2,7 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAllTrades } from "@services/ApiRequests/journalApiAccess";
 import { tradeKeysFactory } from "@services/query-key-factory";
 
-export function useFetchAndCacheTrades() {
+export function useFetchAndCacheTrades({ enabled = true } = {}) {
   const queryClient = useQueryClient();
 
   const getAndCacheTrades = async () => {
@@ -19,6 +19,7 @@ export function useFetchAndCacheTrades() {
     queryKey: tradeKeysFactory.getTradesKey(),
     queryFn: getAndCacheTrades,
     throwOnError: true,
+    enabled,
   });
 
   const prefetchTrades = async () => {

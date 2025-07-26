@@ -21,7 +21,7 @@ export const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <MantineProvider>
-      <Notifications position="bottom-right" zIndex={10000} />
+      {/* <Notifications position="bottom-right" zIndex={10000} /> */}
       <QueryClientProvider client={queryClient}>
         <App />
         <ReactQueryDevtools initialIsOpen={false} />
