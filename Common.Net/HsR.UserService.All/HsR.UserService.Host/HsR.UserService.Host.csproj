@@ -36,8 +36,8 @@
     </None>
   </ItemGroup>
 
-  <Target Name="CopySharedEnvFile" AfterTargets="Build">
-    <Copy SourceFiles="..\..\..\.env.Global" DestinationFolder="$(OutputPath)" />
-  </Target>
+<Target Name="CopySharedEnvFile" AfterTargets="Build" Condition="'$(CopyEnvFile)' == 'true'">
+  <Copy SourceFiles="..\..\..\.env.Global" DestinationFolder="$(OutputPath)" />
+</Target>
 
 </Project> 
