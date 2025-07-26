@@ -1,9 +1,18 @@
-import { Title, Loader, Text, Button, Flex, Box, Group } from "@mantine/core";
+import {
+  Title,
+  Loader,
+  Text,
+  Button,
+  Flex,
+  Box,
+  Group,
+} from "@mantine/core";
 import { TbHelp, TbChartLine, TbUser } from "react-icons/tb";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { notifications } from "@mantine/notifications";
 import AboutDrawer from "@components/About/AboutDrawer";
+import LoadingOverlay from "@components/LoadingOverlay";
 import { useAuth } from "@hooks/Auth/useAuth";
 import { reseedDemoUserAPI } from "@services/ApiRequests/adminApiAccess";
 
@@ -116,6 +125,8 @@ function Header({ showUserActions = true }) {
           )}
         </Flex>
       </Box>
+
+      <LoadingOverlay visible={isReseeding} text={"Reseed in progress ... \n(~10sec)"}/>
 
       <AboutDrawer opened={opened} onClose={close} />
     </>
