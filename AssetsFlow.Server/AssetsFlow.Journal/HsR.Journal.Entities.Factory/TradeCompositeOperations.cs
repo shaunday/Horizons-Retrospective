@@ -45,7 +45,7 @@ namespace HsR.Journal.Entities.Factory
                 trade.TradeElements.Add(reductionEle);
 
                 trade.Summary = TradeElementsFactory.GetNewElement(trade, TradeActionType.Summary) as TradeSummary;
-                trade.Close();
+                trade.SetStatus(TradeStatus.Closed);
             }
             else
             {

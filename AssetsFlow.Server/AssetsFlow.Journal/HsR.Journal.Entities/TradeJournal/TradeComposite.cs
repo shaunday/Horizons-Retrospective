@@ -16,39 +16,17 @@ public class TradeComposite
 
     #region Status Logic
 
-    public TradeStatus Status { get; set; } = TradeStatus.AnIdea;
+    public TradeStatus Status { get; private set; } = TradeStatus.AnIdea;
 
-    private void UpdateStatus(TradeStatus newStatus)
+    public void SetStatus(TradeStatus newStatus)
     {
+        if (Status == newStatus)
+            return;
+
         Status = newStatus;
-
-        if (newStatus == TradeStatus.Open)
-        {
-            OpenedAt ??= DateTime.UtcNow;
-        }
-        else if (newStatus == TradeStatus.Closed)
-        {
-            ClosedAt = DateTime.UtcNow;
-        }
     }
 
-    public void Activate()
-    {
-        if (Status == TradeStatus.AnIdea)
-        {
-            UpdateStatus(TradeStatus.Open);
-        }
-    }
-
-    public void Close()
-    {
-        UpdateStatus(TradeStatus.Closed);
-    }
     #endregion
-
-    public DateTime? OpenedAt { get; set; }
-
-    public DateTime? ClosedAt { get; set; }
 
     public override string ToString() => $"Id={Id}, Status={Status}, Trade Eles Count={TradeElements.Count}";
 }

@@ -52,7 +52,7 @@ namespace HsR.Journal.DataContext
 
                 if (interim.TradeActionType == TradeActionType.Add)
                 {
-                    cell.CompositeRef?.Activate();
+                    cell.CompositeRef?.SetStatus(TradeStatus.Open);
                 }
 
                 if (cell.CompositeRef != null && cell.IsCostRelevant())

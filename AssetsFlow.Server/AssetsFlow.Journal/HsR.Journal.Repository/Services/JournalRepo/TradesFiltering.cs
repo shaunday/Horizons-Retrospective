@@ -11,25 +11,25 @@ namespace HsR.Journal.Repository.Services.TradeCompositeRepo
     {
         public static IQueryable<TradeComposite> ApplyFiltering(this IQueryable<TradeComposite> query, TradesFilterModel filter)
         {
-            if (filter.OpenLowerLimit.HasValue)
-            {
-                query = query.Where(t => t.OpenedAt >= filter.OpenLowerLimit.Value);
-            }
+            //if (filter.OpenLowerLimit.HasValue)
+            //{
+            //    query = query.Where(t => t.OpenedAt >= filter.OpenLowerLimit.Value);
+            //}
 
-            if (filter.OpenUpperLimit.HasValue)
-            {
-                query = query.Where(t => t.OpenedAt <= filter.OpenUpperLimit.Value);
-            }
+            //if (filter.OpenUpperLimit.HasValue)
+            //{
+            //    query = query.Where(t => t.OpenedAt <= filter.OpenUpperLimit.Value);
+            //}
 
-            if (filter.CloseLowerLimit.HasValue)
-            {
-                query = query.Where(t => t.ClosedAt >= filter.CloseLowerLimit.Value);
-            }
+            //if (filter.CloseLowerLimit.HasValue)
+            //{
+            //    query = query.Where(t => t.ClosedAt >= filter.CloseLowerLimit.Value);
+            //}
 
-            if (filter.CloseUpperLimit.HasValue)
-            {
-                query = query.Where(t => t.ClosedAt <= filter.CloseUpperLimit.Value); 
-            }
+            //if (filter.CloseUpperLimit.HasValue)
+            //{
+            //    query = query.Where(t => t.ClosedAt <= filter.CloseUpperLimit.Value); 
+            //}
 
             if (filter.FilterObjects?.Any() == true)
             {
