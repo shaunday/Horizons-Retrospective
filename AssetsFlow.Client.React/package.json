@@ -1,7 +1,7 @@
 {
   "name": "dayjtrading.web",
   "private": true,
-  "version": "0.9.120-c",
+  "version": "0.9.121-c",
   "type": "module",
   "homepage": "https://mywebthings.xyz",
   "scripts": {

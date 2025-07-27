@@ -4,14 +4,13 @@ fix: close trade not working
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox +  autofill
 from limor: edit > expand the object and edit in place?
 from limor: title should be styled diff than the content, text aligned to the left
-add: opened/closedat (just to overview?)
+add: opened/closedat/IdeaDate (just to overview?)
 
 ## 2.
 RQ isloading/error vs statusnots.. move to mantines notifications for all?
 add: filter (status first, date first, BY STATUS), adjust data call api
 revert trades order? last added first?
 
- <p>Something went wrong:</p> > unify with error nott.
 ThemeIcon variant="light" color="indigo.4"> + move the icon into the paper - on elementbadge  ?
 
 add: ignoreActivation flag to content edit

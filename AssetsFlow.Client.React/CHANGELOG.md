@@ -1,6 +1,10 @@
 
 # Changelog
 
+## [0.9.121-c] - 2025-07-..
+### Fixed
+- Error component for errror boundary states
+
 ## [0.9.120-c] - 2025-07-26
 ### Added
 - Users Service, Demo user
