@@ -1,9 +1,10 @@
 ﻿using HsR.Common.Extenders;
 using HsR.Journal.Entities;
+using HsR.Web.Services.Models.Journal;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace HsR.Web.Services.Models.Journal
+namespace AssetsFlowWeb.Services.Models.Journal
 {
     public class TradeElementModel
     {

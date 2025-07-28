@@ -4,6 +4,7 @@ using AutoMapper.EquivalencyExpression;
 using HsR.Journal.Entities;
 using HsR.Journal.Services;
 using HsR.Journal.Entities.TradeJournal;
+using AssetsFlowWeb.Services.Models.Journal;
 
 namespace HsR.Web.API.Mapping
 {

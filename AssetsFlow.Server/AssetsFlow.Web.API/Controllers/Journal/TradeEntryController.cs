@@ -37,7 +37,7 @@ namespace HsR.Web.API.Controllers.Journal
             try
             {
                 (DataElement updatedComponent, UpdatedStatesCollation updatedStates) =
-                    await _journalAccess.DataElement.UpdateCellContentAsync(componentId, request.Content, request.Info);
+                    await _journalAccess.DataElement.UpdateCellContentAsync(componentId, request);
                 DataElementModel newEntry = _mapper.Map<DataElementModel>(updatedComponent);
                 UpdatedStatesModel updatedStatesModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
                 _cacheService.InvalidateAndReload(updatedComponent.UserId);
@@ -52,10 +52,6 @@ namespace HsR.Web.API.Controllers.Journal
             }
         }
 
-        public class UpdateDataComponentRequest
-        {
-            public string Content { get; set; } = "";
-            public string Info { get; set; } = "";
-        }
+       
     }    
 }

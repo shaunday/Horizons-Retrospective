@@ -1,4 +1,5 @@
 ﻿using HsR.Journal.DataContext;
+using HsR.Journal.Entities;
 using HsR.Journal.Entities.Factory;
 using HsR.Journal.Repository.Services.Base;
 using HsR.Journal.Services;

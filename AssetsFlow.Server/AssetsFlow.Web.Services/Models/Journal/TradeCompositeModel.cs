@@ -3,7 +3,7 @@ using HsR.Journal.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace HsR.Web.Services.Models.Journal
+namespace AssetsFlowWeb.Services.Models.Journal
 {
     public class TradeCompositeInfo
     {

@@ -12,7 +12,7 @@ namespace HsR.UserService.Client.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddUserServiceClient(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddUserServiceClient(this IServiceCollection services)
     {
         string baseUrl = UserServiceEx.GetUserServiceUrl();
 

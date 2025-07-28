@@ -1,7 +1,7 @@
+using AssetsFlowWeb.Services.Models.Journal;
 using AutoMapper;
 using HsR.Journal.DataContext;
 using HsR.Web.API.Services;
-using HsR.Web.Services.Models.Journal;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

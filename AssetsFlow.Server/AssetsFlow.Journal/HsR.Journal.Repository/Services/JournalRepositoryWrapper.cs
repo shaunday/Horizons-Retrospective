@@ -6,29 +6,19 @@ using HsR.Journal.Services;
 
 namespace HsR.Journal.DataContext
 {
-    public class JournalRepositoryWrapper : IJournalRepositoryWrapper
+    public class JournalRepositoryWrapper(
+        IJournalRepository tradeCompositesRepository,
+        ITradeCompositeRepository tradeCompositeRepository,
+        ITradeElementRepository tradeElementRepository,
+        IDataElementRepository dataElementRepository,
+        IUserDataRepository userDataRepository) : IJournalRepositoryWrapper
     {
-        public IJournalRepository Journal { get; }
-        public ITradeCompositeRepository TradeComposite { get; }
-        public ITradeElementRepository TradeElement { get; }
-        public IDataElementRepository DataElement { get; }
+        public IJournalRepository Journal { get; } = tradeCompositesRepository;
+        public ITradeCompositeRepository TradeComposite { get; } = tradeCompositeRepository;
+        public ITradeElementRepository TradeElement { get; } = tradeElementRepository;
+        public IDataElementRepository DataElement { get; } = dataElementRepository;
 
-        public IUserDataRepository UserDataRepo { get; }
-
-        public JournalRepositoryWrapper(
-            IJournalRepository tradeCompositesRepository,
-            ITradeCompositeRepository tradeCompositeRepository,
-            ITradeElementRepository tradeElementRepository,
-            IDataElementRepository dataElementRepository,
-            IUserDataRepository userDataRepository)
-        {
-            Journal = tradeCompositesRepository;
-            TradeComposite = tradeCompositeRepository;
-            TradeElement = tradeElementRepository;
-            DataElement = dataElementRepository;
-            UserDataRepo = userDataRepository;
-        }
-
+        public IUserDataRepository UserDataRepo { get; } = userDataRepository;
     } 
 }
 

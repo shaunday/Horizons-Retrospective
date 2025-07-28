@@ -27,7 +27,7 @@ builder.Services
     .AddCustomApiVersioning()
     .AddConfigurationServices(builder.Configuration)
     .AddCacheServices(builder.Configuration)
-    .AddUserServiceClient(builder.Configuration)
+    .AddUserServiceClient()
     .AddJwtAuthentication(builder.Configuration)
     .ConfigureTradingJournalDbContext(isDev)
     .ConfigureCors(isDev);

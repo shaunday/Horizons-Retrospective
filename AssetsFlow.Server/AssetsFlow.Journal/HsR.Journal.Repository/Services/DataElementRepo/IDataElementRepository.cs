@@ -6,7 +6,7 @@ namespace HsR.Journal.DataContext
 {
     public interface IDataElementRepository
     {
-        Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)> UpdateCellContentAsync(int componentId, string newContent, string changeNote);
+        Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)> UpdateCellContentAsync(int componentId, UpdateDataComponentRequest request);
     }
 
 }

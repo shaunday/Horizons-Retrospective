@@ -11,6 +11,7 @@ using System.Data;
 using System.Diagnostics;
 using Serilog;
 using Microsoft.AspNetCore.Authorization;
+using AssetsFlowWeb.Services.Models.Journal;
 
 namespace HsR.Web.API.Controllers.Journal
 {

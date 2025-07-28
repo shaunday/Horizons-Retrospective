@@ -225,7 +225,7 @@ namespace HsR.Journal.Seeder
                 {
                     try
                     {
-                        await _dataElementRepository.UpdateCellContentAsync(entry.Id, value, "manual seed");
+                        await _dataElementRepository.UpdateCellContentAsync(entry.Id, new Services.UpdateDataComponentRequest() { Content = value });
                     }
                     catch (Exception ex)
                     {
