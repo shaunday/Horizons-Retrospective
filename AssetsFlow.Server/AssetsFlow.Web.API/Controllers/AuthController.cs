@@ -1,3 +1,4 @@
+using HsR.Common.AspNet.Authentication;
 using HsR.UserService.Client.Interfaces;
 using HsR.UserService.Contracts;
 using HsR.UserService.Protos;

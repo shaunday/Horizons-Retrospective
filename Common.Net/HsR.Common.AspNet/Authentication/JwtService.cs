@@ -3,10 +3,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using HsR.Web.API.Settings;
 using Microsoft.Extensions.Logging;
 
-namespace HsR.Web.API.Services;
+namespace HsR.Common.AspNet.Authentication;
 
 public interface IJwtService
 {

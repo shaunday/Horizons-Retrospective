@@ -4,6 +4,7 @@
 - DenyActivation flag added to content edit method
 - namespaces foxes
 - return trade analytics in status
+- JWT refresh logic - auth/refresh/save token in userdata
 
 ## [0.9.220-b] - 2025-07-26
 - User Service with gRPC + host + unittests

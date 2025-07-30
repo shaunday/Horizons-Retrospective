@@ -1,4 +1,4 @@
-namespace HsR.Web.API.Settings;
+namespace HsR.Common.AspNet.Authentication;
 
 public class JwtSettings
 {

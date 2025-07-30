@@ -5,7 +5,6 @@
 - Journal to Journal.All
 
 - add version to user.s api
-- Configure JWT refresh logic - auth/refresh
 - fix user entity (remove stuff?), adjust login request to user/pass?
 
 - rethink isContentMissing - either way dont need to reload all tradeComposite to get it, you always got the old one (in the fe at least)

@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using HsR.Web.API.Settings;
 using HsR.Web.API.Services;
+using HsR.Common.AspNet.Authentication;
 
 namespace AssetsFlowWeb.API.Configurations
 {
