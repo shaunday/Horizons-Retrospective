@@ -1,16 +1,25 @@
-// logger.js
-const pino = require('pino');
+import pino from 'pino';
+import pinoHttp from 'pino-http';
 
-const logger = pino({
-  transport: {
-    target: 'pino-pretty',
-    options: {
-      colorize: true,
-      translateTime: 'SYS:standard',
-      singleLine: true,
-      ignore: 'pid,hostname'
-    }
-  }
-});
+const isProd = process.env.NODE_ENV === 'production';
 
-module.exports = logger;
+const baseLogger = pino(
+  isProd
+    ? {}
+    : {
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            colorize: true,
+            translateTime: 'SYS:standard',
+            singleLine: true,
+            ignore: 'pid,hostname'
+          }
+        }
+      }
+);
+
+// Express/Fastify middleware
+const httpLogger = pinoHttp({ logger: baseLogger });
+
+export { baseLogger, httpLogger };

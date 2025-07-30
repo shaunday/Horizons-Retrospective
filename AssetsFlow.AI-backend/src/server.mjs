@@ -1,10 +1,17 @@
-// Express example
-const express = require('express');
-const pino = require('pino-http')();
-const app = express();
+import express from 'express';
+import { httpLogger, baseLogger } from './logger.mjs';
+import { StatusController } from './StatusController.mjs';
 
-app.use(pino);
-app.get('/', (req, res) => {
-  req.log.info('Request received');
-  res.send('hello');
+const app = express();
+app.use(express.json());
+
+app.use(httpLogger);
+
+// Health and version endpoints
+app.get('/routes/health', StatusController.health);
+app.get('/routes/version', StatusController.version);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  baseLogger.info(`Server running on port ${PORT}`);
 });
