@@ -1,18 +1,18 @@
 ﻿
 # TODO
 - replace supa's password, reset db, update db -> name for user's service
-- add version to user.s api
-
-- Configure JWT refresh logic - auth/refresh
-
-- fix user entity (remove stuff?), adjust login request to user/pass?
-
-- on remove, set condition where net is positive post, otherwise error
-- rethink isContentMissing - either way dont need to reload all tradeComposite to get it, you always got the old one (in the fe at least)
-- closed trade logic : deny edits/ re-open trade to allow edit?
-- filtering/sortby/search by
 
 - Journal to Journal.All
+
+- add version to user.s api
+- Configure JWT refresh logic - auth/refresh
+- fix user entity (remove stuff?), adjust login request to user/pass?
+
+- rethink isContentMissing - either way dont need to reload all tradeComposite to get it, you always got the old one (in the fe at least)
+- closed trade logic : deny edits/ re-open trade to allow edit?
+
+- filtering/sortby/search by
+- Pagination
 
 ## security
  - bcrypt (encrypt passwords), firebase (more auth)
@@ -34,7 +34,6 @@
 - conluences check list = trends per tf, bb/ma distances
 - filtering history
 - Add rate limiting, monitoring, and alerting.
-- set full deployment (deploy on aws post version tag .. deploy all??)
 
 ## Expansion:
 Suspence? RQ Suspence

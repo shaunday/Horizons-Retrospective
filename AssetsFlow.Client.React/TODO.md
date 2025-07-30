@@ -23,6 +23,7 @@ add: user login ... routing?
 add: userinfo on toppanel, tooltip + constants
 
 ## 3.
+on reduce position, check max allowed from analytics
 obfuscate amounts/costs for anon view - a method (in the user context?)
 pagination ui (parse X data)
 free flow string with AI to turn it into a trade object

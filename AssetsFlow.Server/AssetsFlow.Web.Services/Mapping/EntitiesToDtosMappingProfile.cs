@@ -5,6 +5,7 @@ using HsR.Journal.Entities;
 using HsR.Journal.Services;
 using HsR.Journal.Entities.TradeJournal;
 using AssetsFlowWeb.Services.Models.Journal;
+using HsR.Journal.TradeAnalytics;
 
 namespace HsR.Web.API.Mapping
 {
@@ -19,7 +20,7 @@ namespace HsR.Web.API.Mapping
                 .EqualityComparison((dto, m) => dto.Id == m.Id)
                 .ForMember(dest => dest.IsAnyContentMissing,
                 opt => opt.MapFrom(src => !src.IsAllRequiredFields()));
-            
+
             CreateMap<TradeComposite, TradeCompositeInfo>()
                 .EqualityComparison((dto, m) => dto.Id == m.Id)
                 .ForMember(dest => dest.IsAnyContentMissing,
@@ -45,7 +46,8 @@ namespace HsR.Web.API.Mapping
                             .Where(te => te.TradeActionType == TradeActionType.Reduce)
                             .OrderByDescending(te => te.TimeStamp)
                             .Select(te => te.TimeStamp)
-                            .FirstOrDefault()));
+                            .FirstOrDefault()))
+                .ForMember(dest => dest.Analytics, opt => opt.MapFrom(src => new TradeAnalyticsSummary(Analytics.GetTradingCosts(src))));
 
 
             CreateMap<TradeComposite, TradeCompositeModel>()
