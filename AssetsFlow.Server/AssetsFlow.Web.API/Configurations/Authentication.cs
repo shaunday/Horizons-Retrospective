@@ -15,6 +15,9 @@ namespace AssetsFlowWeb.API.Configurations
         {
             services.AddSingleton<IJwtService, JwtService>();
 
+            services.AddScoped<IUserRefreshTokenRepository, UserRefreshTokenRepository>();
+            services.AddScoped<IRefreshTokenService, RefreshTokenService>();
+
             var jwtSettings = configuration.GetSection(JwtSettings.SectionName).Get<JwtSettings>() ?? new JwtSettings();
 
             if (string.IsNullOrWhiteSpace(jwtSettings.SecretKey))

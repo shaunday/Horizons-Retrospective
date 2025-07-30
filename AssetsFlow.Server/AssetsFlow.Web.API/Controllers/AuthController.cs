@@ -13,12 +13,14 @@ public class AuthController : ControllerBase
 {
     private readonly IUserServiceClient _userServiceClient;
     private readonly IJwtService _jwtService;
+    private readonly IRefreshTokenService _refreshTokenService;
     private readonly ILogger<AuthController> _logger;
 
-    public AuthController(IUserServiceClient userServiceClient, IJwtService jwtService, ILogger<AuthController> logger)
+    public AuthController(IUserServiceClient userServiceClient, IJwtService jwtService, IRefreshTokenService refreshService, ILogger<AuthController> logger)
     {
         _userServiceClient = userServiceClient;
         _jwtService = jwtService;
+        _refreshTokenService = refreshService;
         _logger = logger;
     }
 
@@ -247,4 +249,6 @@ public class AuthController : ControllerBase
             });
         }
     }
+
+
 } 

@@ -253,8 +253,10 @@ namespace HsR.Web.API.Caching.Tests
             dictTokens![userId] = new CancellationTokenSource();
             // Call private method via reflection
             var method = typeof(TradesCacheService).GetMethod("LoadCacheAsync", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var task = (Task)method.Invoke(service, new object[] { userId, CancellationToken.None });
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+            var task = method.Invoke(service, new object[] { userId, CancellationToken.None }) as Task;
             task.GetAwaiter().GetResult();
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             Assert.True(true);
         }
 

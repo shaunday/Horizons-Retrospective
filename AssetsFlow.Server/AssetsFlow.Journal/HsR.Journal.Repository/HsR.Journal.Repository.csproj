@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common.Net\HsR.Common.AspNet\HsR.Common.AspNet.csproj" />
     <ProjectReference Include="..\..\..\Common.Net\HsR.Common.Db\HsR.Common.Db.csproj" />
     <ProjectReference Include="..\..\..\Common.Net\HsR.Common\HsR.Common.csproj" />
     <ProjectReference Include="..\HsR.Journal.Entities.Factory\HsR.Journal.Entities.Factory.csproj" />

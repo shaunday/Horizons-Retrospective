@@ -5,28 +5,32 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Threading.Tasks;
+
 
 namespace HsR.Common.AspNet.Authentication
 {
     public interface IRefreshTokenService
     {
         string GenerateRefreshToken();
-        Task SaveRefreshTokenAsync(string userId, string refreshToken);
-        Task<bool> ValidateRefreshTokenAsync(string userId, string refreshToken);
-        Task ReplaceRefreshTokenAsync(string userId, string oldToken, string newToken);
+        Task SaveRefreshTokenAsync(Guid userId, string refreshToken);
+        Task<bool> ValidateRefreshTokenAsync(Guid userId, string refreshToken);
+        Task ReplaceRefreshTokenAsync(Guid userId, string oldToken, string newToken);
+        Task RevokeRefreshTokenAsync(Guid userId);
         ClaimsPrincipal? GetPrincipalFromExpiredToken(string token);
     }
 
-public class RefreshTokenService : IRefreshTokenService
+    public class RefreshTokenService : IRefreshTokenService
     {
-        // Simulated storage: userId -> (refreshToken, expiry)
-        private readonly ConcurrentDictionary<string, (string Token, DateTime Expiry)> _refreshTokens = new();
+        private readonly IUserRefreshTokenRepository _userTokenRepo;
         private readonly JwtSettings _jwtSettings;
         private readonly ILogger<RefreshTokenService> _logger;
 
-        public RefreshTokenService(IOptions<JwtSettings> jwtSettings, ILogger<RefreshTokenService> logger)
+        public RefreshTokenService(
+            IUserRefreshTokenRepository userTokenRepo,
+            IOptions<JwtSettings> jwtSettings,
+            ILogger<RefreshTokenService> logger)
         {
+            _userTokenRepo = userTokenRepo;
             _jwtSettings = jwtSettings.Value;
             _logger = logger;
         }
@@ -39,33 +43,33 @@ public class RefreshTokenService : IRefreshTokenService
             return Convert.ToBase64String(randomBytes);
         }
 
-        public Task SaveRefreshTokenAsync(string userId, string refreshToken)
+        public async Task SaveRefreshTokenAsync(Guid userId, string refreshToken)
         {
-            var expiry = DateTime.UtcNow.AddDays(7); // Refresh token valid 7 days
-            _refreshTokens[userId] = (refreshToken, expiry);
+            var expiry = DateTime.UtcNow.AddDays(7);
+            await _userTokenRepo.SaveRefreshTokenAsync(userId, refreshToken, expiry);
             _logger.LogInformation("Saved refresh token for user {UserId} expiring at {Expiry}", userId, expiry);
-            return Task.CompletedTask;
         }
 
-        public Task<bool> ValidateRefreshTokenAsync(string userId, string refreshToken)
+        public async Task<bool> ValidateRefreshTokenAsync(Guid userId, string refreshToken)
         {
-            if (_refreshTokens.TryGetValue(userId, out var storedToken))
-            {
-                var isValid = storedToken.Token == refreshToken && storedToken.Expiry > DateTime.UtcNow;
-                return Task.FromResult(isValid);
-            }
-            return Task.FromResult(false);
+            var (token, expiry) = await _userTokenRepo.GetRefreshTokenAsync(userId);
+            return token == refreshToken && expiry > DateTime.UtcNow;
         }
 
-        public Task ReplaceRefreshTokenAsync(string userId, string oldToken, string newToken)
+        public async Task ReplaceRefreshTokenAsync(Guid userId, string oldToken, string newToken)
         {
-            if (_refreshTokens.TryGetValue(userId, out var storedToken) && storedToken.Token == oldToken)
+            var (token, _) = await _userTokenRepo.GetRefreshTokenAsync(userId);
+            if (token == oldToken)
             {
-                var expiry = DateTime.UtcNow.AddDays(7);
-                _refreshTokens[userId] = (newToken, expiry);
+                var newExpiry = DateTime.UtcNow.AddDays(7);
+                await _userTokenRepo.SaveRefreshTokenAsync(userId, newToken, newExpiry);
                 _logger.LogInformation("Replaced refresh token for user {UserId}", userId);
             }
-            return Task.CompletedTask;
+        }
+
+        public Task RevokeRefreshTokenAsync(Guid userId)
+        {
+            return _userTokenRepo.RevokeRefreshTokenAsync(userId);
         }
 
         public ClaimsPrincipal? GetPrincipalFromExpiredToken(string token)
@@ -80,14 +84,14 @@ public class RefreshTokenService : IRefreshTokenService
                     ValidIssuer = _jwtSettings.Issuer,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.SecretKey)),
-                    ValidateLifetime = false // Here we want to get principal even if token expired
+                    ValidateLifetime = false // allow expired tokens
                 };
 
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);
 
-                if (securityToken is not JwtSecurityToken jwtSecurityToken ||
-                    !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                if (securityToken is not JwtSecurityToken jwtToken ||
+                    !jwtToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
                 {
                     throw new SecurityTokenException("Invalid token");
                 }
