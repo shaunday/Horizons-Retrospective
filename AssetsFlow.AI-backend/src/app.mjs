@@ -1,15 +1,15 @@
 import express from 'express';
 import { httpLogger, baseLogger } from './logger.mjs';
-import { StatusController } from './StatusController.mjs';
+import tradeWizardRoutes from './routes/tradeWizardRoutes.mjs';
+import statusRoutes from './routes/StatusRoutes.mjs';
 
 const app = express();
 app.use(express.json());
 
 app.use(httpLogger);
 
-// Health and version endpoints
-app.get('/routes/health', StatusController.health);
-app.get('/routes/version', StatusController.version);
+app.use('/status', statusRoutes);
+app.use('/trade-wizard', tradeWizardRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
