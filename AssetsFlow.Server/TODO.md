@@ -11,7 +11,6 @@
 - closed trade logic : deny edits/ re-open trade to allow edit?
 
 - filtering/sortby/search by
-- Pagination
 
 ## security
  - bcrypt (encrypt passwords), firebase (more auth)
