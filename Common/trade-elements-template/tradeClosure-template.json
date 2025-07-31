@@ -1,0 +1,20 @@
+{
+  "elementType": "Closure",
+  "elements": [
+    {
+      "title": "Net Result",
+      "componentType": "Results",
+      "isRelevantForTradeOverview": true
+    },
+    {
+      "title": "W/L",
+      "componentType": "Results",
+      "restrictions": ["W", "L"],
+      "isRelevantForTradeOverview": true
+    },
+    {
+      "title": "Lessons",
+      "componentType": "Context"
+    }
+  ]
+}

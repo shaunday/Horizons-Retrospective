@@ -85,6 +85,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Web.API.Caching.Tests", "Tests\HsR.Web.API.Caching.Tests\HsR.Web.API.Caching.Tests.csproj", "{F9C60128-9FEA-4874-B31D-3EF483FC3E01}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "element-templates", "element-templates", "{32571ED3-E066-4876-85DF-045768B96B89}"
+	ProjectSection(SolutionItems) = preProject
+		..\Common\trade-elements-template\addToPosition-template.json = ..\Common\trade-elements-template\addToPosition-template.json
+		..\Common\trade-elements-template\evaluation-template.json = ..\Common\trade-elements-template\evaluation-template.json
+		..\Common\trade-elements-template\reducePosition-template.json = ..\Common\trade-elements-template\reducePosition-template.json
+		..\Common\trade-elements-template\tradeClosure-template.json = ..\Common\trade-elements-template\tradeClosure-template.json
+		..\Common\trade-elements-template\tradeOrigin-template.json = ..\Common\trade-elements-template\tradeOrigin-template.json
+		..\Common\trade-elements-template\tradeSummary-template.json = ..\Common\trade-elements-template\tradeSummary-template.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -357,6 +367,7 @@ Global
 		{ABC623D6-EDD3-4CBE-9D6E-904E00F1B282} = {46B455BF-9472-4F21-B4B0-63627CF80A7E}
 		{5CD3D614-88C8-FEAA-E28E-66756038CBED} = {F160C4C3-5E21-4DDF-B119-BB651086EF4B}
 		{F9C60128-9FEA-4874-B31D-3EF483FC3E01} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+		{32571ED3-E066-4876-85DF-045768B96B89} = {F160C4C3-5E21-4DDF-B119-BB651086EF4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6CD0AE80-6A63-459E-884D-64F6D12582F5}

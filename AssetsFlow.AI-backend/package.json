@@ -3,10 +3,10 @@
   "name": "trading-chattie-backend",
   "version": "0.9.401",
   "description": "Validate 1 line trade creations with AI",
-  "main": "src/server.mjs",
+  "main": "src/app.mjs",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node --env-file=.env --watch src --watch-path src src/server.mjs",
-    "start": "cross-env NODE_ENV=production node --env-file=.env.production src/server.mjs"
+    "dev": "cross-env NODE_ENV=development node --env-file=.env --watch src --watch-path src src/app.mjs",
+    "start": "cross-env NODE_ENV=production node --env-file=.env.production src/app.mjs"
   },
   "author": "Shaun Day",
   "dependencies": {

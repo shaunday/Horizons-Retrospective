@@ -3,6 +3,7 @@
 - replace supa's password, reset db, update db -> name for user's service
 
 - Journal to Journal.All
+- entities as json
 
 - add version to user.s api
 - fix user entity (remove stuff?), adjust login request to user/pass?

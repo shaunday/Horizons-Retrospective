@@ -1,0 +1,20 @@
+{
+  "elementType": "Summary",
+  "elements": [
+    {
+      "title": "Average Entry",
+      "componentType": "PriceRelated",
+      "isRelevantForTradeOverview": true
+    },
+    {
+      "title": "Average Close",
+      "componentType": "PriceRelated",
+      "isRelevantForTradeOverview": true
+    },
+    {
+      "title": "Total Amount",
+      "componentType": "PriceRelated",
+      "isRelevantForTradeOverview": true
+    }
+  ]
+}
