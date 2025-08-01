@@ -16,13 +16,12 @@ namespace HsR.Journal.Infrastructure.Migrations
                 name: "UserData",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     SavedSectors = table.Column<string>(type: "jsonb", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserData", x => x.Id);
+                    table.PrimaryKey("PK_UserData", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -33,6 +32,7 @@ namespace HsR.Journal.Infrastructure.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: false),
                     ComponentType = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     SectorRelevance = table.Column<bool>(type: "boolean", nullable: false),
                     UnitPriceRelevance = table.Column<string>(type: "text", nullable: true),
                     TotalCostRelevance = table.Column<string>(type: "text", nullable: true),
@@ -78,6 +78,7 @@ namespace HsR.Journal.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     SummaryId = table.Column<int>(type: "integer", nullable: true),
                     Status = table.Column<string>(type: "text", nullable: false),
                     OpenedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -89,12 +90,13 @@ namespace HsR.Journal.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TradeElement",
+                name: "TradeElements",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TradeActionType = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     TimeStamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CompositeFK = table.Column<int>(type: "integer", nullable: false),
                     TradeElementType = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: false),
@@ -103,15 +105,15 @@ namespace HsR.Journal.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TradeElement", x => x.Id);
+                    table.PrimaryKey("PK_TradeElements", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TradeElement_TradeComposites_CompositeFK",
+                        name: "FK_TradeElements_TradeComposites_CompositeFK",
                         column: x => x.CompositeFK,
                         principalTable: "TradeComposites",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TradeElement_TradeComposites_CompositeRefId",
+                        name: "FK_TradeElements_TradeComposites_CompositeRefId",
                         column: x => x.CompositeRefId,
                         principalTable: "TradeComposites",
                         principalColumn: "Id",
@@ -129,20 +131,35 @@ namespace HsR.Journal.Infrastructure.Migrations
                 column: "TradeElementFK");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Entries_UserId",
+                table: "Entries",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TradeComposites_SummaryId",
                 table: "TradeComposites",
                 column: "SummaryId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TradeElement_CompositeFK",
-                table: "TradeElement",
+                name: "IX_TradeComposites_UserId",
+                table: "TradeComposites",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TradeElements_CompositeFK",
+                table: "TradeElements",
                 column: "CompositeFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TradeElement_CompositeRefId",
-                table: "TradeElement",
+                name: "IX_TradeElements_CompositeRefId",
+                table: "TradeElements",
                 column: "CompositeRefId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TradeElements_UserId",
+                table: "TradeElements",
+                column: "UserId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Entries_TradeComposites_CompositeFK",
@@ -153,18 +170,18 @@ namespace HsR.Journal.Infrastructure.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Entries_TradeElement_TradeElementFK",
+                name: "FK_Entries_TradeElements_TradeElementFK",
                 table: "Entries",
                 column: "TradeElementFK",
-                principalTable: "TradeElement",
+                principalTable: "TradeElements",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TradeComposites_TradeElement_SummaryId",
+                name: "FK_TradeComposites_TradeElements_SummaryId",
                 table: "TradeComposites",
                 column: "SummaryId",
-                principalTable: "TradeElement",
+                principalTable: "TradeElements",
                 principalColumn: "Id");
         }
 
@@ -172,12 +189,12 @@ namespace HsR.Journal.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_TradeElement_TradeComposites_CompositeFK",
-                table: "TradeElement");
+                name: "FK_TradeElements_TradeComposites_CompositeFK",
+                table: "TradeElements");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_TradeElement_TradeComposites_CompositeRefId",
-                table: "TradeElement");
+                name: "FK_TradeElements_TradeComposites_CompositeRefId",
+                table: "TradeElements");
 
             migrationBuilder.DropTable(
                 name: "Entries_History");
@@ -192,7 +209,7 @@ namespace HsR.Journal.Infrastructure.Migrations
                 name: "TradeComposites");
 
             migrationBuilder.DropTable(
-                name: "TradeElement");
+                name: "TradeElements");
         }
     }
 }

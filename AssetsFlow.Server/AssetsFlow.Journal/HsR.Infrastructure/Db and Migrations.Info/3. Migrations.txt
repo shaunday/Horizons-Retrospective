@@ -25,3 +25,10 @@ EntityFrameworkCore\Script-Migration -Idempotent -Output "db-scripts\04_01_2025_
 c. Migration bundles
 
 
+
+
+IF YOU EVER RE-SET THE DB YOU NEED TO UPDATE/CONFIG/SET INITIAL MIGRATIONS
+
+PM> $env:SUPABASE_DB_ID="X"
+PM> $env:SUPABASE_DB_PASS="Y"
+PM> EntityFrameworkCore\Add-Migration InitialCreate -p HsR.Journal.Infrastructure -s HsR.Journal.Infrastructure
