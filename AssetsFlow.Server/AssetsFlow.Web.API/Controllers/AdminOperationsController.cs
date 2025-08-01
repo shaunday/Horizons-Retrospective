@@ -14,18 +14,29 @@ namespace AssetsFlowWeb.API.Controllers
     public class AdminOperationsController : ControllerBase
     {
         private readonly DatabaseSeeder _seeder;
+        private readonly ILogger<AdminOperationsController> _logger;
 
-        public AdminOperationsController(DatabaseSeeder seeder)
+        public AdminOperationsController(DatabaseSeeder seeder, ILogger<AdminOperationsController> logger)
         {
             _seeder = seeder;
+            _logger = logger;
         }
 
-        [HttpPost("reseed-demo-user")]
         public async Task<IActionResult> ReseedDemoUser()
         {
-            await _seeder.DeleteAllDemoUserTradesAsync();
-            await _seeder.SeedDemoUserTradesAsync();
-            return Ok(new { message = "Demo user and demo trades reseeded." });
+            _logger.LogInformation("ReseedDemoUser called");
+            try
+            {
+                await _seeder.DeleteAllDemoUserTradesAsync();
+                await _seeder.SeedDemoUserTradesAsync();
+                _logger.LogInformation("ReseedDemoUser succeeded");
+                return Ok(new { message = "Demo user and demo trades reseeded." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "ReseedDemoUser failed");
+                return StatusCode(500, "Internal server error");
+            }
         }
     }
 } 
