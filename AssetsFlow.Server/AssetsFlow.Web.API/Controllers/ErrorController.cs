@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using HsR.Web.API.Controllers;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace AssetsFlowWeb.API.Controllers
 {
     [ApiController]
-    public class ErrorController : ControllerBase
+    public class ErrorController : HsRControllerBase
     {
         private readonly ILogger<ErrorController> _logger;
 

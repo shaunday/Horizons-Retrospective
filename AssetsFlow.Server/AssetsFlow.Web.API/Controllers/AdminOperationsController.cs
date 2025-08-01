@@ -1,6 +1,7 @@
 using Asp.Versioning;
 using HsR.Journal.Seeder;
 using HsR.UserService.Contracts;
+using HsR.Web.API.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -11,32 +12,21 @@ namespace AssetsFlowWeb.API.Controllers
     [ApiVersion("1.0")]
     [ApiController]
     //[Authorize(Roles = RoleNames.Admin)]
-    public class AdminOperationsController : ControllerBase
+    public class AdminOperationsController : HsRControllerBase
     {
         private readonly DatabaseSeeder _seeder;
-        private readonly ILogger<AdminOperationsController> _logger;
 
-        public AdminOperationsController(DatabaseSeeder seeder, ILogger<AdminOperationsController> logger)
+        public AdminOperationsController(DatabaseSeeder seeder)
         {
             _seeder = seeder;
-            _logger = logger;
         }
 
+        [HttpPost("reseed-demo-user")]
         public async Task<IActionResult> ReseedDemoUser()
         {
-            _logger.LogInformation("ReseedDemoUser called");
-            try
-            {
-                await _seeder.DeleteAllDemoUserTradesAsync();
-                await _seeder.SeedDemoUserTradesAsync();
-                _logger.LogInformation("ReseedDemoUser succeeded");
-                return Ok(new { message = "Demo user and demo trades reseeded." });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "ReseedDemoUser failed");
-                return StatusCode(500, "Internal server error");
-            }
+            await _seeder.DeleteAllDemoUserTradesAsync();
+            await _seeder.SeedDemoUserTradesAsync();
+            return Ok(new { message = "Demo user and demo trades reseeded." });
         }
     }
 } 
