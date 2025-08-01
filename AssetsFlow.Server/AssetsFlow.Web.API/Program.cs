@@ -30,12 +30,12 @@ builder.Services
     .AddUserServiceClient(builder.Configuration)
     .AddJwtAuthentication(builder.Configuration)
     .ConfigureTradingJournalDbContext(isDev)
-    .ConfigureCors(isDev);
+    .ConfigureCors(isDev)
+    .RegisterDbSeeder();
 
 if (isDev)
 {
     IdentityModelEventSource.ShowPII = true;
-    builder.Services.AddScoped<DatabaseSeeder>();
 }
 else if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
 {

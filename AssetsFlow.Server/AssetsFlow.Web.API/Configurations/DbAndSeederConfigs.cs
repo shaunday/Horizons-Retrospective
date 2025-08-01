@@ -1,11 +1,18 @@
 ﻿using HsR.Journal.DataContext;
 using HsR.Journal.DataSeeder;
+using HsR.Journal.Seeder;
 using Microsoft.EntityFrameworkCore;
 
 namespace AssetsFlowWeb.API.Configurations
 {
-    public static class InitializeDB
+    public static class DbAndSeederConfigs
     {
+        internal static IServiceCollection RegisterDbSeeder(this IServiceCollection services)
+        {
+            services.AddScoped<DatabaseSeeder>();
+            return services;
+        }
+
         internal static async Task InitDB(this WebApplication app, bool isDev)
         {
             if (isDev)
