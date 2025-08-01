@@ -1,9 +1,9 @@
 ﻿
 # TODO
-- replace supa's password, reset db, update db -> name for user's service
-
 - Journal to Journal.All, move to main
+- HsR.Infrastructure to Hsr.Journal**..
 - HsR.UserService < move to main and rename
+- 
 - parse elements from json templates
 - production envs to GH secrets
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?

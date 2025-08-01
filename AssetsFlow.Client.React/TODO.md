@@ -1,4 +1,7 @@
 ## 1
+reseed : takes 15secs. also no refresh post
+invalid date on version getter
+
 fix: close trade not working
 
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox +  autofill
