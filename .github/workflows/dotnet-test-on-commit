@@ -2,13 +2,10 @@ name: Dotnet Build & Test on Commit
 
 on:
   push:
-    branches:
-      - main
-      - dev  
     paths:
       - "AssetsFlow.Server/**"
       - "PriceAlerts.Server/**"
-      - "Common.Net\HsR.UserService/**"
+      - "HsR.UserService/**"
   workflow_dispatch:
 
 jobs:
@@ -16,15 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        solution-path:
-          - AssetsFlow.Server
-          - PriceAlerts.Server
+        project-path:
+          - ./AssetsFlow.Server/AssetsFlow.Web.API
+          - ./HsR.UserService/HsR.UserService.Host
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         
       - name: .NET Build Composite
-        uses: ./.github/actions/common-build-steps-dotnet
+        uses: ./.github/actions/reusable-build-dotnet
         with:
-          solution-path: ${{ matrix.solution-path }}
+          project-path: ${{ matrix.project-path }}

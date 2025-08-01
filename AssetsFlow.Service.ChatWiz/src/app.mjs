@@ -1,3 +1,5 @@
+const API_VERSION = 'trade-wiz/api/v1';
+
 import express from 'express';
 import { httpLogger, baseLogger } from './logger.mjs';
 import tradeWizardRoutes from './routes/tradeWizardRoutes.mjs';
@@ -8,8 +10,8 @@ app.use(express.json());
 
 app.use(httpLogger);
 
-app.use('/status', statusRoutes);
-app.use('/trade-wizard', tradeWizardRoutes);
+app.use(`${API_VERSION}/status`, statusRoutes);
+app.use(`${API_VERSION}/trade-wizard`, tradeWizardRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

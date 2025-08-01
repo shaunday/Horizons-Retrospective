@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HsR.Web.API.Controllers.Journal
 {
-    [Route("hsr-api/v{version:apiVersion}/journal/components")]
+    [Route("hsr-api/v{version:apiVersion}/journal/components/{componentId}")]
     [ApiVersion("1.0")]
     [ApiController]
     [Authorize]
@@ -26,7 +26,7 @@ namespace HsR.Web.API.Controllers.Journal
         {
         }
 
-        [HttpPatch("{componentId}")]
+        [HttpPatch]
         public async Task<ActionResult<(DataElementModel newEntry, UpdatedStatesModel updatedStates)>>
                                                   UpdateDataComponent(int componentId, [FromBody] UpdateDataComponentRequest request)
         {

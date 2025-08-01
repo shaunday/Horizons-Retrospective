@@ -34,7 +34,7 @@ runs:
         echo "project-file=$PROJECT_FILE" >> $GITHUB_OUTPUT
 
     - name: Build .NET project
-      uses: ./.github/actions/common-build-steps-dotnet
+      uses: ./.github/actions/reusable-build-dotnet
       with:
         project-path: ${{ steps.detect_project.outputs.project-file }}
 

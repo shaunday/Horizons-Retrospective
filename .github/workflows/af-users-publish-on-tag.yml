@@ -5,7 +5,7 @@ on:
     tags:
       - 'v*'
     paths:
-      - "Common.Net/HsR.UserService.All/**"
+      - "HsR.UserService/**"
   workflow_dispatch:
 
 jobs:
@@ -16,8 +16,8 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Run Dotnet Build & Publish Action
-        uses: ./.github/actions/dotnet-build-publish
+        uses: ./.github/actions/reusable-publish-dotnet
         with:
-          project-path: ./Common.Net/HsR.UserService.All/HsR.UserService.Host
+          project-path: ./HsR.UserService/HsR.UserService.Host
           image-name: userservice-backend
           github-token: ${{ secrets.GITHUB_TOKEN }}

@@ -2,8 +2,11 @@
 # TODO
 - replace supa's password, reset db, update db -> name for user's service
 
-- Journal to Journal.All
-- entities as json
+- Journal to Journal.All, move to main
+- HsR.UserService < move to main and rename
+- parse elements from json templates
+- production envs to GH secrets
+- add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
 
 - add version to user.s api
 - fix user entity (remove stuff?), adjust login request to user/pass?
