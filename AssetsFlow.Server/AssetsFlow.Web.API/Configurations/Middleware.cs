@@ -40,7 +40,7 @@ namespace AssetsFlowWeb.API.Configurations
             }
             else
             {
-                app.UseExceptionHandler("/error");  // Or your custom error handling endpoint
+                app.UseExceptionHandler("/hsr-api/error");
             }
 
             // Enable routing for the application.

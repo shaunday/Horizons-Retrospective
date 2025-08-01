@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using HsR.UserService.Client.Interfaces;
 using HsR.UserService.Contracts;
 using HsR.UserService.Protos;
@@ -6,8 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AssetsFlowWeb.API.Controllers;
 
-[ApiController]
 [Route("hsr-api/v{version:apiVersion}/[controller]")]
+[ApiVersion("1.0")]
+[ApiController]
 public class AuthController : ControllerBase
 {
     private readonly IUserServiceClient _userServiceClient;

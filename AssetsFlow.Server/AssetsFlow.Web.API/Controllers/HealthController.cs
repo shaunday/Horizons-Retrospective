@@ -1,11 +1,13 @@
-﻿using HsR.Journal.DataContext;
+﻿using Asp.Versioning;
+using HsR.Journal.DataContext;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace AssetsFlowWeb.API.Controllers
 {
-    [ApiController]
     [Route("hsr-api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
+    [ApiController]
     public class HealthController(TradingJournalDataContext context, ILogger<HealthController> logger) : ControllerBase
     {
         private readonly TradingJournalDataContext _context = context;

@@ -15,7 +15,6 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("hsr-api/v{version:apiVersion}/journal/components")]
     [ApiVersion("1.0")]
     [ApiController]
-    [Authorize]
     public class ContentUpdateController : JournalControllerBase
     {
         public ContentUpdateController(
