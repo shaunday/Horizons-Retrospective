@@ -28,7 +28,8 @@ public static class ServiceCollectionExtensions
                     PooledConnectionIdleTimeout = TimeSpan.FromMinutes(5),
                     KeepAlivePingDelay = TimeSpan.FromSeconds(60),
                     KeepAlivePingTimeout = TimeSpan.FromSeconds(30),
-                    KeepAlivePingPolicy = HttpKeepAlivePingPolicy.WithActiveRequests
+                    KeepAlivePingPolicy = HttpKeepAlivePingPolicy.WithActiveRequests,
+                    EnableMultipleHttp2Connections = true
                 }
             });
 
