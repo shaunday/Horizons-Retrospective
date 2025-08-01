@@ -1,6 +1,5 @@
 using HsR.UserService.Data;
 using HsR.UserService.Services;
-using HsR.Common.AspNet;
 using Microsoft.EntityFrameworkCore;
 
 namespace HsR.UserService.Host.Configurations
@@ -9,29 +8,19 @@ namespace HsR.UserService.Host.Configurations
     {
         public static async Task EnsureUserServiceDatabaseAndUsersAsync(this WebApplication app)
         {
-            await app.EnsureDatabaseCreatedAsync<UserDbContext>();
-            await app.EnsureDemoUserCreatedAsync();
-            await app.EnsureAdminUserCreatedAsync();
+            using var scope = app.Services.CreateScope();
+            var db = scope.ServiceProvider.GetRequiredService<UserDbContext>();
+            await db.Database.MigrateAsync();  // Apply migrations on startup
+
+            var userService = scope.ServiceProvider.GetService<IUserService>() as HsR.UserService.Services.UserService;
+            if (userService == null)
+            {
+                throw new InvalidOperationException("IUserService not registered or cannot be resolved.");
+            }
+
+            await userService.EnsureDemoUserExistsAsync();
+            await userService.EnsureAdminUserExistsAsync();
         }
 
-        private static async Task EnsureDemoUserCreatedAsync(this WebApplication app)
-        {
-            using var scope = app.Services.CreateScope();
-            var userService = scope.ServiceProvider.GetRequiredService<IUserService>() as HsR.UserService.Services.UserService;
-            if (userService != null)
-            {
-                await userService.EnsureDemoUserExistsAsync();
-            }
-        }
-
-        private static async Task EnsureAdminUserCreatedAsync(this WebApplication app)
-        {
-            using var scope = app.Services.CreateScope();
-            var userService = scope.ServiceProvider.GetRequiredService<IUserService>() as HsR.UserService.Services.UserService;
-            if (userService != null)
-            {
-                await userService.EnsureAdminUserExistsAsync();
-            }
-        }
     }
 } 

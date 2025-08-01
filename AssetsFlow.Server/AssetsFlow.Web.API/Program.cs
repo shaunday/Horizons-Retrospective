@@ -1,11 +1,11 @@
 using AssetsFlowWeb.API.Configurations;
 using DotNetEnv;
-using HsR.Common.AspNet;
 using HsR.Infrastructure;
 using HsR.Journal.DataContext;
 using HsR.Journal.DataSeeder;
 using HsR.Journal.Seeder;
 using HsR.UserService.Client.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
 using Serilog;
 
@@ -44,11 +44,7 @@ else if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "t
 
 var app = builder.Build();
 
-await app.EnsureDatabaseCreatedAsync<TradingJournalDataContext>();
-if (app.Environment.IsDevelopment())
-{
-    await app.Services.FlushDbAndSeedDemoAsync();
-}
+await app.InitDB(isDev);
 
 Middleware.ConfigureMiddleware(app);
 

@@ -1,5 +1,4 @@
 using DotNetEnv;
-using HsR.Common.AspNet;
 using HsR.UserService.Data;
 using HsR.UserService.Host.Configurations;
 using HsR.UserService.Infrastructure;
