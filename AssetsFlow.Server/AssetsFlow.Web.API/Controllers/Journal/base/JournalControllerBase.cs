@@ -1,13 +1,15 @@
 ﻿using AutoMapper;
 using HsR.Journal.DataContext;
-using Microsoft.AspNetCore.Mvc;
 using HsR.Web.API.Controllers;
 using HsR.Web.API.Services;
 using HsR.Web.Services.Models.Journal;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HsR.Web.API.Controllers.Journal
 {
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [Authorize]
     public class JournalControllerBase : HsRControllerBase
     {
         private protected readonly string NEW_CELL_DATA = "updatedCellData";

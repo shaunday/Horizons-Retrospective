@@ -15,9 +15,9 @@ services:
       - ./nginx/start-nginx.sh:/start-nginx.sh
     entrypoint: /bin/bash /start-nginx.sh
     networks:
-      - af-net
+      - hsr-net
 
-  assetsflow-api:
+  assetsflow-main:
     image: ghcr.io/shaunday/horizons-retrospective/assetsflow-backend:latest
     container_name: journalmain
     expose:
@@ -27,9 +27,10 @@ services:
     volumes:
       - ./logs:/app/logs
     env_file:
-      - .env
+      - .env.AssetsFlow.Server
+      - .env.Global
     networks:
-      - af-net
+      - hsr-net
       
   userservice:
     image: ghcr.io/shaunday/horizons-retrospective/userservice-backend:latest
@@ -41,9 +42,10 @@ services:
     volumes:
       - ./logs:/app/logs
     env_file:
-      - .env
+      - .env.UserService
+      - .env.Global
     networks:
-      - af-net
+      - hsr-net
 
 networks:
-  af-net:
+  hsr-net:

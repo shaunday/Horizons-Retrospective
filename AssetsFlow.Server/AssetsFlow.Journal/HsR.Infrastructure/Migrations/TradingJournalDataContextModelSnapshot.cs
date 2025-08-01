@@ -62,11 +62,16 @@ namespace HsR.Journal.Infrastructure.Migrations
                     b.Property<string>("UnitPriceRelevance")
                         .HasColumnType("text");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CompositeFK");
 
                     b.HasIndex("TradeElementFK");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Entries");
                 });
@@ -94,9 +99,14 @@ namespace HsR.Journal.Infrastructure.Migrations
                         .HasMaxLength(13)
                         .HasColumnType("character varying(13)");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
-                    b.ToTable("TradeElement");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TradeElements");
 
                     b.HasDiscriminator<string>("TradeElementType").HasValue("TradeElement");
 
@@ -105,16 +115,14 @@ namespace HsR.Journal.Infrastructure.Migrations
 
             modelBuilder.Entity("HsR.Journal.Entities.UserData", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("SavedSectors")
                         .HasColumnType("jsonb");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.ToTable("UserData");
                 });
@@ -140,10 +148,15 @@ namespace HsR.Journal.Infrastructure.Migrations
                     b.Property<int?>("SummaryId")
                         .HasColumnType("integer");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SummaryId")
                         .IsUnique();
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TradeComposites");
                 });
@@ -251,7 +264,8 @@ namespace HsR.Journal.Infrastructure.Migrations
                 {
                     b.HasOne("HsR.Journal.Entities.TradeJournal.TradeSummary", "Summary")
                         .WithOne()
-                        .HasForeignKey("TradeComposite", "SummaryId");
+                        .HasForeignKey("TradeComposite", "SummaryId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Summary");
                 });

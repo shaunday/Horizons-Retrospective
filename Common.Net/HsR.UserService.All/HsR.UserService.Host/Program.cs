@@ -1,9 +1,9 @@
 using DotNetEnv;
-using HsR.Common.AspNet;
 using HsR.UserService.Data;
 using HsR.UserService.Host.Configurations;
 using HsR.UserService.Infrastructure;
 using HsR.UserService.Services;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Serilog;
 
 // Load  environment variables
@@ -15,6 +15,14 @@ var builder = WebApplication.CreateBuilder(args)
 
 string connectionString = builder.GetUserServiceConnectionString();
 builder.Services.AddGrpc();
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(80, listenOptions =>
+    {
+        listenOptions.Protocols = HttpProtocols.Http2; // Enforce HTTP/2 for gRPC
+    });
+});
+
 builder.Services.AddUserServiceAllServices(builder.Configuration, connectionString);
 
 var app = builder.Build();

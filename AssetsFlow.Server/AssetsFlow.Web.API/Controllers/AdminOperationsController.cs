@@ -1,15 +1,18 @@
+using Asp.Versioning;
+using HsR.Journal.Seeder;
+using HsR.UserService.Contracts;
+using HsR.Web.API.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using HsR.Journal.Seeder;
-using Microsoft.AspNetCore.Authorization;
-using HsR.UserService.Contracts;
 
 namespace AssetsFlowWeb.API.Controllers
 {
-    [ApiController]
     [Route("hsr-api/v{version:apiVersion}/admin")]
+    [ApiVersion("1.0")]
+    [ApiController]
     //[Authorize(Roles = RoleNames.Admin)]
-    public class AdminOperationsController : ControllerBase
+    public class AdminOperationsController : HsRControllerBase
     {
         private readonly DatabaseSeeder _seeder;
 

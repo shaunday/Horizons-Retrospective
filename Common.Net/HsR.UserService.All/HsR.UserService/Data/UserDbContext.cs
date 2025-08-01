@@ -6,9 +6,7 @@ namespace HsR.UserService.Data
 {
     public class UserDbContext : IdentityDbContext<User, Microsoft.AspNetCore.Identity.IdentityRole<Guid>, Guid>
     {
-        public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
-        {
-        }
+        public UserDbContext(DbContextOptions<UserDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -17,7 +17,6 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("hsr-api/v{version:apiVersion}/journal/trades")]
     [ApiVersion("1.0")]
     [ApiController]
-    [Authorize]
     public class TradesJournalController : JournalControllerBase
     {
         private readonly IConfigurationService _config;

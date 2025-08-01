@@ -1,6 +1,5 @@
 using HsR.UserService.Data;
 using HsR.UserService.Services;
-using HsR.Common.AspNet;
 using Microsoft.EntityFrameworkCore;
 
 namespace HsR.UserService.Host.Configurations

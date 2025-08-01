@@ -18,4 +18,4 @@ COPY ./publish/ ./
 HEALTHCHECK --interval=60s --timeout=5s --start-period=15s --retries=3 \
   CMD curl --fail http://localhost/hsr-api/v1/info || exit 1
 
-ENTRYPOINT ["dotnet", "UserService.Host.dll"]
+ENTRYPOINT ["dotnet", "HsR.UserService.Host.dll"]

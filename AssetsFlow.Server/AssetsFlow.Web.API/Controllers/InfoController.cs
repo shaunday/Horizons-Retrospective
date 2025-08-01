@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
 using HsR.Common;
+using HsR.Web.API.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Hosting; // Needed for IWebHostEnvironment
 
 namespace AssetsFlowWeb.API.Controllers
 {
@@ -9,7 +9,7 @@ namespace AssetsFlowWeb.API.Controllers
     [ApiVersion("1.0")]
     [ApiController]
     [ResponseCache(Duration = 1800, Location = ResponseCacheLocation.Client)]
-    public class InfoController(IWebHostEnvironment env) : ControllerBase
+    public class InfoController(IWebHostEnvironment env) : HsRControllerBase
     {
         private readonly IWebHostEnvironment _env = env;
 
