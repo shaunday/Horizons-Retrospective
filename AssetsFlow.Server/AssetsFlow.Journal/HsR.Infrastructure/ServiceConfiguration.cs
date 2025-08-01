@@ -17,11 +17,13 @@ namespace HsR.Infrastructure
         public static IServiceCollection ConfigureTradingJournalDbContext(this IServiceCollection services, bool isDev)
         {
             string connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(isDev);
+            var migrationsAssembly = typeof(ServiceConfiguration).Assembly.FullName;
 
             services.AddDbContextPool<TradingJournalDataContext>(options =>
             {
                 options.UseNpgsql(connectionString, npgsqlOptions =>
                 {
+                    npgsqlOptions.MigrationsAssembly(migrationsAssembly);
                     npgsqlOptions.EnableRetryOnFailure();
                     npgsqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                 });
