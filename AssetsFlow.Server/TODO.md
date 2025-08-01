@@ -8,7 +8,9 @@
 - production envs to GH secrets
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
 
-- add version to user.s api
+- error route doesnt work 
+
+- add version to user api
 - fix user entity (remove stuff?), adjust login request to user/pass?
 
 - rethink isContentMissing - either way dont need to reload all tradeComposite to get it, you always got the old one (in the fe at least)

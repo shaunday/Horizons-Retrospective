@@ -1,16 +1,19 @@
+using Asp.Versioning;
 using HsR.Common.AspNet.Authentication;
 using HsR.UserService.Client.Interfaces;
 using HsR.UserService.Contracts;
 using HsR.UserService.Protos;
+using HsR.Web.API.Controllers;
 using HsR.Web.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace AssetsFlowWeb.API.Controllers;
 
-[ApiController]
 [Route("hsr-api/v{version:apiVersion}/[controller]")]
-public class AuthController : ControllerBase
+[ApiVersion("1.0")]
+[ApiController]
+public class AuthController : HsRControllerBase
 {
     private readonly IUserServiceClient _userServiceClient;
     private readonly IJwtService _jwtService;
