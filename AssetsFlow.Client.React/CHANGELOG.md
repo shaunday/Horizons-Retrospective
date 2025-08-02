@@ -4,6 +4,8 @@
 ## [0.9.121-c] - 2025-07-..
 ### Fixed
 - Error component for errror boundary states
+- Get all trades / refresh after reseed
+- Edit logic - no modal, popover instead.
 
 ## [0.9.120-c] - 2025-07-26
 ### Added

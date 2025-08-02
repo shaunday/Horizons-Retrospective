@@ -1,11 +1,11 @@
 ## 1
-reseed : takes 15secs. also no refresh post
-invalid date on version getter
+edit content work: style (background? wider?), prevent clicks closing (double click?), restrictions clicks fucked, show validation errors ?
+prod: invalid date on version getter
 
 fix: close trade not working
+no need to have trades by tradeids cached twice. adjust
 
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox +  autofill
-from limor: edit > expand the object and edit in place?
 from limor: title should be styled diff than the content, text aligned to the left
 add: opened/closedat/IdeaDate (just to overview?)
 
