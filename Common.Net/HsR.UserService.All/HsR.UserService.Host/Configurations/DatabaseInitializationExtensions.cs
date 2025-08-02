@@ -6,11 +6,18 @@ namespace HsR.UserService.Host.Configurations
 {
     public static class DatabaseInitializationExtensions
     {
-        public static async Task EnsureUserServiceDatabaseAndUsersAsync(this WebApplication app)
+        public static async Task EnsureUserServiceDatabaseAndUsersAsync(this WebApplication app, bool isDev)
         {
             using var scope = app.Services.CreateScope();
-            var db = scope.ServiceProvider.GetRequiredService<UserDbContext>();
-            await db.Database.MigrateAsync();  // Apply migrations on startup
+            var dbContext = scope.ServiceProvider.GetRequiredService<UserDbContext>();
+            if (isDev)
+            {
+                await dbContext.Database.EnsureCreatedAsync();
+            }
+            else
+            {
+                await dbContext.Database.MigrateAsync();  // Apply migrations on startup
+            }
 
             var userService = scope.ServiceProvider.GetService<IUserService>() as HsR.UserService.Services.UserService;
             if (userService == null)

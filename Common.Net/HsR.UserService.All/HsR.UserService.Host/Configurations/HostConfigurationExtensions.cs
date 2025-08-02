@@ -1,8 +1,9 @@
+using DotNetEnv;
+using HsR.UserService.Contracts;
 using HsR.UserService.Host.Configurations;
 using HsR.UserService.Infrastructure;
-using DotNetEnv;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Serilog;
-using HsR.UserService.Contracts;
 
 namespace HsR.UserService.Host.Configurations
 {
@@ -18,6 +19,18 @@ namespace HsR.UserService.Host.Configurations
             string baseUrl = UserServiceEx.GetUserServiceUrl();
 
             builder.WebHost.UseUrls(baseUrl);
+
+            if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
+            {
+                builder.WebHost.ConfigureKestrel(options =>
+                {
+                    options.ListenAnyIP(80, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http2; // Enforce HTTP/2 for gRPC
+                    });
+                });
+            }
+
             return builder;
         }
 

@@ -41,13 +41,16 @@ namespace HsR.UserService.Host.Configurations
             return services;
         }
 
-        public static IServiceCollection AddUserServiceAllServices(this IServiceCollection services, IConfiguration configuration, string connectionString)
+        public static IServiceCollection AddUserServiceAllServices(this IServiceCollection services, string connectionString)
         {
+            services.AddGrpc(); // Grpc doesn't return IServiceCollection
+
             return services
                 .AddUserServiceDbContext(connectionString)
                 .AddUserServiceIdentity()
                 .AddAuthorization()
                 .AddUserServiceCoreServices();
         }
+
     }
 } 

@@ -10,26 +10,18 @@ using Serilog;
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.UserService"));
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.Global"));
 
-var builder = WebApplication.CreateBuilder(args)
-    .ConfigureUserServiceHost();
+var builder = WebApplication.CreateBuilder(args).ConfigureUserServiceHost();
+
+bool isDev = builder.Environment.IsDevelopment();
 
 string connectionString = builder.GetUserServiceConnectionString();
-builder.Services.AddGrpc();
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(80, listenOptions =>
-    {
-        listenOptions.Protocols = HttpProtocols.Http2; // Enforce HTTP/2 for gRPC
-    });
-});
-
-builder.Services.AddUserServiceAllServices(builder.Configuration, connectionString);
+builder.Services.AddUserServiceAllServices(connectionString);
 
 var app = builder.Build();
 
 app.ConfigureUserServicePipeline();
 app.MapGrpcService<UserGrpcService>();
-await app.EnsureUserServiceDatabaseAndUsersAsync();
+await app.EnsureUserServiceDatabaseAndUsersAsync(isDev);
 
 try
 {
