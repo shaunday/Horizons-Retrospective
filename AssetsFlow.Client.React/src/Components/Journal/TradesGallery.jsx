@@ -5,7 +5,7 @@ import TradeWrapper from "./TradeComposite/TradeWrapper";
 
 function TradesGallery({ newlyAddedTradeId }) {
   const { data: cachedTradeIds = [] } = useQuery({
-    queryKey: tradeKeysFactory.getTradeIdsKey(),
+    queryKey: tradeKeysFactory.getKeyForAllTradesByIds(),
     queryFn: () => [],
   });
   return (
