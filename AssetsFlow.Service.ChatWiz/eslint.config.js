@@ -6,6 +6,14 @@ export default [
     js.configs.recommended,
     {
         files: ["src/**/*.js", "src/**/*.mjs"],
+        ignores: [
+            "node_modules/",
+            "dist/",
+            "build/",
+            "coverage/",
+            ".types/",
+            ".generated/",
+        ],
         plugins: {
             n: nodePlugin,
             import: importPlugin,
