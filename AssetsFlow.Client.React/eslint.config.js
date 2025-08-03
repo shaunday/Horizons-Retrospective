@@ -3,6 +3,7 @@ import js from "@eslint/js";
 import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 import importPlugin from "eslint-plugin-import";
+import nodePlugin from 'eslint-plugin-node';
 import reactRefreshPlugin from "eslint-plugin-react-refresh";
 
 export default [
@@ -13,8 +14,9 @@ export default [
     plugins: {
       react: reactPlugin,
       "react-hooks": reactHooksPlugin,
-      import: importPlugin,
       "react-refresh": reactRefreshPlugin,
+      import: importPlugin,
+      node: nodePlugin,
     },
 
     languageOptions: {
@@ -34,9 +36,11 @@ export default [
     },
 
     rules: {
+      ...nodePlugin.configs.recommended.rules,
       ...reactPlugin.configs.recommended.rules,
       ...reactHooksPlugin.configs.recommended.rules,
       ...importPlugin.configs.recommended.rules,
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       "react-refresh/only-export-components": "warn",
     },
   },
