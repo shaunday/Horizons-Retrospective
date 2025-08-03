@@ -11,7 +11,8 @@
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --fix",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "audit": "npm audit --audit-level=moderate"
   },
   "dependencies": {
     "@mantine/core": "^8.2.1",
