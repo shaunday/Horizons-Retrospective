@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Popover } from "@mantine/core";
 import { dataElementContentParser } from "@services/dataElementContentParser";
 import ValueDisplay from "./ValueDisplay";
@@ -9,6 +9,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const { contentValue, textRestrictions } = dataElementContentParser(cellInfo);
 
   const [popoverOpened, setPopoverOpened] = useState(false);
+  const preventCloseRef = useRef(false);
 
   const handleSubmit = (value, changeDetails) => {
     onValueChangeInitiated(value, changeDetails);
@@ -18,9 +19,18 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   return (
     <Popover
       opened={popoverOpened}
-      onChange={setPopoverOpened}
+      onChange={(open) => {
+        if (!open && preventCloseRef.current) {
+          preventCloseRef.current = false;
+          return;
+        }
+        setPopoverOpened(open);
+      }}
       position="bottom"
+      trapFocus={false}
+      closeOnEscape={true}
       withArrow
+      arrowSize={12}
       shadow="md"
     >
       <Popover.Target>
@@ -31,7 +41,11 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
         />
       </Popover.Target>
 
-      <Popover.Dropdown>
+      <Popover.Dropdown
+        onMouseDown={() => {
+          preventCloseRef.current = true;
+        }}
+      >
         <ValuePopover
           contentValue={contentValue}
           textRestrictions={textRestrictions}

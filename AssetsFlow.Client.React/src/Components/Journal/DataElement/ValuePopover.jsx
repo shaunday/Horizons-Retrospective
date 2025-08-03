@@ -1,10 +1,10 @@
 import React from "react";
 import { Textarea, Button, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import DefaultSelect from "./DefaultSelect";
+import DataValuesSelect from "./DataValuesSelect";
 
 function ValuePopover({ contentValue, textRestrictions, onSubmit }) {
-  const textRestrictionsExist  =
+  const textRestrictionsExist =
     Array.isArray(textRestrictions) && textRestrictions.length > 0;
 
   const form = useForm({
@@ -12,13 +12,13 @@ function ValuePopover({ contentValue, textRestrictions, onSubmit }) {
       value: contentValue || "",
       changeDetails: "",
     },
-    validateInputOnChange: true, 
+    validateInputOnChange: true,
     validate: {
       value: (val) => {
         const trimmed = val.trim();
         const isEmpty = !trimmed;
         const isRestrictedValid =
-          !textRestrictionsExist  || textRestrictions.includes(trimmed);
+          !textRestrictionsExist || textRestrictions.includes(trimmed);
 
         if (isEmpty) return "Value cannot be empty";
         if (!isRestrictedValid) return "Value must be from the list";
@@ -28,9 +28,8 @@ function ValuePopover({ contentValue, textRestrictions, onSubmit }) {
     },
   });
 
-   const handleSubmit = (values) => {
-    onSubmit(values.value, values.changeDetails);
-    onClose();
+  const handleSubmit = (values) => {
+    onSubmit(values.value.trim(), values.changeDetails.trim());
   };
 
   return (
@@ -39,18 +38,13 @@ function ValuePopover({ contentValue, textRestrictions, onSubmit }) {
       onClick={(e) => e.stopPropagation()}
     >
       <Stack spacing="xs" className="w-60">
-        {textRestrictionsExist  ? (
+        {textRestrictionsExist ? (
           <>
-            <DefaultSelect
+            <DataValuesSelect
               value={form.values.value}
               onChange={(val) => form.setFieldValue("value", val)}
               data={textRestrictions}
             />
-            {form.errors.value && (
-              <div style={{ color: "red", fontSize: 12, marginTop: 4 }}>
-                {form.errors.value}
-              </div>
-            )}
           </>
         ) : (
           <Textarea
@@ -60,6 +54,7 @@ function ValuePopover({ contentValue, textRestrictions, onSubmit }) {
             autosize
             placeholder="Enter value"
             autoFocus
+            withAsterisk
             {...form.getInputProps("value")}
             error={form.errors.value}
           />
