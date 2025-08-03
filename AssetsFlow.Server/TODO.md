@@ -3,6 +3,7 @@
 - Journal to Journal.All, move to main
 - HsR.Infrastructure to Hsr.Journal**..
 - HsR.UserService < move to main and rename
+- update readme
 - 
 - parse elements from json templates
 - production envs to GH secrets
