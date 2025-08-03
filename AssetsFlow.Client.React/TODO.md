@@ -1,5 +1,5 @@
 ## 1
-edit content work: style (background? wider?), prevent clicks closing (double click?), restrictions clicks fucked, show validation errors ?
+edit content work: style (spacing/title?), prevent clicks closing (double click?), restrictions clicks fucked, show validation errors ?
 prod: invalid date on version getter
 
 fix: close trade not working
