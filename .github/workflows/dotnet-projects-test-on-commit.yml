@@ -6,8 +6,6 @@ on:
       - "AssetsFlow.Server/**"
       - "PriceAlerts.Server/**"
       - "HsR.UserService/**"
-    paths-ignore:
-      - '**/*.md'
   workflow_dispatch:
 
 jobs:
