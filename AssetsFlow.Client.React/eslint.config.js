@@ -1,17 +1,43 @@
-module.exports = {
-  env: { browser: true, es2020: true },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-    'plugin:import/recommended', // added import plugin recommended config
-    'prettier', // Ensure this is the last in the extends array
-  ],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: 'detect' } },
-  plugins: ['react-refresh', 'import'], // added import plugin here
-  rules: {
-    'react-refresh/only-export-components': 'warn',
+// eslint.config.js
+import js from "@eslint/js";
+import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
+import importPlugin from "eslint-plugin-import";
+import reactRefreshPlugin from "eslint-plugin-react-refresh";
+
+export default [
+  js.configs.recommended,
+  {
+    files: ["**/*.js", "**/*.jsx"],
+
+    plugins: {
+      react: reactPlugin,
+      "react-hooks": reactHooksPlugin,
+      import: importPlugin,
+      "react-refresh": reactRefreshPlugin,
+    },
+
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        window: "readonly",
+        document: "readonly",
+      },
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+      },
+    },
+
+    settings: {
+      react: { version: "detect" },
+    },
+
+    rules: {
+      ...reactPlugin.configs.recommended.rules,
+      ...reactHooksPlugin.configs.recommended.rules,
+      ...importPlugin.configs.recommended.rules,
+      "react-refresh/only-export-components": "warn",
+    },
   },
-};
+];
