@@ -78,7 +78,7 @@ jobs:
       - name: Run build
         run: cd ${{ matrix.project-path }} && npm run build
         
-       -name: Run audit
+      - name: Run audit
         run: npm run audit
 
       # Uncomment below to add lint and test steps
