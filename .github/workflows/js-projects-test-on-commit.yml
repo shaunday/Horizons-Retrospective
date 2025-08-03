@@ -14,16 +14,32 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Important to fetch full history for git diff
 
       - name: Detect changed project paths from predefined list
         id: set-matrix
+        env:
+          GITHUB_BASE_REF: ${{ github.event.pull_request.base.ref || '' }}
         run: |
           KNOWN_PATHS=(
             "AssetsFlow.Service.ChatWiz"
             "AssetsFlow.Client.React"
           )
 
-          CHANGED_FILES=$(git diff --name-only origin/main...HEAD)
+          BASE_BRANCH="main"
+          if [ -n "$GITHUB_BASE_REF" ]; then
+            BASE_BRANCH=$GITHUB_BASE_REF
+          fi
+
+          echo "Using base branch: $BASE_BRANCH"
+
+          git fetch origin $BASE_BRANCH
+
+          CHANGED_FILES=$(git diff --name-only origin/$BASE_BRANCH...HEAD)
+
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
 
           MATRIX_LIST=()
           for path in "${KNOWN_PATHS[@]}"; do
@@ -32,7 +48,6 @@ jobs:
             fi
           done
 
-          # Create JSON array
           MATRIX_JSON="[$(IFS=,; echo "${MATRIX_LIST[*]}")]"
           echo "matrix=$MATRIX_JSON" >> "$GITHUB_OUTPUT"
           echo "Matrix paths: $MATRIX_JSON"
@@ -59,3 +74,10 @@ jobs:
 
       - name: Run build
         run: cd ${{ matrix.project-path }} && npm run build
+
+      # Uncomment below to add lint and test steps
+      # - name: Run lint
+      #   run: cd ${{ matrix.project-path }} && npm run lint
+      #
+      # - name: Run tests
+      #   run: cd ${{ matrix.project-path }} && npm test
