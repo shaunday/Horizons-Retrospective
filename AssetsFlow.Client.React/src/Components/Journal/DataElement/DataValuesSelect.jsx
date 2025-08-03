@@ -22,6 +22,9 @@ function DataValuesSelect({ value, onChange, data }) {
       onChange={handleChange}
       error={error}
       withAsterisk
+      classNames={{
+        label: "mb-1",
+      }}
     />
   );
 }

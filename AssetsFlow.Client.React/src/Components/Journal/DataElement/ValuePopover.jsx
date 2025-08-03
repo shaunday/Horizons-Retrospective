@@ -57,6 +57,9 @@ function ValuePopover({ contentValue, textRestrictions, onSubmit }) {
             withAsterisk
             {...form.getInputProps("value")}
             error={form.errors.value}
+            classNames={{
+              label: "mb-1",
+            }}
           />
         )}
 
@@ -64,6 +67,9 @@ function ValuePopover({ contentValue, textRestrictions, onSubmit }) {
           label="Change notes"
           minRows={2}
           {...form.getInputProps("changeDetails")}
+          classNames={{
+              label: "mb-1",
+            }}
         />
 
         <Button type="submit" size="xs" disabled={!form.isValid()}>
