@@ -15,28 +15,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Important to fetch full history for git diff
+          fetch-depth: 0  # Fetch full history for git diff
 
       - name: Detect changed project paths from predefined list
         id: set-matrix
-        env:
-          GITHUB_BASE_REF: ${{ github.event.pull_request.base.ref || '' }}
         run: |
           KNOWN_PATHS=(
             "AssetsFlow.Service.ChatWiz"
             "AssetsFlow.Client.React"
           )
 
-          BASE_BRANCH="main"
-          if [ -n "$GITHUB_BASE_REF" ]; then
-            BASE_BRANCH=$GITHUB_BASE_REF
+          CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo "")
+
+          if [ -n "$UPSTREAM" ]; then
+            BASE_BRANCH=$UPSTREAM
+          else
+            BASE_BRANCH="origin/main"
           fi
 
+          echo "Current branch: $CURRENT_BRANCH"
           echo "Using base branch: $BASE_BRANCH"
 
           git fetch origin $BASE_BRANCH
 
-          CHANGED_FILES=$(git diff --name-only origin/$BASE_BRANCH...HEAD)
+          CHANGED_FILES=$(git diff --name-only $BASE_BRANCH...HEAD)
 
           echo "Changed files:"
           echo "$CHANGED_FILES"
