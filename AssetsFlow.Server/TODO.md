@@ -3,8 +3,10 @@
 - Journal to Journal.All, move to main
 - HsR.Infrastructure to Hsr.Journal**..
 - HsR.UserService < move to main and rename
+- Caching should move to common, it's test(HsR.Web.API.Caching.Tests) renamed
+
 - update readme
-- 
+- directory.packages.props managepackageversionscentrally
 - parse elements from json templates
 - production envs to GH secrets
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
