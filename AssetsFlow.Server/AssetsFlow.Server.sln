@@ -95,7 +95,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "element-templates", "elemen
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{884E3130-E308-425C-9528-40F4F096152A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssetsFlow.Server.Main", "AssetsFlow.Server.Main", "{A5A10CC3-3CEE-4319-88F0-BFA241AA6C75}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssetsFlow.Server", "AssetsFlow.Server", "{A5A10CC3-3CEE-4319-88F0-BFA241AA6C75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Server.AppHost", "..\Hsr.Server.Aspire\HsR.Server.AppHost\HsR.Server.AppHost.csproj", "{42FDD9FA-FB96-4373-A223-B7CBF7421353}"
 EndProject

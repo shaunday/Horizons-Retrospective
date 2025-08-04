@@ -5,6 +5,8 @@
 - HsR.UserService < move to main and rename
 - Caching should move to common, it's test(HsR.Web.API.Caching.Tests) renamed
 
+- aspire packages
+
 - update readme
 - directory.packages.props managepackageversionscentrally
 - parse elements from json templates

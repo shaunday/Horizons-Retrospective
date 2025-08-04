@@ -12,12 +12,16 @@ Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.Global"));
 
 var builder = WebApplication.CreateBuilder(args).ConfigureUserServiceHost();
 
+builder.AddServiceDefaults();
+
 bool isDev = builder.Environment.IsDevelopment();
 
 string connectionString = builder.GetUserServiceConnectionString();
 builder.Services.AddUserServiceAllServices(connectionString);
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 app.ConfigureUserServicePipeline();
 app.MapGrpcService<UserGrpcService>();
