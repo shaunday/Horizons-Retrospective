@@ -13,6 +13,8 @@ Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.Global"));
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow.Server"));
 
 var builder = WebApplication.CreateBuilder(args).ConfigureLogging();
+
+builder.AddServiceDefaults();
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables();
@@ -43,6 +45,8 @@ else if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "t
 }
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 await app.InitDB(isDev);
 
