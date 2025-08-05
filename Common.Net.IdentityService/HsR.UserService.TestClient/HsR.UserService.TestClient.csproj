@@ -5,8 +5,8 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <BaseOutputPath>..\..\bin\HsR.UserService\UserTests\</BaseOutputPath>
-    <OutputPath>..\..\bin\HsR.UserService\UserTests\</OutputPath>
+    <BaseOutputPath>..\bin\HsR.UserService\UserTests\</BaseOutputPath>
+    <OutputPath>..\bin\HsR.UserService\UserTests\</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <AppendConfigurationToOutputPath>false</AppendConfigurationToOutputPath>

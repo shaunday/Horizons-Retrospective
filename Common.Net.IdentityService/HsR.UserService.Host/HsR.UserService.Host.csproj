@@ -5,8 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>HsR.UserService.Host</RootNamespace>
     <AssemblyName>HsR.UserService.Host</AssemblyName>
-    <BaseOutputPath>..\..\bin\HsR.UserService\</BaseOutputPath>
-    <OutputPath>..\..\bin\HsR.UserService\</OutputPath>
+    <BaseOutputPath>..\bin\HsR.UserService\</BaseOutputPath>
+    <OutputPath>..\bin\HsR.UserService\</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <AppendConfigurationToOutputPath>false</AppendConfigurationToOutputPath>
@@ -33,6 +33,6 @@
     </None>
   </ItemGroup>
   <Target Name="CopySharedEnvFile" AfterTargets="Build" Condition="'$(CopyEnvFile)' == 'true'">
-    <Copy SourceFiles="..\..\..\.env.Global" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="..\..\.env.Global" DestinationFolder="$(OutputPath)" />
   </Target>
 </Project>
