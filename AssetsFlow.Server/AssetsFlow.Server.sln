@@ -24,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		AssetsFlow.Web.API\version.txt = AssetsFlow.Web.API\version.txt
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Journal.All", "Journal.All", "{E2F11EF4-F624-492C-83BE-36B75D46AA56}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Journal", "Journal", "{E2F11EF4-F624-492C-83BE-36B75D46AA56}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ledger", "Ledger", "{5CAFC034-4D7B-4A72-B13C-5FF762C6EEEF}"
 EndProject
@@ -51,9 +51,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetsFlowWeb.Services", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Entities.Factory", "AssetsFlow.Journal\HsR.Journal.Entities.Factory\HsR.Journal.Entities.Factory.csproj", "{07987639-CCDB-4836-9133-750BC843775C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService", "..\Common.Net\HsR.UserService.All\HsR.UserService\HsR.UserService.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService", "..\Common.Net.IdentityService\HsR.UserService\HsR.UserService.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.Host", "..\Common.Net\HsR.UserService.All\HsR.UserService.Host\HsR.UserService.Host.csproj", "{64F826EF-21A9-4D08-8D38-2CE31306863A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.Host", "..\Common.Net.IdentityService\HsR.UserService.Host\HsR.UserService.Host.csproj", "{64F826EF-21A9-4D08-8D38-2CE31306863A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_deployment-info", "_deployment-info", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
@@ -64,18 +64,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_deployment-info", "_deploy
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityService", "IdentityService", "{46B455BF-9472-4F21-B4B0-63627CF80A7E}"
-	ProjectSection(SolutionItems) = preProject
-		..\Common.Net\HsR.UserService.All\CHANGELOG.md = ..\Common.Net\HsR.UserService.All\CHANGELOG.md
-		..\Common.Net\HsR.UserService.All\HsR.UserService.Host\version.txt = ..\Common.Net\HsR.UserService.All\HsR.UserService.Host\version.txt
-	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.IntegrationTests", "..\Common.Net\HsR.UserService.All\HsR.UserService.IntegrationTests\HsR.UserService.IntegrationTests.csproj", "{9C6B9736-DA03-2DA3-ADC8-01246097C3D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.IntegrationTests", "..\Common.Net.IdentityService\HsR.UserService.IntegrationTests\HsR.UserService.IntegrationTests.csproj", "{9C6B9736-DA03-2DA3-ADC8-01246097C3D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.TestClient", "..\Common.Net\HsR.UserService.All\HsR.UserService.TestClient\HsR.UserService.TestClient.csproj", "{1DB09F0E-0362-8EB8-E15E-B3236A9C9240}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.TestClient", "..\Common.Net.IdentityServicel\HsR.UserService.TestClient\HsR.UserService.TestClient.csproj", "{1DB09F0E-0362-8EB8-E15E-B3236A9C9240}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.Tests", "..\Common.Net\HsR.UserService.All\HsR.UserService.Tests\HsR.UserService.Tests.csproj", "{4A6D21AC-AFB4-F078-F553-59D9EFD6B30A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.Tests", "..Common.Net.IdentityService\HsR.UserService.Tests\HsR.UserService.Tests.csproj", "{4A6D21AC-AFB4-F078-F553-59D9EFD6B30A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.Contracts", "..\Common.Net\HsR.UserService.All\HsR.UserService.Contracts\HsR.UserService.Contracts.csproj", "{ABC623D6-EDD3-4CBE-9D6E-904E00F1B282}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.Contracts", "..\Common.Net.IdentityService\HsR.UserService.Contracts\HsR.UserService.Contracts.csproj", "{ABC623D6-EDD3-4CBE-9D6E-904E00F1B282}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common.AspNet", "..\Common.Net\HsR.Common.AspNet\HsR.Common.AspNet.csproj", "{5CD3D614-88C8-FEAA-E28E-66756038CBED}"
 EndProject
@@ -95,11 +91,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "element-templates", "elemen
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{884E3130-E308-425C-9528-40F4F096152A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssetsFlow.Server", "AssetsFlow.Server", "{A5A10CC3-3CEE-4319-88F0-BFA241AA6C75}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server.Main", "Server.Main", "{A5A10CC3-3CEE-4319-88F0-BFA241AA6C75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Server.AppHost", "..\Hsr.Server.Aspire\HsR.Server.AppHost\HsR.Server.AppHost.csproj", "{42FDD9FA-FB96-4373-A223-B7CBF7421353}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Server.AppHost", "..\AssetsFlow.Server.Aspire\HsR.Server.AppHost\HsR.Server.AppHost.csproj", "{42FDD9FA-FB96-4373-A223-B7CBF7421353}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Server.ServiceDefaults", "..\Hsr.Server.Aspire\HsR.Server.ServiceDefaults\HsR.Server.ServiceDefaults.csproj", "{10583B7E-21B7-72F6-D433-11880996F2B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Server.ServiceDefaults", "..\AssetsFlow.Server.Aspire\HsR.Server.ServiceDefaults\HsR.Server.ServiceDefaults.csproj", "{10583B7E-21B7-72F6-D433-11880996F2B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

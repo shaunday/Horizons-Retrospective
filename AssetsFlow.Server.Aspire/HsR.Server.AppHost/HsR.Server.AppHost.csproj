@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\AssetsFlow.Server\AssetsFlow.Web.API\AssetsFlowWeb.API.csproj" />
-    <ProjectReference Include="..\..\Common.Net\HsR.UserService.All\HsR.UserService.Host\HsR.UserService.Host.csproj" />
+    <ProjectReference Include="..\..\Common.Net.IdentityService\HsR.UserService.Host\HsR.UserService.Host.csproj" />
   </ItemGroup>
 
 </Project>

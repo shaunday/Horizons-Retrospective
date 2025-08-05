@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common.Net.IdentityService\HsR.UserService.Contracts\HsR.UserService.Contracts.csproj" />
     <ProjectReference Include="..\..\..\Common.Net\HsR.Common\HsR.Common.csproj" />
-    <ProjectReference Include="..\..\..\Common.Net\HsR.UserService.All\HsR.UserService.Contracts\HsR.UserService.Contracts.csproj" />
     <ProjectReference Include="..\HsR.Journal.Entities\HsR.Journal.Entities.csproj" />
     <ProjectReference Include="..\HsR.Journal.Repository\HsR.Journal.Repository.csproj" />
     <ProjectReference Include="..\HsR.Journal.Services\HsR.Journal.Services.csproj" />
