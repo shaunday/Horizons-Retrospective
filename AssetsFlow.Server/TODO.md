@@ -4,7 +4,6 @@
 - HsR.Infrastructure to Hsr.Journal**..
 
 - update readme
-- directory.packages.props managepackageversionscentrally
 - parse elements from json templates
 - production envs to GH secrets
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
