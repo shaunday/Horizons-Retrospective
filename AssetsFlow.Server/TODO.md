@@ -2,7 +2,6 @@
 # TODO
 - Journal to Journal.All, move to main
 - HsR.Infrastructure to Hsr.Journal**..
-- Caching should move to common, it's test(HsR.Web.API.Caching.Tests) renamed
 
 - update readme
 - directory.packages.props managepackageversionscentrally
