@@ -13,14 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.UnitTests", "As
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Infrastructure", "AssetsFlow.Server\AssetsFlow.Journal\HsR.Infrastructure\HsR.Journal.Infrastructure.csproj", "{4C8A4A02-17FD-42BA-85F0-D535616669E9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{431FEC36-857D-4990-A331-54C7FCDA5E92}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-		.env.Global = ..\.env.Global
-		.NET Release Checklist.txt = ..\.NET Release Checklist.txt
-		Tips & Tricks.txt = ..\Tips & Tricks.txt
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Journal", "Journal", "{E2F11EF4-F624-492C-83BE-36B75D46AA56}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ledger", "Ledger", "{5CAFC034-4D7B-4A72-B13C-5FF762C6EEEF}"
@@ -83,6 +75,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{884E3130-E308-425C-9528-40F4F096152A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server.Main", "Server.Main", "{A5A10CC3-3CEE-4319-88F0-BFA241AA6C75}"
+	ProjectSection(SolutionItems) = preProject
+		AssetsFlow.Server\CHANGELOG.md = AssetsFlow.Server\CHANGELOG.md
+		AssetsFlow.Server\TODO.md = AssetsFlow.Server\TODO.md
+		AssetsFlow.Server\AssetsFlow.Web.API\version.txt = AssetsFlow.Server\AssetsFlow.Web.API\version.txt
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Server.AppHost", "AssetsFlow.Server.Aspire\HsR.Server.AppHost\HsR.Server.AppHost.csproj", "{42FDD9FA-FB96-4373-A223-B7CBF7421353}"
 EndProject
@@ -394,6 +391,7 @@ Global
 		{884E3130-E308-425C-9528-40F4F096152A} = {46B455BF-9472-4F21-B4B0-63627CF80A7E}
 		{8615A4B2-E90B-D312-F327-BA232AA7546C} = {884E3130-E308-425C-9528-40F4F096152A}
 		{D1BDAA8A-6480-187A-7ABA-23D647C13C0B} = {884E3130-E308-425C-9528-40F4F096152A}
+		{9604882F-0F6E-ADA0-B23B-A56FAD6BFE2B} = {A5A10CC3-3CEE-4319-88F0-BFA241AA6C75}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6CD0AE80-6A63-459E-884D-64F6D12582F5}
