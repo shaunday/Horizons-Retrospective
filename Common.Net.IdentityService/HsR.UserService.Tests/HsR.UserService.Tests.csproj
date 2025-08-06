@@ -4,8 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
-    <BaseOutputPath>..\bin\HsR.UserService\UserTests\</BaseOutputPath>
-    <OutputPath>..\bin\HsR.UserService\UserTests\</OutputPath>
+    <BaseOutputPath>..\bin\UserTests\</BaseOutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <AppendConfigurationToOutputPath>false</AppendConfigurationToOutputPath>
