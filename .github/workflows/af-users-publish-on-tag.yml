@@ -5,7 +5,7 @@ on:
     tags:
       - 'v*'
     paths:
-      - "HsR.UserService/**"
+      - "Common.Net.IdentityService/**"
   workflow_dispatch:
 
 jobs:
@@ -18,6 +18,6 @@ jobs:
       - name: Run Dotnet Build & Publish Action
         uses: ./.github/actions/reusable-publish-dotnet
         with:
-          project-path: ./HsR.UserService/HsR.UserService.Host
+          project-path: ./Common.Net.IdentityService/HsR.UserService.Host
           image-name: userservice-backend
           github-token: ${{ secrets.GITHUB_TOKEN }}

@@ -5,7 +5,7 @@ on:
     paths:
       - "AssetsFlow.Server/**"
       - "PriceAlerts.Server/**"
-      - "HsR.UserService/**"
+      - "Common.Net.IdentityService/**"
   workflow_dispatch:
 
 jobs:
