@@ -21,15 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Services", "Ass
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{F160C4C3-5E21-4DDF-B119-BB651086EF4B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_db-setup-info", "_db-setup-info", "{EAA1E7BB-2B5C-421C-A137-98DDCDC9BB95}"
-	ProjectSection(SolutionItems) = preProject
-		AssetsFlow.Journal\HsR.Infrastructure\Db and Migrations.Info\1. PgAndDbCreation.txt = AssetsFlow.Journal\HsR.Infrastructure\Db and Migrations.Info\1. PgAndDbCreation.txt
-		AssetsFlow.Journal\HsR.Infrastructure\Db and Migrations.Info\2. EnvironmentVars.txt = AssetsFlow.Journal\HsR.Infrastructure\Db and Migrations.Info\2. EnvironmentVars.txt
-		AssetsFlow.Journal\HsR.Infrastructure\Db and Migrations.Info\3. Migrations.txt = AssetsFlow.Journal\HsR.Infrastructure\Db and Migrations.Info\3. Migrations.txt
-		AssetsFlow.Journal\HsR.Infrastructure\Db and Migrations.Info\4. Optimization.txt = AssetsFlow.Journal\HsR.Infrastructure\Db and Migrations.Info\4. Optimization.txt
-		AssetsFlow.Journal\HsR.Infrastructure\Db and Migrations.Info\SQL_Roles.txt = AssetsFlow.Journal\HsR.Infrastructure\Db and Migrations.Info\SQL_Roles.txt
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common", "Common.Net\HsR.Common\HsR.Common.csproj", "{B6DA8FEB-823A-414D-911B-08CAAC8AD61B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common.Db", "Common.Net\HsR.Common.Db\HsR.Common.Db.csproj", "{5B0F30C3-5ECA-4964-BA70-EB4D6F7695B3}"
@@ -43,14 +34,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService", "Common.Net.IdentityService\HsR.UserService\HsR.UserService.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.Host", "Common.Net.IdentityService\HsR.UserService.Host\HsR.UserService.Host.csproj", "{64F826EF-21A9-4D08-8D38-2CE31306863A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_deployment-info", "_deployment-info", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-	ProjectSection(SolutionItems) = preProject
-		deployment-info\a Backend Deployment Recepie.txt = deployment-info\a Backend Deployment Recepie.txt
-		deployment-info\b AWS deploy recepie.txt = deployment-info\b AWS deploy recepie.txt
-		deployment-info\z Docker devops.txt = deployment-info\z Docker devops.txt
-		deployment-info\z HTTPS Recepie.txt = deployment-info\z HTTPS Recepie.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityService", "IdentityService", "{46B455BF-9472-4F21-B4B0-63627CF80A7E}"
 EndProject

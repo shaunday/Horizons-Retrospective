@@ -15,7 +15,7 @@ jobs:
       matrix:
         project-path:
           - ./AssetsFlow.Server/AssetsFlow.Web.API
-          - ./HsR.UserService/HsR.UserService.Host
+          - ./Common.Net.IdentityService/HsR.UserService.Host
 
     steps:
       - name: Checkout repository
