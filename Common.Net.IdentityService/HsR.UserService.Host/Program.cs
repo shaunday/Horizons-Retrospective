@@ -10,7 +10,9 @@ using Serilog;
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.UserService"));
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.Global"));
 
-var builder = WebApplication.CreateBuilder(args).ConfigureUserServiceHost();
+var builder = WebApplication.CreateBuilder(args)
+    .ConfigureLogging()
+    .ConfigureUserServiceHost();
 
 builder.AddServiceDefaults();
 

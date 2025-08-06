@@ -13,6 +13,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
     <PackageReference Include="DotNetEnv" />
     <PackageReference Include="Grpc.AspNetCore" />
     <PackageReference Include="Serilog.AspNetCore" />

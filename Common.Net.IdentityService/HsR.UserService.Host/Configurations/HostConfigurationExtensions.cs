@@ -11,10 +11,6 @@ namespace HsR.UserService.Host.Configurations
     {
         public static WebApplicationBuilder ConfigureUserServiceHost(this WebApplicationBuilder builder)
         {
-            // Configure Serilog
-            LoggingConfiguration.ConfigureLogging(builder.Environment.IsDevelopment());
-            builder.Host.UseSerilog();
-
             // Determine the base URL based on environment
             string baseUrl = UserServiceEx.GetUserServiceUrl();
 
