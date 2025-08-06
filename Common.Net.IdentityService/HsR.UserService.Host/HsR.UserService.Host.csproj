@@ -5,8 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>HsR.UserService.Host</RootNamespace>
     <AssemblyName>HsR.UserService.Host</AssemblyName>
-    <BaseOutputPath>..\bin\HsR.UserService\</BaseOutputPath>
-    <OutputPath>..\bin\HsR.UserService\</OutputPath>
+    <BaseOutputPath>..\bin\</BaseOutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <AppendConfigurationToOutputPath>false</AppendConfigurationToOutputPath>
@@ -30,9 +29,15 @@
     <None Update=".env.UserService">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+      <None Update="appsettings.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="appsettings.Development.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="appsettings.Production.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
   </ItemGroup>
   <Target Name="CopySharedEnvFile" AfterTargets="Build" Condition="'$(CopyEnvFile)' == 'true'">
     <Copy SourceFiles="..\..\.env.Global" DestinationFolder="$(OutputPath)" />

@@ -9,12 +9,6 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <Content Remove="appSettings.Production.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="appSettings.Production.json" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Asp.Versioning.Mvc" />
     <PackageReference Include="AutoMapper" />
     <PackageReference Include="AutoMapper.Collection.EntityFramework" />
@@ -37,6 +31,15 @@
     <None Update=".env.AssetsFlow.Server">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+      <None Update="appsettings.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="appsettings.Development.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="appsettings.Production.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
   </ItemGroup>
   <Target Name="CopySharedEnvFile" AfterTargets="Build" Condition="'$(CopyEnvFile)' == 'true'">
     <Copy SourceFiles="..\..\.env.Global" DestinationFolder="$(OutputPath)" />

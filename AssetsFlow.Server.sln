@@ -76,6 +76,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{884E3130
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server.Main", "Server.Main", "{A5A10CC3-3CEE-4319-88F0-BFA241AA6C75}"
 	ProjectSection(SolutionItems) = preProject
+		C:\Users\novelty\My Drive\Documents\HsR\.env.Global = C:\Users\novelty\My Drive\Documents\HsR\.env.Global
 		AssetsFlow.Server\CHANGELOG.md = AssetsFlow.Server\CHANGELOG.md
 		AssetsFlow.Server\TODO.md = AssetsFlow.Server\TODO.md
 		AssetsFlow.Server\AssetsFlow.Web.API\version.txt = AssetsFlow.Server\AssetsFlow.Web.API\version.txt
