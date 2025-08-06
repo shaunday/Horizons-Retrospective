@@ -22,7 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="../HsR.UserService/HsR.UserService.csproj" />
     <ProjectReference Include="../../Common.Net/HsR.Common.AspNet/HsR.Common.AspNet.csproj" />
-    <ProjectReference Include="..\..\AssetsFlow.Server.Aspire\HsR.Server.ServiceDefaults\HsR.Server.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\AssetsFlow.Server.Aspire\HsR.Server.ServiceDefaults\AssetsFlow-Aspire.ServiceDefaults.csproj" />
     <ProjectReference Include="..\HsR.UserService.Contracts\HsR.UserService.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>

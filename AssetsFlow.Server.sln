@@ -81,9 +81,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server.Main", "Server.Main"
 		AssetsFlow.Server\AssetsFlow.Web.API\version.txt = AssetsFlow.Server\AssetsFlow.Web.API\version.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Server.AppHost", "AssetsFlow.Server.Aspire\HsR.Server.AppHost\HsR.Server.AppHost.csproj", "{42FDD9FA-FB96-4373-A223-B7CBF7421353}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetsFlow-Aspire.AppHost", "AssetsFlow.Server.Aspire\HsR.Server.AppHost\AssetsFlow-Aspire.AppHost.csproj", "{42FDD9FA-FB96-4373-A223-B7CBF7421353}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Server.ServiceDefaults", "AssetsFlow.Server.Aspire\HsR.Server.ServiceDefaults\HsR.Server.ServiceDefaults.csproj", "{10583B7E-21B7-72F6-D433-11880996F2B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetsFlow-Aspire.ServiceDefaults", "AssetsFlow.Server.Aspire\HsR.Server.ServiceDefaults\AssetsFlow-Aspire.ServiceDefaults.csproj", "{10583B7E-21B7-72F6-D433-11880996F2B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.Tests", "Common.Net.IdentityService\HsR.UserService.Tests\HsR.UserService.Tests.csproj", "{8615A4B2-E90B-D312-F327-BA232AA7546C}"
 EndProject
