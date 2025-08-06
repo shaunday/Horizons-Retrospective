@@ -4,7 +4,6 @@ using HsR.Journal.Entities.TradeJournal;
 using HsR.Journal.Repository.Services.Base;
 using HsR.Journal.Services;
 using Microsoft.EntityFrameworkCore;
-using Serilog;
 
 namespace HsR.Journal.DataContext
 {

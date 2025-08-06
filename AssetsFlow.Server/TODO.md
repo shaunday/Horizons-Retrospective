@@ -7,6 +7,7 @@
 - parse elements from json templates
 - production envs to GH secrets
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
+- add logs to repo methods
 
 - error route doesnt work 
 

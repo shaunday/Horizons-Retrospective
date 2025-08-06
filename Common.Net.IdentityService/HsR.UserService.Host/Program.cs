@@ -14,7 +14,7 @@ EnvLoader.LoadEnvFiles(
 ]);
 
 var builder = WebApplication.CreateBuilder(args)
-    .ConfigureLogging()
+    //.ConfigureLogging() //using aspire's
     .ConfigureUserServiceHost();
 
 builder.AddServiceDefaults();

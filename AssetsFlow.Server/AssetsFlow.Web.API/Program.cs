@@ -12,7 +12,8 @@ using Serilog;
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.Global"));
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow.Server"));
 
-var builder = WebApplication.CreateBuilder(args).ConfigureLogging();
+var builder = WebApplication.CreateBuilder(args);
+    //.ConfigureLogging(); using aspire's 
 
 builder.AddServiceDefaults();
 builder.Configuration

@@ -7,6 +7,11 @@ using Microsoft.Extensions.ServiceDiscovery;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
+using Serilog;
+using Serilog.Enrichers.Span;
+using Serilog.Events;
+using Serilog.Exceptions;
+using System.Reflection;
 
 namespace Microsoft.Extensions.Hosting;
 
@@ -20,11 +25,13 @@ public static class Extensions
 
     public static TBuilder AddServiceDefaults<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
     {
+        (builder as WebApplicationBuilder)?.AddCustomSerilog();
+
         builder.ConfigureOpenTelemetry();
 
         builder.AddDefaultHealthChecks();
 
-        builder.Services.AddServiceDiscovery();
+        //builder.Services.AddServiceDiscovery();
 
         builder.Services.ConfigureHttpClientDefaults(http =>
         {
@@ -32,7 +39,7 @@ public static class Extensions
             http.AddStandardResilienceHandler();
 
             // Turn on service discovery by default
-            http.AddServiceDiscovery();
+            //http.AddServiceDiscovery();
         });
 
         // Uncomment the following to restrict the allowed schemes for service discovery.
@@ -42,6 +49,51 @@ public static class Extensions
         // });
 
         return builder;
+    }
+
+    public static IHostBuilder AddCustomSerilog(this WebApplicationBuilder builder)
+    {
+        return builder.Host.UseSerilog((context, loggerConfig) =>
+        {
+            bool isDev = builder.Environment.IsDevelopment();
+
+            // Get the entry assembly name (e.g., HsR.UserService.Host)
+            var assemblyName = Assembly.GetEntryAssembly()?.GetName().Name ?? "default-app";
+
+            // Generate log file name using assembly name
+            var logFileName = $"{assemblyName.ToLowerInvariant()}.log";
+            var logPath = Path.Combine(AppContext.BaseDirectory, logFileName);
+
+            loggerConfig
+                .MinimumLevel.Is(isDev ? LogEventLevel.Debug : LogEventLevel.Warning)
+                .ReadFrom.Configuration(context.Configuration)
+                .WriteTo.Console()
+                .WriteTo.File(logPath, rollingInterval: RollingInterval.Day)
+                .Enrich.WithExceptionDetails()
+                .Enrich.FromLogContext()
+                .Enrich.With<ActivityEnricher>();
+
+            var otlpExporterEndpoint = context.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"];
+            if (string.IsNullOrEmpty(otlpExporterEndpoint)) return;
+
+            loggerConfig  // same comment as above - can use configuration here too
+                .WriteTo.OpenTelemetry(options =>
+                {
+                    options.Endpoint = otlpExporterEndpoint;
+                    options.ResourceAttributes.Add("service.name", builder.Configuration["OTEL_SERVICE_NAME"]!);
+                    var headers = builder.Configuration["OTEL_EXPORTER_OTLP_HEADERS"]?.Split(',') ?? [];
+                    foreach (var header in headers)
+                    {
+                        var (key, value) = header.Split('=') switch
+                        {
+                            [string k, string v] => (k, v),
+                            var v => throw new Exception($"Invalid header format {v}")
+                        };
+
+                        options.Headers.Add(key, value);
+                    }
+                });
+        });
     }
 
     public static TBuilder ConfigureOpenTelemetry<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
