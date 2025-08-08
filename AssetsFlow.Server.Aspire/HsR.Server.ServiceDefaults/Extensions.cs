@@ -65,14 +65,18 @@ public static class Extensions
             var logFileName = $"{assemblyName.ToLowerInvariant()}.log";
             var logPath = Path.Combine(AppContext.BaseDirectory, logFileName);
 
+            var fileTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] ({Username}/{UserId}) {Message:lj}{NewLine}{Exception}";
+            var consoleTemplate = "[{Timestamp:HH:mm:ss} {Level:u3}] ({Username}/{UserId}) {Message:lj}{NewLine}{Exception}";
+
             loggerConfig
                 .MinimumLevel.Is(isDev ? LogEventLevel.Debug : LogEventLevel.Warning)
                 .ReadFrom.Configuration(context.Configuration)
-                .WriteTo.Console()
-                .WriteTo.File(logPath, rollingInterval: RollingInterval.Day)
+                .WriteTo.Console(outputTemplate: consoleTemplate)
+                .WriteTo.File(logPath, rollingInterval: RollingInterval.Day, outputTemplate: fileTemplate)
                 .Enrich.WithExceptionDetails()
                 .Enrich.FromLogContext()
                 .Enrich.With<ActivityEnricher>();
+
 
             var otlpExporterEndpoint = context.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"];
             if (string.IsNullOrEmpty(otlpExporterEndpoint)) return;

@@ -1,4 +1,4 @@
-﻿using CarvedRock.Core;
+﻿using HsR.Middleware;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;

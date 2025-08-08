@@ -1,11 +1,12 @@
+using HsR.Common.AspNet.Authentication;
+using HsR.Web.API.Services;
+using HsR.Web.API.Settings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
-using HsR.Web.API.Settings;
-using HsR.Web.API.Services;
-using HsR.Common.AspNet.Authentication;
 
 namespace AssetsFlowWeb.API.Configurations
 {
@@ -41,7 +42,10 @@ namespace AssetsFlowWeb.API.Configurations
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwtSettings.Issuer,
                     ValidAudience = jwtSettings.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(key)
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+
+                    NameClaimType = ClaimTypes.NameIdentifier,
+                    RoleClaimType = ClaimTypes.Role
                 };
             });
 

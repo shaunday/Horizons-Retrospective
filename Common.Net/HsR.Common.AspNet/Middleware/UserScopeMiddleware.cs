@@ -1,25 +1,39 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Serilog.Context;
+using System.Security.Claims;
 
-namespace CarvedRock.Core;
-
-public class UserScopeMiddleware(RequestDelegate next, ILogger<UserScopeMiddleware> logger)
+namespace HsR.Middleware
 {
-    public async Task InvokeAsync(HttpContext context)
+    public class UserScopeMiddleware(RequestDelegate next, ILogger<UserScopeMiddleware> logger)
     {
-        if (context.User.Identity is { IsAuthenticated: true })
-        {
-            var user = context.User;
-            var subjectId = user.Claims.First(c => c.Type == "sub")?.Value;
+        private readonly RequestDelegate _next = next;
+        private readonly ILogger<UserScopeMiddleware> _logger = logger;
 
-            using (logger.BeginScope("User:{user}, SubjectId:{subject}", user.Identity.Name??"", subjectId))
-            {
-                await next(context);
-            }
-        }
-        else
+        public async Task InvokeAsync(HttpContext context)
         {
-            await next(context);
+            if (context.User.Identity?.IsAuthenticated == true)
+            {
+                var userId = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "unknown";
+                var userName = context.User.Identity?.Name ?? "unknown";
+
+                using (_logger.BeginScope(new Dictionary<string, object>
+                {
+                    ["UserId"] = userId,
+                    //["UserName"] = userName //todo
+                }))
+                {
+                    await _next(context);
+                }
+            }
+            else
+            {
+                using (LogContext.PushProperty("UserId", "unknown"))
+                //using (LogContext.PushProperty("UserName", "unknown")) //todo
+                {
+                    await _next(context);
+                }
+            }
         }
     }
 }

@@ -25,6 +25,7 @@ public class JwtService : IJwtService
         _logger = logger;
     }
 
+    //Guid userId, string username, IEnumerable<string>? roles = null) //todo add username
     public string GenerateToken(Guid userId, IEnumerable<string>? roles = null)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
@@ -32,7 +33,8 @@ public class JwtService : IJwtService
 
         var claims = new List<Claim>
         {
-            new(ClaimTypes.NameIdentifier, userId.ToString())
+            new(ClaimTypes.NameIdentifier, userId.ToString()),
+            //new Claim(ClaimTypes.Name, username)
         };
 
         if (roles != null)

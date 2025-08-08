@@ -1,10 +1,11 @@
 
-## [0.9.221-b] - 2025-07-...
+## [0.9.221-b] - 2025-08-...
 - Map date stamps on composite dto, removed double entries on composite models
 - DenyActivation flag added to content edit method
 - namespaces foxes
 - return trade analytics in status
 - JWT refresh logic - auth/refresh/save token in userdata
+- Logging UserId
 
 ## [0.9.220-b] - 2025-07-26
 - User Service with gRPC + host + unittests

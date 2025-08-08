@@ -1,4 +1,4 @@
-using CarvedRock.Core;
+using HsR.Middleware;
 using HsR.UserService.Data;
 using HsR.UserService.Services;
 using Microsoft.EntityFrameworkCore;
