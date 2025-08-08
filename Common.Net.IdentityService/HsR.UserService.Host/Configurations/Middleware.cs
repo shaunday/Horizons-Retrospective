@@ -1,3 +1,4 @@
+using CarvedRock.Core;
 using HsR.UserService.Data;
 using HsR.UserService.Services;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace HsR.UserService.Host.Configurations
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseMiddleware<UserScopeMiddleware>();
 
             return app;
         }
