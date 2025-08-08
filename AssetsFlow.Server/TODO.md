@@ -39,6 +39,7 @@
 - conluences check list = trends per tf, bb/ma distances
 - filtering history
 - Add rate limiting, monitoring, and alerting.
+- Run Prometheus on EC2 to collect metrics, store them, and visualize via Grafana; compare with InfluxDB, VictoriaMetrics, or AWS CloudWatch/X-Ray.
 
 ## Expansion:
 Suspence? RQ Suspence
