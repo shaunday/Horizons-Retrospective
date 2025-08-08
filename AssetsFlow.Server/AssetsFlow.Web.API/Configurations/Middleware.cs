@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.HttpOverrides;
+﻿using CarvedRock.Core;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -52,6 +53,7 @@ namespace AssetsFlowWeb.API.Configurations
             // Apply authentication and authorization middleware.
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseMiddleware<UserScopeMiddleware>();
 
             // Map controllers for request handling.
             app.MapControllers();

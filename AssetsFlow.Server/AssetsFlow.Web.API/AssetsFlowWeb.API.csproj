@@ -7,6 +7,7 @@
     <DocumentationFile>$(OutputPath)HsR.Web.API.xml</DocumentationFile>
     <BaseOutputPath>..\bin</BaseOutputPath>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <UserSecretsId>d695b964-133b-4f51-bd8d-0cbf79bfe1a0</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Asp.Versioning.Mvc" />
@@ -42,6 +43,6 @@
       </None>
   </ItemGroup>
   <Target Name="CopySharedEnvFile" AfterTargets="Build" Condition="'$(CopyEnvFile)' == 'true'">
-    <Copy SourceFiles="..\..\.env.Global" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="..\..\.env.Global" DestinationFolder="$(OutputPath)" Condition="Exists('$(GlobalEnvFile)')" />
   </Target>
 </Project>

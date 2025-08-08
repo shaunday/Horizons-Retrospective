@@ -42,6 +42,6 @@
             <GlobalEnvFile>$(ProjectDir)..\..\.env.Global</GlobalEnvFile>
         </PropertyGroup>
         <Message Importance="high" Text="Copying .env.Global from $(GlobalEnvFile) to $(OutputPath)" />
-        <Copy SourceFiles="$(GlobalEnvFile)" DestinationFolder="$(OutputPath)" />
+        <Copy SourceFiles="$(GlobalEnvFile)" DestinationFolder="$(OutputPath)" Condition="Exists('$(GlobalEnvFile)')" />
     </Target>
 </Project>
