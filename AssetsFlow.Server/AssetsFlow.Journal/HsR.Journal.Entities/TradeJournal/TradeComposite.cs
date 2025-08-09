@@ -2,53 +2,34 @@
 using HsR.Journal.Entities.TradeJournal;
 using System.ComponentModel.DataAnnotations;
 
-public class TradeComposite
+namespace HsR.Journal.Entities
 {
-    [Key]
-    public int Id { get; private set; }
-
-    [Required]
-    public Guid UserId { get; set; }
-
-    public ICollection<InterimTradeElement> TradeElements { get; set; } = new List<InterimTradeElement>();
-
-    public TradeSummary? Summary { get; set; }
-
-    #region Status Logic
-
-    public TradeStatus Status { get; set; } = TradeStatus.AnIdea;
-
-    private void UpdateStatus(TradeStatus newStatus)
+    public class TradeComposite
     {
-        Status = newStatus;
+        [Key]
+        public int Id { get; private set; }
 
-        if (newStatus == TradeStatus.Open)
+        [Required]
+        public Guid UserId { get; set; }
+
+        public ICollection<InterimTradeElement> TradeElements { get; set; } = [];
+
+        public TradeSummary? Summary { get; set; }
+
+        #region Status Logic
+
+        public TradeStatus Status { get; private set; } = TradeStatus.AnIdea;
+
+        public void SetStatus(TradeStatus newStatus)
         {
-            OpenedAt ??= DateTime.UtcNow;
+            if (Status == newStatus)
+                return;
+
+            Status = newStatus;
         }
-        else if (newStatus == TradeStatus.Closed)
-        {
-            ClosedAt = DateTime.UtcNow;
-        }
+
+        #endregion
+
+        public override string ToString() => $"Id={Id}, Status={Status}, Trade Eles Count={TradeElements.Count}";
     }
-
-    public void Activate()
-    {
-        if (Status == TradeStatus.AnIdea)
-        {
-            UpdateStatus(TradeStatus.Open);
-        }
-    }
-
-    public void Close()
-    {
-        UpdateStatus(TradeStatus.Closed);
-    }
-    #endregion
-
-    public DateTime? OpenedAt { get; set; }
-
-    public DateTime? ClosedAt { get; set; }
-
-    public override string ToString() => $"Id={Id}, Status={Status}, Trade Eles Count={TradeElements.Count}";
 }

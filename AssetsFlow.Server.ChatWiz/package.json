@@ -1,0 +1,26 @@
+{
+  "type": "module",
+  "name": "trading-chattie-backend",
+  "version": "0.9.401",
+  "description": "Validate 1 line trade creations with AI",
+  "main": "src/app.mjs",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development node --env-file=.env --watch src --watch-path src src/app.mjs",
+    "start": "cross-env NODE_ENV=production node --env-file=.env.production src/app.mjs",
+    "lint": "eslint src --fix",
+    "audit": "npm audit --audit-level=moderate"
+  },
+  "author": "Shaun Day",
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "pino": "^9.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.32.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-n": "^17.21.3",
+    "pino-pretty": "^13.0.0"
+  }
+}

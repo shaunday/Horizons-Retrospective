@@ -1,21 +1,23 @@
 ﻿
 # TODO
-- replace supa's password, reset db, update db -> name for user's service
-- add version to user.s api
+- Journal to Journal.All, move to main
+- HsR.Infrastructure to Hsr.Journal**..
 
-- Configure JWT refresh logic - auth/refresh
+- update readme
+- parse elements from json templates
+- production envs to GH secrets
+- add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
+- add logs to repo methods
 
+- error route doesnt work 
+
+- add version to user api
 - fix user entity (remove stuff?), adjust login request to user/pass?
 
-- add ignoreActivation flag to content edit
-- add idea/origin date (not same as trade open)
-- on remove, set condition where net is positive post, otherwise error
 - rethink isContentMissing - either way dont need to reload all tradeComposite to get it, you always got the old one (in the fe at least)
 - closed trade logic : deny edits/ re-open trade to allow edit?
-- filtering/sortby/search by
 
-## security
- - bcrypt (encrypt passwords), firebase (more auth)
+- filtering/sortby/search by
 
 ## testing
 - API tests (seeder?)
@@ -34,7 +36,7 @@
 - conluences check list = trends per tf, bb/ma distances
 - filtering history
 - Add rate limiting, monitoring, and alerting.
-- set full deployment (deploy on aws post version tag .. deploy all??)
+- Microsoft.Extensions.Caching.Hybrid
 
 ## Expansion:
 Suspence? RQ Suspence

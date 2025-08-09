@@ -1,47 +1,59 @@
-import React from "react";
-import { Text, Tooltip, ActionIcon } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { TbEdit } from "react-icons/tb";
-import DataUpdateModal from "./DataUpdateModal";
+import React, { useRef, useState } from "react";
+import { Popover } from "@mantine/core";
 import { dataElementContentParser } from "@services/dataElementContentParser";
-import { useDelayedHover } from "@hooks/useDelayedHover";
+import ValueDisplay from "./ValueDisplay";
+import ValuePopover from "./ValuePopover";
 
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const isOverview = onValueChangeInitiated === undefined;
-  const { contentValue } = dataElementContentParser(cellInfo);
-  const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
-  const { delayedHover, ref: wrapperRef } = useDelayedHover(200);
+  const { contentValue, textRestrictions } = dataElementContentParser(cellInfo);
 
-  const handleEditClick = (e) => {
-    e.stopPropagation();
-    openModal();
+  const [popoverOpened, setPopoverOpened] = useState(false);
+  const preventCloseRef = useRef(false);
+
+  const handleSubmit = (value, changeDetails) => {
+    onValueChangeInitiated(value, changeDetails);
+    setPopoverOpened(false);
   };
 
   return (
-    <div className="container-with-centered-content h-10 relative min-w-0">
-      <div className="max-w-full rounded-md flex-shrink overflow-hidden bg-[#fefefe]">
-        <Tooltip label={contentValue} disabled={contentValue.length < 20} withinPortal position="bottom">
-          <Text className="max-w-full whitespace-nowrap overflow-hidden text-ellipsis">{contentValue}</Text>
-        </Tooltip>
-      </div>
+    <Popover
+      opened={popoverOpened}
+      onChange={(open) => {
+        if (!open && preventCloseRef.current) {
+          preventCloseRef.current = false;
+          return;
+        }
+        setPopoverOpened(open);
+      }}
+      position="bottom"
+      trapFocus={false}
+      closeOnEscape={true}
+      withArrow
+      arrowSize={12}
+      shadow="md"
+    >
+      <Popover.Target>
+        <ValueDisplay
+          contentValue={contentValue}
+          isOverview={isOverview}
+          onClick={() => !isOverview && setPopoverOpened(true)}
+        />
+      </Popover.Target>
 
-      <DataUpdateModal opened={modalOpened} onClose={closeModal} data={cellInfo} onSubmit={onValueChangeInitiated} />
-
-      {!isOverview && (
-        <div className="h-8 w-full absolute -bottom-4" ref={wrapperRef}>
-          {delayedHover && (
-            <ActionIcon 
-              variant="outline" 
-              onClick={handleEditClick} 
-              className="absolute -bottom-1 left-1/2 -translate-x-1/2"
-              style={{ transform: 'translateX(-50%)' }}
-            >
-              <TbEdit size={20} />
-            </ActionIcon>
-          )}
-        </div>
-      )}
-    </div>
+      <Popover.Dropdown
+        onMouseDown={() => {
+          preventCloseRef.current = true;
+        }}
+        className="bg-amber-50 border border-blue-50 rounded-lg p-3 shadow-md"
+      >
+        <ValuePopover
+          contentValue={contentValue}
+          textRestrictions={textRestrictions}
+          onSubmit={handleSubmit}
+        />
+      </Popover.Dropdown>
+    </Popover>
   );
 }
 

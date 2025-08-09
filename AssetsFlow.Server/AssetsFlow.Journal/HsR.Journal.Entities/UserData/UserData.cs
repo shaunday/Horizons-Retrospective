@@ -8,5 +8,8 @@ namespace HsR.Journal.Entities
         public Guid UserId { get; set; }
         
         public ICollection<string>? SavedSectors { get; set; }
+
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpiry { get; set; }
     }
 }

@@ -1,0 +1,30 @@
+{
+  "elementType": "Evaluation",
+  "elements": [
+    {
+      "title": "General",
+      "componentType": "Header",
+      "isRelevantForLocalOverview": true
+    },
+    {
+      "title": "D/W/M str?",
+      "componentType": "EntryLogic",
+      "isRelevantForLocalOverview": true
+    },
+    {
+      "title": "Momentum",
+      "componentType": "EntryLogic",
+      "isRelevantForLocalOverview": true
+    },
+    {
+      "title": "Fta reached?",
+      "componentType": "EntryLogic",
+      "isRelevantForLocalOverview": true
+    },
+    {
+      "title": "NTA",
+      "componentType": "ExitLogic",
+      "isRelevantForLocalOverview": true
+    }
+  ]
+}

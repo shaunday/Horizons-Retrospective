@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import {
   Title,
   Loader,
@@ -9,39 +10,17 @@ import {
 } from "@mantine/core";
 import { TbHelp, TbChartLine, TbUser } from "react-icons/tb";
 import { useDisclosure } from "@mantine/hooks";
-import { useEffect, useState } from "react";
-import { notifications } from "@mantine/notifications";
 import AboutDrawer from "@components/About/AboutDrawer";
 import LoadingOverlay from "@components/LoadingOverlay";
 import { useAuth } from "@hooks/Auth/useAuth";
-import { reseedDemoUserAPI } from "@services/ApiRequests/adminApiAccess";
+import { useReseedDemoUser } from "@hooks/Admin/useReseedDemoUser";
 
-function Header({ showUserActions = true }) {
+function HeaderComponent({ showUserActions = true }) {
   const [opened, { open, close }] = useDisclosure(false);
   const isDev = import.meta.env.DEV;
   const { user } = useAuth();
 
-  const [isReseeding, setIsReseeding] = useState(false);
-
-  const handleReseed = async () => {
-    setIsReseeding(true);
-    try {
-      await reseedDemoUserAPI();
-      notifications.show({
-        title: "Success",
-        message: "Demo user and trades reseeded!",
-        color: "green",
-      });
-    } catch (error) {
-      notifications.show({
-        title: "Error",
-        message: "Failed to reseed demo user. Please try again.",
-        color: "red",
-      });
-    } finally {
-      setIsReseeding(false);
-    }
-  };
+  const { isReseeding, reseed } = useReseedDemoUser();
 
   useEffect(() => {
     document.title = "HsR" + (isDev ? " [DEV]" : "");
@@ -98,7 +77,7 @@ function Header({ showUserActions = true }) {
               <Button
                 variant="subtle"
                 size="sm"
-                onClick={handleReseed}
+                onClick={reseed}
                 leftSection={
                   isReseeding ? (
                     <Loader size={16} />
@@ -126,11 +105,17 @@ function Header({ showUserActions = true }) {
         </Flex>
       </Box>
 
-      <LoadingOverlay visible={isReseeding} text={"Reseed in progress ... \n(~10sec)"}/>
+      <LoadingOverlay
+        visible={isReseeding}
+        text={"Reseed in progress ... \n(~10-15sec)"}
+      />
 
       <AboutDrawer opened={opened} onClose={close} />
     </>
   );
 }
+
+// Memoized export to prevent unnecessary re-renders
+const Header = React.memo(HeaderComponent);
 
 export default Header;

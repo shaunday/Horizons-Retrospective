@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using HsR.Web.API.Controllers.Journal;
 using Microsoft.AspNetCore.Authorization;
+using HsR.Journal.Entities;
 
 [Route("hsr-api/v{version:apiVersion}/journal/elements/{elementId}")]
 [ApiVersion("1.0")]

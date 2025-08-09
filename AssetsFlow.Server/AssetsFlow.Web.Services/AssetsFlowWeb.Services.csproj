@@ -1,23 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <BaseOutputPath>..\bin</BaseOutputPath>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="AutoMapper.Collection.EntityFramework" Version="10.0.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
-    <PackageReference Include="System.Drawing.Common" Version="9.0.0" />
+    <PackageReference Include="AutoMapper" />
+    <PackageReference Include="AutoMapper.Collection.EntityFramework" />
+    <PackageReference Include="System.Data.SqlClient" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Common.Net\HsR.Common\HsR.Common.csproj" />
     <ProjectReference Include="..\AssetsFlow.Journal\HsR.Journal.Entities\HsR.Journal.Entities.csproj" />
     <ProjectReference Include="..\AssetsFlow.Journal\HsR.Journal.Services\HsR.Journal.Services.csproj" />
   </ItemGroup>
-
 </Project>

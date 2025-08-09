@@ -65,7 +65,7 @@ namespace HsR.Journal.Entities
         {
             if (ContentWrapper != null)
             {
-                History ??= new List<ContentRecord>();
+                History ??= [];
                 History.Add(ContentWrapper);
             }
            

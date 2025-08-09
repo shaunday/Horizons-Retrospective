@@ -1,3 +1,4 @@
+using HsR.Common.AspNet.Authentication;
 using HsR.Web.API.Settings;
 
 namespace HsR.Web.API.Services

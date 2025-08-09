@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -7,36 +6,21 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <DocumentationFile>$(OutputPath)HsR.Web.API.xml</DocumentationFile>
     <BaseOutputPath>..\bin</BaseOutputPath>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <UserSecretsId>d695b964-133b-4f51-bd8d-0cbf79bfe1a0</UserSecretsId>
   </PropertyGroup>
-
   <ItemGroup>
-    <Content Remove="appSettings.Production.json" />
+    <PackageReference Include="Asp.Versioning.Mvc" />
+    <PackageReference Include="AutoMapper" />
+    <PackageReference Include="AutoMapper.Collection.EntityFramework" />
+    <PackageReference Include="DotNetEnv" />
+    <PackageReference Include="Microsoft.Data.SqlClient" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+    <PackageReference Include="System.Data.SqlClient" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Include="appSettings.Production.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Asp.Versioning.Mvc" Version="8.1.0" />
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-
-    <PackageReference Include="AutoMapper.Collection.EntityFramework" Version="10.0.0" />
-
-    <PackageReference Include="DotNetEnv" Version="3.1.1" />
-
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
-
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
-
-    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
-
-    <PackageReference Include="System.Drawing.Common" Version="9.0.0" />
-
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Common.Net\HsR.Common.AspNet\HsR.Common.AspNet.csproj" />
+    <ProjectReference Include="..\..\AssetsFlow.Server.Aspire\HsR.Server.ServiceDefaults\AssetsFlow-Aspire.ServiceDefaults.csproj" />
     <ProjectReference Include="..\AssetsFlow.Journal\HsR.Infrastructure\HsR.Journal.Infrastructure.csproj" />
     <ProjectReference Include="..\AssetsFlow.Journal\HsR.Journal.Repository\HsR.Journal.Repository.csproj" />
     <ProjectReference Include="..\AssetsFlow.Journal\HsR.Journal.Seeder\HsR.Journal.Seeder.csproj" />
@@ -44,15 +28,21 @@
     <ProjectReference Include="..\AssetsFlow.Web.Services\AssetsFlowWeb.Services.csproj" />
     <ProjectReference Include="..\HsR.UserService.Client\HsR.UserService.Client.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update=".env.AssetsFlow.Server">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+      <None Update="appsettings.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="appsettings.Development.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="appsettings.Production.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
   </ItemGroup>
-
   <Target Name="CopySharedEnvFile" AfterTargets="Build" Condition="'$(CopyEnvFile)' == 'true'">
-    <Copy SourceFiles="..\..\.env.Global" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="..\..\.env.Global" DestinationFolder="$(OutputPath)" Condition="Exists('$(GlobalEnvFile)')" />
   </Target>
-
 </Project>

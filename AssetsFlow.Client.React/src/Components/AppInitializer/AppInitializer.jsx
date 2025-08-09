@@ -6,7 +6,7 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const DELAY_MS = 750;
+const DELAY_MS = 500;
 
 export function useAppGate() {
   const [authStep, setAuthStep] = useState("pending");

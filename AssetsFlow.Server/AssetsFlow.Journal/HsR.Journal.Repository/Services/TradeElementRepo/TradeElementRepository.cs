@@ -97,7 +97,7 @@ namespace HsR.Journal.DataContext
                     _dataContext.Entry(trade.Summary).State = EntityState.Deleted;
                     trade.Summary = null;
                 }
-                trade.Status = TradeStatus.AnIdea;
+                trade.SetStatus(TradeStatus.AnIdea);
             }
             await _dataContext.SaveChangesAsync();
             return trade;

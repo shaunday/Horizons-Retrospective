@@ -12,7 +12,10 @@ using Serilog;
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.Global"));
 Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow.Server"));
 
-var builder = WebApplication.CreateBuilder(args).ConfigureLogging();
+var builder = WebApplication.CreateBuilder(args);
+    //.ConfigureLogging(); using aspire's 
+
+builder.AddServiceDefaults();
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables();
@@ -27,7 +30,7 @@ builder.Services
     .AddCustomApiVersioning()
     .AddConfigurationServices(builder.Configuration)
     .AddCacheServices(builder.Configuration)
-    .AddUserServiceClient(builder.Configuration)
+    .AddUserServiceClient()
     .AddJwtAuthentication(builder.Configuration)
     .ConfigureTradingJournalDbContext(isDev)
     .ConfigureCors(isDev)
@@ -43,6 +46,8 @@ else if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "t
 }
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 await app.InitDB(isDev);
 

@@ -1,0 +1,3 @@
+Tools> Code Snippets
+
+Ctrl + Space : Get intellisense back (if youve aborted mid typing)

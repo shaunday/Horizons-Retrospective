@@ -2,6 +2,7 @@ using HsR.Web.API.Settings;
 using HsR.Web.API.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using HsR.Common.AspNet.Authentication;
 
 namespace AssetsFlowWeb.API.Configurations
 {

@@ -140,7 +140,6 @@ namespace HsR.Journal.Seeder
             await PopulateStageContent(eval3, ManualDemoTrades.Trade3_Evaluate);
 
             TradeCompositeOperations.CloseTrade(trade3, "1250");
-            trade3.Close();
 
             await PopulateStageContent(trade3.Summary!, ManualDemoTrades.Trade3_Close);
         }
@@ -159,7 +158,6 @@ namespace HsR.Journal.Seeder
             await PopulateStageContent(eval4, ManualDemoTrades.Trade4_Evaluate);
 
             TradeCompositeOperations.CloseTrade(trade4, "900");
-            trade4.Close();
 
             await PopulateStageContent(trade4.Summary!, ManualDemoTrades.Trade4_Close);
         }
@@ -192,7 +190,6 @@ namespace HsR.Journal.Seeder
             await PopulateStageContent(eval6, ManualDemoTrades.Trade6_Evaluate);
 
             TradeCompositeOperations.CloseTrade(trade6, "1500");
-            trade6.Close();
 
             await PopulateStageContent(trade6.Summary!, ManualDemoTrades.Trade6_Close);
         }
@@ -227,7 +224,7 @@ namespace HsR.Journal.Seeder
                 {
                     try
                     {
-                        await _dataElementRepository.UpdateCellContentAsync(entry.Id, value, "manual seed");
+                        await _dataElementRepository.UpdateCellContentAsync(entry.Id, new Services.UpdateDataComponentRequest() { Content = value });
                     }
                     catch (Exception ex)
                     {

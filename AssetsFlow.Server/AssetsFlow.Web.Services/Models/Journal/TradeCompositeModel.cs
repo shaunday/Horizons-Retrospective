@@ -1,9 +1,10 @@
 ﻿using HsR.Common.Extenders;
 using HsR.Journal.Entities;
+using HsR.Journal.TradeAnalytics;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace HsR.Web.Services.Models.Journal
+namespace AssetsFlowWeb.Services.Models.Journal
 {
     public class TradeCompositeInfo
     {
@@ -24,6 +25,9 @@ namespace HsR.Web.Services.Models.Journal
 
         public DateTime? OpenedAt { get; set; }
         public DateTime? ClosedAt { get; set; }
+        public DateTime? IdeaDate { get; set; }
+
+        public TradeAnalyticsSummary Analytics { get; set; }
 
         public override string ToString() => $"Id={Id}, IsAnyContentMissing={IsAnyContentMissing}, Status={Status}";
     }

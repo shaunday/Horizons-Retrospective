@@ -1,0 +1,27 @@
+name: Dotnet Build & Test on Commit
+
+on:
+  push:
+    paths:
+      - "AssetsFlow.Server/**"
+      - "PriceAlerts.Server/**"
+      - "Common.Net.IdentityService/**"
+  workflow_dispatch:
+
+jobs:
+  Build-Test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project-path:
+          - ./AssetsFlow.Server/AssetsFlow.Web.API
+          - ./Common.Net.IdentityService/HsR.UserService.Host
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: .NET Build Composite
+        uses: ./.github/actions/reusable-build-dotnet
+        with:
+          project-path: ${{ matrix.project-path }}

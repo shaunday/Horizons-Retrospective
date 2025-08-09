@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HsR.Web.API.Controllers.Journal
 {
-    [Route("hsr-api/v{version:apiVersion}/journal/components")]
+    [Route("hsr-api/v{version:apiVersion}/journal/components/{componentId}")]
     [ApiVersion("1.0")]
     [ApiController]
     public class ContentUpdateController : JournalControllerBase
@@ -25,7 +25,7 @@ namespace HsR.Web.API.Controllers.Journal
         {
         }
 
-        [HttpPatch("{componentId}")]
+        [HttpPatch]
         public async Task<ActionResult<(DataElementModel newEntry, UpdatedStatesModel updatedStates)>>
                                                   UpdateDataComponent(int componentId, [FromBody] UpdateDataComponentRequest request)
         {
@@ -36,7 +36,7 @@ namespace HsR.Web.API.Controllers.Journal
             try
             {
                 (DataElement updatedComponent, UpdatedStatesCollation updatedStates) =
-                    await _journalAccess.DataElement.UpdateCellContentAsync(componentId, request.Content, request.Info);
+                    await _journalAccess.DataElement.UpdateCellContentAsync(componentId, request);
                 DataElementModel newEntry = _mapper.Map<DataElementModel>(updatedComponent);
                 UpdatedStatesModel updatedStatesModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
                 _cacheService.InvalidateAndReload(updatedComponent.UserId);
@@ -51,10 +51,6 @@ namespace HsR.Web.API.Controllers.Journal
             }
         }
 
-        public class UpdateDataComponentRequest
-        {
-            public string Content { get; set; } = "";
-            public string Info { get; set; } = "";
-        }
+       
     }    
 }

@@ -4,26 +4,30 @@ using HsR.Journal.Entities.TradeJournal;
 using HsR.Journal.Repository.Services.Base;
 using HsR.Journal.Services;
 using Microsoft.EntityFrameworkCore;
-using Serilog;
 
 namespace HsR.Journal.DataContext
 {
-    public class DataElementRepository(TradingJournalDataContext dataContext, IUserDataRepository userDataRepository) : JournalRepositoryBase(dataContext), IDataElementRepository
+    public class DataElementRepository(TradingJournalDataContext dataContext, IUserDataRepository userDataRepository) 
+                                                                    : JournalRepositoryBase(dataContext), IDataElementRepository
     {
         private readonly IUserDataRepository _userDataRepository = userDataRepository;
 
-        public async Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)> UpdateCellContentAsync(int componentId, string newContent, string changeNote)
+        public async Task<(DataElement updatedCell, UpdatedStatesCollation updatedStates)> 
+                                                        UpdateCellContentAsync(int componentId, UpdateDataComponentRequest request)
         {
             var cell = await _dataContext.Entries
                 .Include(e => e.History)
                 .FirstOrDefaultAsync(e => e.Id == componentId)
                 ?? throw new InvalidOperationException($"Entry with ID {componentId} not found.");
-            var userId = cell.UserId;
-            cell.SetFollowupContent(newContent, changeNote);
-            UpdatedStatesCollation updatedStates =  await HandleTradeStatusUpdates(cell);
+
+            cell.SetFollowupContent(request.Content, request.Info);
+
+            UpdatedStatesCollation updatedStates =  await HandleTradeStatusUpdates(cell, request.DenyActivation);
+
             if (cell.SectorRelevance)
             {
-                await _userDataRepository.SaveSectorAsync(userId, newContent);
+                var userId = cell.UserId;
+                await _userDataRepository.SaveSectorAsync(userId, request.Content);
                 var userData = await _userDataRepository.GetOrCreateUserDataAsync(userId);
                 updatedStates.SavedSectors = userData.SavedSectors;
             }
@@ -39,20 +43,24 @@ namespace HsR.Journal.DataContext
             }
         }
 
-        private async Task<UpdatedStatesCollation> HandleTradeStatusUpdates(DataElement cell)
+        private async Task<UpdatedStatesCollation> HandleTradeStatusUpdates(DataElement cell, bool ignoreActivation)
         {
             UpdatedStatesCollation updatedStates = new();
             await _dataContext.Entry(cell).Reference(c => c.TradeElementRef).LoadAsync();
 
             if (cell.TradeElementRef is InterimTradeElement interim && interim.IsAllRequiredFields())
             {
-                interim.Activate();
+                if (!ignoreActivation)
+                {
+                    interim.Activate();
+                    updatedStates.ActivationTimeStamp = interim.TimeStamp;
+                }
 
                 await LoadCompositeRefAsync(cell);
 
                 if (interim.TradeActionType == TradeActionType.Add)
                 {
-                    cell.CompositeRef?.Activate();
+                    cell.CompositeRef?.SetStatus(TradeStatus.Open);
                 }
 
                 if (cell.CompositeRef != null && cell.IsCostRelevant())
@@ -61,7 +69,6 @@ namespace HsR.Journal.DataContext
                 }
 
                 updatedStates.TradeInfo = cell.CompositeRef;
-                updatedStates.ActivationTimeStamp = interim.TimeStamp;
             }
 
             return updatedStates;

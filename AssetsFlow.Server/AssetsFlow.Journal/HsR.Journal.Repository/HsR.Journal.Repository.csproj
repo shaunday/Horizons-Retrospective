@@ -1,42 +1,35 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	<GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
-	<BaseOutputPath>..\bin</BaseOutputPath>
+    <GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
+    <BaseOutputPath>..\bin</BaseOutputPath>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+    <PackageReference Include="AutoMapper" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.1" />
-    <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
-    <PackageReference Include="serilog.sinks.console" Version="6.0.0" />
-    <PackageReference Include="serilog.sinks.file" Version="6.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
   </ItemGroup>
-
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common.Net\HsR.Common.AspNet\HsR.Common.AspNet.csproj" />
     <ProjectReference Include="..\..\..\Common.Net\HsR.Common.Db\HsR.Common.Db.csproj" />
     <ProjectReference Include="..\..\..\Common.Net\HsR.Common\HsR.Common.csproj" />
     <ProjectReference Include="..\HsR.Journal.Entities.Factory\HsR.Journal.Entities.Factory.csproj" />
     <ProjectReference Include="..\HsR.Journal.Entities\HsR.Journal.Entities.csproj" />
     <ProjectReference Include="..\HsR.Journal.Services\HsR.Journal.Services.csproj" />
   </ItemGroup>
-
 </Project>

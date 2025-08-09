@@ -1,5 +1,4 @@
 ﻿using Asp.Versioning;
-using HsR.Web.Services.Models.Journal;
 using AutoMapper;
 using HsR.Journal.DataContext;
 using HsR.Journal.Entities;
@@ -11,6 +10,7 @@ using Serilog;
 using HsR.UserService.Client.Interfaces;
 using HsR.UserService.Protos;
 using Microsoft.AspNetCore.Authorization;
+using AssetsFlowWeb.Services.Models.Journal;
 
 namespace HsR.Web.API.Controllers.Journal
 {

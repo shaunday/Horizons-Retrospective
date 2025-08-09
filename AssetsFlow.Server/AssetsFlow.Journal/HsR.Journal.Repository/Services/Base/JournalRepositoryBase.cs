@@ -31,7 +31,7 @@ namespace HsR.Journal.Repository.Services.Base
 
             if (!newSummary.IsInterim) //check if summary returned closure
             {
-                trade.Close();
+                trade.SetStatus(TradeStatus.Closed);
             }
 
             trade.Summary = newSummary;

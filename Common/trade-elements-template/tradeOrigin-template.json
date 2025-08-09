@@ -1,0 +1,55 @@
+{
+  "elementType": "Origin",
+  "elements": [
+    {
+      "title": "Ticker",
+      "componentType": "Header",
+      "isRelevantForLocalOverview": true,
+      "isRelevantForTradeOverview": true
+    },
+    {
+      "title": "Direction",
+      "componentType": "Header",
+      "restrictions": ["Long", "Short"],
+      "isRelevantForLocalOverview": true,
+      "isRelevantForTradeOverview": true
+    },
+    {
+      "title": "Thesis",
+      "componentType": "Context",
+      "isRelevantForLocalOverview": true,
+      "isRelevantForTradeOverview": true
+    },
+    {
+      "title": "Aligned TA",
+      "componentType": "EntryLogic"
+    },
+    {
+      "title": "Sector/FA",
+      "componentType": "EntryLogic"
+    },
+    {
+      "title": "Certainty",
+      "componentType": "Context",
+      "restrictions": ["Low", "Mid", "High"]
+    },
+    {
+      "title": "Contras",
+      "componentType": "EntryLogic"
+    },
+    {
+      "title": "Invalidation",
+      "componentType": "Risk",
+      "isRelevantForLocalOverview": true
+    },
+    {
+      "title": "Target",
+      "componentType": "ExitLogic",
+      "isRelevantForLocalOverview": true
+    },
+    {
+      "title": "Time Frame",
+      "componentType": "ExitLogic"
+    }
+  ]
+}
