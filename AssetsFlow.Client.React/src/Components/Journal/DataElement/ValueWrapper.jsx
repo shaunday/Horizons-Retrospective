@@ -45,6 +45,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
         onMouseDown={() => {
           preventCloseRef.current = true;
         }}
+        className="bg-amber-50 border border-blue-50 rounded-lg p-3 shadow-md"
       >
         <ValuePopover
           contentValue={contentValue}
