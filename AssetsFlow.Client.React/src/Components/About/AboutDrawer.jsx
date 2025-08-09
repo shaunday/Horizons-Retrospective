@@ -5,7 +5,6 @@ const AboutDrawer = ({ opened, onClose }) => {
     <Drawer
       opened={opened}
       onClose={onClose}
-      title="About this App"
       position="right"
       size="md"
       padding="md"
@@ -18,52 +17,52 @@ const AboutDrawer = ({ opened, onClose }) => {
       }}
     >
       <Stack gap="sm">
-        <Text>
-          This is an online trading journal that allows you to record trades
-          from an <b>idea stage</b> through building or reducing a position,
-          performing evaluations, and finally <b>closing</b> the trade.
+        <Text size="xl" weight={700} mb="md">
+          About this App
         </Text>
 
         <Text>
-          To add a new trade, click on <b>"Add a Trade"</b>. This creates a
-          Trade Composition with an initial <b>Idea</b>.
-        </Text>
-
-        <Text>
-          Once all fields in the Idea are filled, you can initiate an{" "}
-          <b>actual position</b>.
-        </Text>
-
-        <Text>
-          After an initial position is created, you can add <b>evaluations</b>{" "}
-          (your thoughts on the market or trade), <b>reduce</b> or <b>add to</b>{" "}
-          the position, and ultimately <b>terminate</b> it when closing the
+          This is an online trading journal that allows you to record trades from the idea stage
+          through building or reducing a position, performing evaluations, and finally closing the
           trade.
         </Text>
 
         <Divider my="sm" />
 
         <Text>
-          A Trade Component/Element becomes <b>active</b> once all essential
-          information is entered.
+          To add a new trade, click on <b>&quot;Add a Trade&quot;</b>. This creates a Trade
+          Composition with an initial idea.
+        </Text>
+
+        <Text>Once all fields in the idea are filled, you can initiate an actual position.</Text>
+
+        <Text>
+          After an initial position is created, you can <b>create</b> evaluations (your thoughts on
+          the market or trade), reduce or add to the position, and ultimately close all positions.
+        </Text>
+
+        <Divider my="lg" />
+
+        <Text>
+          A trade component or element becomes active once all essential information is entered.
         </Text>
 
         <Text>
-          Currently only allowing trade actions (expanding the trade) once all
-          elements are active.
+          Currently, trade actions (expanding the trade) are only allowed once all elements are
+          active.
         </Text>
 
         <Divider my="sm" />
 
         <Text>
-          Components are collapsed by default. Click on the component name to
-          expand it and view its details.
+          Components are collapsed by default. Click on the component name to expand it and view its
+          details.
         </Text>
 
         <Text>
-          Once a trade component (Idea, Evaluation, Position) is expanded, hover
-          your mouse at the bottom of the component to reveal the <b>Edit</b>{" "}
-          icon. Click it to open a modal for editing the component.
+          Once a trade component (idea, evaluation, position) is expanded, you can click on the
+          value to <b>edit</b> it. This opens a popover where you can change the value and add
+          change notes.
         </Text>
 
         <Divider my="sm" />
