@@ -4,7 +4,8 @@ prod: invalid date on version getter
 
 workflow to run lint, test
 
-cotent edit > disable tooltip, allow edit on 1/2 overview?
+cotent edit > disable tooltip, allow edit on 1/2 overview?.
+fix: content edit popup appears twice sometimes
 fix: close trade not working
 no need to have trades by tradeids cached twice. adjust
 
