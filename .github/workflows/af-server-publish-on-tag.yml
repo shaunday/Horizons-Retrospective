@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Run Dotnet Build & Publish Action
-        uses: ./.github/actions/dotnet-build-publish
+        uses: ./.github/actions/dotnet-publish-common
         with:
           project-path: ./AssetsFlow.Server/AssetsFlow.Web.API
           image-name: assetsflow-backend
