@@ -7,15 +7,14 @@ using HsR.UserService.Services;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Serilog;
 
-EnvLoader.LoadEnvFiles(
+var builder = WebApplication.CreateBuilder(args)
+    .ConfigureUserServiceHost();
+
+builder.LoadEnvFilesPerEnvironment(
 [
     Path.Combine(AppContext.BaseDirectory, ".env.UserService"),
     Path.Combine(AppContext.BaseDirectory, ".env.Global")
 ]);
-
-var builder = WebApplication.CreateBuilder(args)
-    //.ConfigureLogging() //using aspire's
-    .ConfigureUserServiceHost();
 
 builder.AddServiceDefaults();
 builder.Configuration

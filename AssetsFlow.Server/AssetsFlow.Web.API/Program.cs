@@ -1,5 +1,6 @@
 using AssetsFlowWeb.API.Configurations;
 using DotNetEnv;
+using HsR.Common.AspNet;
 using HsR.Infrastructure;
 using HsR.Journal.DataContext;
 using HsR.Journal.DataSeeder;
@@ -9,11 +10,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
 using Serilog;
 
-Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.Global"));
-Env.Load(Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow.Server"));
 
 var builder = WebApplication.CreateBuilder(args);
-    //.ConfigureLogging(); using aspire's 
+
+builder.LoadEnvFilesPerEnvironment(
+[
+    Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow.Server"),
+    Path.Combine(AppContext.BaseDirectory, ".env.Global")
+]);
 
 builder.AddServiceDefaults();
 builder.Configuration

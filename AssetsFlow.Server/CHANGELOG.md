@@ -1,3 +1,5 @@
+## [0.9.222-b] - 2025-08-09
+ - .Env fixes
 
 ## [0.9.221-b] - 2025-08-09
 - Map date stamps on composite dto, removed double entries on composite models

@@ -1,3 +1,4 @@
+using HsR.Common.AspNet;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
@@ -180,5 +181,13 @@ public static class Extensions
         }
 
         return app;
+    }
+
+    public static void LoadEnvFilesPerEnvironment<TBuilder>(this TBuilder builder, IEnumerable<string> envFilePaths) where TBuilder : IHostApplicationBuilder
+    {
+        if (builder.Environment.IsDevelopment())
+        {
+            EnvLoader.LoadEnvFiles(envFilePaths);
+        }
     }
 }
