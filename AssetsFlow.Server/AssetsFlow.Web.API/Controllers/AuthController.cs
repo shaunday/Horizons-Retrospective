@@ -277,73 +277,73 @@ public class AuthController : HsRControllerBase
     }
 
 
-    [HttpPost("refresh-token")]
-    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
-    {
-        try
-        {
-            var principal = _refreshTokenService.GetPrincipalFromExpiredToken(request.AccessToken);
-            if (principal == null)
-                return BadRequest(new { success = false, message = "Invalid access token" });
+    //[HttpPost("refresh-token")]
+    //public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
+    //{
+    //    try
+    //    {
+    //        var principal = _refreshTokenService.GetPrincipalFromExpiredToken(request.AccessToken);
+    //        if (principal == null)
+    //            return BadRequest(new { success = false, message = "Invalid access token" });
 
-            var userIdString = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (!Guid.TryParse(userIdString, out var userId))
-                return BadRequest(new { success = false, message = "Invalid user ID in token" });
+    //        var userIdString = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    //        if (!Guid.TryParse(userIdString, out var userId))
+    //            return BadRequest(new { success = false, message = "Invalid user ID in token" });
 
-            var isValidRefresh = await _refreshTokenService.ValidateRefreshTokenAsync(userId, request.RefreshToken);
-            if (!isValidRefresh)
-                return Unauthorized(new { success = false, message = "Invalid refresh token" });
+    //        var isValidRefresh = await _refreshTokenService.ValidateRefreshTokenAsync(userId, request.RefreshToken);
+    //        if (!isValidRefresh)
+    //            return Unauthorized(new { success = false, message = "Invalid refresh token" });
 
-            var userRoles = await _userServiceClient.GetUserRolesAsync(userIdString) ?? Array.Empty<string>();
+    //        var userRoles = await _userServiceClient.GetUserRolesAsync(userIdString) ?? Array.Empty<string>();
 
-            var newJwtToken = _jwtService.GenerateToken(userId, userRoles);
-            var newRefreshToken = _refreshTokenService.GenerateRefreshToken();
+    //        var newJwtToken = _jwtService.GenerateToken(userId, userRoles);
+    //        var newRefreshToken = _refreshTokenService.GenerateRefreshToken();
 
-            await _refreshTokenService.ReplaceRefreshTokenAsync(userId, request.RefreshToken, newRefreshToken);
+    //        await _refreshTokenService.ReplaceRefreshTokenAsync(userId, request.RefreshToken, newRefreshToken);
 
-            _logger.LogInformation("Refresh token used for user {UserId}", userId);
+    //        _logger.LogInformation("Refresh token used for user {UserId}", userId);
 
-            return Ok(new
-            {
-                success = true,
-                token = newJwtToken,
-                refreshToken = newRefreshToken
-            });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error refreshing token");
-            return StatusCode(500, new { success = false, message = "An error occurred refreshing token" });
-        }
-    }
+    //        return Ok(new
+    //        {
+    //            success = true,
+    //            token = newJwtToken,
+    //            refreshToken = newRefreshToken
+    //        });
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        _logger.LogError(ex, "Error refreshing token");
+    //        return StatusCode(500, new { success = false, message = "An error occurred refreshing token" });
+    //    }
+    //}
 
-    [HttpPost("revoke-refresh-token")]
-    public async Task<IActionResult> RevokeRefreshToken([FromBody] RevokeRefreshTokenRequest request)
-    {
-        try
-        {
-            if (!Guid.TryParse(request.UserId, out var userId))
-                return BadRequest(new { success = false, message = "Invalid user ID" });
+    //[HttpPost("revoke-refresh-token")]
+    //public async Task<IActionResult> RevokeRefreshToken([FromBody] RevokeRefreshTokenRequest request)
+    //{
+    //    try
+    //    {
+    //        if (!Guid.TryParse(request.UserId, out var userId))
+    //            return BadRequest(new { success = false, message = "Invalid user ID" });
 
-            await _refreshTokenService.RevokeRefreshTokenAsync(userId);
-            return Ok(new { success = true, message = "Refresh token revoked" });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error revoking refresh token");
-            return StatusCode(500, new { success = false, message = "An error occurred revoking token" });
-        }
-    }
+    //        await _refreshTokenService.RevokeRefreshTokenAsync(userId);
+    //        return Ok(new { success = true, message = "Refresh token revoked" });
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        _logger.LogError(ex, "Error revoking refresh token");
+    //        return StatusCode(500, new { success = false, message = "An error occurred revoking token" });
+    //    }
+    //}
 
 
-    public class RefreshTokenRequest
-    {
-        public string AccessToken { get; set; } = null!; // expired JWT token
-        public string RefreshToken { get; set; } = null!;
-    }
+    //public class RefreshTokenRequest
+    //{
+    //    public string AccessToken { get; set; } = null!; // expired JWT token
+    //    public string RefreshToken { get; set; } = null!;
+    //}
 
-    public class RevokeRefreshTokenRequest
-    {
-        public string UserId { get; set; } = null!;
-    }
+    //public class RevokeRefreshTokenRequest
+    //{
+    //    public string UserId { get; set; } = null!;
+    //}
 }
