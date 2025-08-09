@@ -27,4 +27,7 @@
         <PackageReference Include="Serilog.Exceptions" />
         <PackageReference Include="Serilog.Sinks.OpenTelemetry" />
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common.Net\HsR.Common.AspNet\HsR.Common.AspNet.csproj" />
+    </ItemGroup>
 </Project>
