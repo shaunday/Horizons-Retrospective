@@ -1,4 +1,4 @@
-name: UserService - Build & Publish on Version Tag
+name: HsR.UserService - Build & Publish on Version Tag
 
 on:
   push:
