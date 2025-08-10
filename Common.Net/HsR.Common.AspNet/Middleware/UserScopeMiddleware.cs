@@ -12,15 +12,19 @@ namespace HsR.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
+            
+            var userId = "unknown";
+            //var userName = "unknown"; //todo
+
             if (context.User.Identity?.IsAuthenticated == true)
             {
-                var userId = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "unknown";
-                var userName = context.User.Identity?.Name ?? "unknown";
-
+                userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "unknown";
+                //userName = context.User.Identity?.Name ?? "unknown";
+            
                 using (_logger.BeginScope(new Dictionary<string, object>
                 {
                     ["UserId"] = userId,
-                    //["UserName"] = userName //todo
+                    //["UserName"] = userName
                 }))
                 {
                     await _next(context);
@@ -28,12 +32,9 @@ namespace HsR.Middleware
             }
             else
             {
-                using (LogContext.PushProperty("UserId", "unknown"))
-                //using (LogContext.PushProperty("UserName", "unknown")) //todo
-                {
-                    await _next(context);
-                }
+                await _next(context);
             }
         }
+
     }
 }
