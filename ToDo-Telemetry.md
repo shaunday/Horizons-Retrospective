@@ -13,6 +13,7 @@ number of transactions sent, or other factors.
 
 ### option 2
 Run Prometheus on EC2 to collect metrics, store them, and visualize via Grafana; or AWS CloudWatch/X-Ray.
+Can also add Loki for logs -> Grafana
 
 
 ### option 3

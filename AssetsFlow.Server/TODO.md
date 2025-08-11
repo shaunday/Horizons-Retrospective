@@ -5,11 +5,11 @@
 
 - update readme
 - parse elements from json templates
-- production envs to GH secrets
+- production envs to GH secrets (?)
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
 - add logs to repo methods
 
-- error route doesnt work 
+- fix error route
 
 - add version to user api
 - fix user entity (remove stuff?), adjust login request to user/pass?

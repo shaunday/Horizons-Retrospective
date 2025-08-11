@@ -1,8 +1,11 @@
 {
   "profiles": {
     "HsR.UserService.Host": {
-      "commandName": "Project",
-      "launchBrowser": false
+        "commandName": "Project",
+        "launchBrowser": false,
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        }
     }
   }
 }
