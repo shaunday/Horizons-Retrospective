@@ -41,3 +41,4 @@
 ## Expansion:
 Suspence? RQ Suspence
 Socket.IO
+Full auto deploy ? Expand publish action to also auto deploy on ec2

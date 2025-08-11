@@ -13,17 +13,17 @@ namespace HsR.Journal.Infrastructure
         public static string GetConnectionStringByEnv(bool isDev = true)
         {
             Console.WriteLine("Current working dir: " + Environment.CurrentDirectory);
-            var supabasePassword = Environment.GetEnvironmentVariable(SupabasePassVar);
 
             if (isDev)
             {
-                string DevDbUser = "postgres";
-                return $"Host=localhost;Port=5432;Database=HsR_Journal_Database;Username={DevDbUser};Password={supabasePassword};Include Error Detail=true";
+                var pgDevPass = Environment.GetEnvironmentVariable("SUPA_DEV_PASS");
+                string pgDevUser = "postgres";
+                return $"Host=localhost;Port=5432;Database=HsR_Journal_Database;Username={pgDevUser};Password={pgDevPass};Include Error Detail=true";
             }
             else // Production
             {
                 var supabaseConnectionId = Environment.GetEnvironmentVariable(SupabaseIdVar);
-
+                var supabasePassword = Environment.GetEnvironmentVariable(SupabasePassVar);
 
                 if (string.IsNullOrWhiteSpace(supabasePassword))
                 {
