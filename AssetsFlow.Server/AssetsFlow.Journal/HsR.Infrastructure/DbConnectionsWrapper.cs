@@ -7,23 +7,21 @@ namespace HsR.Journal.Infrastructure
 {
     public static class DbConnectionsWrapper
     {
-        private const string DevDbUser = "postgres";
-        private const string DevDbPass= "meefi_"; //dev
-
-        private const string SupabasePassVar = "SUPABASE_DB_PASS";
         private const string SupabaseIdVar = "SUPABASE_DB_ID";
+        private const string SupabasePassVar = "SUPABASE_DB_PASS";
 
         public static string GetConnectionStringByEnv(bool isDev = true)
         {
             Console.WriteLine("Current working dir: " + Environment.CurrentDirectory);
+            var supabasePassword = Environment.GetEnvironmentVariable(SupabasePassVar);
 
             if (isDev)
             {
-                return $"Host=localhost;Port=5432;Database=HsR_Journal_Database;Username={DevDbUser};Password={DevDbPass};Include Error Detail=true";
+                string DevDbUser = "postgres";
+                return $"Host=localhost;Port=5432;Database=HsR_Journal_Database;Username={DevDbUser};Password={supabasePassword};Include Error Detail=true";
             }
             else // Production
             {
-                var supabasePassword = Environment.GetEnvironmentVariable(SupabasePassVar);
                 var supabaseConnectionId = Environment.GetEnvironmentVariable(SupabaseIdVar);
 
 

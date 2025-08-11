@@ -9,7 +9,6 @@
 - add logs to repo methods
 
 - fix error route
-- move production secrets to gh secrets
 
 - add version to user api
 - fix user entity (remove stuff?), adjust login request to user/pass?

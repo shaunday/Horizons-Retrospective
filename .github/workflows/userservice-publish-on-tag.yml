@@ -11,6 +11,9 @@ on:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    env: 
+      SUPABASE_USERDB_ID: ${{ secrets.SUPABASE_USERDB_ID }}
+      SUPABASE_USERDB_PASS: ${{ secrets.SUPABASE_USERDB_PASS }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4

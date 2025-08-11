@@ -1,3 +1,6 @@
+## [0.9.222-b] - 2025-08-11
+- moved production secrets from .env to gh secrets
+
 ## [0.9.222-b] - 2025-08-09
  - .Env fixes
 
