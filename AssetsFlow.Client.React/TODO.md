@@ -1,7 +1,5 @@
 ## 1
 
-prod: invalid date on version getter
-
 workflow to run lint, test
 
 cotent edit > disable tooltip, allow edit on 1/2 overview?.

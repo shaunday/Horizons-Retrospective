@@ -20,8 +20,6 @@ namespace AssetsFlowWeb.API.Controllers
             string? buildTimeStamp = Environment.GetEnvironmentVariable("BUILD_TIMESTAMP");
             string? commitHash = Environment.GetEnvironmentVariable("COMMIT_SHA");
 
-            _logger.LogError("Build time stamp = " + buildTimeStamp);
-
             if (!string.IsNullOrWhiteSpace(commitHash) && commitHash.Length > 7)
             {
                 commitHash = commitHash[..7];

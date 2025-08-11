@@ -88,6 +88,7 @@ runs:
         build-args: |
           VERSION=${{ env.VERSION }}
           COMMIT_SHA=${{ github.sha }}
+          BUILD_TIMESTAMP=${{ env.TIMESTAMP }}
         tags: |
           ghcr.io/shaunday/horizons-retrospective/${{ inputs.image-name }}:${{ env.VERSION }}
           ghcr.io/shaunday/horizons-retrospective/${{ inputs.image-name }}:latest
