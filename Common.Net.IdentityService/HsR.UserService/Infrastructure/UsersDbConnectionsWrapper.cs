@@ -4,8 +4,8 @@ namespace HsR.UserService.Infrastructure
 {
     public static class UsersDbConnectionsWrapper
     {
-        private const string SupabasePassVar = "SUPABASE_DB_ID";
-        private const string SupabaseIdVar = "SUPABASE_DB_PASS";
+        private const string SupabaseIdVar = "SUPABASE_DB_ID";
+        private const string SupabasePassVar = "SUPABASE_DB_PASS";
 
         public static string GetConnectionStringByEnv(bool isDev = true)
         {
