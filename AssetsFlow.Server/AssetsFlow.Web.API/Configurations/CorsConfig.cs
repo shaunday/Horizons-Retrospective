@@ -20,14 +20,10 @@ namespace AssetsFlowWeb.API.Configurations
             }
             else
             {
-                corsOrigin = Environment.GetEnvironmentVariable("FRONTEND_URL");
+                corsOrigin = "https://hsr.mywebthings.xyz";
                 if (!string.IsNullOrEmpty(corsOrigin))
                 {
                     Log.Information("CORS policy set for frontend URL: {FrontendUrl}", corsOrigin);
-                }
-                else
-                {
-                    Log.Warning("FRONTEND_URL environment variable is not set. CORS policy will not be applied for production.");
                 }
             }
             if (!string.IsNullOrEmpty(corsOrigin))
