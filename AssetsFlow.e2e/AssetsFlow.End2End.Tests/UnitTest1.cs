@@ -10,7 +10,7 @@
             await Page.GotoAsync("https://playwright.dev");
 
             // Expect a title "to contain" a substring.
-            await Expect(Page).ToHaveTitleAsync(new Regex("Playwright")); //dfgdf
+            await Expect(Page).ToHaveTitleAsync(new Regex("Playwright")); 
 
             // create a locator
             var getStarted = Page.Locator("text=Get Started");
