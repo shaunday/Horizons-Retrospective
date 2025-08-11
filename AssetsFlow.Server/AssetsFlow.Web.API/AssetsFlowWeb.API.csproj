@@ -29,9 +29,6 @@
     <ProjectReference Include="..\HsR.UserService.Client\HsR.UserService.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Update=".env.AssetsFlow.Server">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
       <None Update="appsettings.json">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
@@ -42,7 +39,4 @@
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
   </ItemGroup>
-  <Target Name="CopySharedEnvFile" AfterTargets="Build" Condition="'$(CopyEnvFile)' == 'true'">
-    <Copy SourceFiles="..\..\.env.Global" DestinationFolder="$(OutputPath)" Condition="Exists('$(GlobalEnvFile)')" />
-  </Target>
 </Project>

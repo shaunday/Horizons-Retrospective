@@ -5,14 +5,15 @@
 
 - update readme
 - parse elements from json templates
-- production envs to GH secrets (?)
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
 - add logs to repo methods
 
 - fix error route
+- move production secrets to gh secrets
 
 - add version to user api
 - fix user entity (remove stuff?), adjust login request to user/pass?
+- GetUserIdFromToken/ValidateToken are not used.. 
 
 - rethink isContentMissing - either way dont need to reload all tradeComposite to get it, you always got the old one (in the fe at least)
 - closed trade logic : deny edits/ re-open trade to allow edit?

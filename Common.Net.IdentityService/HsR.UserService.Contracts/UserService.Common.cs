@@ -11,8 +11,7 @@
             }
             else
             {
-                var userServicePort = Environment.GetEnvironmentVariable("USER_SERVICE_PORT") ?? "7001";
-                baseUrl = $"https://localhost:{userServicePort}";
+                baseUrl = $"https://localhost:7001";
             }
 
             return baseUrl;

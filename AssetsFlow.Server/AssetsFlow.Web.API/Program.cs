@@ -13,11 +13,7 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.LoadEnvFilesPerEnvironment(
-[
-    Path.Combine(AppContext.BaseDirectory, ".env.AssetsFlow.Server"),
-    Path.Combine(AppContext.BaseDirectory, ".env.Global")
-]);
+builder.LoadEnvFilesPerEnvironment([ ".env.AssetsFlow.Server"]);
 
 builder.AddServiceDefaults();
 builder.Configuration

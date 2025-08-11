@@ -7,21 +7,17 @@ namespace HsR.Common.AspNet
 {
     public static class EnvLoader
     {
-        /// <summary>
-        /// Loads the specified .env files after verifying they exist.
-        /// Throws FileNotFoundException if any file is missing.
-        /// </summary>
-        /// <param name="envFilePaths">List of full paths to .env files.</param>
-        public static void LoadEnvFiles(IEnumerable<string> envFilePaths)
+        public static void LoadEnvFiles(IEnumerable<string> envFiles)
         {
-            foreach (var path in envFilePaths)
+            foreach (var FileName in envFiles)
             {
-                if (!File.Exists(path))
+                string tFilePath = Path.Combine("E:\\documents\\git\\HsR-Configs", FileName); //dev files
+                if (!File.Exists(tFilePath))
                 {
-                    throw new FileNotFoundException($"Missing .env file: {path}");
+                    throw new FileNotFoundException($"Missing .env file: {tFilePath}");
                 }
 
-                Env.Load(path);
+                Env.Load(tFilePath);
             }
         }
     }
