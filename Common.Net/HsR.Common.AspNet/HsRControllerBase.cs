@@ -37,5 +37,8 @@ namespace HsR.Web.API.Controllers
     }
 
     [ServiceFilter(typeof(CustomExceptionFilterAttribute))]
-    public class HsRControllerBase : ControllerBase { }
+    public class HsRControllerBase(ILogger<HsRControllerBase> logger) : ControllerBase 
+    {
+        protected readonly ILogger<HsRControllerBase> _logger = logger;
+    }
 }

@@ -16,7 +16,7 @@ namespace AssetsFlowWeb.API.Controllers
     {
         private readonly DatabaseSeeder _seeder;
 
-        public AdminOperationsController(DatabaseSeeder seeder)
+        public AdminOperationsController(DatabaseSeeder seeder, ILogger<HealthController> logger) : base(logger)
         {
             _seeder = seeder;
         }

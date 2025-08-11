@@ -18,18 +18,16 @@ public class AuthController : HsRControllerBase
     private readonly IUserServiceClient _userServiceClient;
     private readonly IJwtService _jwtService;
     private readonly IRefreshTokenService _refreshTokenService;
-    private readonly ILogger<AuthController> _logger;
 
     public AuthController(
         IUserServiceClient userServiceClient,
         IJwtService jwtService,
         IRefreshTokenService refreshTokenService,
-        ILogger<AuthController> logger)
+        ILogger<AuthController> logger) : base(logger)
     {
         _userServiceClient = userServiceClient;
         _jwtService = jwtService;
         _refreshTokenService = refreshTokenService;
-        _logger = logger;
     }
 
     [HttpPost("login")]

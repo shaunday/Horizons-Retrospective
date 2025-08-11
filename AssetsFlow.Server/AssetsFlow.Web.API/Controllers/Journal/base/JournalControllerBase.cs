@@ -17,7 +17,6 @@ namespace HsR.Web.API.Controllers.Journal
         private protected readonly string NEW_STATES_WRAPPER = "updatedStates";
 
         private protected readonly IJournalRepositoryWrapper _journalAccess;
-        private protected readonly ILogger<JournalControllerBase> _logger;
         private protected readonly IMapper _mapper;
         private protected readonly ITradesCacheService _cacheService;
 
@@ -25,10 +24,9 @@ namespace HsR.Web.API.Controllers.Journal
             IJournalRepositoryWrapper journalAccess, 
             ILogger<JournalControllerBase> logger, 
             IMapper mapper,
-            ITradesCacheService cacheService)
+            ITradesCacheService cacheService) : base(logger) 
         {
             _journalAccess = journalAccess ?? throw new ArgumentNullException(nameof(journalAccess));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
         }

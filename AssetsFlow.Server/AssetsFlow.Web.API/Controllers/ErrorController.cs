@@ -8,12 +8,7 @@ namespace AssetsFlowWeb.API.Controllers
     [ApiController]
     public class ErrorController : HsRControllerBase
     {
-        private readonly ILogger<ErrorController> _logger;
-
-        public ErrorController(ILogger<ErrorController> logger)
-        {
-            _logger = logger;
-        }
+        public ErrorController(ILogger<ErrorController> logger) :base(logger) { }
 
         [Route("hsr-api/error")]
         public IActionResult HandleError()

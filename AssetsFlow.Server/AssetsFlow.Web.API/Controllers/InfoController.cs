@@ -9,7 +9,7 @@ namespace AssetsFlowWeb.API.Controllers
     [ApiVersion("1.0")]
     [ApiController]
     [ResponseCache(Duration = 1800, Location = ResponseCacheLocation.Client)]
-    public class InfoController(IWebHostEnvironment env) : HsRControllerBase
+    public class InfoController(IWebHostEnvironment env, ILogger<HealthController> logger) : HsRControllerBase(logger)
     {
         private readonly IWebHostEnvironment _env = env;
 
@@ -19,6 +19,8 @@ namespace AssetsFlowWeb.API.Controllers
             string? appVersion = Environment.GetEnvironmentVariable("APP_VERSION");
             string? buildTimeStamp = Environment.GetEnvironmentVariable("BUILD_TIMESTAMP");
             string? commitHash = Environment.GetEnvironmentVariable("COMMIT_SHA");
+
+            _logger.LogError("Build time stamp = " + buildTimeStamp);
 
             if (!string.IsNullOrWhiteSpace(commitHash) && commitHash.Length > 7)
             {

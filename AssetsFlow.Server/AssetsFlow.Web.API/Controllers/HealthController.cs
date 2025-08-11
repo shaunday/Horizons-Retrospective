@@ -9,10 +9,9 @@ namespace AssetsFlowWeb.API.Controllers
     [Route("hsr-api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class HealthController(TradingJournalDataContext context, ILogger<HealthController> logger) : HsRControllerBase
+    public class HealthController(TradingJournalDataContext context, ILogger<HealthController> logger) : HsRControllerBase(logger)
     {
         private readonly TradingJournalDataContext _context = context;
-        private readonly ILogger<HealthController> _logger = logger;
 
         [HttpGet("ping")]
         public async Task<IActionResult> Ping()
