@@ -3,7 +3,7 @@ name: Build & Test Javascript projects
 on:
   push:
     paths:
-      - "AssetsFlow.Service.ChatWiz/**"
+      - "AssetsFlow.Server.ChatWiz/**"
       - "AssetsFlow.Client.React/**"
   workflow_dispatch:
 
@@ -21,7 +21,7 @@ jobs:
         id: set-matrix
         run: |
           KNOWN_PATHS=(
-            "AssetsFlow.Service.ChatWiz"
+            "AssetsFlow.Server.ChatWiz"
             "AssetsFlow.Client.React"
           )
 

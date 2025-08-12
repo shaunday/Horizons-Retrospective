@@ -10,7 +10,7 @@ no need to have trades by tradeids cached twice. adjust
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox + autofill
 from limor: title should be styled diff than the content, text aligned to the left
 add: opened/closedat/IdeaDate (just to overview?)
-add: data attributes for testing
+add: data attributes/alt/role for testing
 
 ## 2.
 
