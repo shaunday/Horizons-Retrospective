@@ -2,8 +2,8 @@
 
 workflow to run lint, test
 
-fix: content edit popup appears twice sometimes
-fix: close trade not working
+fix: content edit popup appears twice sometimes- jotai
+fix: close trade not refreshing
 no need to have trades by tradeids cached twice. adjust
 
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox + autofill

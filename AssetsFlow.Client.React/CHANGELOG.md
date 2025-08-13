@@ -4,6 +4,7 @@
 
 fix: cotent edit popup open> disable tooltip
 allow edit on 1/2 overview
+fix: close trade not working
 
 ### Fixed
 

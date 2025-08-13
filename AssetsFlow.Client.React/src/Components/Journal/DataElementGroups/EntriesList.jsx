@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import DataElement from "../DataElement/DataElement";
 
 function EntriesList({ entries, overviewType }) {
@@ -12,5 +13,9 @@ function EntriesList({ entries, overviewType }) {
     </ul>
   );
 }
+EntriesList.propTypes = {
+  entries: PropTypes.arrayOf(PropTypes.object).isRequired,
+  overviewType: PropTypes.string,
+};
 
 export default React.memo(EntriesList);
