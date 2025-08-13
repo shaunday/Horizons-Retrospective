@@ -27,11 +27,10 @@ jobs:
 
           CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
           UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo "")
-
-          if [ -n "$UPSTREAM" ]; then
-            BASE_BRANCH=$UPSTREAM
+          if git show-ref --verify --quiet "refs/remotes/${UPSTREAM}"; then
+             BASE_BRANCH=$UPSTREAM
           else
-            BASE_BRANCH="origin/main"
+             BASE_BRANCH="origin/main"
           fi
 
           echo "Current branch: $CURRENT_BRANCH"
