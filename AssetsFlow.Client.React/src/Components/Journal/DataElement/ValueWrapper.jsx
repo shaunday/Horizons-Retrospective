@@ -37,6 +37,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
         <ValueDisplay
           contentValue={contentValue}
           isOverview={isOverview}
+          disallowTooltip={popoverOpened}
           onClick={() => !isOverview && setPopoverOpened(true)}
         />
       </Popover.Target>

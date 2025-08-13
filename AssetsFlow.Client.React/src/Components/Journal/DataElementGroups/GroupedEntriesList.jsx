@@ -1,8 +1,8 @@
-import { useMemo } from 'react';
-import { Box, ThemeIcon } from '@mantine/core';
-import { getGroupedEntries } from './groupedEntries';
-import { getComponentTypeIcon } from './componentTypeIcons';
-import EntriesList from './EntriesList';
+import React, { useMemo } from "react";
+import { Box, ThemeIcon } from "@mantine/core";
+import { getGroupedEntries } from "./groupedEntries";
+import { getComponentTypeIcon } from "./componentTypeIcons";
+import EntriesList from "./EntriesList";
 import * as Constants from "@constants/journalConstants";
 
 function GroupedEntriesList({ entries }) {
@@ -27,7 +27,7 @@ function GroupedEntriesList({ entries }) {
             >
               <IconComponent size={18} />
             </ThemeIcon>
-            <EntriesList entries={entries} overviewType={Constants.OverviewType.NONE}/>
+            <EntriesList entries={entries} overviewType={Constants.OverviewType.NONE} />
           </Box>
         );
       })}
@@ -35,4 +35,4 @@ function GroupedEntriesList({ entries }) {
   );
 }
 
-export default GroupedEntriesList;
+export default React.memo(GroupedEntriesList);

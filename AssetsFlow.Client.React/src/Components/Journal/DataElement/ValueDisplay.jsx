@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { Tooltip, Text } from "@mantine/core";
 
 const ValueDisplay = forwardRef(function ValueDisplay(
-  { contentValue, isOverview, onClick },
+  { contentValue, isOverview, onClick, disallowTooltip = false },
   ref
 ) {
   return (
@@ -14,12 +14,12 @@ const ValueDisplay = forwardRef(function ValueDisplay(
     >
       <Tooltip
         label={contentValue}
-        disabled={contentValue.length < 20}
+        disabled={contentValue.length < 20 || disallowTooltip}
         withinPortal
         position="bottom"
       >
         <Text className="max-w-full whitespace-nowrap overflow-hidden text-ellipsis">
-         {contentValue || <span className="opacity-0">-</span>}
+          {contentValue || <span className="opacity-0">-</span>}
         </Text>
       </Tooltip>
     </div>

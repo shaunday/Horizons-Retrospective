@@ -1,6 +1,9 @@
 # Changelog
 
-## [0.9.121-c] - 2025-08-09
+## [0.9.122-c] - 2025-08-...
+
+fix: cotent edit popup open> disable tooltip
+allow edit on 1/2 overview
 
 ### Fixed
 
