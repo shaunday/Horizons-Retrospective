@@ -3,6 +3,7 @@ import * as Constants from "@constants/journalConstants";
 import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
 import ActionButtons from "./ActionButtons";
 import TradeClosingModal from "./TradeClosingModal";
+import PropTypes from "prop-types";
 import { useTradeActionMutation } from "@hooks/Journal/Composite/useTradeActionMutation";
 
 function CompositeControls({ tradeComposite }) {
@@ -18,7 +19,10 @@ function CompositeControls({ tradeComposite }) {
   };
 
   const handleCloseTrade = (closingPrice) => {
-    tradeActionMutation.mutate({ action: Constants.TradeActions.CLOSE, additionalParam: closingPrice });
+    tradeActionMutation.mutate({
+      action: Constants.TradeActions.CLOSE,
+      additionalParam: closingPrice,
+    });
     setIsModalOpen(false);
   };
 
@@ -29,7 +33,7 @@ function CompositeControls({ tradeComposite }) {
         disallowInteractions={tradeComposite?.[Constants.HasMissingContent]}
         handleActionClick={handleAction}
       />
-      
+
       <ProcessingAndSuccessMessage status={processingStatus} />
 
       <TradeClosingModal
@@ -40,5 +44,9 @@ function CompositeControls({ tradeComposite }) {
     </div>
   );
 }
+
+CompositeControls.propTypes = {
+  tradeComposite: PropTypes.object.isRequired,
+};
 
 export default React.memo(CompositeControls);

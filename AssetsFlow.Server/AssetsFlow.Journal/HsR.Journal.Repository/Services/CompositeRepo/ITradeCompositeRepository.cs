@@ -10,7 +10,7 @@ namespace HsR.Journal.Repository.Services.CompositeRepo
 {
     public interface ITradeCompositeRepository
     {
-        Task<TradeComposite> CloseTradeAsync(int tradeId, string closingPrice);
+        Task<(TradeComposite, InterimTradeElement?)> CloseTradeAsync(int tradeId, string closingPrice);
 
         Task RefreshSaveSummaryAsync(TradeComposite trade);
     }

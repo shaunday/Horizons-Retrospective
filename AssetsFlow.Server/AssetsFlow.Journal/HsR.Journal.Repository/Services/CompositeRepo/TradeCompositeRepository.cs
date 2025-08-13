@@ -14,7 +14,7 @@ namespace HsR.Journal.Repository.Services.CompositeRepo
 {
     public class TradeCompositeRepository(TradingJournalDataContext dataContext) : JournalRepositoryBase(dataContext), ITradeCompositeRepository
     {
-        public async Task<TradeComposite> CloseTradeAsync(int tradeId, string closingPrice)
+        public async Task<(TradeComposite, InterimTradeElement?)> CloseTradeAsync(int tradeId, string closingPrice)
         {
             var trade = await GetTradeCompositeAsync(tradeId);
 
@@ -26,11 +26,11 @@ namespace HsR.Journal.Repository.Services.CompositeRepo
             {
                 throw new InvalidOperationException("Trade / summary is missing.");
             }
-            
-            TradeCompositeOperations.CloseTrade(trade, closingPrice);
+
+            InterimTradeElement? closeTradeData = TradeCompositeOperations.CloseTrade(trade, closingPrice);
 
             await _dataContext.SaveChangesAsync();
-            return trade;
+            return (trade, closeTradeData);
         }
 
         public async Task RefreshSaveSummaryAsync(TradeComposite trade)

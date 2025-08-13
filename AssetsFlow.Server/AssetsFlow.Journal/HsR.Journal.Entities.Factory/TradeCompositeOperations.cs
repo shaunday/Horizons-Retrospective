@@ -11,8 +11,15 @@ namespace HsR.Journal.Entities.Factory
 {
     public class TradeCompositeOperations
     {
-        public static TradeComposite CloseTrade(TradeComposite trade, string closingPrice)
+        public static InterimTradeElement? CloseTrade(TradeComposite trade, string closingPrice)
         {
+            var analytics = Analytics.GetTradingCosts(trade);
+            TradeAnalyticsSummary analyticsSummary = new(analytics);
+            if (analyticsSummary.NetAmount == 0)
+            {
+                return null;
+            }
+
             // Create a TradeElement for ReducePosition
             InterimTradeElement? reductionEle = TradeElementsFactory.GetNewElement(trade, TradeActionType.Reduce) as InterimTradeElement;
 
@@ -38,9 +45,7 @@ namespace HsR.Journal.Entities.Factory
 
             if (double.TryParse(closingPrice, out double closingPriceValue))
             {
-                var analytics = Analytics.GetTradingCosts(trade);
-                double netAmountInPosition = analytics.addPositions.TotalAmount - analytics.reducePositions.TotalAmount;
-                double costToClose = closingPriceValue * netAmountInPosition;
+                double costToClose = closingPriceValue * analyticsSummary.NetAmount;
                 costEntry.ContentWrapper = new ContentRecord(costToClose.ToF2String());
                 trade.TradeElements.Add(reductionEle);
 
@@ -52,7 +57,7 @@ namespace HsR.Journal.Entities.Factory
                 throw new FormatException("Could not parse closing price");
             }
 
-            return trade;
+            return reductionEle;
         }
     }
 }
