@@ -19,8 +19,6 @@ RQ isloading/error vs statusnots.. vs mantines notifications
 add: filter (status first, date first, BY STATUS), adjust data call api
 revert trades order? last added first?
 
-ThemeIcon variant="light" color="indigo.4"> + move the icon into the paper - on elementbadge ?
-
 add: ignoreActivation flag to content edit (requests "DenyActivation")
 add: Once an element is active, can edit date via popup (pick date/now)
 add: trade command bar - delete trade action, collapse all trades
