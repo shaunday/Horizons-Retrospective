@@ -10,8 +10,21 @@ function TradeClosingModal({ opened, onClose, onSubmit }) {
       closePrice: "",
     },
     validate: {
-      closePrice: (val) =>
-        String(val || "").trim() === "" ? "Closing Price cannot be empty" : null,
+      closePrice: (val) => {
+        if (val === null || val === undefined || String(val).trim() === "") {
+          return "Closing Price cannot be empty";
+        }
+        if (isNaN(val) || !isFinite(val)) {
+          return "Closing Price must be a valid number";
+        }
+        if (Number(val) === 0) {
+          return "Closing Price cannot be zero";
+        }
+        if (Number(val) <= 0) {
+          return "Closing Price must be greater than zero";
+        }
+        return null;
+      },
     },
   });
 
