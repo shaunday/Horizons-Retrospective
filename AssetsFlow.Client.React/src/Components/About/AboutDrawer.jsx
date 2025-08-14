@@ -1,4 +1,4 @@
-import { Drawer, Text, Stack, Divider } from "@mantine/core";
+import { Drawer, Text, Stack, Divider, Image } from "@mantine/core";
 
 const AboutDrawer = ({ opened, onClose }) => {
   return (
@@ -41,7 +41,15 @@ const AboutDrawer = ({ opened, onClose }) => {
           the market or trade), reduce or add to the position, and ultimately close all positions.
         </Text>
 
-        <Divider my="lg" />
+        <Image
+          src="/tradeActionsImg.png"
+          alt="Trade Actions Illustration"
+          radius="md"
+          fit="contain"
+          className="max-h-20 mt-2"
+        />
+
+        <Divider my="sm" />
 
         <Text>
           A trade component or element becomes active once all essential information is entered.
