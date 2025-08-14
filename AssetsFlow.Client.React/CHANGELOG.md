@@ -5,7 +5,8 @@
 fix: cotent edit popup open> disable tooltip
 allow edit on 1/2 overview
 fix: close trade not working
-fix: close trade not refreshing - parse new-reduce value
+fix: close trade not refreshing - parse new- reduce value
+add: close trade input validation
 
 ### Fixed
 

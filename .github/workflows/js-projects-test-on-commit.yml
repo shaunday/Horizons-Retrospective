@@ -25,13 +25,17 @@ jobs:
             "AssetsFlow.Client.React"
           )
 
-          CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-          UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo "")
-          if git show-ref --verify --quiet "refs/remotes/${UPSTREAM}"; then
-             BASE_BRANCH=$UPSTREAM
-          else
-             BASE_BRANCH="origin/main"
-          fi
+        CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+        # Try to get upstream branch
+        UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || true)
+
+        # If no upstream or invalid, fall back
+        if [ -n "$UPSTREAM" ] && git show-ref --verify --quiet "refs/remotes/${UPSTREAM}"; then
+          BASE_BRANCH="$UPSTREAM"
+        else
+          BASE_BRANCH="origin/main"
+        fi
 
           echo "Current branch: $CURRENT_BRANCH"
           echo "Using base branch: $BASE_BRANCH"
