@@ -39,12 +39,7 @@ namespace AssetsFlowWeb.API.Configurations
                     }
                 });
             }
-            else
-            {
-                app.UseExceptionHandler("/hsr-api/error");
-            }
 
-            // Enable routing for the application.
             app.UseRouting();
 
             // ✅ Apply CORS after routing, before endpoints
@@ -55,7 +50,6 @@ namespace AssetsFlowWeb.API.Configurations
             app.UseAuthorization();
             app.UseMiddleware<UserScopeMiddleware>();
 
-            // Map controllers for request handling.
             app.MapControllers();
         }
     }

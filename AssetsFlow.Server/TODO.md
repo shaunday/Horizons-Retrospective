@@ -8,8 +8,6 @@
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
 - add logs to repo methods
 
-- fix error route
-
 - add version to user api
 - fix user entity (remove stuff?), adjust login request to user/pass?
 - GetUserIdFromToken/ValidateToken are not used.. 
@@ -20,8 +18,7 @@
 - filtering/sortby/search by
 
 ## testing
-- API tests (seeder?)
-- expand tests/integration tests
+- API tests (seeder?) + expand tests/integration tests
 
 ## dashboard + price alerts
 - Indicator alerts, upcoming reports, trend watch
