@@ -7,8 +7,6 @@ export function useFetchAndCacheTrades({ enabled = true } = {}) {
 
   const getAndCacheTrades = async () => {
     const fetchedTrades = await getAllTrades();
-    const tradeIds = fetchedTrades.map((trade) => trade.id);
-    queryClient.setQueryData(tradeKeysFactory.getKeyForAllTradesByIds(), tradeIds);
     fetchedTrades.forEach((trade) => {
       queryClient.setQueryData(tradeKeysFactory.getTradeAndIdArrayKey(trade.id), trade);
     });
@@ -29,10 +27,10 @@ export function useFetchAndCacheTrades({ enabled = true } = {}) {
     });
   };
 
-  return { 
-    isLoading: tradesQuery.isLoading, 
-    isError: tradesQuery.isError, 
-    trades: tradesQuery.data, 
-    prefetchTrades 
+  return {
+    isLoading: tradesQuery.isLoading,
+    isError: tradesQuery.isError,
+    trades: tradesQuery.data,
+    prefetchTrades,
   };
 }

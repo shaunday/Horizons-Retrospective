@@ -14,7 +14,6 @@ export function useReseedDemoUser() {
     try {
       await reseedDemoUserAPI();
       queryClient.invalidateQueries({ queryKey: tradeKeysFactory.getKeyForAllTrades() });
-      queryClient.invalidateQueries({ queryKey: tradeKeysFactory.getKeyForAllTradesByIds() });
       notifications.show({
         title: "Success",
         message: "Demo user and trades reseeded!",

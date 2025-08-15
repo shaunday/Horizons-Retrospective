@@ -12,7 +12,6 @@ fix: mantines notifications
 
 ## 2.
 
-fix: no need to have trades by tradeids cached twice.
 workflow to run lint, test
 
 RQ isloading/error vs statusnots.. vs mantines notifications
