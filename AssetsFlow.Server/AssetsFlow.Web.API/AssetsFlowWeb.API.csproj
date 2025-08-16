@@ -21,7 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Common.Net\HsR.Common.AspNet\HsR.Common.AspNet.csproj" />
     <ProjectReference Include="..\..\AssetsFlow.Server.Aspire\HsR.Server.ServiceDefaults\AssetsFlow-Aspire.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\AssetsFlow.Journal.All\HsR.Infrastructure\HsR.Journal.Infrastructure.csproj" />
+    <ProjectReference Include="..\AssetsFlow.Journal.All\HsR.Journal.Infrastructure\HsR.Journal.Infrastructure.csproj" />
     <ProjectReference Include="..\AssetsFlow.Journal.All\HsR.Journal.Repository\HsR.Journal.Repository.csproj" />
     <ProjectReference Include="..\AssetsFlow.Journal.All\HsR.Journal.Seeder\HsR.Journal.Seeder.csproj" />
     <ProjectReference Include="..\AssetsFlow.Journal.All\HsR.Journal.Services\HsR.Journal.Services.csproj" />

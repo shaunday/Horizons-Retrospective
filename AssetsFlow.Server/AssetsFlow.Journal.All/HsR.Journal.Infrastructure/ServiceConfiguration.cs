@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 using System;
 
-namespace HsR.Infrastructure
+namespace HsR.Journal.Infrastructure
 {
     public static class ServiceConfiguration
     {
