@@ -1,5 +1,6 @@
 ## 1
 
+fix: add trade doesnt refresh
 fix: content edit popup appears twice sometimes- jotai
 
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox + autofill

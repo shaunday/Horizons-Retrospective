@@ -1,4 +1,7 @@
-﻿using HsR.Journal.Entities.TradeJournal;
+﻿using HsR.Common.Extenders;
+using HsR.Journal.Entities.Factory.Models;
+using HsR.Journal.Entities.Factory.Services;
+using HsR.Journal.Entities.TradeJournal;
 using HsR.Journal.TradeAnalytics;
 
 namespace HsR.Journal.Entities.Factory
@@ -8,44 +11,49 @@ namespace HsR.Journal.Entities.Factory
         #region Origin
         private static List<DataElement> GetOriginEntries(InterimTradeElement elementRef)
         {
-            return CreateEntries(GetTradeOriginObjects(), elementRef);
+            var template = TradeElementTemplateLoader.GetTemplate(TradeActionType.Origin);
+            return CreateEntries(CreateDataElementsFromTemplate(template), elementRef);
         }
         #endregion
 
         #region Interim elements
         private static List<DataElement> GetAddPositionEntries(InterimTradeElement elementRef)
         {
-            return CreateEntries(GetAddToPositionObjects(), elementRef);
+            var template = TradeElementTemplateLoader.GetTemplate(TradeActionType.Add);
+            return CreateEntries(CreateDataElementsFromTemplate(template), elementRef);
         }
 
         private static List<DataElement> GetEvalutationEntries(InterimTradeElement elementRef)
         {
-            return CreateEntries(GetEvalutationObjects(), elementRef);
+            var template = TradeElementTemplateLoader.GetTemplate(TradeActionType.Evaluation);
+            return CreateEntries(CreateDataElementsFromTemplate(template), elementRef);
         }
 
         private static List<DataElement> GetFirstPositionEntries(InterimTradeElement elementRef)
         {
-            return CreateEntries(GetFirstPositionObjects(), elementRef);
+            var template = TradeElementTemplateLoader.GetTemplate(TradeActionType.Add);
+            return CreateEntries(CreateDataElementsFromTemplate(template, isFirstPosition: true), elementRef);
         }
 
         private static List<DataElement> GetReducePositionEntries(InterimTradeElement elementRef)
         {
-            return CreateEntries(GetReducePositionObjects(), elementRef);
+            var template = TradeElementTemplateLoader.GetTemplate(TradeActionType.Reduce);
+            return CreateEntries(CreateDataElementsFromTemplate(template), elementRef);
         }
         #endregion
 
         #region Summary and Closure
         private static List<DataElement> GetSummaryComponents(TradeSummary elementRef, TradeAnalyticsSummary analytics)
         {
-            var summaryCells = GetSummaryComponents(analytics);
-            return CreateEntries(summaryCells, elementRef);
+            var template = TradeElementTemplateLoader.GetTemplate(TradeActionType.Summary);
+            return CreateEntries(CreateSummaryDataElementsFromTemplate(template, analytics), elementRef);
         }
 
         private static List<DataElement> GetTradeClosureComponents(TradeSummary elementRef, TradeAnalyticsSummary analytics)
         {
-            var closureCells = GetTradeClosureComponents(analytics);
-            return CreateEntries(closureCells, elementRef);
-        } 
+            var template = TradeElementTemplateLoader.GetTemplate(TradeActionType.Closure);
+            return CreateEntries(CreateSummaryDataElementsFromTemplate(template, analytics), elementRef);
+        }
         #endregion
 
         private static DataElement CreateEntry(DataElement overview, TradeElement elementRef)
@@ -58,5 +66,52 @@ namespace HsR.Journal.Entities.Factory
         {
             return cellConfigs.Select(config => CreateEntry(config, elementRef)).ToList();
         }
+
+        private static List<DataElement> CreateDataElementsFromTemplate(TradeElementTemplate template, bool isFirstPosition = false)
+        {
+            return CreateDataElementsInternal(template, isFirstPosition, analytics: null);
+        }
+
+        private static List<DataElement> CreateSummaryDataElementsFromTemplate(TradeElementTemplate template, TradeAnalyticsSummary analytics)
+        {
+            return CreateDataElementsInternal(template, isFirstPosition: false, analytics);
+        }
+
+        private static List<DataElement> CreateDataElementsInternal(TradeElementTemplate template, bool isFirstPosition, TradeAnalyticsSummary? analytics)
+        {
+            var elements = new List<DataElement>();
+
+            foreach (var el in template.Elements)
+            {
+                if (el.FirstPositionOnly == true && !isFirstPosition)
+                    continue;
+
+                string content = analytics is TradeAnalyticsSummary summary
+                    ? el.Title switch
+                     {
+                         "Average Entry" => summary.AverageEntryPrice.ToF2String(),
+                         "Average Close" => summary.AverageExitPrice.ToF2String(),
+                         "Total Amount" => summary.NetAmount.ToF2String(),
+                         "Net Result" => summary.Profit.ToF2String(),
+                         "W/L" => summary.IsWin ? "W" : "L",
+                         _ => ""
+                     }
+                     : "";
+
+                var dataElement = new DataElement(el.Title, el.ComponentType, content)
+                {
+                    IsRelevantForLocalOverview = el.IsRelevantForLocalOverview ?? false,
+                    IsRelevantForTradeOverview = el.IsRelevantForTradeOverview ?? false,
+                    Restrictions = el.Restrictions,
+                    UnitPriceRelevance = el.UnitPriceRelevance,
+                    TotalCostRelevance = el.TotalCostRelevance
+                };
+
+                elements.Add(dataElement);
+            }
+
+            return elements;
+        }
     }
 }
+

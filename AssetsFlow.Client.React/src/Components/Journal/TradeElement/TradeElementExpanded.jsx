@@ -8,18 +8,15 @@ function TradeElementExpanded({ tradeElement }) {
     const elementType = tradeElement[Constants.ELEMENT_TYPE_STING];
     return (
       elementType !== Constants.ElementType.ORIGIN &&
-      elementType !== Constants.ElementType.SUMMARY
+      elementType !== Constants.ElementType.SUMMARY &&
+      elementType !== Constants.ElementType.CLOSURE
     );
   }, [tradeElement]);
 
   return (
     <div className="flex items-center">
-      <GroupedEntriesList
-        entries={tradeElement[Constants.TRADE_ENTRIES_STRING]}
-      />
-      {isAllowControls && (
-        <ElementControls className="m-3" tradeElement={tradeElement} />
-      )}
+      <GroupedEntriesList entries={tradeElement[Constants.TRADE_ENTRIES_STRING]} />
+      {isAllowControls && <ElementControls className="m-3" tradeElement={tradeElement} />}
     </div>
   );
 }

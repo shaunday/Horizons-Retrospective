@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -11,4 +11,10 @@
     <ProjectReference Include="..\HsR.Journal.Entities\HsR.Journal.Entities.csproj" />
     <ProjectReference Include="..\HsR.Journal.Services\HsR.Journal.Services.csproj" />
   </ItemGroup>
+    <ItemGroup>
+        <None Include="..\..\..\Common\trade-elements-templates\*.*"
+              Link="trade-elements-templates\%(Filename)%(Extension)"
+              CopyToOutputDirectory="Always" />
+    </ItemGroup>
+
 </Project>

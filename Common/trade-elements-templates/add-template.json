@@ -1,5 +1,5 @@
 {
-  "elementType": "AddToPosition",
+  "elementType": "Add",
   "elements": [
       {
       "title": "Broker",
@@ -55,6 +55,6 @@
     {
       "title": "R:R",
       "componentType": "Risk"
-    },
+    }
   ]
 }

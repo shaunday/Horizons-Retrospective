@@ -45,16 +45,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common.AspNet", "Common
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.Client", "AssetsFlow.Server\HsR.UserService.Client\HsR.UserService.Client.csproj", "{C4833897-9B39-4190-BA96-E054F13E4941}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "element-templates", "element-templates", "{32571ED3-E066-4876-85DF-045768B96B89}"
-	ProjectSection(SolutionItems) = preProject
-		..\Common\trade-elements-template\addToPosition-template.json = ..\Common\trade-elements-template\addToPosition-template.json
-		..\Common\trade-elements-template\evaluation-template.json = ..\Common\trade-elements-template\evaluation-template.json
-		..\Common\trade-elements-template\reducePosition-template.json = ..\Common\trade-elements-template\reducePosition-template.json
-		..\Common\trade-elements-template\tradeClosure-template.json = ..\Common\trade-elements-template\tradeClosure-template.json
-		..\Common\trade-elements-template\tradeOrigin-template.json = ..\Common\trade-elements-template\tradeOrigin-template.json
-		..\Common\trade-elements-template\tradeSummary-template.json = ..\Common\trade-elements-template\tradeSummary-template.json
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{884E3130-E308-425C-9528-40F4F096152A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AsF.Server.Main", "AsF.Server.Main", "{A5A10CC3-3CEE-4319-88F0-BFA241AA6C75}"
@@ -371,7 +361,6 @@ Global
 		{ABC623D6-EDD3-4CBE-9D6E-904E00F1B282} = {46B455BF-9472-4F21-B4B0-63627CF80A7E}
 		{5CD3D614-88C8-FEAA-E28E-66756038CBED} = {F160C4C3-5E21-4DDF-B119-BB651086EF4B}
 		{C4833897-9B39-4190-BA96-E054F13E4941} = {A5A10CC3-3CEE-4319-88F0-BFA241AA6C75}
-		{32571ED3-E066-4876-85DF-045768B96B89} = {F160C4C3-5E21-4DDF-B119-BB651086EF4B}
 		{884E3130-E308-425C-9528-40F4F096152A} = {46B455BF-9472-4F21-B4B0-63627CF80A7E}
 		{8615A4B2-E90B-D312-F327-BA232AA7546C} = {884E3130-E308-425C-9528-40F4F096152A}
 		{D1BDAA8A-6480-187A-7ABA-23D647C13C0B} = {884E3130-E308-425C-9528-40F4F096152A}
