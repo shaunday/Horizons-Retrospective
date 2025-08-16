@@ -13,7 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common.Net\HsR.Common\HsR.Common.csproj" />
-    <ProjectReference Include="..\AssetsFlow.Journal\HsR.Journal.Entities\HsR.Journal.Entities.csproj" />
-    <ProjectReference Include="..\AssetsFlow.Journal\HsR.Journal.Services\HsR.Journal.Services.csproj" />
+    <ProjectReference Include="..\AssetsFlow.Journal.All\HsR.Journal.Entities\HsR.Journal.Entities.csproj" />
+    <ProjectReference Include="..\AssetsFlow.Journal.All\HsR.Journal.Services\HsR.Journal.Services.csproj" />
   </ItemGroup>
 </Project>

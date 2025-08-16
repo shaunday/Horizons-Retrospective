@@ -33,4 +33,4 @@ PM> $env:SUPABASE_DB_ID="X"
 PM> $env:SUPABASE_DB_PASS="Y"
 PM> EntityFrameworkCore\Add-Migration InitialCreate -p HsR.Journal.Infrastructure -s HsR.Journal.Infrastructure
 
-dotnet ef migrations add mig1 -p "E:\documents\git\Horizons-Retrospective\AssetsFlow.Server\AssetsFlow.Journal\HsR.Infrastructure\HsR.Journal.Infrastructure.csproj" -s "E:\documents\git\Horizons-Retrospective\AssetsFlow.Server\AssetsFlow.Journal\HsR.Infrastructure\HsR.Journal.Infrastructure.csproj"
+dotnet ef migrations add mig1 -p "E:\documents\git\Horizons-Retrospective\AssetsFlow.Server\AssetsFlow.Journal.All\HsR.Infrastructure\HsR.Journal.Infrastructure.csproj" -s "E:\documents\git\Horizons-Retrospective\AssetsFlow.Server\AssetsFlow.Journal.All\HsR.Infrastructure\HsR.Journal.Infrastructure.csproj"

@@ -1,6 +1,5 @@
 ﻿
 # TODO
-- Journal to Journal.All, move to main
 - HsR.Infrastructure to Hsr.Journal**.. adjust txt instructions
 
 - update readme

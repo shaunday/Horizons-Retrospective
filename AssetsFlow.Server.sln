@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HsR.Journal.Entities", "AssetsFlow.Server\AssetsFlow.Journal\HsR.Journal.Entities\HsR.Journal.Entities.csproj", "{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HsR.Journal.Entities", "AssetsFlow.Server\AssetsFlow.Journal.All\HsR.Journal.Entities\HsR.Journal.Entities.csproj", "{4DD2E0D5-8DB3-40DA-8516-436A8F4A7406}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HsR.Journal.Repository", "AssetsFlow.Server\AssetsFlow.Journal\HsR.Journal.Repository\HsR.Journal.Repository.csproj", "{71B5E78E-B056-4414-B253-42E41650DC5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HsR.Journal.Repository", "AssetsFlow.Server\AssetsFlow.Journal.All\HsR.Journal.Repository\HsR.Journal.Repository.csproj", "{71B5E78E-B056-4414-B253-42E41650DC5D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HsR.Journal.Seeder", "AssetsFlow.Server\AssetsFlow.Journal\HsR.Journal.Seeder\HsR.Journal.Seeder.csproj", "{9E5A0232-2B34-4D69-A714-2C34C38C4BB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HsR.Journal.Seeder", "AssetsFlow.Server\AssetsFlow.Journal.All\HsR.Journal.Seeder\HsR.Journal.Seeder.csproj", "{9E5A0232-2B34-4D69-A714-2C34C38C4BB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.UnitTests", "AssetsFlow.Server\AssetsFlow.Journal\HsR.UnitTests\HsR.Journal.UnitTests.csproj", "{1070FBF4-644F-4D08-8486-37EB9F8D872E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.UnitTests", "AssetsFlow.Server\AssetsFlow.Journal.All\HsR.UnitTests\HsR.Journal.UnitTests.csproj", "{1070FBF4-644F-4D08-8486-37EB9F8D872E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Infrastructure", "AssetsFlow.Server\AssetsFlow.Journal\HsR.Infrastructure\HsR.Journal.Infrastructure.csproj", "{4C8A4A02-17FD-42BA-85F0-D535616669E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Infrastructure", "AssetsFlow.Server\AssetsFlow.Journal.All\HsR.Infrastructure\HsR.Journal.Infrastructure.csproj", "{4C8A4A02-17FD-42BA-85F0-D535616669E9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssetsFlow.Journal", "AssetsFlow.Journal", "{E2F11EF4-F624-492C-83BE-36B75D46AA56}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssetsFlow.Journal.All", "AssetsFlow.Journal.All", "{E2F11EF4-F624-492C-83BE-36B75D46AA56}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssetsFlow.Ledger", "AssetsFlow.Ledger", "{5CAFC034-4D7B-4A72-B13C-5FF762C6EEEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Services", "AssetsFlow.Server\AssetsFlow.Journal\HsR.Journal.Services\HsR.Journal.Services.csproj", "{F5F2DC89-CB63-4EC8-AF62-E81590A92E95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Services", "AssetsFlow.Server\AssetsFlow.Journal.All\HsR.Journal.Services\HsR.Journal.Services.csproj", "{F5F2DC89-CB63-4EC8-AF62-E81590A92E95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{F160C4C3-5E21-4DDF-B119-BB651086EF4B}"
 EndProject
@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetsFlowWeb.API", "Assets
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetsFlowWeb.Services", "AssetsFlow.Server\AssetsFlow.Web.Services\AssetsFlowWeb.Services.csproj", "{881C9D8F-198E-4779-BCA4-9591CC04E445}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Entities.Factory", "AssetsFlow.Server\AssetsFlow.Journal\HsR.Journal.Entities.Factory\HsR.Journal.Entities.Factory.csproj", "{07987639-CCDB-4836-9133-750BC843775C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Entities.Factory", "AssetsFlow.Server\AssetsFlow.Journal.All\HsR.Journal.Entities.Factory\HsR.Journal.Entities.Factory.csproj", "{07987639-CCDB-4836-9133-750BC843775C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService", "Common.Net.IdentityService\HsR.UserService\HsR.UserService.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
 EndProject
