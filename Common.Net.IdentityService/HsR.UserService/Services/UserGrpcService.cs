@@ -13,12 +13,18 @@ namespace HsR.UserService.Services
         private readonly UserManager<User> _userManager;
         private readonly ILogger<UserGrpcService> _logger;
 
+        #region Constructor
+
         public UserGrpcService(IUserService userService, UserManager<User> userManager, ILogger<UserGrpcService> logger)
         {
             _userService = userService;
             _userManager = userManager;
             _logger = logger;
         }
+
+        #endregion
+
+        #region Authentication Methods
 
         public override async Task<Protos.AuthResponse> Login(Protos.LoginRequest request, ServerCallContext context)
         {
@@ -69,6 +75,10 @@ namespace HsR.UserService.Services
                 };
             }
         }
+
+        #endregion
+
+        #region User Management Methods
 
         public override async Task<Protos.UserResponse> GetUserById(Protos.GetUserRequest request, ServerCallContext context)
         {
@@ -156,16 +166,6 @@ namespace HsR.UserService.Services
             return response;
         }
 
-        public override Task<Protos.HealthCheckResponse> HealthCheck(Protos.HealthCheckRequest request, ServerCallContext context)
-        {
-            return Task.FromResult(new Protos.HealthCheckResponse
-            {
-                Status = "Healthy",
-                Message = "User Service is running",
-                Timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss UTC")
-            });
-        }
-
         public override async Task<Protos.ChangePasswordResponse> ChangePassword(Protos.ChangePasswordRequest request, ServerCallContext context)
         {
             try
@@ -216,6 +216,24 @@ namespace HsR.UserService.Services
             }
         }
 
+        #endregion
+
+        #region Utility Methods
+
+        public override Task<Protos.HealthCheckResponse> HealthCheck(Protos.HealthCheckRequest request, ServerCallContext context)
+        {
+            return Task.FromResult(new Protos.HealthCheckResponse
+            {
+                Status = "Healthy",
+                Message = "User Service is running",
+                Timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss UTC")
+            });
+        }
+
+        #endregion
+
+        #region Mapping Methods
+
         private static Protos.AuthResponse MapToGrpcAuthResponse(Models.AuthResponse response) => new()
         {
             Success = response.Success,
@@ -242,5 +260,7 @@ namespace HsR.UserService.Services
             FirstName = user.FirstName ?? string.Empty,
             LastName = user.LastName ?? string.Empty
         };
+
+        #endregion
     }
 } 
