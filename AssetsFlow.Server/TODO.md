@@ -1,8 +1,5 @@
 ﻿
 # TODO
-- HsR.Infrastructure to Hsr.Journal**.. adjust txt instructions
-
-- update readme
 - parse elements from json templates
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
 - add logs to repo methods
