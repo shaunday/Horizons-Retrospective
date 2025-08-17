@@ -1,4 +1,5 @@
 import { Drawer, Text, Stack, Divider, Image } from "@mantine/core";
+import PropTypes from "prop-types";
 
 const AboutDrawer = ({ opened, onClose }) => {
   return (
@@ -81,6 +82,11 @@ const AboutDrawer = ({ opened, onClose }) => {
       </Stack>
     </Drawer>
   );
+};
+
+AboutDrawer.propTypes = {
+  opened: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default AboutDrawer;
