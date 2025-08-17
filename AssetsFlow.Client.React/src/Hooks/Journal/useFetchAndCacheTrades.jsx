@@ -20,17 +20,9 @@ export function useFetchAndCacheTrades({ enabled = true } = {}) {
     enabled,
   });
 
-  const prefetchTrades = async () => {
-    queryClient.prefetchQuery({
-      queryKey: tradeKeysFactory.getKeyForAllTrades(),
-      queryFn: getAndCacheTrades,
-    });
-  };
-
   return {
     isLoading: tradesQuery.isLoading,
     isError: tradesQuery.isError,
     trades: tradesQuery.data,
-    prefetchTrades,
   };
 }
