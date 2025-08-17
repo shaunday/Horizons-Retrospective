@@ -1,13 +1,11 @@
 ## 1
 
-fix: content edit popup appears twice sometimes- jotai
-
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox + autofill
 from limor: title should be styled diff than the content, text aligned to the left
 add: opened/closedat/IdeaDate (just to overview?)
 
 add: expand/collapse by clicking on the background, reduce expand icon's size
-fix: how to edit lessons in trade closure? meanwhile im not seeing them at all
+fix: edit lessons in trade closure
 fix: mantines notifications
 
 ## 2.

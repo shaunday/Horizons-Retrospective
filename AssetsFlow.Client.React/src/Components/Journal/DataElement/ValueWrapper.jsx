@@ -6,11 +6,13 @@ import { dataElementContentParser } from "@services/dataElementContentParser";
 import ValueDisplay from "./ValueDisplay";
 import ValuePopover from "./ValuePopover";
 
+// eslint-disable-next-line react/prop-types
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const isOverview = onValueChangeInitiated === undefined;
   const { contentValue, textRestrictions } = dataElementContentParser(cellInfo);
 
   const [openPopoverId, setOpenPopoverId] = useAtom(openPopoverIdAtom);
+  // eslint-disable-next-line react/prop-types
   const popoverId = cellInfo.id; // or any unique ID for this cell
   const preventCloseRef = useRef(false);
 

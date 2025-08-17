@@ -48,7 +48,8 @@ namespace HsR.Journal.DataContext
             UpdatedStatesCollation updatedStates = new();
             await _dataContext.Entry(cell).Reference(c => c.TradeElementRef).LoadAsync();
 
-            if (cell.TradeElementRef is InterimTradeElement interim && interim.IsAllRequiredFields())
+            if (cell.TradeElementRef is InterimTradeElement interim && interim.IsAllRequiredFields()
+                                                                            && interim.TradeActionType != TradeActionType.Origin)
             {
                 if (!ignoreActivation)
                 {

@@ -49,7 +49,7 @@ namespace HsR.Journal.Entities.Factory
                 costEntry.ContentWrapper = new ContentRecord(costToClose.ToF2String());
                 trade.TradeElements.Add(reductionEle);
 
-                trade.Summary = TradeElementsFactory.GetNewElement(trade, TradeActionType.Summary) as TradeSummary;
+                trade.Summary = TradeElementsFactory.GetNewElement(trade, TradeActionType.Closure) as TradeSummary;
                 trade.SetStatus(TradeStatus.Closed);
             }
             else

@@ -15,7 +15,8 @@ namespace HsR.Journal.Entities.Factory
                 { TradeActionType.Add, trade => GetNewInterimTradeElement(trade, true) },
                 { TradeActionType.Reduce, trade => GetNewInterimTradeElement(trade, false) },
                 { TradeActionType.Evaluation, trade => GetNewEvalutationElement(trade) },
-                { TradeActionType.Summary, trade => GetNewSummary(trade) }
+                { TradeActionType.Summary, trade => GetNewSummary(trade) },
+                { TradeActionType.Closure, trade => GetNewSummary(trade, isClosure: true) }
             };
 
         public static TradeElement GetNewElement(TradeComposite trade, TradeActionType actionType)
@@ -54,14 +55,14 @@ namespace HsR.Journal.Entities.Factory
             return tradeInput;
         }
 
-        private static TradeSummary GetNewSummary(TradeComposite trade)
+        private static TradeSummary GetNewSummary(TradeComposite trade, bool isClosure = false)
         {
             var analytics = Analytics.GetTradingCosts(trade);
             TradeAnalyticsSummary analyticsSummary = new(analytics);
 
             TradeSummary newSummary = new(trade, TradeActionType.Summary);
             newSummary.IsInterim = analyticsSummary.IsNetExists;
-            newSummary.Entries = analyticsSummary.IsNetExists
+            newSummary.Entries = analyticsSummary.IsNetExists && !isClosure
                 ? GetSummaryComponents(newSummary, analyticsSummary)
                 : GetTradeClosureComponents(newSummary, analyticsSummary);
 
