@@ -9,6 +9,7 @@ fix: close trade not refreshing - parse new- reduce value
 add: close trade input validation
 fix: trade by id cached twice
 fix: invlidate also by key fortradeids after reseed
+fix: add trade doesnt refresh
 
 ### Fixed
 

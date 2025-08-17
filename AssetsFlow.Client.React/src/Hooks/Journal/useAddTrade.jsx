@@ -12,17 +12,18 @@ export function useAddTrade() {
     isLoading: isAddingTrade,
     isError: isAddTradeError,
   } = useMutation({
-    mutationFn: () => {
-      return addTradeComposite();
-    },
+    mutationFn: () => addTradeComposite(),
     onSuccess: (newTrade) => {
-      const tradeAndIdArray = tradeKeysFactory.getKeyForTradeById(newTrade.id);
-      queryClient.setQueryData(tradeAndIdArray, newTrade);
-      const currentTradeIds = queryClient.getQueryData(tradeKeysFactory.getTradeIdsKey()) || [];
-      queryClient.setQueryData(tradeKeysFactory.getTradeIdsKey(), [
-        ...currentTradeIds,
-        newTrade.id,
+      // 1) Cache the new trade individually
+      queryClient.setQueryData(tradeKeysFactory.getKeyForTradeById(newTrade.id), newTrade);
+
+      // 2) Update the "AllTrades" array in cache so UI sees it immediately
+      queryClient.setQueryData(tradeKeysFactory.getKeyForAllTrades(), (oldTrades = []) => [
+        ...oldTrades,
+        newTrade,
       ]);
+
+      // 3) Optionally mark the newly added trade for highlighting in UI
       setNewlyAddedTradeId(newTrade.id);
     },
   });
