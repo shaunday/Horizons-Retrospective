@@ -1,6 +1,6 @@
 import { authStorage } from "@services/authStorage";
 
-const TRADE_KEY = "TradeById";
+const TRADE_BY_ID_KEY = "TradeById";
 const TRADES_ARRAY_KEY = "AllTrades";
 
 function safeGetUserId() {
@@ -16,8 +16,12 @@ export const tradeKeysFactory = {
     const userId = safeGetUserId();
     return [userId, TRADES_ARRAY_KEY];
   },
-  getTradeAndIdArrayKey: (tradeId) => {
+  getKeyForTradeById: (tradeId) => {
     const userId = safeGetUserId();
-    return [userId, TRADE_KEY, tradeId];
+    return [userId, TRADE_BY_ID_KEY, tradeId];
+  },
+  getKeyForForAllTradesByIds: () => {
+    const userId = safeGetUserId();
+    return [userId, TRADE_BY_ID_KEY];
   },
 };

@@ -1,19 +1,11 @@
 import React, { useEffect } from "react";
-import {
-  Title,
-  Loader,
-  Text,
-  Button,
-  Flex,
-  Box,
-  Group,
-} from "@mantine/core";
+import { Title, Loader, Text, Button, Flex, Box, Group } from "@mantine/core";
 import { TbHelp, TbChartLine, TbUser } from "react-icons/tb";
 import { useDisclosure } from "@mantine/hooks";
 import AboutDrawer from "@components/About/AboutDrawer";
 import LoadingOverlay from "@components/LoadingOverlay";
 import { useAuth } from "@hooks/Auth/useAuth";
-import { useReseedDemoUser } from "@hooks/Admin/useReseedDemoUser";
+import { useReseedDemoUser } from "@hooks/UserManagement/useReseedDemoUser";
 
 function HeaderComponent({ showUserActions = true }) {
   const [opened, { open, close }] = useDisclosure(false);
@@ -41,11 +33,7 @@ function HeaderComponent({ showUserActions = true }) {
                 <TbChartLine size={18} className="text-slate-600" />
               </Box>
               <Box>
-                <Title
-                  order={2}
-                  className="text-slate-800 font-bold tracking-tight"
-                  mb={2}
-                >
+                <Title order={2} className="text-slate-800 font-bold tracking-tight" mb={2}>
                   Horizons Retrospective{isDev && " [DEV]"}
                 </Title>
                 <Text
@@ -53,8 +41,7 @@ function HeaderComponent({ showUserActions = true }) {
                   className="text-slate-600 font-medium"
                   style={{ letterSpacing: "0.025em" }}
                 >
-                  Analyze your trades, identify patterns, evolve your trading
-                  mindset.
+                  Analyze your trades, identify patterns, evolve your trading mindset.
                 </Text>
               </Box>
             </Box>
@@ -63,11 +50,7 @@ function HeaderComponent({ showUserActions = true }) {
           {/* Right side - User Actions */}
           {showUserActions && user && (
             <Group gap="sm" align="center">
-              <Flex
-                align="center"
-                gap={8}
-                className="text-slate-700 font-medium"
-              >
+              <Flex align="center" gap={8} className="text-slate-700 font-medium">
                 <TbUser size={18} />
                 <Text fz="sm" fw={500} c="dark">
                   {user.firstName || user.name || "User"}
@@ -105,10 +88,7 @@ function HeaderComponent({ showUserActions = true }) {
         </Flex>
       </Box>
 
-      <LoadingOverlay
-        visible={isReseeding}
-        text={"Reseed in progress ... \n(~10-15sec)"}
-      />
+      <LoadingOverlay visible={isReseeding} text={"Reseed in progress ... \n(~20sec)"} />
 
       <AboutDrawer opened={opened} onClose={close} />
     </>

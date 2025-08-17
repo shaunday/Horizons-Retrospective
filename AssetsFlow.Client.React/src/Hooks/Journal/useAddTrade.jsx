@@ -16,7 +16,7 @@ export function useAddTrade() {
       return addTradeComposite();
     },
     onSuccess: (newTrade) => {
-      const tradeAndIdArray = tradeKeysFactory.getTradeAndIdArrayKey(newTrade.id)
+      const tradeAndIdArray = tradeKeysFactory.getKeyForTradeById(newTrade.id);
       queryClient.setQueryData(tradeAndIdArray, newTrade);
       const currentTradeIds = queryClient.getQueryData(tradeKeysFactory.getTradeIdsKey()) || [];
       queryClient.setQueryData(tradeKeysFactory.getTradeIdsKey(), [
@@ -27,10 +27,10 @@ export function useAddTrade() {
     },
   });
 
-  return { 
-    addTrade, 
-    isAddingTrade, 
-    isAddTradeError, 
-    newlyAddedTradeId
+  return {
+    addTrade,
+    isAddingTrade,
+    isAddTradeError,
+    newlyAddedTradeId,
   };
 }

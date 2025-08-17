@@ -9,7 +9,7 @@ namespace AssetsFlowWeb.API.Controllers
     [ApiVersion("1.0")]
     [ApiController]
     [ResponseCache(Duration = 1800, Location = ResponseCacheLocation.Client)]
-    public class InfoController(IWebHostEnvironment env, ILogger<HealthController> logger) : HsRControllerBase(logger)
+    public class InfoController(IWebHostEnvironment env, ILogger<InfoController> logger) : HsRControllerBase(logger)
     {
         private readonly IWebHostEnvironment _env = env;
 

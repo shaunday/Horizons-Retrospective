@@ -8,7 +8,7 @@ export function useFetchAndCacheTrades({ enabled = true } = {}) {
   const getAndCacheTrades = async () => {
     const fetchedTrades = await getAllTrades();
     fetchedTrades.forEach((trade) => {
-      queryClient.setQueryData(tradeKeysFactory.getTradeAndIdArrayKey(trade.id), trade);
+      queryClient.setQueryData(tradeKeysFactory.getKeyForTradeById(trade.id), trade);
     });
     return fetchedTrades;
   };

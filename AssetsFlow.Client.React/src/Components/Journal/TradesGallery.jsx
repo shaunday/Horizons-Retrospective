@@ -1,14 +1,10 @@
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import { tradeKeysFactory } from "@services/query-key-factory";
 import TradeWrapper from "./TradeComposite/TradeWrapper";
+import { useFetchAndCacheTrades } from "@hooks/Journal/useFetchAndCacheTrades";
 
 // eslint-disable-next-line react/prop-types
 function TradesGallery({ newlyAddedTradeId }) {
-  const { data: cachedTradeIds = [] } = useQuery({
-    queryKey: tradeKeysFactory.getKeyForAllTrades(),
-    queryFn: () => [],
-  });
+  const { trades: cachedTradeIds } = useFetchAndCacheTrades();
   return (
     <div className="m-1 p-1 max-h-screen flex-1 overflow-y-auto">
       <ul className="m-1 flex flex-col">

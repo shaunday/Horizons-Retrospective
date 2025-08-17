@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.UnitTests", "As
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Infrastructure", "AssetsFlow.Server\AssetsFlow.Journal.All\HsR.Journal.Infrastructure\HsR.Journal.Infrastructure.csproj", "{4C8A4A02-17FD-42BA-85F0-D535616669E9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AsF.Journal.All", "AsF.Journal.All", "{E2F11EF4-F624-492C-83BE-36B75D46AA56}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssetsFlow.Journal.All", "AssetsFlow.Journal.All", "{E2F11EF4-F624-492C-83BE-36B75D46AA56}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AsF.Ledger", "AsF.Ledger", "{5CAFC034-4D7B-4A72-B13C-5FF762C6EEEF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssetsFlow.Ledger", "AssetsFlow.Ledger", "{5CAFC034-4D7B-4A72-B13C-5FF762C6EEEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Journal.Services", "AssetsFlow.Server\AssetsFlow.Journal.All\HsR.Journal.Services\HsR.Journal.Services.csproj", "{F5F2DC89-CB63-4EC8-AF62-E81590A92E95}"
 EndProject
@@ -47,7 +47,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.UserService.Client", "A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{884E3130-E308-425C-9528-40F4F096152A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AsF.Server.Main", "AsF.Server.Main", "{A5A10CC3-3CEE-4319-88F0-BFA241AA6C75}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssetsFlow.Server.Main", "AssetsFlow.Server.Main", "{A5A10CC3-3CEE-4319-88F0-BFA241AA6C75}"
 	ProjectSection(SolutionItems) = preProject
 		AssetsFlow.Server\CHANGELOG.md = AssetsFlow.Server\CHANGELOG.md
 		ToDo-Telemetry.md = ToDo-Telemetry.md

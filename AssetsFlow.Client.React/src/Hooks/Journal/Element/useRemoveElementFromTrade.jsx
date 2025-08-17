@@ -5,14 +5,12 @@ import { tradeKeysFactory } from "@services/query-key-factory";
 
 export function useRemoveElementFromTrade(tradeId) {
   const queryClient = useQueryClient();
-  const tradeAndIdArray = tradeKeysFactory.getTradeAndIdArrayKey(tradeId);
+  const tradeAndIdArray = tradeKeysFactory.getKeyForTradeById(tradeId);
   const removeElement = (elementId) => {
     queryClient.setQueryData(tradeAndIdArray, (oldTrade) => {
       if (!oldTrade) return oldTrade;
       return produce(oldTrade, (draft) => {
-        draft.tradeElements = draft.tradeElements.filter(
-          (ele) => ele.id !== elementId
-        );
+        draft.tradeElements = draft.tradeElements.filter((ele) => ele.id !== elementId);
       });
     });
   };

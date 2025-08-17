@@ -1,19 +1,18 @@
-// src/hooks/Admin/useReseedDemoUser.js
 import { useState } from "react";
 import { notifications } from "@mantine/notifications";
 import { reseedDemoUserAPI } from "@services/ApiRequests/adminApiAccess";
-import { tradeKeysFactory } from "@services/query-key-factory";
-import { useQueryClient } from "@tanstack/react-query";
+import { useClearTradesCache } from "@hooks/UserManagement/useClearTradesCache";
 
 export function useReseedDemoUser() {
   const [isReseeding, setIsReseeding] = useState(false);
-  const queryClient = useQueryClient();
+  const clearTradesCache = useClearTradesCache();
 
   const reseed = async () => {
     setIsReseeding(true);
     try {
       await reseedDemoUserAPI();
-      queryClient.invalidateQueries({ queryKey: tradeKeysFactory.getKeyForAllTrades() });
+      clearTradesCache();
+
       notifications.show({
         title: "Success",
         message: "Demo user and trades reseeded!",

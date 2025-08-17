@@ -7,12 +7,10 @@ export function useUpdateElementCacheData(tradeId, tradeElementId) {
   const queryClient = useQueryClient();
   const updateElementProp = (dataIdentifier, newData) => {
     queryClient.setQueryData(
-      tradeKeysFactory.getTradeAndIdArrayKey(tradeId),
+      tradeKeysFactory.getKeyForTradeById(tradeId),
       produce((oldTradeComposite) => {
         const tradeElements = oldTradeComposite[Constants.TRADE_ELEMENTS_STRING];
-        const eleIndex = tradeElements.findIndex(
-          (ele) => ele.id === tradeElementId
-        );
+        const eleIndex = tradeElements.findIndex((ele) => ele.id === tradeElementId);
         if (eleIndex !== -1) {
           tradeElements[eleIndex][dataIdentifier] = newData;
         }
