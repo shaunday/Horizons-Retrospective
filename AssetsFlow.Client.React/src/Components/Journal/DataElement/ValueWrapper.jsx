@@ -1,5 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Popover } from "@mantine/core";
+import { useAtom } from "jotai";
+import { openPopoverIdAtom } from "@state/popoverAtom";
 import { dataElementContentParser } from "@services/dataElementContentParser";
 import ValueDisplay from "./ValueDisplay";
 import ValuePopover from "./ValuePopover";
@@ -8,12 +10,15 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const isOverview = onValueChangeInitiated === undefined;
   const { contentValue, textRestrictions } = dataElementContentParser(cellInfo);
 
-  const [popoverOpened, setPopoverOpened] = useState(false);
+  const [openPopoverId, setOpenPopoverId] = useAtom(openPopoverIdAtom);
+  const popoverId = cellInfo.id; // or any unique ID for this cell
   const preventCloseRef = useRef(false);
 
+  const popoverOpened = openPopoverId === popoverId;
+
   const handleSubmit = (value, changeDetails) => {
-    onValueChangeInitiated(value, changeDetails);
-    setPopoverOpened(false);
+    onValueChangeInitiated?.(value, changeDetails);
+    setOpenPopoverId(null);
   };
 
   return (
@@ -24,11 +29,11 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
           preventCloseRef.current = false;
           return;
         }
-        setPopoverOpened(open);
+        setOpenPopoverId(open ? popoverId : null);
       }}
       position="bottom"
       trapFocus={false}
-      closeOnEscape={true}
+      closeOnEscape
       withArrow
       arrowSize={12}
       shadow="md"
@@ -38,7 +43,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
           contentValue={contentValue}
           isOverview={isOverview}
           disallowTooltip={popoverOpened}
-          onClick={() => !isOverview && setPopoverOpened(true)}
+          onClick={() => !isOverview && setOpenPopoverId(popoverId)}
         />
       </Popover.Target>
 

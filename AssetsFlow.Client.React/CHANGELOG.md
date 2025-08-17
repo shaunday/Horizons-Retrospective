@@ -10,6 +10,7 @@ add: close trade input validation
 fix: trade by id cached twice
 fix: invlidate also by key fortradeids after reseed
 fix: add trade doesnt refresh
+fix: content edit popup appears twice sometimes- jotai
 
 ### Fixed
 

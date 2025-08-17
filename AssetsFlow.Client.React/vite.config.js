@@ -32,7 +32,7 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, 'src/Hooks/'),
       '@services': path.resolve(__dirname, 'src/Services/'),
       '@constants': path.resolve(__dirname, 'src/Constants/'),
-      '@context': path.resolve(__dirname, 'src/Contexts/'),
+      '@state': path.resolve(__dirname, 'src/State/'),
     },
   },
   build: {
