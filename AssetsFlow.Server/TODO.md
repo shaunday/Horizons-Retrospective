@@ -1,6 +1,5 @@
 ﻿
 # TODO
-- invalidate cache after reseed
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
 - add logs to repo methods
 
