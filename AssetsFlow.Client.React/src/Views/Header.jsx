@@ -6,6 +6,7 @@ import AboutDrawer from "@components/About/AboutDrawer";
 import LoadingOverlay from "@components/LoadingOverlay";
 import { useAuth } from "@hooks/Auth/useAuth";
 import { useReseedDemoUser } from "@hooks/UserManagement/useReseedDemoUser";
+import PropTypes from "prop-types";
 
 function HeaderComponent({ showUserActions = true }) {
   const [opened, { open, close }] = useDisclosure(false);
@@ -94,6 +95,10 @@ function HeaderComponent({ showUserActions = true }) {
     </>
   );
 }
+
+HeaderComponent.propTypes = {
+  showUserActions: PropTypes.bool,
+};
 
 // Memoized export to prevent unnecessary re-renders
 const Header = React.memo(HeaderComponent);
