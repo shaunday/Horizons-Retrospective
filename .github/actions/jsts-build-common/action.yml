@@ -1,0 +1,35 @@
+name: JS Build & Test
+
+on:
+  workflow_call:
+    inputs:
+      project-path:
+        required: true
+        type: string
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.17'
+
+      - name: Install dependencies
+        run: cd ${{ inputs.project-path }} && npm install
+
+      - name: Set GIT_COMMIT
+        run: echo "GIT_COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Run build
+        run: cd ${{ inputs.project-path }} && npm run build
+
+      - name: Run lint
+        run: cd ${{ inputs.project-path }} && npm run lint
+
+      - name: Run audit
+        run: cd ${{ inputs.project-path }} && npm run audit

@@ -1,20 +1,20 @@
-# Use an official Node.js runtime as a parent image
+# Use official Node.js image
 FROM node:20.6.1
 
-# Set the working directory to /app
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json files
+# Copy package.json and package-lock.json
 COPY package.json package-lock.json ./
 
-# Install any needed packages specified in package.json
-RUN npm ci
+# Install only production dependencies
+RUN npm ci --only=production
 
-# Copy the rest of the application source code
-COPY ./src ./src
+# Copy compiled TypeScript output
+COPY ./dist ./dist
 
-# Define environment variable
+# Set environment
 ENV NODE_ENV=production
 
-# Run app.mjs when the container launches
-CMD ["node", "src/app.mjs"]
+# Run compiled app
+CMD ["node", "dist/app.js"]

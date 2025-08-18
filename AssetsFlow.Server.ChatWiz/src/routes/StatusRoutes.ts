@@ -1,5 +1,5 @@
 import express from 'express';
-import { StatusController } from './StatusController.mjs';
+import { StatusController } from './StatusController';
 
 const router = express.Router();
 

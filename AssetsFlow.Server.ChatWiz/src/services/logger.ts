@@ -1,9 +1,9 @@
-import pino from 'pino';
-import pinoHttp from 'pino-http';
+import pino, { Logger } from 'pino';
+import pinoHttp, { HttpLogger } from 'pino-http';
 
 const isProd = process.env.NODE_ENV === 'production';
 
-const baseLogger = pino(
+const baseLogger: Logger = pino(
   isProd
     ? {}
     : {
@@ -13,13 +13,13 @@ const baseLogger = pino(
             colorize: true,
             translateTime: 'SYS:standard',
             singleLine: true,
-            ignore: 'pid,hostname'
-          }
-        }
+            ignore: 'pid,hostname',
+          },
+        },
       }
 );
 
 // Express/Fastify middleware
-const httpLogger = pinoHttp({ logger: baseLogger });
+const httpLogger: HttpLogger = pinoHttp({ logger: baseLogger });
 
 export { baseLogger, httpLogger };

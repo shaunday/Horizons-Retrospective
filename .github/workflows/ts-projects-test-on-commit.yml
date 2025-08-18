@@ -1,0 +1,21 @@
+name: Build & Test TypeScript Projects
+
+on:
+  push:
+    paths:
+      - "AssetsFlow.Server.ChatWiz/**"
+  workflow_dispatch:
+
+jobs:
+  build-all:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project-path:
+          - "AssetsFlow.Server.ChatWiz"
+
+    steps:
+      - name: Run JS Build & Test
+        uses: ./.github/actions/jsts-build-common
+        with:
+          project-path: ${{ matrix.project-path }}

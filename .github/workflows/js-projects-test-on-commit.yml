@@ -3,7 +3,6 @@ name: Build & Test Javascript projects
 on:
   push:
     paths:
-      - "AssetsFlow.Server.ChatWiz/**"
       - "AssetsFlow.Client.React/**"
   workflow_dispatch:
 
@@ -13,35 +12,13 @@ jobs:
     strategy:
       matrix:
         project-path:
-          - "AssetsFlow.Server.ChatWiz"
           - "AssetsFlow.Client.React"
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Build & Test using reusable action
+        uses: ./.github/workflows/jsts-build-common.yml
         with:
-          fetch-depth: 0
-          ref: ${{ github.ref_name }}
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22.17'
-
-      - name: Install dependencies
-        run: cd ${{ matrix.project-path }} && npm install
-
-      - name: Set GIT_COMMIT
-        run: echo "GIT_COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-  
-      - name: Run build
-        run: cd ${{ matrix.project-path }} && npm run build
-
-      - name: Run audit
-        run: cd ${{ matrix.project-path }} && npm run audit
-
-      # Optional lint/tests
-      # - name: Run lint
-      #   run: cd ${{ matrix.project-path }} && npm run lint
-      #
-      # - name: Run tests
-      #   run: cd ${{ matrix.project-path }} && npm test
+          project-path: ${{ matrix.project-path }}
+          
+      - name: Smoke test
+        run: cd ${{ matrix.project-path }} && node dist/app.js

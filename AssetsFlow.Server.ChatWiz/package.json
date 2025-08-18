@@ -3,16 +3,12 @@
   "name": "trading-chattie-backend",
   "version": "0.9.401",
   "description": "Validate 1 line trade creations with AI",
-  "main": "src/app.mjs",
-  "imports": {
-    "#services/*": "./src/services/*",
-    "#routes/*": "./src/routes/*"
-  },
+  "main": "dist/app.ts",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon --watch src --ext js,mjs,json src/app.mjs",
-    "start": "cross-env NODE_ENV=production node src/app.mjs",
-    "build": "npm run start",
-    "lint": "eslint src --fix",
+    "dev": "concurrently \"tsc --watch\" \"nodemon -r tsconfig-paths/register dist/app.js\"",
+    "start": "node -r tsconfig-paths/register dist/app.js",
+    "build": "tsc",
+    "lint": "eslint src --ext .ts --fix",
     "audit": "npm audit --audit-level=moderate"
   },
   "author": "Shaun Day",
@@ -22,13 +18,22 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "pino": "^9.7.0",
-    "pino-http": "^8.6.1"
+    "pino-http": "^8.6.1",
+    "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
-    "eslint": "^9.32.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.1",
+    "@typescript-eslint/parser": "^8.39.1",
+    "concurrently": "^9.2.0",
+    "eslint": "^9.33.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-n": "^17.21.3",
     "nodemon": "^3.1.10",
-    "pino-pretty": "^13.0.0"
+    "pino-pretty": "^13.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
   }
 }
