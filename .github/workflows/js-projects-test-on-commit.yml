@@ -15,8 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0    # Fetch full history for all files
-          ref: ${{ github.ref }}
+          fetch-depth: 0    # fetch full history to see all files
 
       - name: Detect changed project paths from predefined list
         id: set-matrix
@@ -26,11 +25,9 @@ jobs:
             "AssetsFlow.Client.React"
           )
 
+          # Current branch
           CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
           echo "Current branch: $CURRENT_BRANCH"
-
-          # Ensure full history is available
-          git fetch --no-tags --prune --unshallow || true
 
           # List all files in this branch
           CHANGED_FILES=$(git ls-tree -r --name-only HEAD)
