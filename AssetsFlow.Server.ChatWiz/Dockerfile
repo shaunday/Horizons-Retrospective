@@ -4,14 +4,17 @@ FROM node:20.6.1
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY ./src .
+# Copy package.json and package-lock.json files
+COPY package.json package-lock.json ./
 
 # Install any needed packages specified in package.json
 RUN npm ci
 
+# Copy the rest of the application source code
+COPY ./src ./src
+
 # Define environment variable
 ENV NODE_ENV=production
 
-# Run index.js when the container launches
-CMD [ "node", "server.mjs" ]
+# Run app.mjs when the container launches
+CMD ["node", "src/app.mjs"]

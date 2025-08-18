@@ -1,5 +1,5 @@
 import { loadElementTemplates } from '../templates/templateLoader.mjs';
-import { parseTradeInputWithAI } from '../path/to/aiClient.mjs';
+import { parseTradeInputWithAI } from '#services/aiClient.mjs';
 
 let cachedTemplates = null;
 
