@@ -7,5 +7,6 @@ namespace HsR.UserService.Services
     {
         Task<AuthResponse> LoginAsync(LoginRequest request);
         Task<AuthResponse> RegisterAsync(RegisterRequest request);
+        string GetVersion();
     }
 } 
