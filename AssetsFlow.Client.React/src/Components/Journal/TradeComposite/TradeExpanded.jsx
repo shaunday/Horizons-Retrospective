@@ -4,8 +4,8 @@ import CompositeControls from "./Controls/CompositeControls";
 import TradeElementWrapper from "../TradeElement/TradeElementWrapper";
 import TradeElementCollapsed from "../TradeElement/TradeElementCollapsed";
 import { TbChartBar } from "react-icons/tb";
-import clsx from "clsx";
 
+// eslint-disable-next-line react/prop-types
 function TradeExpanded({ trade }) {
   return (
     <div className="my-2">
@@ -22,11 +22,14 @@ function TradeExpanded({ trade }) {
           {trade[Constants.TRADE_SUMMARY_STRING] && (
             <>
               <TbChartBar size={16} className="text-slate-500" />
-              <TradeElementCollapsed tradeElement={trade[Constants.TRADE_SUMMARY_STRING]} isUseAllEntries={true} />
+              <TradeElementCollapsed
+                tradeElement={trade[Constants.TRADE_SUMMARY_STRING]}
+                isUseAllEntries={true}
+              />
             </>
           )}
         </div>
-        
+
         {trade[Constants.TRADE_STATUS] !== Constants.TradeStatus.CLOSED && (
           <div className="mr-7">
             <CompositeControls tradeComposite={trade} />

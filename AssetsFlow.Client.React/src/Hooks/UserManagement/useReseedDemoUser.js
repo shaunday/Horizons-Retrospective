@@ -21,7 +21,7 @@ export function useReseedDemoUser() {
     } catch (error) {
       notifications.show({
         title: "Error",
-        message: "Failed to reseed demo user. Please try again.",
+        message: "Failed to reseed demo user. Error=" + error instanceof Error ? error.message : String(error),
         color: "red",
       });
     } finally {
