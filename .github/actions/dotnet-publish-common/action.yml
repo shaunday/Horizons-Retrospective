@@ -57,7 +57,7 @@ runs:
       run: |
         PROJECT_FILE="${{ steps.detect_project.outputs.project-file }}"
 
-        VERSION=$(dotnet msbuild "$PROJECT_FILE" -nologo -t:GetVersion -p:Configuration=Release -v:q)
+        VERSION=$(grep -oPm1 "(?<=<Version>)[^<]+" "$PROJECT_FILE" || true)
 
         if [ -z "$VERSION" ]; then
           echo "Error: Version not found"
