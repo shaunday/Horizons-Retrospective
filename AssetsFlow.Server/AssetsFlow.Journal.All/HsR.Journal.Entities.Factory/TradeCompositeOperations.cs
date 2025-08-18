@@ -46,6 +46,12 @@ namespace HsR.Journal.Entities.Factory
             if (double.TryParse(closingPrice, out double closingPriceValue))
             {
                 double costToClose = closingPriceValue * analyticsSummary.NetAmount;
+
+                if (analyticsSummary.NetAmount <= 0)
+                {
+                    throw new InvalidOperationException($"Invalid NetAmount: {analyticsSummary.NetAmount}");
+                }
+
                 costEntry.ContentWrapper = new ContentRecord(costToClose.ToF2String());
                 trade.TradeElements.Add(reductionEle);
 
