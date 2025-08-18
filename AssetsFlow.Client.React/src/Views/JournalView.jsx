@@ -13,10 +13,7 @@ function JournalView() {
   const { addTrade, isAddingTrade, newlyAddedTradeId } = useAddTrade();
 
   return (
-    <Stack
-      id="journalMainBody"
-      className="bg-stone-50 p-4 border-t border-slate-200"
-    >
+    <Stack id="journalMainBody" className="bg-stone-50 p-4 border-t border-slate-200">
       {trades?.length > 0 ? (
         <TradesGallery newlyAddedTradeId={newlyAddedTradeId} />
       ) : (
@@ -40,4 +37,4 @@ function JournalView() {
   );
 }
 
-export default JournalView;
+export default React.memo(JournalView);

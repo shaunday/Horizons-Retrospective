@@ -3,6 +3,7 @@ npm run dev
 
 auto arrange = Shift + Alt + F.
 rename all = ctrl + F → atrl + H
+or just CTRL SHIFT H
 comments: ctrl + /, shift alt a
 
 Quick Open = Ctrl + P → Type filename 

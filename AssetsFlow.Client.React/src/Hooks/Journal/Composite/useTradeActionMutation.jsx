@@ -16,7 +16,7 @@ export const useTradeActionMutation = (tradeComposite) => {
   const onElementUpdate = useCacheNewElement(tradeComposite);
   const { processingStatus, setNewStatus } = useProcessingWrapper(ProcessingStatus.NONE);
 
-  const tradeActionMutation  =  useMutation({
+  const tradeActionMutation = useMutation({
     mutationFn: async ({ action, additionalParam }) => {
       let response;
       switch (action) {
@@ -45,15 +45,13 @@ export const useTradeActionMutation = (tradeComposite) => {
     },
     onSuccess: ({ response }, { action }) => {
       updateTradeStatuses(response);
-      if (action === TradeActions.ADD || action === TradeActions.REDUCE || action === TradeActions.EVALUATE) {
-        const newElement = response[Constants.NEW_ELEMENT_RESPONSE_TAG];
-        if (newElement) {
-          onElementUpdate(newElement);
-        }
+      const newElement = response[Constants.NEW_ELEMENT_RESPONSE_TAG];
+      if (newElement) {
+        onElementUpdate(newElement);
       }
       setNewStatus(ProcessingStatus.SUCCESS);
     },
   });
 
   return { tradeActionMutation, processingStatus };
-}
+};

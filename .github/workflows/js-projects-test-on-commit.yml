@@ -3,69 +3,24 @@ name: Build & Test Javascript projects
 on:
   push:
     paths:
-      - "AssetsFlow.Service.ChatWiz/**"
+      - "AssetsFlow.Server.ChatWiz/**"
       - "AssetsFlow.Client.React/**"
   workflow_dispatch:
 
 jobs:
-  detect-changes:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Fetch full history for git diff
-
-      - name: Detect changed project paths from predefined list
-        id: set-matrix
-        run: |
-          KNOWN_PATHS=(
-            "AssetsFlow.Service.ChatWiz"
-            "AssetsFlow.Client.React"
-          )
-
-          CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-          UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo "")
-
-          if [ -n "$UPSTREAM" ]; then
-            BASE_BRANCH=$UPSTREAM
-          else
-            BASE_BRANCH="origin/main"
-          fi
-
-          echo "Current branch: $CURRENT_BRANCH"
-          echo "Using base branch: $BASE_BRANCH"
-
-          git fetch origin $BASE_BRANCH
-
-          CHANGED_FILES=$(git diff --name-only $BASE_BRANCH...HEAD)
-
-          echo "Changed files:"
-          echo "$CHANGED_FILES"
-
-          MATRIX_LIST=()
-          for path in "${KNOWN_PATHS[@]}"; do
-            if echo "$CHANGED_FILES" | grep -q "^$path/"; then
-              MATRIX_LIST+=("\"./$path\"")
-            fi
-          done
-
-          MATRIX_JSON="[$(IFS=,; echo "${MATRIX_LIST[*]}")]"
-          echo "matrix=$MATRIX_JSON" >> "$GITHUB_OUTPUT"
-          echo "Matrix paths: $MATRIX_JSON"
-        shell: bash
-
-  build:
-    needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.matrix != '[]' }}
+  build-all:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        project-path: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
+        project-path:
+          - "AssetsFlow.Server.ChatWiz"
+          - "AssetsFlow.Client.React"
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref_name }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -77,11 +32,11 @@ jobs:
 
       - name: Run build
         run: cd ${{ matrix.project-path }} && npm run build
-        
-      - name: Run audit
-        run: npm run audit
 
-      # Uncomment below to add lint and test steps
+      - name: Run audit
+        run: cd ${{ matrix.project-path }} && npm run audit
+
+      # Optional lint/tests
       # - name: Run lint
       #   run: cd ${{ matrix.project-path }} && npm run lint
       #

@@ -119,6 +119,26 @@ public class UserServiceClient : IUserServiceClient
         }
     }
 
+    public async Task<string> GetServiceVersionAsync(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            _logger.LogDebug("Fetching service version");
+
+            var response = await _grpcClient.InfoAsync(new InfoRequest(), cancellationToken: cancellationToken);
+
+            _logger.LogInformation("Service version received: {Version}", response.Version);
+
+            return response.Version;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error fetching service version");
+            return "unknown";
+        }
+    }
+
+
     public async Task<ChangePasswordResponse> ChangePasswordAsync(ChangePasswordRequest request, CancellationToken cancellationToken = default)
     {
         try

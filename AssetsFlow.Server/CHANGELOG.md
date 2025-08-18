@@ -1,5 +1,8 @@
 ## [0.9.225-b] - 2025-08-...
-
+- validate net amount on close trade, return reduce element on close
+- parse elements from json templates
+- invalidate cache after reseed
+- Fixed closure getters, no summary for origin elements
 
 ## [0.9.224-b] - 2025-08-11
 - More .env work

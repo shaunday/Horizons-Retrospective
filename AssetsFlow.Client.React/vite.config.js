@@ -1,8 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import path from 'path'
+import { fileURLToPath } from 'url'
 import { execSync } from 'child_process'
 import pkg from './package.json'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 let gitCommit = 'unknown'
 try {
@@ -32,7 +35,7 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, 'src/Hooks/'),
       '@services': path.resolve(__dirname, 'src/Services/'),
       '@constants': path.resolve(__dirname, 'src/Constants/'),
-      '@context': path.resolve(__dirname, 'src/Contexts/'),
+      '@state': path.resolve(__dirname, 'src/State/'),
     },
   },
   build: {

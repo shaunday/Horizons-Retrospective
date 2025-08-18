@@ -1,0 +1,60 @@
+{
+  "elementType": "Add",
+  "elements": [
+      {
+      "title": "Broker",
+      "componentType": "Header",
+      "restrictions": ["Temp1", "Temp2"],
+      "firstPositionOnly": true
+    },
+    {
+      "title": "Sector",
+      "componentType": "Header",
+      "firstPositionOnly": true
+    },
+    {
+      "title": "Reasoning",
+      "componentType": "Context"
+    },
+    {
+      "title": "Emotions",
+      "componentType": "Context"
+    },
+    {
+      "title": "Price",
+      "componentType": "PriceRelated",
+      "isRelevantForLocalOverview": true,
+      "unitPriceRelevance": "Positive"
+    },
+    {
+      "title": "Amount",
+      "componentType": "PriceRelated",
+      "isRelevantForLocalOverview": true
+    },
+    {
+      "title": "Total Cost",
+      "componentType": "PriceRelated",
+      "isRelevantForLocalOverview": true,
+      "totalCostRelevance": "Positive"
+    },
+    {
+      "title": "Time Frame",
+      "componentType": "ExitLogic",
+      "isRelevantForLocalOverview": true
+    },
+    {
+      "title": "Target",
+      "componentType": "ExitLogic",
+      "isRelevantForLocalOverview": true
+    },
+    {
+      "title": "SL",
+      "componentType": "Risk",
+      "isRelevantForLocalOverview": true
+    },
+    {
+      "title": "R:R",
+      "componentType": "Risk"
+    }
+  ]
+}

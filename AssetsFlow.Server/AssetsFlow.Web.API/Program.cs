@@ -1,7 +1,7 @@
 using AssetsFlowWeb.API.Configurations;
 using DotNetEnv;
 using HsR.Common.AspNet;
-using HsR.Infrastructure;
+using HsR.Journal.Infrastructure;
 using HsR.Journal.DataContext;
 using HsR.Journal.DataSeeder;
 using HsR.Journal.Seeder;

@@ -79,11 +79,12 @@ namespace HsR.Web.API.Controllers.Journal
         {
             try
             {
-                var updatedTrade = await _journalAccess.TradeComposite.CloseTradeAsync(tradeId, closingPrice);
-                _cacheService.InvalidateAndReload(updatedTrade?.UserId ?? Guid.Empty);
-                UpdatedStatesCollation updatedStates = new() { TradeInfo = updatedTrade };
-                UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
-                return ResultHandling(resAsModel, $"Could not close trade on : {tradeId}", [NEW_STATES_WRAPPER]);
+                (TradeComposite updatedTrade, InterimTradeElement? newReduceElement) updatedTradeData = await _journalAccess.TradeComposite.CloseTradeAsync(tradeId, closingPrice);
+                _cacheService.InvalidateAndReload(updatedTradeData.updatedTrade?.UserId ?? Guid.Empty);
+                UpdatedStatesCollation updatedStates = new() { TradeInfo = updatedTradeData.updatedTrade };
+                (TradeElementModel, UpdatedStatesModel) resAsModel =
+                                 (_mapper.Map<TradeElementModel>(updatedTradeData.newReduceElement), _mapper.Map<UpdatedStatesModel>(updatedStates));
+                return ResultHandling(resAsModel, $"Could not close trade on : {tradeId}", [NEW_ELEMENT_DATA, NEW_STATES_WRAPPER]);
             }
             catch (Exception ex)
             {

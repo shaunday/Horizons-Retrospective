@@ -9,7 +9,7 @@ export function useUpdateTradeStatusFromResponse(tradeId) {
   const updateTradeStatuses = (response) => {
     const { newTradeStatus, hasMissingContent, newSummary } = newStatesResponseParser(response);
     queryClient.setQueryData(
-      tradeKeysFactory.getTradeAndIdArrayKey(tradeId),
+      tradeKeysFactory.getKeyForTradeById(tradeId),
       (oldTrade) =>
         produce(oldTrade, (draft) => {
           if (newTradeStatus !== undefined) draft[Constants.TRADE_STATUS] = newTradeStatus;

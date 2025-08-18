@@ -14,12 +14,16 @@ namespace HsR.UserService.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IServiceProvider _serviceProvider;
+        private readonly UserServiceVersion _version;  
 
-        public UserService(UserManager<User> userManager, IServiceProvider serviceProvider)
+        public UserService(UserManager<User> userManager, IServiceProvider serviceProvider, UserServiceVersion version)
         {
             _userManager = userManager;
             _serviceProvider = serviceProvider;
+            _version = version;
         }
+
+        public string GetVersion() => _version.Version;
 
         public async Task<AuthResponse> LoginAsync(LoginRequest request)
         {

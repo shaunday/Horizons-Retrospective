@@ -1,0 +1,33 @@
+# Git and version control
+.git
+.gitignore
+
+# .NET build outputs
+bin
+obj
+*.user
+*.suo
+*.nupkg
+
+# IDE / editor
+.vscode
+.idea
+*.code-workspace
+
+# Logs
+*.log
+
+# OS / system files
+.DS_Store
+Thumbs.db
+
+Test projects
+**/*.Tests/
+
+## Node / frontend
+# node_modules
+# npm-debug.log
+# yarn.lock
+# pnpm-lock.yaml
+# /dist
+# /build

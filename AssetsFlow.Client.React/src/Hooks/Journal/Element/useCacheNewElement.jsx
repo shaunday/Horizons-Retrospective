@@ -6,7 +6,7 @@ export function useCacheNewElement(tradeComposite) {
   const queryClient = useQueryClient();
   const onElementUpdate = (newElement) => {
     queryClient.setQueryData(
-      tradeKeysFactory.getTradeAndIdArrayKey(tradeComposite.id),
+      tradeKeysFactory.getKeyForTradeById(tradeComposite.id),
       (oldTradeComposite) =>
         produce(oldTradeComposite, (draft) => {
           draft.tradeElements.push(newElement);

@@ -1,6 +1,16 @@
 # Changelog
 
-## [0.9.121-c] - 2025-08-09
+## [0.9.122-c] - 2025-08-...
+
+fix: cotent edit popup open> disable tooltip
+allow edit on 1/2 overview
+fix: close trade not working
+fix: close trade not refreshing - parse new- reduce value
+add: close trade input validation
+fix: trade by id cached twice
+fix: invlidate also by key fortradeids after reseed
+fix: add trade doesnt refresh
+fix: content edit popup appears twice sometimes- jotai
 
 ### Fixed
 

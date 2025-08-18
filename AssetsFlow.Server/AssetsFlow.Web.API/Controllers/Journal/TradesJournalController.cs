@@ -20,18 +20,15 @@ namespace HsR.Web.API.Controllers.Journal
     public class TradesJournalController : JournalControllerBase
     {
         private readonly IConfigurationService _config;
-        private readonly IUserServiceClient _userServiceClient;
 
         public TradesJournalController(
             IJournalRepositoryWrapper journalAccess,
             ILogger<JournalControllerBase> logger,
             IMapper mapper,
             ITradesCacheService cacheService,
-            IConfigurationService config,
-            IUserServiceClient userServiceClient) : base(journalAccess, logger, mapper, cacheService)
+            IConfigurationService config) : base(journalAccess, logger, mapper, cacheService)
         {
             _config = config;
-            _userServiceClient = userServiceClient;
         }
 
         [HttpGet]

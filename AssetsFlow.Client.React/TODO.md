@@ -1,36 +1,35 @@
 ## 1
 
-workflow to run lint, test
-
-cotent edit > disable tooltip, allow edit on 1/2 overview?.
-fix: content edit popup appears twice sometimes
-fix: close trade not working
-no need to have trades by tradeids cached twice. adjust
-
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox + autofill
 from limor: title should be styled diff than the content, text aligned to the left
 add: opened/closedat/IdeaDate (just to overview?)
 
+add: expand/collapse by clicking on the background, reduce expand icon's size
+fix: edit lessons in trade closure
+fix: mantines notifications
+
 ## 2.
 
-RQ isloading/error vs statusnots.. move to mantines notifications for all?
+workflow to run lint, test
+
+RQ isloading/error vs statusnots.. vs mantines notifications
 add: filter (status first, date first, BY STATUS), adjust data call api
 revert trades order? last added first?
-
-ThemeIcon variant="light" color="indigo.4"> + move the icon into the paper - on elementbadge ?
 
 add: ignoreActivation flag to content edit (requests "DenyActivation")
 add: Once an element is active, can edit date via popup (pick date/now)
 add: trade command bar - delete trade action, collapse all trades
-add: expand/collapse by clicking on the background
-issue: how to edit lessons in trade closure?
+
 add: content-history
 add: user login ... routing?
 add: userinfo on toppanel, tooltip + constants
+add: data attributes/alt/role for testing
 
 ## 3.
 
 on reduce position, check max allowed from analytics
+validation per net ammount on close - if net =0 just close
+
 obfuscate amounts/costs for anon view - a method (in the user context?)
 pagination ui (parse X data)
 free flow string with AI to turn it into a trade object

@@ -1,13 +1,13 @@
 //general
-export const HasMissingContent = 'isAnyContentMissing'; 
+export const HasMissingContent = 'isAnyContentMissing';
 
 //trade
 export const TRADE_SUMMARY_STRING = 'summary';
 export const TRADE_ELEMENTS_STRING = 'tradeElements'
 export const TRADE_ENTRIES_STRING = 'entries'
-export const TRADE_STATUS = 'status'; 
+export const TRADE_STATUS = 'status';
 
-export const COMPOSITE_OPENED_AT = 'compositeOpenedAt'; 
+export const COMPOSITE_OPENED_AT = 'compositeOpenedAt';
 export const COMPOSITE_CLOSED_AT = 'compositeClosedAt'
 
 export const TradeActions = Object.freeze({
@@ -39,20 +39,21 @@ export const ElementType = Object.freeze({
   REDUCE: "Reduce",
   EVALUATION: "Evaluation",
   SUMMARY: "Summary",
+  CLOSURE: "Closure",
 });
 
 //entry
 export const DATA_TITLE_STRING = 'title'
 export const DATA_RELEVANT_FOR_ORVERVIEW_STRING = 'isRelevantForTradeOverview'
 export const DATA_RELEVANT_FOR_LOCAL_ORVERVIEW_STRING = 'isRelevantForLocalOverview'
-export const COMPONENT_TYPE ='componentType'
+export const COMPONENT_TYPE = 'componentType'
 export const DATA_COMPOSITEFK_STRING = 'compositeFK'
 export const DATA_TRADE_ELEMENTFK_STRING = 'tradeElementFK'
 
 export const OverviewType = Object.freeze({
   NONE: "None",
-  TRADE_OVERVIEW: "TradeOverview",
   ELEMENT_OVERVIEW: "ElementOverview",
+  TRADE_OVERVIEW: "TradeOverview",
 });
 
 //respones

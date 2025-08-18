@@ -1,3 +1,4 @@
+using HsR.UserService.Contracts;
 using HsR.UserService.Data;
 using HsR.UserService.Entities;
 using HsR.UserService.Services;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace HsR.UserService.Host.Configurations
 {
@@ -36,10 +38,26 @@ namespace HsR.UserService.Host.Configurations
 
         public static IServiceCollection AddUserServiceCoreServices(this IServiceCollection services)
         {
+            // Compute host version
+            var assembly = Assembly.GetExecutingAssembly();
+            var infoAttr = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+            var versionRaw = infoAttr?.InformationalVersion ?? "unknown";
+
+            // Strip build metadata after '+'
+            var version = versionRaw.Split('+')[0];
+
+            // Register the version as singleton
+            services.AddSingleton(new UserServiceVersion(version));
+
+            // Register UserService with DI
             services.AddScoped<IUserService, HsR.UserService.Services.UserService>();
+
+            // Register gRPC service
             services.AddScoped<UserGrpcService>();
+
             return services;
         }
+
 
         public static IServiceCollection AddUserServiceAllServices(this IServiceCollection services, string connectionString)
         {

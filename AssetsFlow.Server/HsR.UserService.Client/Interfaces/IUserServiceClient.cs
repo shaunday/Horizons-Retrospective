@@ -9,6 +9,7 @@ public interface IUserServiceClient
     Task<UserResponse> GetUserByIdAsync(GetUserRequest request, CancellationToken cancellationToken = default);
     Task<UserResponse> GetUserByEmailAsync(GetUserByEmailRequest request, CancellationToken cancellationToken = default);
     Task<HealthCheckResponse> HealthCheckAsync(HealthCheckRequest request, CancellationToken cancellationToken = default);
+    Task<string> GetServiceVersionAsync(CancellationToken cancellationToken = default);
     Task<ChangePasswordResponse> ChangePasswordAsync(ChangePasswordRequest request, CancellationToken cancellationToken = default);
     Task<IList<string>> GetUserRolesAsync(string userId, CancellationToken cancellationToken = default);
 } 
