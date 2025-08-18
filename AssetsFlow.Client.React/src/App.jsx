@@ -6,7 +6,7 @@ import ErrorState from "@components/Common/LoadingStates/ErrorState";
 // Fallback UI component for unhandled errors
 function Fallback({ error, resetErrorBoundary }) {
   return (
- <ErrorState
+    <ErrorState
       mainText="Something went wrong"
       subText={error.message}
       retryText="Try again"
@@ -22,7 +22,7 @@ function App() {
 
 export default withErrorBoundary(App, {
   FallbackComponent: Fallback,
-  onError(error, info) {
+  onError(error, _info) {
     console.error("Unhandled app error:", error);
   },
 });

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { ActionIcon, Paper } from "@mantine/core";
 import { TbChevronRight, TbChevronLeft } from "react-icons/tb";
-import clsx from "clsx";
 import TradeElementExpanded from "./TradeElementExpanded";
 import TradeElementCollapsed from "./TradeElementCollapsed";
 import TradeElementBadge from "./Badge/TradeElementBadge";
 
+// eslint-disable-next-line react/prop-types
 function TradeElementWrapper({ tradeElement }) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
