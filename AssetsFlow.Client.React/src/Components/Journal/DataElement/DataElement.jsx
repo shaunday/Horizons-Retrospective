@@ -2,12 +2,13 @@ import React from "react";
 import { Paper, Text } from "@mantine/core";
 import clsx from "clsx";
 import * as Constants from "@constants/journalConstants";
-import { ProcessingStatus } from "@constants/Constants";
+import { ProcessingStatus } from "@constants/constants";
 import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
 import ValueWrapper from "./ValueWrapper";
 import { useContentUpdateMutation } from "@hooks/Journal/Entry/useContentUpdateMutation";
 import { dataElementContentParser } from "@services/dataElementContentParser";
 
+// eslint-disable-next-line react/prop-types
 function DataElement({ cellInfo, overviewType }) {
   const isOverview = overviewType != Constants.OverviewType.NONE;
   const { contentValue } = dataElementContentParser(cellInfo);
