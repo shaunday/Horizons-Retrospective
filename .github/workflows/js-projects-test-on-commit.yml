@@ -15,10 +15,9 @@ jobs:
           - "AssetsFlow.Client.React"
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Build & Test using reusable action
         uses: ./.github/workflows/jsts-build-common.yml
         with:
           project-path: ${{ matrix.project-path }}
-          
-      - name: Smoke test
-        run: cd ${{ matrix.project-path }} && node dist/app.js

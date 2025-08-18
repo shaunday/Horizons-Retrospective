@@ -15,7 +15,12 @@ jobs:
           - "AssetsFlow.Server.ChatWiz"
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Run JS Build & Test
         uses: ./.github/actions/jsts-build-common
         with:
           project-path: ${{ matrix.project-path }}
+          
+      - name: Smoke test
+        run: cd ${{ matrix.project-path }} && node dist/app.js

@@ -1,4 +1,4 @@
-name: JS Build & Test
+name: JS-TS Build & Test
 
 on:
   workflow_call:
