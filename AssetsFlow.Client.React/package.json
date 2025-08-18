@@ -1,7 +1,7 @@
 {
   "name": "dayjtrading.web",
   "private": true,
-  "version": "0.9.122-c",
+  "version": "0.9.123-c",
   "type": "module",
   "homepage": "https://mywebthings.xyz",
   "scripts": {
@@ -48,7 +48,6 @@
     "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.6.2",
     "tailwindcss": "^3.4.17",
-    "terser": "^5.43.1",
     "vite": "^6.3.5"
   }
 }

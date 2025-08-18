@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.9.123-c] - 2025-08-18
+
+fix: a bunch of prop checks, removed unused vars (linting.. some 70 warnings left)
+
 ## [0.9.122-c] - 2025-08-18
 
 fix: cotent edit popup open> disable tooltip
