@@ -52,8 +52,8 @@ export const DATA_TRADE_ELEMENTFK_STRING = 'tradeElementFK'
 
 export const OverviewType = Object.freeze({
   NONE: "None",
-  TRADE_OVERVIEW: "TradeOverview",
   ELEMENT_OVERVIEW: "ElementOverview",
+  TRADE_OVERVIEW: "TradeOverview",
 });
 
 //respones

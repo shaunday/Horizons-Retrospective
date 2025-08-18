@@ -41,7 +41,7 @@ function DataElement({ cellInfo, overviewType }) {
       <ValueWrapper
         cellInfo={cellInfo}
         onValueChangeInitiated={
-          !overviewType != Constants.OverviewType.TRADE_OVERVIEW ? initiateMutation : undefined
+          overviewType != Constants.OverviewType.TRADE_OVERVIEW ? initiateMutation : undefined
         }
       />
       <ProcessingAndSuccessMessage status={processingStatus} />
