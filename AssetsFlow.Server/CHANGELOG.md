@@ -1,4 +1,4 @@
-## [0.9.225-b] - 2025-08-...
+## [0.9.225-b] - 2025-08-18
 - validate net amount on close trade, return reduce element on close
 - parse elements from json templates
 - invalidate cache after reseed
