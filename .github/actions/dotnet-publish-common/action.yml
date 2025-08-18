@@ -71,6 +71,7 @@ runs:
         echo "Version: $CLEAN_VERSION"
         
     - name: Set build timestamp
+      shell: bash
       run: echo "TIMESTAMP=$(TZ="Asia/Jerusalem" date --iso-8601=seconds)" >> $GITHUB_ENV
 
     - name: Build and push Docker image

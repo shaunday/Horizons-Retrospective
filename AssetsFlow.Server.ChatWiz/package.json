@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development node --env-file=.env --watch src --watch-path src src/app.mjs",
     "start": "cross-env NODE_ENV=production node --env-file=.env.production src/app.mjs",
+    "build": "npm run start",
     "lint": "eslint src --fix",
     "audit": "npm audit --audit-level=moderate"
   },
