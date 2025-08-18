@@ -16,9 +16,10 @@ export function useAppGate() {
   const { user, loginAsDemo } = useAuth();
 
   const fetchTradesEnabled = authStep === "success";
-  const { isLoading: isTradeLoading, isError: isTradeError } = useFetchAndCacheTrades({
-    enabled: fetchTradesEnabled,
-  });
+  const { isLoading: isTradeLoading, isError: isTradeError } =
+    useFetchAndCacheTrades({
+      enabled: fetchTradesEnabled,
+    });
 
   // Run login on mount
   useEffect(() => {
@@ -41,7 +42,7 @@ export function useAppGate() {
     }
 
     run();
-  });
+  }, []);
 
   useEffect(() => {
     if (!fetchTradesEnabled) return;

@@ -1,9 +1,10 @@
 import React from "react";
-import { Menu, ActionIcon } from "@mantine/core";
-import { TbDots, TbTrash } from "react-icons/tb";
+import { Menu, ActionIcon } from '@mantine/core';
+import { TbDots, TbTrash } from 'react-icons/tb'; 
 import { ElementActions } from "@constants/journalConstants";
 import ProcessingAndSuccessMessage from "@components/Processing/ProcessingAndSuccessMessage";
-import { useElementActionMutation } from "@hooks/Journal/Element/useElementActionMutation";
+import { useElementActionMutation } from "@hooks/Journal/Element/useElementActionMutation"
+
 
 function ElementControls({ tradeElement, className = "" }) {
   const { elementActionMutation, processingStatus } = useElementActionMutation(tradeElement);
@@ -22,8 +23,7 @@ function ElementControls({ tradeElement, className = "" }) {
             </ActionIcon>
           </Menu.Target>
           <Menu.Dropdown>
-            <Menu.Item
-              leftSection={<TbTrash size={16} />}
+            <Menu.Item leftSection={<TbTrash size={16} />}
               onClick={() => handleAction(ElementActions.DELETE)}
             >
               Delete Element

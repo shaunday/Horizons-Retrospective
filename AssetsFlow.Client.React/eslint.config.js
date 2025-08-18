@@ -17,6 +17,7 @@ export default [
       ".types/",
       ".generated/",
     ],
+
     plugins: {
       react: reactPlugin,
       "react-hooks": reactHooksPlugin,
@@ -30,19 +31,6 @@ export default [
       globals: {
         window: "readonly",
         document: "readonly",
-        console: "readonly",
-        localStorage: "readonly",
-        sessionStorage: "readonly",
-        setTimeout: "readonly",
-        clearTimeout: "readonly",
-        setInterval: "readonly",
-        clearInterval: "readonly",
-        fetch: "readonly",
-        navigator: "readonly",
-        location: "readonly",
-        __APP_VERSION__: "readonly",
-        __APP_BUILD_DATE__: "readonly",
-        __GIT_COMMIT__: "readonly",
       },
       parserOptions: {
         ecmaFeatures: { jsx: true },

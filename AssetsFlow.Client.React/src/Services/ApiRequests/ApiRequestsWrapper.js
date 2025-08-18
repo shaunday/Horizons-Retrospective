@@ -32,7 +32,7 @@ export async function request(url, options = {}, retry = true) {
         authStorage.setAuth(refreshed.token, refreshed.user);
         return request(url, options, false);
       }
-    } catch (_refreshError) {
+    } catch (refreshError) {
       authStorage.clearAll();
       // TODO: redirect to login if needed
       throw new Error("Session expired. Please log in again.");

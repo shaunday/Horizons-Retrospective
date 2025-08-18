@@ -1,5 +1,5 @@
 import React from "react";
-import { ProcessingStatus } from "@constants/constants";
+import { ProcessingStatus } from "@constants/Constants"; 
 
 // SuccessMessage component
 function SuccessMessage() {
@@ -8,13 +8,15 @@ function SuccessMessage() {
 
 const MemoizedSuccessMessage = React.memo(SuccessMessage);
 
-function ProcessingAndSuccessMessage({ status }) {
+function ProcessingAndSuccessMessage ({ status }) {
   return (
     <>
-      {status === ProcessingStatus.PROCESSING && <div className="spinner">Processing...</div>}
+      {status === ProcessingStatus.PROCESSING && (
+        <div className="spinner">Processing...</div>
+      )}
       {status === ProcessingStatus.SUCCESS && <MemoizedSuccessMessage />}
     </>
   );
-}
+};
 
 export default React.memo(ProcessingAndSuccessMessage);
