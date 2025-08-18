@@ -15,10 +15,9 @@ service UserService {
   rpc GetUserByEmail (GetUserByEmailRequest) returns (UserResponse);
   rpc GetUserRoles (GetUserRolesRequest) returns (GetUserRolesResponse);
   
-  // Health check
+  rpc Info(InfoRequest) returns (InfoResponse);
   rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse);
 
-  // Password operations
   rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse);
 }
 
@@ -96,3 +95,8 @@ message GetUserRolesRequest {
 message GetUserRolesResponse {
   repeated string roles = 1;
 } 
+
+message InfoRequest {}
+message InfoResponse {
+  string version = 1;
+}

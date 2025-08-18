@@ -1,8 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import path from 'path'
+import { fileURLToPath } from 'url'
 import { execSync } from 'child_process'
 import pkg from './package.json'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 let gitCommit = 'unknown'
 try {

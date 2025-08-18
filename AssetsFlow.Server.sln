@@ -52,7 +52,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssetsFlow.Server.Main", "A
 		AssetsFlow.Server\CHANGELOG.md = AssetsFlow.Server\CHANGELOG.md
 		ToDo-Telemetry.md = ToDo-Telemetry.md
 		AssetsFlow.Server\TODO.md = AssetsFlow.Server\TODO.md
-		AssetsFlow.Server\AssetsFlow.Web.API\version.txt = AssetsFlow.Server\AssetsFlow.Web.API\version.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetsFlow-Aspire.AppHost", "AssetsFlow.Server.Aspire\HsR.Server.AppHost\AssetsFlow-Aspire.AppHost.csproj", "{42FDD9FA-FB96-4373-A223-B7CBF7421353}"

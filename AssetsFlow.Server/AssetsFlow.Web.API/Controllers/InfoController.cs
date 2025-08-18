@@ -2,6 +2,7 @@
 using HsR.Common;
 using HsR.Web.API.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace AssetsFlowWeb.API.Controllers
 {
@@ -16,7 +17,13 @@ namespace AssetsFlowWeb.API.Controllers
         [HttpGet]
         public IActionResult GetInfo()
         {
-            string? appVersion = Environment.GetEnvironmentVariable("APP_VERSION");
+            var assembly = Assembly.GetExecutingAssembly();
+            var infoAttr = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+            var versionRaw = infoAttr?.InformationalVersion ?? "unknown";
+
+            // Strip build metadata after '+'
+            var appVersion = versionRaw.Split('+')[0];
+
             string? buildTimeStamp = Environment.GetEnvironmentVariable("BUILD_TIMESTAMP");
             string? commitHash = Environment.GetEnvironmentVariable("COMMIT_SHA");
 

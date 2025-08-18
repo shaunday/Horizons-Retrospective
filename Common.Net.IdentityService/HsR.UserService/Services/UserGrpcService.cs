@@ -1,9 +1,10 @@
+using Grpc.Core;
+using HsR.UserService.Entities;
 using HsR.UserService.Models;
 using HsR.UserService.Protos;
 using Microsoft.AspNetCore.Identity;
-using HsR.UserService.Entities;
-using Grpc.Core;
 using Microsoft.Extensions.Logging;
+using System.Reflection;
 
 namespace HsR.UserService.Services
 {
@@ -227,6 +228,21 @@ namespace HsR.UserService.Services
                 Status = "Healthy",
                 Message = "User Service is running",
                 Timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss UTC")
+            });
+        }
+
+        public override Task<Protos.InfoResponse> Info(Protos.InfoRequest request, ServerCallContext context)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var infoAttr = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+            var versionRaw = infoAttr?.InformationalVersion ?? "unknown";
+
+            // Strip build metadata after '+'
+            var version = versionRaw.Split('+')[0];
+
+            return Task.FromResult(new Protos.InfoResponse
+            {
+                Version = version,
             });
         }
 

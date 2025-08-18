@@ -1,7 +1,6 @@
 ﻿
 # TODO
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
-- add logs to repo methods
 
 - add version to user api
 - fix user entity (remove stuff?), adjust login request to user/pass?

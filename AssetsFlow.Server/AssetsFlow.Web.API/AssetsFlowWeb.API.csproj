@@ -9,6 +9,9 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <UserSecretsId>d695b964-133b-4f51-bd8d-0cbf79bfe1a0</UserSecretsId>
   </PropertyGroup>
+    <PropertyGroup>
+        <Version>0.9.225-b</Version>
+    </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Asp.Versioning.Mvc" />
     <PackageReference Include="AutoMapper" />

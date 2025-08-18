@@ -26,7 +26,7 @@ runs:
       id: detect_project
       shell: bash
       run: |
-        PROJECT_FILE=$(find "${{ inputs.project-path }}" -maxdepth 1 -name '*.csproj' | head -n 1)
+        PROJECT_FILE=$(ls "${{ inputs.project-path }}"/*.csproj 2>/dev/null | head -n1)
         if [ -z "$PROJECT_FILE" ]; then
           echo "❌ No .csproj file found in project path '${{ inputs.project-path }}'"
           exit 1
@@ -52,32 +52,26 @@ runs:
         username: ${{ github.actor }}
         password: ${{ inputs.github-token }}
 
-    - name: Set version from version.txt or fallback to timestamp
-      id: set_version
+    - name: Extract project version
       shell: bash
       run: |
-        TIMESTAMP=$(TZ="Asia/Jerusalem" date --iso-8601=seconds)
+        PROJECT_FILE="${{ steps.detect_project.outputs.project-file }}"
 
-        VERSION_FILE="${{ inputs.project-path }}/version.txt"
+        VERSION=$(dotnet msbuild "$PROJECT_FILE" -nologo -t:GetVersion -p:Configuration=Release -v:q)
 
-        if [ -f "$VERSION_FILE" ]; then
-          VERSION_RAW=$(cat "$VERSION_FILE" | tr -d ' \t\n\r')
-          if [ -z "$VERSION_RAW" ]; then
-            echo "version.txt is empty, falling back to timestamp version"
-            VERSION="v${TIMESTAMP}"
-          else
-            VERSION="$VERSION_RAW"
-          fi
-        else
-          echo "version.txt not found, falling back to timestamp version"
-          VERSION="v${TIMESTAMP}"
+        if [ -z "$VERSION" ]; then
+          echo "Error: Version not found"
+          exit 1
         fi
 
-        echo "VERSION=$VERSION" >> $GITHUB_ENV
-        echo "TIMESTAMP=$TIMESTAMP" >> $GITHUB_ENV
+        # Clean build metadata (+anything)
+        CLEAN_VERSION=$(echo "$VERSION" | cut -d'+' -f1)
 
-        echo "Version: $VERSION"
-        echo "Timestamp: $TIMESTAMP"
+        echo "VERSION=$CLEAN_VERSION" >> $GITHUB_ENV
+        echo "Version: $CLEAN_VERSION"
+        
+    - name: Set build timestamp
+      run: echo "TIMESTAMP=$(TZ="Asia/Jerusalem" date --iso-8601=seconds)" >> $GITHUB_ENV
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
