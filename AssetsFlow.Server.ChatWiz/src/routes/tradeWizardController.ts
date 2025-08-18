@@ -1,9 +1,11 @@
-import { loadElementTemplates } from '../templates/templateLoader.mjs';
-import { parseTradeInputWithAI } from '#services/aiClient.mjs';
+import { Request, Response } from 'express';
+import { loadElementTemplates } from '../templates/templateLoader';
+import { parseTradeInputWithAI } from '#services/aiClient';
 
-let cachedTemplates = null;
+type Templates = Record<string, unknown>; // adjust to actual template type
+let cachedTemplates: Templates | null = null;
 
-async function ensureTemplatesLoaded() {
+async function ensureTemplatesLoaded(): Promise<void> {
   if (!cachedTemplates) {
     const { templates, errors } = await loadElementTemplates();
     if (Object.keys(errors).length) {
@@ -13,28 +15,34 @@ async function ensureTemplatesLoaded() {
   }
 }
 
-export async function getCreationFlows(req, res) {
+export async function getCreationFlows(req: Request, res: Response): Promise<void> {
   res.json({
     flows: ['new trade', 'add element to existing'],
   });
 }
 
-export async function handleCreationStep(req, res) {
+export async function handleCreationStep(req: Request, res: Response): Promise<Response> {
   try {
     await ensureTemplatesLoaded();
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(err);
-    return res.status(500).json({ error: 'Failed to load templates', details: err.message });
+    return res.status(500).json({
+      error: 'Failed to load templates',
+      details: err instanceof Error ? err.message : 'Unknown error',
+    });
   }
 
-  const { flowType, userInput } = req.body;
+  const { flowType, userInput } = req.body as {
+    flowType?: string;
+    userInput?: string;
+  };
 
   if (!flowType || typeof flowType !== 'string') {
     return res.status(400).json({ error: 'flowType (string) is required' });
   }
 
   if (flowType === 'new trade') {
-    const template = cachedTemplates.tradeOrigin;
+    const template = cachedTemplates?.['tradeOrigin'];
     if (!template) {
       return res.status(500).json({ error: 'Trade origin template not found' });
     }
@@ -48,7 +56,7 @@ export async function handleCreationStep(req, res) {
     try {
       const aiResult = await parseTradeInputWithAI(userInput);
       return res.json({ aiResult });
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('AI parsing error:', err);
       return res.status(500).json({ error: 'Failed to process input with AI' });
     }
