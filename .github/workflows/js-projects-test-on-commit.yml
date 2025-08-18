@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: cd ${{ matrix.project-path }} && npm install
 
+      - name: Set GIT_COMMIT
+        run: echo "GIT_COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+  
       - name: Run build
         run: cd ${{ matrix.project-path }} && npm run build
 

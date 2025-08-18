@@ -7,10 +7,10 @@
   "scripts": {
     "dev": "vite",
     "start": "vite",
-    "build": "powershell -Command \"$env:GIT_COMMIT = (git rev-parse --short HEAD); vite build\"",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --fix",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+    "build": "vite build",
+    "predeploy": "cross-env GIT_COMMIT=$(git rev-parse --short HEAD) BUILD_TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ) npm run build",
     "deploy": "gh-pages -d dist",
     "audit": "npm audit --audit-level=moderate"
   },
