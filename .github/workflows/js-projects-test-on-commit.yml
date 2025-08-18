@@ -15,7 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Fetch full history for git diff
+          fetch-depth: 0    # Fetch full history for all files
+          ref: ${{ github.ref }}
 
       - name: Detect changed project paths from predefined list
         id: set-matrix
@@ -26,27 +27,17 @@ jobs:
           )
 
           CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-
-          # Try to get upstream branch
-          UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || true)
-
-          # If no upstream or invalid, fall back
-          if [ -n "$UPSTREAM" ] && git show-ref --verify --quiet "refs/remotes/${UPSTREAM}"; then
-            BASE_BRANCH="$UPSTREAM"
-          else
-            BASE_BRANCH="origin/main"
-          fi
-
           echo "Current branch: $CURRENT_BRANCH"
-          echo "Using base branch: $BASE_BRANCH"
 
-          git fetch origin $BASE_BRANCH
+          # Ensure full history is available
+          git fetch --no-tags --prune --unshallow || true
 
-          CHANGED_FILES=$(git diff --name-only $BASE_BRANCH...HEAD)
-
-          echo "Changed files:"
+          # List all files in this branch
+          CHANGED_FILES=$(git ls-tree -r --name-only HEAD)
+          echo "Files in branch:"
           echo "$CHANGED_FILES"
 
+          # Build matrix for changed paths
           MATRIX_LIST=()
           for path in "${KNOWN_PATHS[@]}"; do
             if echo "$CHANGED_FILES" | grep -q "^$path/"; then
@@ -69,6 +60,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
