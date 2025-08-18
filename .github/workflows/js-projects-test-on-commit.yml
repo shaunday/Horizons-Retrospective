@@ -1,3 +1,22 @@
+name: Build & Test Javascript projects
+
+on:
+  push:
+    paths:
+      - "AssetsFlow.Server.ChatWiz/**"
+      - "AssetsFlow.Client.React/**"
+  workflow_dispatch:
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history for git diff
+
       - name: Detect changed project paths from predefined list
         id: set-matrix
         run: |
@@ -39,3 +58,35 @@
           echo "matrix=$MATRIX_JSON" >> "$GITHUB_OUTPUT"
           echo "Matrix paths: $MATRIX_JSON"
         shell: bash
+
+  build:
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.matrix != '[]' }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project-path: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.17'
+
+      - name: Install dependencies
+        run: cd ${{ matrix.project-path }} && npm install
+
+      - name: Run build
+        run: cd ${{ matrix.project-path }} && npm run build
+
+      - name: Run audit
+        run: cd ${{ matrix.project-path }} && npm run audit
+
+      # Uncomment below to add lint and test steps
+      # - name: Run lint
+      #   run: cd ${{ matrix.project-path }} && npm run lint
+      #
+      # - name: Run tests
+      #   run: cd ${{ matrix.project-path }} && npm test
