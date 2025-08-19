@@ -1,5 +1,7 @@
 ## 1
 
+filtering: symbol should have a list, , w/l should toggle closed, moving from closed should clear w/l
+
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox + autofill
 from limor: title should be styled diff than the content, text aligned to the left
 add: opened/closedat/IdeaDate (just to overview?)
@@ -20,6 +22,7 @@ add: ignoreActivation flag to content edit (requests "DenyActivation")
 add: Once an element is active, can edit date via popup (pick date/now)
 add: trade command bar - delete trade action, collapse all trades
 
+add: broker to filtering
 add: content-history
 add: user login ... routing?
 add: userinfo on toppanel, tooltip + constants

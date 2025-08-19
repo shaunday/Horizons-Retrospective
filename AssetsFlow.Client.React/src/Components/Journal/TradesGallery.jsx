@@ -6,7 +6,7 @@ import { useFetchAndCacheTrades } from "@hooks/Journal/useFetchAndCacheTrades";
 function TradesGallery({ newlyAddedTradeId }) {
   const { trades: cachedTradeIds } = useFetchAndCacheTrades();
   return (
-    <div className="m-1 p-1 max-h-screen flex-1 overflow-y-auto">
+    <div className="p-1 max-h-screen flex-1 overflow-y-auto">
       <ul className="m-1 flex flex-col">
         {cachedTradeIds.map((trade) => {
           return (

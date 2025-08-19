@@ -6,7 +6,7 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const DELAY_MS = 500;
+const DELAY_MS = 250;
 
 export function useAppGate() {
   const [authStep, setAuthStep] = useState("pending");
@@ -16,10 +16,9 @@ export function useAppGate() {
   const { user, loginAsDemo } = useAuth();
 
   const fetchTradesEnabled = authStep === "success";
-  const { isLoading: isTradeLoading, isError: isTradeError } =
-    useFetchAndCacheTrades({
-      enabled: fetchTradesEnabled,
-    });
+  const { isLoading: isTradeLoading, isError: isTradeError } = useFetchAndCacheTrades({
+    enabled: fetchTradesEnabled,
+  });
 
   // Run login on mount
   useEffect(() => {
