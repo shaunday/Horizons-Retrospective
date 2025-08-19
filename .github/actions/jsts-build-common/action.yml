@@ -20,16 +20,20 @@ jobs:
           node-version: '22.17'
 
       - name: Install dependencies
-        run: cd ${{ inputs.project-path }} && npm install
+        working-directory: ${{ inputs.project-path }}
+        run: npm install
 
       - name: Set GIT_COMMIT
         run: echo "GIT_COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: Run build
-        run: cd ${{ inputs.project-path }} && npm run build
+        working-directory: ${{ inputs.project-path }}
+        run: npm run build
 
       - name: Run lint
-        run: cd ${{ inputs.project-path }} && npm run lint
+        working-directory: ${{ inputs.project-path }}
+        run: npm run lint
 
       - name: Run audit
-        run: cd ${{ inputs.project-path }} && npm run audit
+        working-directory: ${{ inputs.project-path }}
+        run: npm run audit
