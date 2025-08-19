@@ -9,7 +9,7 @@ import ValuePopover from "./ValuePopover";
 // eslint-disable-next-line react/prop-types
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const isOverview = onValueChangeInitiated === undefined;
-  const { contentValue, textRestrictions } = dataElementContentParser(cellInfo);
+  const { contentData } = dataElementContentParser(cellInfo);
 
   const [openPopoverId, setOpenPopoverId] = useAtom(openPopoverIdAtom);
   // eslint-disable-next-line react/prop-types
@@ -42,7 +42,7 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
     >
       <Popover.Target>
         <ValueDisplay
-          contentValue={contentValue}
+          contentValue={contentData.contentValue}
           isOverview={isOverview}
           disallowTooltip={popoverOpened}
           onClick={() => !isOverview && setOpenPopoverId(popoverId)}
@@ -56,8 +56,8 @@ function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
         className="bg-neutral-50 border border-blue-50 rounded-lg p-3 shadow-md"
       >
         <ValuePopover
-          contentValue={contentValue}
-          textRestrictions={textRestrictions}
+          contentValue={contentData.contentValue}
+          textRestrictions={contentData.textRestrictions}
           onSubmit={handleSubmit}
         />
       </Popover.Dropdown>

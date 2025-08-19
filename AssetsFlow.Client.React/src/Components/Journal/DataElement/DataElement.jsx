@@ -11,7 +11,7 @@ import { dataElementContentParser } from "@services/dataElementContentParser";
 // eslint-disable-next-line react/prop-types
 function DataElement({ cellInfo, overviewType }) {
   const isOverview = overviewType != Constants.OverviewType.NONE;
-  const { contentValue } = dataElementContentParser(cellInfo);
+  const { contentData } = dataElementContentParser(cellInfo);
 
   const { contentUpdateMutation, processingStatus } = useContentUpdateMutation(cellInfo);
 
@@ -30,7 +30,7 @@ function DataElement({ cellInfo, overviewType }) {
         "flex-row": isOverview,
         "flex-col": !isOverview,
         "bg-red-50 border-red-200":
-          !contentValue && overviewType != Constants.OverviewType.TRADE_OVERVIEW,
+          !contentData.contentValue && overviewType != Constants.OverviewType.TRADE_OVERVIEW,
         "pointer-events-none": processingStatus === ProcessingStatus.PROCESSING,
         "pointer-events-auto": processingStatus !== ProcessingStatus.PROCESSING,
       })}
