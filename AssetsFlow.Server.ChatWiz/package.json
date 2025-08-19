@@ -9,10 +9,11 @@
     "#routes/*": "./dist/routes/*.js"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development tsc --watch",
-    "typecheck": "tsc --noEmit",
-    "build": "tsc",
+    "dev": "cross-env NODE_ENV=development tsc --project tsconfig.dev.json --watch",
+    "typecheck": "tsc --noEmit --project tsconfig.json",
+    "build": "tsc --project tsconfig.build.json",
     "start": "cross-env NODE_ENV=development node dist/app.js",
+    "start:prod": "cross-env NODE_ENV=production node dist/app.js",
     "lint": "eslint src --ext .ts --fix",
     "audit": "npm audit --audit-level=moderate"
   },
