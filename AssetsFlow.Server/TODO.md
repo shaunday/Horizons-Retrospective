@@ -1,6 +1,6 @@
 ﻿
 # TODO
-- filtering BASE: data migrations, controller endpoint
+- filtering BASE: data migrations, controller endpoint, add symbols to userdata
 - 
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
 - fix user entity (remove stuff?), adjust login request to user/pass?
