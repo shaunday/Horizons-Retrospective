@@ -1,16 +1,17 @@
 ﻿
 # TODO
+- filtering BASE: data migrations, controller endpoint
+- 
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
-
 - fix user entity (remove stuff?), adjust login request to user/pass?
 - GetUserIdFromToken/ValidateToken are not used.. 
+- closed trade logic : deny edits/ re-open trade to allow edit? meanwhile its all open
+- 
+- closure: change lessons to : mistakes, strengths, takeaways
+- filtering: add the above + dates, free search
+- add sortby
 
 - rethink isContentMissing - either way dont need to reload all tradeComposite to get it, you always got the old one (in the fe at least)
-- closed trade logic : deny edits/ re-open trade to allow edit? meanwhile its all open
-- add mistakes?
-
-- filtering: figure out date, add search by
-- sortby
 
 ## testing
 - API tests (seeder?) + expand tests/integration tests
