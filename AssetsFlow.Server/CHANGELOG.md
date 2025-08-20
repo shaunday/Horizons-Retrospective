@@ -1,3 +1,6 @@
+## [0.9.226-b] - 2025-08-..
+- filtering
+
 ## [0.9.225-b] - 2025-08-18
 - validate net amount on close trade, return reduce element on close
 - parse elements from json templates

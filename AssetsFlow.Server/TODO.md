@@ -7,8 +7,10 @@
 
 - rethink isContentMissing - either way dont need to reload all tradeComposite to get it, you always got the old one (in the fe at least)
 - closed trade logic : deny edits/ re-open trade to allow edit? meanwhile its all open
+- add mistakes?
 
-- filtering/sortby/search by
+- filtering: figure out date, add search by
+- sortby
 
 ## testing
 - API tests (seeder?) + expand tests/integration tests
