@@ -1,10 +1,11 @@
-﻿using System;
+﻿using HsR.Journal.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AssetsFlowWeb.Services.Models
+namespace HsR.Journal.Services
 {
     public abstract class FilterDefinition
     {
@@ -26,15 +27,6 @@ namespace AssetsFlowWeb.Services.Models
     public class DateRangeFilterDefinition : FilterDefinition
     {
         public IReadOnlyList<string> Restrictions { get; init; } = Array.Empty<string>();
-    }
-
-    public enum FilterId
-    {
-        Wl,
-        Status,
-        Symbol,
-        OpenDateRange,
-        CloseDateRange
     }
 
     public enum FilterType

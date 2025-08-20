@@ -39,6 +39,9 @@ namespace HsR.Journal.Entities
 
         public ICollection<string>? Restrictions { get; set; }
 
+        //canonical identifier for filtering
+        public FilterId FilterId { get; set; } = FilterId.None;
+
         #endregion
 
         #region Ctors

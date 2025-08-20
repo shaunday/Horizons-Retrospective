@@ -8,12 +8,13 @@ namespace HsR.Journal.Entities.Factory.Models
         public TradeActionType ElementType { get; set; }
 
         [JsonPropertyName("elements")]
-        public List<ElementTemplate> Elements { get; set; } = new();
+        public List<DataElementTemplate> Elements { get; set; } = new();
     }
 
-    public class ElementTemplate
+    public class DataElementTemplate
     {
         [JsonPropertyName("title")]
+
         public string Title { get; set; } = string.Empty;
 
         [JsonPropertyName("componentType")]
@@ -36,5 +37,8 @@ namespace HsR.Journal.Entities.Factory.Models
 
         [JsonPropertyName("totalCostRelevance")]
         public ValueRelevance TotalCostRelevance { get; set; }
+
+        [JsonPropertyName("filterId")]
+        public FilterId FilterId { get; set; } = FilterId.None;
     }
 }

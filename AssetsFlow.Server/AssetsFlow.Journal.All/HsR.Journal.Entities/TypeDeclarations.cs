@@ -21,4 +21,12 @@
         Open,
         Closed
     }
+
+    public enum FilterId
+    {
+        Wl,
+        Status,
+        Symbol,
+        None,
+    }
 }
