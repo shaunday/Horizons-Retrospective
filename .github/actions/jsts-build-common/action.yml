@@ -1,39 +1,39 @@
 name: JS-TS Build & Test
+description: Build, lint, and audit a JS/TS project
 
-on:
-  workflow_call:
-    inputs:
-      project-path:
-        required: true
-        type: string
+inputs:
+  project-path:
+    description: "Path to the project"
+    required: true
 
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+runs:
+  using: "composite"
+  steps:
 
-    steps:
-      - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22.17'
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: "22.17"
 
-      - name: Install dependencies
-        working-directory: ${{ inputs.project-path }}
-        run: npm install
+    - name: Install dependencies
+      run: npm install
+      working-directory: ${{ inputs.project-path }}
 
-      - name: Set GIT_COMMIT
-        run: echo "GIT_COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+    - name: Set GIT_COMMIT
+      run: echo "GIT_COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+      working-directory: ${{ inputs.project-path }}
 
-      - name: Run build
-        working-directory: ${{ inputs.project-path }}
-        run: npm run build
+    - name: Build project
+      run: npm run build
+      working-directory: ${{ inputs.project-path }}
 
-      - name: Run lint
-        working-directory: ${{ inputs.project-path }}
-        run: npm run lint
+    - name: Run lint
+      run: npm run lint
+      working-directory: ${{ inputs.project-path }}
 
-      - name: Run audit
-        working-directory: ${{ inputs.project-path }}
-        run: npm run audit
+    - name: Run audit
+      run: npm run audit
+      working-directory: ${{ inputs.project-path }}
