@@ -1,5 +1,5 @@
 import express from 'express';
-import { getCreationFlows, handleCreationStep } from './tradeWizardController';
+import { getCreationFlows, handleCreationStep } from './tradeWizardController.js';
 
 const router = express.Router();
 

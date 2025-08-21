@@ -7,28 +7,36 @@ export default [
     js.configs.recommended,
     {
         files: ["src/**/*.{ts,tsx,js,mjs}"],
-        ignores: [
-            "node_modules/",
-            "dist/",
-            "build/",
-            "coverage/",
-            ".types/",
-            ".generated/",
-        ],
-        plugins: {
-            n: nodePlugin,
-            import: importPlugin,
-            "@typescript-eslint": tsPlugin,
-        },
+        ignores: ["node_modules/", "dist/", "build/", "coverage/", ".types/", ".generated/"],
         languageOptions: {
             ecmaVersion: 2022,
             sourceType: "module",
+            globals: {
+                process: "readonly",
+                URL: "readonly"
+            }
+        },
+        plugins: {
+            n: nodePlugin,
+            import: importPlugin,
+            "@typescript-eslint": tsPlugin
+        },
+        settings: {
+            "import/resolver": {
+                typescript: { project: "./tsconfig.json" },
+                node: { extensions: [".js", ".ts", ".tsx"] }
+            }
         },
         rules: {
             ...nodePlugin.configs.recommended.rules,
             ...importPlugin.configs.recommended.rules,
             ...tsPlugin.configs.recommended.rules,
-            // Add your custom rules or overrides here
-        },
-    },
+            "import/extensions": [
+                "error",
+                "ignorePackages",
+                { ts: "never", tsx: "never", js: "never", mjs: "never" }
+            ],
+            "import/no-unresolved": "off"
+        }
+    }
 ];

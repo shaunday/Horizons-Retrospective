@@ -1,9 +1,9 @@
 const API_VERSION = 'trade-wiz/api/v1';
 
 import express from 'express';
-import { httpLogger, baseLogger } from '#services/logger';
-import tradeWizardRoutes from '#routes/tradeWizardRoutes';
-import statusRoutes from '#routes/statusRoutes';
+import { httpLogger, baseLogger } from './services/logger.js';
+import tradeWizardRoutes from './routes/tradeWizardRoutes.js';
+import statusRoutes from './routes/statusRoutes.js';
 import cors from 'cors';
 
 const app = express();
