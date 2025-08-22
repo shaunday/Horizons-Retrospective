@@ -1,33 +1,31 @@
-import fs from 'fs/promises';
-import path from 'path';
-import { execSync } from 'child_process';
+// tradeElementTemplateLoader.ts
+import fs from "fs/promises";
+import path from "path";
 
-function getElementTemplatePath() {
-  const isDev = process.env.NODE_ENV !== 'production';
-  const basePath = isDev
-    ? execSync('git rev-parse --show-toplevel', { encoding: 'utf-8' }).trim()
-    : path.resolve(new URL('.', import.meta.url).pathname);
-  return path.join(basePath, 'common', 'trade-elements-template');
+const templates: Record<string, unknown> = {};
+
+async function loadTemplates() {
+  const basePath = process.cwd();
+  const templatePath = path.join(
+    basePath,
+    "common",
+    "trade-elements-templates"
+  );
+
+  const files = await fs.readdir(templatePath);
+  for (const file of files) {
+    if (file.endsWith("-template.json")) {
+      const raw = await fs.readFile(path.join(templatePath, file), "utf-8");
+      const parsed = JSON.parse(raw);
+      templates[parsed.elementType] = parsed;
+    }
+  }
 }
 
-const TEMPLATE_FILES = {
-  tradeOrigin: 'tradeOrigin-template.json',
-};
+await loadTemplates();
 
-export async function loadElementTemplates() {
-  const templatesDir = getElementTemplatePath();
-  const templates = {};
-  const errors = {};
-
-//   for (const [key, fileName] of Object.entries(TEMPLATE_FILES)) {
-//     const filePath = path.join(templatesDir, fileName);
-//     try {
-//       const raw = await fs.readFile(filePath, 'utf-8');
-//       templates[key] = JSON.parse(raw);
-//     } catch (err) {
-//       errors[key] = `Failed to load: ${err.message}`;
-//     }
-//   }
-
-  return { templates, errors };
+export function getTemplate(type: string) {
+  const t = templates[type];
+  if (!t) throw new Error(`Template not found: ${type}`);
+  return t as { elementType: string; elements: unknown[] }; // type assertion on return
 }
