@@ -1,6 +1,6 @@
 ﻿
 # TODO
-- userdata, controller endpoint, figure out in-process add/remove of symbols
+- userdata: cache it, update symbol if it's edited, verify it's all sent back
 - data migrations
 
 - alltrades should be via filter method
@@ -28,6 +28,7 @@
 - pies
 
 ## nice to have
+- saved sectors: get online? add to filters (SectorRelevance + saving logic commented out for now)
 - screenshots firebase (to store images?)
 - Actual R:R in closure
 - conluences check list = trends per tf, bb/ma distances

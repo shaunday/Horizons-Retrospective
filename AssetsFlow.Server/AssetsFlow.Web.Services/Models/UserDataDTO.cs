@@ -14,7 +14,7 @@ namespace AssetsFlowWeb.Services.Models
         [Required]
         public Guid UserId { get; set; }
 
-        public ICollection<string>? SavedSectors { get; set; }
+        //public ICollection<string>? SavedSectors { get; set; }
 
         public ICollection<string>? Symbols { get; set; }
 

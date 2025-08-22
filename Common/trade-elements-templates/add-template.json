@@ -8,11 +8,6 @@
       "firstPositionOnly": true
     },
     {
-      "title": "Sector",
-      "componentType": "Header",
-      "firstPositionOnly": true
-    },
-    {
       "title": "Reasoning",
       "componentType": "Context"
     },

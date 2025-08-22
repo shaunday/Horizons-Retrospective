@@ -29,12 +29,6 @@ namespace HsR.Journal.Entities.Factory
             return CreateEntries(CreateDataElementsFromTemplate(template), elementRef);
         }
 
-        private static List<DataElement> GetFirstPositionEntries(InterimTradeElement elementRef)
-        {
-            var template = TradeElementTemplateLoader.GetTemplate(TradeActionType.Add);
-            return CreateEntries(CreateDataElementsFromTemplate(template, isFirstPosition: true), elementRef);
-        }
-
         private static List<DataElement> GetReducePositionEntries(InterimTradeElement elementRef)
         {
             var template = TradeElementTemplateLoader.GetTemplate(TradeActionType.Reduce);
@@ -67,25 +61,22 @@ namespace HsR.Journal.Entities.Factory
             return cellConfigs.Select(config => CreateEntry(config, elementRef)).ToList();
         }
 
-        private static List<DataElement> CreateDataElementsFromTemplate(TradeElementTemplate template, bool isFirstPosition = false)
+        private static List<DataElement> CreateDataElementsFromTemplate(TradeElementTemplate template)
         {
-            return CreateDataElementsInternal(template, isFirstPosition, analytics: null);
+            return CreateDataElementsInternal(template, analytics: null);
         }
 
         private static List<DataElement> CreateSummaryDataElementsFromTemplate(TradeElementTemplate template, TradeAnalyticsSummary analytics)
         {
-            return CreateDataElementsInternal(template, isFirstPosition: false, analytics);
+            return CreateDataElementsInternal(template, analytics);
         }
 
-        private static List<DataElement> CreateDataElementsInternal(TradeElementTemplate template, bool isFirstPosition, TradeAnalyticsSummary? analytics)
+        private static List<DataElement> CreateDataElementsInternal(TradeElementTemplate template, TradeAnalyticsSummary? analytics)
         {
             var elements = new List<DataElement>();
 
             foreach (var el in template.Elements)
             {
-                if (el.FirstPositionOnly == true && !isFirstPosition)
-                    continue;
-
                 string content = analytics is TradeAnalyticsSummary summary
                     ? el.Title switch
                      {

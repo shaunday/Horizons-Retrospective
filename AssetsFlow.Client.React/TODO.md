@@ -1,6 +1,7 @@
 ## 1
 
 filtering: symbol should have a list, , w/l should toggle closed, moving from closed should clear w/l
+on login- get symbols list, filters list
 
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox + autofill
 from limor: title should be styled diff than the content, text aligned to the left

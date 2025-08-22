@@ -47,11 +47,7 @@ namespace HsR.Journal.Entities.Factory
         private static InterimTradeElement GetNewInterimTradeElement(TradeComposite trade, bool isAdd)
         {
             InterimTradeElement tradeInput = new(trade, isAdd ? TradeActionType.Add : TradeActionType.Reduce);
-            tradeInput.Entries = isAdd
-                ? (trade.Status == TradeStatus.AnIdea
-                    ? GetFirstPositionEntries(tradeInput)
-                    : GetAddPositionEntries(tradeInput))
-                : GetReducePositionEntries(tradeInput);
+            tradeInput.Entries = isAdd? GetAddPositionEntries(tradeInput) : GetReducePositionEntries(tradeInput);
             return tradeInput;
         }
 

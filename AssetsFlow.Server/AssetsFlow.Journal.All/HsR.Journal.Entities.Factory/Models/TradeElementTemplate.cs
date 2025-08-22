@@ -23,9 +23,6 @@ namespace HsR.Journal.Entities.Factory.Models
         [JsonPropertyName("restrictions")]
         public List<string>? Restrictions { get; set; }
 
-        [JsonPropertyName("firstPositionOnly")]
-        public bool? FirstPositionOnly { get; set; }
-
         [JsonPropertyName("isRelevantForLocalOverview")]
         public bool? IsRelevantForLocalOverview { get; set; }
 

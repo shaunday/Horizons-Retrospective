@@ -24,13 +24,12 @@ namespace HsR.Journal.DataContext
 
             UpdatedStatesCollation updatedStates =  await HandleTradeStatusUpdates(cell, request.DenyActivation);
 
-            if (cell.SectorRelevance)
-            {
-                var userId = cell.UserId;
-                await _userDataRepository.SaveSectorAsync(userId, request.Content);
-                var userData = await _userDataRepository.GetOrCreateUserDataAsync(userId);
-                updatedStates.SavedSectors = userData.SavedSectors;
-            }
+            //if (cell.SectorRelevance)
+            //{
+            //    var userId = cell.UserId;
+            //    await _userDataRepository.SaveSectorAsync(userId, request.Content);
+            //    updatedStates.UpdatedUserData = await _userDataRepository.GetOrCreateUserDataAsync(userId);
+            //}
             await _dataContext.SaveChangesAsync();
             return (cell, updatedStates);
         }

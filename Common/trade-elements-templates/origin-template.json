@@ -16,6 +16,10 @@
             "isRelevantForTradeOverview": true
         },
         {
+            "title": "Sector",
+            "componentType": "Header"
+        },
+        {
             "title": "Thesis",
             "componentType": "Context",
             "isRelevantForLocalOverview": true,

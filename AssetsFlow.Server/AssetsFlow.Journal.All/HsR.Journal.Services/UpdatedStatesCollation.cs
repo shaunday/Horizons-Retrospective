@@ -15,6 +15,6 @@ namespace HsR.Journal.Services
 
         public TradeComposite? TradeInfo { get; set; }
 
-        public ICollection<string>? SavedSectors { get; set; }
+        public UserData? UpdatedUserData { get; set; }
     }
 }
