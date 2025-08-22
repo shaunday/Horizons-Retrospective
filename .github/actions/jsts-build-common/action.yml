@@ -9,7 +9,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-
     - name: Checkout code
       uses: actions/checkout@v4
 
@@ -21,19 +20,24 @@ runs:
     - name: Install dependencies
       run: npm install
       working-directory: ${{ inputs.project-path }}
+      shell: bash
 
     - name: Set GIT_COMMIT
       run: echo "GIT_COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       working-directory: ${{ inputs.project-path }}
+      shell: bash
 
     - name: Build project
       run: npm run build
       working-directory: ${{ inputs.project-path }}
+      shell: bash
 
     - name: Run lint
       run: npm run lint
       working-directory: ${{ inputs.project-path }}
+      shell: bash
 
     - name: Run audit
       run: npm run audit
       working-directory: ${{ inputs.project-path }}
+      shell: bash
