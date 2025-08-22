@@ -2,7 +2,6 @@
 # TODO
 - userdata: cache it, update symbol if it's edited, verify it's all sent back
 - data migrations
-
 - alltrades should be via filter method
 
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
@@ -10,9 +9,7 @@
 - GetUserIdFromToken/ValidateToken are not used.. 
 - closed trade logic : deny edits/ re-open trade to allow edit? meanwhile its all open
 
-- closure: change lessons to : mistakes, strengths, takeaways
-- filtering: add the above( mistakes, strengths, takeaways) + dates, free search
-
+- filtering: add mistakes, strengths, takeaways + dates, free search
 - add sortby
 
 - rethink isContentMissing - either way dont need to reload all tradeComposite to get it, you always got the old one (in the fe at least)
@@ -28,7 +25,7 @@
 - pies
 
 ## nice to have
-- saved sectors: get online? add to filters (SectorRelevance + saving logic commented out for now)
+- saved sectors: get online? add to filters + filterId (saving logic commented out for now)
 - screenshots firebase (to store images?)
 - Actual R:R in closure
 - conluences check list = trends per tf, bb/ma distances

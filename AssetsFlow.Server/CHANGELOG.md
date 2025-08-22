@@ -3,7 +3,7 @@
 - filtering: added controller route
 - filtering: added to userdata
 - userdata: added repo wrapper for get symbols, get filters
-
+- closure: change lessons to : mistakes, strengths, takeaways
 
 ## [0.9.225-b] - 2025-08-18
 - validate net amount on close trade, return reduce element on close
