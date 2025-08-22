@@ -15,11 +15,11 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("hsr-api/v{version:apiVersion}/journal/components/{componentId}")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class ContentUpdateController : JournalControllerBase
+    public class ContentUpdateController : JournalOpsControllerBase
     {
         public ContentUpdateController(
             IJournalRepositoryWrapper journalAccess,
-            ILogger<JournalControllerBase> logger,
+            ILogger<JournalOpsControllerBase> logger,
             IMapper mapper,
             ITradesCacheService cacheService) : base(journalAccess, logger, mapper, cacheService)
         {

@@ -15,9 +15,9 @@ using HsR.Journal.Entities;
 [ApiController]
 public class TradeElementsController(
     IJournalRepositoryWrapper journalAccess,
-    ILogger<JournalControllerBase> logger,
+    ILogger<JournalOpsControllerBase> logger,
     IMapper mapper,
-    ITradesCacheService cacheService) : JournalControllerBase(journalAccess, logger, mapper, cacheService)
+    ITradesCacheService cacheService) : JournalOpsControllerBase(journalAccess, logger, mapper, cacheService)
 {
     [HttpDelete]
     public async Task<ActionResult<UpdatedStatesModel>> DeleteInterimTradeInput(int elementId)

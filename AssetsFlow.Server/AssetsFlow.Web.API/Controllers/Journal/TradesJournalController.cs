@@ -18,13 +18,13 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("hsr-api/v{version:apiVersion}/journal/trades")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class TradesJournalController : JournalControllerBase
+    public class TradesJournalController : JournalOpsControllerBase
     {
         private readonly IConfigurationService _config;
 
         public TradesJournalController(
             IJournalRepositoryWrapper journalAccess,
-            ILogger<JournalControllerBase> logger,
+            ILogger<JournalOpsControllerBase> logger,
             IMapper mapper,
             ITradesCacheService cacheService,
             IConfigurationService config) : base(journalAccess, logger, mapper, cacheService)
@@ -33,11 +33,8 @@ namespace HsR.Web.API.Controllers.Journal
         }
 
         [HttpGet]
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(
-    int pageNumber = 1,
-    int pageSize = 0,
-    [FromBody] IEnumerable<FilterDefinition>? filters = null)
+        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(int pageNumber = 1, int pageSize = 0, 
+                                                                           [FromBody] IEnumerable<FilterDefinition>? filters = null)
         {
             var userId = GetUserIdFromClaims();
             pageSize = ValidatePageSize(pageSize);

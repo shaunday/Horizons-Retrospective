@@ -62,7 +62,7 @@ namespace HsR.Journal.Entities
 
         public ContentRecord? ContentWrapper { get; set; }
 
-        public string? Content => ContentWrapper?.ContentValue ;
+        public string Content => ContentWrapper != null? ContentWrapper.ContentValue : "" ;
 
         public void SetFollowupContent(string newContent, string changeNote)
         {

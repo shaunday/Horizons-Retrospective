@@ -1,7 +1,9 @@
 ﻿
 # TODO
-- userdata, controller endpoint, add symbols, filters on creation
+- userdata, controller endpoint, figure out in-process add/remove of symbols
 - data migrations
+
+- alltrades should be via filter method
 
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
 - fix user entity (remove stuff?), adjust login request to user/pass?

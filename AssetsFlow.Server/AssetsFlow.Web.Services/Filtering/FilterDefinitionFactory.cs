@@ -11,7 +11,7 @@ namespace AssetsFlowWeb.Services.Filtering
 {
     public static class FilterDefinitionFactory
     {
-        public static IReadOnlyList<FilterDefinition> Create()
+        public static ICollection<FilterDefinition> Create()
         {
             return new List<FilterDefinition>
         {

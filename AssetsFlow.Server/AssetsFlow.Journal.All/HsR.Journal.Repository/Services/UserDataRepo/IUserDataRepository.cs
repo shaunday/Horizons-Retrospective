@@ -9,5 +9,7 @@ namespace HsR.Journal.DataContext
         Task<UserData> GetOrCreateUserDataAsync(Guid userId);
         Task SaveSectorAsync(Guid userId, string sector);
         Task<List<string>> GetSavedSectorsAsync(Guid userId);
+
+        Task<IList<string>> GetAllAvailableSymbolsAsync(Guid userId);
     } 
 }

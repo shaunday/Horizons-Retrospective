@@ -13,41 +13,42 @@ namespace HsR.Journal.DataContext
         public async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)> GetAllTradeCompositesAsync(Guid userId, 
                                                                                                             int pageNumber = 1, int pageSize = 10)
         {
-            var query = _dataContext.TradeComposites
-                .Where(tc => tc.UserId == userId)
-                .AsQueryable();
-            return await GetPaginatedTradesAsync(query, pageNumber, pageSize);
+            return await GetFilteredTradeCompositesAsync(userId, null, pageNumber, pageSize);
         }
 
         public async Task<(IEnumerable<TradeComposite>?, int totalTradesCount)> GetFilteredTradeCompositesAsync(Guid userId,
-                                                                                            IEnumerable<FilterDefinition> filters,
+                                                                                            IEnumerable<FilterDefinition>? filters = null,
                                                                                             int pageNumber = 1, int pageSize = 10)
         {
             var query = _dataContext.TradeComposites
                 .Where(tc => tc.UserId == userId)
                 .AsQueryable();
-            foreach (var filter in filters)
+
+            if (filters != null)
             {
-                switch (filter)
+                foreach (var filter in filters)
                 {
-                    case TextFilterDefinition textFilter when filter.Id == FilterId.Symbol:
-                        query = query.Where(tc =>
-                            tc.TradeElements.Any(te =>
-                                te.Entries.Any(e => e.FilterId == FilterId.Symbol && e.Content == filter.Title)));
-                        break;
+                    switch (filter)
+                    {
+                        case TextFilterDefinition textFilter when filter.Id == FilterId.Symbol:
+                            query = query.Where(tc =>
+                                tc.TradeElements.Any(te =>
+                                    te.Entries.Any(e => e.FilterId == FilterId.Symbol && e.Content == filter.Title)));
+                            break;
 
-                    case EnumFilterDefinition<WinLoss> wlFilter when filter.Id == FilterId.Wl:
-                        query = query.Where(tc =>
-                            tc.Summary != null &&
-                            tc.Summary.Entries.Any(e => e.FilterId == FilterId.Wl && e.Content == filter.Title));
-                        break;
+                        case EnumFilterDefinition<WinLoss> wlFilter when filter.Id == FilterId.Wl:
+                            query = query.Where(tc =>
+                                tc.Summary != null &&
+                                tc.Summary.Entries.Any(e => e.FilterId == FilterId.Wl && e.Content == filter.Title));
+                            break;
 
-                    case EnumFilterDefinition<TradeActionType> statusFilter when filter.Id == FilterId.Status:
-                        if (Enum.TryParse<TradeStatus>(filter.Title, out var status))
-                        {
-                            query = query.Where(tc => tc.Status == status);
-                        }
-                        break;
+                        case EnumFilterDefinition<TradeActionType> statusFilter when filter.Id == FilterId.Status:
+                            if (Enum.TryParse<TradeStatus>(filter.Title, out var status))
+                            {
+                                query = query.Where(tc => tc.Status == status);
+                            }
+                            break;
+                    }
                 }
             }
 

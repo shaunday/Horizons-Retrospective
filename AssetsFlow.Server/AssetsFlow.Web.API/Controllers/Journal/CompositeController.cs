@@ -18,11 +18,11 @@ namespace HsR.Web.API.Controllers.Journal
     [Route("hsr-api/v{version:apiVersion}/journal/trades/{tradeId}")]
     [ApiVersion("1.0")]
     [ApiController]
-    public class CompositeController : JournalControllerBase
+    public class CompositeController : JournalOpsControllerBase
     {
         public CompositeController(
             IJournalRepositoryWrapper journalAccess,
-            ILogger<JournalControllerBase> logger,
+            ILogger<JournalOpsControllerBase> logger,
             IMapper mapper,
             ITradesCacheService cacheService) : base(journalAccess, logger, mapper, cacheService)
         {
