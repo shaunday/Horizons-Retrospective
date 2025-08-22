@@ -2,6 +2,7 @@ import js from "@eslint/js";
 import nodePlugin from "eslint-plugin-n";
 import importPlugin from "eslint-plugin-import";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
 
 export default [
     js.configs.recommended,
@@ -9,11 +10,14 @@ export default [
         files: ["src/**/*.{ts,tsx,js,mjs}"],
         ignores: ["node_modules/", "dist/", "build/", "coverage/", ".types/", ".generated/"],
         languageOptions: {
+            parser: tsParser,
             ecmaVersion: 2022,
             sourceType: "module",
             globals: {
                 process: "readonly",
-                URL: "readonly"
+                URL: "readonly",
+                console: "readonly",
+                setTimeout: "readonly",
             }
         },
         plugins: {
@@ -23,8 +27,13 @@ export default [
         },
         settings: {
             "import/resolver": {
-                typescript: { project: "./tsconfig.json" },
-                node: { extensions: [".js", ".ts", ".tsx"] }
+                typescript: {
+                    alwaysTryTypes: true,
+                    project: "./tsconfig.json"
+                },
+                node: {
+                    extensions: [".js", ".ts", ".tsx"]
+                }
             }
         },
         rules: {

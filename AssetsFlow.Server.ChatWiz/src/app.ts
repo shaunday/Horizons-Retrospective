@@ -1,31 +1,31 @@
-const API_VERSION = 'trade-wiz/api/v1';
-
 import express from 'express';
+import cors from 'cors';
+
 import { httpLogger, baseLogger } from './services/logger.js';
 import tradeWizardRoutes from './routes/tradeWizardRoutes.js';
 import statusRoutes from './routes/statusRoutes.js';
-import cors from 'cors';
+import { notFoundHandler, errorHandler } from './middleware/errorHandler.js';
+import { config } from './config.js';
 
 const app = express();
 app.use(express.json());
 
-// Determine CORS origin based on environment
-const isDev = process.env.NODE_ENV === 'development';
-const corsOrigin = isDev ? 'http://localhost:5173' : 'https://hsr.mywebthings.xyz';
+// CORS
+baseLogger.info(`CORS policy set for frontend URL: ${config.corsOrigin}`);
+app.use(cors({ origin: config.corsOrigin }));
 
-if (corsOrigin) {
-  baseLogger.info(`CORS policy set for frontend URL: ${corsOrigin}`);
-}
-
-// Configure CORS middleware
-app.use(cors({ origin: corsOrigin }));
-
+// Logging
 app.use(httpLogger);
 
-app.use(`${API_VERSION}/status`, statusRoutes);
-app.use(`${API_VERSION}/trade-wizard`, tradeWizardRoutes);
+// Routes
+app.use(`/${config.apiVersion}/status`, statusRoutes);
+app.use(`/${config.apiVersion}/trade-wizard`, tradeWizardRoutes);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  baseLogger.info(`Server running on port ${PORT}`);
+// Error handling
+app.use(notFoundHandler);
+app.use(errorHandler);
+
+// Start
+app.listen(config.port, () => {
+  baseLogger.info(`Server running on port ${config.port}`);
 });
