@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Overlay, Loader, Center, Text, Stack } from "@mantine/core";
 
 function LoadingOverlay({ visible, text }) {
@@ -18,12 +19,8 @@ function LoadingOverlay({ visible, text }) {
       >
         <Stack align="center" spacing="xs">
           <Loader size="xl" color="white" />
-            {text && (
-            <Text
-              color="white"
-              size="md"
-              style={{ whiteSpace: "pre-line", textAlign: "center" }}
-            >
+          {text && (
+            <Text c="white" size="md" style={{ whiteSpace: "pre-line", textAlign: "center" }}>
               {text}
             </Text>
           )}
@@ -32,5 +29,10 @@ function LoadingOverlay({ visible, text }) {
     </>
   );
 }
+
+LoadingOverlay.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  text: PropTypes.string,
+};
 
 export default LoadingOverlay;

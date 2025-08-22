@@ -1,7 +1,10 @@
 ## 1
 
-filtering: symbol should have a list, , w/l should toggle closed, moving from closed should clear w/l
-on login- get symbols list, filters list
+filtering:
+w/l should toggle closed, moving from closed should clear w/l
+on login- get symbols list, filters list. save both with RQ
+selected filter - save as jotai's atom, pass to api
+connect symbols list
 
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox + autofill
 from limor: title should be styled diff than the content, text aligned to the left
@@ -13,7 +16,7 @@ fix: mantines notifications
 
 ## 2.
 
-workflow to run lint, test
+lint : "react/prop-types": "off"... keep fixing
 
 RQ isloading/error vs statusnots.. vs mantines notifications
 add: filter (status first, date first, BY STATUS), adjust data call api

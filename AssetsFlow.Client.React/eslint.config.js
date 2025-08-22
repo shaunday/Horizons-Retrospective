@@ -76,6 +76,7 @@ export default [
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "react-refresh/only-export-components": "warn",
       "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
     },
   },
 ];

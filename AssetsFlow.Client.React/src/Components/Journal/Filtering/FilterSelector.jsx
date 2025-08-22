@@ -1,9 +1,14 @@
-// FilterSelector.jsx
 import React from "react";
-import PropTypes from "prop-types";
 import { SegmentedControl, Group, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { TbCalendar } from "react-icons/tb";
+
+import {
+  filterSelectorPropTypes,
+  filterDateInputPropTypes,
+  filterSegmentedControlPropTypes,
+  filterTextInputPropTypes,
+} from "@services/PropTypes/filtersPropTypes";
 
 export default function FilterSelector({ filters = [], onAdd, onRemove, filterDefinitions = [] }) {
   const handleAdd = (field, value) => {
@@ -21,6 +26,7 @@ export default function FilterSelector({ filters = [], onAdd, onRemove, filterDe
       {...props}
     />
   );
+  FilterDateInput.propTypes = filterDateInputPropTypes;
 
   const FilterSegmentedControl = ({ filter, data = [] }) => (
     <SegmentedControl
@@ -30,6 +36,7 @@ export default function FilterSelector({ filters = [], onAdd, onRemove, filterDe
       size="xs"
     />
   );
+  FilterSegmentedControl.propTypes = filterSegmentedControlPropTypes;
 
   const FilterTextInput = ({ filter }) => (
     <TextInput
@@ -42,6 +49,7 @@ export default function FilterSelector({ filters = [], onAdd, onRemove, filterDe
       size="xs"
     />
   );
+  FilterTextInput.propTypes = filterTextInputPropTypes;
 
   const activeFilters = filterDefinitions.map((def) => {
     const current = filters.find((f) => f.field === def.id);
@@ -78,21 +86,4 @@ export default function FilterSelector({ filters = [], onAdd, onRemove, filterDe
   );
 }
 
-FilterSelector.propTypes = {
-  filters: PropTypes.arrayOf(
-    PropTypes.shape({
-      field: PropTypes.string.isRequired,
-      value: PropTypes.any,
-    })
-  ).isRequired,
-  onAdd: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired,
-  filterDefinitions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      type: PropTypes.oneOf(["enum", "text", "dateRange"]).isRequired,
-      restrictions: PropTypes.array,
-    })
-  ).isRequired,
-};
+FilterSelector.propTypes = filterSelectorPropTypes;
