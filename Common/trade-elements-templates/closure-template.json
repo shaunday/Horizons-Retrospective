@@ -1,21 +1,29 @@
 {
-  "elementType": "Closure",
-  "elements": [
-    {
-      "title": "Net Result",
-      "componentType": "Results",
-      "isRelevantForTradeOverview": true
-    },
-    {
-        "title": "W/L",
-        "componentType": "Results",
-        "restrictions": [ "W", "L" ],
-        "isRelevantForTradeOverview": true,
-        "filterId": "Wl"
-    },
-    {
-      "title": "Lessons",
-      "componentType": "Context"
-    }
-  ]
+    "elementType": "Closure",
+    "elements": [
+        {
+            "title": "Net Result",
+            "componentType": "Results",
+            "isRelevantForTradeOverview": true
+        },
+        {
+            "title": "W/L",
+            "componentType": "Results",
+            "restrictions": [ "W", "L" ],
+            "isRelevantForTradeOverview": true,
+            "filterId": "Wl"
+        },
+        {
+            "title": "Mistakes",
+            "componentType": "Context"
+        },
+        {
+            "title": "Strengths",
+            "componentType": "Context"
+        },
+        {
+            "title": "Takeaways",
+            "componentType": "Context"
+        }
+    ]
 }
