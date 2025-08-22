@@ -1,11 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import {
-  login,
-  loginAsDemo,
-  register,
-  logout as logoutApi,
-} from "@services/ApiRequests/userApiAccess";
+import { login, register, logout as logoutApi } from "@services/ApiRequests/userApiAccess";
 import { authStorage, USER_QUERY_KEY } from "@services/authStorage";
+import { useClearTradesCache } from "@hooks/UserManagement/useClearTradesCache";
+import { useUserData } from "@hooks/UserManagement/useUserData";
 
 export function useAuth() {
   const { data: user } = useQuery({
@@ -13,10 +10,16 @@ export function useAuth() {
     queryFn: authStorage.getUser,
   });
 
+  const { getUserData, setUserDataFromApi } = useUserData();
   const loginMutation = useMutation({
-    mutationFn: ({ isDemo, credentials }) =>
-      isDemo ? loginAsDemo() : login(credentials),
-    onSuccess: (data) => authStorage.setAuth(data.token, data.user),
+    mutationFn: (credentials) => login(credentials),
+    onSuccess: async (data) => {
+      authStorage.setAuth(data.token, data.user);
+      console.log("Logged in user:", data.user);
+
+      const fetchedData = await getUserData();
+      setUserDataFromApi(fetchedData);
+    }
   });
 
   const registerMutation = useMutation({
@@ -24,8 +27,10 @@ export function useAuth() {
     onSuccess: (data) => authStorage.setAuth(data.token, data.user),
   });
 
+  const clearTradesCache = useClearTradesCache();
   const logout = () => {
     authStorage.clearAll();
+    clearTradesCache();
     logoutApi();
   };
 
@@ -34,8 +39,8 @@ export function useAuth() {
   return {
     user,
     getToken,
-    login: (credentials) => loginMutation.mutateAsync({ isDemo: false, credentials }),
-    loginAsDemo: () => loginMutation.mutateAsync({ isDemo: true }),
+    login: (credentials) => loginMutation.mutateAsync(credentials),
+    loginAsDemo: () => loginMutation.mutateAsync(), // send empty object internally
     register: registerMutation.mutateAsync,
     logout,
     isLoggingIn: loginMutation.isLoading,

@@ -1,6 +1,6 @@
 ﻿
 # TODO
-- userdata: cache it, update symbol if it's edited, verify it's all sent back
+- userdata: cache symbols, update symbol if it's edited, verify it's all sent back
 - data migrations
 - alltrades should be via filter method
 

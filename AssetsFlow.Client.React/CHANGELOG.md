@@ -4,6 +4,7 @@
 
 fix: a bunch of prop checks, removed unused vars
 fix: mantines notifications
+add: get userdata on login - symbols list, filters list. save both with RQ
 
 ## [0.9.122-c] - 2025-08-18
 

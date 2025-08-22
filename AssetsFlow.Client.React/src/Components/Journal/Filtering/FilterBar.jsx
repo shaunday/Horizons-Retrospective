@@ -1,19 +1,22 @@
-// FilterBar.jsx
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Paper, Group, Button, Stack } from "@mantine/core";
 import FilterSelector from "./FilterSelector";
 import FilterChips from "./FilterChips";
-
-// Move filter definitions here
-const filterDefinitions = [
-  { id: "wl", title: "W/L", type: "enum", restrictions: ["win", "loss"] },
-  { id: "status", title: "Status", type: "enum", restrictions: ["idea", "open", "closed"] },
-  { id: "symbol", title: "Symbol", type: "text", restrictions: [] },
-  { id: "openDateRange", title: "Open Date", type: "dateRange", restrictions: [] },
-  { id: "closeDateRange", title: "Close Date", type: "dateRange", restrictions: [] },
-];
+import { useUserData } from "@hooks/UserManagement/useUserData";
 
 export default function FilterBar({ onFiltersChange }) {
+  const { data: userData, symbolRestrictions } = useUserData();
+  const rawDefinitions = useMemo(() => {
+    return userData?.availableFilters || [];
+  }, [userData]);
+
+  // Inject symbolRestrictions into the "symbols" filter definition
+  const filterDefinitions = useMemo(() => {
+    return rawDefinitions.map((def) =>
+      def.id === "symbols" ? { ...def, restrictions: symbolRestrictions ?? [] } : def
+    );
+  }, [rawDefinitions, symbolRestrictions]);
+
   const [filters, setFilters] = useState([]);
 
   const addFilter = (filter) => {

@@ -1,9 +1,6 @@
 ## 1
 
-filtering:
-on login- get symbols list, filters list. save both with RQ
-selected filter - save as jotai's atom, pass to api
-connect symbols list
+filtering: selected filter - save as jotai's atom, pass to api
 
 add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox + autofill
 from limor: title should be styled diff than the content, text aligned to the left
@@ -11,7 +8,6 @@ add: opened/closedat/IdeaDate (just to overview?)
 
 add: expand/collapse by clicking on the background, reduce expand icon's size
 fix: edit lessons in trade closure
-fix: mantines notifications
 
 ## 2.
 
