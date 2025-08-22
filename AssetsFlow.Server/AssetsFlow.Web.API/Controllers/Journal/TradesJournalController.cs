@@ -1,16 +1,17 @@
 ﻿using Asp.Versioning;
+using AssetsFlowWeb.Services.Models.Journal;
 using AutoMapper;
 using HsR.Journal.DataContext;
 using HsR.Journal.Entities;
-using HsR.Web.API.Services;
-using Microsoft.AspNetCore.Mvc;
-using System.Drawing.Printing;
-using System.Text.Json;
-using Serilog;
+using HsR.Journal.Services;
 using HsR.UserService.Client.Interfaces;
 using HsR.UserService.Protos;
+using HsR.Web.API.Services;
 using Microsoft.AspNetCore.Authorization;
-using AssetsFlowWeb.Services.Models.Journal;
+using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using System.Drawing.Printing;
+using System.Text.Json;
 
 namespace HsR.Web.API.Controllers.Journal
 {
@@ -32,7 +33,11 @@ namespace HsR.Web.API.Controllers.Journal
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(int pageNumber = 1, int pageSize = 0)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TradeCompositeModel>>> GetAllTrades(
+    int pageNumber = 1,
+    int pageSize = 0,
+    [FromBody] IEnumerable<FilterDefinition>? filters = null)
         {
             var userId = GetUserIdFromClaims();
             pageSize = ValidatePageSize(pageSize);
@@ -41,22 +46,37 @@ namespace HsR.Web.API.Controllers.Journal
             IEnumerable<TradeCompositeModel>? paginatedTradeDTOs;
             int totalTradesCount;
 
-            paginatedTradeDTOs = await _cacheService.GetCachedTrades(userId, pageNumber, pageSize);
-            if (paginatedTradeDTOs != null)
+
+            if (filters != null && filters.Any())
             {
-                totalTradesCount = _cacheService.GetCachedTotalCount(userId);
-            }
-            else  // If not in cache, get from database
-            {
-                var (tradeEntities, totalCount) = await _journalAccess.Journal.GetAllTradeCompositesAsync(userId, pageNumber, pageSize);
+                // Use filtered query
+                var (tradeEntities, totalCount) = await _journalAccess.Journal.GetFilteredTradeCompositesAsync(userId, filters, pageNumber, pageSize);
+
                 paginatedTradeDTOs = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradeEntities);
                 totalTradesCount = totalCount;
             }
+            else
+            {
+                // Use cached or all trades
+                paginatedTradeDTOs = await _cacheService.GetCachedTrades(userId, pageNumber, pageSize);
+                if (paginatedTradeDTOs != null)
+                {
+                    totalTradesCount = _cacheService.GetCachedTotalCount(userId);
+                }
+                else
+                {
+                    var (tradeEntities, totalCount) = await _journalAccess.Journal
+                        .GetAllTradeCompositesAsync(userId, pageNumber, pageSize);
+
+                    paginatedTradeDTOs = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradeEntities);
+                    totalTradesCount = totalCount;
+                }
+            }
 
             SetPaginationHeaders(totalTradesCount, pageSize, pageNumber);
-
             return Ok(paginatedTradeDTOs);
         }
+
 
         [HttpPost]
         public async Task<ActionResult<TradeCompositeModel>> AddTrade()

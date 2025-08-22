@@ -1,6 +1,5 @@
 ﻿
 # TODO
-- filtering: controller endpoint for filtered trades
 - userdata, controller endpoint, add symbols, filters on creation
 - data migrations
 
