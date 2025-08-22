@@ -32,6 +32,7 @@ export async function request(url, options = {}, retry = true) {
         authStorage.setAuth(refreshed.token, refreshed.user);
         return request(url, options, false);
       }
+      // eslint-disable-next-line no-unused-vars
     } catch (refreshError) {
       authStorage.clearAll();
       // TODO: redirect to login if needed
@@ -50,6 +51,7 @@ export async function request(url, options = {}, retry = true) {
 
   try {
     return await response.json();
+    // eslint-disable-next-line no-unused-vars
   } catch (jsonError) {
     throw new Error("Failed to parse response as JSON.");
   }

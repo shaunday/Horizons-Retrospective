@@ -4,7 +4,7 @@ import { getOverViewEntries } from "@services/getOverViewEntries";
 import EntriesList from "../DataElementGroups/EntriesList";
 import Notifications from "@components/Notifications";
 
-// eslint-disable-next-line react/prop-types
+ 
 function TradeCollapsed({ trade }) {
   if (!trade) {
     return <div>Loading...</div>;

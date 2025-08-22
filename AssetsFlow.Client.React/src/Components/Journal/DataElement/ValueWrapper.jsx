@@ -8,7 +8,7 @@ import ValuePopover from "./ValuePopover";
 
 function ValueWrapper({ cellInfo, onValueChangeInitiated }) {
   const isOverview = onValueChangeInitiated === undefined;
-  const { contentData } = dataElementContentParser(cellInfo);
+  const contentData = dataElementContentParser(cellInfo);
 
   const [openPopoverId, setOpenPopoverId] = useAtom(openPopoverIdAtom);
 

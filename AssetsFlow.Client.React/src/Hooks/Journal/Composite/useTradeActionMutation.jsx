@@ -43,7 +43,8 @@ export const useTradeActionMutation = (tradeComposite) => {
     onError: (error) => {
       console.error("Error adding/reducing position:", error);
     },
-    onSuccess: ({ response }, { action }) => {
+
+    onSuccess: ({ response }, { _action }) => {
       updateTradeStatuses(response);
       const newElement = response[Constants.NEW_ELEMENT_RESPONSE_TAG];
       if (newElement) {

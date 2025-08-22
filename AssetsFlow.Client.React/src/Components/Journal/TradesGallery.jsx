@@ -2,7 +2,7 @@ import React from "react";
 import TradeWrapper from "./TradeComposite/TradeWrapper";
 import { useFetchAndCacheTrades } from "@hooks/Journal/useFetchAndCacheTrades";
 
-// eslint-disable-next-line react/prop-types
+ 
 function TradesGallery({ newlyAddedTradeId }) {
   const { trades: cachedTradeIds } = useFetchAndCacheTrades();
   return (

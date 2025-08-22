@@ -8,10 +8,9 @@ import ValueWrapper from "./ValueWrapper";
 import { useContentUpdateMutation } from "@hooks/Journal/Entry/useContentUpdateMutation";
 import { dataElementContentParser } from "@services/dataElementContentParser";
 
-// eslint-disable-next-line react/prop-types
 function DataElement({ cellInfo, overviewType }) {
   const isOverview = overviewType != Constants.OverviewType.NONE;
-  const { contentData } = dataElementContentParser(cellInfo);
+  const contentData = dataElementContentParser(cellInfo);
 
   const { contentUpdateMutation, processingStatus } = useContentUpdateMutation(cellInfo);
 

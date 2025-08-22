@@ -3,7 +3,7 @@ import * as Constants from "@constants/journalConstants";
 import ElementControls from "./ElementControls";
 import GroupedEntriesList from "../DataElementGroups/GroupedEntriesList";
 
-// eslint-disable-next-line react/prop-types
+ 
 function TradeElementExpanded({ tradeElement }) {
   const isAllowControls = useMemo(() => {
     const elementType = tradeElement[Constants.ELEMENT_TYPE_STING];

@@ -46,7 +46,7 @@ export default function FilterBar({ onFiltersChange }) {
   return (
     <Stack spacing="xs" className="mx-3 justify-start">
       <Paper shadow="xs" radius="md" className="p-2 flex items-center">
-        <Group spacing="sm" noWrap align="center" className="flex-1">
+        <Group spacing="sm" align="center" className="flex-1">
           <FilterSelector
             filters={filters}
             onAdd={addFilter}

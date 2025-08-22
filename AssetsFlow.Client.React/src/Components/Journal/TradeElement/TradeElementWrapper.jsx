@@ -5,7 +5,7 @@ import TradeElementExpanded from "./TradeElementExpanded";
 import TradeElementCollapsed from "./TradeElementCollapsed";
 import TradeElementBadge from "./Badge/TradeElementBadge";
 
-// eslint-disable-next-line react/prop-types
+ 
 function TradeElementWrapper({ tradeElement }) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 

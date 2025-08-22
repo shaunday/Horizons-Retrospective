@@ -7,7 +7,7 @@ export default function FilterChips({ filters, onRemove }) {
   if (!Array.isArray(filters) || filters.length === 0) return null;
 
   return (
-    <Group spacing="xs" align="center" noWrap className="flex-nowrap overflow-x-auto">
+    <Group spacing="xs" align="center" className="flex-nowrap overflow-x-auto">
       {filters.map((f) => (
         <Badge
           key={f.id || f.field}

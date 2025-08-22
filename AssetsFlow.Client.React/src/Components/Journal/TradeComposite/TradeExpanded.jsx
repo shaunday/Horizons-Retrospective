@@ -5,7 +5,7 @@ import TradeElementWrapper from "../TradeElement/TradeElementWrapper";
 import TradeElementCollapsed from "../TradeElement/TradeElementCollapsed";
 import { TbChartBar } from "react-icons/tb";
 
-// eslint-disable-next-line react/prop-types
+ 
 function TradeExpanded({ trade }) {
   return (
     <div className="my-2">

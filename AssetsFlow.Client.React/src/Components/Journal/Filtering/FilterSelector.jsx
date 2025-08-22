@@ -60,7 +60,7 @@ export default function FilterSelector({ filters = [], onAdd, onRemove, filterDe
   });
 
   return (
-    <Group spacing="sm" noWrap align="center" className="flex-1">
+    <Group spacing="sm" align="center" className="flex-1">
       {activeFilters.map((filter) => {
         switch (filter.type) {
           case "enum":

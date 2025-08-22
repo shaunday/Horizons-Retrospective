@@ -3,7 +3,7 @@ import { Badge, Tooltip, ThemeIcon } from "@mantine/core";
 import * as Constants from "@constants/journalConstants";
 import { getTradeElementStatusIcon } from "./tradeElementIcons";
 
-// eslint-disable-next-line react/prop-types
+ 
 function TradeElementBadge({ tradeElement }) {
   const elementType = tradeElement[Constants.ELEMENT_TYPE_STING];
   const StatusIcon = getTradeElementStatusIcon(elementType);
