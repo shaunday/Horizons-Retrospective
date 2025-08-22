@@ -63,6 +63,7 @@ export default [
             ["@services", "./src/Services"],
             ["@constants", "./src/Constants"],
             ["@context", "./src/Contexts"],
+            ["@state", "./src/State"],
           ],
           extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
         },

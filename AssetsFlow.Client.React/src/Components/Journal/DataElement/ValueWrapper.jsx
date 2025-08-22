@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Popover } from "@mantine/core";
 import { useAtom } from "jotai";
-import { openPopoverIdAtom } from "@state/popoverAtom.js";
+import { openPopoverIdAtom } from "@state/popoverAtom";
 import { dataElementContentParser } from "@services/dataElementContentParser";
 import ValueDisplay from "./ValueDisplay";
 import ValuePopover from "./ValuePopover";
