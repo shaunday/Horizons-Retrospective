@@ -4,7 +4,7 @@ import {
   loginAsDemo,
   register,
   logout as logoutApi,
-} from "@services/ApiRequests/authApiAccess";
+} from "@services/ApiRequests/userApiAccess";
 import { authStorage, USER_QUERY_KEY } from "@services/authStorage";
 
 export function useAuth() {
@@ -14,7 +14,7 @@ export function useAuth() {
   });
 
   const loginMutation = useMutation({
-    mutationFn: ({ isDemo, credentials }) => 
+    mutationFn: ({ isDemo, credentials }) =>
       isDemo ? loginAsDemo() : login(credentials),
     onSuccess: (data) => authStorage.setAuth(data.token, data.user),
   });

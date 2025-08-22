@@ -31,10 +31,21 @@ public class AuthController : HsRControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginRequest request)
+    public async Task<IActionResult> Login([FromBody] LoginRequest? request)
     {
         try
         {
+            // If request is null or missing email/password, use demo user
+            if (request == null || string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
+            {
+                _logger.LogInformation("Empty login request, falling back to demo login");
+                request = new LoginRequest
+                {
+                    Email = DemoUserData.Email,
+                    Password = DemoUserData.Password
+                };
+            }
+
             _logger.LogInformation("Login attempt for user: {Email}", request.Email);
 
             var response = await _userServiceClient.LoginAsync(request);
@@ -69,65 +80,11 @@ public class AuthController : HsRControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error during login for user: {Email}", request.Email);
+            _logger.LogError(ex, "Error during login for user: {Email}", request?.Email ?? "N/A");
             return StatusCode(500, new
             {
                 success = false,
                 message = "An error occurred during login"
-            });
-        }
-    }
-
-    [HttpPost("login-demo")]
-    public async Task<IActionResult> LoginAsDemo()
-    {
-        try
-        {
-            _logger.LogInformation("Demo login attempt");
-
-            var request = new LoginRequest
-            {
-                Email = DemoUserData.Email,
-                Password = DemoUserData.Password
-            };
-
-            var response = await _userServiceClient.LoginAsync(request);
-
-            if (response.Success)
-            {
-                _logger.LogInformation("Demo login successful");
-
-                var roles = await _userServiceClient.GetUserRolesAsync(response.User.Id) ?? Array.Empty<string>();
-                var userId = Guid.Parse(response.User.Id);
-
-                var token = _jwtService.GenerateToken(userId, roles);
-                var refreshToken = _refreshTokenService.GenerateRefreshToken();
-                await _refreshTokenService.SaveRefreshTokenAsync(userId, refreshToken);
-
-                return Ok(new
-                {
-                    success = true,
-                    message = response.Message,
-                    user = response.User,
-                    token,
-                    refreshToken
-                });
-            }
-
-            _logger.LogWarning("Demo login failed: {Message}", response.Message);
-            return BadRequest(new
-            {
-                success = false,
-                message = response.Message
-            });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error during demo login");
-            return StatusCode(500, new
-            {
-                success = false,
-                message = "An error occurred during demo login"
             });
         }
     }

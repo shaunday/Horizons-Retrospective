@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AssetsFlowWeb.API.Controllers.Journal;
 
-[Route("hsr-api/v{version:apiVersion}/journal/users")]
+[Route("hsr-api/v{version:apiVersion}/journal/userdata")]
 [ApiVersion("1.0")]
 [ApiController]
 public class UserDataController : JournalControllerBase
