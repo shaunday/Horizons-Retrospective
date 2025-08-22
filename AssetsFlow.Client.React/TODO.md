@@ -1,7 +1,6 @@
 ## 1
 
 filtering:
-w/l should toggle closed, moving from closed should clear w/l
 on login- get symbols list, filters list. save both with RQ
 selected filter - save as jotai's atom, pass to api
 connect symbols list
