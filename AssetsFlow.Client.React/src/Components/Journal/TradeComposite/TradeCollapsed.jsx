@@ -4,13 +4,10 @@ import { getOverViewEntries } from "@services/getOverViewEntries";
 import EntriesList from "../DataElementGroups/EntriesList";
 import Notifications from "@components/Notifications";
 
- 
 function TradeCollapsed({ trade }) {
-  if (!trade) {
-    return <div>Loading...</div>;
-  }
-
   const EntriesForTradeOverView = useMemo(() => {
+    if (!trade) return [];
+
     const elementsToFlatten = [
       ...trade[Constants.TRADE_ELEMENTS_STRING],
       ...(trade[Constants.TRADE_SUMMARY_STRING] ? [trade[Constants.TRADE_SUMMARY_STRING]] : []),
@@ -18,6 +15,10 @@ function TradeCollapsed({ trade }) {
 
     return getOverViewEntries(elementsToFlatten, Constants.DATA_RELEVANT_FOR_ORVERVIEW_STRING);
   }, [trade]);
+
+  if (!trade) {
+    return <div>Loading...</div>;
+  }
 
   const hasMissingContent = trade[Constants.HasMissingContent];
 
