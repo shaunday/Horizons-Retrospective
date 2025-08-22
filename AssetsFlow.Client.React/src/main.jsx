@@ -6,8 +6,10 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
+import "@mantine/notifications/styles.css";
+
 import { MantineProvider } from "@mantine/core";
-//import { Notifications } from "@mantine/notifications";
+import { Notifications } from "@mantine/notifications";
 import "./index.css";
 
 export const queryClient = new QueryClient({
@@ -22,7 +24,7 @@ export const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <MantineProvider>
-      {/* <Notifications position="bottom-right" zIndex={10000} /> */}
+      <Notifications position="bottom-right" zIndex={10000} />
       <QueryClientProvider client={queryClient}>
         <App />
         <ReactQueryDevtools initialIsOpen={false} />

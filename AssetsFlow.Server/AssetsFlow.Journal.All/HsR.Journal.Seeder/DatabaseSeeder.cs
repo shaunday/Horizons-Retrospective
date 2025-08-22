@@ -46,8 +46,6 @@ namespace HsR.Journal.Seeder
 
         public async Task FlushDbAndSeedDemoAsync()
         {
-            await dbContext.Database.EnsureDeletedAsync(); //dont ocmmit this ye
-
             await dbContext.Database.EnsureCreatedAsync();
 
             await SeedDemoUserTradesAsync();

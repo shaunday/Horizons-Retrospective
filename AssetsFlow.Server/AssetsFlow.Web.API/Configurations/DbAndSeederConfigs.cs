@@ -17,7 +17,7 @@ namespace AssetsFlowWeb.API.Configurations
         {
             if (isDev)
             {
-                await app.Services.FlushDbAndSeedDemoAsync();
+               // await app.Services.FlushDbAndSeedDemoAsync();
             }
             else
             {
