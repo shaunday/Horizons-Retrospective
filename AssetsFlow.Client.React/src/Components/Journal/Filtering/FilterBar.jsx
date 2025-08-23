@@ -5,9 +5,14 @@ import FilterChips from "./FilterChips";
 import { useUserData } from "@hooks/UserManagement/useUserData";
 
 export default function FilterBar({ onFiltersChange }) {
-  const { data: userData, symbolRestrictions } = useUserData();
+  const { data: userData } = useUserData();
+
   const rawDefinitions = useMemo(() => {
     return userData?.availableFilters || [];
+  }, [userData]);
+
+  const symbolRestrictions = useMemo(() => {
+    return userData?.symbols || [];
   }, [userData]);
 
   // Inject symbolRestrictions into the "symbols" filter definition

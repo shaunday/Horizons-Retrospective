@@ -3,33 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceAlerts.Web.API", "HsR.PriceAlerts.Web.API\PriceAlerts.Web.API.csproj", "{EEA25423-F99D-4700-9BC9-A3276B513A20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceAlerts.Web.API", "MarketWatch.Server\MarketWatch.Web.API\PriceAlerts.Web.API.csproj", "{EEA25423-F99D-4700-9BC9-A3276B513A20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.PriceAlerts.Entities", "HsR.PriceAlerts.Entities\HsR.PriceAlerts.Entities.csproj", "{7E6BC007-57CB-4E9B-9DA6-BF72C99EE501}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.PriceAlerts.Entities", "MarketWatch.Server\MarketWatch.Entities\HsR.PriceAlerts.Entities.csproj", "{7E6BC007-57CB-4E9B-9DA6-BF72C99EE501}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.PriceAlerts.Entities.Factory", "HsR.PriceAlerts.Entities.Factory\HsR.PriceAlerts.Entities.Factory.csproj", "{7162AF9D-8FF3-4DB6-AD2D-220521E7989A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.PriceAlerts.Entities.Factory", "MarketWatch.Server\MarketWatch.Entities.Factory\HsR.PriceAlerts.Entities.Factory.csproj", "{7162AF9D-8FF3-4DB6-AD2D-220521E7989A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.PriceAlerts.Repository", "HsR.PriceAlerts.Repository\HsR.PriceAlerts.Repository.csproj", "{BE08D8AA-16A8-4559-81C0-15A6576E05F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.PriceAlerts.Repository", "MarketWatch.Server\MarketWatch.Repository\HsR.PriceAlerts.Repository.csproj", "{BE08D8AA-16A8-4559-81C0-15A6576E05F7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PriceAlerts", "PriceAlerts", "{085A1250-96C9-4709-8119-25E687EA021E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Price", "Price", "{57A96199-3669-4ACA-9610-9FA6D9B68CF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Price.Repository", "HsR.Price.Repository\HsR.Price.Repository.csproj", "{1F4DFA42-3D82-45A7-81F7-C49EC7FEA287}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Price.Repository", "MarketWatch.Server\MarketWatch.Price.Repository\HsR.Price.Repository.csproj", "{1F4DFA42-3D82-45A7-81F7-C49EC7FEA287}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Ticker.Entities", "HsR.Ticker.Entities\HsR.Ticker.Entities.csproj", "{ED313F7C-73A9-4DCF-979A-80C3724B80AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Ticker.Entities", "MarketWatch.Server\MarketWatch.Ticker.Entities\HsR.Ticker.Entities.csproj", "{ED313F7C-73A9-4DCF-979A-80C3724B80AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Price.Entities", "HsR.Price.Entities\HsR.Price.Entities.csproj", "{D2DC95A1-AB1C-46D1-8384-233D4C3B60AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Price.Entities", "MarketWatch.Server\MarketWatch.Price.Entities\HsR.Price.Entities.csproj", "{D2DC95A1-AB1C-46D1-8384-233D4C3B60AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{AFB14AF5-BB16-44BC-88E0-6D2D5B91E7E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common", "..\Common.Net\HsR.Common\HsR.Common.csproj", "{8699948D-0BF1-4514-9D30-8BFF235F7D71}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ticker", "Ticker", "{CE530A22-C1E8-479C-90DB-7B77CD06F701}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User", "User", "{0806DB90-F041-4E91-A9FF-DE6FA2ADFDDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common.Db", "Common.Net\HsR.Common.Db\HsR.Common.Db.csproj", "{20684AED-629D-2716-483E-A1A78A75B2B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.PriceAlerts.User.Entities", "HsR.User.Entities\HsR.PriceAlerts.User.Entities\HsR.PriceAlerts.User.Entities.csproj", "{FBB7E802-09DB-40B8-B079-10AF405E08B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common.AspNet", "Common.Net\HsR.Common.AspNet\HsR.Common.AspNet.csproj", "{AC69A855-7F0A-FC46-6236-DE054D622230}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common", "Common.Net\HsR.Common\HsR.Common.csproj", "{FC7448B8-CA62-D6FE-D7B5-AF94F13E1364}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,14 +65,18 @@ Global
 		{D2DC95A1-AB1C-46D1-8384-233D4C3B60AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2DC95A1-AB1C-46D1-8384-233D4C3B60AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2DC95A1-AB1C-46D1-8384-233D4C3B60AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8699948D-0BF1-4514-9D30-8BFF235F7D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8699948D-0BF1-4514-9D30-8BFF235F7D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8699948D-0BF1-4514-9D30-8BFF235F7D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8699948D-0BF1-4514-9D30-8BFF235F7D71}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FBB7E802-09DB-40B8-B079-10AF405E08B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBB7E802-09DB-40B8-B079-10AF405E08B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FBB7E802-09DB-40B8-B079-10AF405E08B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FBB7E802-09DB-40B8-B079-10AF405E08B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20684AED-629D-2716-483E-A1A78A75B2B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20684AED-629D-2716-483E-A1A78A75B2B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20684AED-629D-2716-483E-A1A78A75B2B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20684AED-629D-2716-483E-A1A78A75B2B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC69A855-7F0A-FC46-6236-DE054D622230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC69A855-7F0A-FC46-6236-DE054D622230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC69A855-7F0A-FC46-6236-DE054D622230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC69A855-7F0A-FC46-6236-DE054D622230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC7448B8-CA62-D6FE-D7B5-AF94F13E1364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC7448B8-CA62-D6FE-D7B5-AF94F13E1364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC7448B8-CA62-D6FE-D7B5-AF94F13E1364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC7448B8-CA62-D6FE-D7B5-AF94F13E1364}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,7 +88,8 @@ Global
 		{1F4DFA42-3D82-45A7-81F7-C49EC7FEA287} = {57A96199-3669-4ACA-9610-9FA6D9B68CF9}
 		{ED313F7C-73A9-4DCF-979A-80C3724B80AF} = {CE530A22-C1E8-479C-90DB-7B77CD06F701}
 		{D2DC95A1-AB1C-46D1-8384-233D4C3B60AB} = {57A96199-3669-4ACA-9610-9FA6D9B68CF9}
-		{8699948D-0BF1-4514-9D30-8BFF235F7D71} = {AFB14AF5-BB16-44BC-88E0-6D2D5B91E7E9}
-		{FBB7E802-09DB-40B8-B079-10AF405E08B2} = {0806DB90-F041-4E91-A9FF-DE6FA2ADFDDE}
+		{20684AED-629D-2716-483E-A1A78A75B2B5} = {AFB14AF5-BB16-44BC-88E0-6D2D5B91E7E9}
+		{AC69A855-7F0A-FC46-6236-DE054D622230} = {AFB14AF5-BB16-44BC-88E0-6D2D5B91E7E9}
+		{FC7448B8-CA62-D6FE-D7B5-AF94F13E1364} = {AFB14AF5-BB16-44BC-88E0-6D2D5B91E7E9}
 	EndGlobalSection
 EndGlobal
