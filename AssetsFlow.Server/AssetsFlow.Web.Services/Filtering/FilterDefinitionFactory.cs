@@ -20,14 +20,12 @@ namespace AssetsFlowWeb.Services.Filtering
                 Id = FilterId.Wl,
                 Title = "W/L",
                 Type = FilterType.Enum,
-                Restrictions = Enum.GetValues<WinLoss>()
             },
             new EnumFilterDefinition<TradeStatus>
             {
                 Id = FilterId.Status,
                 Title = "Status",
                 Type = FilterType.Enum,
-                Restrictions = Enum.GetValues<TradeStatus>()
             },
             new TextFilterDefinition
             {

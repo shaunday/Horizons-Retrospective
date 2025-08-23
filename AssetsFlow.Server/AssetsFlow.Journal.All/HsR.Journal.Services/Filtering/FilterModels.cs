@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HsR.Journal.Services
 {
@@ -12,22 +10,23 @@ namespace HsR.Journal.Services
         public FilterId Id { get; init; }
         public required string Title { get; init; }
         public FilterType Type { get; init; }
+
+        // Single Restrictions property in the base
+        public List<string> Restrictions { get; init; } = [];
     }
 
     public class EnumFilterDefinition<TEnum> : FilterDefinition where TEnum : struct, Enum
     {
-        public required IReadOnlyList<TEnum> Restrictions { get; init; }
+        public EnumFilterDefinition()
+        {
+            // Automatically set Restrictions to string representations of the enum
+            Restrictions = Enum.GetValues<TEnum>().Select(e => e.ToString()).ToList();
+        }
     }
 
-    public class TextFilterDefinition : FilterDefinition
-    {
-        public IReadOnlyList<string> Restrictions { get; init; } = Array.Empty<string>();
-    }
+    public class TextFilterDefinition : FilterDefinition { }
 
-    public class DateRangeFilterDefinition : FilterDefinition
-    {
-        public IReadOnlyList<string> Restrictions { get; init; } = Array.Empty<string>();
-    }
+    public class DateRangeFilterDefinition : FilterDefinition { }
 
     public enum FilterType
     {
@@ -41,5 +40,4 @@ namespace HsR.Journal.Services
         Win,
         Loss
     }
-
 }

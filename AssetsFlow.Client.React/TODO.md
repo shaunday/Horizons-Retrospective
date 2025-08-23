@@ -2,20 +2,21 @@
 
 filtering: selected filter - save as jotai's atom, pass to api
 
-add: update user's saved sectors (parse via useHandleStatusUpdates?), sectors combobox + autofill
 from limor: title should be styled diff than the content, text aligned to the left
 add: opened/closedat/IdeaDate (just to overview?)
 
 add: expand/collapse by clicking on the background, reduce expand icon's size
 fix: edit lessons in trade closure
+refresh userdata on reseed
 
 ## 2.
 
 lint : "react/prop-types": "off"... keep fixing
 try catch on parsers? why dont i get onSuccess with fetchTrades, userData
+verify no triple calls
 
 RQ isloading/error vs statusnots.. vs mantines notifications
-add: filter (status first, date first, BY STATUS), adjust data call api
+add: sort/sort order (status first, date first)
 revert trades order? last added first?
 
 add: ignoreActivation flag to content edit (requests "DenyActivation")
@@ -30,6 +31,7 @@ add: data attributes/alt/role for testing
 
 ## 3.
 
+add/parse saved sectors - free flow combobox
 on reduce position, check max allowed from analytics
 validation per net ammount on close - if net =0 just close
 

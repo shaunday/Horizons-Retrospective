@@ -95,7 +95,8 @@ namespace HsR.Journal.Entities.Factory
                     IsRelevantForTradeOverview = el.IsRelevantForTradeOverview ?? false,
                     Restrictions = el.Restrictions,
                     UnitPriceRelevance = el.UnitPriceRelevance,
-                    TotalCostRelevance = el.TotalCostRelevance
+                    TotalCostRelevance = el.TotalCostRelevance,
+                    FilterId = el.FilterId,
                 };
 
                 elements.Add(dataElement);

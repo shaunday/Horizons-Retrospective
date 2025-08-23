@@ -34,6 +34,8 @@ namespace HsR.Web.Services.Models.Journal
         public bool SectorRelevance { get; set; } 
         public ICollection<string>? Restrictions { get; set; }
 
+        public FilterId FilterId { get; set; } = FilterId.None;
+
         [Required]
         public int TradeElementFK { get; set; }
         [Required]

@@ -1,83 +1,59 @@
-import React from "react";
-import { SegmentedControl, Group, TextInput } from "@mantine/core";
-import { DatePickerInput } from "@mantine/dates";
-import { TbCalendar } from "react-icons/tb";
-
-import {
-  filterSelectorPropTypes,
-  filterDateInputPropTypes,
-  filterSegmentedControlPropTypes,
-  filterTextInputPropTypes,
-} from "@services/PropTypes/filtersPropTypes";
+import React, { useMemo, useCallback } from "react";
+import { Group } from "@mantine/core";
+import { filterSelectorPropTypes } from "@services/PropTypes/filtersPropTypes";
+import DateInputFilter from "./FilterComponents/DateInputFilter";
+import SegmentedControlFilter from "./FilterComponents/SegmentedControlFilter";
+import TextInputFilter from "./FilterComponents/TextInputFilter";
 
 export default function FilterSelector({ filters = [], onAdd, onRemove, filterDefinitions = [] }) {
-  const handleAdd = (field, value) => {
-    if (!field || value == null) return;
-    onAdd({ field, value });
-  };
-
-  const FilterDateInput = ({ filter, ...props }) => (
-    <DatePickerInput
-      placeholder={filter.title}
-      value={filter.value || null}
-      onChange={(val) => (val === null ? onRemove(filter.id) : handleAdd(filter.id, val))}
-      clearable
-      rightSection={<TbCalendar size={14} />}
-      {...props}
-    />
+  // Memoized handleChange that works for all filter types
+  const handleChange = useCallback(
+    (id, value) => {
+      if (value === null || value === "") onRemove(id);
+      else onAdd(id, value);
+    },
+    [onAdd, onRemove]
   );
-  FilterDateInput.propTypes = filterDateInputPropTypes;
 
-  const FilterSegmentedControl = ({ filter, data = [] }) => (
-    <SegmentedControl
-      value={filter.value || null}
-      onChange={(val) => (val === filter.value ? onRemove(filter.id) : handleAdd(filter.id, val))}
-      data={data}
-      size="xs"
-    />
+  const activeFilters = useMemo(
+    () =>
+      filterDefinitions.map((def) => {
+        const current = filters.find((f) => f.field === def.id);
+        return { ...def, value: current?.value ?? null };
+      }),
+    [filterDefinitions, filters]
   );
-  FilterSegmentedControl.propTypes = filterSegmentedControlPropTypes;
 
-  const FilterTextInput = ({ filter }) => (
-    <TextInput
-      placeholder={filter.title}
-      value={filter.value || ""}
-      onChange={(e) => {
-        const val = e.currentTarget.value;
-        val ? handleAdd(filter.id, val) : onRemove(filter.id);
-      }}
-      size="xs"
-    />
-  );
-  FilterTextInput.propTypes = filterTextInputPropTypes;
-
-  const activeFilters = filterDefinitions.map((def) => {
-    const current = filters.find((f) => f.field === def.id);
-    return {
-      ...def,
-      value: current?.value ?? null,
-    };
-  });
+  if (filterDefinitions.length === 0) return null;
 
   return (
     <Group spacing="sm" align="center" className="flex-1">
       {activeFilters.map((filter) => {
         switch (filter.type) {
-          case "enum":
+          case "Enum":
             return (
-              <FilterSegmentedControl
+              <SegmentedControlFilter
                 key={filter.id}
                 filter={filter}
+                onChange={handleChange}
                 data={filter.restrictions.map((r) => ({
                   label: r.charAt(0).toUpperCase() + r.slice(1),
                   value: r,
                 }))}
               />
             );
-          case "dateRange":
-            return <FilterDateInput key={filter.id} filter={filter} size="xs" radius="sm" />;
-          case "text":
-            return <FilterTextInput key={filter.id} filter={filter} />;
+          case "DateRange":
+            return (
+              <DateInputFilter
+                key={filter.id}
+                filter={filter}
+                onChange={handleChange}
+                size="xs"
+                radius="sm"
+              />
+            );
+          case "Text":
+            return <TextInputFilter key={filter.id} filter={filter} onChange={handleChange} />;
           default:
             return null;
         }
