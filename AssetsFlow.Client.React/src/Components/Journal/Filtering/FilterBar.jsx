@@ -13,7 +13,7 @@ export default function FilterBar({ onFiltersChange }) {
 
   const filterDefinitionsForUi = useMemo(() => {
     return (rawFilterDefinitions || []).map((def) =>
-      def.id === "symbols" ? { ...def, restrictions: symbolRestrictions ?? [] } : def
+      def.id === "Symbol" ? { ...def, restrictions: symbolRestrictions ?? [] } : def
     );
   }, [rawFilterDefinitions, symbolRestrictions]);
 

@@ -60,7 +60,7 @@ namespace HsR.Journal.Seeder
             await SeedTrade5Async();
             await SeedTrade6Async();
 
-            await dbContext.SaveChangesAsync();
+           await dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAllDemoUserTradesAsync()
@@ -87,7 +87,6 @@ namespace HsR.Journal.Seeder
 
             await dbContext.SaveChangesAsync(); // Apply nulls to break cycles
 
-            // 2. Delete in FK-safe order: Entries → Elements → Composites
             var entries = dbContext.Entries.Where(e => e.UserId == _demoUserId);
             dbContext.Entries.RemoveRange(entries);
 

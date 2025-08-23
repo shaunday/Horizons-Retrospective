@@ -4,6 +4,7 @@ import { filterSelectorPropTypes } from "@services/PropTypes/filtersPropTypes";
 import DateInputFilter from "./FilterComponents/DateInputFilter";
 import SegmentedControlFilter from "./FilterComponents/SegmentedControlFilter";
 import TextInputFilter from "./FilterComponents/TextInputFilter";
+import TextOrComboFilter from "./FilterComponents/TextOrComboFilter";
 
 export default function FilterSelector({ filters = [], onAdd, onRemove, filterDefinitions = [] }) {
   // Memoized handleChange that works for all filter types
@@ -53,7 +54,7 @@ export default function FilterSelector({ filters = [], onAdd, onRemove, filterDe
               />
             );
           case "Text":
-            return <TextInputFilter key={filter.id} filter={filter} onChange={handleChange} />;
+            return <TextOrComboFilter key={filter.id} filter={filter} onChange={handleChange} />;
           default:
             return null;
         }

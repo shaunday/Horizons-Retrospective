@@ -5,7 +5,7 @@ namespace HsR.Journal.Seeder
         // Trade 1: Just an idea
         public static readonly Dictionary<string, string> Trade1_Idea = new()
         {
-            { "Ticker", "AAPL" },
+            { "Symbol", "AAPL" },
             { "Direction", "Long" },
             { "Thesis", "Apple is breaking out after strong earnings and new product launches." },
             { "Aligned TA", "Price above 200MA, strong volume, breakout from base." },
@@ -20,7 +20,7 @@ namespace HsR.Journal.Seeder
         // Trade 2: Idea, 2 adds, evaluate
         public static readonly Dictionary<string, string> Trade2_Idea = new()
         {
-            { "Ticker", "MSFT" },
+            { "Symbol", "MSFT" },
             { "Direction", "Long" },
             { "Thesis", "Microsoft cloud growth and AI leadership." },
             { "Aligned TA", "Ascending triangle breakout." },
@@ -69,7 +69,7 @@ namespace HsR.Journal.Seeder
         // Trade 3: Idea, add, evaluate, close
         public static readonly Dictionary<string, string> Trade3_Idea = new()
         {
-            { "Ticker", "TSLA" },
+            { "Symbol", "TSLA" },
             { "Direction", "Short" },
             { "Thesis", "Overextended after parabolic run, signs of reversal." },
             { "Aligned TA", "Bearish engulfing on daily." },
@@ -111,7 +111,7 @@ namespace HsR.Journal.Seeder
         // Trade 4: Idea, add, evaluate, close
         public static readonly Dictionary<string, string> Trade4_Idea = new()
     {
-        { "Ticker", "AMZN" },
+        { "Symbol", "AMZN" },
         { "Direction", "Long" },
         { "Thesis", "Strong growth in e-commerce and AWS driving revenues." },
         { "Aligned TA", "Bullish breakout above resistance at 3300." },
@@ -153,7 +153,7 @@ namespace HsR.Journal.Seeder
         // Trade 5: Idea, adds, evaluate
         public static readonly Dictionary<string, string> Trade5_Idea = new()
     {
-        { "Ticker", "NFLX" },
+        { "Symbol", "NFLX" },
         { "Direction", "Short" },
         { "Thesis", "Subscriber growth slowing, increasing competition." },
         { "Aligned TA", "Bearish head and shoulders on weekly chart." },
@@ -202,7 +202,7 @@ namespace HsR.Journal.Seeder
         // Trade 6: Idea, add, evaluate, close
         public static readonly Dictionary<string, string> Trade6_Idea = new()
     {
-        { "Ticker", "GOOGL" },
+        { "Symbol", "GOOGL" },
         { "Direction", "Long" },
         { "Thesis", "Strong ad revenue and AI initiatives." },
         { "Aligned TA", "Ascending channel, strong support." },

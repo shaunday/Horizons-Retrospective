@@ -45,15 +45,19 @@ namespace HsR.Journal.DataContext
             var symbols = await _dataContext.TradeComposites
                 .AsNoTracking()
                 .Where(tc => tc.UserId == userId)
-                .SelectMany(tc => tc.TradeElements)                       // flatten TradeElements
-                .Where(te => te.TradeActionType == TradeActionType.Origin) // only Origin actions
-                .SelectMany(te => te.Entries)                             // flatten entries
-                .Where(e => e.FilterId == FilterId.Symbol)               // only Symbol entries
-                .Select(e => e.Content)                                  // get the symbol value
-                .Distinct()                                              // unique symbols
-                .ToListAsync();
+                .SelectMany(tc => tc.TradeElements)
+                .Where(te => te.TradeActionType == TradeActionType.Origin)
+                .SelectMany(te => te.Entries)
+                .Where(e => e.FilterId == FilterId.Symbol)
+                .Select(e => e.Content)
+                .ToListAsync(); 
 
-            return symbols;
+            // filter in memory, after EF executes SQL
+            return symbols
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Select(s => s.Trim())
+                .Distinct()
+                .ToList();
         }
 
     }
