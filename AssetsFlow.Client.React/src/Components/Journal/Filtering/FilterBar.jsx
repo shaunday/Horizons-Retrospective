@@ -5,22 +5,13 @@ import FilterChips from "./FilterChips";
 import { useUserData } from "@hooks/UserManagement/useUserData";
 
 export default function FilterBar({ onFiltersChange }) {
-  const { data: userData } = useUserData();
+  const { filters: availableFilters, symbols: symbolRestrictions } = useUserData();
 
-  const rawDefinitions = useMemo(() => {
-    return userData?.availableFilters || [];
-  }, [userData]);
-
-  const symbolRestrictions = useMemo(() => {
-    return userData?.symbols || [];
-  }, [userData]);
-
-  // Inject symbolRestrictions into the "symbols" filter definition
   const filterDefinitions = useMemo(() => {
-    return rawDefinitions.map((def) =>
+    return (availableFilters || []).map((def) =>
       def.id === "symbols" ? { ...def, restrictions: symbolRestrictions ?? [] } : def
     );
-  }, [rawDefinitions, symbolRestrictions]);
+  }, [availableFilters, symbolRestrictions]);
 
   const [filters, setFilters] = useState([]);
 
@@ -28,9 +19,11 @@ export default function FilterBar({ onFiltersChange }) {
     setFilters((prev) => {
       const next = prev.filter((f) => f.field !== filter.field);
 
-      // Always carry the title from definitions
       const def = filterDefinitions.find((d) => d.id === filter.field);
-      const filterWithTitle = { ...filter, title: def?.title || filter.title || filter.field };
+      const filterWithTitle = {
+        ...filter,
+        title: def?.title || filter.title || filter.field,
+      };
 
       next.push(filterWithTitle);
       onFiltersChange?.(next);

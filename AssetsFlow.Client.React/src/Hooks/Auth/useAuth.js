@@ -2,7 +2,6 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { login, register, logout as logoutApi } from "@services/ApiRequests/userApiAccess";
 import { authStorage, USER_QUERY_KEY } from "@services/authStorage";
 import { useClearTradesCache } from "@hooks/UserManagement/useClearTradesCache";
-import { useUserData } from "@hooks/UserManagement/useUserData";
 
 export function useAuth() {
   const { data: user } = useQuery({
@@ -10,15 +9,11 @@ export function useAuth() {
     queryFn: authStorage.getUser,
   });
 
-  const { getUserData, setUserDataFromApi } = useUserData();
   const loginMutation = useMutation({
     mutationFn: (credentials) => login(credentials),
     onSuccess: async (data) => {
       authStorage.setAuth(data.token, data.user);
       console.log("Logged in user:", data.user);
-
-      const fetchedData = await getUserData();
-      setUserDataFromApi(fetchedData);
     }
   });
 

@@ -5,9 +5,11 @@ import ErrorState from "@components/Common/LoadingStates/ErrorState";
 import JournalView from "@views/JournalView";
 import Layout from "./Layout";
 import { UserName } from "@constants/constants";
+import { useAuth } from "@hooks/Auth/useAuth";
 
 export default function GlobalAppGate() {
-  const { authStep, tradeStep, allDone, user } = useAppGate();
+  const { authStep, userDataStep, allDone } = useAppGate();
+  const { user } = useAuth();
 
   if (authStep === "error") {
     return (
@@ -17,7 +19,7 @@ export default function GlobalAppGate() {
     );
   }
 
-  if (tradeStep === "error") {
+  if (userDataStep === "error") {
     return (
       <Layout>
         <ErrorState mainText="Failed to load trades" />
@@ -26,8 +28,7 @@ export default function GlobalAppGate() {
   }
 
   if (!allDone) {
-    const activeStep =
-      authStep !== "success" ? 0 : tradeStep !== "success" ? 1 : 2;
+    const activeStep = authStep !== "success" ? 0 : userDataStep !== "success" ? 1 : 2;
 
     return (
       <Layout showUserActions={false}>
@@ -42,11 +43,7 @@ export default function GlobalAppGate() {
               <Text fw={600} fz="lg">
                 Initializing Application
               </Text>
-              <Stepper
-                active={activeStep}
-                orientation="horizontal"
-                breakpoint="sm"
-              >
+              <Stepper active={activeStep} orientation="horizontal" breakpoint="sm">
                 <Stepper.Step
                   label="Authentication"
                   description={
@@ -58,18 +55,14 @@ export default function GlobalAppGate() {
                   completed={authStep === "success" ? "true" : "false"}
                 />
                 <Stepper.Step
-                  label="Fetching trades..."
+                  label="Loading user data..."
                   description={
-                    tradeStep === "success" ? "Trades loaded" : "Loading trades"
+                    userDataStep === "success" ? "User Data loaded" : "Loading user data"
                   }
-                  loading={tradeStep === "pending"}
-                  completed={tradeStep === "success"? "true" : "false"}
+                  loading={userDataStep === "pending"}
+                  completed={userDataStep === "success" ? "true" : "false"}
                 />
-                <Stepper.Step
-                  label="Ready"
-                  description="App is ready"
-                  completed="false"
-                />
+                <Stepper.Step label="Ready" description="App is ready" completed="false" />
               </Stepper>
 
               <Progress

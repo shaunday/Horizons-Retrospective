@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@hooks/Auth/useAuth";
 import { useFetchAndCacheTrades } from "@hooks/Journal/useFetchAndCacheTrades";
+import { useUserData } from "@hooks/UserManagement/useUserData";
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -10,28 +11,31 @@ const DELAY_MS = 250;
 
 export function useAppGate() {
   const [authStep, setAuthStep] = useState("pending");
-  const [tradeStep, setTradeStep] = useState("pending");
+  const [userDataStep, setUserDataStep] = useState("pending");
   const [allDone, setAllDone] = useState(false);
 
-  const { user, loginAsDemo } = useAuth();
+  const { loginAsDemo } = useAuth();
 
-  const fetchTradesEnabled = authStep === "success";
-  const { isLoading: isTradeLoading, isError: isTradeError } = useFetchAndCacheTrades({
-    enabled: fetchTradesEnabled,
+  const isUserAuthenticated = authStep === "success";
+
+  const { isLoading: isFetchTradesLoading, isError: isFetchTradesError } = useFetchAndCacheTrades({
+    enabled: isUserAuthenticated,
+  });
+  const { isLoading: isUserDataLoading, isError: isUserDataError } = useUserData({
+    enabled: isUserAuthenticated,
   });
 
   // Run login on mount
   useEffect(() => {
     async function run() {
       setAuthStep("pending");
-      setTradeStep("pending");
+      setUserDataStep("pending");
       setAllDone(false);
 
       try {
-        const data = await Promise.all([
-          loginAsDemo(),
-          delay(DELAY_MS), // enforce minimum delay
-        ]).then((results) => results[0]);
+        const data = await Promise.all([loginAsDemo(), delay(DELAY_MS)]).then(
+          (results) => results[0]
+        );
 
         if (!data || !data.user || !data.token) throw new Error("Login failed");
         setAuthStep("success");
@@ -45,26 +49,24 @@ export function useAppGate() {
   }, []);
 
   useEffect(() => {
-    if (!fetchTradesEnabled) return;
+    if (!isUserAuthenticated) return;
 
-    if (isTradeError) {
-      setTradeStep("error");
+    if (isUserDataError || isFetchTradesError) {
+      setUserDataStep("error");
       return;
     }
 
     let successTimeout;
     let doneTimeout;
 
-    if (!isTradeLoading) {
-      // Delay before setting tradeStep to success
+    if (!isUserDataLoading && !isFetchTradesLoading) {
       successTimeout = setTimeout(() => {
-        setTradeStep("success");
+        setUserDataStep("success");
 
-        // Delay before setting allDone true
         doneTimeout = setTimeout(() => setAllDone(true), DELAY_MS);
       }, DELAY_MS);
     } else {
-      setTradeStep("pending");
+      setUserDataStep("pending");
       setAllDone(false);
     }
 
@@ -72,7 +74,13 @@ export function useAppGate() {
       clearTimeout(successTimeout);
       clearTimeout(doneTimeout);
     };
-  }, [fetchTradesEnabled, isTradeLoading, isTradeError]);
+  }, [
+    isUserAuthenticated,
+    isUserDataLoading,
+    isUserDataError,
+    isFetchTradesLoading,
+    isFetchTradesError,
+  ]);
 
-  return { authStep, tradeStep, allDone, user };
+  return { authStep, userDataStep, allDone };
 }
