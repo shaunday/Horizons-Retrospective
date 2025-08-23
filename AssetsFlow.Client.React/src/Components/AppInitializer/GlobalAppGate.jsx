@@ -55,9 +55,9 @@ export default function GlobalAppGate() {
                   completed={authStep === "success" ? "true" : "false"}
                 />
                 <Stepper.Step
-                  label="Loading user data..."
+                  label="User Data"
                   description={
-                    userDataStep === "success" ? "User Data loaded" : "Loading user data"
+                    userDataStep === "success" ? "User Data loaded" : "Loading user data..."
                   }
                   loading={userDataStep === "pending"}
                   completed={userDataStep === "success" ? "true" : "false"}

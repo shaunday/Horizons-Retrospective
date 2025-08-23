@@ -5,13 +5,17 @@ import FilterChips from "./FilterChips";
 import { useUserData } from "@hooks/UserManagement/useUserData";
 
 export default function FilterBar({ onFiltersChange }) {
-  const { filters: availableFilters, symbols: symbolRestrictions } = useUserData();
+  const {
+    filters: rawFilterDefinitions,
+    symbols: symbolRestrictions,
+    isLoading: isUserDataLoading,
+  } = useUserData();
 
-  const filterDefinitions = useMemo(() => {
-    return (availableFilters || []).map((def) =>
+  const filterDefinitionsForUi = useMemo(() => {
+    return (rawFilterDefinitions || []).map((def) =>
       def.id === "symbols" ? { ...def, restrictions: symbolRestrictions ?? [] } : def
     );
-  }, [availableFilters, symbolRestrictions]);
+  }, [rawFilterDefinitions, symbolRestrictions]);
 
   const [filters, setFilters] = useState([]);
 
@@ -19,7 +23,7 @@ export default function FilterBar({ onFiltersChange }) {
     setFilters((prev) => {
       const next = prev.filter((f) => f.field !== filter.field);
 
-      const def = filterDefinitions.find((d) => d.id === filter.field);
+      const def = filterDefinitionsForUi.find((d) => d.id === filter.field);
       const filterWithTitle = {
         ...filter,
         title: def?.title || filter.title || filter.field,
@@ -44,6 +48,9 @@ export default function FilterBar({ onFiltersChange }) {
     onFiltersChange?.([]);
   };
 
+  if (isUserDataLoading || !filterDefinitionsForUi || filterDefinitionsForUi.length === 0)
+    return null;
+
   return (
     <Stack spacing="xs" className="mx-3 justify-start">
       <Paper shadow="xs" radius="md" className="p-2 flex items-center">
@@ -52,7 +59,7 @@ export default function FilterBar({ onFiltersChange }) {
             filters={filters}
             onAdd={addFilter}
             onRemove={removeFilter}
-            filterDefinitions={filterDefinitions}
+            filterDefinitions={filterDefinitionsForUi}
           />
           <Button size="xs" variant="outline" color="red" onClick={clearFilters}>
             Clear Filters

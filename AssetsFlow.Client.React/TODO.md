@@ -12,6 +12,7 @@ fix: edit lessons in trade closure
 ## 2.
 
 lint : "react/prop-types": "off"... keep fixing
+try catch on parsers? why dont i get onSuccess with fetchTrades, userData
 
 RQ isloading/error vs statusnots.. vs mantines notifications
 add: filter (status first, date first, BY STATUS), adjust data call api

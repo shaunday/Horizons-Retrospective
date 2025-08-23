@@ -16,6 +16,9 @@ export function useFetchAndCacheTrades({ enabled = true } = {}) {
   const tradesQuery = useQuery({
     queryKey: tradeKeysFactory.getKeyForAllTrades(),
     queryFn: getAndCacheTrades,
+    onSuccess: (data) => {
+      console.log(`Fetched and cached ${data.length} trades`);
+    },
     throwOnError: true,
     enabled,
   });
