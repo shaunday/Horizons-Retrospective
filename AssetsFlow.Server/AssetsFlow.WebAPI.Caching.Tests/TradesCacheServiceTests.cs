@@ -2,11 +2,13 @@
 using AutoMapper;
 using HsR.Common.AspNet.Authentication;
 using HsR.Common.Services.Caching;
+using HsR.Journal.DataContext;
 using HsR.Web.API.Services;
 using HsR.Web.API.Settings;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,12 +16,6 @@ using Xunit;
 
 namespace HsR.Web.API.Caching.Tests
 {
-    public class ConfigurationServiceStub : IConfigurationService
-    {
-        public CacheSettings Cache { get; set; } = new CacheSettings();
-        public JwtSettings Jwt { get; set; } = new JwtSettings();
-        public PaginationSettings Pagination { get; set; } = new PaginationSettings();
-    }
 
     public class TradesCacheServiceTests
     {
@@ -28,10 +24,22 @@ namespace HsR.Web.API.Caching.Tests
             return new MemoryCache(new MemoryCacheOptions { SizeLimit = sizeLimit });
         }
 
-        private (TradesCacheService service, IMemoryCache cache) CreateService(int? sizeLimit = null)
+        private (TradesCacheService service, IMemoryCache cache, Mock<IJournalRepositoryWrapper> journalMock) CreateService(int? sizeLimit = null)
         {
             var cache = CreateMemoryCache(sizeLimit);
-            var sp = new ServiceCollection().BuildServiceProvider();
+            var spMock = new Mock<IServiceProvider>();
+            var journalMock = new Mock<IJournalRepositoryWrapper>();
+            var journalRepoMock = new Mock<IJournalRepository>();
+            journalMock.Setup(j => j.Journal).Returns(journalRepoMock.Object);
+
+            var serviceProviderMock = new Mock<IServiceScope>();
+            serviceProviderMock.Setup(s => s.ServiceProvider).Returns(spMock.Object);
+
+            var scopeFactoryMock = new Mock<IServiceScopeFactory>();
+            scopeFactoryMock.Setup(f => f.CreateScope()).Returns(serviceProviderMock.Object);
+            spMock.Setup(sp => sp.GetService(typeof(IServiceScopeFactory))).Returns(scopeFactoryMock.Object);
+            spMock.Setup(sp => sp.GetService(typeof(IJournalRepositoryWrapper))).Returns(journalMock.Object);
+
             var mapper = new MapperConfiguration(cfg => { }).CreateMapper();
             var logger = new LoggerFactory().CreateLogger<TradesCacheService>();
 
@@ -46,42 +54,69 @@ namespace HsR.Web.API.Caching.Tests
                     LoadWaitTimeoutSeconds = 1,
                     CleanupInactiveUsersThresholdHours = 1,
                     CleanupIntervalMinutes = 10
-                }
+                },
+                Pagination = new PaginationSettings { DefaultPageSize = 10 }
             };
 
-            var service = new TradesCacheService(cache, sp, mapper, logger, configStub);
-            return (service, cache);
+            var service = new TradesCacheService(cache, spMock.Object, mapper, logger, configStub);
+            return (service, cache, journalMock);
         }
 
         [Fact]
         public async Task GetCachedTrades_Returns_Null_If_Not_Present()
         {
-            var (service, _) = CreateService();
+            var (service, _, _) = CreateService();
             var userId = Guid.NewGuid();
             var result = await service.GetCachedTrades(userId, 1, 10);
             Assert.Null(result);
         }
 
         [Fact]
-        public void InvalidateAndReload_Creates_Task_PublicMethod()
+        public void InvalidateAndReload_PublicMethod_Runs()
         {
-            var (service, _) = CreateService();
+            var (service, _, _) = CreateService();
             var userId = Guid.NewGuid();
 
-            // Only call the public API
             service.InvalidateAndReload(userId);
-
-            // Since we cannot access _loadTasks safely, we only verify that no exception occurs
         }
 
         [Fact]
-        public void CleanupInactive_PublicMethod_RunsWithoutException()
+        public void CleanupInactive_PublicMethod_Runs()
         {
-            var (service, _) = CreateService();
+            var (service, _, _) = CreateService();
             var userId = Guid.NewGuid();
 
-            // Just call public method to ensure no crash
             service.CleanupInactive(TimeSpan.Zero);
+        }
+
+        [Fact]
+        public void GetCachedTotalCount_DefaultsToZero_WhenNothingCached()
+        {
+            var (service, _, _) = CreateService();
+            var userId = Guid.NewGuid();
+
+            var totalCount = service.GetCachedTotalCount(userId);
+
+            Assert.Equal(0, totalCount);
+        }
+
+        [Fact]
+        public async Task SetAndGetCachedTrades_WorksWithPublicMethods()
+        {
+            var (service, cache, _) = CreateService();
+            var userId = Guid.NewGuid();
+            var trades = new List<TradeCompositeModel>
+            {
+                new TradeCompositeModel { Id = 1 }
+            };
+
+            // Set using public Set method
+            service.Set(userId, trades, "1_10");
+
+            var result = await service.GetCachedTrades(userId, 1, 10);
+            Assert.NotNull(result);
+            Assert.Single(result);
+            Assert.Equal(1, result?.FirstOrDefault()?.Id);
         }
     }
 }
