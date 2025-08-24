@@ -2,9 +2,14 @@
 import fs from "fs/promises";
 import path from "path";
 
-const templates: Record<string, unknown> = {};
+export interface TradeElementTemplate {
+  elementType: string;
+  elements: unknown[];
+}
 
-async function loadTemplates() {
+const templates: Record<string, TradeElementTemplate> = {};
+
+export async function loadTemplates(): Promise<void> {
   const basePath = process.cwd();
   const templatePath = path.join(
     basePath,
@@ -12,20 +17,31 @@ async function loadTemplates() {
     "trade-elements-templates"
   );
 
-  const files = await fs.readdir(templatePath);
-  for (const file of files) {
-    if (file.endsWith("-template.json")) {
-      const raw = await fs.readFile(path.join(templatePath, file), "utf-8");
-      const parsed = JSON.parse(raw);
-      templates[parsed.elementType] = parsed;
-    }
+  let files: string[];
+  try {
+    files = await fs.readdir(templatePath);
+  } catch (err) {
+    throw new Error(
+      `Failed to read template directory: ${templatePath}. ${err}`
+    );
   }
+
+  const jsonFiles = files.filter((f) => f.endsWith("-template.json"));
+
+  await Promise.all(
+    jsonFiles.map(async (file) => {
+      const raw = await fs.readFile(path.join(templatePath, file), "utf-8");
+      const parsed = JSON.parse(raw) as TradeElementTemplate;
+      if (!parsed.elementType) {
+        throw new Error(`Template missing 'elementType': ${file}`);
+      }
+      templates[parsed.elementType] = parsed;
+    })
+  );
 }
 
-await loadTemplates();
-
-export function getTemplate(type: string) {
+export function getTemplate(type: string): TradeElementTemplate {
   const t = templates[type];
   if (!t) throw new Error(`Template not found: ${type}`);
-  return t as { elementType: string; elements: unknown[] }; // type assertion on return
+  return t;
 }
