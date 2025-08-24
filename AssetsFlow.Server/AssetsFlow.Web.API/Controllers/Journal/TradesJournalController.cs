@@ -102,8 +102,7 @@ namespace HsR.Web.API.Controllers.Journal
             catch (Exception ex)
             {
                 Log.Error(ex, "Error getting trade by Id: {TradeId}", tradeId);
-                var (status, msg) = ExceptionMappingService.MapToStatusCode(ex);
-                return StatusCode(status, msg);
+                return GetStatusCode(ex);
             }
         }
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HsR.Common.AspNet.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using System.Net;
@@ -40,5 +42,11 @@ namespace HsR.Web.API.Controllers
     public class HsRControllerBase(ILogger<HsRControllerBase> logger) : ControllerBase 
     {
         protected readonly ILogger<HsRControllerBase> _logger = logger;
+
+        protected ObjectResult GetStatusCode(Exception ex)
+        {
+            var (status, msg) = ExceptionMappingService.MapToStatusCode(ex);
+            return StatusCode(status, msg);
+        }
     }
 }

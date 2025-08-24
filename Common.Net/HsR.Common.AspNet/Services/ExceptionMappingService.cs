@@ -1,6 +1,6 @@
 using System;
 
-namespace HsR.Web.API.Services
+namespace HsR.Common.AspNet.Services
 {
     public static class ExceptionMappingService
     {

@@ -32,8 +32,7 @@ public class TradeElementsController(
         catch (Exception ex)
         {
             Log.Error(ex, "Error deleting interim trade input with Id: {ElementId}", elementId);
-            var (status, msg) = ExceptionMappingService.MapToStatusCode(ex);
-            return StatusCode(status, msg);
+            return GetStatusCode(ex);
         }
     }
 
@@ -50,8 +49,7 @@ public class TradeElementsController(
         catch (Exception ex)
         {
             Log.Error(ex, "Error re-timestamping trade input with Id: {ElementId}", elementId);
-            var (status, msg) = ExceptionMappingService.MapToStatusCode(ex);
-            return StatusCode(status, msg);
+            return GetStatusCode(ex);
         }
     }
 }

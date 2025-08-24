@@ -12,6 +12,7 @@ using System.Diagnostics;
 using Serilog;
 using Microsoft.AspNetCore.Authorization;
 using AssetsFlowWeb.Services.Models.Journal;
+using HsR.Common.AspNet.Services;
 
 namespace HsR.Web.API.Controllers.Journal
 {
@@ -65,8 +66,7 @@ namespace HsR.Web.API.Controllers.Journal
             catch (Exception ex)
             {
                 Log.Error(ex, "Error adding evaluation position for tradeId: {TradeId}", tradeId);
-                var (status, msg) = ExceptionMappingService.MapToStatusCode(ex);
-                return StatusCode(status, msg);
+                return GetStatusCode(ex);
             }
         }
 
