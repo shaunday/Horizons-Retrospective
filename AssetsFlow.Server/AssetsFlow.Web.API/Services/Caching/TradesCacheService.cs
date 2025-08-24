@@ -48,24 +48,22 @@ namespace HsR.Web.API.Services
             _config = config;
         }
 
-        protected override async Task<IEnumerable<TradeCompositeModel>?> LoadFromSourceAsync(Guid userId, string? subKey, CancellationToken token)
+        protected override async Task<IEnumerable<TradeCompositeModel>> LoadFromSourceAsync(Guid userId, CancellationToken token)
         {
             var allTrades = new List<TradeCompositeModel>();
-            int pageNumber = 1;
             int pageSize = _config.Pagination.DefaultPageSize;
-
-            if (subKey != null && int.TryParse(subKey.Split('_')[0], out var pn))
-                pageNumber = pn;
 
             using var scope = _serviceProvider.CreateScope();
             var journal = scope.ServiceProvider.GetRequiredService<IJournalRepositoryWrapper>();
 
-            // total count
+            // Get total count
             var (_, totalCount) = await journal.Journal.GetAllTradeCompositesAsync(userId, 1, 1);
             SetTotalCount(userId, totalCount);
 
-            // preload pages
-            for (int page = pageNumber; page <= _config.Cache.PreloadPageCount; page++)
+            int totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+            int pagesToLoad = Math.Min(_config.Cache.PreloadPageCount, totalPages);
+
+            for (int page = 1; page <= pagesToLoad; page++)
             {
                 token.ThrowIfCancellationRequested();
 
@@ -75,6 +73,7 @@ namespace HsR.Web.API.Services
                 var models = _mapper.Map<IEnumerable<TradeCompositeModel>>(tradeEntities);
                 allTrades.AddRange(models);
 
+                // cache each page internally
                 Set(userId, models, $"{page}_{pageSize}");
             }
 

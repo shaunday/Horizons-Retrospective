@@ -27,6 +27,7 @@
 ## nice to have
 - cache: invalidate by key/partial (no need to invalidate whole user)
 - cache: repo.GetOrCreateUserDataAsync(userId); //todo pass cancelation token?
+- cache - extend to save by filter (currently saves everything, doesnt use cache when filtered)
 
 - saved sectors: get online? add to filters + filterId (saving logic commented out for now)
 - screenshots firebase (to store images?)
