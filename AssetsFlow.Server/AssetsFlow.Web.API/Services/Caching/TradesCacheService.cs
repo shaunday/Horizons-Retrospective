@@ -48,7 +48,7 @@ namespace HsR.Web.API.Services
             _config = config;
         }
 
-        protected override async Task<IEnumerable<TradeCompositeModel>> LoadFromSourceAsync(Guid userId, CancellationToken token)
+        protected override async Task<IEnumerable<TradeCompositeModel>?> LoadFromSourceAsync(Guid userId, CancellationToken token)
         {
             var allTrades = new List<TradeCompositeModel>();
             int pageSize = _config.Pagination.DefaultPageSize;

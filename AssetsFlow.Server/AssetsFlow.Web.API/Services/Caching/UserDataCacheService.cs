@@ -36,7 +36,7 @@ namespace HsR.Web.API.Services
             _config = config;
         }
 
-        protected override async Task<UserDataDTO?> LoadFromSourceAsync(Guid userId, string? subKey, CancellationToken token)
+        protected override async Task<UserDataDTO?> LoadFromSourceAsync(Guid userId, CancellationToken token)
         {
             using var scope = _serviceProvider.CreateScope();
             var repo = scope.ServiceProvider.GetRequiredService<IUserDataRepository>();

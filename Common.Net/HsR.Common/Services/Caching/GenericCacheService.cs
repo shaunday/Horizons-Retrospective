@@ -32,7 +32,7 @@ namespace HsR.Common.Services.Caching
         private readonly ConcurrentDictionary<TId, SemaphoreSlim> _userSemaphores = new();
 
         protected abstract string CacheKeyPrefix { get; }
-        protected abstract Task<TModel> LoadFromSourceAsync(TId id, CancellationToken token);
+        protected abstract Task<TModel?> LoadFromSourceAsync(TId id, CancellationToken token);
 
         protected CacheServiceBase(
             IMemoryCache memoryCache,
