@@ -25,7 +25,7 @@ namespace HsR.Web.API.Controllers.Journal
             IJournalRepositoryWrapper journalAccess,
             ILogger<JournalOpsControllerBase> logger,
             IMapper mapper,
-            ITradesCacheService cacheService) : base(journalAccess, logger, mapper, cacheService)
+            TradesCacheService cacheService) : base(journalAccess, logger, mapper, cacheService)
         {
         }
 
@@ -80,7 +80,11 @@ namespace HsR.Web.API.Controllers.Journal
             try
             {
                 (TradeComposite updatedTrade, InterimTradeElement? newReduceElement) updatedTradeData = await _journalAccess.TradeComposite.CloseTradeAsync(tradeId, closingPrice);
-                _cacheService.InvalidateAndReload(updatedTradeData.updatedTrade?.UserId ?? Guid.Empty);
+                if (updatedTradeData.updatedTrade?.UserId is Guid userId)
+                {
+                    _cacheService.InvalidateAndReload(userId);
+                }
+
                 UpdatedStatesCollation updatedStates = new() { TradeInfo = updatedTradeData.updatedTrade };
                 (TradeElementModel, UpdatedStatesModel) resAsModel =
                                  (_mapper.Map<TradeElementModel>(updatedTradeData.newReduceElement), _mapper.Map<UpdatedStatesModel>(updatedStates));

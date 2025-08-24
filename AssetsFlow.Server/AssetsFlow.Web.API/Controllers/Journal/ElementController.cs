@@ -17,7 +17,7 @@ public class TradeElementsController(
     IJournalRepositoryWrapper journalAccess,
     ILogger<JournalOpsControllerBase> logger,
     IMapper mapper,
-    ITradesCacheService cacheService) : JournalOpsControllerBase(journalAccess, logger, mapper, cacheService)
+    TradesCacheService cacheService) : JournalOpsControllerBase(journalAccess, logger, mapper, cacheService)
 {
     [HttpDelete]
     public async Task<ActionResult<UpdatedStatesModel>> DeleteInterimTradeInput(int elementId)
@@ -43,7 +43,10 @@ public class TradeElementsController(
         {
             var updatedStates = await _journalAccess.TradeElement.UpdateActivationTimeAsync(elementId, newTime);
             UpdatedStatesModel resAsModel = _mapper.Map<UpdatedStatesModel>(updatedStates);
-            _cacheService.InvalidateAndReload(updatedStates.TradeInfo?.UserId ?? Guid.Empty);
+            if (updatedStates.TradeInfo?.UserId is Guid userId)
+            {
+                _cacheService.InvalidateAndReload(userId);
+            }
             return ResultHandling(resAsModel, $"Could not re-timestamp element with Id: {elementId}", [NEW_STATES_WRAPPER]);
         }
         catch (Exception ex)

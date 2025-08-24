@@ -1,8 +1,8 @@
 ﻿
 # TODO
-- userdata: cache symbols, update symbol if it's edited, verify it's all sent back
+- userdata: update symbol if it's edited, verify it's all sent back
 - data migrations
-- alltrades should be via filter method
+- alltrades can be removed when all's connected to filtered
 
 - add Entity base class and valueObject. do i have aggregates? maybe trade/elements?
 - fix user entity (remove stuff?), adjust login request to user/pass?
@@ -25,6 +25,9 @@
 - pies
 
 ## nice to have
+- cache: invalidate by key/partial (no need to invalidate whole user)
+- cache: repo.GetOrCreateUserDataAsync(userId); //todo pass cancelation token?
+
 - saved sectors: get online? add to filters + filterId (saving logic commented out for now)
 - screenshots firebase (to store images?)
 - Actual R:R in closure

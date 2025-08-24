@@ -15,13 +15,13 @@ namespace HsR.Web.API.Controllers.Journal
         private protected readonly string NEW_ELEMENT_DATA = "updatedElement";
         private protected readonly string NEW_STATES_WRAPPER = "updatedStates";
 
-        private protected readonly ITradesCacheService _cacheService;
+        private protected readonly TradesCacheService _cacheService;
 
         public JournalOpsControllerBase(
             IJournalRepositoryWrapper journalAccess, 
             ILogger<JournalOpsControllerBase> logger, 
             IMapper mapper,
-            ITradesCacheService cacheService) : base(journalAccess, logger, mapper) 
+            TradesCacheService cacheService) : base(journalAccess, logger, mapper) 
         {
             _cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
         }

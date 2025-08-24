@@ -1,6 +1,7 @@
 ## 1
 
 filtering: selected filter - save as jotai's atom, pass to api
+selecting filter should refresh all trades
 
 from limor: title should be styled diff than the content, text aligned to the left
 add: opened/closedat/IdeaDate (just to overview?)

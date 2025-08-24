@@ -26,7 +26,7 @@ namespace HsR.Web.API.Controllers.Journal
             IJournalRepositoryWrapper journalAccess,
             ILogger<JournalOpsControllerBase> logger,
             IMapper mapper,
-            ITradesCacheService cacheService,
+            TradesCacheService cacheService,
             IConfigurationService config) : base(journalAccess, logger, mapper, cacheService)
         {
             _config = config;
