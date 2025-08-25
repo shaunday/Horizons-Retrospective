@@ -1,6 +1,7 @@
 ﻿using MarketWatch.Data.Services;
 using MarketWatch.Price.Repository;
 using MW.Price.Fetcher.IBKR;
+using MW.Price.Fetcher.IBKR.ConIdGetters;
 using Serilog;
 using System.Text.Json;
 
@@ -12,15 +13,15 @@ Log.Logger = new LoggerConfiguration()
 
 Log.Information("Starting MarketWatch DataFetcher...");
 
-
-// Exchanges to process
-var exchanges = new List<string> { "NASDAQ", /*"NYSE", "TSX"*/ };
-
-
 var apiClient = new IbkrApiClient();
-var exchangeService = new IbkrExchangeService(apiClient, Log.Logger);
-var exportService = new IbkrSymbolExportService(exchangeService, Log.Logger);
 
+
+// ---------- Symbols Fetcher ----------
+Log.Information("Fetching Symbols by exchange...");
+var exchangeService = new IbkrConIdsByExchangeService(apiClient, Log.Logger);
+var exportService = new IbkSymbolsExportService(exchangeService, Log.Logger);
+
+var exchanges = new List<string> { "NASDAQ", /*"NYSE", "TSX"*/ };
 await exportService.ExportSymbolsAsync(exchanges);
 
 using var dbContext = new MarketDbContext();

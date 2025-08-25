@@ -4,9 +4,9 @@ using System.Text.Json;
 using Serilog;
 using System.Threading.Tasks;
 
-namespace MW.Price.Fetcher.IBKR
+namespace MW.Price.Fetcher.IBKR.ConIdGetters
 {
-    public class IbkrSymbolService
+    public class IbkrConIdBySymbolService
     {
         private const string SecdefEndpoint = "trsrv/secdef";
 
@@ -14,7 +14,7 @@ namespace MW.Price.Fetcher.IBKR
         private readonly ILogger _logger;
 
 
-        public IbkrSymbolService(IbkrApiClient api, ILogger logger)
+        public IbkrConIdBySymbolService(IbkrApiClient api, ILogger logger)
         {
             _api = api;
             _logger = logger;

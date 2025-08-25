@@ -1,19 +1,18 @@
 ﻿using System;
-using Serilog;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Serilog;
 
-namespace MW.Price.Fetcher.IBKR
+namespace MW.Price.Fetcher.IBKR.ConIdGetters
 {
-    public class IbkrExchangeService
+    public class IbkrConIdsByExchangeService
     {
         private readonly IbkrApiClient _api;
         private readonly ILogger _logger;
         private const string AllConidsEndpoint = "trsrv/all-conids";
 
-        public IbkrExchangeService(IbkrApiClient api, ILogger logger)
+        public IbkrConIdsByExchangeService(IbkrApiClient api, ILogger logger)
         {
             _api = api;
             _logger = logger;
@@ -43,15 +42,16 @@ namespace MW.Price.Fetcher.IBKR
                     }
                 }
 
+                // Only log summary
                 _logger.Information("Fetched {Count} symbols from {Exchange}", result.Count, exchange);
-                Console.WriteLine($"✅ {result.Count} symbols from {exchange}");
+                Console.WriteLine($"✅ {exchange}: {result.Count} symbols");
 
                 return result;
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, "Failed to get symbols for exchange {Exchange}", exchange);
-                Console.WriteLine($"❌ Failed to get symbols for {exchange}: {ex.Message}");
+                Console.WriteLine($"❌ {exchange}: failed ({ex.Message})");
                 return null;
             }
         }
