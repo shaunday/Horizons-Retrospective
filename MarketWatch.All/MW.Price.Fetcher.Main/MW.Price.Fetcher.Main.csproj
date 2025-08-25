@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\MW.Price.Fetcher.IBKR\MW.Price.Fetcher.IBKR.csproj" />
       <ProjectReference Include="..\MarketWatch.Price.Repository\MarketWatch.Price.Repository.csproj" />
     </ItemGroup>
 

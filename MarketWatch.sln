@@ -19,6 +19,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketWatch.Price.Repositor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MW.Price.Fetcher.Adapters", "MarketWatch.All\MW.Price.Fetcher.Adapters\MW.Price.Fetcher.Adapters.csproj", "{B68D036A-B81E-43A5-B7C1-D5AC61D61F32}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		MarketWatch.All\API Providers Research.txt = MarketWatch.All\API Providers Research.txt
+		MarketWatch.All\Interactive Brokers Web API 1.0.txt = MarketWatch.All\Interactive Brokers Web API 1.0.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MW.Price.Fetcher.IBKR", "MW.Price.Fetcher.IBKR\MW.Price.Fetcher.IBKR.csproj", "{58B45746-357E-470A-891F-8AED00E82621}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +61,10 @@ Global
 		{B68D036A-B81E-43A5-B7C1-D5AC61D61F32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B68D036A-B81E-43A5-B7C1-D5AC61D61F32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B68D036A-B81E-43A5-B7C1-D5AC61D61F32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58B45746-357E-470A-891F-8AED00E82621}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58B45746-357E-470A-891F-8AED00E82621}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58B45746-357E-470A-891F-8AED00E82621}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58B45746-357E-470A-891F-8AED00E82621}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

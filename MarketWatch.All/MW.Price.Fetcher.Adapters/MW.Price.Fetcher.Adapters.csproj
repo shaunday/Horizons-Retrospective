@@ -11,4 +11,8 @@
         <AppendConfigurationToOutputPath>false</AppendConfigurationToOutputPath>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MarketWatch.Price.Entities\MarketWatch.Price.Entities.csproj" />
+    </ItemGroup>
+
 </Project>
