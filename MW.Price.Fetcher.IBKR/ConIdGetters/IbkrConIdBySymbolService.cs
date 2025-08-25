@@ -13,7 +13,6 @@ namespace MW.Price.Fetcher.IBKR.ConIdGetters
         private readonly IbkrApiClient _api;
         private readonly ILogger _logger;
 
-
         public IbkrConIdBySymbolService(IbkrApiClient api, ILogger logger)
         {
             _api = api;

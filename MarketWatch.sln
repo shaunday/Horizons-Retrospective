@@ -22,7 +22,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
 		MarketWatch.All\API Providers Research.txt = MarketWatch.All\API Providers Research.txt
-		MarketWatch.All\Interactive Brokers Web API 1.0.txt = MarketWatch.All\Interactive Brokers Web API 1.0.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MW.Price.Fetcher.IBKR", "MW.Price.Fetcher.IBKR\MW.Price.Fetcher.IBKR.csproj", "{58B45746-357E-470A-891F-8AED00E82621}"

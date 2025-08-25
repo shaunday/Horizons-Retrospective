@@ -15,8 +15,3 @@ Whatever feed you pick, dump the raw JSON into a local SQLite/parquet cache so y
 I’ve tried Polygon.io and Tiingo, but APIWrapper.ai is what I ended up using because it lets me stitch multiple feeds together with one script instead of babysitting different rate limits. Skip the fake key hustle and lean on the legit free feeds plus a local cache instead.
 
 I started looking at alpha vantage and quickly moved on to alpaca. Much better imo for equities, not sure on other securities. Simple to download and store locally as well to speed up backtesting.
-
-20y W (weekly) – regime, macro, cycle.
-5y D (daily) – swing, quant signals, daily vol stats.
-1y 4h – mid-term swing and intraday patterns.
-3m 1h – tactical positioning.

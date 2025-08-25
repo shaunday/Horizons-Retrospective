@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MarketWatch.Entities
@@ -16,6 +17,8 @@ namespace MarketWatch.Entities
         public SecurityType SecurityType { get; set; }
         public string Currency { get; set; }
         public List<PriceBarModel> PriceBars { get; set; } = [];
+
+        public JsonElement BrokerSpecificData { get; set; }
 
         public SecurityModel(string symbol, string exchange, SecurityType securityType, string currency)
         {
