@@ -1,5 +1,0 @@
-//todo
-
-double bottom on rsi/cci, ma, ema, wbb, dividends, report, news
-price: sfp, mhl, mhh, double/triple bottoms, deviations
-(w/m = higher "ranking")
