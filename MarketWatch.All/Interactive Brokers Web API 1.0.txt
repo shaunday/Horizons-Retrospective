@@ -1,0 +1,33 @@
+Authentication process
+
+The API relies on session-based authentication (often via cookies or bearer tokens).
+The Gateway opens that session in your browser, and your code inherits it by connecting via the same local host domain and port. 
+You may need to confirm the /auth/status endpoint or similar to validate session tokens.
+
+
+
+1.
+To resolve symbol names to IBKR’s internal IDs (like conid), use:
+POST /trsrvr/secdef/search
+{ "symbols": ["AAPL", "MSFT", "GOOG"] }
+
+
+2.
+Historical market data — REST
+Use GET /iserver/marketdata/history
+(Historical data: REST endpoint /iserver/marketdata/history?conid={id}&period=1d&bar=5min.)
+
+
+
+Additional stuff:
+- Heartbeats required: send "ech+hb" periodically over WS or the server disconnects.
+- Streaming limit: max 5 concurrent live subscriptions for market data per account.
+- Data subscriptions: your IBKR account must have real-time data subscriptions for those instruments.
+- Session validation: check /auth/status before making calls.
+
+
+
+IBKR support Market data for those:
+- Toronto Stock Exchange
+- PAXOS Cryptocurrency for IBLLC-US with COLR not USA
+- US Real-Time Non Consolidated Streaming Quotes

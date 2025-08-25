@@ -1,0 +1,22 @@
+Create account at databento and use 125 USD free credits to download!
+
+I've done this with ibkr, all the way back to 2014, including pre and postmarket. Mind you, it's slow as helllll, but I only have to do it once.
+Multithreading with TWS api is my go to. 50 threads (for the rate limiting, no more than 50 requests at a time), and a deque based reading system. Use the index of your symbol vector as your request-id.
+
+This keeps 50 requests in the air at any given time and ibkr will fill them as they feel like, it's quite a bit faster.
+
+For forex Oanda is king. Free data / API for decades of data. 
+
+Don't bother spinning up a fake-account farm, there are cleaner free sources for minute bars. IEX Cloud’s free tier gives 50k messages a month-still delayed 15 min, but fine for backtests. 
+Polygon.io’s community plan lets you pull two years of US equities minute data if you keep calls under 5/sec. 
+Tiingo has a hobby tier that’s cheap and the historical coverage is solid once you register a credit card. 
+For crypto, Binance publishes zipped daily 1-min candles on GitHub, so you can bulk download then filter locally. 
+Whatever feed you pick, dump the raw JSON into a local SQLite/parquet cache so you only hit the API once per symbol.
+I’ve tried Polygon.io and Tiingo, but APIWrapper.ai is what I ended up using because it lets me stitch multiple feeds together with one script instead of babysitting different rate limits. Skip the fake key hustle and lean on the legit free feeds plus a local cache instead.
+
+I started looking at alpha vantage and quickly moved on to alpaca. Much better imo for equities, not sure on other securities. Simple to download and store locally as well to speed up backtesting.
+
+20y W (weekly) – regime, macro, cycle.
+5y D (daily) – swing, quant signals, daily vol stats.
+1y 4h – mid-term swing and intraday patterns.
+3m 1h – tactical positioning.

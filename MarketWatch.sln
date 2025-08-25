@@ -13,9 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsR.Common", "Common.Net\Hs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketWatch.Price.Entities", "MarketWatch.All\MarketWatch.Price.Entities\MarketWatch.Price.Entities.csproj", "{640354EA-0E60-B888-67B8-731E8BDC198A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketWatch.DataFetcher", "MarketWatch.All\MarketWatch.Price.DataFetcher\MarketWatch.DataFetcher.csproj", "{FAA8D13D-19BD-46F8-8724-B76206587520}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MW.Price.Fetcher.Main", "MarketWatch.All\MW.Price.Fetcher.Main\MW.Price.Fetcher.Main.csproj", "{FAA8D13D-19BD-46F8-8724-B76206587520}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketWatch.Price.Repository", "MarketWatch.All\MarketWatch.Price.Repository\MarketWatch.Price.Repository.csproj", "{83738F8F-28C8-4FED-A015-59E1495ECD7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MW.Price.Fetcher.Adapters", "MarketWatch.All\MW.Price.Fetcher.Adapters\MW.Price.Fetcher.Adapters.csproj", "{B68D036A-B81E-43A5-B7C1-D5AC61D61F32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{83738F8F-28C8-4FED-A015-59E1495ECD7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83738F8F-28C8-4FED-A015-59E1495ECD7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83738F8F-28C8-4FED-A015-59E1495ECD7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B68D036A-B81E-43A5-B7C1-D5AC61D61F32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B68D036A-B81E-43A5-B7C1-D5AC61D61F32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B68D036A-B81E-43A5-B7C1-D5AC61D61F32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B68D036A-B81E-43A5-B7C1-D5AC61D61F32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
