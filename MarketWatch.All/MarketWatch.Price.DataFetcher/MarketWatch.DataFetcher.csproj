@@ -12,4 +12,14 @@
         <AppendConfigurationToOutputPath>false</AppendConfigurationToOutputPath>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Serilog" />
+      <PackageReference Include="Serilog.Sinks.Console" />
+      <PackageReference Include="Serilog.Sinks.File" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MarketWatch.Price.Repository\MarketWatch.Price.Repository.csproj" />
+    </ItemGroup>
+
 </Project>
