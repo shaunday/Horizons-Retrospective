@@ -17,15 +17,28 @@ var apiClient = new IbkrApiClient();
 
 
 // ---------- Symbols Fetcher ----------
-Log.Information("Fetching Symbols by exchange...");
-var exchangeService = new IbkrConIdsByExchangeService(apiClient, Log.Logger);
-var exportService = new IbkSymbolsExportService(exchangeService, Log.Logger);
+Console.WriteLine("Symbols fetch complete. Do you want to continue? (y/n)");
+var input = Console.ReadLine()?.Trim().ToLower();
 
-var exchanges = new List<string> { "NASDAQ", /*"NYSE", "TSX"*/ };
-await exportService.ExportSymbolsAsync(exchanges);
+if (input == "y")
+{
+    Log.Information("Fetching Symbols by exchange...");
+    var exchangeService = new IbkrConIdsByExchangeService(apiClient, Log.Logger);
+    var exportService = new IbkSymbolsExportService(exchangeService, Log.Logger);
 
-using var dbContext = new MarketDbContext();
+    var exchanges = new List<string> { "NASDAQ", /*"NYSE", "TSX"*/ };
+    await exportService.ExportSymbolsAsync(exchanges);
+}
+
+// ----------
+
+
+
 
 // ---------- Setup repository & service ----------
+using var dbContext = new MarketDbContext();
+
 var securityRepository = new SecurityRepository(dbContext);
 var securityService = new SecurityService(securityRepository);
+
+// ----------
