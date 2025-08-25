@@ -7,7 +7,7 @@ namespace MarketWatch.Data.Services
 {
     public interface ISecurityService
     {
-        Task<SecurityModel> GetBySymbolAsync(string symbol);
+        Task<SecurityModel?> GetBySymbolAsync(string symbol, Timeframe? timeframe = null);
         Task AddSecurityAsync(SecurityModel security);
         Task AddPriceBarsAsync(SecurityModel security, IEnumerable<PriceBarModel> bars);
         Task SaveChangesAsync();
@@ -22,9 +22,9 @@ namespace MarketWatch.Data.Services
             _securityRepository = securityRepository;
         }
 
-        public async Task<SecurityModel> GetBySymbolAsync(string symbol)
+        public async Task<SecurityModel?> GetBySymbolAsync(string symbol, Timeframe? timeframe = null)
         {
-            return await _securityRepository.GetBySymbolAsync(symbol);
+            return await _securityRepository.GetBySymbolAsync(symbol, timeframe);
         }
 
         public async Task AddSecurityAsync(SecurityModel security)

@@ -6,26 +6,18 @@ using System.Threading.Tasks;
 
 namespace MarketWatch.Entities
 {
-    public class PriceBarModel
+    public class PriceBarModel(DateTime time, decimal open, decimal high, decimal low, decimal close, long volume, Timeframe timeframe)
     {
         public int Id { get; set; } // Primary key for EF
         public int SecurityFK { get; set; }
 
-        public DateTime Time { get; }
-        public decimal Open { get; }
-        public decimal High { get; }
-        public decimal Low { get; }
-        public decimal Close { get; }
-        public long Volume { get; }
+        public DateTime Time { get; } = time;
+        public decimal Open { get; } = open;
+        public decimal High { get; } = high;
+        public decimal Low { get; } = low;
+        public decimal Close { get; } = close;
+        public long Volume { get; } = volume;
 
-        public PriceBarModel(DateTime time, decimal open, decimal high, decimal low, decimal close, long volume)
-        {
-            Time = time;
-            Open = open;
-            High = high;
-            Low = low;
-            Close = close;
-            Volume = volume;
-        }
+        public Timeframe Timeframe { get; set; } = timeframe;
     }
 }

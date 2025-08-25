@@ -8,17 +8,33 @@ using System.Threading.Tasks;
 
 namespace MarketWatch.Price.Repository
 {
+    public interface ISecurityRepository : IRepository<SecurityModel>
+    {
+        Task<SecurityModel?> GetBySymbolAsync(string symbol, Timeframe? timeframe = null);
+    }
+
     public class SecurityRepository : Repository<SecurityModel>, ISecurityRepository
     {
         public SecurityRepository(MarketDbContext context) : base(context)
         {
         }
 
-        public async Task<SecurityModel?> GetBySymbolAsync(string symbol)
+        public async Task<SecurityModel?> GetBySymbolAsync(string symbol, Timeframe? timeframe = null)
         {
-            return await _dbSet
-                .Include(s => s.PriceBars)
-                .FirstOrDefaultAsync(s => s.Symbol == symbol);
+            var query = _dbSet.AsQueryable();
+
+            query = query.Where(s => s.Symbol == symbol);
+
+            if (timeframe.HasValue)
+            {
+                query = query.Include(s => s.PriceBars.Where(pb => pb.Timeframe == timeframe.Value));
+            }
+            else
+            {
+                query = query.Include(s => s.PriceBars);
+            }
+
+            return await query.FirstOrDefaultAsync();
         }
     }
 }
