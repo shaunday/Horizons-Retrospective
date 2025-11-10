@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,13 +10,13 @@ namespace HsR.Common.Services.Caching
     public class CacheCleanupService<TId, TModel> : BackgroundService
     {
         private readonly ICacheService<TId, TModel> _cacheService;
-        private readonly ILogger<CacheCleanupService<TId, TModel>> _logger;
+        private readonly Serilog.ILogger _logger;
         private readonly TimeSpan _cleanupInterval;
         private readonly TimeSpan _inactivityThreshold;
 
         public CacheCleanupService(
             ICacheService<TId, TModel> cacheService,
-            ILogger<CacheCleanupService<TId, TModel>> logger,
+            Serilog.ILogger logger,
             TimeSpan cleanupInterval,
             TimeSpan inactivityThreshold)
         {
@@ -32,11 +33,11 @@ namespace HsR.Common.Services.Caching
                 try
                 {
                     _cacheService.CleanupInactive(_inactivityThreshold);
-                    _logger.LogDebug("Cache cleanup completed for {CacheService}", typeof(TModel).Name);
+                    _logger.Debug("Cache cleanup completed for {CacheService}", typeof(TModel).Name);
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Error during cache cleanup for {CacheService}", typeof(TModel).Name);
+                    _logger.Error(ex, "Error during cache cleanup for {CacheService}", typeof(TModel).Name);
                 }
 
                 await Task.Delay(_cleanupInterval, stoppingToken);

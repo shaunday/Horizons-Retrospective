@@ -6,6 +6,7 @@ using HsR.UserService.Protos;
 using HsR.Web.API.Services;
 using HsR.Web.API.Settings;
 using Microsoft.Extensions.Caching.Memory;
+using Serilog;
 
 public static class ServiceCollectionExtensions
 {
@@ -19,15 +20,16 @@ public static class ServiceCollectionExtensions
         });
 
         // Register cache services
-        services.AddSingleton<ICacheService<Guid, IEnumerable<TradeCompositeModel>>, TradesCacheService>();
+        services.AddSingleton<ITradesCacheService, TradesCacheService>();
+        services.AddSingleton<ICacheService<Guid, IEnumerable<TradeCompositeModel>>>(provider => provider.GetRequiredService<ITradesCacheService>());
         services.AddSingleton<ICacheService<Guid, UserDataDTO>, UserDataCacheService>();
 
         // Register cleanup background services
-        services.AddHostedService<CacheCleanupService<Guid, List<TradeCompositeModel>>>(provider =>
+        services.AddHostedService(provider =>
         {
-            var cache = provider.GetRequiredService<ICacheService<Guid, List<TradeCompositeModel>>>();
-            var logger = provider.GetRequiredService<ILogger<CacheCleanupService<Guid, List<TradeCompositeModel>>>>();
-            return new CacheCleanupService<Guid, List<TradeCompositeModel>>(
+            var cache = provider.GetRequiredService<ICacheService<Guid, IEnumerable<TradeCompositeModel>>>();
+            var logger = Log.ForContext("SourceContext", "CacheCleanupService");
+            return new CacheCleanupService<Guid, IEnumerable<TradeCompositeModel>>(
                 cache,
                 logger,
                 TimeSpan.FromMinutes(cacheSettings.CleanupIntervalMinutes),
@@ -35,11 +37,11 @@ public static class ServiceCollectionExtensions
             );
         });
 
-        services.AddHostedService<CacheCleanupService<Guid, UserDto>>(provider =>
+        services.AddHostedService(provider =>
         {
-            var cache = provider.GetRequiredService<ICacheService<Guid, UserDto>>();
-            var logger = provider.GetRequiredService<ILogger<CacheCleanupService<Guid, UserDto>>>();
-            return new CacheCleanupService<Guid, UserDto>(
+            var cache = provider.GetRequiredService<ICacheService<Guid, UserDataDTO>>();
+            var logger = Log.ForContext("SourceContext", "CacheCleanupService");
+            return new CacheCleanupService<Guid, UserDataDTO>(
                 cache,
                 logger,
                 TimeSpan.FromMinutes(cacheSettings.CleanupIntervalMinutes),

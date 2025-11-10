@@ -1,4 +1,5 @@
 1. copy and fix permissions for the pem file
+WSL
 mkdir -p ~/.ssh
 cp /mnt/d/tmp2/HsR_AF2.pem ~/.ssh/
 chmod 400 ~/.ssh/HsR_AF2.pem

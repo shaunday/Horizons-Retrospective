@@ -3,7 +3,7 @@ import { baseURL, request } from "./ApiRequestsWrapper";
 const userDataURL = `${baseURL}${import.meta.env.VITE_JOURNAL_USERDATA_SUFFIX}`;
 
 export async function login({ email, password } = {}) {
-  const body = email && password ? { email, password } : {};
+  const body = email && password ? { email, password } : {}; //empty for demo
   const response = await request(`${baseURL}auth/login`, {
     method: "POST",
     body: JSON.stringify(body),

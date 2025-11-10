@@ -1,11 +1,12 @@
 ## [0.9.226-b] - 2025-08-..
-- filtering : added filter model, filters factory
+- filtering: added filter model, filters factory
 - filtering: added controller route
 - filtering: added to userdata
 - userdata: added repo wrapper for get symbols, get filters
 - closure: change lessons to : mistakes, strengths, takeaways
 - morphed cache service into generic
 - added userdata to cache
+- fixing cache issues
 
 ## [0.9.225-b] - 2025-08-18
 - validate net amount on close trade, return reduce element on close

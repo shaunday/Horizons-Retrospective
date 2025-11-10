@@ -11,7 +11,7 @@ public class TradingJournalContextFactory : IDesignTimeDbContextFactory<TradingJ
         var connectionString = DbConnectionsWrapper.GetConnectionStringByEnv(false); //used for migration scripts, so set to production for now
         if (string.IsNullOrEmpty(connectionString))
         {
-            throw new ApplicationException($"Please set  environment variables");
+            throw new ApplicationException($"Please set environment variables");
         }
 
         var optionsBuilder = new DbContextOptionsBuilder<TradingJournalDataContext>();
